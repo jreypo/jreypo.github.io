@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>/bsd/virtualization/openbsd-and-virtualbox/</loc>
+    <lastmod>2009-12-14T16:06:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>/hp-ux/security/hardening-dilemma/</loc>
+    <lastmod>2009-12-14T14:28:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>/hp-ux/security/hp-ux-security-resources/</loc>
+    <lastmod>2009-12-10T14:04:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>/hp-ux/installing-a-new-client-with-ignite/</loc>
+    <lastmod>2009-12-09T13:50:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>/hp-ux/ioscan_fc2-sh/</loc>
+    <lastmod>2009-12-09T09:29:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>/blog/personal/hello-world/</loc>
+    <lastmod>2009-12-07T11:35:52+01:00</lastmod>
+  </url>
+  <url>
     <loc>/about/</loc>
   </url>
   <url>
