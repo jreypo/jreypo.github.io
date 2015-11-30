@@ -1,25 +1,19 @@
 ---
 layout: page
-title: About the Theme
+title: About me
 tags: [about, Jekyll, theme, responsive]
 modified: 2014-08-08T20:53:07.573882-04:00
-comments: true
+comments: false
 image:
-  feature: sample-image-2.jpg
-  credit: WeGraphics
-  creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
+  feature: about-banner.png
 ---
 
-Minimal Mistakes is responsive Jekyll theme with large featured images and solid typography. As the name implies the styling is fairly minimal to make it easier for you to build on top of.
+I'm Juan Manuel Rey, I live in Madrid with my incredible wife Gemma, our son Jaime and Buffy, our adorable lady poddle.
 
-## Minimal Mistakes is all about:
+## What I do for a living...
 
-* Responsive templates. Looking good on mobile, tablet, and desktop.
-* Gracefully degrading in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.
-* Minimal embellishments -- content first.
-* Optional large feature images for posts and pages.
-* Simple and clear permalink structure.
-* [Custom 404 page](http://mmistakes.github.io/minimal-mistakes/404.html) to get you started.
-* Support for Disqus Comments
+I am a Senior Consultant working for VMware Professional Services, specialized in [NSX](https://www.vmware.com/products/nsx), [vCloud Director](https://www.vmware.com/products/vcloud-director) and [OpenStack](http://www.openstack.org).
 
-<a markdown="0" href="{{ site.url }}/theme-setup" class="btn">Install Minimal Mistakes Theme</a>
+With more than fifteen years of experience in the industry as Unix, Virtualization and Cloud professional, with great experience in architecting and administer mission critical environments. Currently working at VMware as Senior Consultant focused on automation, cloud and network virtualization.
+
+I've been lucky enough to be awarded as **VMware vExpert** from 2011 to 2015. I'm interested in everything related to Unix, VMware, cloud, Python, distributed systems and DevOps.
