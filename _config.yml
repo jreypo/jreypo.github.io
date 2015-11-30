@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title:            Site Title
+title:            Juanma's Blog
 locale:           en_US
-url:
+# url:              http://jreypo.gitbub.io
 
 
 # Jekyll configuration
@@ -26,23 +26,23 @@ kramdown:
 
 # Site owner
 owner:
-  name: Your Name
+  name: Juan Manuel Rey
   avatar: bio-photo.jpg
-  bio: "Describe your self."
-  email:
-  disqus-shortname:
-  twitter: #username
+  bio: "Unix Geek. Sysadmin by heart turned cloud architect for VMware."
+  email: juanmanuel.reyportal@gmail.com
+  disqus-shortname: jreypo
+  twitter: jreypo
   facebook: #username
   google:
-    plus: #username
+    plus: JuanManuelReyPortal
     analytics:
     verify:
     ad-client:
     ad-slot:
   bing-verify:
-  github: #username
-  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: #username
+  github: jreypo
+  stackoverflow: 2454288/jreypo
+  linkedin: jreypo
   xing: #username
   instagram: #username
   lastfm: #username
