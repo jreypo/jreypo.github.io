@@ -12,7 +12,7 @@ I'm Juan Manuel Rey, I live in Madrid with my incredible wife Gemma, our son Jai
 
 ## What I do for a living...
 
-[![/images/radio_cto_v6.png]]({{site.url}}/images/radio_cto_v6.png)
+[![](/images/radio_cto_v6.png)]({{site.url}}/images/radio_cto_v6.png)
 
 I am a Senior Consultant working for VMware Professional Services, specialized in [NSX](https://www.vmware.com/products/nsx), [vCloud Director](https://www.vmware.com/products/vcloud-director) and [OpenStack](http://www.openstack.org). I am also a [CTO Ambassador](http://blogs.vmware.com/cto/author/ctoambassadors/) at VMware, if you want to know more about us I suggest the article from my Chinese brother Iwan [On being a VMware CTO Ambassador](http://virtual-red-dot.info/on-being-a-vmware-cto-ambassador/).
 
