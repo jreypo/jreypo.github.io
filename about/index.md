@@ -4,8 +4,6 @@ title: About me
 tags: [about, Jekyll, theme, responsive]
 modified: 2014-08-08T20:53:07.573882-04:00
 comments: false
-image:
-  feature: about-banner.png
 ---
 
 I am Juan Manuel Rey, I live in Madrid with my incredible wife Gemma, our son Jaime and Buffy, our adorable lady poodle. My kid and myself are die hard Star Wars fans, as you can see in the picture.
