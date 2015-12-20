@@ -34,7 +34,6 @@ GEM
       toml (~> 0.1.0)
     jekyll-coffeescript (1.0.1)
       coffee-script (~> 2.2)
-    jekyll-feed (0.3.1)
     jekyll-gist (1.4.0)
       octokit (~> 4.2)
     jekyll-paginate (1.1.0)
@@ -93,7 +92,6 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (= 2.5.3)
-  jekyll-feed
   jekyll-sitemap
   octopress (~> 3.0)
 
