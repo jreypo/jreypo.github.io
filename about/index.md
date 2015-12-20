@@ -18,4 +18,4 @@ I am a Senior Consultant working for VMware Professional Services, specialized i
 
 I am also a [CTO Ambassador](http://blogs.vmware.com/cto/author/ctoambassadors/) at VMware, if you want to know more about us I suggest the article from my Chinese brother [Iwan Rahabok](https://twitter.com/e1_ang) [**On being a VMware CTO Ambassador**](http://virtual-red-dot.info/on-being-a-vmware-cto-ambassador/).
 
-I've been lucky enough to be awarded as **VMware vExpert** from 2011 to 2015. I'm interested in everything related to Unix, VMware, cloud, Python, distributed systems and DevOps.
+I've been lucky enough to be awarded as **VMware vExpert** from 2011 to 2015. I'm interested in everything related to Unix, VMware, cloud, distributed systems and DevOps.
