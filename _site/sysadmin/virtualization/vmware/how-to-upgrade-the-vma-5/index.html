@@ -1,0 +1,316 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>How to upgrade the vMA 5 &#8211; Juanma's Blog</title>
+<meta name="description" content="Last week vSphere 5 Update
+1
+was released by VMware, along with the main products some of the SDKs
+and automation tools were also updated, including the vMA.
+
+">
+<meta name="keywords" content="sysadmin, systems administration, Virtualization, vMA, vMA5, VMware, vSphere, vSphere 5">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="How to upgrade the vMA 5">
+<meta name="twitter:description" content="Last week vSphere 5 Update
+1
+was released by VMware, along with the main products some of the SDKs
+and automation tools were also updated, including the vMA.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to upgrade the vMA 5">
+<meta property="og:description" content="Last week vSphere 5 Update
+1
+was released by VMware, along with the main products some of the SDKs
+and automation tools were also updated, including the vMA.
+
+">
+<meta property="og:url" content="/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/" rel="bookmark" title="How to upgrade the vMA 5">How to upgrade the vMA 5</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Last week <strong><a href="http://blogs.vmware.com/vsphere/2012/03/cloud-infrastructure-suite-updates.html">vSphere 5 Update
+1</a></strong>
+was released by VMware, along with the main products some of the SDKs
+and automation tools were also updated, including the vMA.</p>
+
+<p>As you should remember from my <a href="https://jreypo.wordpress.com/2011/09/21/a-first-look-into-the-vma-5/">first
+post</a>
+about <strong>vMA 5</strong> the classic <code>vma-update</code> utility is no longer available.
+So to be able to update our vMA to the new version we have to use the
+Web UI. Following is the procedure to perform the upgrade.</p>
+
+<p>First access the web interface using the <em>vi-admin</em> user as always.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image1.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb1.png" alt="image" title="image" /></a></p>
+
+<p>From the main screen go to the <em>Update</em> tab. In the <em>Status</em> screen
+click on <em>**</em> <em>Check Updates</em>.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image2.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb2.png" alt="image" title="image" /></a></p>
+
+<p>After a few seconds a message will appear showing the new update
+available.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image3.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb3.png" alt="image" title="image" /></a></p>
+
+<p>Click on <em>Install Updates</em> and after asking for confirmation the update
+process will start.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image4.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb4.png" alt="image" title="image" /></a></p>
+
+<p>Once the update process is complete the appliance will ask for a system
+reboot.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image5.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb5.png" alt="image" title="image" /></a></p>
+
+<p>Go to the System tab and perform the reboot. After the reboot is done
+you can check the new version in the appliance console,</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/03/image6.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb6.png" alt="image" title="image" /></a></p>
+
+<p>And in the <code>/etc/vma-release</code> file.</p>
+
+<pre><code>vi-admin@vma:~&gt; cat /etc/vma-release
+vMA 5.0.0 BUILD-643553
+
+Copyright (C) 1998-2011 VMware, Inc. All rights reserved.
+This product is protected by U.S. and international copyright and
+intellectual property laws. VMware products are covered by one or more U.S.
+Patent Numbers D617,808, D617,809, D617,810, D617,811, 6,075,938,
+6,397,242, 6,496,847, 6,704,925, 6,711,672, 6,725,289, 6,735,601,
+6,785,886, 6,789,156, 6,795,966, 6,880,022, 6,883,095, 6,940,980,
+6,944,699, 6,961,806, 6,961,941, 6,970,562, 7,017,041, 7,055,032,
+7,065,642, 7,069,413, 7,069,435, 7,082,598, 7,089,377, 7,111,086,
+7,111,145, 7,117,481, 7,149,310, 7,149,843, 7,155,558, 7,222,221,
+7,260,815, 7,260,820, 7,269,683, 7,275,136, 7,277,998, 7,277,999,
+7,278,030, 7,281,102, 7,290,253, 7,343,599, 7,356,679, 7,386,720,
+7,409,487, 7,412,492, 7,412,702, 7,424,710, 7,428,636, 7,433,951,
+7,434,002, 7,447,854, 7,447,903, 7,467,067, 7,475,002, 7,478,173,
+7,478,180, 7,478,218, 7,478,388, 7,484,208, 7,487,313, 7,487,314,
+7,490,216, 7,500,048, 7,506,122, 7,516,453, 7,529,897, 7,543,301,
+7,555,747, 7,565,527, 7,571,471, 7,577,722, 7,581,064, 7,590,715,
+7,590,982, 7,594,111, 7,596,594, 7,596,697, 7,599,493, 7,603,704,
+7,606,868, 7,620,523, 7,620,766, 7,620,955, 7,624,240, 7,630,493,
+7,636,831, 7,657,659, 7,657,937, 7,665,088, 7,672,814, 7,680,919,
+7,689,986, 7,693,996, 7,694,101, 7,702,843, 7,707,185, 7,707,285,
+7,707,578, 7,716,446, 7,734,045, 7,734,911, 7,734,912, 7,735,136,
+7,743,389, 7,761,917, 7,765,543, 7,774,391, 7,779,091, 7,783,779,
+7,783,838, 7,793,279, 7,797,748, 7,801,703, 7,802,000, 7,802,248,
+7,805,676, 7,814,495, 7,823,145, 7,831,661, 7,831,739, 7,831,761,
+7,831,773, 7,840,790, 7,840,839, 7,840,993, 7,844,954, 7,849,098,
+7,853,744, 7,853,960, 7,856,419, 7,856,531, 7,856,637, 7,865,663,
+7,869,967, 7,886,127, 7,886,148, 7,886,346, 7,890,754, 7,895,437,
+7,908,646, 7,912,951, 7,921,197, 7,925,850; patents pending.
+VMware, the VMware "boxes" logo and design, Virtual SMP and VMotion are
+registered trademarks or trademarks of VMware, Inc. in the United States
+and/or other jurisdictions. All other marks and names mentioned herein may
+be trademarks of their respective companies.
+vi-admin@vma:~&gt;
+</code></pre>
+
+<p>The above procedure use the default VMware repository and your appliance
+must be able to resolve public DNS addresses and access the internet in
+order to download de upgrade bits.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/sysadmin/virtualization/vmware/how-to-upgrade-the-vma-5/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>How to upgrade the vMA 5</strong> was published on <time datetime="2012-03-20T12:39:47+01:00">March 20, 2012</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

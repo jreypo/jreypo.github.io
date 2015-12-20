@@ -1,0 +1,443 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>How to setup ESXi for NSX &#8211; Juanma's Blog</title>
+<meta name="description" content="In the series of posts about OpenStack and KVM we saw how to add a KVM
+node to NSX for multi-hypervisor environments as a transport node. In
+this post we will discuss how to perform the same procedure for an ESXi
+host.
+
+">
+<meta name="keywords" content="ESXi, network virtualization, networking, NSX, NSX vSwitch, NSX-MH, nsxcli, VMware">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="How to setup ESXi for NSX">
+<meta name="twitter:description" content="In the series of posts about OpenStack and KVM we saw how to add a KVM
+node to NSX for multi-hypervisor environments as a transport node. In
+this post we will discuss how to perform the same procedure for an ESXi
+host.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to setup ESXi for NSX">
+<meta property="og:description" content="In the series of posts about OpenStack and KVM we saw how to add a KVM
+node to NSX for multi-hypervisor environments as a transport node. In
+this post we will discuss how to perform the same procedure for an ESXi
+host.
+
+">
+<meta property="og:url" content="/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/" rel="bookmark" title="How to setup ESXi for NSX">How to setup ESXi for NSX</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>In the series of posts about OpenStack and KVM we saw how to add a KVM
+node to NSX for multi-hypervisor environments as a transport node. In
+this post we will discuss how to perform the same procedure for an ESXi
+host.</p>
+
+<h3 id="nsx-vswitch-installation">NSX vSwitch installation</h3>
+
+<p>Before proceeding with the installation keep in mind that NSX vSwitch
+can run on an ESXi host simultaneously only with VMware Standard Switch,
+distributed switches are not supported.</p>
+
+<p>Install the NSX vSwitch <code>vib</code> file using <code>esxcli</code>.</p>
+
+<pre><code>~ # esxcli software vib install --no-sig-check -v /tmp/vmware-nsxvswitch-2.1.3-35984-prod2013-stage-release.vib
+Installation Result
+   Message: Operation finished successfully.
+   Reboot Required: false
+   VIBs Installed: VMware_bootbank_vmware-nsxvswitch_2.1.3-35984
+   VIBs Removed:
+   VIBs Skipped:
+~ #
+~ # esxcli software vib list | grep nsx
+vmware-nsxvswitch              2.1.3-35984                           VMware  VMwareCertified   2014-07-13
+~ #
+</code></pre>
+
+<p>Check that the a new virtual switch has been created on the host, don’t
+use <code>esxcli</code> but the good old <code>esxcfg-vswitch</code> command because for now
+there is no namespace available in <code>esxcli</code> for NSX vSwitch.</p>
+
+<pre><code>~ # esxcfg-vswitch -l
+Switch Name      Num Ports   Used Ports  Configured Ports  MTU     Uplinks
+vSwitch0         1536        7           128               1500    vmnic0,vmnic1
+
+  PortGroup Name        VLAN ID  Used Ports  Uplinks
+  vMotion               0        1           vmnic0,vmnic1
+  Management Network    0        1           vmnic0,vmnic1
+
+Switch Name      Num Ports   Used Ports  Configured Ports  MTU     Uplinks
+vSwitch1         1536        6           128               1500    vmnic2,vmnic3
+
+  PortGroup Name        VLAN ID  Used Ports  Uplinks
+  vsan                  0        1           vmnic2,vmnic3
+
+Switch Name      Num Ports   Used Ports  Uplinks
+nsx-vswitch      1536        1
+
+~ #
+</code></pre>
+
+<h3 id="nsx-vswitch-configuration">NSX vSwitch configuration</h3>
+
+<p>With NSX vSwitch installed proceed to the conifguration. First connect
+an uplink to the switch, this will create an NVS bridge which is the
+equivalent of an OVS bridge in Open vSwitch.</p>
+
+<pre><code>nsxcli uplink/connect vmnic4
+</code></pre>
+
+<p>Set an IP address for the uplink, this IP address will be used later to
+create the transport tunneling endpoint when we connect the ESXi as a
+transport node to NSX. You can also specify the VLAN tag by appending
+<code>vlan=&lt;vlan_id&gt;</code> as an additional parameter to the command.</p>
+
+<pre><code>nsxcli uplink/set-ip vmnic4 192.168.110.123 255.255.255.0
+</code></pre>
+
+<p>Validate that the bridge is correctly configured. Use <code>nsxcli port/show</code>
+to verify the bridge and <code>nsxcli uplink/show</code> for the uplink.</p>
+
+<pre><code>~ # nsxcli port/show
+br-int:
+-------
+
+br-vmnic4:
+----------
+vmnic4
+vmk3
+
+~ #
+</code></pre>
+
+<p>In the <code>uplink/show</code> output look for an entry like the one below.</p>
+
+<pre><code>==============================
+vmnic4:
+MAC       : 00:50:56:01:08:ca
+Link      : Up
+MTU       : 1500
+IP config :
+------------------------------
+VMK intf  : vmk3
+MAC addr  : 00:50:56:6b:ca:dd
+Services  : NSX-Tunneling
+VLAN      : 0
+IP        : 192.168.110.123(Static)
+Mask      : 255.255.255.0(Static)
+..............................
+------------------------------
+Connection : NVS (uplink0)
+Configured as standalone interface
+==============================
+</code></pre>
+
+<p>You can also check the status of the vmkernel interface with <code>esxcli</code>
+and with <code>nsxcli</code>.</p>
+
+<pre><code> ~ # esxcli network ip interface ipv4 get -i vmk3
+Name  IPv4 Address     IPv4 Netmask   IPv4 Broadcast   Address Type  DHCP DNS
+----  ---------------  -------------  ---------------  ------------  --------
+vmk3  192.168.110.123  255.255.255.0  192.168.110.255  STATIC           false
+~ #
+~ # nsxcli vmknic/show vmk3
+vmk3:
+MAC addr  : 00:50:56:6b:ca:dd
+Services  : NSX-Tunneling
+VLAN      : 0
+IP        : 192.168.110.123(Static)
+Mask      : 255.255.255.0(Static)
+Assoc with: vmnic4
+..............................
+~ #
+</code></pre>
+
+<p>The next step is configure the gateway  for NSX vSwitch.</p>
+
+<pre><code>~ # nsxcli gw/set tunneling 192.168.110.2
+~ #
+~ # nsxcli gw/show tunneling
+Tunneling:
+Configured default gateway       : 192.168.110.2
+Currently active default gateway : 192.168.110.2 (Manual)
+~ #
+</code></pre>
+
+<p>Connect NSX vSwitch instance to NSX controller cluster.</p>
+
+<pre><code>~ # nsxcli manager/set ssl:192.168.110.31
+~ #
+~ # nsx-dbctl show
+e42912a7-693f-43ee-84d5-11b5bb3491eb
+    Manager "ssl:192.168.110.31:6632"
+    Bridge br-int
+        fail_mode: secure
+    Bridge "br-vmnic4"
+        fail_mode: standalone
+        Port "vmk3"
+            Interface "vmk3"
+        Port "vmnic4"
+            Interface "vmnic4"
+    ovs_version: "2.1.3.35984"
+~ #
+</code></pre>
+
+<p>Create an opaque network. An opaque network is basically a transport
+bridge that will provide the network backend for the virtual machines.
+Opaque networks must be identified during its creation based on its type
+and ID.</p>
+
+<p>In this particular case the ESXi will be added later to a cluster acting
+as nova compute backend for my OpenStack lab so the network type must be
+<code>nsx.network</code> and the UUID have to match the configured one for the
+<code>integration_bridge</code> setting in <code>nova.conf</code> file. We also need to
+specify the port attach mode, for OpenStack environments is <code>manual</code>.</p>
+
+<pre><code>~ # nsxcli network/add NSX-Bridge NSX-Bridge nsx.network manual
+success
+~ #
+~ # nsxcli network/show
+UUID                                        Name                    Type            Mode
+----                                        ----                    ----            ----
+NSX-Bridge                                  NSX-Bridge              nsx.network     manual
+~ #
+</code></pre>
+
+<h3 id="add-esxi-as-transport-node">Add ESXi as transport node</h3>
+
+<p>The final part of the procedure is to add our new ESXi server as
+transport node to NSX. Log into NSX Manager web UI and initiate the
+wizard to add a new Hypervisor. First specify the name of the new
+hypervisor.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-13-30.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-13-30.png?w=580" alt="Screen Shot 2014-07-14 at
+02.13.30" /></a></p>
+
+<p>Set the integration bridge.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-22-44.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-22-44.png?w=580" alt="Screen Shot 2014-07-14 at
+02.22.44" /></a></p>
+
+<p>Select <em>Security Certificate</em> as credential type and paste the NSX
+vSwitch SSL certificate. The certificate can be retrieved from
+<code>/etc/nsxvswitch/nsxvswitch-cert.pem</code>.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-29-50.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-29-50.png?w=580" alt="Screen Shot 2014-07-14 at
+02.29.50" /></a></p>
+
+<p>Add an SST transport connector, using the IP address configured for the
+uplink.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-31-57.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-31-57.png?w=580" alt="Screen Shot 2014-07-14 at
+02.31.57" /></a></p>
+
+<p>Click Save &amp; View and verify the new hypervisor configuration in NSX.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-36-15.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-36-15.png?w=580" alt="Screen Shot 2014-07-14 at
+02.36.15" /></a></p>
+
+<p>The setup of our new ESXi server within NSX is done. As always comments
+are welcomed.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/networking/sysadmin/vmware/how-to-setup-esxi-for-nsx/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>How to setup ESXi for NSX</strong> was published on <time datetime="2014-07-14T16:05:48+02:00">July 14, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

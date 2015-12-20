@@ -1,0 +1,392 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Understanding RAID management in Linux &#8211; Juanma's Blog</title>
+<meta name="description" content="The first thing you must learn about RAID technologies in Linux is that they have nothing in common with HP-UX, and I mean nothing! Yes there is LVM but that’s all, the mirror of a volume group for example is not done through LVM commands, in fact you are not going to mirror a volume group but the block device/s where the volume group resides.
+
+">
+<meta name="keywords" content="device-mapper, dmraid, dmsetup, EVMS, Linux, Linux LVM, MD, mdadm, Raid">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Understanding RAID management in Linux">
+<meta name="twitter:description" content="The first thing you must learn about RAID technologies in Linux is that they have nothing in common with HP-UX, and I mean nothing! Yes there is LVM but that’s all, the mirror of a volume group for example is not done through LVM commands, in fact you are not going to mirror a volume group but the block device/s where the volume group resides.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding RAID management in Linux">
+<meta property="og:description" content="The first thing you must learn about RAID technologies in Linux is that they have nothing in common with HP-UX, and I mean nothing! Yes there is LVM but that’s all, the mirror of a volume group for example is not done through LVM commands, in fact you are not going to mirror a volume group but the block device/s where the volume group resides.
+
+">
+<meta property="og:url" content="/linux/understanding-raid-management-in-linux/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/linux/understanding-raid-management-in-linux/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/linux/understanding-raid-management-in-linux/" rel="bookmark" title="Understanding RAID management in Linux">Understanding RAID management in Linux</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>The first thing you must learn about RAID technologies in Linux is that they have nothing in common with HP-UX, and I mean nothing! Yes there is LVM but that’s all, the mirror of a volume group for example is not done through LVM commands, in fact you are not going to mirror a volume group but the block device/s where the volume group resides.</p>
+
+<p>There are two tools to manage RAID in Linux.</p>
+
+<ul>
+  <li><code>dmraid</code></li>
+  <li><code>mdadm</code></li>
+</ul>
+
+<p><code>dmraid</code> is used to discover and activate software (ATA)RAID arrays, commonly known as fakeRAID, and <code>mdadm</code> is used to manage Linux Software RAID devices.</p>
+
+<h3 id="dmraid">dmraid</h3>
+
+<p><code>dmraid</code>, uses <code>libdevmapper</code> and the device-mapper kernel driver to perform all the tasks.</p>
+
+<p>The device-mapper is a component of the Linux Kernel. This the way the Linux Kernel do all the block device management. It maps a block device onto another and forms the base of volume management (<a href="http://sources.redhat.com/lvm2/" title="LVM2">LVM2</a> and <a href="http://evms.sourceforge.net/" title="EVMS">EVMS</a>) and software raid. Multipathing support is also provided through the device-mapper.
+Device-mapper support is present in 2.6 kernels although there are patches for the most recent versions of 2.4 kernel version.</p>
+
+<p><code>dmraid</code> supports several array types.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# dmraid -l
+asr     : Adaptec HostRAID ASR (0,1,10)
+ddf1    : SNIA DDF1 (0,1,4,5,linear)
+hpt37x  : Highpoint HPT37X (S,0,1,10,01)
+hpt45x  : Highpoint HPT45X (S,0,1,10)
+isw     : Intel Software RAID (0,1)
+jmicron : JMicron ATARAID (S,0,1)
+lsi     : LSI Logic MegaRAID (0,1,10)
+nvidia  : NVidia RAID (S,0,1,10,5)
+pdc     : Promise FastTrack (S,0,1,10)
+sil     : Silicon Image(tm) Medley(tm) (0,1,10)
+via     : VIA Software RAID (S,0,1,10)
+dos     : DOS partitions on SW RAIDs
+[root@caladan ~]#</code></pre></div>
+
+<p>Following are a couple of examples to show <code>dmraid</code> operation.</p>
+
+<h4 id="array-discovering">Array discovering</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# dmraid -r
+/dev/dm-46: hpt45x, &quot;hpt45x_chidjhaiaa-0&quot;, striped, ok, 320172928 sectors, data@ 0
+/dev/dm-50: hpt45x, &quot;hpt45x_chidjhaiaa-0&quot;, striped, ok, 320172928 sectors, data@ 0
+/dev/dm-54: hpt45x, &quot;hpt45x_chidjhaiaa-1&quot;, striped, ok, 320172928 sectors, data@ 0
+/dev/dm-58: hpt45x, &quot;hpt45x_chidjhaiaa-1&quot;, striped, ok, 320172928 sectors, data@ 0
+
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="activate-all-discovered-arrays">Activate all discovered arrays</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# dmraid -ay</code></pre></div>
+
+<h4 id="deactivate-all-discovered-arrays">Deactivate all discovered arrays</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# dmraid -an</code></pre></div>
+
+<h3 id="mdadm">mdadm</h3>
+
+<p><code>mdadm</code>, is a tool to manage the Linux software RAID arrays. This tool has nothing to do with the device-mapper, in fact the device-mapper is not aware of the RAID arrays created with <code>mdadm</code>.</p>
+
+<p>To illustrate this take a look at the screenshot below. I created a RAID1 device, <code>/dev/md0</code>, I then show its configuration with  <code>mdadm --detail</code>. Later with <em>dmsetup ls</em> I list all the block devices seen by the device-mapper, as you can see there is no reference to <code>/dev/md0</code>.</p>
+
+<p><a href="/11/dmsetup-mdadm1.png"><img src="/images/dmsetup-mdadm1.png" alt="" title="dmsetup mdadm" /></a></p>
+
+<p>Instead <code>mdadm</code> uses the MD (Multiple Devices) device driver, this driver provides virtual devices created from another independent devices. Currently the MD driver supports the following RAID levels and configurations</p>
+
+<ul>
+  <li>RAID1</li>
+  <li>RAID4</li>
+  <li>RAID5</li>
+  <li>RAID6</li>
+  <li>RAID0</li>
+  <li>LINEAR (a concatenated array)</li>
+  <li>MULTIPATH</li>
+  <li>FAULTY (an special failed array type for testing purposes)</li>
+</ul>
+
+<p>The configuration of the MD devices is contained in the <code>/etc/mdadm.conf</code> file.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# cat mdadm.conf
+ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
+ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44
+[root@caladan ~]#</code></pre></div>
+
+<p>The <code>mdadm</code> tool has seven operation modes.</p>
+
+<ol>
+  <li>Assemble</li>
+  <li>Build</li>
+  <li>Create</li>
+  <li>Manage</li>
+  <li>Misc</li>
+  <li>Follow or Monitor</li>
+  <li>Grow</li>
+</ol>
+
+<p>A more detailed description of every major operation mode is provided in <code>mdadm</code> man page.</p>
+
+<p>Finally below are examples of some of the more common operations with <code>mdadm</code>.</p>
+
+<h4 id="create-a-raid1-array">Create a RAID1 array</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid1 --raid-devices 2 /dev/sd[de]1
+mdadm: size set to 1044096K
+mdadm: array /dev/md1 started.
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="get-detailed-configuration-of-the-array">Get detailed configuration of the array</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# mdadm --query --detail /dev/md1
+/dev/md1:
+            Version : 00.90.01
+      Creation Time : Tue Nov 23 22:37:05 2010
+         Raid Level : raid1
+         Array Size : 1044096 (1019.80 MiB 1069.15 MB)
+        Device Size : 1044096 (1019.80 MiB 1069.15 MB)
+       Raid Devices : 2
+      Total Devices : 2
+    Preferred Minor : 1
+        Persistence : Superblock is persistent
+
+        Update Time : Tue Nov 23 22:37:11 2010
+              State : clean
+     Active Devices : 2
+    Working Devices : 2
+     Failed Devices : 0
+      Spare Devices : 0
+
+               UUID : c1893118:c1327582:7dc3a667:aa87dfeb
+             Events : 0.2
+
+        Number   Major   Minor   RaidDevice State
+           0       8       49        0      active sync   /dev/sdd1
+           1       8       65        1      active sync   /dev/sde1
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="destroy-the-array">Destroy the array</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# mdadm --remove /dev/md1
+[root@caladan ~]# mdadm --stop /dev/md1
+[root@caladan ~]# mdadm --detail /dev/md1
+mdadm: md device /dev/md1 does not appear to be active.
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="create-a-raid5-array-with-an-spare-device">Create a RAID5 array with an spare device</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid5 --raid-devices 3 --spare-devices 1 /dev/sd[def]1 /dev/sdg1
+mdadm: array /dev/md1 started
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="check-for-the-status-of-a-task-into-the-procmdstat-file">Check for the status of a task into the /proc/mdstat file.</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# cat /proc/mdstat
+Personalities : [raid6] [raid5] [raid4]
+md0 : active raid6 sdi1[7] sdh1[6] sdg1[5] sdf1[4] sde1[3] sdd1[2] sdc1[1] sdb1[0]
+             226467456 blocks level 6, 64k chunk, algorithm 2 [8/8] [UUUUUUUU]
+             [=========&gt;...........]  resync = 49.1% (18552320/37744576) finish=11.4min speed=27963K/sec
+
+unused devices: &lt;none&gt;
+[root@caladan ~]#</code></pre></div>
+
+<h4 id="generate-the-mdadmconf-file-from-the-current-active-devices">Generate the mdadm.conf file from the current active devices.</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@caladan ~]# mdadm --detail --scan
+ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
+ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44
+[root@caladan ~]# mdadm --detail --scan &gt;&gt; mdadm.conf</code></pre></div>
+
+<p>As a final thought, my recommendation is that if there is hardware RAID controller available, like the HP Smart Array P400 for example, go hard-RAID five by five and if not always use <code>mdadm</code> even if there is an onboard RAID controller.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/linux/understanding-raid-management-in-linux/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/linux/understanding-raid-management-in-linux/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/linux/understanding-raid-management-in-linux/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Understanding RAID management in Linux</strong> was published on <time datetime="2010-11-24T00:32:57+01:00">November 24, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

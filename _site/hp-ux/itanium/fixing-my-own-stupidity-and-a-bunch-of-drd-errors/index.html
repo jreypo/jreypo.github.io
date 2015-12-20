@@ -1,0 +1,442 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Fixing my own stupidity and a bunch of DRD errors &#8211; Juanma's Blog</title>
+<meta name="description" content="I was playing this afternoon with DRD in an 11.23 machine and just after launching the clone process I decided to stop it with Ctrl-c since I wasn’t logging the session and I wanted to do it. The process stopped with an error and I was sent back to the shell.
+
+">
+<meta name="keywords" content="DRD, Dynamic Root Disk, HP-UX, idisk, Itanium, LVM">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Fixing my own stupidity and a bunch of DRD errors">
+<meta name="twitter:description" content="I was playing this afternoon with DRD in an 11.23 machine and just after launching the clone process I decided to stop it with Ctrl-c since I wasn’t logging the session and I wanted to do it. The process stopped with an error and I was sent back to the shell.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fixing my own stupidity and a bunch of DRD errors">
+<meta property="og:description" content="I was playing this afternoon with DRD in an 11.23 machine and just after launching the clone process I decided to stop it with Ctrl-c since I wasn’t logging the session and I wanted to do it. The process stopped with an error and I was sent back to the shell.
+
+">
+<meta property="og:url" content="/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/" rel="bookmark" title="Fixing my own stupidity and a bunch of DRD errors">Fixing my own stupidity and a bunch of DRD errors</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>I was playing this afternoon with DRD in an 11.23 machine and just after launching the clone process I decided to stop it with <code>Ctrl-c</code> since I wasn’t logging the session and I wanted to do it. The process stopped with an error and I was sent back to the shell.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">* Copying File Systems To New System Image
+ERROR:   Exiting due to keyboard interrupt.
+       * Unmounting New System Image Clone
+       * System image: &quot;sysimage_001&quot; on disk &quot;/dev/dsk/c2t1d0&quot;
+ERROR:   Caught signal SIGINT.  This process is running critical code, this signal will be handled shortly.
+ERROR:   Caught signal SIGINT.  This process is running critical code, this signal will be handled shortly.
+ERROR:   Caught signal SIGINT.  This process is running critical code, this signal will be handled shortly.
+ERROR:   Caught signal SIGINT.  This process is running critical code, this signal will be handled shortly.
+ERROR:   Unmounting the file system fails.
+         - Unmounting the clone image fails.
+         - The &quot;umount&quot; command returned  &quot;13&quot;. The &quot;sync&quot; command returned  &quot;0&quot;. The error messages produced are the following: &quot;&quot;
+       * Unmounting New System Image Clone failed with 5 errors.
+       * Copying File Systems To New System Image failed with 6 errors.
+=======  04/21/10 08:20:19 EDT  END Clone System Image failed with 6 errors. (user=root)  (jobid=ivm-v2)</code></pre></div>
+
+<p>I know it is a very bad idea but it’s not production server, just a virtual machine I use to perform tests. In fact my stupid behavior gaveme the opportunity to discover and play with a funny and pretty bunch of errors. Here it is how I manage to  resolve it.</p>
+
+<p>I launched again the clone process in preview mode, just in case, and DRD fails with the following error.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/ # drd clone -p -v -t /dev/dsk/c2t1d0
+
+=======  04/21/10 08:22:01 EDT  BEGIN Clone System Image Preview (user=root)  (jobid=ivm-v2)
+
+        * Reading Current System Information
+        * Selecting System Image To Clone
+        * Selecting Target Disk
+ ERROR:   Selection of the target disk fails.
+          - Selecting the target disk fails.
+          - Validation of the disk &quot;/dev/dsk/c2t1d0&quot; fails with the following error(s):
+          - Target volume group device entry &quot;/dev/drd00&quot; exists. Run &quot;drd umount&quot; before proceeding.
+        * Selecting Target Disk failed with 1 error.
+
+=======  04/21/10 08:22:10 EDT  END Clone System Image Preview failed with 1 error. (user=root)  (jobid=ivm-v2)</code></pre></div>
+
+<p>It seems that the original process just leaved the image mounted but after trying with <code>drd umount</code> just like the DRD output said it didn’t worked. The image was only partially created, yeah I created a beautiful mess ;-)</p>
+
+<p>At that point, and in another <em>clever</em> movement, instead of simply removing the <code>drd00</code> volume group I just deleted <code>/dev/drd00</code>… who’s da man!! or like we use to say in Spain ¡Con dos cojones!</p>
+
+<p>DRD, of course, failed with a new error.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">ERROR:   Selection of the target disk fails.
+         - Selecting the target disk fails.
+         - Validation of the disk &quot;/dev/dsk/c2t1d0&quot; fails with the following error(s):
+         - Target volume group &quot;/dev/drd00&quot; found in logical volume table. &quot;/etc/lvmtab&quot; is corrupt and must be fixed before proceeding.
+       * Selecting Target Disk failed with 1 error.</code></pre></div>
+
+<p>Well it wasn’t so bad. I recreated <code>/etc/lvmtab</code> and yes… I fired up my friend Dynamic Root Disk in preview mode.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/ # rm -f /etc/lvmtab
+[ivm-v2]/ # vgscan -v
+Creating &quot;/etc/lvmtab&quot;.
+vgscan: Couldn&#39;t access the list of physical volumes for volume group &quot;/dev/vg00&quot;.
+Invalid argument
+Physical Volume &quot;/dev/dsk/c3t2d0&quot; contains no LVM information
+
+/dev/vg00
+/dev/dsk/c2t0d0s2
+
+Following Physical Volumes belong to one Volume Group.
+Unable to match these Physical Volumes to a Volume Group.
+Use the vgimport command to complete the process.
+/dev/dsk/c2t1d0s2
+
+Scan of Physical Volumes Complete.
+*** LVMTAB has been created successfully.
+*** Do the following to resync the information on the disk.
+*** #1.  vgchange -a y
+*** #2.  lvlnboot -R
+[ivm-v2]/ # lvlnboot -R
+Volume Group configuration for /dev/vg00 has been saved in /etc/lvmconf/vg00.conf
+[ivm-v2]/ #
+[ivm-v2]/ # drd clone -p -v -t /dev/dsk/c2t1d0
+
+=======  04/21/10 08:26:06 EDT  BEGIN Clone System Image Preview (user=root)  (jobid=ivm-v2)
+
+       * Reading Current System Information
+       * Selecting System Image To Clone
+       * Selecting Target Disk
+ERROR:   Selection of the target disk fails.
+         - Selecting the target disk fails.
+         - Validation of the disk &quot;/dev/dsk/c2t1d0&quot; fails with the following error(s):
+         - The disk &quot;/dev/dsk/c2t1d0&quot; contains data. To overwrite this disk use the option &quot;-x overwrite=true&quot;.
+       * Selecting Target Disk failed with 1 error.
+
+=======  04/21/10 08:26:13 EDT  END Clone System Image Preview failed with 1 error. (user=root)  (jobid=ivm-v2)</code></pre></div>
+
+<p>I couldn’t believe that. Another error? Why in the hell I got involved with DRD? But I am a Unix Sysadmin, and a stubborn one. Looked at the disk and discovered that it had been partitioned by the first failed DRD cloning process. I just wiped out the whole disk with <code>idisk</code> and just in case I used the overwrite option.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/ # idisk -p /dev/rdsk/c2t1d0
+idisk version: 1.31
+
+EFI Primary Header:
+        Signature                 = EFI PART
+        Revision                  = 0x10000
+        HeaderSize                = 0x5c
+        HeaderCRC32               = 0xe19d8a07
+        MyLbaLo                   = 0x1
+        AlternateLbaLo            = 0x1117732f
+        FirstUsableLbaLo          = 0x22
+        LastUsableLbaLo           = 0x1117730c
+        Disk GUID                 = d79b52fa-4d43-11df-8001-d6217b60e588
+        PartitionEntryLbaLo       = 0x2
+        NumberOfPartitionEntries  = 0xc
+        SizeOfPartitionEntry      = 0x80
+        PartitionEntryArrayCRC32  = 0xca7e53ce
+
+  Primary Partition Table (in 512 byte blocks):
+    Partition 1 (EFI):
+        Partition Type GUID       = c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+        Unique Partition GUID     = d79b550c-4d43-11df-8002-d6217b60e588
+        Starting Lba              = 0x22
+        Ending Lba                = 0xfa021
+    Partition 2 (HP-UX):
+        Partition Type GUID       = 75894c1e-3aeb-11d3-b7c1-7b03a0000000
+        Unique Partition GUID     = d79b5534-4d43-11df-8003-d6217b60e588
+        Starting Lba              = 0xfa022
+        Ending Lba                = 0x110af021
+    Partition 3 (HPSP):
+        Partition Type GUID       = e2a1e728-32e3-11d6-a682-7b03a0000000
+        Unique Partition GUID     = d79b5552-4d43-11df-8004-d6217b60e588
+        Starting Lba              = 0x110af022
+        Ending Lba                = 0x11177021
+
+[ivm-v2]/ #
+[ivm-v2]/ # idisk -R /dev/rdsk/c2t1d0
+idisk version: 1.31
+********************** WARNING ***********************
+If you continue you will destroy all partition data on this disk.
+Do you wish to continue(yes/no)? yes</code></pre></div>
+
+<p>Don’t know why but I was pretty sure that DRD was going to fail again… and it did.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">=======  04/21/10 08:27:02 EDT  BEGIN Clone System Image Preview (user=root)  (jobid=ivm-v2)
+
+       * Reading Current System Information
+       * Selecting System Image To Clone
+       * Selecting Target Disk
+       * The disk &quot;/dev/dsk/c2t1d0&quot; contains data which will be overwritten.
+       * Selecting Volume Manager For New System Image
+       * Analyzing For System Image Cloning
+ERROR:   Analysis of file system creation fails.
+         - Analysis of target fails.
+         - The analysis step for creation of an inactive system image failed.
+         - The default DRD mount point &quot;/var/opt/drd/mnts/sysimage_001/&quot; cannot be used due to the following error(s):
+         - The mount point /var/opt/drd/mnts/sysimage_001/ is not an empty directory as required.
+       * Analyzing For System Image Cloning failed with 1 error.
+
+=======  04/21/10 08:27:09 EDT  END Clone System Image Preview failed with 1 error. (user=root)  (jobid=ivm-v2)</code></pre></div>
+
+<p>After a quick check I found that the original image was mounted.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/ # mount
+/ on /dev/vg00/lvol3 ioerror=mwdisable,delaylog,dev=40000003 on Wed Apr 21 07:29:37 2010
+/stand on /dev/vg00/lvol1 ioerror=mwdisable,log,tranflush,dev=40000001 on Wed Apr 21 07:29:38 2010
+/var on /dev/vg00/lvol8 ioerror=mwdisable,delaylog,dev=40000008 on Wed Apr 21 07:29:50 2010
+/usr on /dev/vg00/lvol7 ioerror=mwdisable,delaylog,dev=40000007 on Wed Apr 21 07:29:50 2010
+/tmp on /dev/vg00/lvol4 ioerror=mwdisable,delaylog,dev=40000004 on Wed Apr 21 07:29:50 2010
+/opt on /dev/vg00/lvol6 ioerror=mwdisable,delaylog,dev=40000006 on Wed Apr 21 07:29:50 2010
+/home on /dev/vg00/lvol5 ioerror=mwdisable,delaylog,dev=40000005 on Wed Apr 21 07:29:50 2010
+/net on -hosts ignore,indirect,nosuid,soft,nobrowse,dev=1 on Wed Apr 21 07:30:26 2010
+/var/opt/drd/mnts/sysimage_001 on /dev/drd00/lvol3 ioerror=nodisable,delaylog,dev=40010003 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/stand on /dev/drd00/lvol1 ioerror=nodisable,delaylog,dev=40010001 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/tmp on /dev/drd00/lvol4 ioerror=nodisable,delaylog,dev=40010004 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/home on /dev/drd00/lvol5 ioerror=nodisable,delaylog,dev=40010005 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/opt on /dev/drd00/lvol6 ioerror=nodisable,delaylog,dev=40010006 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/usr on /dev/drd00/lvol7 ioerror=nodisable,delaylog,dev=40010007 on Wed Apr 21 08:19:46 2010
+/var/opt/drd/mnts/sysimage_001/var on /dev/drd00/lvol8 ioerror=nodisable,delaylog,dev=40010008 on Wed Apr 21 08:19:47 2010
+[ivm-v2]/ #</code></pre></div>
+
+<p>Had to unmount the filesystems of the image one by one and after almost committing suicide with a rack rail I launched the clone again and without the preview, if I were going to play a stupid role at least it was going to the most stupid one in the world x-)</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/ # drd clone -x overwrite=true -v -t /dev/dsk/c2t1d0
+
+=======  04/21/10 08:38:22 EDT  BEGIN Clone System Image (user=root)  (jobid=rx260-02)
+
+       * Reading Current System Information
+       * Selecting System Image To Clone
+       * Selecting Target Disk
+       * The disk &quot;/dev/dsk/c2t1d0&quot; contains data which will be overwritten.
+       * Selecting Volume Manager For New System Image
+       * Analyzing For System Image Cloning
+       * Creating New File Systems
+ERROR:   Clone file system creation fails.
+         - Creating the target file systems fails.
+         - Command &quot;/opt/drd/lbin/drdconfigure&quot; fails with the return code 255. The entire output from the command is given below:
+         - Start of output from /opt/drd/lbin/drdconfigure:
+         -        * Creating LVM physical volume &quot;/dev/rdsk/c2t1d0s2&quot; (0/1/1/0.1.0).
+                  * Creating volume group &quot;drd00&quot;.
+           ERROR:   Command &quot;/sbin/vgcreate -A n -e 4356 -l 255 -p 16 -s 32 /dev/drd00
+                    /dev/dsk/c2t1d0s2&quot; failed.
+
+         - End of output from /opt/drd/lbin/drdconfigure
+       * Creating New File Systems failed with 1 error.
+       * Unmounting New System Image Clone
+       * System image: &quot;sysimage_001&quot; on disk &quot;/dev/dsk/c2t1d0&quot;
+
+=======  04/21/10 08:38:46 EDT  END Clone System Image failed with 1 error. (user=root)  (jobid=rx260-02)
+
+[ivm-v2]/ #</code></pre></div>
+
+<p>I thought that every possible error was fixed but there it was DRD saying that it failed with a bogus <code>return code 255</code>, oh yes very insightful because it’s not a 254 or a 256 it is a 255 code and everybody know what it means… Shit! I don’t know what it means. Yes it was true, I didn’t know what “return code 255” stood for. After doing a small search on ITRC there was only one entry about a similar case, only one. I manage to create a beautiful error, don’t you think?</p>
+
+<p>The question is that there was a mismatch between the minor numbers the kernel believed were in use and those really visible in the device files. DRD will always try to use the next free based on the device files and since in my case there was only one in use but the kernel thought there were two in use, one from <code>vg00</code> and another one from the failed clone, it failed.</p>
+
+<p>The solution is to cheat the kernel creating a fake group device using the minor number the kernel thinks is in use.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[ivm-v2]/dev # mkdir fake
+[ivm-v2]/dev # cd fake
+[ivm-v2]/dev/fake # mknod group c 64 0x010000
+[ivm-v2]/dev/fake #</code></pre></div>
+
+<p>After that I launched DRD and everything went smoothly.</p>
+
+<p>Fortunately everything happened in a test virtual machine and at any step of my frustrating trip through self-generated DRD error I could reset the VM and start over again with a clean system but since the purpose of Dynamic Root Disk is to minimize the downtime of production systems the reboot was not an option, at least no the first in the list.</p>
+
+<p>The credit for the solution goes to <a href="http://forums13.itrc.hp.com/service/forums/publicProfile.do?forumId=1&amp;userId=CA1442849&amp;admit=109447627+1271889825841+28353475">Judit Wathen</a> from the <a href="http://www.docs.hp.com/en/DRD/">Dynamic Root Disk</a> Team at HP, continue with your great work :-D</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/itanium/fixing-my-own-stupidity-and-a-bunch-of-drd-errors/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Fixing my own stupidity and a bunch of DRD errors</strong> was published on <time datetime="2010-04-22T00:25:00+02:00">April 22, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

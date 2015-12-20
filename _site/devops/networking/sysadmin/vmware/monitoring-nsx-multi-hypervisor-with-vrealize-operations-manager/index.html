@@ -1,0 +1,346 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Monitoring NSX Multi-Hypervisor with vRealize Operations Manager &#8211; Juanma's Blog</title>
+<meta name="description" content="VMware has released a new vRealize Operations Manager management
+pack for NSX Multi-hypervisor. This new management pack will allow
+vROps to extend its management capabilities into any NSX-MH
+infrastructure.
+
+">
+<meta name="keywords" content="network virtualization, networking, NSX, NSX-MH, vC Ops, vCenter Operations, vCenter Operations Manager, VMware, vRealize Operations, vROps">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Monitoring NSX Multi-Hypervisor with vRealize Operations Manager">
+<meta name="twitter:description" content="VMware has released a new vRealize Operations Manager management
+pack for NSX Multi-hypervisor. This new management pack will allow
+vROps to extend its management capabilities into any NSX-MH
+infrastructure.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitoring NSX Multi-Hypervisor with vRealize Operations Manager">
+<meta property="og:description" content="VMware has released a new vRealize Operations Manager management
+pack for NSX Multi-hypervisor. This new management pack will allow
+vROps to extend its management capabilities into any NSX-MH
+infrastructure.
+
+">
+<meta property="og:url" content="/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/" rel="bookmark" title="Monitoring NSX Multi-Hypervisor with vRealize Operations Manager">Monitoring NSX Multi-Hypervisor with vRealize Operations Manager</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>VMware has released a new <strong>vRealize Operations Manager</strong> management
+pack for <strong>NSX Multi-hypervisor</strong>. This new management pack will allow
+vROps to extend its management capabilities into any NSX-MH
+infrastructure.</p>
+
+<p>This management pack provides a great set a features, including:</p>
+
+<ul>
+  <li>Operational visibility into the different NSX-MH components, from
+NSX Manager to Controllers, transport nodes and logical elements of
+the network.</li>
+  <li>Search and drill down functionality to help the administrator
+monitor the health of the NSX objects.</li>
+  <li>Alerts and root cause problem solving capabilities by detecting
+configuration, connectivity and health deficiencies into the
+NSX environment.</li>
+  <li>Report templates for NSX Multi-Hypervisor environment.</li>
+</ul>
+
+<p>The management pack requires vRealize Operations Manager 6.0 and can be
+downloaded from <a href="https://solutionexchange.vmware.com/store/products/management-pack-for-nsx-for-multi-hypervisor-1-0#.VI9wfIrF-n0">VMware Solutions
+Exchange</a>.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>To install this management pack go to <strong>Administration</strong> in the left
+pane.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-15-10.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-15-10.png" alt="Screen Shot 2014-12-16 at
+01.15.10" /></a></p>
+
+<p>From there go to <strong>Solutions</strong> and on the right pane click on the plus
+sign to add the new management pack.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-15-24.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-15-24.png?w=580" alt="Screen Shot 2014-12-16 at
+01.15.24" /></a></p>
+
+<p>Browse for the pack installation file, click <strong>Upload</strong> and then click
+<strong>Next</strong> when the installation file is uploaded.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-16-27.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-16-27.png?w=580" alt="Screen Shot 2014-12-16 at
+01.16.27" /></a></p>
+
+<p>Accept the EULA and proceed to the last screen. Wait until the
+management pack is installed and then click <strong>Finish</strong>.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-19-10.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-19-10.png?w=580" alt="Screen Shot 2014-12-16 at
+01.19.10" /></a></p>
+
+<h3 id="configure-the-adapter-instance">Configure the adapter instance</h3>
+
+<p>The first task is to create the credentials for the solution. Access
+<strong>Administration -&gt; Credentials</strong> and create a new credential for the
+<strong>NSX-MH Adapter</strong>.It has to include the administration credentials for
+the NSX Controller, NSX Manager and vCenter Server.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-02-19-17.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-02-19-17.png" alt="Screen Shot 2014-12-16 at
+02.19.17" /></a></p>
+
+<p>Next access <strong>Administration -&gt; Solutions</strong>, select the NSX-MH pack
+and click on the gear icon.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/configure-nsx-mh.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/configure-nsx-mh.png?w=580" alt="configure-nsx-mh" /></a></p>
+
+<p>On the pop-up window enter the IP address or the FQDN for:</p>
+
+<ul>
+  <li>NSX Controller</li>
+  <li>NSX Manager</li>
+  <li>vCenter Server</li>
+</ul>
+
+<p>Only the first NSX Controller is needed.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/configure-nsx-mh_2.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/configure-nsx-mh_2.png?w=580" alt="configure-nsx-mh_2" /></a></p>
+
+<p>Test the connection, accept the certificates for the different
+components and click Save Settings. After this the adapter is configured
+and will start collecting data, it will take a some time until it
+displays data, depending on the size of the NSX environment, to have a
+full collection of data.</p>
+
+<h3 id="nsx-mh-dashboards">NSX-MH dashboards</h3>
+
+<p>Out of the box the management pack comes with three dashboards.</p>
+
+<ul>
+  <li><strong>NSX-MH Main</strong>: It provides an overview of the health of the
+different network objects</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-29-26.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-29-26.png?w=580" alt="Screen Shot 2014-12-16 at
+01.29.26" /></a></p>
+
+<ul>
+  <li><strong>NSX-MH Topology</strong>: Provides details about the topology of a
+selected object, how it connects in the networks and a view of the
+related alerts and metrics.</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-15-at-02-30-37.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-15-at-02-30-37.png?w=580" alt="Screen Shot 2014-12-15 at
+02.30.37" /></a></p>
+
+<ul>
+  <li><strong>NSX-MH Object Path</strong>: This dashboard enables the administrator to
+visually depict a the path between two selected objects and verify
+how they are connected between each other and other objects.</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/12/screen-shot-2014-12-16-at-01-32-14.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-12-16-at-01-32-14.png?w=580" alt="Screen Shot 2014-12-16 at
+01.32.14" /></a></p>
+
+<p>Juanma.</p>
+
+<p> </p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/devops/networking/sysadmin/vmware/monitoring-nsx-multi-hypervisor-with-vrealize-operations-manager/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Monitoring NSX Multi-Hypervisor with vRealize Operations Manager</strong> was published on <time datetime="2014-12-16T02:35:50+01:00">December 16, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

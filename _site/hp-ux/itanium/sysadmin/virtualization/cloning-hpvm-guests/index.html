@@ -1,0 +1,664 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Cloning HPVM guests &#8211; Juanma's Blog</title>
+<meta name="description" content="Our next step in the wonderful HPVM World is… cloning virtual machines.
+
+">
+<meta name="keywords" content="Dynamic Root Disk, HP-UX, HPVM, hpvmclone, Integrity VMs, Itanium, sysadmin, systems administration">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Cloning HPVM guests">
+<meta name="twitter:description" content="Our next step in the wonderful HPVM World is… cloning virtual machines.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cloning HPVM guests">
+<meta property="og:description" content="Our next step in the wonderful HPVM World is… cloning virtual machines.
+
+">
+<meta property="og:url" content="/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/" rel="bookmark" title="Cloning HPVM guests">Cloning HPVM guests</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Our next step in the wonderful HPVM World is… cloning virtual machines.</p>
+
+<p>If you have used VMware Virtual Infrastructure cloning, probably are used to the easy <em>right-click and clone vm</em> procedure. Sadly HPVM cloning has nothing in common with it. In fact the process to clone a virtual machine can be a little creepy.</p>
+
+<p>Of course there is a <code>hpvmclone</code> command and anyone can think, as I did the first time I had to clone an IVM, I only have to provide the source VM, the new VM name and <em>voilà</em> everything will be done:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # hpvmclone -P ivm1 -N ivm_clone01
+[root@hpvmhost] ~ # hpvmstatus
+[Virtual Machines]
+Virtual Machine Name VM #  OS Type State     #VCPUs #Devs #Nets Memory  Runsysid
+==================== ===== ======= ========= ====== ===== ===== ======= ========
+ivm1                     9 HPUX    Off            3     3     2    2 GB        0
+ivm2                    10 HPUX    Off            1     7     1    3 GB        0
+ivm_clone01             11 HPUX    Off            3     3     2    2 GB        0
+[root@hpvmhost] ~ #</code></pre></div>
+
+<p>The new virtual machine can be seen and everything seems to be fine but when you ask for the configuration details of the new IVM a nasty surprise will appear… the storage devices had not been cloned instead it looks that <code>hpvmclone</code> simply mapped the devices of the source IVM to the new IVM:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # hpvmstatus -P ivm_clone01
+[Virtual Machine Details]
+Virtual Machine Name VM #  OS Type State
+==================== ===== ======= ========
+ivm_clone01             11 HPUX    Off      
+
+[Authorized Administrators]
+Oper Groups: 
+Admin Groups:
+Oper Users:  
+Admin Users: 
+
+[Virtual CPU Details]
+#vCPUs Entitlement Maximum
+====== =========== =======
+     3       20.0%  100.0%
+
+[Memory Details]
+Total    Reserved
+Memory   Memory 
+=======  ========
+   2 GB     64 MB
+
+[Storage Interface Details]
+Guest                                 Physical
+Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
+======= ========== === === === === === ========= =========================
+disk    scsi         0   2   0   0   0 lv        /dev/vg_vmtest/rivm1d1
+disk    scsi         0   2   0   1   0 lv        /dev/vg_vmtest/rivm1d2
+dvd     scsi         0   2   0   2   0 disk      /dev/rdsk/c1t4d0
+
+[Network Interface Details]
+Interface Adaptor    Name/Num   PortNum Bus Dev Ftn Mac Address
+========= ========== ========== ======= === === === =================
+vswitch   lan        vlan02     11        0   0   0 f6-fb-bf-41-78-63
+vswitch   lan        localnet   10        0   1   0 2a-69-35-d5-c1-5f
+
+[Misc Interface Details]
+Guest                                 Physical
+Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
+======= ========== === === === === === ========= =========================
+serial  com1                           tty       console
+[root@hpvmhost] ~ #</code></pre></div>
+
+<p>With this configuration the virtual machines can’t be booted at the same time. So, what is the purpose of <code>hpvmclone</code> if the newly cloned node can’t be used simultaneously with the original? Honestly this makes no sense at least for me.</p>
+
+<p>At that point and since I really wanted to use both machines in a test cluster I decided to do a little research through Google and <a href="http://www.itrc.hp.com/" title="IT Resource Center">ITRC</a>.</p>
+
+<p>After reading again the official documentation, a few dozens posts regarding HPVM cloning and HPVM in general and a few very nice posts in Daniel Parkes’ <a href="http://www.hpuxtips.es/">HP-UX Tips &amp; Tricks</a> site I finally came up with three different methods to successfully and <em>physically</em> clone an Integrity Virtual Machine.</p>
+
+<h3 id="method-1-using-dd">METHOD 1: Using <code>dd</code></h3>
+
+<ul>
+  <li>Create the LVM structure for the new virtual machine on the host.</li>
+  <li>Use <code>dd</code> to copy every storage device from the source virtual machine.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # dd if=/dev/vg_vmtest/rivm1d1 of=/dev/vg_vmtest/rclone01_d1 bs=1024k
+12000+0 records in
+12000+0 records out
+[root@hpvmhost] ~ #
+[root@hpvmhost] ~ # dd if=/dev/vg_vmtest/rivm1d2 of=/dev/vg_vmtest/rclone01_d2 bs=1024k
+12000+0 records in
+12000+0 records out
+[root@hpvmhost] ~ #</code></pre></div>
+
+<ul>
+  <li>Using <code>hpvmclone</code> create the new machine and in the same command add the new storage devices and delete the old ones from its configuration, any resource can also be modified at this point like with <code>hpvmcreate</code>.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # hpvmclone -P ivm1 -N clone01 -d disk:scsi:0,2,0:lv:/dev/vg_vmtest/rivm1d1 \
+&gt; -d disk:scsi:0,2,1:lv:/dev/vg_vmtest/rivm1d2 \
+&gt; -a disk:scsi::lv:/dev/vg_vmtest/rclone01_d1 \
+&gt; -a disk:scsi::lv:/dev/vg_vmtest/rclone01_d2 \
+&gt; -l &quot;Clone-cluster 01&quot; \
+&gt; -B manual
+[root@hpvmhost] ~ #</code></pre></div>
+
+<ul>
+  <li>Start the new virtual machine and make the necessary changes to the guest OS (network, hostname, etc).</li>
+</ul>
+
+<h3 id="method-2-clone-the-virtual-storage-devices-at-the-same-time-the-ivm-is-cloned">METHOD 2: Clone the virtual storage devices at the same time the IVM is cloned.</h3>
+
+<p>Yes, yes and yes it can be done with <code>hpvmclone</code>, you have to use the <code>-b</code> switch and provide the storage resource to use.</p>
+
+<p>I really didn’t test this procedure with other devices apart from the booting disk/disks. In theory the man page of the command and the HPVM documentation states that this option can be used to specify the booting device of the clone but I used to clone a virtual machine with one boot disk and one with two disks and in both cases it worked without problems.</p>
+
+<ul>
+  <li>As in METHOD 1 create the necessary LVM infrastructure for the new IVM.</li>
+  <li>Once the lvols are created clone the virtual machine.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # hpvmclone -P ivm1 -N vxcl01 -a disk:scsi::lv:/dev/vg_vmtest/rvxcl01_d1 \
+&gt; -a disk:scsi::lv:/dev/vg_vmtest/rvxcl01_d2 \
+&gt; -b disk:scsi:0,2,0:lv:/dev/vg_vmtest/rvxcl01_d1 \
+&gt; -b disk:scsi:0,2,1:lv:/dev/vg_vmtest/rvxcl01_d2 \
+&gt; -d disk:scsi:0,2,0:lv:/dev/vg_vmtest/rivm1d1 \
+&gt; -d disk:scsi:0,2,1:lv:/dev/vg_vmtest/rivm1d2 \
+&gt; -B manual
+12000+0 records in
+12000+0 records out
+hpvmclone: Virtual storage cloned successfully.
+12000+0 records in
+12000+0 records out
+hpvmclone: Virtual storage cloned successfully.
+[root@hpvmhost] ~ #</code></pre></div>
+
+<ul>
+  <li>Start the virtual machine.</li>
+  <li>Now log into the virtual machine to check the start-up process and to make any change needed.</li>
+</ul>
+
+<h3 id="method-3-dynamic-root-disk">METHOD 3: Dynamic Root Disk.</h3>
+
+<p>Since with DRD a clone of <code>vg00</code> can be produced we can use it too to clone an Integrity Virtual Machine.</p>
+
+<ul>
+  <li>First step is to create a new <code>lvol</code> that will contain the clone of <code>vg00</code>, it has to be at least the same size as the original disk.</li>
+  <li>Install the last DRD version supported on the virtual machin to clone.</li>
+  <li>Add the new volume to the source virtual machine and from the guest OS re-scan for the new disk.</li>
+  <li>Now proceed with the DRD clone.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ivm2:~# drd clone -v -x overwrite=true -t /dev/disk/disk15   
+
+=======  03/09/10 15:45:15 MST  BEGIN Clone System Image (user=root)  (jobid=ivm2)
+
+       * Reading Current System Information
+       * Selecting System Image To Clone
+       * Converting legacy Dsf &quot;/dev/dsk/c0t0d0&quot; to &quot;/dev/disk/disk3&quot;
+       * Selecting Target Disk
+NOTE:    There may be LVM 2 volumes configured that will not be recognized.
+       * Selecting Volume Manager For New System Image
+       * Analyzing For System Image Cloning
+       * Creating New File Systems
+       * Copying File Systems To New System Image
+       * Copying File Systems To New System Image succeeded.
+       * Making New System Image Bootable
+       * Unmounting New System Image Clone
+       * System image: &quot;sysimage_001&quot; on disk &quot;/dev/disk/disk15&quot;
+
+=======  03/09/10 16:05:20 MST  END Clone System Image succeeded. (user=root)  (jobid=ivm2)
+
+root@ivm2:~#</code></pre></div>
+
+<ul>
+  <li>Mount the new image.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ivm2:~# drd mount -v
+
+=======  03/09/10 16:09:08 MST  BEGIN Mount Inactive System Image (user=root)  (jobid=ivm2)
+
+       * Checking for Valid Inactive System Image
+       * Locating Inactive System Image
+       * Preparing To Mount Inactive System Image
+       * Selected inactive system image &quot;sysimage_001&quot; on disk &quot;/dev/disk/disk15&quot;.
+       * Mounting Inactive System Image
+       * System image: &quot;sysimage_001&quot; on disk &quot;/dev/disk/disk15&quot;
+
+=======  03/09/10 16:09:26 MST  END Mount Inactive System Image succeeded. (user=root)  (jobid=ivm2)
+
+root@ivm2:~#</code></pre></div>
+
+<ul>
+  <li>On the mounted image edit the <code>netconf</code> file and modify the hostname to “” and remove any network configuration such as IP address, gateway, etc. The image is mounted on <code>/var/opt/drd/mnts/sysimage_001</code>.</li>
+  <li>Move or delete the DRD XML registry file in <code>/var/opt/drd/mnts/sysimage_001/var/opt/drd/registry</code> in order to avoid any problems during the boot of the clone since the source disk will not be present.</li>
+  <li>Unmount the image.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ivm2:~# drd umount -v
+
+=======  03/09/10 16:20:45 MST  BEGIN Unmount Inactive System Image (user=root)  (jobid=ivm2)
+
+       * Checking for Valid Inactive System Image
+       * Locating Inactive System Image
+       * Preparing To Unmount Inactive System Image
+       * Unmounting Inactive System Image
+       * System image: &quot;sysimage_001&quot; on disk &quot;/dev/disk/disk15&quot;
+
+=======  03/09/10 16:20:58 MST  END Unmount Inactive System Image succeeded. (user=root)  (jobid=ivm2)
+
+root@ivm2:~#</code></pre></div>
+
+<ul>
+  <li>Now we are going to create the new virtual machine with <code>hpvmclone</code>. Of course the new IVM can be created through <code>hpvmcreate</code> and add the new disk as its boot disk.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@hpvmhost] ~ # hpvmclone -P ivm2 -N ivm3 -B manual -d disk:scsi:0,1,0:lv:/dev/vg_vmtest/rivm2disk
+[root@hpvmhost] ~ # hpvmstatus -P ivm3
+[Virtual Machine Details]
+Virtual Machine Name VM #  OS Type State
+==================== ===== ======= ========
+ivm3                     4 HPUX    Off      
+
+[Authorized Administrators]
+Oper Groups: 
+Admin Groups:
+Oper Users:  
+Admin Users: 
+
+[Virtual CPU Details]
+#vCPUs Entitlement Maximum
+====== =========== =======
+     1       10.0%  100.0%
+
+[Memory Details]
+Total    Reserved
+Memory   Memory 
+=======  ========
+   3 GB     64 MB
+
+[Storage Interface Details]
+Guest                                 Physical
+Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
+======= ========== === === === === === ========= =========================
+dvd     scsi         0   1   0   1   0 disk      /dev/rdsk/c1t4d0
+disk    scsi         0   1   0   2   0 lv        /dev/vg_vmtest/rivm3disk
+
+[Network Interface Details]
+Interface Adaptor    Name/Num   PortNum Bus Dev Ftn Mac Address
+========= ========== ========== ======= === === === =================
+vswitch   lan        vlan02     11        0   0   0 52-4f-f9-5e-02-82
+
+[Misc Interface Details]
+Guest                                 Physical
+Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
+======= ========== === === === === === ========= =========================
+serial  com1                           tty       console
+[root@hpvmhost] ~ #</code></pre></div>
+
+<ul>
+  <li>Final step is to boot the newly create machine, from the EFI menu we’re going to create a new boot file.</li>
+  <li>First select the <em>Boot option maintenance menu</em>:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
+
+Please select a boot option
+
+    HP-UX Primary Boot: 0/0/1/0.0.0                                
+    EFI Shell [Built-in]                                           
+    Boot option maintenance menu                                   
+
+    Use ^ and v to change option(s). Use Enter to select an option</code></pre></div>
+
+<ul>
+  <li>Now go to <code>Add a Boot Option</code>.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Maintenance Manager ver 1.10 [14.62]
+
+Main Menu. Select an Operation
+
+        Boot from a File                                           
+        Add a Boot Option                                          
+        Delete Boot Option(s)                                      
+        Change Boot Order                                          
+
+        Manage BootNext setting                                    
+        Set Auto Boot TimeOut                                      
+
+        Select Active Console Output Devices                       
+        Select Active Console Input Devices                        
+        Select Active Standard Error Devices                       
+
+        Cold Reset                                                 
+        Exit                                                       
+
+    Timeout--&gt;[10] sec SystemGuid--&gt;[5A0F8F26-2BA2-11DF-9C04-001A4B07F002]
+    SerialNumber--&gt;[VM01010008          ]</code></pre></div>
+
+<ul>
+  <li>Select the first partition of the disk.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Maintenance Manager ver 1.10 [14.62]
+
+Add a Boot Option.  Select a Volume
+
+    IA64_EFI [Acpi(PNP0A03,0)/Pci(1|0)/Scsi(Pun2,Lun0)/HD(Part1,Sig7
+    IA64_EFI [Acpi(PNP0A03,0)/Pci(1|0)/Scsi(Pun2,Lun0)/HD(Part3,Sig7
+    Removable Media Boot [Acpi(PNP0A03,0)/Pci(1|0)/Scsi(Pun1,Lun0)]
+    Load File [Acpi(PNP0A03,0)/Pci(0|0)/Mac(524FF95E0282)]         
+    Load File [EFI Shell [Built-in]]                               
+    Legacy Boot                                                    
+    Exit</code></pre></div>
+
+<ul>
+  <li>Select the first option.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Maintenance Manager ver 1.10 [14.62]
+
+Select file or change to new directory:
+
+       03/09/10  03:45p &lt;DIR&gt;       4,096 EFI                      
+       [Treat like Removable Media Boot]                           
+    Exit</code></pre></div>
+
+<ul>
+  <li>Enter the HPUX directory.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Maintenance Manager ver 1.10 [14.62]
+
+Select file or change to new directory:
+
+       03/09/10  03:45p &lt;DIR&gt;       4,096 .                        
+       03/09/10  03:45p &lt;DIR&gt;           0 ..                       
+       03/09/10  03:45p &lt;DIR&gt;       4,096 HPUX                     
+       03/09/10  03:45p &lt;DIR&gt;       4,096 Intel_Firmware           
+       03/09/10  03:45p &lt;DIR&gt;       4,096 diag                     
+       03/09/10  03:45p &lt;DIR&gt;       4,096 hp                       
+       03/09/10  03:45p &lt;DIR&gt;       4,096 tools                    
+    Exit</code></pre></div>
+
+<ul>
+  <li>Select the <code>hpux.efi</code> file.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Maintenance Manager ver 1.10 [14.62]
+
+Select file or change to new directory:
+
+       03/09/10  03:45p &lt;DIR&gt;       4,096 .                        
+       03/09/10  03:45p &lt;DIR&gt;       4,096 ..                       
+       03/09/10  03:45p           654,025 hpux.efi                 
+       03/09/10  03:45p            24,576 nbp.efi                  
+    Exit</code></pre></div>
+
+<ul>
+  <li>Enter <code>BOOTDISK</code> as description and None as BootOption Data Type. Save changes.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Filename: \EFI\HPUX\hpux.efi
+DevicePath: [Acpi(PNP0A03,0)/Pci(1|0)/Scsi(Pun2,Lun0)/HD(Part1,Sig71252358-2BCD-11DF-8000-D6217B60E588)/\EFI\HPUX\hpux.efi]
+
+IA-64 EFI Application 03/09/10  03:45p     654,025 bytes
+
+Enter New Description:  BOOTDISK
+New BootOption Data. ASCII/Unicode strings only, with max of 240 characters
+
+Enter BootOption Data Type [A-Ascii U-Unicode N-No BootOption] :  None
+
+Save changes to NVRAM [Y-Yes N-No]:</code></pre></div>
+
+<ul>
+  <li>Go back to the EFI main menu and boot from the new option.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
+
+Please select a boot option
+HP-UX Primary Boot: 0/0/1/0.0.0
+EFI Shell [Built-in]
+BOOTDISK
+Boot option maintenance menu
+
+Use ^ and v to change option(s). Use Enter to select an option
+Loading.: BOOTDISK
+Starting: BOOTDISK
+
+(C) Copyright 1999-2006 Hewlett-Packard Development Company, L.P.
+All rights reserved
+
+HP-UX Boot Loader for IPF  --  Revision 2.035
+
+Press Any Key to interrupt Autoboot
+\EFI\HPUX\AUTO ==&gt; boot vmunix
+Seconds left till autoboot -   0
+AUTOBOOTING...&gt; System Memory = 3066 MB
+loading section 0
+.................................................................................. (complete)
+loading section 1
+.............. (complete)
+loading symbol table
+loading System Directory (boot.sys) to MFS
+.....
+loading MFSFILES directory (bootfs) to MFS
+................
+Launching /stand/vmunix
+SIZE: Text:41555K + Data:6964K + BSS:20747K = Total:69267K</code></pre></div>
+
+<ul>
+  <li>Finally the OS will ask some questions about the network configuration and other parameters, answer what suits better
+your needing.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">_______________________________________________________________________________
+
+                       Welcome to HP-UX!
+
+Before using your system, you will need to answer a few questions.
+
+The first question is whether you plan to use this system on a network.
+
+Answer &quot;yes&quot; if you have connected the system to a network and are ready
+to link with a network.
+
+Answer &quot;no&quot; if you:
+
+     * Plan to set up this system as a standalone (no networking).
+
+     * Want to use the system now as a standalone and connect to a
+       network later.
+_______________________________________________________________________________
+
+Are you ready to link this system to a network?
+
+Press [y] for yes or [n] for no, then press [Enter] y
+...</code></pre></div>
+
+<p>And we are done.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>I have to say that at the beginning the cloning system of HPVM disappointed me; but after a while I got used to it.</p>
+
+<p>In my opinion the best method of the above is the second if you have one boot disk, and I really can’t see a reason to have a <code>vg00</code> with several PVs on a virtual machine. If you have an IVM as template and need to produce many copies as quickly as possible this method is perfect.</p>
+
+<p>Of course there is a fourth method: Our beloved Ignite-UX. But I will write about it in another post.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/itanium/sysadmin/virtualization/cloning-hpvm-guests/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Cloning HPVM guests</strong> was published on <time datetime="2010-03-09T19:17:57+01:00">March 09, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

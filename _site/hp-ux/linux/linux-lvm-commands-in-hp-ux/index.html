@@ -1,0 +1,514 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Linux LVM commands in HP-UX &#8211; Juanma's Blog</title>
+<meta name="description" content="Some of the features I always liked about the Linux LVM2 implementation are the lvs, vgs and pvs commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.
+
+">
+<meta name="keywords" content="11iv3, commands, HP-UX, Linux LVM, LVM, lvs, pvs, scripts, vgs">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Linux LVM commands in HP-UX">
+<meta name="twitter:description" content="Some of the features I always liked about the Linux LVM2 implementation are the lvs, vgs and pvs commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux LVM commands in HP-UX">
+<meta property="og:description" content="Some of the features I always liked about the Linux LVM2 implementation are the lvs, vgs and pvs commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.
+
+">
+<meta property="og:url" content="/hp-ux/linux/linux-lvm-commands-in-hp-ux/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/linux/linux-lvm-commands-in-hp-ux/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/linux/linux-lvm-commands-in-hp-ux/" rel="bookmark" title="Linux LVM commands in HP-UX">Linux LVM commands in HP-UX</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Some of the features I always liked about the Linux LVM2 implementation are the <code>lvs</code>, <code>vgs</code> and <code>pvs</code> commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">www04:~ # vgs
+VG            #PV #LV #SN Attr   VSize  VFree
+vgwww01         1   6   0 wz--n- 39.75G   6.25G
+vgbbdd          3   3   0 wz--n- 94.25G      0
+vgsys           1   6   0 wz--n- 34.74G   1.25G
+www04:~ #</code></pre></div>
+
+<p>In HP-UX there is nothing similar available, well since HP-UX 11.31 and LVM2 <code>-F</code> option has been added to produce a formatted, more script friendly list but is not very human readable.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@nfscl02] ~ # vgdisplay -vF vg00
+vg_name=/dev/vg00:vg_write_access=read,write:vg_status=available:max_lv=255:cur_lv=9:open_lv=9:max_pv=16:cur_pv=1:act_pv=1:max_pe_per_pv=4353:vgda=2:pe_size=32:total_pe=4322:alloc_pe=1539:free_pe=2783:total_pvg=0:total_spare_pvs=0:total_spare_pvs_in_use=0:vg_version=1.0:vg_max_size=2228736m:vg_max_extents=69648
+lv_name=/dev/vg00/lvol1:lv_status=available,syncd:lv_size=1856:current_le=58:allocated_pe=58:used_pv=1
+lv_name=/dev/vg00/lvol2:lv_status=available,syncd:lv_size=8192:current_le=256:allocated_pe=256:used_pv=1
+lv_name=/dev/vg00/lvol3:lv_status=available,syncd:lv_size=1504:current_le=47:allocated_pe=47:used_pv=1
+lv_name=/dev/vg00/lvol4:lv_status=available,syncd:lv_size=512:current_le=16:allocated_pe=16:used_pv=1
+lv_name=/dev/vg00/lvol5:lv_status=available,syncd:lv_size=8192:current_le=256:allocated_pe=256:used_pv=1
+lv_name=/dev/vg00/lvol6:lv_status=available,syncd:lv_size=5024:current_le=157:allocated_pe=157:used_pv=1
+lv_name=/dev/vg00/lvol7:lv_status=available,syncd:lv_size=5024:current_le=157:allocated_pe=157:used_pv=1
+lv_name=/dev/vg00/lvol8:lv_status=available,syncd:lv_size=8704:current_le=272:allocated_pe=272:used_pv=1
+lv_name=/dev/vg00/lv_crash:lv_status=available,syncd:lv_size=10240:current_le=320:allocated_pe=320:used_pv=1
+pv_name=/dev/disk/disk1_p2:pv_status=available:total_pe=4322:free_pe=2783:autoswitch=On:proactive_polling=On
+[root@nfscl02] ~ #</code></pre></div>
+
+<p>Because of this I decided to write three scripts to emulate the behavior of <code>vgs</code>, <code>lvs</code> and <code>pvs</code> on my HP-UX servers. This scripts take advantage of the mentioned LVM2 <code>-F</code> switch so they will not work on HP-UX 11.23 or any other previous versions. If anyones recognize the scripting style is because I grab some parts of the code from Olivier’s <a href="http://jreypo.wordpress.com/2009/12/09/ioscan_fc2-sh/">ioscan_fc2.sh</a> and adapted them to my needs so credit goes to him also :-)</p>
+
+<ul>
+  <li><strong>VGS:</strong> List the volume group on the <code>/etc/lvmtab</code> file, if the server is part of a cluster the volume groups active on other nodes will be showed as deactivated. With the <code>-v</code> switch single VGs can be queried.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@cldpp01:~# ./vgs.sh
+VG         PVs   LVs   Status               Version  VGSize Free
+vg00       1     9     available            1.0      135G   77G
+vgdpp      1     1     available,exclusive  1.0      49G    0G
+vgidbbck               deactivated
+root@cldpp01:~# ./vgs.sh -v vgdpp
+VG         PVs   LVs   Status               Version  VGSize Free
+vgdpp      1     1     available,exclusive  1.0      49G    0G
+root@cldpp01:~#</code></pre></div>
+
+<p>The code:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/sbin/sh</span>
+<span class="c">#</span>
+<span class="c"># vgs.sh - script to emulate the Linux LVM command vgs in HP-UX 11iv3</span>
+<span class="c">#</span>
+<span class="c"># (C) 2010 - Juan Manuel Rey (juanmanuel.reyportal@gmail.com)</span>
+<span class="c">#</span>
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</span>
+<span class="c">#</span>
+
+<span class="nv">version</span><span class="o">=</span><span class="s2">&quot;v0.1 2010/02/15&quot;</span>
+
+<span class="k">function</span> usage
+<span class="o">{</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;VGS for HP-UX ${version}&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;Usage: vgs [-v vg_name]&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">        exit </span>1
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> ! <span class="s2">&quot;$(uname -r)&quot;</span> <span class="o">=</span> <span class="s2">&quot;B.11.31&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;VGS for HP-UX only works on HP-UX 11iv3&quot;</span>
+        <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+        -v<span class="o">)</span> <span class="nb">shift</span><span class="p">;</span> <span class="o">[</span>  <span class="s2">&quot;$1&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> usage <span class="o">||</span> <span class="nv">vg_name</span><span class="o">=</span><span class="k">${</span><span class="nv">1</span><span class="k">}</span><span class="p">;;</span>
+        *<span class="o">)</span>  usage<span class="p">;;</span>
+        <span class="k">esac</span>
+<span class="k">fi</span>
+
+<span class="nv">vg_display</span><span class="o">=</span><span class="s2">&quot;vgdisplay -F&quot;</span>
+<span class="o">[</span> ! <span class="s2">&quot;${vg_name}&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">vg_display</span><span class="o">=</span><span class="s2">&quot;vgdisplay -F ${vg_name}&quot;</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;%-10s %-5s %-5s %-20s %-8s %-6s %-5s\n&quot;</span> VG PVs LVs Status Version VGSize Free
+
+<span class="nb">eval</span> <span class="k">${</span><span class="nv">vg_display</span><span class="k">}</span> <span class="p">|</span> <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;:&quot;</span> <span class="nb">read </span>vgdisplay
+<span class="k">do</span>
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>status
+        <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;${status}&quot;</span> <span class="o">=</span> <span class="s2">&quot;deactivated&quot;</span> <span class="o">]</span>
+        <span class="k">then</span>
+                <span class="nv">status</span><span class="o">=</span>deactivated
+                <span class="nv">vg_size</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+                <span class="nv">vg_free</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+        <span class="k">else</span>
+                <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">3</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>status
+                <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">13</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>total_pe
+                <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">12</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>pe_size
+                <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">15</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>free_pe
+                <span class="nv">vg_size</span><span class="o">=</span><span class="s2">&quot;`/usr/bin/expr $total_pe \* $pe_size / 1024`G&quot;</span>
+                <span class="nv">vg_free</span><span class="o">=</span><span class="s2">&quot;`/usr/bin/expr $free_pe \* $pe_size / 1024`G&quot;</span>
+        <span class="k">fi</span>
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">1</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;/&quot;</span> -f <span class="m">3</span> <span class="p">|</span> <span class="nb">read </span>vg_name
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">8</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>pvs
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">5</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lvs
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">vgdisplay</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">19</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>version
+        <span class="nb">printf</span> <span class="s2">&quot;%-10s %-5s %-5s %-20s %-8s %-6s %-5s\n&quot;</span> <span class="s2">&quot;${vg_name}&quot;</span> <span class="s2">&quot;${pvs}&quot;</span> <span class="s2">&quot;${lvs}&quot;</span> <span class="s2">&quot;${status}&quot;</span> <span class="s2">&quot;${version}&quot;</span> <span class="s2">&quot;${vg_size}&quot;</span> <span class="s2">&quot;${vg_free}&quot;</span>
+<span class="k">done</span></code></pre></div>
+
+<ul>
+  <li><strong>LVS:</strong> Like its Linux counterpart shows a list with every active logical volume. As in <code>vgs.sh</code> with the <code>-v</code> switch you can ask the list of a specific volume group.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# ./lvs.sh -v vg00
+LV                             VG           Status            LVSize Permissions Mirrors Stripes  Allocation
+lvol1                          vg00         available,syncd   1G     read,write        0       0  strict,contiguous
+lvol2                          vg00         available,syncd   8G     read,write        0       0  strict,contiguous
+lvol3                          vg00         available,syncd   1G     read,write        0       0  strict,contiguous
+lvol4                          vg00         available,syncd   0G     read,write        0       0  strict
+lvol5                          vg00         available,syncd   20G    read,write        0       0  strict
+lvol6                          vg00         available,syncd   1G     read,write        0       0  strict
+lvol7                          vg00         available,syncd   5G     read,write        0       0  strict
+lvol8                          vg00         available,syncd   20G    read,write        0       0  strict
+lv_crash                       vg00         available,syncd   9G     read,write        0       0  strict
+root@asoka:/#</code></pre></div>
+
+<p>The code:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/sbin/sh</span>
+<span class="c">#</span>
+<span class="c"># lvs.sh - script to emulate the Linux LVM command lvs in HP-UX 11iv3</span>
+<span class="c">#</span>
+<span class="c"># (C) 2010 - Juan Manuel Rey (juanmanuel.reyportal@gmail.com)</span>
+<span class="c">#</span>
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</span>
+<span class="c">#</span>
+
+<span class="nv">version</span><span class="o">=</span><span class="s2">&quot;v0.1 2010/02/15&quot;</span>
+
+<span class="k">function</span> usage
+<span class="o">{</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;LVS for HP-UX ${version}&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;Usage: lvs [-v vg_name]&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">                exit </span>1
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> ! <span class="s2">&quot;$(uname -r)&quot;</span> <span class="o">=</span> <span class="s2">&quot;B.11.31&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;LVS for HP-UX only works on HP-UX 11iv3&quot;</span>
+        <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+        -v<span class="o">)</span> <span class="nb">shift</span><span class="p">;</span> <span class="o">[</span>  <span class="s2">&quot;$1&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> usage <span class="o">||</span> <span class="nv">vg_name</span><span class="o">=</span><span class="k">${</span><span class="nv">1</span><span class="k">}</span><span class="p">;;</span>
+        *<span class="o">)</span>  usage<span class="p">;;</span>
+        <span class="k">esac</span>
+<span class="k">fi</span>
+
+<span class="nv">lv_list</span><span class="o">=</span><span class="s2">&quot;vgdisplay -vF | grep lv_name&quot;</span>
+<span class="o">[</span> ! <span class="s2">&quot;${vg_name}&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">lv_list</span><span class="o">=</span><span class="s2">&quot;vgdisplay -vF ${vg_name} | grep lv_name&quot;</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;%-30s %-12s %-17s %-6s %-10s %-7s %-8s %-8s %-7s\n&quot;</span> LV VG Status LVSize Permissions Mirrors Stripes Allocation
+
+<span class="nb">eval</span> <span class="k">${</span><span class="nv">lv_list</span><span class="k">}</span> <span class="p">|</span> <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;:&quot;</span> <span class="nb">read </span>lvlist
+<span class="k">do</span>
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">lvlist</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">1</span> <span class="p">|</span> cut -d <span class="s2">&quot;/&quot;</span> -f <span class="m">4</span> <span class="p">|</span> <span class="nb">read </span>lv_name
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">lvlist</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">1</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_long_name
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;/&quot;</span> -f <span class="m">3</span> <span class="p">|</span> <span class="nb">read </span>vg_name
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">4</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_status
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">3</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_perm
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">5</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_mirrors
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">11</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_stripes
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">14</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>lv_allocation
+        lvdisplay -F <span class="k">${</span><span class="nv">lv_long_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">8</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>size_megs
+        <span class="nv">lv_size</span><span class="o">=</span><span class="s2">&quot;`/usr/bin/expr $size_megs / 1024`G&quot;</span>
+
+        <span class="nb">printf</span> <span class="s2">&quot;%-30s %-12s %-17s %-6s %-17s %-7s %-2s %-5s\n&quot;</span> <span class="s2">&quot;${lv_name}&quot;</span> <span class="s2">&quot;${vg_name}&quot;</span> <span class="s2">&quot;${lv_status}&quot;</span> <span class="s2">&quot;${lv_size}&quot;</span> <span class="s2">&quot;${lv_perm}&quot;</span> <span class="s2">&quot;${lv_mirrors}&quot;</span> <span class="s2">&quot;${lv_stripes}&quot;</span> <span class="s2">&quot;${lv_allocation}&quot;</span>
+<span class="k">done</span></code></pre></div>
+
+<ul>
+  <li><strong>PVS:</strong> And now the last one. List the activated physical volumes, if a VGs is not active on the current node its PVs wouldn’t be shown. Like in <code>pvs.sh</code> and <code>vgs.sh</code> there is a <code>-v</code> switch.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@oracle:~# ./pvs.sh
+PV                   VG         Status               PVSize Free
+/dev/disk/disk1_p2   vg00       available            135G   48G  
+/dev/disk/disk28     vgora      available            1G     0G   
+/dev/disk/disk29     vgora      available            5G     0G   
+/dev/disk/disk30     vgora      available            3G     0G   
+/dev/disk/disk31     vgora      available            51G    1G   
+/dev/disk/disk32     vgora      available            1G     0G   
+/dev/disk/disk37     vgora      available            3G     0G   
+/dev/disk/disk38     vgora      available            6G     0G   /dev/disk/disk43     vgoracli   available            3G     0G   
+/dev/disk/disk119    vgoracli   available            2G     0G  
+root@oracle:~#</code></pre></div>
+
+<p>And the code:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/sbin/sh</span>
+<span class="c">#</span>
+<span class="c"># pvs.sh - script to emulate the Linux LVM command pvs in HP-UX 11iv3</span>
+<span class="c">#</span>
+<span class="c"># (C) 2010 - Juan Manuel Rey (juanmanuel.reyportal@gmail.com)</span>
+<span class="c">#</span>
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</span>
+<span class="c">#</span>
+
+<span class="nv">version</span><span class="o">=</span><span class="s2">&quot;v0.1 2010/02/15&quot;</span>
+
+<span class="k">function</span> usage
+<span class="o">{</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;PVS for HP-UX ${version}&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">        echo</span> <span class="s2">&quot;Usage: pvs [-v vg_name]&quot;</span>
+        <span class="nb">echo</span>
+<span class="nb">        exit </span>1
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> ! <span class="s2">&quot;$(uname -r)&quot;</span> <span class="o">=</span> <span class="s2">&quot;B.11.31&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;PVS for HP-UX only works on HP-UX 11iv3&quot;</span>
+        <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+        <span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+        -v<span class="o">)</span> <span class="nb">shift</span><span class="p">;</span> <span class="o">[</span>  <span class="s2">&quot;$1&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> usage <span class="o">||</span> <span class="nv">vg_name</span><span class="o">=</span><span class="k">${</span><span class="nv">1</span><span class="k">}</span><span class="p">;;</span>
+        *<span class="o">)</span>  usage<span class="p">;;</span>
+        <span class="k">esac</span>
+<span class="k">fi</span>
+
+<span class="nv">pv_list</span><span class="o">=</span><span class="s2">&quot;vgdisplay -vF | grep disk&quot;</span>
+<span class="o">[</span> ! <span class="s2">&quot;${vg_name}&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">pv_list</span><span class="o">=</span><span class="s2">&quot;vgdisplay -vF ${vg_name} | grep disk&quot;</span>
+
+<span class="nb">printf</span> <span class="s2">&quot;%-20s %-10s %-20s %-6s %-5s\n&quot;</span> PV VG Status PVSize Free
+
+<span class="nb">eval</span> <span class="k">${</span><span class="nv">pv_list</span><span class="k">}</span> <span class="p">|</span> <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;:&quot;</span> <span class="nb">read </span>pvlist
+<span class="k">do</span>
+        <span class="nb">echo</span> <span class="k">${</span><span class="nv">pvlist</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">1</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>pv_name
+        pvdisplay -F <span class="k">${</span><span class="nv">pv_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;/&quot;</span> -f <span class="m">3</span> <span class="p">|</span> <span class="nb">read </span>vg_name
+        pvdisplay -F <span class="k">${</span><span class="nv">pv_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">3</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>status
+        pvdisplay -F <span class="k">${</span><span class="nv">pv_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">8</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>total_pe
+        pvdisplay -F <span class="k">${</span><span class="nv">pv_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">7</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>pe_size
+        pvdisplay -F <span class="k">${</span><span class="nv">pv_name</span><span class="k">}</span> <span class="p">|</span> cut -d <span class="s2">&quot;:&quot;</span> -f <span class="m">9</span> <span class="p">|</span> cut -d <span class="s2">&quot;=&quot;</span> -f <span class="m">2</span> <span class="p">|</span> <span class="nb">read </span>free_pe
+        <span class="nv">pv_size</span><span class="o">=</span><span class="s2">&quot;`/usr/bin/expr $total_pe \* $pe_size / 1024`G&quot;</span>
+        <span class="nv">pv_free</span><span class="o">=</span><span class="s2">&quot;`/usr/bin/expr $free_pe \* $pe_size / 1024`G&quot;</span>
+        <span class="nb">printf</span> <span class="s2">&quot;%-20s %-10s %-20s %-6s %-5s\n&quot;</span> <span class="s2">&quot;${pv_name}&quot;</span> <span class="s2">&quot;${vg_name}&quot;</span> <span class="s2">&quot;${status}&quot;</span> <span class="s2">&quot;${pv_size}&quot;</span> <span class="s2">&quot;${pv_free}&quot;</span>
+<span class="k">done</span></code></pre></div>
+
+<p>These scripts are available also on my <a href="https://github.com/jreypo/hpux-scripts">HP-UX Scripts</a> Github repository. As always any comments, corrections and/or suggestions are welcome.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/linux/linux-lvm-commands-in-hp-ux/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/linux/linux-lvm-commands-in-hp-ux/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/linux/linux-lvm-commands-in-hp-ux/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Linux LVM commands in HP-UX</strong> was published on <time datetime="2010-02-16T16:07:04+01:00">February 16, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

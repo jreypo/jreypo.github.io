@@ -1,0 +1,449 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Taking Chargeback API for a ride - Part 1 &#8211; Juanma's Blog</title>
+<meta name="description" content="vCenter Chargeback provides a fully featured API that allows to
+automate many tasks like user and rights management, cost configuration
+or reporting.
+
+">
+<meta name="keywords" content="API, CBM, Chargeback Manager, developer, REST, VMware">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Taking Chargeback API for a ride - Part 1">
+<meta name="twitter:description" content="vCenter Chargeback provides a fully featured API that allows to
+automate many tasks like user and rights management, cost configuration
+or reporting.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taking Chargeback API for a ride - Part 1">
+<meta property="og:description" content="vCenter Chargeback provides a fully featured API that allows to
+automate many tasks like user and rights management, cost configuration
+or reporting.
+
+">
+<meta property="og:url" content="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/" rel="bookmark" title="Taking Chargeback API for a ride - Part 1">Taking Chargeback API for a ride - Part 1</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><strong>vCenter Chargeback</strong> provides a fully featured API that allows to
+automate many tasks like user and rights management, cost configuration
+or reporting.</p>
+
+<p>Chargeback API is a <strong>REST-based</strong> one, this means that it will receive
+requests and send responses using HTTP protocol and methods. CBM API
+implements a set of basic CRUD operations, and each of them maps with an
+HTTP method as shown in he below table.</p>
+
+<div>
+
+  -------- ---------------
+  POST     CREATE
+  GET      READ
+  PUT      UPDATE/CREATE
+  DELETE   DELETE
+  -------- ---------------
+
+</div>
+
+<p>API syntax is actually very easy, it is composed of:</p>
+
+<ul>
+  <li>Request method</li>
+  <li>Base URL</li>
+  <li>API signature</li>
+</ul>
+
+<p>It’s better illustrated with an example:</p>
+
+<pre><code>POST https://chargeback.corp.local/vCenter-CB/api/login?version=2.5
+</code></pre>
+
+<p>We can map the above example with the different elements of the API
+syntax:</p>
+
+<ul>
+  <li>POST –This is the request method</li>
+  <li>https://chargeback.corp.loca./vCenter-CB/api – This the base URL</li>
+  <li>/login – This is the API signature, composed of the path to the API
+we want to call.</li>
+</ul>
+
+<p>We have also included the API version, I usually includes the version as
+an URL parameter but as we will see later is not really required. Some
+of the tasks will need also URL parameters that will be placed after the
+signature.</p>
+
+<p>If there is need for more complex information either in the request or
+the response an XML payload have to be sent, just like in many other
+REST APIs. Even to perform a simple login an XML has to be sent, just
+like the next example.</p>
+
+<p>https://gist.github.com/jreypo/11113319</p>
+
+<p>For our first ride with CBM API we will use Firefox REST Client add-on,
+can be found here, this handy add-on provides a visual an easy way to
+quickly ramp up with any REST API. I personally have used it a lot with
+Chargeback to try the different API operations during a development
+project for a customer.</p>
+
+<p>I’m not going to review every possible API, just a few examples to
+illustrate how it works.</p>
+
+<p><strong><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb.png" alt="image" title="image" />Login
+operation:</strong></p>
+
+<p>This is the most basic operation of all. In the REST Client paste the
+XML payload in the Body area, select POST as the method to use and fill
+the URL field.</p>
+
+<p> </p>
+
+<p><strong>Get hierarchy list:</strong></p>
+
+<p>Not every task needs an XML payload, in the following example we are
+going to get a list of the hierarchies using a GET method and with no
+message body. The URL to make the request would be:</p>
+
+<pre><code>https://&lt;chargeback_server&gt;/vCenter-CB/api/hierarchies?version=2.5
+</code></pre>
+
+<p>After executing the request we can see in the REST Client the response
+from Chargeback in XML format.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/04/get_hierarchies.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/get_hierarchies_thumb.png" alt="get_hierarchies" title="get_hierarchies" /></a></p>
+
+<p>If we go to Chargeback web UI we’ll see the listed hierarchies.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/04/hierarchy_cbm_ui.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/hierarchy_cbm_ui_thumb.png" alt="hierarchy_cbm_ui" title="hierarchy_cbm_ui" /></a></p>
+
+<p><strong>Get all Pricing Models:</strong></p>
+
+<p>Another simple request with no XML payload, with a similar syntax to the
+previous one:</p>
+
+<pre><code>GET https://&lt;chargeback_server&gt;/vCenter-CB/api/costModels?version=2.5
+</code></pre>
+
+<p>It will produce however a much more detailed response XML with the
+details of each of the configured Pricing Models.</p>
+
+<p>[code language=”xml”]\
+ &lt;?xml version=”1.0” encoding=”UTF-8”?&gt;\
+ &lt;Response xmlns=”http://www.vmware.com/vcenter/chargeback/2.0”
+xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance” status=”success”
+isValidLicense=”true”&gt;\
+ &lt;CostModels&gt;\
+ &lt;CostModel id=”31”&gt;\
+ &lt;Name&gt;Default Allocation Based Chargeback Pricing
+Model&lt;/Name&gt;\
+ &lt;Description&gt;(DONT DELETE) This is only for optimization reports,
+only base rates are allowed for editing.&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”30”&gt;\
+ &lt;Name&gt;Default Chargeback Pricing Model&lt;/Name&gt;\
+ &lt;Description&gt;This is the default pricing model shipped with
+VMware vCenter Chargeback Manager.&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”558”&gt;\
+ &lt;Name&gt;VMware Cloud Director Actual Usage Pricing
+Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model to charge for actual usage
+in hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”548”&gt;\
+ &lt;Name&gt;VMware Cloud Director Allocation Pool Pricing
+Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model on vDC with Allocation
+model as ‘Allocation Pool’ in hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”550”&gt;\
+ &lt;Name&gt;VMware Cloud Director Networks Pricing Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model on organization networks in
+hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”556”&gt;\
+ &lt;Name&gt;VMware Cloud Director Overage Allocation Pool Pricing
+Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model to charge for overage on
+vDC with Allocation model as ‘Allocation Pool’ in
+hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”554”&gt;\
+ &lt;Name&gt;VMware Cloud Director Pay As You Go - Fixed Charging
+Pricing Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model for ‘Fixed charging’ on vDC
+with Allocation model as ‘Pay As You Go’ in
+hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”552”&gt;\
+ &lt;Name&gt;VMware Cloud Director Pay As You Go - Resource Based
+Charging Pricing Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model for ‘Resource based
+charging’ on vDC with Allocation model as ‘Pay As You Go’ in
+hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;CostModel id=”546”&gt;\
+ &lt;Name&gt;VMware Cloud Director Reservation Pool Pricing
+Model&lt;/Name&gt;\
+ &lt;Description&gt;Apply this pricing model on vDC with Allocation
+model as ‘Reservation Pool’ in hierarchy&lt;/Description&gt;\
+ &lt;Currency id=”104”&gt;\
+ &lt;Name&gt;USD&lt;/Name&gt;\
+ &lt;/Currency&gt;\
+ &lt;/CostModel&gt;\
+ &lt;/CostModels&gt;\
+ &lt;/Response&gt;\
+ [/code]</p>
+
+<p><strong>Add a new hierarchy:</strong></p>
+
+<p>invoked using a POST method, that corresponds with the CREATE operation
+from the table at the beginning of the post. The syntax for the request
+would be:</p>
+
+<pre><code>POST https://&lt;chargeback_server&gt;/vCenter-CB/api/hierarchy
+</code></pre>
+
+<p>In this case I’m not going to put the version as a parameter. An XML
+payload with the details of the new hierarchy is required.</p>
+
+<p>https://gist.github.com/jreypo/11114576</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/04/image1.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb1.png" alt="image" title="image" /></a></p>
+
+<p>Login to Chargeback web interface to check that the new hierarchy is
+there.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/04/image2.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb2.png" alt="image" title="image" /></a></p>
+
+<p>I hope that now you have at least a general understanding of how
+Chargeback API works and how easy is to interact with it. In the second
+post of the series we will review how to automate Chargeback using
+vCenter Orchestrator.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-1/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Taking Chargeback API for a ride - Part 1</strong> was published on <time datetime="2014-04-03T22:25:19+02:00">April 03, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

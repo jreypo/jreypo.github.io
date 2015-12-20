@@ -1,0 +1,402 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>HPVM memory management &#8211; Juanma's Blog</title>
+<meta name="description" content="Like other virtualization software, HP Integrity Virtual Machines comes with several memory management capabilities. In this new post about HPVM I will try to explain what are these capabilities, their purpose and how to configure and use them.
+
+">
+<meta name="keywords" content="Autmatic Memory Reallocation, HP-UX, HPVM, HPVM 4.2, HPVM Dynamic Memory, Integrity VMs">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="HPVM memory management">
+<meta name="twitter:description" content="Like other virtualization software, HP Integrity Virtual Machines comes with several memory management capabilities. In this new post about HPVM I will try to explain what are these capabilities, their purpose and how to configure and use them.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HPVM memory management">
+<meta property="og:description" content="Like other virtualization software, HP Integrity Virtual Machines comes with several memory management capabilities. In this new post about HPVM I will try to explain what are these capabilities, their purpose and how to configure and use them.
+
+">
+<meta property="og:url" content="/hp/hp-ux/itanium/virtualization/hpvm-memory-management/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp/hp-ux/itanium/virtualization/hpvm-memory-management/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp/hp-ux/itanium/virtualization/hpvm-memory-management/" rel="bookmark" title="HPVM memory management">HPVM memory management</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Like other virtualization software, HP Integrity Virtual Machines comes with several memory management capabilities. In this new post about HPVM I will try to explain what are these capabilities, their purpose and how to configure and use them.</p>
+
+<h3 id="dynamic-memory">Dynamic memory</h3>
+
+<p>Dynamic memory is an HPVM feature that allow you to resize the amount of memory of a guest without rebooting it. The HPVM manual mention an example in which dynamic memory is applicable.</p>
+
+<blockquote>
+  <p>…this feature allows a guest that is a Serviceguard node to be used
+as a standby server for multiple Serviceguard packages. When a package
+fails over to the guest, the guest memory can be changed to suit the
+requirements of the package before, during, and after the failover
+process.</p>
+</blockquote>
+
+<p>Dynamic memory is only available on HP-UX guests with the guest management software installed.</p>
+
+<p>Lets see how to enable an configure dynamic memory.</p>
+
+<p>First thing to do is to enable dynamic memory.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_dyn_type=driver</code></pre></div>
+
+<p>There are three possible values for the <code>ram_dyn_type</code> option:</p>
+
+<ol>
+  <li>None: Self explanatory.</li>
+  <li>Any: In the next boot of the guest it will check if dynamic memory is enabled and if the driver is loaded. If the dynamic memory driver is in place the option will change its value to <code>driver</code>.</li>
+  <li>Driver: When the <code>ram_dyn_type</code> is set to <code>driver</code> it means that every dynamic memory control and range is functional.</li>
+</ol>
+
+<p>Specify the minimum amount of RAM to be allocated to the guest, the default unit is MB but GB can also be used.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_dyn_min=1024</code></pre></div>
+
+<p>Next set the maximum memory.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_dyn_max=4G</code></pre></div>
+
+<p>Set the amount of memory to be allocated when the guests starts, this value must be greater than the minimum one.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_dyn_target_start=2048</code></pre></div>
+
+<p>Check the status of the guest to see the newly configured options.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmstatus -r -P batman
+[Virtual Machine entitlements]
+ Percent       Cumulative
+#VCPUs Entitlement Maximum   Usage            Usage
+====== =========== ======= ======= ================
+ 6       10.0%  100.0%    0.0%                0
+
+[Virtual CPU details]
+vCPU Cumulative       Guest   Host    Cycles   Sampling
+ID   Usage            percent percent achieved Interval
+==== ================ ======= ======= ======== ===========
+ 0                0    0.0%    0.0%     0MHz   0 seconds
+ 1                0    0.0%    0.0%     0MHz   0 seconds
+ 2                0    0.0%    0.0%     0MHz   0 seconds
+ 3                0    0.0%    0.0%     0MHz   0 seconds
+ 4                0    0.0%    0.0%     0MHz   0 seconds
+ 5                0    0.0%    0.0%     0MHz   0 seconds
+
+[Virtual Machine Memory Entitlement]
+DynMem  Memory   DynMem  DynMem DynMem  Comfort Total    Free   Avail    Mem    AMR     AMR
+ Min   Entitle   Max    Target Current   Min   Memory  Memory  Memory  Press  Chunk   State
+======= ======= ======= ======= ======= ======= ======= ======= ======= ===== ======= ========
+ 1024MB     0MB     4GB  4096MB  4096MB     0MB     4GB     0MB     0MB   0       0MB DISABLED</code></pre></div>
+
+<p>Once dynamic memory is properly configured, from the VM host, the memory of a guest can be manually resized to a value between the <code>ram_dyn_min</code> and <code>ram_dyn_max</code> parameters in increments of the default chunk size, which is 64MB.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_target=3136</code></pre></div>
+
+<p>There is one final option named <code>dynamic_memory_control</code>, with this option the system administration can allow the root user of the guest to change dynamic memory options, from the guest side, while it is running. The <code>dynamic_memory_control</code> option is incompatible with automatic memory reallocation.</p>
+
+<p>Just to show a small example from the guest side, to view the dynamic memory configuration:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@batman:~# hpvmmgmt -V -l ram
+[Dynamic Memory Information]
+=======================================
+Type                    : driver
+Minimum memory          : 1024 MB
+Target memory           : 4090 MB
+Maximum memory          : 4096 MB
+Current memory          : 4090 MB
+Comfortable minimum     : 1850 MB
+Boot memory             : 4090 MB
+Free memory             : 2210 MB
+Available memory        : 505 MB
+Memory pressure         : 0
+Memory chunksize        : 65536 KB
+Driver Mode(s)          : STARTED ENABLED
+
+root@batman:~#</code></pre></div>
+
+<h3 id="automatic-memory-reallocation">Automatic memory reallocation</h3>
+
+<p>The new HPVM 4.2 version from March expands dynamic memory with an interesting feature called <strong>Automatic Memory Reallocation</strong>. This new feature provides the possibility of automated changes in the amount of memory used by a guest based on load conditions.</p>
+
+<p>Automatic memory reallocation is only supported on HP-UX guests with dynamic memory enabled and with the guest management software installed.</p>
+
+<p>Automatic memory reallocation can be configured through two ways:</p>
+
+<ol>
+  <li>System-wide values.</li>
+  <li>On a per-VM basis.</li>
+</ol>
+
+<p>Each way doesn’t exclude the other one, you can set the system-wide parameters for every VM and later customize some of the virtual machines adjusting their parameters to any additional requirement.</p>
+
+<p>Automatic memory reallocation is enabled by default on the VM host. Open the file <code>/etc/rc.config.d/hpvmconf</code> and check that <code>HPVMAMRENABLE=0</code> is not set to verify that automatic memory reallocation is enabled. The process <code>hpmvmamrd</code>, the automatic memory reallocation daemon, can also be check with a simple <code>ps</code>.</p>
+
+<p><a href="/images/hpvmamrd.jpg"><img src="/images/hpvmamrd.jpg" alt="" title="hpvmamrd" /></a></p>
+
+<p>In the same file two system-wide tunables can be configured.</p>
+
+<ol>
+  <li><code>HPVMCHUNKSIZE</code></li>
+  <li><code>HPVMAMRWAITTIME</code></li>
+</ol>
+
+<p>The first parameter determine the number of megabytes by the guest will attempt to grow if there is memory pressure. If the parameter is not set the default value will be 256MB. The best practice for this parameter is to be a multiple of the dynamic memory chunk size.</p>
+
+<p>The second one set the maximum number of seconds that any VM startup process will wait for memory before reporting a failure due to insufficient memory. The default value is 60 seconds and the maximum configurable 600 seconds.</p>
+
+<p>With the above parameter set to its defaults or customized the next step is to enable automatic memory reallocation in the virtual machines. The <code>amr</code> feature is DISABLED by default on the VMs. To enable use the <code>amr_enable</code> option.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x amr_enable=1</code></pre></div>
+
+<p>Now set the memory entitlement for the virtual machine. The entitlement is the minimum amount of RAM guaranteed to the virtual machine.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x ram_dyn_entitlement=1500</code></pre></div>
+
+<p>Take into account that if <code>amr</code> is not enabled the entitlement could be set but it will not work and any VM without the entitlement parameter set will be ignored by automatic memory reallocation.</p>
+
+<p>The entitlement value can be modified online by the system administrator at any time, but there are some rules that apply:</p>
+
+<ol>
+  <li>If there is not enough memory to grow the VM memory to the specified
+entitlement the operation will fail.</li>
+  <li>The memory of virtual machine can not be grown beyond its
+maximum memory.</li>
+  <li>The virtual machine memory always have to be set to a value between
+<code>ram_dyn_max</code> and <code>ram_dyn_min</code> parameters, no more no less.</li>
+</ol>
+
+<p>When the memory of a guest is resized by default the <code>HPVMCHUNKSIZE</code> value is used but a per-VM chunk size can also be set. To do so use the <code>amr_chunk_size</code> parameter.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmmodify -P batman -x amr_chunk_resize=512</code></pre></div>
+
+<p>As in the system-wide parameter the recommendation is to set the chunk size to a multiple of the dynamic memory chunks size.</p>
+
+<p>Finally to display the configuration and the current use of the virtual machines resource entitlements use <code>hpvmstatus -r</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@hinata:~ # hpvmstatus -r
+[Virtual Machine Resource Entitlement]
+[Virtual CPU entitlement]
+ Percent       Cumulative
+Virtual Machine Name VM #  #VCPUs Entitlement Maximum   Usage            Usage
+==================== ===== ====== =========== ======= ======= ================
+rh-www                   1      4       50.0%  100.0%    0.0%                0
+sql-dev                  2      4       50.0%  100.0%    0.3%         21611866
+rhino                    3      4       50.0%  100.0%    0.0%                0
+batman                   4      8       20.0%  100.0%    0.8%          1318996
+robin                    5      8       20.0%  100.0%    0.8%            97993
+falcon                   6      2       10.0%  100.0%    0.0%                0
+
+[Virtual Machine Memory Entitlement]
+ DynMem  Memory   DynMem  DynMem DynMem  Comfort Total    Free   Avail    Mem    AMR     AMR
+Virtual Machine Name  VM #   Min   Entitle   Max    Target Current   Min   Memory  Memory  Memory  Press  Chunk   State
+==================== ===== ======= ======= ======= ======= ======= ======= ======= ======= ======= ===== ======= ========
+rh-www                   1   512MB     0MB     8GB  8192MB  8192MB     0MB     8GB     0MB     0MB   0       0MB DISABLED
+sql-dev                  2   512MB     0MB     8GB  8192MB  8192MB     0MB     8GB     0MB     0MB   0       0MB DISABLED
+rhino                    3  1024MB  1500MB     6GB  2048MB  6144MB     0MB     6GB     0MB     0MB   0     256MB  ENABLED
+batman                   4  1024MB  1500MB     4GB  4090MB  4090MB  1850MB     4GB  2214MB   500MB   0     256MB  ENABLED
+robin                    5  1024MB  1500MB     4GB  4090MB  4090MB  1914MB     4GB  2165MB   531MB   0     256MB  ENABLED
+falcon                   6   512MB     0MB     6GB  6144MB  6144MB     0MB     6GB     0MB     0MB   0       0MB DISABLED</code></pre></div>
+
+<p>I hope this helps to clarify how HPVM manage the memory of the virtual machines and how to customize its configuration. As always any comment would be welcome :-)</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp/hp-ux/itanium/virtualization/hpvm-memory-management/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp/hp-ux/itanium/virtualization/hpvm-memory-management/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp/hp-ux/itanium/virtualization/hpvm-memory-management/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>HPVM memory management</strong> was published on <time datetime="2010-06-09T14:47:58+02:00">June 09, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

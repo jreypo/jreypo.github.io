@@ -1,0 +1,464 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>How to integrate SUSE Linux Enterprise 11 with Windows Active Directory &#8211; Juanma's Blog</title>
+<meta name="description" content="Getting
+SUSE Enterprise Linux integrated
+with Microsoft Active Directory is much easier than it sounds.
+
+">
+<meta name="keywords" content="Active Directory, Kerberos, Linux, Microsoft, samba, SLES11, SUSE, sysadmin, systems administration, Windows, yast2">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="How to integrate SUSE Linux Enterprise 11 with Windows Active Directory">
+<meta name="twitter:description" content="Getting
+SUSE Enterprise Linux integrated
+with Microsoft Active Directory is much easier than it sounds.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to integrate SUSE Linux Enterprise 11 with Windows Active Directory">
+<meta property="og:description" content="Getting
+SUSE Enterprise Linux integrated
+with Microsoft Active Directory is much easier than it sounds.
+
+">
+<meta property="og:url" content="/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/" rel="bookmark" title="How to integrate SUSE Linux Enterprise 11 with Windows Active Directory">How to integrate SUSE Linux Enterprise 11 with Windows Active Directory</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><a href="http://jreypo.files.wordpress.com/2012/02/suse_linux_logo1.jpg"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/suse_linux_logo1_thumb.jpg" alt="suse_linux_logo1" title="suse_linux_logo1" /></a>Getting
+<a href="http://www.suse.com/products/server/">SUSE Enterprise Linux</a> integrated
+with Microsoft Active Directory is much easier than it sounds.</p>
+
+<p>There are a few prerequisites to meet before:</p>
+
+<ul>
+  <li>Samba client must be installed.</li>
+  <li>Packages samba-winbind and krb5-client must be installed.</li>
+  <li>The primary DNS server must be the Domain Controller.</li>
+</ul>
+
+<p>For this task we will use <strong>YaST2</strong>, the SUSE configuration tool.</p>
+
+<p>YaST2 can be run either in graphical…</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/screenshot-yast2-control-center-1.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screenshot-yast2-control-center-1_thumb.png" alt="Screenshot-YaST2 Control
+Center-1" title="Screenshot-YaST2 Control Center-1" /></a></p>
+
+<p>…or in text mode.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/yast2_text_mode.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/yast2_text_mode_thumb.png" alt="YaST2_text_mode" title="YaST2_text_mode" /></a></p>
+
+<p>I decided to use the text mode since it will be by far the most common
+use case, anyway in both cases the procedure is exactly the same.</p>
+
+<p>Go to <em>Network Services</em> section and later select <em>Windows Domain
+Membership</em>. The <em>Windows Domain Membership</em> configuration screen will
+appear.</p>
+
+<p>In the <em>Membership</em> area enter the domain name and configure the options
+that best suit your environment, including the other sections of the
+screen.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/yast2_windom_config.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/yast2_windom_config_thumb.png" alt="YaST2_WinDom_config" title="YaST2_WinDom_config" /></a></p>
+
+<p>I configure it to allow SSH single sign-on, more on this later, and to
+create a home directory for the user on his first login.</p>
+
+<p>You should take into account the NTP configuration since it’s a critical
+component in Active Directory authentication.</p>
+
+<p>Select OK to acknowledge your selection and a small pop-up will show up
+to inform that the host is not part of the domain and if you want to
+join it.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/yast2_domain_confirmation.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/yast2_domain_confirmation_thumb.png" alt="YaST2_domain_confirmation" title="YaST2_domain_confirmation" /></a></p>
+
+<p>Next you must enter the password of the domain Administrator.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/yast2_domain_admin_password.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/yast2_domain_admin_password_thumb.png" alt="YaST2_domain_admin_password" title="YaST2_domain_admin_password" /></a></p>
+
+<p>And YaST will finally confirm the success of the operation.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/yast2_domain_joined.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/yast2_domain_joined_thumb.png" alt="YaST2_domain_joined" title="YaST2_domain_joined" /></a></p>
+
+<p>At this point the basic configuration is done and the server should be
+integrated on the Windows Domain.</p>
+
+<p>Under the hood this process has modified several configuration files in
+order the get the system ready to authenticate against Active Directory:</p>
+
+<ul>
+  <li>smb.conf</li>
+  <li>krb5.conf</li>
+  <li>nsswitch.conf</li>
+</ul>
+
+<p><strong>smb.conf</strong></p>
+
+<p>The first is the configuration file for the <a href="http://samba.org/">samba</a>
+service. As you should know Samba is an open source implementation of
+the Windows SMB/CIFS protocol, it allows Unix systems to integrate
+almost transparently into a Windows Domain infrastructure and also
+provides file and print services for Windows clients.</p>
+
+<p>The file resides in <strong>/etc/samba</strong>. Take a look at the contents of the
+file, the relevant part is the <em>global</em> section.</p>
+
+<pre><code>[global]
+        workgroup = VJLAB
+        passdb backend = tdbsam
+        printing = cups
+        printcap name = cups
+        printcap cache time = 750
+        cups options = raw
+        map to guest = Bad User
+        include = /etc/samba/dhcp.conf
+        logon path = \%L\profiles\.msprofile
+        logon home = \%L\%U\.9xprofile
+        logon drive = P:
+        usershare allow guests = No
+        idmap gid = 10000-20000
+        idmap uid = 10000-20000
+        realm = VJLAB.LOCAL
+        security = ADS
+        template homedir = /home/%D/%U
+        template shell = /bin/bash
+        winbind refresh tickets = yes
+</code></pre>
+
+<p><strong>krb5.conf</strong></p>
+
+<p>The <em>krb5.conf</em> is the Kerberos daemon configuration file which contains
+the necessary information for the Kerberos library.</p>
+
+<pre><code>jreypo@sles11-01:/etc&gt; cat krb5.conf
+[libdefaults]
+        default_realm = VJLAB.LOCAL
+        clockskew = 300
+[realms]
+        VJLAB.LOCAL = {
+                kdc = dc.vjlab.local
+                default_domain = vjlab.local
+                admin_server = dc.vjlab.local
+        }
+[logging]
+        kdc = FILE:/var/log/krb5/krb5kdc.log
+        admin_server = FILE:/var/log/krb5/kadmind.log
+        default = SYSLOG:NOTICE:DAEMON
+[domain_realm]
+        .vjlab.local = VJLAB.LOCAL
+[appdefaults]
+        pam = {
+                ticket_lifetime = 1d
+                renew_lifetime = 1d
+                forwardable = true
+                proxiable = false
+                minimum_uid = 1
+        }
+jreypo@sles11-01:/etc&gt;
+</code></pre>
+
+<p><strong>nsswitch.conf</strong></p>
+
+<p>The <em>nsswitch.conf</em> file as stated by its man page is the <em>System
+Databases and Name Service Switch configuration file</em>. Basically it
+includes the different databases of the system to look for
+authentication information when user tries to log into the server.</p>
+
+<p>Have a quick look into the file and you will notice the two fields
+changed, <em>passwd</em> and <em>group</em>. In both the <em>winbind</em> option has been
+added in order to indicate the system to use <strong>Winbind</strong>, the Name
+Service Switch daemon used to resolve NT server names.</p>
+
+<pre><code>passwd: compat winbind
+group:  compat winbind
+</code></pre>
+
+<h4 id="ssh-single-sign-on">SSH single sign-on</h4>
+
+<p>Finally we need to test the SSH connection to the host using a user
+account of the domain. When asked for the login credentials use the
+<strong>DOMAIN\USER</strong> formula for the user name.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/ssh_auth.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/ssh_auth_thumb.png" alt="SSH_auth" title="SSH_auth" /></a></p>
+
+<p>This kind of integration is very useful, specially for the bigger shops,
+because you don’t have to maintain the user list of your SLES servers
+individually, just only the root account since the other accounts can be
+centrally managed from the Windows Domain.</p>
+
+<p>However there is one issue that must be taken into account, the SSH
+single sign-on authentication means that anyone with a domain account
+can log into your Linux servers and we don’t want that.</p>
+
+<p>To prevent this potentially dangerous situation we are going to limit
+the access only to those groups of users that really need it. I’m going
+to use the Domain Admins to show you how.</p>
+
+<p>First we need to look for the Domain Admins group ID within our Linux
+box. Log in as <strong>DOMAIN\Administrator</strong> and use the <em>id</em> command to get
+the user info.</p>
+
+<pre><code>VJLAB\administrator@sles11-01:~&gt; id
+uid=10000(VJLAB\administrator) gid=10000(VJLAB\domain users) groups=10000(VJLAB\domain users),10001(VJLAB\schema admins),10002(VJLAB\domain admins),10003(VJLAB\enterprise admins),10004(VJLAB\group policy creator owners)
+VJLAB\administrator@sles11-01:~&gt;
+</code></pre>
+
+<p>There are several group IDs, for our purposes we need the
+<strong>VJLAB\domain</strong> <strong>admins</strong> which is 10002.</p>
+
+<p>You should be asking yourself, but the GID is not 10002 but 10000? Yes
+you are right and because of that we need to make some changes at Domain
+Controller level.</p>
+
+<p>Fire up Server Manager and go to <em>Roles –&gt; Active Directory Domain
+Services –&gt; Active Directory Users and Computers –&gt; DOMAIN –&gt;
+Users</em>.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/server_manager.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/server_manager_thumb.png" alt="server_manager" title="server_manager" /></a></p>
+
+<p>On the right pane edit the properties of the account you want to be able
+to access the linux server via SSH. In my case I used my own account
+<em>juanma</em>. In the <em>Member of</em> tab select the Domain Admins group and
+click <em>Set Primary Group</em>.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/02/member_of.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/member_of_thumb.png" alt="member_of" title="member_of" /></a></p>
+
+<p>Now we need to modify how the pam daemon manage the authentication. Go
+back to SLES and edit <strong>/etc/pam.d/sshd.</strong></p>
+
+<pre><code>#%PAM-1.0
+auth     requisite      pam_nologin.so
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+</code></pre>
+
+<p>Delete the account line and add the following two lines.</p>
+
+<pre><code>account  sufficient     pam_localuser.so
+account  sufficient     pam_succeed_if.so gid = 10002
+</code></pre>
+
+<p>The sshd file should look like this:</p>
+
+<pre><code>#%PAM-1.0
+auth     requisite      pam_nologin.so
+auth     include        common-auth
+account  sufficient     pam_localuser.so
+account  sufficient     pam_succeed_if.so gid = 10002
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+</code></pre>
+
+<p>What we did? First eliminated the ability to login via SSH for every
+user and later we allow the server local users and the Domain Admins to
+log into the server.</p>
+
+<p>And we are done. Any comment would be welcome as always :-)</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/linux/sysadmin/windows/how-to-integrate-suse-linux-enterprise-11-with-windows-active-directory/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>How to integrate SUSE Linux Enterprise 11 with Windows Active Directory</strong> was published on <time datetime="2012-02-01T22:44:42+01:00">February 01, 2012</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

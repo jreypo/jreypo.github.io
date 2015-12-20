@@ -1,0 +1,703 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup &#8211; Juanma's Blog</title>
+<meta name="description" content="Welcome
+to the third post of my series about OpenStack. In the
+first
+and
+second
+posts we saw in detail how to prepare the basic network infrastructure
+of our future OpenStack cloud using VMware NSX. In this third one we are
+going to install and configure the KVM compute host and the shared
+storage of the lab.
+
+">
+<meta name="keywords" content="CentOS, Cloud, Fedora, gluster, GlusterFS, KVM, Linux, networking, NFS, NSX, NSX-MH, Open vSwitch, OpenStack, OVS, Red Hat, Storage, Virtualization, VMware">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup">
+<meta name="twitter:description" content="Welcome
+to the third post of my series about OpenStack. In the
+first
+and
+second
+posts we saw in detail how to prepare the basic network infrastructure
+of our future OpenStack cloud using VMware NSX. In this third one we are
+going to install and configure the KVM compute host and the shared
+storage of the lab.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup">
+<meta property="og:description" content="Welcome
+to the third post of my series about OpenStack. In the
+first
+and
+second
+posts we saw in detail how to prepare the basic network infrastructure
+of our future OpenStack cloud using VMware NSX. In this third one we are
+going to install and configure the KVM compute host and the shared
+storage of the lab.
+
+">
+<meta property="og:url" content="/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/" rel="bookmark" title="Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup">Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><a href="http://jreypo.files.wordpress.com/2014/04/kvm.jpg"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/kvm.jpg?w=150" alt="kvm" /></a>Welcome
+to the third post of my series about OpenStack. In the
+<a href="http://jreypo.wordpress.com/2014/04/29/deploying-openstack-with-kvm-and-vmware-nsx-part-1-nsx-overview-and-initial-setup/" title="Deploying OpenStack with KVM and VMware NSX – Part 1: NSX overview and initial setup">first</a>
+and
+<a href="http://jreypo.wordpress.com/2014/05/06/deploying-openstack-with-kvm-and-vmware-nsx-part-2-configure-nsx-transport-and-logical-network-views/" title="Deploying OpenStack with KVM and VMware NSX. Part 2 – Configure NSX Transport and Logical network views">second</a>
+posts we saw in detail how to prepare the basic network infrastructure
+of our future OpenStack cloud using VMware NSX. In this third one we are
+going to install and configure the KVM compute host and the shared
+storage of the lab.</p>
+
+<h3 id="kvm-setup">KVM setup</h3>
+
+<p>Create and install two CentOS 6.4 virtual machines with 2 vCPU, 2 GB of
+RAM, 2 network interfaces (E1000) and one 16GB disk. For the
+partitioning schema I have used the following one:</p>
+
+<ul>
+  <li>sda1 - 512MB - /boot</li>
+  <li>sda2 - Rest of the disk - LVM PV
+    <ul>
+      <li>lv_root - 13.5GB - /</li>
+      <li>lv_swap - 2GB - swap</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Mark Base and Standard groups to be installed and leave the rest
+unchecked. Set the hostname during the installation and leave the
+networking configuration with the default values. Please have in mind
+that you will need to have a DHCP server on your network, in my case I’m
+using the one that comes with VMware Fusion if you don’t have one then
+you will have to set here a temporary IP address in order to able to
+install the KVM software. Once the installation is done reboot your
+virtual machine and open a root SSH session to proceed with the rest of
+the configuration tasks.</p>
+
+<p>Disable SELinux with <code>setenfornce</code> command, also modify SELinux config
+to disable it during OS boot. I do not recommend to disable SELinux in a
+production environment but for a lab it will simplify things.</p>
+
+<pre><code>setenforce 0
+cp /etc/selinux/config /etc/selinux/config.orig
+sed -i s/SELINUX\=enforcing/SELINUX\=disabled/ /etc/selinux/config
+</code></pre>
+
+<p>Check that hardware virtualization support is activated.</p>
+
+<pre><code>egrep -i 'vmx|svm' /proc/cpuinfo
+</code></pre>
+
+<p>Install KVM packages.</p>
+
+<pre><code>yum install kvm libvirt python-virtinst qemu-kvm
+</code></pre>
+
+<p>After installing a ton of dependencies and if t nothing failed enable
+and start the libvirtd service.</p>
+
+<pre><code>[root@kvm1 ~]# chkconfig libvirtd on
+[root@kvm1 ~]# service libvirtd start
+Starting libvirtd daemon:                                  [  OK  ]
+[root@kvm1 ~]#
+</code></pre>
+
+<p>Verify that KVM has been correctly installed and it’s loaded and running
+on the system.</p>
+
+<pre><code>[root@kvm1 ~]# lsmod | grep kvm
+kvm_intel              53484  0
+kvm                   316506  1 kvm_intel
+[root@kvm1 ~]#
+[root@kvm1 ~]# virsh -c qemu:///system list
+ Id    Name                           State
+----------------------------------------------------
+
+[root@kvm1 ~]#
+</code></pre>
+
+<h3 id="hypervisor-networking-setup">Hypervisor networking setup</h3>
+
+<p>With KVM software installed and ready we can now move on to configure
+the networking for both hosts and integrate them into our NSX
+deployment.</p>
+
+<p>Disable Network Manager for both interfaces. Edit
+<code>/etc/sysconfig/network-scripts/ifcfg-ethX</code> files and change
+<code>NM_CONTROLLED</code> value to <code>no</code>.</p>
+
+<p>By default libvirt creates <code>virbr0</code> network bridge to be used for the
+virtual machines to access the external network through a NAT
+connection. We need to disable it to ensure that bridge components of
+Open vSwitch can load without any errors.</p>
+
+<pre><code>virsh net-destroy default
+virsh net-autostart --disable default
+</code></pre>
+
+<h4 id="install-open-vswitch">Install Open vSwitch</h4>
+
+<p>Copy the NSX OVS package to the KVM host and extract it.</p>
+
+<pre><code>[root@kvm1 nsx-ovs]# tar vxfz nsx-ovs-2.1.0-build33849-rhel64_x86_64.tar.gz
+./
+./nicira-flow-stats-exporter/
+./nicira-flow-stats-exporter/nicira-flow-stats-exporter-4.1.0.32691-1.x86_64.rpm
+./tcpdump-ovs-4.4.0.ovs2.1.0.33849-1.x86_64.rpm
+./kmod-openvswitch-2.1.0.33849-1.el6.x86_64.rpm
+./openvswitch-2.1.0.33849-1.x86_64.rpm
+./nicira-ovs-hypervisor-node-2.1.0.33849-1.x86_64.rpm
+./nicira-ovs-hypervisor-node-debuginfo-2.1.0.33849-1.x86_64.rpm
+[root@kvm1 nsx-ovs]#
+</code></pre>
+
+<p>Install Open vSwitch packages.</p>
+
+<pre><code>rpm -Uvh kmod-openvswitch-2.1.0.33849-1.el6.x86_64.rpm
+rpm -Uvh openvswitch-2.1.0.33849-1.x86_64.rpm
+</code></pre>
+
+<p>Verify that Open vSwitch service is enabled and start it.</p>
+
+<pre><code>[root@kvm1 ~]# chkconfig --list openvswitch
+openvswitch     0:off   1:off   2:on    3:on    4:on    5:on    6:off
+[root@kvm1 ~]#
+[root@kvm1 ~]#
+[root@kvm1 ~]# service openvswitch start
+/etc/openvswitch/conf.db does not exist ... (warning).
+Creating empty database /etc/openvswitch/conf.db           [  OK  ]
+Starting ovsdb-server                                      [  OK  ]
+Configuring Open vSwitch system IDs                        [  OK  ]
+Inserting openvswitch module                               [  OK  ]
+Starting ovs-vswitchd                                      [  OK  ]
+Enabling remote OVSDB managers                             [  OK  ]
+[root@kvm1 ~]#
+</code></pre>
+
+<p>Install <code>nicira-ovs-hypervisor-node</code> package, this utility provides the
+infrastructure for distributed routing on the hypervisor. With the
+installation the integration bridge <code>br-int</code> and OVS SSL credentials
+will be created.</p>
+
+<pre><code>[root@kvm1 ~]# rpm -Uvh nicira-ovs-hypervisor-node*.rpm
+Preparing...                ########################################### [100%]
+   1:nicira-ovs-hypervisor-n########################################### [ 50%]
+   2:nicira-ovs-hypervisor-n########################################### [100%]
+Running '/usr/sbin/ovs-integrate init'
+successfully generated self-signed certificates..
+successfully created the integration bridge..
+[root@kvm1 ~]#
+</code></pre>
+
+<p>There are other packages like <code>nicira-flow-stats-exporter</code> and
+<code>tcpdump-ovs</code> but they are not needed for OVS functioning. We can
+proceed now with OVS configuration.</p>
+
+<h4 id="configure-open-vswitch">Configure Open vSwitch</h4>
+
+<p>The first step is to create OVS bridges for each network interface card
+of the hypervisor.</p>
+
+<pre><code>ovs-vsctl add-br br0
+ovs-vsctl br-set-external-id br0 bridge-id br0
+ovs-vsctl set Bridge br0 fail-mode=standalone
+ovs-vsctl add-port br0 eth0
+</code></pre>
+
+<p>If you were logged in by an SSH session you have probably noticed that
+your connection is lost, this is because <code>br0</code> interface has taken
+control of the networking of the host and it doesn’t have an IP address
+configured. To solve this access the host console and edit <code>ifcfg-eth0</code>
+file and modify to look like this.</p>
+
+<pre><code>DEVICE=eth0
+DEVICETYPE=ovs
+TYPE=OVSPort
+OVS_BRIDGE=br0
+ONBOOT=yes
+BOOTPROTO=none
+IPV6INIT=no
+NAME=eth0
+HOTPLUG=no
+HWADDR=00:0C:29:CA:34:FE
+NM_CONTROLLED=no
+</code></pre>
+
+<p>Next create and edit <code>ifcfg-br0</code> file.</p>
+
+<pre><code>DEVICE=br0
+DEVICETYPE=ovs
+TYPE=OVSBridge
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR=192.168.82.42
+NETMASK=255.255.255.0
+GATEWAY=192.168.82.2
+IPV6INIT=no
+HOTPLUG=no
+</code></pre>
+
+<p>Restart the network service and test the connection.</p>
+
+<pre><code>service network restart
+</code></pre>
+
+<p>Repeat all the above steps for the second network interface.</p>
+
+<p>Finally configure NSX Controller Cluster as manager in Open vSwitch.</p>
+
+<pre><code>ovs-vsctl set-manager ssl:192.168.82.44
+</code></pre>
+
+<p>Execute <code>ovs-vsctl show</code> command to review OVS current configuration.</p>
+
+<pre><code>[root@kvm1 ~]# ovs-vsctl show
+383c3f17-5c53-4992-be8e-6e9b195e51d8
+    Manager "ssl:192.168.82.44"
+    Bridge "br1"
+        fail_mode: standalone
+        Port "br1"
+            Interface "br1"
+                type: internal
+        Port "eth1"
+            Interface "eth1"
+    Bridge "br0"
+        fail_mode: standalone
+        Port "eth0"
+            Interface "eth0"
+        Port "br0"
+            Interface "br0"
+                type: internal
+    Bridge br-int
+        fail_mode: secure
+        Port br-int
+            Interface br-int
+                type: internal
+    ovs_version: "2.1.0.33849"
+[root@kvm1 ~]#
+</code></pre>
+
+<h4 id="register-ovs-in-nsx-controller">Register OVS in NSX Controller</h4>
+
+<p>With our OVS instance installed and running we can now inform NSX
+Controller of its existence either via NVP API or NSX Manager, in our
+case we will use the later.</p>
+
+<p>Log into NSX Manager as admin user and go to <em>Dashboard</em>, from <em>Summary
+of Transport Components</em> table click <em>Add</em> in the Hypervisors row.
+Verify that Hypervisor is selected as transport node and move to the
+Basics screen. Enter a name for the hypervisor, usually the hostname of
+the server.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/05/screen-shot-2014-05-05-at-23-18-22.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-05-05-at-23-18-22.png?w=580" alt="Screen Shot 2014-05-05 at
+23.18.22" /></a></p>
+
+<p>In Properties enter:</p>
+
+<ul>
+  <li>Integration bridge ID, for us is <code>br-int</code>.</li>
+  <li>Admin Status Enabled -  Enabled by default.</li>
+</ul>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/05/screen-shot-2014-05-05-at-23-29-03.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-05-05-at-23-29-03.png?w=580" alt="Screen Shot 2014-05-05 at
+23.29.03" /></a></p>
+
+<p>For the Credential screen we are going to need the SSL certificate that
+was created along with the integration bridge during the NSX OVS
+installation. The PEM certificate file is <code>ovsclient-cert.pem</code> and is in
+<code>/etc/openvswitch</code> directory.</p>
+
+<pre><code>[root@kvm1 ~]# cat /etc/openvswitch/ovsclient-cert.pem
+-----BEGIN CERTIFICATE-----
+MIIDwjCCAqoCCQDZUob5H9tzvjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMC
+VVMxCzAJBgNVBAgTAkNBMRIwEAYDVQQHEwlQYWxvIEFsdG8xFTATBgNVBAoTDE9w
+ZW4gdlN3aXRjaDEfMB0GA1UECxMWT3BlbiB2U3dpdGNoIGNlcnRpZmllcjE6MDgG
+A1UEAxMxb3ZzY2xpZW50IGlkOjA4NWQwMTFiLTJiMzYtNGQ5My1iMWIyLWJjODIz
+MDczYzE0YzAeFw0xNDA1MDQyMjE3NTVaFw0yNDA1MDEyMjE3NTVaMIGiMQswCQYD
+VQQGEwJVUzELMAkGA1UECBMCQ0ExEjAQBgNVBAcTCVBhbG8gQWx0bzEVMBMGA1UE
+ChMMT3BlbiB2U3dpdGNoMR8wHQYDVQQLExZPcGVuIHZTd2l0Y2ggY2VydGlmaWVy
+MTowOAYDVQQDEzFvdnNjbGllbnQgaWQ6MDg1ZDAxMWItMmIzNi00ZDkzLWIxYjIt
+YmM4MjMwNzNjMTRjMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwgqT
+hvG72vat0hXvTuukZOs6fM4CAphmN34l4415q/vReSM3upN+vOLoyGJ/8VJGdNXH
+3Bsu6V58f6o8EPbfnhgqf2rCP0r5kiiN5SivsAWI5//ltV1GDFO4+8VpYAwn4Cbd
+sNOuFEM1mKOR//IL3Riy9Nkh16wfLy44KEE9745uhZ9gW96AkSkBx1ajjUiApnjL
+M6L2w/E4sxNeMDLf/VYlc/SuEg775D9iaPpA1haJt8FFw1g769FsR9Q0Fl+CoT7f
+ggBZTKwwcoU+5Ew1mNlPV0Hm8vpFcXbtMBeuT9Fe7k4bC+UuQPaSnbPpbZMpx/wd
+fHOdJpemcog/0EjOJQIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQDBPNM/uI25ofIl
+AgCpG42UD3M/RZRPX0/6Be4jCTaAuET6J8wAKA4k1btA6UPt0M98N6o4y60Du2D+
+ZwFOa2LSTXZB43X70XnDKxapDVqmhKtrmX2hL1NRD9RjTTx3TOXMOlUiUizRB1+L
+d8MNhX3qrvOLeFOUnxm6C5RnI/HdqvS9TyxybX+Qfqit9Q66hbjAt9RribXSw21G
+Ix8d9S4NyDO91mDstIcXeNRUk8K64gEQSKxQO9QKmVAQBIlYAJVVXzfkXyHEiKTe
+0zIsW/oknwWeQMD9xSrKomY/5+LCuDM1jT5LcL8vxmrEVIrUjNqt4nQsT4mjooG+
+XYf2HdXj
+-----END CERTIFICATE-----
+[root@kvm1 ~]#
+</code></pre>
+
+<p>Copy the contents of the file and paste them in the <em>Security
+Certificate</em> text box.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/05/screen-shot-2014-05-05-at-23-36-28.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-05-05-at-23-36-28.png?w=580" alt="Screen Shot 2014-05-05 at
+23.36.28" /></a></p>
+
+<p>Finally add the Transport Connector with the values:</p>
+
+<ul>
+  <li>Transport Type: STT</li>
+  <li>Transport Zone UUID: The transport zone, in my case the UUID
+corresponding to <em>vlab-transport-zone.</em></li>
+  <li>IP Address - The address of the br0 interface of the host.</li>
+</ul>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/05/screen-shot-2014-05-05-at-23-41-57.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-05-05-at-23-41-57.png" alt="Screen Shot 2014-05-05 at
+23.41.57" /></a></p>
+
+<p>Click Save &amp; View and check that <strong>Management</strong> and <strong>OpenFlow</strong>
+connections are up.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/05/screen-shot-2014-05-05-at-23-52-16.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-05-05-at-23-52-16.png?w=580" alt="Screen Shot 2014-05-05 at
+23.52.16" /></a></p>
+
+<h3 id="glusterfs-setup">GlusterFS setup</h3>
+
+<p><a href="http://jreypo.files.wordpress.com/2014/04/gluster-logo-300x115.jpg"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/gluster-logo-300x115.jpg?w=150" alt="gluster-logo-300x115" /></a>I
+choose <strong><a href="http://www.gluster.org/">GlusterFS</a></strong> for my OpenStack lab for
+two reasons.  I have used it in the past so this has been a good
+opportunity for me to refresh and enhance my rusty gluster skills, and
+it’s supported as storage backend for Glance in OpenStack. Instead of
+going with CentOS again this time I choose Fedora 20 for my gluster VM,
+a real world GlusterFS cluster will have at least two node but for our
+lab one will be enough.</p>
+
+<p>Create a Fedora x64 virtual machine with 1 vCPU, 1GB of RAM and one
+network interface. For the storage part use the following:</p>
+
+<ul>
+  <li>System disk: 16GB</li>
+  <li>Data disk: 72GB</li>
+</ul>
+
+<p>Use the same partitioning schema of the KVM hosts for the system disk.
+Choose a Minimal installation and add the Standard group. Configure the
+hostname and the IP address of the node, set the root password and
+create a user as administrator, I’m using here my personal user <code>jrey.</code></p>
+
+<p>Disable SELinux.</p>
+
+<pre><code>sudo setenforce 0
+sudo cp /etc/selinux/config /etc/selinux/config.orig
+sudo sed -i s/SELINUX\=enforcing/SELINUX\=disabled/ /etc/selinux/config
+</code></pre>
+
+<p>Stop and disable firewalld.</p>
+
+<pre><code>sudo systemctl disable firewalld.service
+sudo systemctl stop firewalld.service
+</code></pre>
+
+<p>Install GlusterFS packages. There is no need to add any additional yum
+repository since Gluster is included in the standard Fedora repos.</p>
+
+<pre><code>sudo systemctl install glusterfs-server
+</code></pre>
+
+<p>Enable Gluster services.</p>
+
+<pre><code>sudo systemctl enable glusterd.service
+sudo systemctl enable glusterfsd.service
+</code></pre>
+
+<p>Start Gluster services.</p>
+
+<pre><code>[jrey@gluster ~]$ sudo systemctl start glusterd.service
+[jrey@gluster ~]$ sudo systemctl start glusterfsd.service
+[jrey@gluster ~]$
+[jrey@gluster ~]$ sudo systemctl status glusterd.service
+glusterd.service - GlusterFS an clustered file-system server
+   Loaded: loaded (/usr/lib/systemd/system/glusterd.service; enabled)
+   Active: active (running) since Mon 2014-04-28 17:17:35 CEST; 20s ago
+  Process: 1496 ExecStart=/usr/sbin/glusterd -p /run/glusterd.pid (code=exited, status=0/SUCCESS)
+ Main PID: 1497 (glusterd)
+   CGroup: /system.slice/glusterd.service
+           └─1497 /usr/sbin/glusterd -p /run/glusterd.pid
+
+Apr 28 17:17:35 gluster.vlab.local systemd[1]: Started GlusterFS an clustered file-system server.
+[jrey@gluster ~]$
+[jrey@gluster ~]$ sudo systemctl status glusterfsd.service
+glusterfsd.service - GlusterFS brick processes (stopping only)
+   Loaded: loaded (/usr/lib/systemd/system/glusterfsd.service; enabled)
+   Active: active (exited) since Mon 2014-04-28 17:17:45 CEST; 15s ago
+  Process: 1515 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+ Main PID: 1515 (code=exited, status=0/SUCCESS)
+
+Apr 28 17:17:45 gluster.vlab.local systemd[1]: Starting GlusterFS brick processes (stopping only)...
+Apr 28 17:17:45 gluster.vlab.local systemd[1]: Started GlusterFS brick processes (stopping only).
+[jrey@gluster ~]$
+</code></pre>
+
+<p>Since we are running a one-node cluster there is no need to add any node
+to the trusted pool. In case you decide to run a multinode environment
+you can setup the pool by running the following command on each node of
+the clsuter. .</p>
+
+<pre><code>gluster peer probe &lt;IP_ADDRESS_OF_OTHER_NODE&gt;
+</code></pre>
+
+<p>Edit the data disk with <code>fdisk</code> and create a single partition. Format
+the partition as XFS.</p>
+
+<pre><code>[jrey@gluster ~]$ sudo mkfs.xfs -i size=512 /dev/sdb1
+meta-data=/dev/sdb1              isize=512    agcount=4, agsize=4718528 blks
+         =                       sectsz=512   attr=2, projid32bit=0
+data     =                       bsize=4096   blocks=18874112, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0
+log      =internal log           bsize=4096   blocks=9215, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[jrey@gluster ~]$
+</code></pre>
+
+<p>Create the mount point for the new filesystem, mount the partition and
+edit <code>/etc/fstab</code> accordingly to make it persistent to reboots.</p>
+
+<pre><code>sudo mkdir -p /data/glance/
+sudo mount /dev/sdb1 /data/glance
+sudo mkdir -p /data/glance/brick1
+sudo echo "/dev/sdb1 /data/glance xfs defaults 0 0" &gt;&gt; /etc/fstab
+</code></pre>
+
+<p>Create the Gluster volume and start it.</p>
+
+<pre><code>[jrey@gluster ~]$ sudo gluster volume create gv0 gluster.vlab.local:/data/glance/brick1
+volume create: gv0: success: please start the volume to access data
+[jrey@gluster ~]$
+[jrey@gluster ~]$ sudo gluster volume start gv0
+volume start: gv0: success
+[jrey@gluster ~]$
+[jrey@gluster ~]$ sudo gluster volume info
+
+Volume Name: gv0
+Type: Distribute
+Volume ID: d1ad2d00-6210-4856-a5eb-26ddcba77a70
+Status: Started
+Number of Bricks: 1
+Transport-type: tcp
+Bricks:
+Brick1: gluster.vlab.local:/data/glance/brick1
+[jrey@gluster ~]$
+</code></pre>
+
+<p>The configuration of the Gluster node is finished. In the next article
+we will install and configure OpenStack using the different components
+detailed during current and previous parts of the series.</p>
+
+<p>Please feel free to add any comment or correction.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/cloud/kvm/linux/networking/openstack/red%20hat/virtualization/vmware/deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup</strong> was published on <time datetime="2014-05-07T16:43:34+02:00">May 07, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

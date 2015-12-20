@@ -1,0 +1,328 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Power and maintenance operations in ESXi 5.1 with esxcli &#8211; Juanma's Blog</title>
+<meta name="description" content="ESXi 5.1 comes with many improvements and one of them is new
+namespaces and commands in esxcli.
+
+">
+<meta name="keywords" content="esxcli, ESXi, esxi 5.1, sysadmin, systems administration, VMware, vSphere, vSphere 5.1">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Power and maintenance operations in ESXi 5.1 with esxcli">
+<meta name="twitter:description" content="ESXi 5.1 comes with many improvements and one of them is new
+namespaces and commands in esxcli.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Power and maintenance operations in ESXi 5.1 with esxcli">
+<meta property="og:description" content="ESXi 5.1 comes with many improvements and one of them is new
+namespaces and commands in esxcli.
+
+">
+<meta property="og:url" content="/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/" rel="bookmark" title="Power and maintenance operations in ESXi 5.1 with esxcli">Power and maintenance operations in ESXi 5.1 with esxcli</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><strong>ESXi 5.1</strong> comes with many improvements and one of them is new
+namespaces and commands in <code>esxcli</code>.</p>
+
+<p>Those new commands enable a system administrator to perform a shutdown,
+a reboot or a maintenance operation in a host.</p>
+
+<p>Under the <code>system</code> namespace the new commands are the equivalents of the
+classic <code>vicfg/esxcfg-hostops</code> which until now was the only way to
+perform such kind of operations with vCLI and are also accessible
+locally on ESXi Shell.</p>
+
+<p><a href="http://jreypo.files.wordpress.com/2012/09/image18.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb18.png" alt="image" title="image" /></a></p>
+
+<h4 id="maintenance-mode-operations">Maintenance mode operations</h4>
+
+<p>Getting the basic usage of the command is as simple as always. You can
+perform two operations.</p>
+
+<ul>
+  <li>Get the state of the host</li>
+  <li>Put the the host in or out of Maintenance Mode</li>
+</ul>
+
+<!-- -->
+
+<pre><code>~ # esxcli system maintenanceMode
+Usage: esxcli system maintenanceMode {cmd} [cmd options]
+Available Commands:
+  get                   Get the maintenance mode state of the system.
+  set                   Enable or disable the maintenance mode of the system.
+~ #
+</code></pre>
+
+<ul>
+  <li>Get the state of the host</li>
+</ul>
+
+<!-- -->
+
+<pre><code>~ # esxcli system maintenanceMode get
+Disabled
+~ #
+</code></pre>
+
+<ul>
+  <li>Put the host in Maintenance Mode</li>
+</ul>
+
+<!-- -->
+
+<pre><code>~ # esxcli system maintenanceMode set -e true -t 0
+~ #
+~ # esxcli system maintenanceMode get
+Enabled
+~ #
+</code></pre>
+
+<h4 id="power-operations">Power operations</h4>
+
+<p>With the <code>shutdown</code> command the host can be either rebooted or shutdown.
+If the ESXi server is not in Maintenance Mode mode the operation will
+not be allowed.</p>
+
+<pre><code>~ # esxcli system shutdown
+Usage: esxcli system shutdown {cmd} [cmd options]
+Available Commands:
+  poweroff              Power off the system. The host must be in maintenance mode.
+  reboot                Reboot the system. The host must be in maintenance mode.
+~ #
+</code></pre>
+
+<p>For both task the delay and reason parameter must be provided.</p>
+
+<pre><code>~ # esxcli system shutdown poweroff
+Error: Missing required parameter -r|--reason
+Usage: esxcli system shutdown poweroff [cmd options]
+Description:
+  poweroff              Power off the system. The host must be in maintenance mode.
+Cmd options:
+  -d|--delay=&lt;long&gt;     Delay interval in seconds
+  -r|--reason=&lt;str&gt;     Reason for performing the operation (required)
+~ #
+</code></pre>
+
+<ul>
+  <li>Power off the host</li>
+</ul>
+
+<!-- -->
+
+<pre><code>~ # esxcli system shutdown poweroff --delay=10 --reason=”Hardware maintenance”
+</code></pre>
+
+<ul>
+  <li>Reboot the host</li>
+</ul>
+
+<!-- -->
+
+<pre><code>~ # esxcli system shutdown reboot -d 10 –r “Patches applied”
+</code></pre>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/sysadmin/virtualization/vmware/power-and-maintenance-operations-in-esxi-5-1-with-esxcli/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Power and maintenance operations in ESXi 5.1 with esxcli</strong> was published on <time datetime="2012-09-18T16:05:27+02:00">September 18, 2012</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

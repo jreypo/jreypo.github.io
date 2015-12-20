@@ -1,0 +1,319 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>iSCSI initiator configuration in RedHat Enterprise Linux 5 &#8211; Juanma's Blog</title>
+<meta name="description" content="The following post will discuss about iSCSI initiator configuration in RedHat Enterprise Linux 5, this method is also applicable to all RHEL5 derivatives. The iSCSI LUNs will be provided by an HP P4000 array.
+
+">
+<meta name="keywords" content="HP Lefthand, HP P4000, iSCSI, iscsi-initiator-utils, Linux, Red Hat, RHEL5, Storage, sysadmin">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="iSCSI initiator configuration in RedHat Enterprise Linux 5">
+<meta name="twitter:description" content="The following post will discuss about iSCSI initiator configuration in RedHat Enterprise Linux 5, this method is also applicable to all RHEL5 derivatives. The iSCSI LUNs will be provided by an HP P4000 array.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iSCSI initiator configuration in RedHat Enterprise Linux 5">
+<meta property="og:description" content="The following post will discuss about iSCSI initiator configuration in RedHat Enterprise Linux 5, this method is also applicable to all RHEL5 derivatives. The iSCSI LUNs will be provided by an HP P4000 array.
+
+">
+<meta property="og:url" content="/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/" rel="bookmark" title="iSCSI initiator configuration in RedHat Enterprise Linux 5">iSCSI initiator configuration in RedHat Enterprise Linux 5</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>The following post will discuss about <strong>iSCSI initiator</strong> configuration in <strong>RedHat Enterprise Linux 5</strong>, this method is also applicable to all RHEL5 derivatives. The iSCSI LUNs will be provided by an HP P4000 array.</p>
+
+<p>First of all we need to get and install the <code>iscsi-initiator-utils</code> RPM package, you can use yum to get and install the package from any supported repository for <a href="http://www.centos.org/">CentOS</a> or RHEL. You can also download the package from <a href="http://rhn.redhat.com/">RedHat Network</a> if you have a valid RHN account and your system doesn’t have internet connection.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# rpm -ivh /tmp/iscsi-initiator-utils-6.2.0.871-0.16.el5.x86_64.rpm
+Preparing...                ########################################### [100%]
+   1:iscsi-initiator-utils  ########################################### [100%]
+[root@rhel5 ~]#
+[root@rhel5 ~]#rpm -qa | grep iscsi
+iscsi-initiator-utils-6.2.0.871-0.16.el5
+[root@rhel5 ~]# rpm -qi iscsi-initiator-utils-6.2.0.871-0.16.el5
+Name        : iscsi-initiator-utils        Relocations: (not relocatable)
+Version     : 6.2.0.871                         Vendor: Red Hat, Inc.
+Release     : 0.16.el5                      Build Date: Tue 09 Mar 2010 09:16:29 PM CET
+Install Date: Wed 16 Feb 2011 11:34:03 AM CET      Build Host: x86-005.build.bos.redhat.com
+Group       : System Environment/Daemons    Source RPM: iscsi-initiator-utils-6.2.0.871-0.16.el5.src.rpm
+Size        : 1960412                          License: GPL
+Signature   : DSA/SHA1, Wed 10 Mar 2010 04:26:37 PM CET, Key ID 5326810137017186
+Packager    : Red Hat, Inc. &lt;http://bugzilla.redhat.com/bugzilla&gt;
+URL         : http://www.open-iscsi.org
+Summary     : iSCSI daemon and utility programs
+Description :
+The iscsi package provides the server daemon for the iSCSI protocol,
+as well as the utility programs used to manage it. iSCSI is a protocol
+for distributed disk access using SCSI commands sent over Internet
+Protocol networks.
+[root@rhel5 ~]#</code></pre></div>
+
+<p>Next we are going to configure the initiator. The iSCSI initiator is composed by two services, <code>iscsi </code>and <code>iscsid</code>, enable them to start at system startup using <code>chkconfig</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# chkconfig iscsi on
+[root@rhel5 ~]# chkconfig iscsid on
+[root@rhel5 ~]#
+[root@rhel5 ~]# chkconfig --list | grep iscsi
+iscsi           0:off   1:off   2:on    3:on    4:on    5:on    6:off
+iscsid          0:off   1:off   2:on    3:on    4:on    5:on    6:off
+[root@rhel5 ~]#</code></pre></div>
+
+<p>Once iSCSI is configured start the service.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# service iscsi start
+iscsid is stopped
+Starting iSCSI daemon:                                     [  OK  ]
+                                                           [  OK  ]
+Setting up iSCSI targets: iscsiadm: No records found!
+                                                           [  OK  ]
+[root@rhel5 ~]#
+[root@rhel5 ~]# service iscsi status
+iscsid (pid  14170) is running...
+[root@rhel5 ~]#</code></pre></div>
+
+<p>From P4000 CMC we need to add the server to the management group configuration like we would do with any other server.</p>
+
+<p><a href="/images/p4000-addserver.png"><img src="/images/p4000-addserver.png" alt="" title="P4000 CMC add server" /></a></p>
+
+<p>The server iqn can be found in the file <code>/etc/iscsi/initiatorname.iscsi</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@cl-node1 ~]# cat /etc/iscsi/initiatorname.iscsi
+InitiatorName=iqn.1994-05.com.redhat:2551bf29b48
+[root@cl-node1 ~]#</code></pre></div>
+
+<p>Create any iSCSI volumes you need in the P4000 arrays and assign them to the RedHat system. Then to discover the presented LUNs, from the Linux server run the <code>iscsiadm</code> command.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# iscsiadm -m discovery -t sendtargets -p 192.168.126.60
+192.168.126.60:3260,1 iqn.2003-10.com.lefthandnetworks:mlab:62:lv-rhel01
+[root@rhel5 ~]#</code></pre></div>
+
+<p>Restart the iSCSI initiator to make the new block device available to the operative system.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# service iscsi restart
+Stopping iSCSI daemon:
+iscsid dead but pid file exists                            [  OK  ]
+Starting iSCSI daemon:                                     [  OK  ]
+                                                           [  OK  ]
+Setting up iSCSI targets: Logging in to [iface: default, target: iqn.2003-10.com.lefthandnetworks:mlab:62:lv-rhel01, portal: 192.168.126.60,3260]
+Login to [iface: default, target: iqn.2003-10.com.lefthandnetworks:mlab:62:lv-rhel01, portal: 192.168.126.60,3260]: successful
+                                                           [  OK  ]
+[root@rhel5 ~]#</code></pre></div>
+
+<p>Then check that the new disk is available, I used <code>lsscsi</code> but <code>fdisk -l</code> will do the trick too.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@rhel5 ~]# lsscsi
+[0:0:0:0]    disk    VMware,  VMware Virtual S 1.0   /dev/sda
+[2:0:0:0]    disk    LEFTHAND iSCSIDisk        9000  /dev/sdb
+[root@rhel5 ~]#
+[root@rhel5 ~]# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 156.7 GB, 156766306304 bytes
+255 heads, 63 sectors/track, 19059 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+Disk /dev/sdb doesn&#39;t contain a valid partition table
+[root@rhel5 ~]#</code></pre></div>
+
+<p>At this point the iSCSI configuration is done, the new LUNs will be available through a system reboot as long as the iSCSI service is enabled.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/linux/red%20hat/storage/sysadmin/iscsi-initiator-configuration-in-redhat-enterprise-linux-5/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>iSCSI initiator configuration in RedHat Enterprise Linux 5</strong> was published on <time datetime="2011-02-22T13:43:41+01:00">February 22, 2011</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

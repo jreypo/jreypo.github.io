@@ -1,0 +1,371 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Open vSwitch and NSX vSwitch command equivalencies &#8211; Juanma's Blog</title>
+<meta name="description" content="A question I’ve heard a few times, what are the command equivalencies
+between a standard Open vSwitch, running inside a Linux box, and the
+NSX vSwitch running inside ESXi? I have written this post to clarify
+this a bit.
+
+">
+<meta name="keywords" content="network virtualization, networking, NSX, NSX vSwitch, NSX-MH, NVS, Open vSwitch, OVS, VMware">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Open vSwitch and NSX vSwitch command equivalencies">
+<meta name="twitter:description" content="A question I’ve heard a few times, what are the command equivalencies
+between a standard Open vSwitch, running inside a Linux box, and the
+NSX vSwitch running inside ESXi? I have written this post to clarify
+this a bit.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open vSwitch and NSX vSwitch command equivalencies">
+<meta property="og:description" content="A question I’ve heard a few times, what are the command equivalencies
+between a standard Open vSwitch, running inside a Linux box, and the
+NSX vSwitch running inside ESXi? I have written this post to clarify
+this a bit.
+
+">
+<meta property="og:url" content="/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/" rel="bookmark" title="Open vSwitch and NSX vSwitch command equivalencies">Open vSwitch and NSX vSwitch command equivalencies</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>A question I’ve heard a few times, what are the command equivalencies
+between a standard <strong>Open vSwitch</strong>, running inside a Linux box, and the
+<strong>NSX vSwitch</strong> running inside ESXi? I have written this post to clarify
+this a bit.</p>
+
+<p>There are four commands in NSX CLI that have equivalencies in the OVS
+world:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>NVS Command</strong></th>
+      <th><strong>OVS Command</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>nsx-dbctl</td>
+      <td>ovs-vsctl</td>
+    </tr>
+    <tr>
+      <td>nsx-dpctl</td>
+      <td>ovs-dpctl</td>
+    </tr>
+    <tr>
+      <td>nsx-appctl</td>
+      <td>ovs-appctl</td>
+    </tr>
+    <tr>
+      <td>nsx-flowctl</td>
+      <td>ovs-flowctl</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="nsx-dbctl">nsx-dbctl</h3>
+
+<p><code>ovs-dbctl</code> command, like its OVS equivalent <code>ovs-vsctl</code>, Sub-commands
+are the same, and for example <code>nsx-dbctl show</code> will produce a similar
+output to <code>ovs-vsctl show</code>.</p>
+
+<pre><code>~ # nsx-dbctl show
+ec451c1a-0258-423a-b406-dec83af4b241
+    Manager "ssl:192.168.110.201:6632"
+        is_connected: true
+    Bridge "br-vmnic1"
+        fail_mode: standalone
+        Port "vmk3"
+            Interface "vmk3"
+        Port "vmnic1"
+            Interface "vmnic1"
+    Bridge br-int
+        Controller "ssl:192.168.110.201:6633"
+            is_connected: true
+        Controller "unix:ovs-l3d.mgmt"
+            is_connected: true
+        fail_mode: secure
+        Port "vNic.3000004"
+            Interface "vNic.3000004"
+        Port "vNic.3000006"
+            Interface "vNic.3000006"
+        Port "vNic.3000005"
+            Interface "vNic.3000005"
+    ovs_version: "2.0.2.31704"
+~ #
+</code></pre>
+
+<h3 id="nsx-dpctl">nsx-dpctl</h3>
+
+<p><code>nsx-dpctl</code> command maps to <code>ovs-dpctl</code> and much like it allow you to
+manage Open vSwitch datapaths.</p>
+
+<pre><code>~ # nsx-dpctl show
+system@nsx-vswitch:
+        lookups: hit:1770781 missed:192476 lost:0
+        flows: 14
+        port 50331650: vmnic1
+        port 50331651: vmk3
+        port 50331652: vNic.3000004
+        port 50331653: vNic.3000005
+        port 50331654: vNic.3000006
+~ #
+</code></pre>
+
+<h3 id="nsx-appctl">nsx-appctl</h3>
+
+<p><code>nsx-appctl</code> will allow the administrator to manage and configure OVS
+daemons. It maps to <code>ovs-appctl</code> command.</p>
+
+<pre><code>~ # nsx-appctl dpif/show
+system@nsx-vswitch: hit:2230477 missed:148652
+        flows: cur: 17, avg: 17, max: 33, life span: 1918447ms
+        hourly avg: add rate: 66.907/min, del rate: 66.880/min
+        daily avg: add rate: 43.476/min, del rate: 43.461/min
+        overall avg: add rate: 60.918/min, del rate: 60.909/min
+        br-int: hit:142949 missed:8461
+                vNic.3000004 1/50331652: (system)
+                vNic.3000005 2/50331653: (system)
+                vNic.3000006 3/50331654: (system)
+        br-vmnic1: hit:2087528 missed:140191
+                vmk3 2/50331651: (system)
+                vmnic1 1/50331650: (system)
+~ #
+</code></pre>
+
+<h3 id="nsx-flowctl">nsx-flowctl</h3>
+
+<p><code>nsx-flowctl</code> is the equivalent of <code>ovs-flowctl</code> and will allow you to
+manage NSX vSwich flow tables, ports, etc.</p>
+
+<pre><code>~ # nsx-flowctl show br-bond0
+OFPT_FEATURES_REPLY (xid=0x3): dpid:0000725d4492c540
+n_tables:254, n_buffers:256
+capabilities: FLOW_STATS TABLE_STATS PORT_STATS QUEUE_STATS ARP_MATCH_IP
+actions: OUTPUT SET_VLAN_VID SET_VLAN_PCP STRIP_VLAN SET_DL_SRC SET_DL_DST SET_NW_SRC SET_NW_DST SET_NW_TOS SET_TP_SRC SET_TP_DST ENQUEUE
+ 1(vmnic4): addr:00:50:56:01:08:c6
+     config:     0
+     state:      0
+     current:    1GB-FD
+     advertised: 10MB-HD 10MB-FD 100MB-HD 100MB-FD 1GB-HD 1GB-FD
+     supported:  10MB-HD 10MB-FD 100MB-HD 100MB-FD 1GB-HD 1GB-FD
+     speed: 1000 Mbps now, 1000 Mbps max
+ 2(vmnic5): addr:00:50:56:01:08:c8
+     config:     0
+     state:      0
+     current:    1GB-FD
+     advertised: 10MB-HD 10MB-FD 100MB-HD 100MB-FD 1GB-HD 1GB-FD
+     supported:  10MB-HD 10MB-FD 100MB-HD 100MB-FD 1GB-HD 1GB-FD
+     speed: 1000 Mbps now, 1000 Mbps max
+ 3(vmk3): addr:00:50:56:66:57:18
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+OFPT_GET_CONFIG_REPLY (xid=0x6): frags=normal miss_send_len=0
+~ #
+</code></pre>
+
+<p>Courteous comments are welcome.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/networking/sysadmin/vmware/open-vswitch-and-nsx-vswitch-command-equivalencies/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Open vSwitch and NSX vSwitch command equivalencies</strong> was published on <time datetime="2014-12-16T16:22:32+01:00">December 16, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

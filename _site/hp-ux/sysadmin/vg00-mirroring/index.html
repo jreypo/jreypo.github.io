@@ -1,0 +1,464 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>vg00 mirroring &#8211; Juanma's Blog</title>
+<meta name="description" content="This is a small cookbook about mirroring the vg00 I’ve compiled throughout the years, well it’s really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.
+
+">
+<meta name="keywords" content="11iv2, 11iv3, HP-UX, Itanium, LVM, Mirror-UX, PA-RISC, Raid, sysadmin, systems administration">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="vg00 mirroring">
+<meta name="twitter:description" content="This is a small cookbook about mirroring the vg00 I’ve compiled throughout the years, well it’s really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vg00 mirroring">
+<meta property="og:description" content="This is a small cookbook about mirroring the vg00 I’ve compiled throughout the years, well it’s really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.
+
+">
+<meta property="og:url" content="/hp-ux/sysadmin/vg00-mirroring/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/sysadmin/vg00-mirroring/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/sysadmin/vg00-mirroring/" rel="bookmark" title="vg00 mirroring">vg00 mirroring</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>This is a small cookbook about mirroring the <code>vg00</code> I’ve compiled throughout the years, well it’s really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.</p>
+
+<h3 id="pa-risc-1123">PA-RISC 11.23</h3>
+
+<p>First initialize the disk.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# pvcreate -f -B /dev/rdsk/c0t6d0</code></pre></div>
+
+<p>Now make the disk bootable writing the LIF header.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# mkboot -l /dev/dsk/c0t6d0</code></pre></div>
+
+<p>And the LIF files, I’m using the unenforced quorum option because in my example <code>vg00</code> has only two PVs.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# mkboot -a &#39;hpux -lq&#39; /dev/dsk/c0t6d0</code></pre></div>
+
+<p>Add the new PV to <code>vg00</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# vgextend vg00 /dev/dsk/c0t6d0</code></pre></div>
+
+<p>Create the mirrors of the logical volumes within <code>vg00</code> in the new PV.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# for i in $(vgdisplay -v vg00 | grep &quot;LV Name&quot; | awk &#39;{ print $3 };&#39;)
+&gt; do
+&gt; lvextend -m 1 $i /dev/dsk/c0t6d0
+&gt; done</code></pre></div>
+
+<p>When the mirror is finished.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# lvlnboot -r /dev/vg00/lvol3 /dev/vg00
+root@ayane:/# lvlnboot -b /dev/vg00/lvol1 /dev/vg00
+root@ayane:/# lvlnboot -s /dev/vg00/lvol2 /dev/vg00
+root@ayane:/# lvlnboot -d /dev/vg00/lvol2 /dev/vg00</code></pre></div>
+
+<p>Specify the new disk as alternate boot path and add it to <code>/stand/bootconf</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# setboot -a 0/0/0/3/0.6.0
+root@ayane:/# cat /stand/bootconf
+l  /dev/dsk/c0t5d0
+l  /dev/dsk/c0t6d0
+root@ayane:/#</code></pre></div>
+
+<p>And it’s done. To check that everything correct.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@ayane:/# vgdisplay -v vg00
+--- Volume groups ---
+VG Name                     /dev/vg00
+VG Write Access             read/write
+VG Status                   available
+Max LV                      255
+Cur LV                      10
+Open LV                     10
+Max PV                      16
+Cur PV                      2
+Act PV                      2
+Max PE per PV               4384
+VGDA                        4
+PE Size (Mbytes)            32
+Total PE                    8748
+Alloc PE                    4076
+Free PE                     4672
+Total PVG                   0
+Total Spare PVs             0
+Total Spare PVs in use      0
+
+ --- Logical volumes ---
+.
+.
+.
+ --- Physical volumes ---
+ PV Name                     /dev/dsk/c0t5d0
+ PV Status                   available
+ Total PE                    4374
+ Free PE                     2336
+ Autoswitch                  On
+ Proactive Polling           On
+
+ PV Name                     /dev/dsk/c0t6d0
+ PV Status                   available
+ Total PE                    4374
+ Free PE                     2336
+ Autoswitch                  On
+ Proactive Polling           On
+
+root@ayane:/#
+root@ayane:/# lvlnboot -v
+Boot Definitions for Volume Group /dev/vg00:
+Physical Volumes belonging in Root Volume Group:
+ /dev/dsk/c0t5d0 (0/0/0/3/0.5.0) -- Boot Disk
+ /dev/dsk/c0t6d0 (0/0/0/3/0.6.0) -- Boot Disk
+Boot: lvol1     on:     /dev/dsk/c0t5d0
+                        /dev/dsk/c0t6d0
+Root: lvol3     on:     /dev/dsk/c0t5d0
+                        /dev/dsk/c0t6d0
+Swap: lvol2     on:     /dev/dsk/c0t5d0
+                        /dev/dsk/c0t6d0
+Dump: lvol2     on:     /dev/dsk/c0t5d0, 0
+
+root@ayane:/#
+root@ayane:/# setboot
+Primary bootpath : 0/0/0/3/0.6.0
+HA Alternate bootpath : 0/0/0/0/0.0.0
+Alternate bootpath : 0/0/0/3/0.5.0
+
+Autoboot is ON (enabled)
+Autosearch is ON (enabled)
+
+root@ayane:/#
+root@ayane:/# lifls -l /dev/dsk/c0t6d0
+volume ISL10 data size 7984 directory size 8 05/09/22 09:37:09
+filename   type   start   size     implement  created
+===============================================================
+HPUX       -12928 584     1024     0          06/10/27 14:23:07
+ISL        -12800 1608    242      0          05/09/22 09:37:09
+AUTO       -12289 1856    1        0          05/09/22 09:37:09
+PAD        -12290 1864    1468     0          05/09/22 09:37:09
+LABEL      BIN    3336    8        0          07/07/17 19:42:29
+root@ayane:/#</code></pre></div>
+
+<h3 id="itanium-1123">Itanium 11.23</h3>
+
+<p>The procedure of mirroring <code>vg00</code> in an Itanium HP-UX 11.23, although shares some part with the PA-RISC differs in some critical area. The main difference is the partitioning of the disk, the boot disks in an Integrity server must have an specific layout with three partitions:</p>
+
+<ol>
+  <li>EFI</li>
+  <li>HPUX</li>
+  <li>HPSP (HP Service Partition)</li>
+</ol>
+
+<p>Preparation of the disk:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# touch /tmp/partitionfile
+root@asoka:/# cat &lt;&lt;EOF &gt;&gt; /tmp/partitionfile
+&gt; 3
+&gt; EFI 500MB
+&gt; HPUX 100%
+&gt; HPSP 400MB
+&gt; EOF
+root@asoka:/# cat partitionfile
+3
+EFI 500MB
+HPUX 100%
+HPSP 400MB
+root@asoka:/#
+root@asoka:/# idisk -wqf /tmp/partitionfile /dev/rdsk/c1t1d0</code></pre></div>
+
+<p>Make it bootable and copy the AUTO file. As it can be viewed in the example below as <code>&lt;number_of_partition&gt;</code> has been added to the device in order to identify the partition in which the operation will be executed.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# insf -eCdisk
+root@asoka:/# mkboot -e -l /dev/rdsk/c1t1d0
+root@asoka:/# echo &quot;boot vmunix -lq&quot; &gt;&gt; /tmp/AUTO.lq
+root@asoka:/# efi_cp -d /dev/rdsk/c1t1d0s1 /tmp/AUTO.lq /EFI/HPUX/AUTO</code></pre></div>
+
+<p>Create the HPSP partition.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# dd if=/dev/rdsk/c0t1d0s3 of=/dev/rdsk/c1t1d0s3 bs=1024k</code></pre></div>
+
+<p>Like in PA-RISC initialize the PV and add it to the VG.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# pvreate -f -B /dev/rdsk/c1t1d0s2
+root@asoka:/# vgextend vg00 /dev/dsk/c1t1d0s2</code></pre></div>
+
+<p>Mirror the Logical Volumes.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# for i in $(vgdisplay -v vg00 | grep &quot;LV Name&quot; | awk &#39;{ print $3 };&#39;)
+&gt; do
+&gt; lvextend -m 1 $i /dev/dsk/c1t1d0s2
+&gt; done</code></pre></div>
+
+<p>Set the content of the LABEL file, edit the <code>/stand/bootconf</code> like in the PA-RISC procedure and add the new disk as alternate HA boot path.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# setboot -h &lt;HW_PATH&gt;</code></pre></div>
+
+<p>To check that everything is properly configured you can use the same commands as in PA-RISC and the command <code>idisk</code> to check the correct partitioning of the disk.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@asoka:/# idisk -p /dev/rdsk/c1t1d0
+idisk version: 1.32
+
+EFI Primary Header:
+        Signature                 = EFI PART
+        Revision                  = 0x10000
+        HeaderSize                = 0x5c
+        HeaderCRC32               = 0xa498de56
+        MyLbaLo                   = 0x1
+        MyLbaHi                   = 0x0
+        AlternateLbaLo            = 0x88aacbf
+        AlternateLbaHi            = 0x0
+        FirstUsableLbaLo          = 0x22
+        FirstUsableLbaHi          = 0x0
+        LastUsableLbaLo           = 0x88aac9c
+        LastUsableLbaHi           = 0x0
+        Disk GUID                 = 24e8312a-20cf-11dd-8001-d6217b60e588
+        PartitionEntryLbaLo       = 0x2
+        PartitionEntryLbaHi       = 0x0
+        NumberOfPartitionEntries  = 0xc
+        SizeOfPartitionEntry      = 0x80
+        PartitionEntryArrayCRC32  = 0xae99dcc3
+
+  Primary Partition Table (in 512 byte blocks):
+    Partition 1 (EFI):
+        Partition Type GUID       = c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+        Unique Partition GUID     = 24e83378-20cf-11dd-8002-d6217b60e588
+        Starting Lba Lo            = 0x22
+        Starting Lba Hi            = 0x0
+        Ending Lba Lo              = 0xfa021
+        Ending Lba Hi              = 0x0
+    Partition 2 (HP-UX):
+        Partition Type GUID       = 75894c1e-3aeb-11d3-b7c1-7b03a0000000
+        Unique Partition GUID     = 24e83396-20cf-11dd-8003-d6217b60e588
+        Starting Lba Lo            = 0xfa022
+        Starting Lba Hi            = 0x0
+        Ending Lba Lo              = 0x87e2821
+        Ending Lba Hi              = 0x0
+    Partition 3 (HPSP):
+        Partition Type GUID       = e2a1e728-32e3-11d6-a682-7b03a0000000
+        Unique Partition GUID     = 24e833b4-20cf-11dd-8004-d6217b60e588
+        Starting Lba Lo            = 0x87e2822
+        Starting Lba Hi            = 0x0
+        Ending Lba Lo              = 0x88aa821
+        Ending Lba Hi              = 0x0
+root@asoka:/#</code></pre></div>
+
+<h3 id="itanium-1131">Itanium 11.31</h3>
+
+<p>The 11.31 section will be short since the procedure is almost equal to the 11.23 one. You have to take into account that if you have migrated to the new agile view (and you should have ;-D ) a few things will change. The new agile view use <code>_p1</code>, <code>_p2</code> and <code>_p3</code> to identify the partitions of the disk instead of the classic <code>s1</code>, <code>s2</code> &amp;  <code>s3 </code><code> and the paths will change from  </code>dsk/rdsk `` to <code>disk/rdisk</code>, the names of the devices as well.</p>
+
+<p>A few of examples will show it.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@piroko:/# efi_cp -d /dev/rdisk/disk4_p1 /tmp/AUTO.lq /EFI/HPUX/AUTO
+
+root@piroko:/# pvcreate -fB /dev/rdisk/disk4_p2
+root@piroko:/# vgextend rootvg /dev/disk/disk_p2
+root@piroko:/# for i in $(vgdisplay -v vg00| grep &quot;LV Name&quot; | awk &#39;{ print $3 };&#39;)
+&gt; do
+&gt; lvextend -m 1 $i /dev/disk/disk4_p2
+&gt; done</code></pre></div>
+
+<p>And we are done. As always every comment or correction will be welcome.</p>
+
+<p>See you next time.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/sysadmin/vg00-mirroring/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/sysadmin/vg00-mirroring/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/sysadmin/vg00-mirroring/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>vg00 mirroring</strong> was published on <time datetime="2010-01-27T16:41:49+01:00">January 27, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

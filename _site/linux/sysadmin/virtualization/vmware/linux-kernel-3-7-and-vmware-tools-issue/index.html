@@ -1,0 +1,294 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Linux Kernel 3.7 and VMware Tools issue &#8211; Juanma's Blog</title>
+<meta name="description" content="I got aware of this issue last week after installing a Fedora 18 virtual
+machine on Fusion 5. The installation of the Tools went as expected but
+when the install process launched the vmware-tools-config,pl script I
+got the typical error of not being able to find the Linux Kernel
+headers.
+
+">
+<meta name="keywords" content="Fedora, Kernel 3.7, Linux, sysadmin, Virtualization, VMware, VMware Fusion, VMware Tools">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Linux Kernel 3.7 and VMware Tools issue">
+<meta name="twitter:description" content="I got aware of this issue last week after installing a Fedora 18 virtual
+machine on Fusion 5. The installation of the Tools went as expected but
+when the install process launched the vmware-tools-config,pl script I
+got the typical error of not being able to find the Linux Kernel
+headers.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Kernel 3.7 and VMware Tools issue">
+<meta property="og:description" content="I got aware of this issue last week after installing a Fedora 18 virtual
+machine on Fusion 5. The installation of the Tools went as expected but
+when the install process launched the vmware-tools-config,pl script I
+got the typical error of not being able to find the Linux Kernel
+headers.
+
+">
+<meta property="og:url" content="/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/" rel="bookmark" title="Linux Kernel 3.7 and VMware Tools issue">Linux Kernel 3.7 and VMware Tools issue</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>I got aware of this issue last week after installing a Fedora 18 virtual
+machine on Fusion 5. The installation of the Tools went as expected but
+when the install process launched the <em>vmware-tools-config,pl</em> script I
+got the typical error of not being able to find the Linux Kernel
+headers.</p>
+
+<pre><code>Searching for a valid kernel header path...
+The path "" is not a valid path to the 3.7.2-204.fc18.x86_64 kernel headers.
+Would you like to change it? [yes]
+</code></pre>
+
+<p>I installed the kernel headers and devel packages with yum.</p>
+
+<pre><code>[root@fed18 ~]# yum install kernel-headers kernel-devel
+</code></pre>
+
+<p>Fired up again the configuration script and got the same error. The
+problem is that snce kernel 3.7 all the kernel header files have been
+relocated to a new path and because of that the script is not able to
+find them. To solve it just create a symlink of the <em>version.h</em> file
+from the new location to the old one.</p>
+
+<pre><code>[root@fed18 src]# ln -s /usr/src/kernels/3.7.2-204.fc18.x86_64/include/generated/uapi/linux/version.h /lib/modules/3.7.2-204.fc18.x86_64/build/include/linux/
+</code></pre>
+
+<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;font-size:13px;line-height:19px;">With
+the problem fixed I launched the config script again and the tools
+finally got configured without problems. </span></p>
+
+<pre><code>[root@fed18 ~]# vmware-config-tools.pl
+Initializing...
+
+Making sure services for VMware Tools are stopped.
+Stopping Thinprint services in the virtual machine:
+ Stopping Virtual Printing daemon: done
+Stopping vmware-tools (via systemctl): [ OK ]
+
+The VMware FileSystem Sync Driver (vmsync) allows external third-party backup
+software that is integrated with vSphere to create backups of the virtual
+machine. Do you wish to enable this feature? [no]
+
+Before you can compile modules, you need to have the following installed...
+make
+gcc
+kernel headers of the running kernel
+
+Searching for GCC...
+Detected GCC binary at "/bin/gcc".
+The path "/bin/gcc" appears to be a valid path to the gcc binary.
+Would you like to change it? [no]
+
+Searching for a valid kernel header path...
+Detected the kernel headers at
+"/lib/modules/3.7.2-204.fc18.x86_64/build/include".
+The path "/lib/modules/3.7.2-204.fc18.x86_64/build/include" appears to be a
+valid path to the 3.7.2-204.fc18.x86_64 kernel headers.
+Would you like to change it? [no]
+</code></pre>
+
+<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;font-size:13px;line-height:19px;">Juanma.</span></p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/linux/sysadmin/virtualization/vmware/linux-kernel-3-7-and-vmware-tools-issue/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Linux Kernel 3.7 and VMware Tools issue</strong> was published on <time datetime="2013-01-28T11:54:19+01:00">January 28, 2013</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

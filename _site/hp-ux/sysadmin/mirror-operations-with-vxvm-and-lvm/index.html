@@ -1,0 +1,482 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Mirror operations with VxVM and LVM &#8211; Juanma's Blog</title>
+<meta name="description" content="In today post I will show how to create and brake a mirrored volume in Veritas Volume Manager and Logical Volume Manager.
+
+">
+<meta name="keywords" content="HP-UX, LVM, Mirror-UX, sysadmin, systems administration, VxVM">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Mirror operations with VxVM and LVM">
+<meta name="twitter:description" content="In today post I will show how to create and brake a mirrored volume in Veritas Volume Manager and Logical Volume Manager.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mirror operations with VxVM and LVM">
+<meta property="og:description" content="In today post I will show how to create and brake a mirrored volume in Veritas Volume Manager and Logical Volume Manager.
+
+">
+<meta property="og:url" content="/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/" rel="bookmark" title="Mirror operations with VxVM and LVM">Mirror operations with VxVM and LVM</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>In today post I will show how to create and brake a mirrored volume in <strong>Veritas Volume Manager</strong> and <strong>Logical Volume Manager</strong>.</p>
+
+<h3 id="lvm">LVM</h3>
+
+<p>Creating a mirror of a volume and later split it in LVM is quite easy an can be done with a few commands. I’m going to suppose that the original volume is already created.</p>
+
+<ul>
+  <li>Extend the Volume Group that contain the <code>lvol</code></li>
+</ul>
+
+<p>It has to be done with the same number of disks and of the same size that the ones within the VG.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vgextend vg_oracle /dev/disk/disk26
+Volume group &quot;vg_oracle&quot; has been successfully extended.
+Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Create the mirror</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # lvextend -m 1 /dev/vg_oracle/lv_oracle /dev/disk/disk26
+The newly allocated mirrors are now being synchronized. This operation will
+take some time. Please wait ....
+Logical volume &quot;/dev/vg_oracle/lv_oracle&quot; has been successfully extended.
+Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Check the configuration</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # lvdisplay /dev/vg_oracle/lv_oracle
+--- Logical volumes ---
+LV Name                     /dev/vg_oracle/lv_oracle
+VG Name                     /dev/vg_oracle
+LV Permission               read/write                
+LV Status                   available/syncd           
+Mirror copies               1            
+Consistency Recovery        MWC                 
+Schedule                    parallel      
+LV Size (Mbytes)            208             
+Current LE                  13             
+Allocated PE                26             
+Stripes                     0       
+Stripe Size (Kbytes)        0                   
+Bad block                   NONE         
+Allocation                  strict                    
+IO Timeout (Seconds)        default             
+Number of Snapshots         0  
+
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Perform the split</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # lvsplit -s copy /dev/vg_oracle/lv_oracle
+Logical volume &quot;/dev/vg_oracle/lv_oraclecopy&quot; has been successfully created with
+character device &quot;/dev/vg_oracle/rlv_oraclecopy&quot;.
+Logical volume &quot;/dev/vg_oracle/lv_oracle&quot; has been successfully split.
+Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Reestablish the mirror</li>
+</ul>
+
+<p>If the VG are 1.0 or 2.0 version the merge can not be performed if the group is in shared mode, for the 2.1 volume groups the <code>lvmerge</code> can be done in any mode.</p>
+
+<p>The order to do the merge is the copy <strong>FIRST</strong> and the master <strong>SECOND</strong>. This is very important if don’t want to sync the mirror in wrong direction.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # lvmerge /dev/vg_oracle/lv_oraclecopy /dev/vg_oracle/lv_oracle
+Logical volume &quot;/dev/vg_oracle/lv_oraclecopy&quot; has been successfully merged
+with logical volume &quot;/dev/vg_oracle/lv_oracle&quot;.
+Logical volume &quot;/dev/vg_oracle/lv_oraclecopy&quot; has been successfully removed.
+Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
+[root@sheldon] / #</code></pre></div>
+
+<h3 id="vxvm">VXVM</h3>
+
+<p>The process in VxVM is in many ways similar to the LVM one.</p>
+
+<ul>
+  <li>Add a new disk/disks to the <code>diskgroup</code></li>
+</ul>
+
+<p>Launch <code>vxdiskadm</code> tool and select <code>Add or initialize one or more disks</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vxdiskadm
+
+Volume Manager Support Operations
+Menu: VolumeManager/Disk
+
+ 1      Add or initialize one or more disks
+ 2      Remove a disk
+ 3      Remove a disk for replacement
+ 4      Replace a failed or removed disk
+ 5      Mirror volumes on a disk
+ 6      Move volumes from a disk
+ 7      Enable access to (import) a disk group
+ 8      Remove access to (deport) a disk group
+ 9      Enable (online) a disk device
+ 10     Disable (offline) a disk device
+ 11     Mark a disk as a spare for a disk group
+ 12     Turn off the spare flag on a disk
+ 13     Remove (deport) and destroy a disk group
+ 14     Unrelocate subdisks back to a disk
+ 15     Exclude a disk from hot-relocation use
+ 16     Make a disk available for hot-relocation use
+ 17     Prevent multipathing/Suppress devices from VxVM&#39;s view
+ 18     Allow multipathing/Unsuppress devices from VxVM&#39;s view
+ 19     List currently suppressed/non-multipathed devices
+ 20     Change the disk naming scheme
+ 21     Change/Display the default disk layouts
+ 22     Mark a disk as allocator-reserved for a disk group
+ 23     Turn off the allocator-reserved flag on a disk
+ list   List disk information
+
+ ?      Display help about menu
+ ??     Display help about the menuing system
+ q      Exit from menus
+
+Select an operation to perform:  1</code></pre></div>
+
+<p>Enter the disk and answer the questions according to your configuration and exit the tool when the process is done.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Add or initialize disks
+Menu: VolumeManager/Disk/AddDisks
+
+ Use this operation to add one or more disks to a disk group.  You can
+ add the selected disks to an existing disk group or to a new disk group
+ that will be created as a part of the operation. The selected disks may
+ also be added to a disk group as spares. Or they may be added as
+ nohotuses to be excluded from hot-relocation use. The selected
+ disks may also be initialized without adding them to a disk group
+ leaving the disks available for use as replacement disks.
+
+ More than one disk or pattern may be entered at the prompt.  Here are
+ some disk selection examples:
+
+ all:          all disks
+ c3 c4t2:      all disks on both controller 3 and controller 4, target 2
+ c3t4d2:       a single disk (in the c#t#d# naming scheme)
+ xyz_0:        a single disk (in the enclosure based naming scheme)
+ xyz_:         all disks on the enclosure whose name is xyz
+
+ disk#:        a single disk (in the new naming scheme)
+
+Select disk devices to add: [&lt;pattern-list&gt;,all,list,q,?]  disk28
+Here is the disk selected.  Output format: [Device_Name]
+
+ disk28
+
+Continue operation? [y,n,q,?] (default: y)  
+
+ You can choose to add this disk to an existing disk group, a
+ new disk group, or leave the disk available for use by future
+ add or replacement operations.  To create a new disk group,
+ select a disk group name that does not yet exist.  To leave
+ the disk available for future use, specify a disk group name
+ of &quot;none&quot;.
+
+Which disk group [&lt;group&gt;,none,list,q,?] (default: none)  dg_sap
+
+Use a default disk name for the disk? [y,n,q,?] (default: y)  n
+
+Add disk as a spare disk for dg_sap? [y,n,q,?] (default: n)  
+
+Exclude disk from hot-relocation use? [y,n,q,?] (default: n)  
+
+Add site tag to disk? [y,n,q,?] (default: n)  
+
+ The selected disks will be added to the disk group dg_sap with
+ disk names that you will specify interactively.
+
+ disk28
+
+Continue with operation? [y,n,q,?] (default: y)  
+
+ Initializing device disk28.
+
+Enter desired private region length
+[&lt;privlen&gt;,q,?] (default: 32768)  
+
+Enter disk name for disk28 [&lt;name&gt;,q,?] (default: dg_sap02)  
+
+ VxVM  NOTICE V-5-2-88
+Adding disk device disk28 to disk group dg_sap with disk
+ name dg_sap02.
+
+Add or initialize other disks? [y,n,q,?] (default: n)</code></pre></div>
+
+<ul>
+  <li>Check the configuration.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vxprint -g dg_sap
+TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
+dg dg_sap       dg_sap       -        -        -        -        -       -
+
+dm dg_sap01     disk27       -        228224   -        -        -       -
+dm dg_sap02     disk28       -        228224   -        -        -       -
+
+v  sapvol       fsgen        ENABLED  204800   -        ACTIVE   -       -
+pl sapvol-01    sapvol       ENABLED  204800   -        ACTIVE   -       -
+sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -        -       -
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Create the mirror.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vxassist -g dg_sap mirror sapvol dg_sap02
+[root@sheldon] / #
+[root@sheldon] / # vxprint -g dg_sap                        
+TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
+dg dg_sap       dg_sap       -        -        -        -        -       -
+
+dm dg_sap01     disk27       -        228224   -        -        -       -
+dm dg_sap02     disk28       -        228224   -        -        -       -
+
+v  sapvol       fsgen        ENABLED  204800   -        ACTIVE   -       -
+pl sapvol-01    sapvol       ENABLED  204800   -        ACTIVE   -       -
+sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -        -       -
+pl sapvol-02    sapvol       ENABLED  204800   -        ACTIVE   -       -
+sd dg_sap02-01  sapvol-02    ENABLED  204800   0        -        -       -
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Break the mirror.</li>
+</ul>
+
+<p>To do this just disassociate the corresponding <code>plex</code> from the volume.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vxplex -g dg_sap dis sapvol-02
+[root@sheldon] / # vxprint -g dg_sap             
+TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
+dg dg_sap       dg_sap       -        -        -        -        -       -
+
+dm dg_sap01     disk27       -        228224   -        -        -       -
+dm dg_sap02     disk28       -        228224   -        -        -       -
+
+pl sapvol-02    -            DISABLED 204800   -        -        -       -
+sd dg_sap02-01  sapvol-02    ENABLED  204800   0        -        -       -
+
+v  sapvol       fsgen        ENABLED  204800   -        ACTIVE   -       -
+pl sapvol-01    sapvol       ENABLED  204800   -        ACTIVE   -       -
+sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -        -       -
+[root@sheldon] / #</code></pre></div>
+
+<ul>
+  <li>Reattach the <code>plex</code> to the volume and reestablish the mirror.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[root@sheldon] / # vxplex -g dg_sap att sapvol sapvol-02</code></pre></div>
+
+<p>And we are done for now, more VxVM stuff in a future post.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/sysadmin/mirror-operations-with-vxvm-and-lvm/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Mirror operations with VxVM and LVM</strong> was published on <time datetime="2010-05-10T16:40:50+02:00">May 10, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

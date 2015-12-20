@@ -1,0 +1,341 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>HP Virtual Connect Domain Setup - Part 2: Network Setup &#8211; Juanma's Blog</title>
+<meta name="description" content="In the first postof the series I introduced to you HP Virtual Connect and showed how to use the Domain Wizard Setup to initially configure a VC domain. In the following article I will outline the use of the Network Setup Wizard and explain Virtual Connect networking concepts.
+
+">
+<meta name="keywords" content="HP, HP BladeSystem, networking, VCEM, VCM, Virtual Connect, Virtual Connect Manager">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="HP Virtual Connect Domain Setup - Part 2: Network Setup">
+<meta name="twitter:description" content="In the first postof the series I introduced to you HP Virtual Connect and showed how to use the Domain Wizard Setup to initially configure a VC domain. In the following article I will outline the use of the Network Setup Wizard and explain Virtual Connect networking concepts.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/images/banner-blades.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HP Virtual Connect Domain Setup - Part 2: Network Setup">
+<meta property="og:description" content="In the first postof the series I introduced to you HP Virtual Connect and showed how to use the Domain Wizard Setup to initially configure a VC domain. In the following article I will outline the use of the Network Setup Wizard and explain Virtual Connect networking concepts.
+
+">
+<meta property="og:url" content="/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/banner-blades.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+  <div class="image-wrap">
+  <img src=
+    
+      "/images/banner-blades.png"
+    
+  alt="HP Virtual Connect Domain Setup - Part 2: Network Setup feature image">
+  
+  </div><!-- /.image-wrap -->
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/" rel="bookmark" title="HP Virtual Connect Domain Setup - Part 2: Network Setup">HP Virtual Connect Domain Setup - Part 2: Network Setup</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>In the <a href="/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-1-domain-setup-wizard/">first post</a>of the series I introduced to you HP Virtual Connect and showed how to use the Domain Wizard Setup to initially configure a VC domain. In the following article I will outline the use of the Network Setup Wizard and explain Virtual Connect networking concepts.</p>
+
+<p>Before we begin to setup the network it would be very useful to clarify the Virtual Connect port terminology.</p>
+
+<ul>
+  <li><strong>External port</strong> - The Ethernet connectors SFP+ modules (either 1GB or 10GB), 10GBASE-CX4 and RJ-45 on the faceplate of the Ethernet module.</li>
+  <li><strong>Stacking port</strong> - These are Ethernet external ports used to connect within a Virtual Connect Domain the VC Ethernet modules. The Ethernet modules automatically identify the stacking modules.</li>
+  <li><strong>Uplink port</strong> - An external port configured within a Domain for use as a connection to the external networking equipment. These ports are defined within Virtual Connect by the enclosure name, interconnect bay that contains the module and the port number.</li>
+  <li><strong>Uplink port set</strong> - A set of uplinks ports trunked together in order to provide improved throughput and availability.</li>
+  <li><strong>Shared uplink port</strong> - This is an Ethernet uplink port that carries the traffic for multiple networks. The associated networks are mapped to a specific VLAN on the external connection, the appropriate VLAN tags are removed or added as Ethernet packets enter or leave the VC Domain.</li>
+  <li><strong>Shared uplink port set</strong> - This is a group of Ethernet uplinks trunked to provide improved throughput and availability to VC Shared Uplink Set.</li>
+</ul>
+
+<p>The Virtual Connect Network Setup Wizard will help to establish external Ethernet connectivity for the enclosure. With this wizard you will be able to:</p>
+
+<ul>
+  <li>Identify the MAC addresses to be used by the servers within the VC Domain.</li>
+  <li>Configure Server VLAN tagging.</li>
+  <li>Set up connections from the c-Class enclosure to the external networks.</li>
+</ul>
+
+<p>The network connections can be:</p>
+
+<ul>
+  <li>Dedicated uplink to a specific Ethernet network.</li>
+  <li>Shared uplink sets.</li>
+</ul>
+
+<p>The first screen of the wizard is the MAC Address Settings. As every server in the market the HP Blades come with factory-default MAC addresses already assigned to their network cards. However Virtual Connect can override these values while the server remains in the enclosure.</p>
+
+<p><a href="/images/network_wizard_1.png"><img src="/images/network_wizard_1.png" alt="" /></a></p>
+
+<p>Virtual Connect access the NICs through the Onboard Administrator and the server iLO to manage the MAC addresses. It provides 64 predefined and reserved MAC address ranges. The wizard will give you the option to use either an HP predefined range or an user defined one. HP recommends to use the predefined ranges.</p>
+
+<p><a href="/12/network_wizard_2.png"><img src="/images/network_wizard_2.png" alt="" /></a></p>
+
+<p>Once you have chosen the address range and click next the wizard will ask for confirmation before continue.</p>
+
+<p>The next screen is <strong>Server VLAN Tagging Support</strong>. Here the wizard gives you two possible options:</p>
+
+<ul>
+  <li>Tunnel VLAN Tags</li>
+  <li>Map VLAN Tags</li>
+</ul>
+
+<p><a href="/2010/12/network_wizard_3.png"><img src="/images/network_wizard_3.png" alt="" /></a></p>
+
+<p>The first one, <strong>Tunnel VLAN Tags</strong>, supports only VLAN tagging on networks with dedicated uplinks where all VLAN tags passed through the VC Domain without modification and ports connected to networks using shared uplinks can only send and receive untagged frames.</p>
+
+<p>On the other hand <strong>Map VLAN Tags</strong> allow you to add more than one network to an Ethernet server port and specify the VLAN mapping between server tags and VC-Enet networks. Also, the VLAN tunneling will be disabled for VC Ethernet networks with dedicated uplinks.</p>
+
+<p>There is also a checkbox in the page to <em>Force server connections to use the same VLAN mappings as shared uplink sets</em>, if this option is enabled the server ports connected to multiple VC Ethernet networks are forced to use the same VLAN mappings as those used for the corresponding Shared Uplink Set and the network connections can only be selected from a single Shared Uplink Set. When this option is not checked server network connections can be selected from any VC network and the external VLAN ID mappings can be manually edited. In the example of the screenshots I decided to check it.</p>
+
+<p>Below are another two optional settings for link speed control when using mapped VLAN tags. These settings are:</p>
+
+<ul>
+  <li>Set a Custom value for Preferred Link Connection Speed. This value applies to server profiles with a Multiple Networks connection defined and the <strong>Port Speed Setting</strong> set to <strong>Preferred</strong>.</li>
+  <li>Set a Custom value for Maximum Link Connection Speed. This value limits the maximum port speed for multi-network connections when a Custom port speed is specified.</li>
+</ul>
+
+<p>In our example we’re not going to check neither of them . Click next to move into the Define Network Connection screen.</p>
+
+<p>Choose the network type you want to define and click next. I choose <strong>Connection with uplink(s) dedicated to a single network</strong>.</p>
+
+<p><a href="/12/network_wizard_4.png"><img src="/images/network_wizard_4.png" alt="" /></a></p>
+
+<p>The <strong>Define Single Network</strong> window shows up. First define the network name (prod_net_01 in my example). There are three configurable values.</p>
+
+<ul>
+  <li><strong>Smart Link</strong> - With this option enabled Virtual Connect will drop the Ethernet link on every server connected to that network if the link to the external switches is lost.</li>
+  <li><strong>Private Network</strong> - This option is intended to provide extra network security by isolating all server ports from each other within the VC Domain. All packets will be sent through the VC Domain and out the uplinks ports so the communication between the severs will go through an external L3 router that will redirect the traffic back to the Domain.</li>
+  <li><strong>Enable VLAN Tunneling</strong>.</li>
+</ul>
+
+<p><a href="/images/network_wizard_5.png"><img src="/images/network_wizard_5.png" alt="" /></a></p>
+
+<p>Click the <strong>Advanced</strong> button to configure <strong>Advanced Network Settings</strong>. Set the network link speeds that best suites your configuration.</p>
+
+<p><a href="/images/network_wizard_6.png"><img src="/images/network_wizard_6.png" alt="" /></a></p>
+
+<p>Again from the <strong>Define Single Network</strong> page we are going to assign a port to our network. Click on <strong>Add Port</strong> and select an uplink port.</p>
+
+<p><a href="/images/network_wizard_7.png"><img src="/assets/network_wizard_7.png" alt="" /></a></p>
+
+<p>Set the <em>Connection Mode</em> to <em>Auto</em> if the ports are trunked and to <em>*Failve</em>r* if not.</p>
+
+<p>Click Apply and move onto the next screen. From this screen you can create as many additional networks as you need.</p>
+
+<p><a href="/images/network_wizard_8.png"><img src="/images/network_wizard_8.png" alt="" /></a></p>
+
+<p>Now we are going to create a network using VLAN tagging. Click <strong>Next</strong> an move again into the <strong>Define Network Connection</strong> page, select <strong>Connection with uplink(s) carrying multiple networks (using VLAN tagging)</strong> and click <em>Next</em>. The <strong>Define Shared Uplink Port Set</strong> page will be displayed.</p>
+
+<p><a href="/images/network_wizard_9.png"><img src="/images/network_wizard_9.png" alt="" /></a></p>
+
+<p>A shared uplink is the way Virtual Connect has to identify which uplinks carry multiple networks over the same cable. On shared uplinks the VLAN tags are added when packets leave the enclosure and added when leave. The external switch and the Virtual Connect Manager must be configured with the same VLAN tag ID for each network  on the shared uplinks. The uplinks enables multiple ports to be added in order to support port aggregation and link failover, with a consistent set of VLAN tags. Virtual Connect has no restriction on which VLAN IDs can be used so the VLANs already used in the external infrastructure can be used here.</p>
+
+<p>Since the VLAN tags are removed or added as soon as the packet enter or leave <strong>VC Ethernet Module</strong> shared uplink they have no relevance after the packet enter the enclosure. By identifying an associated network as the native VLAN will cause all untagged incoming packets to be placed onto this network, just one network can be designated as the native
+VLAN.</p>
+
+<p>To finish the network creation assign a name (up to 64 characters with no spaces), add a port using the drop-down menu like in the single network process described above and add the networks you want to associate to the uplink. Finally click <strong>Apply</strong>.</p>
+
+<p><a href="/images/network_wizard_10.png"><img src="/images/network_wizard_10.png" alt="" /></a></p>
+
+<p>In the final screen you will see now the three networks associated to a <strong>Shared Uplink Set</strong>. You can check this also from the <strong>Virtual Connect Manager</strong> page in the <strong>Ethernet Networks</strong> area.</p>
+
+<p><a href="/images/network_wizard_11.png"><img src="/images/network_wizard_11.png" alt="" /></a></p>
+
+<p>And we are done with the <strong>Network Setup</strong>, in the next post I will show the storage part. As always any feedback would be welcome.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp/networking/virtualization/hp-virtual-connect-domain-setup-part-2-network-setup/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>HP Virtual Connect Domain Setup - Part 2: Network Setup</strong> was published on <time datetime="2010-12-21T15:38:20+01:00">December 21, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

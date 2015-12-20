@@ -1,0 +1,378 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Patching a server using Dynamic Root Disk &#8211; Juanma's Blog</title>
+<meta name="description" content="Dynamic Root Disk, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I’m going to assume you have an spare disk for the task and of course have DRD installed in the server.
+
+">
+<meta name="keywords" content="DRD, Dynamic Root Disk, HP-UX, LVM, sysadmin, systems administration">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Patching a server using Dynamic Root Disk">
+<meta name="twitter:description" content="Dynamic Root Disk, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I’m going to assume you have an spare disk for the task and of course have DRD installed in the server.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Patching a server using Dynamic Root Disk">
+<meta property="og:description" content="Dynamic Root Disk, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I’m going to assume you have an spare disk for the task and of course have DRD installed in the server.
+
+">
+<meta property="og:url" content="/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/" rel="bookmark" title="Patching a server using Dynamic Root Disk">Patching a server using Dynamic Root Disk</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><strong>Dynamic Root Disk</strong>, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I’m going to assume you have an spare disk for the task and of course have DRD installed in the server.</p>
+
+<h4 id="step-1---clone-the-root-disk">Step 1 - Clone the root disk</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
+
+=======  04/21/10 09:05:53 EDT  BEGIN Clone System Image (user=root)  (jobid=sheldon-01)
+
+* Reading Current System Information
+* Selecting System Image To Clone
+* Selecting Target Disk
+* Selecting Volume Manager For New System Image
+* Analyzing For System Image Cloning
+* Creating New File Systems
+* Copying File Systems To New System Image
+* Making New System Image Bootable
+* Unmounting New System Image Clone
+* System image: &quot;sysimage_001&quot; on disk &quot;/dev/disk/disk2&quot;
+
+=======  04/21/10 09:38:48 EDT  END Clone System Image succeeded. (user=root)  (jobid=sheldon-01)
+
+root@sheldon:/ #</code></pre></div>
+
+<h4 id="step-2---mount-the-image">Step 2 - Mount the image</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # drd mount
+
+=======  04/21/10 09:41:20 EDT  BEGIN Mount Inactive System Image (user=root)  (jobid=sheldon)
+
+ * Checking for Valid Inactive System Image
+ * Locating Inactive System Image
+ * Mounting Inactive System Image
+
+=======  04/21/10 09:41:31 EDT  END Mount Inactive System Image succeeded. (user=root)  (jobid=sheldon)
+
+root@sheldon:/ #</code></pre></div>
+
+<p>Check the mount by displaying the <code>drd00</code> volume group.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # vgdisplay drd00
+
+VG Name                     /dev/drd00
+VG Write Access             read/write     
+VG Status                   available                 
+Max LV                      255    
+Cur LV                      8      
+Open LV                     8      
+Max PV                      16     
+Cur PV                      1      
+Act PV                      1      
+Max PE per PV               4356         
+VGDA                        2   
+PE Size (Mbytes)            32              
+Total PE                    4346    
+Alloc PE                    2062    
+Free PE                     2284    
+Total PVG                   0        
+Total Spare PVs             0              
+Total Spare PVs in use      0  
+
+root@sheldon:/ #</code></pre></div>
+
+<h4 id="step-3---apply-the-patches-on-the-mounted-clone">Step 3 - Apply the patches on the mounted clone</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
+
+=======  04/21/10 09:42:55 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
+
+ * Checking for Valid Inactive System Image
+ * Analyzing Command To Be Run On Inactive System Image
+ * Locating Inactive System Image
+ * Accessing Inactive System Image for Command Execution
+ * Setting Up Environment For Command Execution
+ * Executing Command On Inactive System Image
+ * Using unsafe patch list version 20061206
+ * Starting swagentd for drd runcmd
+ * Executing command: &quot;/usr/sbin/swinstall -s /tmp/patches_01.depot&quot;
+
+=======  04/21/10 09:42:59 EDT  BEGIN swinstall SESSION
+ (non-interactive) (jobid=sheldon-0006) (drd session)
+
+ * Session started for user &quot;root@sheldon&quot;.
+
+ * Beginning Selection
+
+ ...
+ ...
+ ...
+
+=======  04/21/10 09:44:37 EDT  END swinstall SESSION (non-interactive)
+ (jobid=sheldon-0006) (drd session)
+
+ * Command &quot;/usr/sbin/swinstall -s /tmp/patches_01.depot&quot; completed with the return
+ code &quot;0&quot;.
+ * Stopping swagentd for drd runcmd
+ * Cleaning Up After Command Execution On Inactive System Image
+
+=======  04/21/10 09:44:38 EDT  END Executing Command On Inactive System Image succeeded. (user=root)  (jobid=sheldon)
+
+root@sheldon:/ #</code></pre></div>
+
+<h4 id="step-4---check-the-installed-patches-on-the-drd-image">Step 4 - Check the installed patches on the DRD image</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # drd runcmd swlist patches_01
+
+=======  04/21/10 09:45:29 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
+
+ * Checking for Valid Inactive System Image
+ * Analyzing Command To Be Run On Inactive System Image
+ * Locating Inactive System Image
+ * Accessing Inactive System Image for Command Execution
+ * Setting Up Environment For Command Execution
+ * Executing Command On Inactive System Image
+ * Executing command: &quot;/usr/sbin/swlist patches_01&quot;
+# Initializing...
+# Contacting target &quot;sheldon&quot;...
+#
+# Target:  sheldon:/
+#
+
+ # patches_01                    1.0            ACME Patching depot
+   patches_01.acme-RUN
+ * Command &quot;/usr/sbin/swlist patches_01&quot; completed with the return code &quot;0&quot;.
+ * Cleaning Up After Command Execution On Inactive System Image
+
+=======  04/21/10 09:45:32 EDT  END Executing Command On Inactive System Image succeeded. (user=root)  (jobid=sheldon)
+
+root@sheldon:/ #</code></pre></div>
+
+<h4 id="step-5---activate-the-image-and-reboot-the-server">Step 5 - Activate the image and reboot the server</h4>
+
+<p>At this point you only have to activate the patched image with the <code>drd activate</code> command and schedule a reboot of the server.</p>
+
+<p>If you want to activate and reboot at the same time use the <code>-x reboot=true</code> option as in the example below.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sheldon:/ # drd activate -x reboot=true
+
+=======  04/21/10 09:52:26 EDT  BEGIN Activate Inactive System Image
+ (user=root)  (jobid=sheldon)
+
+ * Checking for Valid Inactive System Image
+ * Reading Current System Information
+ * Locating Inactive System Image
+ * Determining Bootpath Status
+ * Primary bootpath : 0/1/1/0.0.0 [/dev/disk/disk1] before activate.
+ * Primary bootpath : 0/1/1/0.1.0 [/dev/disk/disk2] after activate.
+ * Alternate bootpath : 0 [unknown] before activate.
+ * Alternate bootpath : 0 [unknown] after activate.
+ * HA Alternate bootpath : &lt;none&gt; [] before activate.
+ * HA Alternate bootpath : &lt;none&gt; [] after activate.
+ * Activating Inactive System Image
+ * Rebooting System</code></pre></div>
+
+<p>If everything goes well after the reboot give the patched server some time, I leave this to your own criteria, before restoring the mirror.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/sysadmin/patching-a-server-using-dynamic-root-disk/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Patching a server using Dynamic Root Disk</strong> was published on <time datetime="2010-05-24T09:00:52+02:00">May 24, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

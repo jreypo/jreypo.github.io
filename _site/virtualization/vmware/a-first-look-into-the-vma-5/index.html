@@ -1,0 +1,338 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>A first look into the vMA 5 &#8211; Juanma's Blog</title>
+<meta name="description" content="Like the rest of components of vSphere the vMA, vSphere Management Appliance, has been updated to the new version. In this post I will discuss the changes and features of the new vMA 5 and will show how to deploy and configure it.
+
+">
+<meta name="keywords" content="ESXi, ESXi5, vCenter Server, vMA5, VMware, vSphere">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="A first look into the vMA 5">
+<meta name="twitter:description" content="Like the rest of components of vSphere the vMA, vSphere Management Appliance, has been updated to the new version. In this post I will discuss the changes and features of the new vMA 5 and will show how to deploy and configure it.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A first look into the vMA 5">
+<meta property="og:description" content="Like the rest of components of vSphere the vMA, vSphere Management Appliance, has been updated to the new version. In this post I will discuss the changes and features of the new vMA 5 and will show how to deploy and configure it.
+
+">
+<meta property="og:url" content="/virtualization/vmware/a-first-look-into-the-vma-5/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/virtualization/vmware/a-first-look-into-the-vma-5/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/virtualization/vmware/a-first-look-into-the-vma-5/" rel="bookmark" title="A first look into the vMA 5">A first look into the vMA 5</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Like the rest of components of vSphere the vMA, vSphere Management Appliance, has been updated to the new version. In this post I will discuss the changes and features of the new vMA 5 and will show how to deploy and configure it.</p>
+
+<p>First of all for those of you who have been hiding in a cave and know nothing about the vMA all you need to know for now is that is a virtual appliance provided by VMware that allows System Administrators to manage their virtual infrastructure and run scripts and agents that interact directly with the vCenter Server and ESXi. It can do it also without having to authenticate each time. I will not go deeper on this since there are tons of blog posts out there explaining it and also it’s very well detailed in the vMA documentation.</p>
+
+<h3 id="vma-5-features-and-changes">vMA 5 features and changes</h3>
+
+<p>The vMA 5 appliance is composed by the following elements:</p>
+
+<ul>
+  <li><strong>SUSE Linux Enterprise Server 11 SP1 64-bit</strong>: This is a major change. Previous versions of the vMA were all based on Red Hat, either Red Hat Enterprise Linux or CentOS, but with the     introduction of vSphere 5 all virtual appliances have been migrated to SUSE Linux Enterprise Server 11.</li>
+  <li><strong>VMware Tools</strong></li>
+  <li><strong>vSphere CLI</strong></li>
+  <li><strong>vSphere SDK for Perl</strong></li>
+  <li><strong>Java JRE 1.6</strong></li>
+  <li><strong>vi-fastpass</strong>: The authentication component of vMA.</li>
+</ul>
+
+<p>As you can observe many of them are also present in former versions of the vMA.</p>
+
+<p>Regarding the hardware requirements they are again very similar to vMA4.</p>
+
+<ul>
+  <li>ESXi host capable of running 64-bit guests</li>
+  <li>1 vCPU</li>
+  <li>3GB of storage space</li>
+  <li>512MB of RAM. This is recommended memory size, however vMA can be run with less RAM but its performance can be penalized.</li>
+</ul>
+
+<p>The new vMA can be deployed from the vSphere Client connected to a <strong>vCenter Server 5.0</strong> or <strong>vCenter Server 4.x</strong> and can be run on the following vSphere releases:</p>
+
+<ul>
+  <li>vSphere 5.0</li>
+  <li>vSphere 4.1 and 4.1 Update 1</li>
+  <li>vSphere 4.0 Update 2</li>
+</ul>
+
+<p>The systems that can be managed from the vMA are:</p>
+
+<ul>
+  <li>ESXi 3.5 Update 5</li>
+  <li>ESXi 4.0 Update 2</li>
+  <li>vSphere 4.1 and 4.1 Update 1</li>
+  <li>vSphere 5.0</li>
+</ul>
+
+<h3 id="vma-5-deployment-and-configuration">vMA 5 deployment and configuration</h3>
+
+<p>We are going to deploy the vMA 5 through the vSphere Client in the same manner as the vMA 4. Go to <strong>File -&gt; Deploy OVF</strong> template and when the pop-up shows up browse for the vMA OVF and click next.</p>
+
+<p><a href="/images/ovf_deployment.png"><img src="/images/ovf_deployment.png" alt="" title="vMA OVF deployment from vSphere Client" /></a></p>
+
+<p>Follow the screens until the last one to configure the datacenter and host or cluster where you want to deploy the vMA, configure the appliance to match your environment and click Finish to start the deployment.</p>
+
+<p><a href="/images/final_screen.png"><img src="/images/final_screen.png" alt="" title="Deployment final screen" /></a></p>
+
+<p>When the deployment is finished open the vMA virtual machine console and power it on. When the vMA boots for the first time it should be configured.</p>
+
+<p>Once the OS is up the first prompt will ask for the network configuration.</p>
+
+<p><a href="/images/vma5_network_configuration.png"><img src="/images/vma5_network_configuration.png" alt="" title="vMA5 network configuration" /></a></p>
+
+<p>In the next step you’ll be asked for the password of vi-admin password. There is a major change here in comparison with the vMA 4, the vi-admin password must has an increased complexity and must contain at least:</p>
+
+<ul>
+  <li>Eight characters.</li>
+  <li>One upper case character.</li>
+  <li>One lower case character.</li>
+  <li>One numeral character.</li>
+  <li>One symbol.</li>
+</ul>
+
+<p>The reason to this new password policy comes from the SUSE Enterprise Linux Server operating system the vMA 5 is based on. William Lamw (<a href="http://www.twitter.com/lamw">@lamw</a>) provides the link to the Novell Knowledge Base article related to this topic in his excellent post **<a href="http://www.virtuallyghetto.com/2011/07/tips-and-tricks-for-vma-5.html">Tips and tricks for the vMA 5** </a>.</p>
+
+<p><a href="/images/vi-admin_password.png"><img src="/images/vi-admin_password.png" alt="" title="vi-admin user password" /></a></p>
+
+<p>Once network parameters and vi-admin password are configured the vMA should be ready to manage your vSphere servers and the console screen will appear.</p>
+
+<p>The vMA5 can be managed from two ways:</p>
+
+<ul>
+  <li>Text-based console</li>
+</ul>
+
+<p><a href="/images/vma5_console.png"><img src="/images/vma5_console.png" alt="" title="vMA5 console" /></a></p>
+
+<p>From the text-based console you can launch the initial configuration for the vMA networking, set the Timezone of the vMA and login into the Linux command-line interface like in the previous releases of the vMA to manage the appliance from the Linux shell and of course to manage your vSphere infrastructure. As always SSH access is also allowed to the lastone.</p>
+
+<ul>
+  <li>Browser-based Web UI</li>
+</ul>
+
+<p><a href="/images/vma5_web_login.png"><img src="/images/vma5_web_login.png" alt="" title="vMA5 web interface" /></a></p>
+
+<p>The Web UI enables you only to manage the vMA itself and not the vCenter and ESX(i) servers. To access the Web UI point your browser to **https://<vma_address_or_hostname>:5480** and login as vi-admin user. From there you can do the following tasks:</vma_address_or_hostname></p>
+
+<ul>
+  <li>Check the status of the appliance, set the timezone and perform a system reboot or shutdown</li>
+</ul>
+
+<p><a href="/images/vma5_web_system.png"><img src="/images/vma5_web_system.png" alt="" title="vMA5 Web UI System screen" /></a></p>
+
+<ul>
+  <li>Manage the appliance network and proxy server settings</li>
+</ul>
+
+<p><a href="/images/vma5_web_network.png"><img src="/images/vma5_web_network.png" alt="" title="vMA5 Web UI Network screen" /></a></p>
+
+<ul>
+  <li>Update the vMA 5</li>
+</ul>
+
+<p><a href="/images/vma5_web_update.png"><img src="/images/vma5_web_update.png" alt="" title="vMA5 Web UI Update screen" /></a></p>
+
+<p>This last option is of significance since now this is the way to update the vMA because the vma-update utility has been removed.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/virtualization/vmware/a-first-look-into-the-vma-5/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/virtualization/vmware/a-first-look-into-the-vma-5/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/virtualization/vmware/a-first-look-into-the-vma-5/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>A first look into the vMA 5</strong> was published on <time datetime="2011-09-21T18:58:09+02:00">September 21, 2011</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

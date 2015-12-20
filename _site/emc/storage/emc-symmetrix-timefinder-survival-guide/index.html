@@ -1,0 +1,586 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>EMC Symmetrix Timefinder survival guide &#8211; Juanma's Blog</title>
+<meta name="description" content="During a previous project I had the opportunity to work very closely with the EMC people and Symmetrix arrays, in fact I got a couple of very good friends from that project. At the time I created a bunch of text files for my self  reference about EMC SRDF and Timefinder technologies.
+
+">
+<meta name="keywords" content="BCV, EMC, EMC Timefinder, Storage, symcli, Symmetrix">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="EMC Symmetrix Timefinder survival guide">
+<meta name="twitter:description" content="During a previous project I had the opportunity to work very closely with the EMC people and Symmetrix arrays, in fact I got a couple of very good friends from that project. At the time I created a bunch of text files for my self  reference about EMC SRDF and Timefinder technologies.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EMC Symmetrix Timefinder survival guide">
+<meta property="og:description" content="During a previous project I had the opportunity to work very closely with the EMC people and Symmetrix arrays, in fact I got a couple of very good friends from that project. At the time I created a bunch of text files for my self  reference about EMC SRDF and Timefinder technologies.
+
+">
+<meta property="og:url" content="/emc/storage/emc-symmetrix-timefinder-survival-guide/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/emc/storage/emc-symmetrix-timefinder-survival-guide/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/emc/storage/emc-symmetrix-timefinder-survival-guide/" rel="bookmark" title="EMC Symmetrix Timefinder survival guide">EMC Symmetrix Timefinder survival guide</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>During a previous project I had the opportunity to work very closely with the <strong>EMC</strong> people and Symmetrix arrays, in fact I got a couple of very good friends from that project. At the time I created a bunch of text files for my self  reference about EMC SRDF and Timefinder technologies.</p>
+
+<p>Today I decided to review that files, give them some order, well sort of, and put them here as a survival guide/quick reference in the hope that will be of help to any of you. The first of this guides will be about <strong>EMC Symmetrix Timefinder.</strong></p>
+
+<p>I don’t have sample output for every command, been more than a year since the last time I work with Timefinder, to complement my own samples I got several outputs from the Timefinder manuals.</p>
+
+<p><strong>This is not a complete Timefinder usage guide</strong>, just my personal notes taken from my direct experience with product.</p>
+
+<h3 id="timefinder-basics">Timefinder Basics</h3>
+
+<p>EMC Timefinder is a replication solution that creates full volume copies. For the full-HP guys out there this is very similar to the XP or EVA Business Copy product.</p>
+
+<p>There are two basic types of replication:</p>
+
+<ul>
+  <li>TimefinderClone - Creates point-in-time copies.</li>
+  <li>Timefinder/Snap - Creates pointer-based replicas, snapshots, only the changed data is written.</li>
+</ul>
+
+<p>There are several optional components.</p>
+
+<ul>
+  <li>Timefinder/Mirror.</li>
+  <li>Timefinder/CG (Consistency Groups)</li>
+  <li>Timefinder/EIM (Exchange Integration Modules)</li>
+  <li>Timefinder/SIM (SQL Integration Modules)</li>
+</ul>
+
+<p>Timefinder allows to retain multiple copies at different checkpoints for lowered RPO and RTO.</p>
+
+<h3 id="symcli-basics">Symcli basics</h3>
+
+<p>Following is a list of the most basic <code>symcli</code> commands necessary to get your way around when you perform any Symmetrix task, including Timefinder.</p>
+
+<h4 id="get-the-list-of-the-symmetrix-devices">Get the list of the Symmetrix devices</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symdev list
+Symmetrix ID: 00029xxxxxxx
+        Device Name           Directors                  Device
+--------------------------- ------------- -------------------------------------
+                                                                           Cap
+Sym  Physical               SA :P DA :IT  Config        Attribute Sts      (MB)
+--------------------------- ------------- -------------------------------------
+0000 Not Visible            ???:? 01A:C0  BCV           Asst&#39;d    RW       8632
+0001 Not Visible            ???:? 16C:D0  BCV           Asst&#39;d    RW       8632
+0002 Not Visible            ???:? 01B:D0  BCV           Asst&#39;d    RW       8632
+0003 Not Visible            ???:? 16D:C0  BCV           Asst&#39;d    RW       8632
+…………………………………………………………………………………………………………………………………………………………………………………………………………………
+0048 Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   RW       8632
+0049 Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   RW       8632
+004A Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   RW       8632
+004B Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+004C Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+004D Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+004E Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+004F Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+0050 Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+0051 Not Visible            ???:? ???:??  VDEV          N/Grp&#39;d   NR       8632
+0052 Not Visible            ???:? 16B:D1  2-Way Mir     N/A (SV)  RW       8632
+0053 Not Visible            ???:? 01C:C0  2-Way Mir     N/A (SV)  RW       8632
+0054 Not Visible            ???:? 16B:C0  2-Way Mir     N/A (SV)  RW       8632
+…………………………………………………………………………………………………………………………………………………………………………………………………………………</code></pre></div>
+
+<h4 id="list-all-available-devices-from-a-device-group">List all available devices from a device group</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symld -g dg_oradev_01 list</code></pre></div>
+
+<h4 id="list-host-physical-devices">List host physical devices</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# sympd list</code></pre></div>
+
+<h4 id="list-the-disk-groups">List the disk groups:</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# /usr/symcli/bin/symdg list
+
+                       D E V I C E      G R O U P S
+
+                                                          Number of
+ Name               Type     Valid  Symmetrix ID  Devs   GKs  BCVs  VDEVs
+
+ dg_oracle_prod1    REGULAR  Yes    00029xxxxxxx    26     0    26      0
+ dg_oracle_prod2    REGULAR  Yes    00029xxxxxxx    21     0    21      0
+ dg_rac_01          RDF1     Yes    00029xxxxxxx    23     0    23      0
+ dg_clvx_01         RDF1     Yes    00029xxxxxxx     5     0     5      0
+ dg_oradev_01       REGULAR  Yes    00029xxxxxxx     3     0     0      0
+ dg_timetest_02     RDF1     Yes    00029xxxxxxx    16     0    16      0
+ grupo1             RDF1     Yes    00029xxxxxxx    22     0     0      0
+
+root:/#</code></pre></div>
+
+<h4 id="add-devices-to-a-disk-group">Add devices to a disk group</h4>
+
+<ul>
+  <li>Add physical devices</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symld -g dg_oradev_01 add pd /dev/dsk/c2t4d12</code></pre></div>
+
+<ul>
+  <li>Add Symmetrix devices</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symld -g dg_oradev_01 add 006E</code></pre></div>
+
+<h4 id="get-diskgroup-detailed-info">Get diskgroup detailed info.</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# /usr/symcli/bin/symdg show dg_prod_01
+
+Group Name:  dg_prod_01
+
+    Group Type                                   : RDF1     (RDFA)
+    Device Group in GNS                          : No
+    Valid                                        : Yes
+    Symmetrix ID                                 : 00029xxxxxxx
+    Group Creation Time                          : Mon Nov 29 18:49:29 2007
+    Vendor ID                                    : EMC Corp
+    Application ID                               : ECC
+
+    Number of STD Devices in Group               :    2
+    Number of Associated GK&#39;s                    :    0
+    Number of Locally-associated BCV&#39;s           :    2
+    Number of Locally-associated VDEV&#39;s          :    0
+    Number of Remotely-associated VDEV&#39;s(STD RDF):    0
+    Number of Remotely-associated BCV&#39;s (STD RDF):    0
+    Number of Remotely-associated BCV&#39;s (BCV RDF):    0
+    Number of Remotely-assoc&#39;d RBCV&#39;s (RBCV RDF) :    0
+
+    Standard (STD) Devices (2):
+        {
+        --------------------------------------------------------------------
+        Sym               Cap
+        LdevName              PdevName                Dev  Att. Sts     (MB)
+        --------------------------------------------------------------------
+        DEV001                N/A                     01C8      RW      8714
+        DEV002                N/A                     01C9      RW      8714
+        }
+
+    BCV Devices Locally-associated (2):
+        {
+        --------------------------------------------------------------------
+        Sym               Cap
+        LdevName              PdevName                Dev  Att. Sts     (MB)
+        --------------------------------------------------------------------
+        BCV001                N/A                     08A8      RW      8714
+        BCV002                N/A                     08A9      RW      8714
+        }
+
+    Device Group RDF Information
+        {
+        RDF Type                               : R1
+        RDF (RA) Group Number                  : 2               (01)
+
+        Remote Symmetrix ID                    : 000287xxxxxx
+
+        R2 Device Is Larger Than The R1 Device : False
+
+        RDF Pair Configuration                 : Normal
+        RDF STAR Mode                          : False
+
+        RDF Mode                               : Synchronous
+        RDF Adaptive Copy                      : Disabled
+        RDF Adaptive Copy Write Pending State  : N/A
+        RDF Adaptive Copy Skew (Tracks)        : 32767
+
+        RDF Device Domino                      : Disabled
+
+        RDF Link Configuration                 : Fibre
+        RDF Link Domino                        : Disabled
+        Prevent Automatic RDF Link Recovery    : Disabled
+        Prevent RAs Online Upon Power ON       : Enabled
+
+        Device RDF Status                      : Ready           (RW)
+
+        Device RA Status                       : Ready           (RW)
+        Device Link Status                     : Ready           (RW)
+
+        Device Suspend State                   : N/A
+        Device Consistency State               : Disabled
+        RDF R2 Not Ready If Invalid            : Disabled
+
+        Device RDF State                       : Ready           (RW)
+        Remote Device RDF State                : Write Disabled  (WD)
+
+        RDF Pair State (  R1 &lt;===&gt; R2 )        : Synchronized
+
+        Number of R1 Invalid Tracks            : 0
+        Number of R2 Invalid Tracks            : 0
+
+        RDFA Information:
+            {
+            Session Number                     : 1
+            Cycle Number                       : 0
+            Number of Devices in the Session   : 491
+            Session Status                     : Inactive
+
+            Session Consistency State          : N/A
+            Minimum Cycle Time                 : 00:00:30
+            Average Cycle Time                 : 00:00:00
+            Duration of Last cycle             : 00:00:00
+            Session Priority                   : 33
+
+            Tracks not Committed to the R2 Side: 0
+            Time that R2 is behind R1          : 00:00:00
+            R1 Side Percent Cache In Use       :  0
+            R2 Side Percent Cache In Use       :  0
+
+            }
+        }
+
+root:/#</code></pre></div>
+
+<h3 id="timfinder-commands">Timfinder commands</h3>
+
+<h4 id="associate-bcvs-to-a-device-group-there-are-two-ways">Associate BCVs to a device group. There are two ways:</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symbcv -sid xxxx -g dg_oradev_01 associate dev 0001</code></pre></div>
+
+<h4 id="establish-the-mirrors">Establish the mirrors</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 -full establish DEV001 BCV001</code></pre></div>
+
+<h4 id="split-operations">Split operations.</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 split</code></pre></div>
+
+<p>There are several additional split modes and/or modifiers.</p>
+
+<ul>
+  <li>Instant</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 split -instant</code></pre></div>
+
+<ul>
+  <li>Force</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 split -force</code></pre></div>
+
+<ul>
+  <li>Differential</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 split -differential</code></pre></div>
+
+<ul>
+  <li>Reverse</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root/# symmir -g dg_oradev_01 reverse split</code></pre></div>
+
+<ul>
+  <li>Reverse differential</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 reverse split -differential</code></pre></div>
+
+<h4 id="restore-the-bcv-mirrors">Restore the BCV mirrors.</h4>
+
+<p>The restore operation will copy the data from the BCV to the Standard device.</p>
+
+<ul>
+  <li>Differential restore</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 restore</code></pre></div>
+
+<ul>
+  <li>Full restore</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 -full restore</code></pre></div>
+
+<h4 id="reestablish-operations">Reestablish operations.</h4>
+
+<p>It is very important to tell the difference between <em>Restore</em> and <em>Reestablish</em>. Reestablish will do a differential
+update from the Standard device to the BCV device.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir -g dg_oradev_01 establish</code></pre></div>
+
+<h4 id="get-the-list-of-bcv-devices">Get the list of BCV devices</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symbcv list
+
+Symmetrix ID: 00029xxxxxxx
+              BCV Device                   Standard Device          Status
+------------------------------------ --------------------------- ------------
+                              Inv.                        Inv.
+Physical         Sym RDF Att. Tracks Physical        Sym  Tracks BCV &lt;=&gt; STD
+------------------------------------ --------------------------- ------------
+Not Visible      0030    (M)       0 N/A             N/A       0 NeverEstab
+Not Visible      0031    (m)       - N/A             N/A       - NeverEstab
+……………………………………………………………………………………………………………………………………………………………………………………………………………
+c4t1d0s2         0088              0 c4t0d0s2        0084      0 Split
+c4t1d1s2         0089              0 c4t0d1s2        0085      0 Split
+c4t1d2s2         008A              0 c4t0d2s2        0086      0 Split
+c4t1d3s2         008B              0 c4t0d3s2        0087      0 Split</code></pre></div>
+
+<h4 id="get-the-state-of-mirroring-of-the-device-pairs-within-a-device-group">Get the state of mirroring of the device pairs within a device group</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# /usr/symcli/bin/symmir -g dg_oracle_prod_01 query
+
+Device Group (DG) Name: dg_oracle_prod_01
+DG&#39;s Type             : RDF1
+DG&#39;s Symmetrix ID     : 00029xxxxxxx
+
+     Standard Device                    BCV Device                  State
+-------------------------- ------------------------------------- ------------
+                    Inv.                                  Inv.
+Logical        Sym  Tracks Logical              Sym       Tracks STD &lt;=&gt; BCV
+-------------------------- ------------------------------------- ------------
+
+DEV001         0184      0 BCV001               039C *         0 Split
+DEV002         0186      0 BCV002               039E *         0 Split
+DEV003         0187      0 BCV003               039F *         0 Split
+DEV004         0188      0 BCV004               03A0 *         0 Split
+DEV005         0189      0 BCV005               03A1 *         0 Split
+DEV006         018E      0 BCV006               03A6 *         0 Split
+DEV007         018F      0 BCV007               03A7 *         0 Split
+DEV008         0190      0 BCV008               03A8 *         0 Split
+DEV009         0191      0 BCV009               03A9 *         0 Split
+DEV010         01C7      0 BCV010               08A7 *         0 Split
+DEV011         01CD      0 BCV011               08AA *         0 Split
+
+Total              -------                               -------
+  Track(s)               0                                     0
+  MB(s)                0.0                                   0.0
+
+Legend:
+
+(*): The paired BCV device is associated with this group.
+
+root:/#</code></pre></div>
+
+<h4 id="list-all-bcv-sessions-in-a-symmetrix-array">List all BCV sessions in a Symmetrix array</h4>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root:/# symmir list -sid xxxx
+
+Symmetrix ID: 00000000xxxx
+
+  Standard Device       BCV Device              State
+-------------------- ----------------------- --------------
+           Invalid             Invalid   GBE
+Sym        Tracks     Sym      Tracks         STD &lt;=&gt; BCV
+-------------------- ----------------------- --------------
+002B               0 0E0B            0   ... Synchronized
+002E               0 0E00            0   ..X Synchronized
+002E               0 0E0A            0   ... Synchronized
+0032               0 0E0F            0   ... Split
+00FF               0 00FD            0   ... Split
+0DF5               0 0DA5            0   ..X Synchronized
+0DF5               0 0DA4            0   ..X Synchronized
+0F70               0 001B         3592   X.. SyncInProg
+0F71               0 001C         4496   X.. SyncInProg
+0F93               0 0DF9            0   ..X Split
+1015               0 1069            0   X.. Synchronized
+
+Total       --------          --------
+  Tracks           0              8088
+  MB(s)          0.0             505.5</code></pre></div>
+
+<p>And we are done. As I said this is not a full guide so please if there is anything that you don’t get please leave a comment and I will try to clarify. Also if any of you have additional tips or recipes for Timefinder please comment.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/emc/storage/emc-symmetrix-timefinder-survival-guide/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/emc/storage/emc-symmetrix-timefinder-survival-guide/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/emc/storage/emc-symmetrix-timefinder-survival-guide/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>EMC Symmetrix Timefinder survival guide</strong> was published on <time datetime="2010-12-10T11:15:51+01:00">December 10, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

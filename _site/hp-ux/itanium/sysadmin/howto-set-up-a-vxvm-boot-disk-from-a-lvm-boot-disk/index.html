@@ -1,0 +1,422 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Howto set-up a VxVM boot disk from a LVM boot disk &#8211; Juanma's Blog</title>
+<meta name="description" content="Creating a Veritas Volume Manager boot disk using the LVM boot disks as its source probably looks to many as a very complicated process, nothing so far from the reality. In fact the whole conversion can be done with one command, vxcp_lvmroot.  In this post I will try to clarify the process and explain some of the underlying mechanisms.
+
+">
+<meta name="keywords" content="EFI, HP-UX, Itanium, LVM, sysadmin, systems administration, vxcp_lvmroot, VxVM">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Howto set-up a VxVM boot disk from a LVM boot disk">
+<meta name="twitter:description" content="Creating a Veritas Volume Manager boot disk using the LVM boot disks as its source probably looks to many as a very complicated process, nothing so far from the reality. In fact the whole conversion can be done with one command, vxcp_lvmroot.  In this post I will try to clarify the process and explain some of the underlying mechanisms.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Howto set-up a VxVM boot disk from a LVM boot disk">
+<meta property="og:description" content="Creating a Veritas Volume Manager boot disk using the LVM boot disks as its source probably looks to many as a very complicated process, nothing so far from the reality. In fact the whole conversion can be done with one command, vxcp_lvmroot.  In this post I will try to clarify the process and explain some of the underlying mechanisms.
+
+">
+<meta property="og:url" content="/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/" rel="bookmark" title="Howto set-up a VxVM boot disk from a LVM boot disk">Howto set-up a VxVM boot disk from a LVM boot disk</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Creating a Veritas Volume Manager boot disk using the LVM boot disks as its source probably looks to many as a very complicated process, nothing so far from the reality. In fact the whole conversion can be done with one command, <code>vxcp_lvmroot</code>.  In this post I will try to clarify the process and explain some of the underlying mechanisms.</p>
+
+<p>I’m going to take for granted that all of you understand the basic structure of boot disks on Itanium servers. If you have read my <a href="/hp-ux/itanium/boot-disk-structure-on-integrity-servers/">post</a> about boot disk structure on Integrity servers you will remember that the disks are composed by three partitions:</p>
+
+<ul>
+  <li>EFI</li>
+  <li>OS Partition.</li>
+  <li>HPSP - HP Service Partition.</li>
+</ul>
+
+<p>For the purpose of this post the only relevant partition is the OS Partition, also named as <code>HPUX</code> in HP-UX hosts.</p>
+
+<p>Unlike LVM, where the volumes are named with numbers (lvol1, lvol2…), in VxVM the volumes follow a specific naming convention that reflects the usage of each one of them:</p>
+
+<ul>
+  <li><code>standvol</code></li>
+  <li><code>swapvol</code></li>
+  <li><code>rootvol</code></li>
+  <li><code>usrvol</code></li>
+  <li><code>varvol</code></li>
+  <li><code>tmpvol</code></li>
+  <li><code>optvol</code></li>
+</ul>
+
+<p>Veritas volumes support also a <code>usetype</code> field used to provide additional information about the volume to VxVM itself. The three most common use types on HP-UX are:</p>
+
+<ul>
+  <li>fsgen - File systems and general purpose volumes</li>
+  <li>swap - Swap volumes</li>
+  <li>root - Used for the volume that contains the root file system</li>
+</ul>
+
+<p>The following restrictions must be taken into account for any VxVM boot disk:</p>
+
+<ul>
+  <li>As in LVM the volumes involved in the boot process (<code>standvol</code>, <code>swapvol</code> and <code>rootvol</code>) must be contiguous.</li>
+  <li>The above volumes can have only one subdisk and can’t span to additional disks.</li>
+  <li>The volumes within the root disk can not use dirty region logging (DRL).</li>
+  <li>The private region size is 1MB rather than the default value of 32MB.</li>
+  <li>The <code>/stand</code> file system can only be configured with VxFS data layout version 5 or the system will not boot.</li>
+  <li>In PA-RISC systems the <code>/stand</code> file system must be HFS, this is necessary because the PA-RISC HP-UX kernel loader is not VxFS-aware.</li>
+</ul>
+
+<p>Following is an example to illustrate the process.</p>
+
+<p>First, with <code>diskinfo</code>, verify the size of the current boot disk and the new disk to check that they are the same.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:/# diskinfo /dev/rdsk/c0t0d0
+SCSI describe of /dev/rdsk/c0t0d0:
+             vendor: HP      
+         product id: Virtual LvDisk  
+               type: direct access
+               size: 40960000 Kbytes
+   bytes per sector: 512
+root@robin:/#
+root@robin:/# diskinfo /dev/rdsk/c0t8d0
+SCSI describe of /dev/rdsk/c0t8d0:
+             vendor: HP      
+         product id: Virtual LvDisk  
+               type: direct access
+               size: 40960000 Kbytes
+   bytes per sector: 512
+root@robin:/#</code></pre></div>
+
+<p>After that scrub the new disk, this will prevent possible problems during the creation process because if <code>vxcp_lvmroot</code> encounter LVM structures on the disk it will fail.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:~# dd if=/dev/zero of=/dev/rdsk/c0t8d0 bs=1048576 count=1024  
+1024+0 records in
+1024+0 records out
+root@robin:~#</code></pre></div>
+
+<p>Finally launch the <code>vxcp_lvmroot</code> command. Before commencing the copy, <code>vxcp_lvmroot</code> will determine how many disks are required and will ensure that enough disks have been specified.</p>
+
+<p>Each one of the given disks for the conversion will be checked to make sure that aren’t in use as LVM, VxVM or raw disks. Once the appropriate checks have been issued the disks will be given VxVM media names, the disk or disks containing the root will be given <code>rootdisk##</code> names and the other disks that are part of the <code>rootdg</code> will be given <code>rootaux##</code> names, <code>##</code> is a number starting on 01.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:~# /etc/vx/bin/vxcp_lvmroot -v -b c0t8d0
+VxVM vxcp_lvmroot INFO V-5-2-4668 10:42: Bootdisk is configured with new-style DSF
+VxVM vxcp_lvmroot INFO V-5-2-2499 10:42: Gathering information on LVM root volume group vg00
+VxVM vxcp_lvmroot INFO V-5-2-2441 10:42: Checking specified disk(s) for usability
+VxVM vxcp_lvmroot INFO V-5-2-4679 10:42: Using legacy-style DSF names
+VxVM vxcp_lvmroot INFO V-5-2-2566 10:42: Preparing disk c0t8d0 as a VxVM root disk
+VxVM vxcp_lvmroot INFO V-5-2-3767 10:42: Disk c0t8d0 is now EFI partitioned disk c0t8d0s2
+VxVM vxcp_lvmroot INFO V-5-2-2537 10:42: Initializing DG rootdg with disk c0t8d0s2 as DM rootdisk01
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:42: Copying /dev/vg00/lvol1 (vxfs) to /dev/vx/dsk/rootdg/standvol
+VxVM vxcp_lvmroot INFO V-5-2-1604 10:42: Cloning /dev/vg00/lvol2 (swap) to /dev/vx/dsk/rootdg/swapvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:42: Copying /dev/vg00/lvol3 (vxfs) to /dev/vx/dsk/rootdg/rootvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:43: Copying /dev/vg00/lvol4 (vxfs) to /dev/vx/dsk/rootdg/homevol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:43: Copying /dev/vg00/lvol5 (vxfs) to /dev/vx/dsk/rootdg/optvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:50: Copying /dev/vg00/lvol6 (vxfs) to /dev/vx/dsk/rootdg/tmpvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:50: Copying /dev/vg00/lvol7 (vxfs) to /dev/vx/dsk/rootdg/usrvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:55: Copying /dev/vg00/lvol8 (vxfs) to /dev/vx/dsk/rootdg/varvol
+VxVM vxcp_lvmroot INFO V-5-2-1606 10:58: Copying /dev/vg00/lv_crash (vxfs) to /dev/vx/dsk/rootdg/crashvol
+VxVM vxcp_lvmroot INFO V-5-2-4678 10:58: Setting up disk c0t8d0s2 as a boot disk
+VxVM vxcp_lvmroot INFO V-5-2-1638 10:59: Installing fstab and fixing dev nodes on new root FS
+VxVM vxcp_lvmroot INFO V-5-2-2538 10:59: Installing bootconf &amp; rootconf files in new stand FS
+VxVM vxcp_lvmroot INFO V-5-2-2462 10:59: Current setboot values:
+VxVM vxcp_lvmroot INFO V-5-2-2569 10:59: Primary:       0/0/0/0.0x0.0x0 /dev/rdisk/disk4
+VxVM vxcp_lvmroot INFO V-5-2-2416 10:59: Alternate:      
+VxVM vxcp_lvmroot INFO V-5-2-4676 10:59: Making disk /dev/rdisk/disk20_p2 the primary boot disk
+VxVM vxcp_lvmroot INFO V-5-2-4663 10:59: Making disk /dev/rdisk/disk4_p2 the alternate boot disk
+VxVM vxcp_lvmroot INFO V-5-2-4671 10:59: Disk c0t8d0s2 is now a VxVM rootable boot disk
+root@robin:~#</code></pre></div>
+
+<p>Now to verify the new VxVM boot disk, first check the newly created <code>rootdg</code> diskgroup.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:~# vxprint -htg rootdg
+DG NAME         NCONFIG      NLOG     MINORS   GROUP-ID
+ST NAME         STATE        DM_CNT   SPARE_CNT         APPVOL_CNT
+DM NAME         DEVICE       TYPE     PRIVLEN  PUBLEN   STATE
+RV NAME         RLINK_CNT    KSTATE   STATE    PRIMARY  DATAVOLS  SRL
+RL NAME         RVG          KSTATE   STATE    REM_HOST REM_DG    REM_RLNK
+CO NAME         CACHEVOL     KSTATE   STATE
+VT NAME         RVG          KSTATE   STATE    NVOLUME
+V  NAME         RVG/VSET/CO  KSTATE   STATE    LENGTH   READPOL   PREFPLEX UTYPE
+PL NAME         VOLUME       KSTATE   STATE    LENGTH   LAYOUT    NCOL/WID MODE
+SD NAME         PLEX         DISK     DISKOFFS LENGTH   [COL/]OFF DEVICE   MODE
+SV NAME         PLEX         VOLNAME  NVOLLAYR LENGTH   [COL/]OFF AM/NM    MODE
+SC NAME         PLEX         CACHE    DISKOFFS LENGTH   [COL/]OFF DEVICE   MODE
+DC NAME         PARENTVOL    LOGVOL
+SP NAME         SNAPVOL      DCO
+EX NAME         ASSOC        VC                       PERMS    MODE     STATE
+SR NAME         KSTATE
+
+dg rootdg       default      default  4466000  1276076559.38.robin
+
+dm rootdisk01   c0t8d0s2     auto     1024     40035232 -
+
+v  crashvol     -            ENABLED  ACTIVE   4194304  SELECT    -        fsgen
+pl crashvol-01  crashvol     ENABLED  ACTIVE   4194304  CONCAT    -        RW
+sd rootdisk01-09 crashvol-01 rootdisk01 28778496 4194304 0        c0t8d0s2 ENA
+
+v  homevol      -            ENABLED  ACTIVE   155648   SELECT    -        fsgen
+pl homevol-01   homevol      ENABLED  ACTIVE   155648   CONCAT    -        RW
+sd rootdisk01-04 homevol-01  rootdisk01 7077888 155648  0         c0t8d0s2 ENA
+
+v  optvol       -            ENABLED  ACTIVE   9560064  SELECT    -        fsgen
+pl optvol-01    optvol       ENABLED  ACTIVE   9560064  CONCAT    -        RW
+sd rootdisk01-05 optvol-01   rootdisk01 7233536 9560064 0         c0t8d0s2 ENA
+
+v  rootvol      -            ENABLED  ACTIVE   1048576  SELECT    -        root
+pl rootvol-01   rootvol      ENABLED  ACTIVE   1048576  CONCAT    -        RW
+sd rootdisk01-03 rootvol-01  rootdisk01 6029312 1048576 0         c0t8d0s2 ENA
+
+v  standvol     -            ENABLED  ACTIVE   1835008  SELECT    -        fsgen
+pl standvol-01  standvol     ENABLED  ACTIVE   1835008  CONCAT    -        RW
+sd rootdisk01-01 standvol-01 rootdisk01 0      1835008  0         c0t8d0s2 ENA
+
+v  swapvol      -            ENABLED  ACTIVE   4194304  SELECT    -        swap
+pl swapvol-01   swapvol      ENABLED  ACTIVE   4194304  CONCAT    -        RW
+sd rootdisk01-02 swapvol-01  rootdisk01 1835008 4194304 0         c0t8d0s2 ENA
+
+v  tmpvol       -            ENABLED  ACTIVE   524288   SELECT    -        fsgen
+pl tmpvol-01    tmpvol       ENABLED  ACTIVE   524288   CONCAT    -        RW
+sd rootdisk01-06 tmpvol-01   rootdisk01 16793600 524288 0         c0t8d0s2 ENA
+
+v  usrvol       -            ENABLED  ACTIVE   6217728  SELECT    -        fsgen
+pl usrvol-01    usrvol       ENABLED  ACTIVE   6217728  CONCAT    -        RW
+sd rootdisk01-07 usrvol-01   rootdisk01 17317888 6217728 0        c0t8d0s2 ENA
+
+v  varvol       -            ENABLED  ACTIVE   5242880  SELECT    -        fsgen
+pl varvol-01    varvol       ENABLED  ACTIVE   5242880  CONCAT    -        RW
+sd rootdisk01-08 varvol-01   rootdisk01 23535616 5242880 0        c0t8d0s2 ENA
+root@robin:~#</code></pre></div>
+
+<p>Verify the contents of the <code>LABEL</code> file.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:~# vxvmboot -v /dev/rdsk/c0t8d0s2
+
+LIF Label File @ (1k) block # 834 on VxVM Disk /dev/rdsk/c0t8d0s2:
+Label Entry: 0, Boot Volume start:     3168; length: 1792 MB
+Label Entry: 1, Root Volume start:  6032480; length: 1024 MB
+Label Entry: 2, Swap Volume start:  1838176; length: 4096 MB
+Label Entry: 3, Dump Volume start:  1838176; length: 4096 MB
+root@robin:~#</code></pre></div>
+
+<p>Check the new boot paths and if everything is OK reboot the server.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@robin:~# setboot -v
+Primary bootpath : 0/0/0/0.0x8.0x0 (/dev/rdisk/disk20)
+HA Alternate bootpath :
+Alternate bootpath : 0/0/0/0.0x0.0x0 (/dev/rdisk/disk4)
+
+Autoboot is ON (enabled)
+setboot: error accessing firmware - Function is not available
+The firmware of your system does not support querying or changing the SpeedyBoot
+settings.
+root@robin:~#
+root@robin:~# shutdown -ry 0
+
+SHUTDOWN PROGRAM
+06/09/10 11:11:37 WETDST
+
+Broadcast Message from root (console) Wed Jun  9 11:11:37...
+SYSTEM BEING BROUGHT DOWN NOW ! ! !
+
+...</code></pre></div>
+
+<p>If everything went as expected the server will boot from the new disk and the migration process will be finished.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/itanium/sysadmin/howto-set-up-a-vxvm-boot-disk-from-a-lvm-boot-disk/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Howto set-up a VxVM boot disk from a LVM boot disk</strong> was published on <time datetime="2010-07-20T10:51:35+02:00">July 20, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Playing with lanadmin & lanscan &#8211; Juanma's Blog</title>
+<meta name="description" content="Current release of HP-UX, 11.31, has the handy nwmgr to handle networking tasks, but for years instead of nwmgr we’ve been playing with lanscan and lanadmin, linkloop as well, to perform many networking tasks on the 11.23 release and previous ones. And surely some of you, just like myself, still have 11iv2 systems up and running. Following is a small list of tips and tasks for lanadmin from one of my how-to files.
+
+">
+<meta name="keywords" content="11iv1, 11iv2, APA, commands, HP-UX, lanadmin, lanscan, networking, sysadmin, systems administration">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Playing with lanadmin & lanscan">
+<meta name="twitter:description" content="Current release of HP-UX, 11.31, has the handy nwmgr to handle networking tasks, but for years instead of nwmgr we’ve been playing with lanscan and lanadmin, linkloop as well, to perform many networking tasks on the 11.23 release and previous ones. And surely some of you, just like myself, still have 11iv2 systems up and running. Following is a small list of tips and tasks for lanadmin from one of my how-to files.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Playing with lanadmin & lanscan">
+<meta property="og:description" content="Current release of HP-UX, 11.31, has the handy nwmgr to handle networking tasks, but for years instead of nwmgr we’ve been playing with lanscan and lanadmin, linkloop as well, to perform many networking tasks on the 11.23 release and previous ones. And surely some of you, just like myself, still have 11iv2 systems up and running. Following is a small list of tips and tasks for lanadmin from one of my how-to files.
+
+">
+<meta property="og:url" content="/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/" rel="bookmark" title="Playing with lanadmin & lanscan">Playing with lanadmin & lanscan</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Current release of HP-UX, 11.31, has the handy <code>nwmgr</code> to handle networking tasks, but for years instead of <code>nwmgr</code> we’ve been playing with <code>lanscan</code> and <code>lanadmin</code>, <code>linkloop</code> as well, to perform many networking tasks on the 11.23 release and previous ones. And surely some of you, just like myself, still have 11iv2 systems up and running. Following is a small list of tips and tasks for <code>lanadmin</code> from one of my <em>how-to</em> files.</p>
+
+<h3 id="lanscan">Lanscan </h3>
+<p><code>lanscan</code> is used to get information about the LAN interfaces.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanscan
+Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
+Path     Address        In# State NamePPA        ID  Type      Support Mjr#
+0/0/0/1/0 0x001A4B07F002 0   UP    lan0 snap0     1   ETHER     Yes     119
+0/0/0/1/1 0x001A4B07F003 1   UP    lan1 snap1     2   ETHER     Yes     119
+0/0/1/1/0 0x0018FE2D7EE7 2   UP    lan2 snap2     3   ETHER     Yes     119
+0/0/9/1/0 0x0018FE2D7EF4 3   UP    lan3 snap3     4   ETHER     Yes     119
+0/0/10/1/0 0x000CFC0046B9 4   UP    lan4 snap4     5   ETHER     Yes     119
+0/0/12/1/0 0x000CFC004672 5   UP    lan5 snap5     6   ETHER     Yes     119
+LinkAgg0 0x000000000000 900 DOWN  lan900 snap900 9   ETHER     Yes     119
+LinkAgg1 0x000000000000 901 DOWN  lan901 snap901 10  ETHER     Yes     119
+LinkAgg2 0x000000000000 902 DOWN  lan902 snap902 11  ETHER     Yes     119
+LinkAgg3 0x000000000000 903 DOWN  lan903 snap903 12  ETHER     Yes     119
+LinkAgg4 0x000000000000 904 DOWN  lan904 snap904 13  ETHER     Yes     119
+root@sap01:~#</code></pre></div>
+
+<p>A verbose version can be obtained with the <code>-v</code> switch, but for me this switch has a glitch since you can’t query for a single LAN card:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanscan -v
+-------------------------------------------------------------------------------
+Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
+Path     Address        In# State NamePPA        ID  Type      Support Mjr#
+0/0/0/1/0 0x001A4B07F002 0   UP    lan0 snap0     1   ETHER     Yes     119
+
+Extended Station                           LLC Encapsulation
+Address                                    Methods
+0x001A4B07F002                             IEEE HPEXTIEEE SNAP ETHER NOVELL 
+
+Driver Specific Information
+iether
+-------------------------------------------------------------------------------
+...
+root@sap01:~#</code></pre></div>
+
+<p>There are other options for <code>lanscan</code> that can be used to obtain more simple info in a script friendly list format:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanscan -a
+0x001A4B07F002
+0x001A4B07F003
+0x0018FE2D7EE7
+0x0018FE2D7EF4
+0x000CFC0046B9
+0x000CFC004672
+0x000000000000
+0x000000000000
+0x000000000000
+0x000000000000
+0x000000000000
+root@sap01:~# lanscan -i
+lan0 snap0
+lan1 snap1
+lan2 snap2
+lan3 snap3
+lan4 snap4
+lan5 snap5
+lan900 snap900
+lan901 snap901
+lan902 snap902
+lan903 snap903
+lan904 snap904
+root@sap01:~#</code></pre></div>
+
+<h3 id="lanadmin">Lanadmin</h3>
+
+<p><code>lanadmin</code> command, according to its man page, allows you to:</p>
+
+<ul>
+  <li>Display and change the station address.</li>
+  <li>Display and change the 802.5 Source Routing options (RIF).</li>
+  <li>Display and change the maximum transmission unit (MTU).</li>
+  <li>Display and change the speed setting.</li>
+  <li>Clear the network statistics registers to zero.</li>
+  <li>Display the interface statistics.</li>
+  <li>Display the interface usage information.</li>
+  <li>Reset the interface card, thus executing its self-test.</li>
+  <li>Configure VLANs on the cards that support VLAN.</li>
+</ul>
+
+<p>It can be used in two ways, if invoked with no options from the shell it will present a menu style interface where different tasks can be performed. Following is am example to illustrate.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">LOCAL AREA NETWORK ONLINE ADMINISTRATION, Version 1.0
+                       Tue , Feb 9,2010  14:22:27
+
+               Copyright 1994 Hewlett Packard Company.
+                       All rights are reserved.
+
+Test Selection mode.
+
+        lan      = LAN Interface Administration
+        menu     = Display this menu
+        quit     = Terminate the Administration
+        terse    = Do not display command menu
+        verbose  = Display command menu
+
+Enter command: lan
+
+LAN Interface test mode. LAN Interface PPA Number = 0
+
+        clear    = Clear statistics registers
+        display  = Display LAN Interface status and statistics registers
+        end      = End LAN Interface Administration, return to Test Selection
+        menu     = Display this menu
+        ppa      = PPA Number of the LAN Interface
+        quit     = Terminate the Administration, return to shell
+        reset    = Reset LAN Interface to execute its selftest
+        specific = Go to Driver specific menu
+
+Enter command: display
+
+                      LAN INTERFACE STATUS DISPLAY
+                       Tue , Feb 9,2010  14:22:31
+
+PPA Number                      = 0
+Description                     = lan0 HP PCI Core I/O 1000Base-T Release B.11.23.0712.01
+Type (value)                    = ethernet-csmacd(6)
+MTU Size                        = 1500
+Speed                           = 1000000000
+Station Address                 = 0x14c2650091
+Administration Status (value)   = up(1)
+Operation Status (value)        = up(1)
+Last Change                     = 419
+Inbound Octets                  = 120454615
+Inbound Unicast Packets         = 863761
+Inbound Non-Unicast Packets     = 4327
+Inbound Discards                = 0
+Inbound Errors                  = 0
+Inbound Unknown Protocols       = 12
+Outbound Octets                 = 145033817
+Outbound Unicast Packets        = 1285500
+Outbound Non-Unicast Packets    = 221
+Outbound Discards               = 0
+Outbound Errors                 = 0
+Outbound Queue Length           = 0
+Specific                        = 655367
+
+Press  to continue
+
+Ethernet-like Statistics Group
+
+Index                           = 1
+Alignment Errors                = 0
+FCS Errors                      = 0
+Single Collision Frames         = 0
+Multiple Collision Frames       = 0
+Deferred Transmissions          = 0
+Late Collisions                 = 0
+Excessive Collisions            = 0
+Internal MAC Transmit Errors    = 0
+Carrier Sense Errors            = 0
+Frames Too Long                 = 0
+Internal MAC Receive Errors     = 0
+
+LAN Interface test mode. LAN Interface PPA Number = 0
+
+        clear    = Clear statistics registers
+        display  = Display LAN Interface status and statistics registers
+        end      = End LAN Interface Administration, return to Test Selection
+        menu     = Display this menu
+        ppa      = PPA Number of the LAN Interface
+        quit     = Terminate the Administration, return to shell
+        reset    = Reset LAN Interface to execute its selftest
+        specific = Go to Driver specific menu
+
+Enter command:</code></pre></div>
+
+<p>When used with options from the command line <code>lanadmin</code> can perform the same tasks as as in the menu interface on each LAN card. Here are some of the most common features I’ve been using for years.</p>
+
+<ul>
+  <li>Display interface info:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanadmin -x card_info  1
+*********** Version Information **********
+Driver version: B.11.23.0712
+Firmware version: N/A
+Chip version: 0x3
+PCI Sub-System ID: 0x12a6
+PCI Sub-Vendor ID: 0x103c
+Board Revision: D4503807
+Software Key: 0
+Engineering Date Code: A-4731
+
+********** Card Setting ***********
+Driver State: IETHER_ONLINE
+Auto Negotiation: On
+Flow Control: On
+Send Max Buf Descriptors: 1
+Recv Max Buf Descriptors: 1
+Send Coalesced Ticks: 150
+Recv Coalesced Ticks: 0
+root@sap01:~#</code></pre></div>
+
+<ul>
+  <li>Display Auto-Port Aggregation status:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanadmin -x -v 900
+Link Aggregate PPA #      : 900
+Number of Ports           : 2
+Ports PPA                 : 0 1
+Link Aggregation State    : LINKAGG MANUAL
+Load Balance Mode         : Hot Standby (LB_HOT_STANDBY)
+
+root@sap01:~#</code></pre></div>
+
+<ul>
+  <li>Show speed settings:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:/# lanadmin -x 1
+Speed = 1000 Full-Duplex.
+Autonegotiation = On.
+
+root@sap01:/#</code></pre></div>
+
+<ul>
+  <li>Creating an Aggregation link:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">roo@sap01:/# lanadmin -X -a 1 2 900</code></pre></div>
+
+<ul>
+  <li>Show load balancing algorithm in APA:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap02:/etc# lanadmin -x -l 900
+Load Balancing = Hot Standby (LB_HOT_STANDBY)
+root@sap02:/etc#</code></pre></div>
+
+<ul>
+  <li>Display MAC address:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanadmin -a 1  
+Station Address                 = 0x001a4b07f003
+root@sap01:~#</code></pre></div>
+
+<ul>
+  <li>Display driver and adapter statistics:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:/# lanadmin -x stats drv 1
+****** Driver Statistics ******        
+In Packet Error                                        0
+Out Packet Error                                       0
+Loopback packets                                      44
+Link Down events                                       0
+
+****** Host Command Statistics ******  
+nicCmdsDelMCastAddr                                    0
+nicCmdsSetMACAddr                                      0
+nicCmdsSetPromiscMode                                  0
+nicCmdsSetMulticastMode                                0
+nicCmdsClearStats                                      1
+
+****** NIC Events Statistics ******    
+nicEventsFirmwareOperational                           0
+nicEventsStatsUpdated                                  0
+nicEventsLinkStateChanged                              1
+nicEventsMCastListUpdated                              0
+
+****** Interface Statistics ******     
+ifIndex                                                2
+ifType                                                 6
+ifMtu                                               1500
+ifSpeed                                       1000000000
+ifAdminStatus                                          1
+ifOperStatus                                           1
+ifLastChange                                          36
+ifInDiscards                                           0
+ifInErrors                                             0
+ifInUnknownProtos                                  87777
+ifOutDiscards                                          0
+ifOutErrors                                            0
+ifOutQLen                                              0
+ifInOctets_low                                1205643914
+ifInOctets_high                                        0
+ifInUcastPkts_low                                8695826
+ifInUcastPkts_high                                     0
+ifInMulticastPkts_low                                  0
+ifInMulticastPkts_high                                 0
+ifInBroadcastPkts_low                              87777
+ifInBroadcastPkts_high                                 0
+ifOutOctets_low                               1200310422
+ifOutOctets_high                                       0
+ifOutUcastPkts_low                               8696015
+ifOutUcastPkts_high                                    0
+ifOutMulticastPkts_low                                 0
+ifOutMulticastPkts_high                                0
+ifOutBroadcastPkts_low                                 0
+ifOutBroadcastPkts_high                                0
+root@sap01:/#</code></pre></div>
+
+<ul>
+  <li>Show Vital Product Data, a really funny name ;-) don’t you think?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:/# lanadmin -x vpd 0
+*********** Vital Product Data **********
+Product Description: PCI/PCI-X 10/100/1000BT Dual Ethernet Adapter
+Part Number: A7012-60601
+Engineering Date Code: A-4731
+Part Serial Number: 001A4B07F002
+Misc. Information: 7.5W
+Mfd. Date: 4749
+Checksum: 0xb
+EFI Version: 03048
+ROM Firmware Version: N/A
+Asset Tag: N/A
+root@sap01:/#</code></pre></div>
+
+<ul>
+  <li>Show card type:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">root@sap01:~# lanadmin -x type 1     
+1000Base-T
+
+root@sap01:~#</code></pre></div>
+
+<p>And we are finished. Probably I’m forgetting a more interesting uses of <code>lanadmin</code> if you have other everyday use please comment :-)</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/hp-ux/networking/sysadmin/playing-with-lanadmin-lanscan/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Playing with lanadmin & lanscan</strong> was published on <time datetime="2010-02-09T16:19:03+01:00">February 09, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays &#8211; Juanma's Blog</title>
+<meta name="description" content="In my previous post about EMC storage I showed a procedure to identify the ID of LUN presented to an 11iv3 host without Powerpath, which is not recommended to be installed on 11.31. I stated that I only did test the procedure with Symmetrix DMX arrays.
+
+">
+<meta name="keywords" content="11iv3, CLARiiON, EMC, HP-UX, inquiry, Storage">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays">
+<meta name="twitter:description" content="In my previous post about EMC storage I showed a procedure to identify the ID of LUN presented to an 11iv3 host without Powerpath, which is not recommended to be installed on 11.31. I stated that I only did test the procedure with Symmetrix DMX arrays.
+
+">
+<meta name="twitter:site" content="@jreypo">
+<meta name="twitter:creator" content="@jreypo">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays">
+<meta property="og:description" content="In my previous post about EMC storage I showed a procedure to identify the ID of LUN presented to an 11iv3 host without Powerpath, which is not recommended to be installed on 11.31. I stated that I only did test the procedure with Symmetrix DMX arrays.
+
+">
+<meta property="og:url" content="/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo-2.jpg" class="bio-photo" alt="Juan Manuel Rey bio photo">
+
+
+  <h3 itemprop="name">Juan Manuel Rey</h3>
+  <p>Unix Geek. Sysadmin by heart turned cloud architect for VMware.</p>
+  <a href="mailto:Juan Manuel Rey" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+JuanManuelReyPortal" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  <a href="http://linkedin.com/in/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a>
+  
+  
+  
+  <a href="http://github.com/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  <a href="http://stackoverflow.com/users/2454288/jreypo" class="author-social" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> Stackoverflow</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/" rel="bookmark" title="Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays">Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>In my previous <a href="/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3/">post</a> about EMC storage I showed a procedure to identify the ID of LUN presented to an 11iv3 host without Powerpath, which is not recommended to be installed on 11.31. I stated that I only did test the procedure with Symmetrix DMX arrays.</p>
+
+<p><strong>Jean Mesquida</strong>, a reader of this blog and a friend, tried the same procedure with <strong>CLARiiON</strong> cabinets and discovered that it didn’t work because the serial number attribute was the same for every disk. After that he performed some tests and provided a similar solution using to the EMC tool inquiry.</p>
+
+<p>The inquiry utility can be downloaded in the following URL:</p>
+
+<p><a href="ftp://ftp.emc.com/pub/symm3000/inquiry/">ftp://ftp.emc.com/pub/symm3000/inquiry/</a></p>
+
+<p>Following are his results, <strong>all credit of this post goes to him</strong> I’m just publishing his work here. I also want to thank my friend Jesus at EMC who confirmed Jean’s procedure. Many thanks to both of you, without people like you this blog wouldn’t be possible :-)</p>
+
+<p>And now the procedure:</p>
+
+<p>Launch an <code>inq</code> against the CLARiiON array.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[hpux-server]root:/ #/usr/local/bin/inq -clariion
+Inquiry utility, Version V7.3-891 (Rev 2.0)      (SIL Version V6.5.2.0 (Edit Level 891)
+Copyright (C) by EMC Corporation, all rights reserved.
+For help type inq -h.
+
+................................................................
+
+-------------------------------------------------------------------------------------------------
+DEVICE              :VEND    :PROD            :REV   :SER NUM    :CAP(kb)      :VLU :CLUN:State
+-------------------------------------------------------------------------------------------------
+...
+/dev/rdsk/c7t0d1    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   1:  2a:ASSIGNED
+/dev/rdsk/c7t0d2    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   2:  2b:ASSIGNED
+/dev/rdsk/c7t0d3    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   3:  2c:ASSIGNED
+/dev/rdsk/c7t0d4    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   4:  2d:ASSIGNED
+/dev/rdsk/c7t0d5    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   5:  2e:ASSIGNED
+/dev/rdsk/c7t0d6    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   6:  2f:ASSIGNED
+/dev/rdsk/c7t0d7    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :   419430400:   7:  30:ASSIGNED
+/dev/rdsk/c8t0d1    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   1:  2a:ASSIGNED
+/dev/rdsk/c8t0d2    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   2:  2b:ASSIGNED
+/dev/rdsk/c8t0d3    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   3:  2c:ASSIGNED
+/dev/rdsk/c8t0d4    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   4:  2d:ASSIGNED
+/dev/rdsk/c8t0d5    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   5:  2e:ASSIGNED
+/dev/rdsk/c8t0d6    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   6:  2f:ASSIGNED
+/dev/rdsk/c8t0d7    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :   419430400:   7:  30:ASSIGNED
+/dev/rdsk/c9t0d1    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   1:  2a:ASSIGNED
+/dev/rdsk/c9t0d2    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   2:  2b:ASSIGNED
+/dev/rdsk/c9t0d3    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   3:  2c:ASSIGNED
+/dev/rdsk/c9t0d4    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   4:  2d:ASSIGNED
+/dev/rdsk/c9t0d5    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   5:  2e:ASSIGNED
+/dev/rdsk/c9t0d6    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   6:  2f:ASSIGNED
+/dev/rdsk/c9t0d7    :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :   419430400:   7:  30:ASSIGNED
+/dev/rdsk/c10t0d1   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   1:  2a:ASSIGNED
+/dev/rdsk/c10t0d2   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :    83886080:   2:  2b:ASSIGNED
+/dev/rdsk/c10t0d3   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   3:  2c:ASSIGNED
+/dev/rdsk/c10t0d4   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   4:  2d:ASSIGNED
+/dev/rdsk/c10t0d5   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   5:  2e:ASSIGNED
+/dev/rdsk/c10t0d6   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   6:  2f:ASSIGNED
+/dev/rdsk/c10t0d7   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :   419430400:   7:  30:ASSIGNED
+...</code></pre></div>
+
+<p>We are going to use the last disk (<code>c10t0d7</code>). Take a look at the CLUN column, this column gives the LUN ID (<code>0x30=48</code> for instance) on the Clariion array. So is Jean’s understanding, and I fully agree with him, that <code>c10t0d7</code> disk match the 48 LUN on this CLARiiON array.</p>
+
+<p>Finally, and to be more accurate, I modified the title of the other post to reflect that is only for Symmetrix arrays.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/emc/hp-ux/storage/sysadmin/howto-identify-the-emc-lun-id-in-hp-ux-11iv3-clariion-arrays/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays</strong> was published on <time datetime="2010-06-14T09:28:54+02:00">June 14, 2010</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

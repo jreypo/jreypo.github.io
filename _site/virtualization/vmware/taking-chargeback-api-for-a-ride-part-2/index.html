@@ -1,0 +1,626 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Taking Chargeback API for a ride - Part 2 &#8211; Juanma's Blog</title>
+<meta name="description" content="In the first
+post
+of the series we discussed Chargeback API basics and how to interact
+with it using Firefox REST Client. In this second and final post we will
+see how Chargeback integrates with vCenter Orchestrator.
+
+">
+<meta name="keywords" content="API, automation, CBM, Chargeback Manager, developer, javascript, REST, vCenter Orchestrator, vCO">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Taking Chargeback API for a ride - Part 2">
+<meta name="twitter:description" content="In the first
+post
+of the series we discussed Chargeback API basics and how to interact
+with it using Firefox REST Client. In this second and final post we will
+see how Chargeback integrates with vCenter Orchestrator.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taking Chargeback API for a ride - Part 2">
+<meta property="og:description" content="In the first
+post
+of the series we discussed Chargeback API basics and how to interact
+with it using Firefox REST Client. In this second and final post we will
+see how Chargeback integrates with vCenter Orchestrator.
+
+">
+<meta property="og:url" content="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/" rel="bookmark" title="Taking Chargeback API for a ride - Part 2">Taking Chargeback API for a ride - Part 2</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>In the <a href="https://jreypo.wordpress.com/2014/04/03/taking-chargeback-api-for-a-ride-part-1/">first
+post</a>
+of the series we discussed Chargeback API basics and how to interact
+with it using Firefox REST Client. In this second and final post we will
+see how Chargeback integrates with <strong>vCenter Orchestrator</strong>.</p>
+
+<p>VMware provides a plugin for the integration between vCO and CBM,
+however there some caveats with that plugin. First it is for version 2.0
+and to be able to use it with 2.5 or above there are some changes to
+perform, the whole process is described in <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2037145">VMware KB
+203145</a>.</p>
+
+<p>Second gotcha of the plugin is that it doesn’t cover every possible API
+within Chargeback, yes you heard it correctly. To cover those parts we
+need to use the vCO plugin for REST APIs, of course this plugin needs
+some configuration before being able to interact with Chargeback but
+will see later how to do it.</p>
+
+<h4 id="add-chargeback-server-to-vcenter-orchestrator-inventory">Add Chargeback server to vCenter Orchestrator inventory</h4>
+
+<p>Open vCenter Orchestrator configuration website at
+https://vco_server:8283 and install Chargeback and REST plugins. I’m
+not going to describe the process of installing a plugin since it is
+fairly well documented in <a href="http://pubs.vmware.com/vsphere-55/index.jsp?topic=%2Fcom.vmware.vsphere.vco_install_config.doc%2FGUID-01019DF6-AF58-4E77-BD66-437907505924.html">vCO
+documentation</a>.</p>
+
+<p>Next we need to import Chargeback SSL certificate, go to <em>Network</em> and
+then to <em>SSL Trust Manager</em> tab. Enter Chargeback server URL in the
+<em>Import from URL</em> textbox and click <em>Import</em>.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image3.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb3.png" alt="image" title="image" /></a></p>
+
+<p>A screen with the details of our Chargeback server will appear, click
+<em>Import</em> to accept the certificate.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image4.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb4.png" alt="image" title="image" /></a></p>
+
+<p>Now from the <em>Chargeback (2.0.0)</em> area go to <em>New Server</em> tab, enter
+Chargeback server details and click <em>Apply Changes</em>.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image5.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb5.png" alt="image" title="image" /></a></p>
+
+<p>In vCO client our new Chargeback server will appear.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image6.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb6.png" alt="image" title="image" /></a></p>
+
+<h4 id="using-vco-plugin-for-chargeback-integration">Using vCO plugin for Chargeback Integration</h4>
+
+<p>vCenter Orchestrator plugin for Chargeback allows to perform several
+administration tasks in a Chargeback server and also cost management and
+configuration tasks. Following are several example workflows for both
+type of actions.</p>
+
+<h5 id="list-all-hierarchies">List all hierarchies</h5>
+
+<p>We are going to automate a very easy task as our first example. Create a
+new workflow and name it <em>List Hierarchies</em>. As workflow parameters add:</p>
+
+<ul>
+  <li>cbmServer – Your Chargeback server. Type
+<em>Chargeback:ChargebackServer.</em></li>
+  <li>cbmVersion – Chargeback API version, 2.0. Type <em>string</em>.</li>
+  <li>hierarchyList – The list of hierarchies- Type
+<em>Array/Chargeback:Hierarchy</em>.</li>
+</ul>
+
+<p>In the Schema tab drag an <em>Action element</em>, a new windows will pop up to
+choose the action. Search for <em>getAllHiearchies</em> and select it.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image7.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb7.png" alt="image" title="image" /></a></p>
+
+<p>Check that the workflows attributes are correctly mapped as the input
+(cbmServer and cbmVersion) and output (hierarchyList) parameters of the
+action.</p>
+
+<p>Next add a <em>Scriptable task</em> element to the workflow and edit it. Map
+hierarchyList attribute as input parameter. In the Scripting tab paste
+this code.</p>
+
+<p>https://gist.github.com/jreypo/11114725</p>
+
+<p>Validate the workflow and save it. The scheme has to look like this.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image8.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb8.png" alt="image" title="image" /></a></p>
+
+<p>In the execution go to the <em>Logs</em> sub-tab in the main <em>Scheme</em> tab to
+check the results of the execution, if everything went as expected you
+should see something similar to the screenshot.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image9.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb9.png" alt="image" title="image" /></a></p>
+
+<p>You should be thinking that this example is a bit silly, and to be
+honest it is. There are few use cases that will require to dump the
+hierarchy list to vCO log. The purpose of this workflow is to illustrate
+Chargeback plugin Action elements. Open vCO API Explorer and have a look
+at all the already implemented Actions that can be used in your
+workflows.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image10.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb10.png" alt="image" title="image" /></a></p>
+
+<p>From basic administration tasks to search and reporting. Also Chargeback
+plugin comes with a set of Scripting Classes and objects that cover all
+Chargeback objects although as I mentioned before not all available
+methods are implemented.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image11.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb11.png" alt="image" title="image" /></a></p>
+
+<p>Make a call to a method from a scripting class is relatively easy as we
+will see in the following example. We want to get a hierarchy and later
+use in a different task. We can use a method from <em>CbServer</em> class:
+<em>getHierarchyByName.</em> It accepts the hierarchy name and CBM API version
+as parameters. Basic syntax would be:</p>
+
+<p>https://gist.github.com/jreypo/11114747</p>
+
+<p>The hierarchy scripting object is now instantiated and we can get any
+property from it, like its ID.</p>
+
+<p>https://gist.github.com/jreypo/11114757</p>
+
+<h4 id="using-vco-http-rest-plugin-with-chargeback">Using vCO HTTP-REST plugin with Chargeback</h4>
+
+<p>vCenter Orchestrator has available an HTTP-REST plugin that enables it
+to interface with systems without a plugin or, like CBM case, to be able
+to execute some operations not implemented in the plugin. Current vCO
+plugin doesn’t have implemented the possibility to manage fixed costs in
+Chargeback. However using the plugin for REST APIs we can circumvent
+that shortage. But before creating any workflow we need to configure the
+REST plugin for Chargeback.</p>
+
+<h5 id="configure-rest-plugin"><strong>Configure REST plugin</strong></h5>
+
+<p>vCenter Orchestrator plugin for REST APIs comes with a set of workflows
+for configuration purposes.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image12.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb12.png" alt="image" title="image" /></a></p>
+
+<p>We need to add first our Chargeback server as REST host. Launch the <em>Add
+a REST host</em> workflow. Enter the name of the REST host and the base URL
+for the API, leave the timeout settings with the default values.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image13.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb13.png" alt="image" title="image" /></a></p>
+
+<p>In the next two steps select Basic authentication mode…</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image14.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb14.png" alt="image" title="image" /></a></p>
+
+<p>…shared session and enter Chargeback server credentials.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image15.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb15.png" alt="image" title="image" /></a></p>
+
+<p>Click submit and have a look at the workflow execution.</p>
+
+<p>If everything went fine we cam see our new REST host in vCO inventory
+under HTTP-REST. Next step is add the API operations we need to execute
+using this plugin. Or course you have to add a Login and Logout
+operation and for our example we are going to add the following ones:</p>
+
+<ul>
+  <li>Create new Hierarchy</li>
+  <li>Add new Fixed Cost</li>
+  <li>Get Task Status – We will not use this one in any of the workflows
+of the post but I decided to add it to show how to add URL
+parameters</li>
+</ul>
+
+<p>Launch <em>Add a REST operation</em> workflow and enter the following
+parameters:</p>
+
+<ul>
+  <li>Parent host – Our previously added REST host.</li>
+  <li>Name – a unique name for the operation.</li>
+  <li>Template URL – This the API signature in the case of Chargeback. The
+URL can contain placeholder for parameters to be provided during
+request phase of the operation.</li>
+  <li>HTTP Method .</li>
+  <li>Content Type – Optional parameter only for POST and PUT methods.
+Below are the screenshots and parameters for the five REST
+operations we need to add.</li>
+</ul>
+
+<p><strong>- Login:</strong></p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image16.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb16.png" alt="image" title="image" /></a></p>
+
+<p> </p>
+
+<p><strong>- Logout:</strong></p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image17.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb17.png" alt="image" title="image" /></a></p>
+
+<p><strong>- Create a new hierarchy:</strong></p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image18.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb18.png" alt="image" title="image" /></a></p>
+
+<p><strong>- Add a new Fixed Cost:</strong></p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image19.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb19.png" alt="image" title="image" /></a></p>
+
+<p><strong>- Get task status:</strong></p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image20.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb20.png" alt="image" title="image" /></a></p>
+
+<p>Look at in the inventory in vCenter Orchestrator client and check that
+all the new added operations appear under Chargeback REST host.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image21.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb21.png" alt="image" title="image" /></a></p>
+
+<p>Now we can proceed to create our workflows.</p>
+
+<h5 id="add-a-new-hierarchy-to-chargeback">Add a new Hierarchy to Chargeback</h5>
+
+<p>We are going to reproduce one the examples from <a href="https://jreypo.wordpress.com/2014/04/03/taking-chargeback-api-for-a-ride-part-1/">Part
+1</a>
+using vCO. First create a new empty workflow. As attributes we are going
+to use the following ones:</p>
+
+<ul>
+  <li>cbmVersion – Chargeback API version, 2.0.</li>
+  <li>cbmUser – User with administrative privileges in Chargeback</li>
+  <li>cbmPassword – Password of the above user</li>
+  <li>restLogin – Login REST Operation</li>
+  <li>restLogout – Logout REST Operation</li>
+  <li>restCreateHierarchy – Create hierarchy REST Operation</li>
+  <li>loginStatus – Status of the login REST Operation.</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image22.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb22.png" alt="image" title="image" /></a></p>
+
+<p>Next configure the input parameters, basically for our purposes here we
+will need the hierarchy name description.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image23.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb23.png" alt="image" title="image" /></a></p>
+
+<p>At the presentation layer the parameters will shown as <em>Name of the new
+hierarchy</em> and <em>Description for the new hierarchy</em>.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image24.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb24.png" alt="image" title="image" /></a></p>
+
+<p>Add two Scriptable tasks to the workflow, name the first as <em>API Login</em>
+and the second as <em>API Logout</em> and paste the code from the previous
+Login and Logout examples. Now add a third scriptable task to be
+executed after the login, name it as <em>“Create Hierarchy”</em> and edit it.
+Paste the below code in the <em>Scripting</em> tab.</p>
+
+<p>Edit the API Login element and in the scripting tab add the following
+Javascript code.</p>
+
+<p>https://gist.github.com/jreypo/11114778</p>
+
+<p>With this chunk of code will suffice to launch the operation, however
+there is no error control. The HTTP status code is not enough because
+the login operation can fail even with a 200 code, like the example
+below.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image25.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb25.png" alt="image" title="image" /></a></p>
+
+<p>To solve this we need to parse the response content. REST plugin
+scripting API provides a method to retrieve the content of the response
+as a string.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image26.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb26.png" alt="image" title="image" /></a></p>
+
+<p>The following code will do the trick.</p>
+
+<p>https://gist.github.com/jreypo/11114795</p>
+
+<p>Firstly we need to convert the string to and array, then we get the
+second element of the array since and look for a successful status. The
+element has <em>loginStatus</em> as output parameter bind to the attribute of
+the same name. The <em>System.log</em> statements are not required but can be
+useful for troubleshooting purposes.</p>
+
+<p>Add a <em>Decision</em> element to the workflow and bind the decision to the
+<em>loginStatus</em> parameter.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image27.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb27.png" alt="image" title="image" /></a></p>
+
+<p>Change the failure branch of the decision from <em>End workflow</em> to <em>Throw
+exception</em> and bind it to <em>loginStatus</em>. With this decision element we
+can force the workflow to end the execution if the API login operation
+was unsuccessful.</p>
+
+<p>Next edit the <em>Create hierarchy</em> element. Bind <em>restCreateHierarchy</em>,
+<em>cbmUser</em>, <em>cbmPassword</em> and <em>cbmVersion</em> attributes as input
+parameters, also bind <em>hierarchyName</em> and <em>hierarchyDescription</em> as
+input parameters.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image28.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb28.png" alt="image" title="image" /></a></p>
+
+<p>In the scripting tab paste this code.</p>
+
+<p>https://gist.github.com/jreypo/11114815</p>
+
+<p>The last part, this is the REST operation output is optional but again
+it can be useful if we need to troubleshoot the workflows using vCO
+logs.</p>
+
+<p>Our workflow is done and it should look like this.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image29.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb29.png" alt="image" title="image" /></a></p>
+
+<p>Launch it and enter a name and a description to test it.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image30.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb30.png" alt="image" title="image" /></a></p>
+
+<p>Click Submit, check the workflow logs for any errors and if everything
+went as expected go to Chargeback UI and see that the new hierarchy is
+there.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image31.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb31.png" alt="image" title="image" /></a></p>
+
+<h5 id="add-new-fixed-cost">Add new Fixed Cost</h5>
+
+<p>For our second workflow we are going the same structure as before. hence
+the first task is duplicate our first workflow and edit the copy. As
+input parameters we will use:</p>
+
+<ul>
+  <li>cbmVersion – Chargeback API version, 2.0.</li>
+  <li>cbmUser – User with administrative privileges in Chargeback</li>
+  <li>cbmPassword – Password of the above user</li>
+  <li>restLogin – Login REST Operation</li>
+  <li>restLogout – Logout REST Operation</li>
+  <li>restAddFixed Cost – Add new fixed cost REST Operation</li>
+  <li>loginStatus – Status of the login REST Operation.</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image32.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb32.png" alt="image" title="image" /></a></p>
+
+<p>Very similar to the hierarchy one. However in this case as input
+parameters we will need much more information.</p>
+
+<ul>
+  <li>fixedCostName – Fixed Cost name</li>
+  <li>fixedCostDescription – Fixed Cost Description</li>
+  <li>fixedCostCurrency – ID for the currency. A full list of the
+currencies supported by Chargeback can be found in the <a href="https://www.vmware.com/support/vcbm/doc/api_ref_2_6.zip">API
+Reference</a>.
+US Dollar is 104 and Euro 31.</li>
+  <li>isProrated – Configure the new fixed cost as prorated or not.
+Default value is true. Cannot be used with one-time fixed costs.</li>
+  <li>isPowerStateBased – Configure the fixed cost to be applied only if
+the virtual machine is powered on. It’s not mandatory, default value
+is false.</li>
+  <li>fixedCostType – Fixed cost type. A value of 0 represents a recurring
+fixed cost and 1 represents a one-time fixed cost. It’s not
+mandatory and the default value is 0.</li>
+</ul>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image33.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb33.png" alt="image" title="image" /></a></p>
+
+<p>Some of the input parameters are optional but we will use all to
+illustrate the example with all the possible details. At <em>Presentation</em>
+add a new property for the name and description to make them mandatory.
+You can also set the default values for the rest of the parameters.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image34.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb34.png" alt="image" title="image" /></a></p>
+
+<p>Change the name of the second scriptable task to <em>Add new Fixed Cost</em>
+and edit it. Bind all the needed parameters and attributes.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image35.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb35.png" alt="image" title="image" /></a></p>
+
+<p>In the XML payload we need to reflect all these parameters. Below is
+code for the scripting part.</p>
+
+<p>https://gist.github.com/jreypo/11114833</p>
+
+<p>Validate the workflow and save it. Execute it and fill in the input
+parameters.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image36.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb36.png" alt="image" title="image" /></a></p>
+
+<p>Check in the Chargeback UI our newly created Fixed Cost.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image37.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb37.png" alt="image" title="image" /></a></p>
+
+<p>We can also have a look at the API response in the workflow logs.</p>
+
+<p><a href="https://jreypo.files.wordpress.com/2014/04/image38.png"><img src="%7B%7B%20site.baseurl%20%7D%7D/assets/image_thumb38.png" alt="image" title="image" /></a></p>
+
+<p>And we are done. This is the end of this two-post series and I hope that
+know you all have a better understanding of Chargeback API. As your next
+step my advice is to try to automate simple API tasks, even if they
+don’t seem to be very useful, and then combine thme into  more complex
+automation workflows along with vCenter and vCloud Director plugins.</p>
+
+<p>In future posts I’ll show a couple of real world examples about how I
+have used CBM and REST plugins in some customer deployments.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/virtualization/vmware/taking-chargeback-api-for-a-ride-part-2/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Taking Chargeback API for a ride - Part 2</strong> was published on <time datetime="2014-04-14T01:53:18+02:00">April 14, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

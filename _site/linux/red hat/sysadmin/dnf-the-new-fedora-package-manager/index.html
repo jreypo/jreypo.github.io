@@ -1,0 +1,370 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>DNF, the new Fedora package manager &#8211; Juanma's Blog</title>
+<meta name="description" content="Fedora 22 was released a few months ago
+and amongst many new features it came with a replacement for yum as
+package manager called dnf, or DaNdiFied YUM, oh yes yum is still
+around but it is now considered legacy software. Also DNF will become in
+the near future the default package manager for RHEL and CentOS so it is
+for the best that you get familiarized with it sooner than later.
+
+">
+<meta name="keywords" content="dnf, Fedora, Fedora 22, Linux, Photon, sysadmin, tdnf, yum">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="DNF, the new Fedora package manager">
+<meta name="twitter:description" content="Fedora 22 was released a few months ago
+and amongst many new features it came with a replacement for yum as
+package manager called dnf, or DaNdiFied YUM, oh yes yum is still
+around but it is now considered legacy software. Also DNF will become in
+the near future the default package manager for RHEL and CentOS so it is
+for the best that you get familiarized with it sooner than later.
+
+">
+<meta name="twitter:site" content="@jreypo">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNF, the new Fedora package manager">
+<meta property="og:description" content="Fedora 22 was released a few months ago
+and amongst many new features it came with a replacement for yum as
+package manager called dnf, or DaNdiFied YUM, oh yes yum is still
+around but it is now considered legacy software. Also DNF will become in
+the near future the default package manager for RHEL and CentOS so it is
+for the best that you get familiarized with it sooner than later.
+
+">
+<meta property="og:url" content="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/">
+<meta property="og:site_name" content="Juanma's Blog">
+
+<meta property="og:image" content="/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Juanma's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">Juanma's Blog</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >Posts</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/vmware-hp-links/" >HP Resources for VMware</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/tags/" >Tags</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" rel="bookmark" title="DNF, the new Fedora package manager">DNF, the new Fedora package manager</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><strong><a href="https://getfedora.org/">Fedora 22</a></strong> was released a few months ago
+and amongst many new features it came with a replacement for <code>yum</code> as
+package manager called <code>dnf</code>, or DaNdiFied YUM, oh yes <code>yum</code> is still
+around but it is now considered legacy software. Also DNF will become in
+the near future the default package manager for RHEL and CentOS so it is
+for the best that you get familiarized with it sooner than later.</p>
+
+<h3 id="dnf-commands">DNF Commands</h3>
+
+<p>The first thing you need to understand about <code>dnf</code> is that many commands
+are basically still the same but there are differences. Package
+management commands can be executed with almost the same syntax
+previously used with <code>yum</code>.</p>
+
+<p>Search for a package.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf search htop
+Last metadata expiration check performed 1:25:54 ago on Mon Oct 5 23:47:45 2015.
+=================================== N/S Matched: htop ====================================
+htop.x86_64 : Interactive process viewer
+php-lightopenid.noarch : PHP OpenID library
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p>Install a package.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf install htop</code></pre></div>
+
+<p>Remove a package.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf remove htop</code></pre></div>
+
+<p>Get information about a package</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf info htop
+Last metadata expiration check performed 1:47:13 ago on Mon Oct 5 23:47:45 2015.
+Available Packages
+Name : htop
+Arch : x86_64
+Epoch : 0
+Version : 1.0.3
+Release : 4.fc22
+Size : 91 k
+Repo : fedora
+Summary : Interactive process viewer
+URL : http://hisham.hm/htop/
+License : GPL+
+Description : htop is an interactive text-mode process viewer for Linux, similar to
+ : top(1).
+
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p>Group and repository management commands are still the same as well.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf repolist</code></pre></div>
+
+<p>Querying the available repositories for a specific command.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf repoquery --whatprovides htop
+Last metadata expiration check performed 1:54:52 ago on Mon Oct 5 23:47:45 2015.
+htop-0:1.0.3-4.fc22.x86_64
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p><code>dnf</code> comes with some powerful capabilities like history query.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf history list
+Last metadata expiration check performed 11 days, 19:14:54 ago on Wed Oct 7 02:56:21 2015.
+ID | Command line             | Date a           | Action  | Altere
+-------------------------------------------------------------------------------
+ 9 | history undo 8           | 2015-10-06 01:53 | Install | 1
+ 8 | erase htop               | 2015-10-06 01:28 | Erase   | 1
+ 7 | install htop -y          | 2015-10-06 01:28 | Install | 1
+ 6 | remove htop              | 2015-10-06 01:14 | Erase   | 1
+ 5 | install htop             | 2015-10-06 01:14 | Install | 1
+ 4 | install make gcc kernel- | 2015-09-30 16:21 | Install | 9
+ 3 | update                   | 2015-09-30 15:43 | I, U    | 112
+ 2 | update                   | 2015-09-16 11:45 | I, O, U | 297
+ 1 |                          | 2015-09-16 10:59 | Install | 658 EE
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p>This can be specially helpful if you need to rollback a change, like
+clean up dependencies after uninstalling a package or reinstall a
+package.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo history undo 8</code></pre></div>
+
+<p>You can also look for duplicated within the installed ones.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf repoquery --duplicated
+Last metadata expiration check performed 0:30:42 ago on Tue Oct 6 02:48:41 2015.
+kernel-core-0:4.0.4-301.fc22.x86_64
+kernel-core-0:4.1.6-201.fc22.x86_64
+kernel-core-0:4.1.7-200.fc22.x86_64
+kernel-modules-0:4.0.4-301.fc22.x86_64
+kernel-modules-0:4.1.6-201.fc22.x86_64
+kernel-modules-0:4.1.7-200.fc22.x86_64
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p>Retrieve all available packages providing a specific software of
+capability.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[jrey@fed22-srv ~]$ sudo dnf repoquery --whatprovides curl
+Last metadata expiration check performed 0:38:00 ago on Tue Oct 6 02:48:41 2015.
+curl-0:7.40.0-3.fc22.x86_64
+curl-0:7.40.0-7.fc22.x86_64
+[jrey@fed22-srv ~]$</code></pre></div>
+
+<p>This is a very basic introduction to <code>dnf</code> capabilities but hopefully
+you have been able to get how it works. My advice is to review <a href="http://dnf.readthedocs.org/en/latest/index.html">DNF
+documentation</a> for all
+the details.</p>
+
+<h3 id="the-photon-connection">The Photon Connection</h3>
+
+<p><a href="https://vmware.github.io/photon/"><strong>VMware Photon</strong></a> comes with <code>tdnf</code>
+(Tiny DNF); this is a development by VMware that comes with compatible
+repository and package management capabilites. Not every <code>dnf</code> command
+is available but the basic ones are there.
+<br />
+<br />
+Package installation and updates.
+<br />
+<br />
+<img src="&quot;/assets/screen-shot-2015-10-11-at-19-41-00.png?w=580&quot;" alt="Package install with tdnf" />
+<br />
+<br />
+Repository management.
+<br />
+<br />
+<img src="/assets/screen-shot-2015-10-11-at-18-54-47.png" alt="Repository management with tdnf" /></p>
+
+<p>In the future if I find the time I’ll write a new post with some advanced examples of <code>dnf</code> commands. Comments are welcome.</p>
+
+<p>Juanma.</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/linux/red%20hat/sysadmin/dnf-the-new-fedora-package-manager/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>DNF, the new Fedora package manager</strong> was published on <time datetime="2015-10-11T19:05:31+02:00">October 11, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/openstack/vmware/upgrading-vmware-integrated-openstack/" title="Upgrading VMware Integrated OpenStack">Upgrading VMware Integrated OpenStack</a></li>
+    
+      <li><a href="/cloud/openstack/give-me-openstack-and-give-me-liberty/" title="Give me OpenStack and give me Liberty!">Give me OpenStack and give me Liberty!</a></li>
+    
+      <li><a href="/cloud-native/devops/pivotal/first-steps-with-pivotal-lattice/" title="First steps with Pivotal Lattice">First steps with Pivotal Lattice</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Juan Manuel Rey. <br> Hosted on <a href="https://pages.github.com" rel="nofollow" target="_blank">GitHub Pages</a> and powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>
