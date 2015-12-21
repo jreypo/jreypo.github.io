@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-12-21T22:31:45+01:00</updated>
+<updated>2015-12-21T23:32:00+01:00</updated>
 <id>/</id>
 <author>
   <name>Juan Manuel Rey</name>
@@ -19,8 +19,8 @@
   <title type="html"><![CDATA[Add iSCSI volumes from HP P4000 VSA to VMware ESXi4]]></title>
   <link rel="alternate" type="text/html" href="/storage/sysadmin/virtualization/vmware/add-iscsi-volumes-from-hp-p4000-vsa-to-vmware-esxi4/" />
   <id>/storage/sysadmin/virtualization/vmware/add-iscsi-volumes-from-hp-p4000-vsa-to-vmware-esxi4</id>
-  <published>2010-04-17T00:17:51+02:00</published>
-  <updated>2010-04-17T00:17:51+02:00</updated>
+  <published>2010-04-17T00:00:00+02:00</published>
+  <updated>2010-04-17T00:00:00+02:00</updated>
   <author>
     <name>Juan Manuel Rey</name>
     <uri></uri>
@@ -83,7 +83,7 @@
 
 &lt;p&gt;&lt;a href=&quot;/images/iscsi_soft_adapter.png&quot;&gt;&lt;img src=&quot;/images/iscsi_soft_adapter.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Click on properties and on the &lt;em&gt;General&lt;/em&gt; tab click the &lt;strong&gt;Configure&lt;/strong&gt; button and check the &lt;strong&gt;Enabled&lt;/strong&gt; status box.&lt;/p&gt;
+&lt;p&gt;Click on properties and on the &lt;strong&gt;General&lt;/strong&gt; tab click the &lt;strong&gt;Configure&lt;/strong&gt; button and check the &lt;strong&gt;Enabled&lt;/strong&gt; status box.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/images/enable_iscsi.png&quot;&gt;&lt;img src=&quot;/images/enable_iscsi.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -136,8 +136,8 @@
   <title type="html"><![CDATA[First hands-on with the HP Lefthand P4000 VSA]]></title>
   <link rel="alternate" type="text/html" href="/storage/virtualization/first-hands-on-with-the-hp-lefthand-p4000-vsa/" />
   <id>/storage/virtualization/first-hands-on-with-the-hp-lefthand-p4000-vsa</id>
-  <published>2010-04-09T00:41:25+02:00</published>
-  <updated>2010-04-09T00:41:25+02:00</updated>
+  <published>2010-04-09T00:00:00+02:00</published>
+  <updated>2010-04-09T00:00:00+02:00</updated>
   <author>
     <name>Juan Manuel Rey</name>
     <uri></uri>

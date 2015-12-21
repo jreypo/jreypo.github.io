@@ -2,11 +2,11 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>/storage/sysadmin/virtualization/vmware/add-iscsi-volumes-from-hp-p4000-vsa-to-vmware-esxi4/</loc>
-    <lastmod>2010-04-17T00:17:51+02:00</lastmod>
+    <lastmod>2010-04-17T00:00:00+02:00</lastmod>
   </url>
   <url>
     <loc>/storage/virtualization/first-hands-on-with-the-hp-lefthand-p4000-vsa/</loc>
-    <lastmod>2010-04-09T00:41:25+02:00</lastmod>
+    <lastmod>2010-04-09T00:00:00+02:00</lastmod>
   </url>
   <url>
     <loc>/hp-ux/new-hp-ux-release-new-hpvm-new-features-same-odd-naming-convention/</loc>

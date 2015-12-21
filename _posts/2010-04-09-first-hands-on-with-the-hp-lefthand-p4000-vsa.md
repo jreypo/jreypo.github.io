@@ -1,7 +1,7 @@
 ---
 layout: post
 title: First hands-on with the HP Lefthand P4000 VSA
-date: 2010-04-09 00:41:25.000000000 +02:00
+date: 2010-04-09
 type: post
 published: true
 status: publish
