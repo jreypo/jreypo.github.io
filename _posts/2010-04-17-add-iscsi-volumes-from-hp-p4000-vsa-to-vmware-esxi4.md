@@ -26,7 +26,7 @@ In today's post I will try to explain step by step how to add an iSCSI volume fr
 
 ### Step One: Create a volume
 
-Lets suppose we already have a configured storage appliance, I showed how to create a cluster in my  so I will not repeat that part here. Open the Centralized Management Console and go to **Management Group -> Cluster -> Volumes and Snapshots**.
+Lets suppose we already have a configured storage appliance, I showed how to create a cluster in my [previous post]({{site.url}}{% post_url 2010-04-09-first-hands-on-with-the-hp-lefthand-p4000-vsa %}) so I will not repeat that part here. Open the Centralized Management Console and go to **Management Group -> Cluster -> Volumes and Snapshots**.
 
 [![](/images/volumes_snapshots.png)]({{site.url}}/images/volumes_snapshots.png)
 
