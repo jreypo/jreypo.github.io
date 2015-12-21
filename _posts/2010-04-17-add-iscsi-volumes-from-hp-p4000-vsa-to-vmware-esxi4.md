@@ -19,7 +19,6 @@ tags:
 - systems administration
 - VMware
 - vSphere
-meta:
 author: juan_manuel_rey
 ---
 
