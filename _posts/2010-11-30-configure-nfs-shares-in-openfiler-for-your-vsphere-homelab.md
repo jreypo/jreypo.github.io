@@ -67,7 +67,7 @@ Finally click on **Add Volume**. In this section you will have to choose the new
 
 The first is obviously intended for iSCSI volume and the other two for NFS, the criteria to follow here is the scalability since esxt3 supports up to 8TB and XFS up to 10TB.
 
-[![](/images/volume-creation.png "Logical Volume creation")]({{site.url}}/11/volume-creation.png)
+[![](/images/volume-creation.png "Logical Volume creation")]({{site.url}}/images/volume-creation.png)
 
 Click **Create** and the new volume will be created.
 
@@ -122,7 +122,7 @@ As usually from the vSphere Client go to **Configuration -> Storage -> Add stora
 
 In the pop-up window choose **Network File System**.
 
-[![](/images/add_nfs_1.png)]({{site.url}}/11/add_nfs_1.png)
+[![](/images/add_nfs_1.png)]({{site.url}}/images/add_nfs_1.png)
 
 Enter in the **Server**, **Folder** and **Datastore Name** label.
 
