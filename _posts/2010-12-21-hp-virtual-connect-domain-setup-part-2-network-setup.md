@@ -50,7 +50,7 @@ The first screen of the wizard is the MAC Address Settings. As every server in t
 
 Virtual Connect access the NICs through the Onboard Administrator and the server iLO to manage the MAC addresses. It provides 64 predefined and reserved MAC address ranges. The wizard will give you the option to use either an HP predefined range or an user defined one. HP recommends to use the predefined ranges.
 
-[![](/images/network_wizard_2.png)]({{site.url}}/12/network_wizard_2.png)
+[![](/images/network_wizard_2.png)]({{site.url}}/images/network_wizard_2.png)
 
 Once you have chosen the address range and click next the wizard will ask for confirmation before continue.
 
@@ -59,7 +59,7 @@ The next screen is **Server VLAN Tagging Support**. Here the wizard gives you tw
 -   Tunnel VLAN Tags
 -   Map VLAN Tags
 
-[![](/images/network_wizard_3.png)]({{site.url}}/2010/12/network_wizard_3.png)
+[![](/images/network_wizard_3.png)]({{site.url}}/2010/images/network_wizard_3.png)
 
 The first one, **Tunnel VLAN Tags**, supports only VLAN tagging on networks with dedicated uplinks where all VLAN tags passed through the VC Domain without modification and ports connected to networks using shared uplinks can only send and receive untagged frames.
 
@@ -76,7 +76,7 @@ In our example we're not going to check neither of them . Click next to move int
 
 Choose the network type you want to define and click next. I choose **Connection with uplink(s) dedicated to a single network**.
 
-[![](/images/network_wizard_4.png)]({{site.url}}/12/network_wizard_4.png)
+[![](/images/network_wizard_4.png)]({{site.url}}/images/network_wizard_4.png)
 
 The **Define Single Network** window shows up. First define the network name (prod_net_01 in my example). There are three configurable values.
 
