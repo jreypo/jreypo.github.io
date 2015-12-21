@@ -93,7 +93,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  jekyll 
+  jekyll (= 2.5.3)
   jekyll-redirect-from
   jekyll-sitemap
   octopress (~> 3.0)
