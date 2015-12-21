@@ -1,4 +1,4 @@
-# Juanma's Blog
+## Juanma's Blog [![Build Status](https://travis-ci.org/jreypo/jreypo.github.io.svg?branch=master)](https://travis-ci.org/jreypo/jreypo.github.io)
 
 My personal blog, formerly located at [http://jreypo.wordpress.com](http://jreypo.wordpress.com). Using theme **[Minimal Mistakes](http://mmistakes.github.io/minimal-mistakes)** by Michael Rose.
 
