@@ -60,7 +60,7 @@ The next screen is **Server VLAN Tagging Support**. Here the wizard gives you tw
 -   Tunnel VLAN Tags
 -   Map VLAN Tags
 
-[![](/images/network_wizard_3.png)]({{site.url}}/2010/images/network_wizard_3.png)
+[![](/images/network_wizard_3.png)]({{site.url}}/images/network_wizard_3.png)
 
 The first one, **Tunnel VLAN Tags**, supports only VLAN tagging on networks with dedicated uplinks where all VLAN tags passed through the VC Domain without modification and ports connected to networks using shared uplinks can only send and receive untagged frames.
 
