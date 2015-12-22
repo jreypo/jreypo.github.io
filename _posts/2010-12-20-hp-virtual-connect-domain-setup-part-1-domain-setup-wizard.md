@@ -69,7 +69,7 @@ After finishing the import the wizard will go the **General Settings** part. The
 
 Next step is to configure the local user accounts.
 
-[![](/images/domain_wizard_6.png)]({{site.url}}/2010/images/domain_wizard_6.png)
+[![](/images/domain_wizard_6.png)]({{site.url}}/images/domain_wizard_6.png)
 
 By default the only local account is Administrator, this account cannot be deleted nor have domain privileges removed. You can also add up to 32 accounts with a combination of up to four levels of access. The available levels are:
 
