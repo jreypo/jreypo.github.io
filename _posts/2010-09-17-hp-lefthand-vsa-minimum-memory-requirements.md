@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HP Lefthand VSA minimum memory requirements
-date: 2010-09-17 11:43:36.000000000 +02:00
+date: 2010-09-17
 type: post
 published: true
 status: publish
