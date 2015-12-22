@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HP-UX security resources
-date: 2009-12-10 14:04:04.000000000 +01:00
+date: 2009-12-10
 type: post
 published: true
 status: publish
@@ -12,6 +12,7 @@ tags:
 - HP-UX
 - Security
 author: juan_manuel_rey
+comments: true
 ---
 
 Recently a friend asked me about HP-UX security and where to find useful information. We have to admit it, there are not many resources out there about HP-UX security and the great majority of them are obsolete since they are about HP-UX 10.20 or even 9.x. Let's take a look...

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ioscan_fc2.sh
-date: 2009-12-09 09:29:05.000000000 +01:00
+date: 2009-12-09
 type: post
 published: true
 status: publish
@@ -11,6 +11,7 @@ tags:
 - HP-UX
 - scripts
 author: juan_manuel_rey
+comments: true
 ---
 
 My first post is about one small, but great, piece of software I found some time ago in Olivier's site [mayoxide](http://www.mayoxide.com/). This script is named `ioscan_fc2.sh` and you can find it in the software/toolbox area.

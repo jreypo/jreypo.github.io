@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hello world!
-date: 2009-12-07 11:35:52.000000000 +01:00
+date: 2009-12-07
 type: post
 published: true
 status: publish
@@ -10,6 +10,7 @@ categories:
 - Personal
 tags: []
 author: juan_manuel_rey
+comments: true
 ---
 
 OK, this it. Finally I manage to get some time to start my technical blog.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Installing a new client with Ignite
-date: 2009-12-09 13:50:46.000000000 +01:00
+date: 2009-12-09
 type: post
 published: true
 status: publish
@@ -12,6 +12,7 @@ tags:
 - Ignite
 - nPartitions
 author: juan_manuel_rey
+comments: true
 ---
 
 Along my career as HP-UX administrator one of the most useful tools has been **Ignite-UX**. This is, IMHO, the most powerful backup/recovery/deployment tool above any other currently present in the Unix OS family (Solaris JumpStart, RH Kickstart, AIX NIM...).

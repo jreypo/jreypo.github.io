@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hardening dilemma
-date: 2009-12-14 14:28:11.000000000 +01:00
+date: 2009-12-14
 type: post
 published: true
 status: publish
@@ -12,6 +12,7 @@ tags:
 - HP-UX
 - Security
 author: juan_manuel_rey
+comments: true
 ---
 
 When you have to secure a system you probably have come to the dilemma 'Which method is the best? Bastille or manual hardening?' at least I did it.
