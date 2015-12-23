@@ -26,7 +26,7 @@ Installing an ESXi server, or any other operative system, using the [c-Class Bl
 
 From the OA main screen go to Device Bays and select the blade server where you want to install the ESXi on, from there enter the iLO section.
 
-[![](/images/device_bay1.png "Device Bay selection")]({{site.url}}/05/device_bay1.png)
+[![](/images/device_bay1.png "Device Bay selection")]({{site.url}}/images/device_bay1.png)
 
 In the iLO area of the server launch a console applet; as you can see in the below screenshot there are several options, choose the one the better suits your environment.
 
@@ -34,7 +34,7 @@ In the iLO area of the server launch a console applet; as you can see in the bel
 
 I personally choose **Remote Console**. When the console is up you'll see a menu, open the Virtual Drives menu. Here you can map a physical drive from your PC/Laptop, an USB Key or an ISO image.
 
-[![](/images/virtual_device.png "Virtual Devices")]({{site.url}}/05/virtual_device.png)
+[![](/images/virtual_device.png "Virtual Devices")]({{site.url}}/images/virtual_device.png)
 
 With the media mapped to the blade server reset the server from the Power Switch menu and launch the ESXi installation like in any other server. By default it boot from the DVD if not from the boot screen press F11 to launch the Boot Menu.
 
