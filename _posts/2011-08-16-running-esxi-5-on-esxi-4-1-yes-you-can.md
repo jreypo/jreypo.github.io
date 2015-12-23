@@ -26,7 +26,7 @@ I used **Eric Gray's** ([@eric\_gray](http://twitter.com/#!/eric_gray)) procedur
 
 Here they are running on top of my whitebox, which is running ESXi 4.1 Update 1, the left one (esxi5) is created as RHEL6 and the right one (esxi5-02) RHEL5.
 
-[![](/images/esxi5.png "ESXi5")]({{site.url}}/08/esxi5.png)
+[![](/images/esxi5.png "ESXi5")]({{site.url}}/images/esxi5.png)
 
 I added also the `monitor_control.restrict_backdoor` option but have not try yet to run nested VMs. I'll do later and will update the post with the results.
 
