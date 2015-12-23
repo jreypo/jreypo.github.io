@@ -52,7 +52,7 @@ And how manages Virtual Connect all this port stuff? I believe that an image is 
 
 As it can be seen the SAN switches, like the [Cisco MDS 9124e](http://h18000.www1.hp.com/storage/saninfrastructure/switches/mds9124e/index.html), that can be used in any blade enclosure including the HP ones are part of the SAN Fabric, that means the enclosure itself is part of the Fabric. These switches are connected to the SAN Core via E_ports or ISL.
 
-[![](/images/hp-vc-fc.png "SAN config with VC")]({site.url}/images/hp-vc-fc.png)
+[![](/images/hp-vc-fc.png "SAN config with VC")]({{site.url}}/images/hp-vc-fc.png)
 
 In this configuration the SAN boundary has been moved out of the enclosure. The VC-FC module includes an HBA Aggregator which is an NPIV device. It passes, transparently, the signals from multiple HBAs to a single switch port.
 
@@ -73,7 +73,7 @@ We are going to use the **Fibre Channel Setup Wizard** to:
 -   Identify the World Wide Names (WWNs) to be used by the servers.
 -   Define the available SAN fabrics.
 
-You can launch the wizard either from the Tools menu in the Virtua Connect page or right after finishing the **Network Setup Wizard**. From the welcome screen click Next and move into the **World Wide Name (WWN) Settings** page.
+You can launch the wizard either from the Tools menu in the Virtual Connect page or right after finishing the **Network Setup Wizard**. From the welcome screen click Next and move into the **World Wide Name (WWN) Settings** page.
 
 In this first page you can specify if you want to use the WWN settings that comes with the Fiber Channel HBA card or if the HP Virtual Connect supplied WWN settings.
 
