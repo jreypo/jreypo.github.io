@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Playing with lanadmin & lanscan
-date: 2010-02-09 16:19:03.000000000 +01:00
+date: 2010-02-09
 type: post
 published: true
 status: publish
@@ -21,6 +21,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Current release of HP-UX, 11.31, has the handy `nwmgr` to handle networking tasks, but for years instead of `nwmgr` we've been playing with `lanscan` and `lanadmin`, `linkloop` as well, to perform many networking tasks on the 11.23 release and previous ones. And surely some of you, just like myself, still have 11iv2 systems up and running. Following is a small list of tips and tasks for `lanadmin` from one of my *how-to* files.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HP-UX 10.20, still around :-)
-date: 2010-02-05 14:02:26.000000000 +01:00
+date: 2010-02-05
 type: post
 published: true
 status: publish
@@ -15,6 +15,7 @@ tags:
 - HP9000
 - PA-RISC
 author: juan_manuel_rey
+comments: true
 ---
 
 Ten years or so ago the first HP-UX I worked with was a 10.20, it was an old D230 HP9000 server.

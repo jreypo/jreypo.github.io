@@ -1,7 +1,7 @@
 ---
 layout: post
 title: UNIX95 and ps command
-date: 2010-02-01 12:09:05.000000000 +01:00
+date: 2010-02-01
 type: post
 published: true
 status: publish
@@ -15,6 +15,7 @@ tags:
 - systems administration
 - Unix
 author: juan_manuel_rey
+comments: true
 ---
 
 **UNIX95** is a Unix standard defined in the [Single UNIX Specification](http://www.unix.org/what_is_unix/single_unix_specification.html). HP-UX 11i is registered as UNIX95 compliant in its v1 and v2 versions and as UNIX03 (a more modern version) the v3.

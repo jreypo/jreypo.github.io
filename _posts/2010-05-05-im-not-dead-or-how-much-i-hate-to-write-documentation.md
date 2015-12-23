@@ -10,6 +10,7 @@ categories:
 tags: []
 meta:
 author: juan_manuel_rey
+comments: true
 ---
 
 Hi everybody! No you aren't lucky, I'm not dead yet ;-). It's only tha I've been very busy these weeks, my current project is almost finished and there is a lot of stuff to deliver to the customer. This part also reminds me that, even knowing that is an essential part of any project, I hate to write documentation with all my heart.

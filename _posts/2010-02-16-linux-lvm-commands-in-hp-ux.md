@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux LVM commands in HP-UX
-date: 2010-02-16 16:07:04.000000000 +01:00
+date: 2010-02-16
 type: post
 published: true
 status: publish
@@ -19,6 +19,7 @@ tags:
 - scripts
 - vgs
 author: juan_manuel_rey
+comments: true
 ---
 
 Some of the features I always liked about the Linux LVM2 implementation are the `lvs`, `vgs` and `pvs` commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.

@@ -16,6 +16,7 @@ tags:
 - VMware Workstation
 - vSphere
 author: juan_manuel_rey
+comments: true
 ---
 
 The **P400 Virtual Storage Appliance** is a storage product from HP, its features include:

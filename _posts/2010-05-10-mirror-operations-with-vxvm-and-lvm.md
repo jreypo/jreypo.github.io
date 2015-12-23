@@ -16,6 +16,7 @@ tags:
 - systems administration
 - VxVM
 author: juan_manuel_rey
+comments: true
 ---
 
 In today post I will show how to create and brake a mirrored volume in **Veritas Volume Manager** and **Logical Volume Manager**.

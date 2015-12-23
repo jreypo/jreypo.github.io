@@ -1,7 +1,7 @@
 ---
 layout: post
 title: OpenVZ in CentOS 5.4
-date: 2010-04-04 23:24:13.000000000 +02:00
+date: 2010-04-04
 type: post
 published: true
 status: publish
@@ -16,6 +16,7 @@ tags:
 - vzctl
 - vzlist
 author: juan_manuel_rey
+comments: true
 ---
 
 First something I completely forgot in my first post. I discovered OpenVZ thanks to [Vivek Gite's](http://vivekgite.com/) great site [nixCraft](http://www.cyberciti.biz/). This post and the previous one are inspired by his nice series of posts about OpenVZ. Now the show can begin :-)

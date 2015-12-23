@@ -20,6 +20,7 @@ tags:
 - VMware
 - vSphere
 author: juan_manuel_rey
+comments: true
 ---
 
 In today's post I will try to explain step by step how to add an iSCSI volume from the HP Lefthand P4000 VSA to a VMware ESXi4 server.

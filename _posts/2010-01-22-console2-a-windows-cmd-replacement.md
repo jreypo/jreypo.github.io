@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Console2, a Windows CMD replacement
-date: 2010-01-22 13:07:20.000000000 +01:00
+date: 2010-01-22
 type: post
 published: true
 status: publish
@@ -10,6 +10,7 @@ categories:
 tags:
 - Windows
 author: juan_manuel_rey
+comments: true
 ---
 
 May be you already know it or may be not, but [Console2](http://unixsadm.blogspot.com/ "Console2") is one of those pieces of software that when you discover it you ask yourself "How was my life before we meet dear?"

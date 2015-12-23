@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Configuring APA
-date: 2010-01-11 17:08:47.000000000 +01:00
+date: 2010-01-11
 type: post
 published: true
 status: publish
@@ -18,6 +18,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Long time since my last post, Christmas you know ;-) BTW Merry Christmas and Happy New Year to all of you.

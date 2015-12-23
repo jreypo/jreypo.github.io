@@ -1,7 +1,7 @@
 ---
 layout: post
 title: BSD, don't you love it?
-date: 2010-01-27 11:03:41.000000000 +01:00
+date: 2010-01-27
 type: post
 published: true
 status: publish
@@ -15,6 +15,7 @@ tags:
 - OpenBSD
 - VirtualBox
 author: juan_manuel_rey
+comments: true
 ---
 
 Because a picture is worth a thousand words.

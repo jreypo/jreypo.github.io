@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cloning HPVM guests
-date: 2010-03-09 19:17:57.000000000 +01:00
+date: 2010-03-09
 type: post
 published: true
 status: publish
@@ -20,6 +20,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Our next step in the wonderful HPVM World is... cloning virtual machines.

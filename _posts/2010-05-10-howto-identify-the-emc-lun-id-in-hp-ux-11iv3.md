@@ -21,6 +21,7 @@ tags:
 - Storage
 - Symmetrix
 author: juan_manuel_rey
+comments: true
 ---
 
 **DISCLAIMER NOTE:** This method is based only on my personal experience working with HP-UX 11iv2, 11iv3 and EMC Symmetrix. I tested it with near a hundred LUNs from a DMX-3 and with six different servers. As far as I know this isn't an official or supported procedure neither from EMC nor from HP.

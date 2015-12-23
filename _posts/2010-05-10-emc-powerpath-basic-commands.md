@@ -19,6 +19,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 PowerPath is a multipathing software for Unix operating systems from EMC. If you have ever worked or you are going to work in an environment that includes EMC storage systems it is more than sure that PowerPath will be installed in the Unix hosts.

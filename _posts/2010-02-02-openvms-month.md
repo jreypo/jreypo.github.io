@@ -1,7 +1,7 @@
 ---
 layout: post
 title: OpenVMS Month!
-date: 2010-02-02 15:36:34.000000000 +01:00
+date: 2010-02-02
 type: post
 published: true
 status: publish
@@ -16,6 +16,7 @@ tags:
 - Itanium
 - OpenVMS
 author: juan_manuel_rey
+comments: true
 ---
 
 February is the **OpenVMS Month**. The people of [**VMSblog**](http://ccsscorp.com/VMSblog/index.php) have launched a "[Call for Participation in the OpenVMS Month](http://ccsscorp.com/VMSblog/index.php?entry=entry100131-204918.)", the event is sponsored by [Connect](http://www.connect-community.org/) and there will be presentations, webinars.  These are great news for me, I like OpenVMS since the very first time I worked with it more than a decade ago. It is robust, reliable and secure.

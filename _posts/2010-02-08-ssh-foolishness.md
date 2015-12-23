@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SSH foolishness
-date: 2010-02-08 16:25:30.000000000 +01:00
+date: 2010-02-08
 type: post
 published: true
 status: publish
@@ -16,6 +16,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Today it's been one of those days that you wish to hide very deep under your desk.

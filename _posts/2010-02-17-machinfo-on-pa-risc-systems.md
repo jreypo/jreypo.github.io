@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Machinfo on PA-RISC systems
-date: 2010-02-17 11:39:36.000000000 +01:00
+date: 2010-02-17
 type: post
 published: true
 status: publish
@@ -16,6 +16,7 @@ tags:
 - machinfo
 - PA-RISC
 author: juan_manuel_rey
+comments: true
 ---
 
 When the HP-UX Itanium version was released  it came with a very handy tool named [`machinfo`](http://docs.hp.com/en/B2355-60130/machinfo.1.html "Machinfo MAN page"). This command prints number and type of CPUs, amount of memory, firmware revision, serial number, machine id and many more useful information about the server. Sadly on PA-RISC we didn't have something similar, of course there is [`print_manifest`](http://www.docs.hp.com/en/5992-6587/5992-6587.pdf "Ignite-UX Reference") and I have to say that it's quite a tool but I always loved the simplicity of `machinfo`.

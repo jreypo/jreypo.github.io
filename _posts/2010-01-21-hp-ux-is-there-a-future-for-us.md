@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HP-UX.. Is there a future for us?
-date: 2010-01-21 14:07:21.000000000 +01:00
+date: 2010-01-21
 type: post
 published: true
 status: publish
@@ -15,6 +15,7 @@ tags:
 - Itanium
 - Opinion
 author: juan_manuel_rey
+comments: true
 ---
 
 Is there a future for HP-UX sysadmins? Is our beloved OS going to die like others did? For example True64 just to name one.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Moving vNICs between vSwitches
-date: 2010-03-03 14:40:37.000000000 +01:00
+date: 2010-03-03
 type: post
 published: true
 status: publish
@@ -19,6 +19,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Following with my re-learning HPVM process today I've been playing around with my virtual switches and a question had arise.

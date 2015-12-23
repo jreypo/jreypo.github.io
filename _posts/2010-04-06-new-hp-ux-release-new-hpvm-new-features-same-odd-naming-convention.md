@@ -1,7 +1,7 @@
 ---
 layout: post
 title: New HP-UX release, new HPVM, new features... same odd naming convention
-date: 2010-04-06 15:19:09.000000000 +02:00
+date: 2010-04-06
 type: post
 published: true
 status: publish
@@ -15,6 +15,7 @@ tags:
 - LVM
 - Opinion
 author: juan_manuel_rey
+comments: true
 ---
 
 Last month HP released the last update of HP-UX 11iv3, the Update 6 or the March 2010 Update or 11.36... I decided some time ago to do not try to understand why we have a so stupid naming scheme for HP-UX.

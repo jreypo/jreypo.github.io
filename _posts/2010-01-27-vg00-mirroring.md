@@ -1,7 +1,7 @@
 ---
 layout: post
 title: vg00 mirroring
-date: 2010-01-27 16:41:49.000000000 +01:00
+date: 2010-01-27
 type: post
 published: true
 status: publish
@@ -20,6 +20,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 This is a small cookbook about mirroring the `vg00` I've compiled throughout the years, well it's really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.

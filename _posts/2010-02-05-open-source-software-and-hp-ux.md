@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Open Source software and HP-UX
-date: 2010-02-05 11:14:55.000000000 +01:00
+date: 2010-02-05
 type: post
 published: true
 status: publish
@@ -14,6 +14,7 @@ tags:
 - HP-UX Internet Express
 - opensource
 author: juan_manuel_rey
+comments: true
 ---
 
 HP-UX is a great OS and the default installation provides a plethora of tools for any Unix sysadmin but of course, like almost every operative system, it can improved with third-party OpenSource software

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tukwila, we are almost there
-date: 2010-02-03 14:58:45.000000000 +01:00
+date: 2010-02-03
 type: post
 published: true
 status: publish
@@ -16,6 +16,7 @@ tags:
 - Opinion
 - Tukwila
 author: juan_manuel_rey
+comments: true
 ---
 
 It seems that finally and after a myriad of delays **[Tukwila](http://en.wikipedia.org/wiki/Tukwila_%28processor%29 "Tukwila")**, the brand new quad-core [Itanium](http://www.intel.com/products/processor/itanium/index.htm) processor from Intel, is going to be released. Yesterday through its

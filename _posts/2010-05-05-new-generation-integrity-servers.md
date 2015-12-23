@@ -19,6 +19,7 @@ tags:
 - Superdome 2
 - Tukwila
 author: juan_manuel_rey
+comments: true
 ---
 
 Last week was, without any doubt, one of the most exciting of the year. The new Integrity Servers have been finally unveiled.

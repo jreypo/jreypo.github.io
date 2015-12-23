@@ -16,6 +16,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 **Dynamic Root Disk**, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I'm going to assume you have an spare disk for the task and of course have DRD installed in the server.

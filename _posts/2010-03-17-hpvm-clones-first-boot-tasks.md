@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HPVM clones first boot tasks
-date: 2010-03-17 12:47:40.000000000 +01:00
+date: 2010-03-17
 type: post
 published: true
 status: publish
@@ -21,6 +21,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Welcome again to **HPVM World!** my dear readers :-D

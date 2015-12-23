@@ -12,6 +12,7 @@ tags:
 - HP-UX
 - VxVM
 author: juan_manuel_rey
+comments: true
 ---
 
 If you need to determine the version of a Veritas `diskgroup` it can be done by two ways:

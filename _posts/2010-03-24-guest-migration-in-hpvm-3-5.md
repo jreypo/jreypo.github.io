@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Guest migration in HPVM 3.5
-date: 2010-03-24 15:25:16.000000000 +01:00
+date: 2010-03-24
 type: post
 published: true
 status: publish
@@ -19,6 +19,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 As I already said many times my current HPVM version is 3.5 so it doesn't support guest online migration. But lacking the online migration feature doesn't mean that we can not perform Integrity VM migration between hosts.

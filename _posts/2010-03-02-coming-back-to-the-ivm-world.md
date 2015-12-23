@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coming back to the IVM world
-date: 2010-03-02 15:00:24.000000000 +01:00
+date: 2010-03-02
 type: post
 published: true
 status: publish
@@ -16,19 +16,8 @@ tags:
 - HPVM
 - Integrity VMs
 - LVM
-meta:
-  _edit_last: '11044808'
-  geo_latitude: '40.416691'
-  geo_longitude: '-3.700345'
-  geo_accuracy: '17077'
-  geo_address: Madrid
-  geo_public: '1'
-author:
-  login: jreypo
-  email: juanmanuel.reyportal@gmail.com
-  display_name: Juan Manuel
-  first_name: Juan Manuel
-  last_name: Rey
+author: juan_manuel_rey
+comments: true
 ---
 
 Yes I have to admit it, it's been a while since the last time I created an Integrity Virtual Machine. In my last job didn't have HPVM and here the VMs were already running when I arrived. So a few weeks ago I decided to cut my teeth again with HPVM, specially since I am pushing forward very hard for an OS and HPVM version upgrade of the IVM cluster which is currently running HP-UX 11.23 with HPVM 3.5.

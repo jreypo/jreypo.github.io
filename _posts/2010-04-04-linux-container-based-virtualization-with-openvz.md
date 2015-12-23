@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux container-based virtualization with OpenVZ
-date: 2010-04-04 22:07:53.000000000 +02:00
+date: 2010-04-04
 type: post
 published: true
 status: publish
@@ -14,6 +14,7 @@ tags:
 - OpenVZ
 - Parallels
 author: juan_manuel_rey
+comments: true
 ---
 
 Long time since my last post. I've been on holidays! :-D

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Double check! Always!
-date: 2010-02-24 16:40:54.000000000 +01:00
+date: 2010-02-24
 type: post
 published: true
 status: publish
@@ -17,6 +17,7 @@ tags:
 - sysadmin
 - systems administration
 author: juan_manuel_rey
+comments: true
 ---
 
 Today I learned the hard way how important is to check everything at least twice.
