@@ -35,7 +35,7 @@ Additionally and although is not a service I decided to include a section about 
 
 Unlike the vCenter Windows version Syslog Collector comes bundled with the VCSA. As we saw in the previous post it can be configured from the VCSA web interface.
 
-[![](/images/image_thumb151_thumb.png "Syslog collector settings")]({{site.url}}/images/image_thumb151.png)
+[![](/images/image_thumb151_thumb.png "Syslog collector settings")]({{site.url}}/images/image_thumb151_thumb.png)
 
 But there are also a limited range of operations that can be done from the command line. Access the VCSA via SSH and make yourself root.
 
