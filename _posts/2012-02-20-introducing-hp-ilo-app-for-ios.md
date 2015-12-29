@@ -31,11 +31,11 @@ Following are a couple of screenshot from the app running on my iPad and another
 
 ##### Main screen
 
-[![](/images/ilo_app_main_screen.png "iLO App main screen")]({{site.url}}/images/photo-1.png)
+[![](/images/ilo_app_main_screen.png "iLO App main screen")]({{site.url}}/images/ilo_app_main_screen.png)
 
 ##### Configure iLO screen
 
-[![](/images/ilo_app_config_screen.png "iLO App configuration screen")]({{site.url}}/images/photo-2.png)
+[![](/images/ilo_app_config_screen.png "iLO App configuration screen")]({{site.url}}/images/ilo_app_config_screen.png)
 
 ##### iLO script output
 

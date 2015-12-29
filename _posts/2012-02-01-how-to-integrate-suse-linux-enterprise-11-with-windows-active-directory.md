@@ -41,7 +41,7 @@ YaST2 can be run either in graphical...
 
 ...or in text mode.
 
-[![](/images/yast2_text_mode_thumb.png "YaST2 text mode")]({{site.url}}/images/yast2_text_mode.png)
+[![](/images/yast2_text_mode.png "YaST2 text mode")]({{site.url}}/images/yast2_text_mode.png)
 
 I decided to use the text mode since it will be by far the most common use case, anyway in both cases the procedure is exactly the same.
 
@@ -49,7 +49,7 @@ Go to `Network Services` section and later select `Windows Domain Membership`. T
 
 In the `Membership` area enter the domain name and configure the options that best suit your environment, including the other sections of the screen.
 
-[![](/images/yast2_windom_config_thumb.png "YaST2 Windows Domain configuration")]({{site.url}}/images/yast2_windom_config.png)
+[![](/images/yast2_windom_config.png "YaST2 Windows Domain configuration")]({{site.url}}/images/yast2_windom_config.png)
 
 I configure it to allow SSH single sign-on, more on this later, and to create a home directory for the user on his first login.
 
@@ -57,15 +57,15 @@ You should take into account the NTP configuration since it’s a critical compo
 
 Select `OK` to acknowledge your selection and a small pop-up will show up to inform that the host is not part of the domain and if you want to join it.
 
-[![](/images/yast2_domain_confirmation_thumb.png "YaST2 domain confirmation")]({{site.url}}/images/yast2_domain_confirmation.png)
+[![](/images/yast2_domain_confirmation.png "YaST2 domain confirmation")]({{site.url}}/images/yast2_domain_confirmation.png)
 
 Next you must enter the password of the domain Administrator.
 
-[![](/images/yast2_domain_admin_password_thumb.png "Domain Administrator password")]({{site.url}}/images/yast2_domain_admin_password.png)
+[![](/images/yast2_domain_admin_password.png "Domain Administrator password")]({{site.url}}/images/yast2_domain_admin_password.png)
 
 And YaST will finally confirm the success of the operation.
 
-[![](/images/yast2_domain_joined_thumb.png "Domain join confirmation")]({{site.url}}/images/yast2_domain_joined.png)
+[![](/images/yast2_domain_joined.png "Domain join confirmation")]({{site.url}}/images/yast2_domain_joined.png)
 
 At this point the basic configuration is done and the server should be integrated on the Windows Domain.
 
