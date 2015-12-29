@@ -1,6 +1,6 @@
 ---
 layout: home
-excerpt: "A minimal Jekyll theme for your blog by designer Michael Rose."
+excerpt: "The weblog of an IT professional and old school Unix Geek living the era of virtualization and cloud"
 tags: [Jekyll, theme, responsive, blog, template]
 image:
   feature: trantor.png
