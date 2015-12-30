@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Reconfigure an ESX(i) for HA using vSphere PowerCLI
-date: 2011-02-21 
+date: 2011-02-21
 type: post
 published: true
 status: publish
@@ -131,7 +131,7 @@ Finally I created the below script to simplify things in the future.
 # PowerCLI script to reconfigure for VMware HA a VM Host
 #
 # Juan Manuel Rey - juanmanuel (dot) reyportal (at) gmail (dot) com
-# https://jreypo.wordpress.com
+# http://blog.jreypo.io
 #
 
 param([string]$esx)

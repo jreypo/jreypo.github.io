@@ -203,7 +203,7 @@ Finally to ease things at work I created a bunch of scripts that implement some 
 # PowerCLI script to get VMware HA advanced options of a given cluster
 #
 # Juan Manuel Rey - juanmanuel (dot) reyportal (at) gmail (dot) com
-# https://jreypo.wordpress.com
+# http://blog.jreypo.io
 #
 # Syntax: Get-ClusterAdvancedOption.ps1 &lt;cluster-name&gt;
 #

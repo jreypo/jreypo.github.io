@@ -24,8 +24,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-In a previous [post](http://jreypo.wordpress.com/2011/08/16/how-to-get-the-network-connections-of-an-esxi/) I described how to get the network connections of an ESXi server using
-`esxcli` from [Tech Support Mode](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1017910) and [vSphere CLI](http://www.vmware.com/support/developer/vcli/). Following I'll show you how to get the same information from an ESXi 4.1 and 5.0 using [PowerCLI](http://communities.vmware.com/community/vmtn/server/vsphere/automationtools/powercli).
+In a previous [post]({% post_url 2011-08-16-how-to-get-the-network-connections-of-an-esxi %}) I described how to get the network connections of an ESXi server using `esxcli` from [Tech Support Mode](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1017910) and [vSphere CLI](http://www.vmware.com/support/developer/vcli/). Following I'll show you how to get the same information from an ESXi 4.1 and 5.0 using [PowerCLI](http://communities.vmware.com/community/vmtn/server/vsphere/automationtools/powercli).
 
 The key to perform this tasks the `Get-EsxCli` cmdlet. This command was introduced with PowerCLI 4.1.1 and its purpose is to expose `esxcli` framework.
 
