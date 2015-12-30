@@ -1,7 +1,7 @@
 ---
 layout: post
 title: New journey, new challenges.
-date: 2012-04-18 10:57:28.000000000 +02:00
+date: 2012-04-18
 type: post
 published: true
 status: publish

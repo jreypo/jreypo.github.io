@@ -1,7 +1,7 @@
 ---
 layout: post
 title: vExpert 2012, one more time :-)
-date: 2012-04-15 23:07:32.000000000 +02:00
+date: 2012-04-15
 type: post
 published: true
 status: publish
