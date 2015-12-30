@@ -69,7 +69,7 @@ root@cldpp01:~#
 
 The code:
 
-{% highlight bash %}
+{% highlight bash linenos %}
 #!/sbin/sh
 #
 # vgs.sh - script to emulate the Linux LVM command vgs in HP-UX 11iv3
@@ -166,7 +166,7 @@ root@asoka:/#
 
 The code:
 
-{% highlight bash %}
+{% highlight bash linenos %}
 #!/sbin/sh
 #
 # lvs.sh - script to emulate the Linux LVM command lvs in HP-UX 11iv3
@@ -255,7 +255,7 @@ root@oracle:~#
 
 And the code:
 
-{% highlight bash %}
+{% highlight bash linenos %}
 #!/sbin/sh
 #
 # pvs.sh - script to emulate the Linux LVM command pvs in HP-UX 11iv3
