@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to install the vCloud Adapter in vC Ops 5.6
-date: 2012-12-21 13:29:15.000000000 +01:00
+date: 2012-12-21
 type: post
 published: true
 status: publish
