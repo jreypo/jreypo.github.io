@@ -32,9 +32,10 @@ VMware vCenter Chargeback Load Balancer                           | C:\\Program 
 
 Bear in mind that if vShield and vCloud DataCollectors are installed on the same server as Chargeback Server the path will be slightly different:
 
+ | **Windows Service**                                                 |  **Path to executable** |
 :--------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------:
 VMware vCenter Chargeback - vShield Manager DataCollector-Embedded     | C:\\Program Files (x86)\\VMware\\VMware vCenter Chargeback\\vShield Manager DataCollector-Embedded\\JavaService.exe
 VMware vCenter Chargeback DataCollector-Embedded                       | C:\\Program Files (x86)\\VMware\\VMware vCenter Chargeback\\DataCollector-Embedded\\JavaService.exe
---------------------------------------------------------------------   | -------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------
 
 Juanma.
