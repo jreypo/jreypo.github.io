@@ -190,23 +190,23 @@ NSX-Bridge                                  NSX
 
 The final part of the procedure is to add our new ESXi server as transport node to NSX. Log into NSX Manager web UI and initiate the wizard to add a new Hypervisor. First specify the name of the new hypervisor.
 
-[![](%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-13-30.png?w=580)](https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-13-30.png)
+[![](/images/screen-shot-2014-07-14-at-02-13-30.png)]({{site.url}}/images/screen-shot-2014-07-14-at-02-13-30.png)
 
 Set the integration bridge.
 
-[![](%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-22-44.png?w=580)](https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-22-44.png)
+[![](/images/screen-shot-2014-07-14-at-02-22-44.png)]({{site.url}}/images/screen-shot-2014-07-14-at-02-22-44.png)
 
 Select **Security Certificate** as credential type and paste the NSX vSwitch SSL certificate. The certificate can be retrieved from `/etc/nsxvswitch/nsxvswitch-cert.pem`.
 
-[![](%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-29-50.png?w=580)](https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-29-50.png)
+[![](/images/screen-shot-2014-07-14-at-02-29-50.png)]({{site.url}}/images/screen-shot-2014-07-14-at-02-29-50.png)
 
 Add an SST transport connector, using the IP address configured for the uplink.
 
-[![](%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-31-57.png?w=580)](https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-31-57.png)
+[![](/images/screen-shot-2014-07-14-at-02-31-57.png)]({{site.url}}/images/screen-shot-2014-07-14-at-02-31-57.png)
 
 Click **Save & View** and verify the new hypervisor configuration in NSX.
 
-[![](%7B%7B%20site.baseurl%20%7D%7D/assets/screen-shot-2014-07-14-at-02-36-15.png?w=580)](https://jreypo.files.wordpress.com/2014/07/screen-shot-2014-07-14-at-02-36-15.png)
+[![](/images/screen-shot-2014-07-14-at-02-36-15.png)]({{site.url}}/images/screen-shot-2014-07-14-at-02-36-15.png)
 
 The setup of our new ESXi server within NSX is done. As always comments are welcomed.
 
