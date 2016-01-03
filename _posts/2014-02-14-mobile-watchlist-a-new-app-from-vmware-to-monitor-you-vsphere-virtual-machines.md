@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mobile Watchlist, a new app from VMware to monitor your vSphere virtual machines
-date: 2014-02-14 21:11:59.000000000 +01:00
+date: 2014-02-14
 type: post
 published: true
 status: publish
