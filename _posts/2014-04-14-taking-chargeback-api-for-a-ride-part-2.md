@@ -228,7 +228,7 @@ Launch it and enter a name and a description to test it.
 
 Click Submit, check the workflow logs for any errors and if everything went as expected go to Chargeback UI and see that the new hierarchy is there.
 
-[![](/images/vco_rest_add_new_hr_new_hr_cbm_ui.png "New CBM hierarchy created")]({{site.url}}/images/image31.png)
+[![](/images/vco_rest_add_new_hr_new_hr_cbm_ui.png "New CBM hierarchy created")]({{site.url}}/images/vco_rest_add_new_hr_new_hr_cbm_ui.png)
 
 #### Add new Fixed Cost
 

@@ -23,6 +23,8 @@ comments: true
 
 Chargeback API is REST-based, this means that it will receive requests and send responses using HTTP protocol and methods. CBM API implements a set of basic CRUD operations, and each of them maps with an HTTP method as shown in he below table.
 
+METHOD | OPERATION
+:-:|:-:
 POST | CREATE
 GET | READ
 PUT | UPDATE/CREATE
@@ -42,7 +44,7 @@ POST https://chargeback.corp.local/vCenter-CB/api/login?version=2.5
 
 We can map the above example with the different elements of the API syntax:
 
--   `POST'  –This is the request method
+-   `POST`  –This is the request method
 -   `https://chargeback.corp.local/vCenter-CB/api` – This the base URL
 -   `/login` – This is the API signature, composed of the path to the API we want to call.
 
@@ -60,8 +62,8 @@ I’m not going to review every possible API, just a few examples to illustrate 
 
 This is the most basic operation of all. In the REST Client paste the XML payload in the Body area, select POST as the method to use and fill the URL field.
 
-[![](/images/rest_login.png) "Chargeback API Login with REST client"]({{site.url}}/images/rest_login.png)
- 
+[![](/images/rest_login.png "Chargeback API Login with REST client")]({{site.url}}/images/rest_login.png)
+
 ### Get hierarchy list
 
 Not every task needs an XML payload, in the following example we are going to get a list of the hierarchies using a GET method and with no message body. The URL to make the request would be:
