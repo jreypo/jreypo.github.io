@@ -27,7 +27,7 @@ tags:
 author: juan_manuel_rey
 comments: true
 image:
-  feature: openstack-banner.png
+  feature: openstack-banner.jpg
 ---
 
 If you follow me on [Twitter](http://twitter.com/jreypo) or [Google+](http://plus.google.com/+JuanManuelReyPortal) probably have seen and increased number of tweets and posts about [**OpenStack**](http://www.openstack.org), [**DevStack**](http://devstack.org/), [**KVM**](http://www.linux-kvm.org/page/Main_Page) and other Linux related topics. It's no secret that I am a *nix guy however it wasn't until last year that I really discovered OpenStack. Oh yes I knew about it, have read a ton of articles and watched some videos in YouTube but I never had the opportunity to actually play with it until I sat on a Hands on Lab about OpenStack and vSphere during VMworld in Barcelona last October. After VMworld I started a personal project to learn as much as possible about OpenStack, using some labs with KVM and vSphere to try to achieve a decent level of proficiency. Finally this year I was able to ramp up with NSX and decided to build a new lab with OpenStack, KVM and NSX and document my progress here in my blog. So without further ado here it is my first series of posts about OpenStack and NSX.
