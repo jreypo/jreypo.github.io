@@ -190,6 +190,7 @@ NAME=eth0
 HOTPLUG=no
 HWADDR=00:0C:29:CA:34:FE
 NM_CONTROLLED=no
+{% endhighlight %}
 
 Next create and edit `ifcfg-br0` file.
 
