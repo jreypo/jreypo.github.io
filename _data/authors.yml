@@ -3,7 +3,7 @@
 juan_manuel_rey:
   name: Juan Manuel Rey
   web: http://blog.jreypo.io
-  email: Juan Manuel Rey
+#  email: Juan Manuel Rey
   bio: "Unix Geek. Sysadmin by heart turned cloud architect. Working for VMware."
   avatar: bio-photo-2.jpg
   twitter: jreypo
