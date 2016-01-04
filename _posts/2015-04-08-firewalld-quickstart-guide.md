@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FirewallD quickstart guide
-date: 2015-04-08 14:30:16.000000000 +02:00
+date: 2015-04-08
 type: post
 published: true
 status: publish
