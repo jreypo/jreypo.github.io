@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to patch your VIO environment
-date: 2015-04-29 00:20:47.000000000 +02:00
+date: 2015-04-29
 type: post
 published: true
 status: publish
