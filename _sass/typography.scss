@@ -146,7 +146,8 @@ p {
    ========================================================================== */
 
 tt, code, kbd, samp, pre {
-	font-family: $code-font;
+//	font-family: $code-font;
+	font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
 }
 p,
 li {
