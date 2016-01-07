@@ -5,7 +5,7 @@
 body {
 	background-color: $bodycolor;
 	font-family: $base-font;
- 	font-size: 14px;	
+ 	font-size: 14px;
 	color: $text-color;
 }
 
@@ -447,7 +447,8 @@ $button-size: 1.5rem;
 	p > em > a,
 	p > strong > a,
 	li > a {
-		text-decoration: underline;
+		color: #008dd8;
+		text-decoration: none;
 	}
 }
 
