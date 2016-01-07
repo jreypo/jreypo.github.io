@@ -4,8 +4,7 @@
 
 .CodeRay {
   background-color: #efefef;
-//  font-family: $code-font;
-  font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  font-family: $code-font;
   @include font(12);
   color: #333332;
   margin-bottom: 1.5em;
