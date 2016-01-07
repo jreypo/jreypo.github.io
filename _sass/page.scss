@@ -604,7 +604,8 @@ $button-size: 1.5rem;
 	  @include font-rem(14);
 	  font-family: $heading-font;
 	  font-weight: 700;
-	  color: $white;
+//	  color: $white;
+		color: white !important;
 	  opacity: 0.8;
 	  &:hover {
 	    opacity: 1;
