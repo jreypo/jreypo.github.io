@@ -80,15 +80,15 @@ The first step is to deploy VIO OVA on our management cluster. From vSphere Web 
 
 Accept the EULA and proceed to configure the template. First as with any OVA template enter the name and the folder,
 
-[![IMAGE03](/images/image03.png)]({{site.url}}/images/image03.png)
+[![](/images/image03.png)]({{site.url}}/images/image03.png)
 
 Select the datastore and the storage format.
 
-[![IMAGE04](/images/image04.png)]({{site.url}}/images/image04.png)
+[![](/images/image04.png)]({{site.url}}/images/image04.png)
 
 Select the network for VIO Manager.
 
-[![IMAGE05](/images/image05.png)]({{site.url}}/images/image05.png)
+[![](/images/image05.png)]({{site.url}}/images/image05.png)
 
 Now we will customize the template, this includes entering the VIO Manager server networking settings, NTP, SSO lookup service URL and Syslog server.
 
