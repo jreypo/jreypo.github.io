@@ -19,7 +19,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-[VMware Lightwave](https://vmware.github.io/lightwave/) is an identity and management access service for Cloud-Native apps. It was released to the community last year and the source code can be accessed in VMware's Github. Since I'm revamping my homelab to become more cloud-native aware Lightwave was the natural choice to provide authentication services, I dedcide to setup a multi-node domain to be able to test different Lightwave scenarios.
+[VMware Lightwave](https://vmware.github.io/lightwave/) is an identity and management access service for Cloud-Native apps. It was released to the community last year and the source code can be accessed in VMware's Github. Since I'm revamping my homelab to become more cloud-native aware Lightwave was the natural choice to provide authentication services, I decided to setup a multi-node domain to be able to test different Lightwave scenarios.
 
 ## Lightwave installation
 
@@ -46,7 +46,7 @@ enabled=1
 skip_if_unavailable=True
 {% endhighlight %}
 
-Then check that if the repository photon-extras is present and if not repeat the same process but with the below content.
+Then check that if the repository `photon-extras` is present and if not repeat the same process but with the below content.
 
 {% highlight text %}
 [photon-extras]
