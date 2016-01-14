@@ -19,7 +19,7 @@ I have finally migrated the last post from my old site in **Wordpress.com** to t
 
 In the end I had to review all the text, modify all the code blocks with Pygments tags, convert all post links in order to use `post_url` tags, re-download and rename many of the pictures from my old site, fix the links to my GitHub Gists and review the Front Matter for every post. In the meantime I also hit an issue with the Jekyll version used by Github Pages (2.4) and timezones, the issue did not allow the site to build. Thanks to my old shell, sed and awk scripting-fu I was able to speed the process.
 
-The good thing is that since I had to manually review all my posts the quality is better than before, I was able to fix some text errors here and there and thanks to the Jekyll bug I decided to add my site repo to [Travis CI](https://travis-ci.org) and now every time I push a commit to Github the site is built and tested by Travis.
+The good thing is that since I had to manually review all my posts the quality is better than before, I was able to fix some text errors here and there and thanks to the Jekyll bug I decided to add my site repository to [Travis CI](https://travis-ci.org) and now every time I push a commit to Github the site is built and tested by Travis.
 
 There are many Jekyll themes available, some of them quite clean and simple however I was looking for something clean but a bit more appealing, visually speaking, and I choose [**Minimal Mistakes**](http://mmistakes.github.io/minimal-mistakes/) by [Michael Rose](http://twitter.com/mmistakes). The theme includes support for Disqus and Google Analytics and uses Pygments for the syntax highlight.
 
