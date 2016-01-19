@@ -102,7 +102,7 @@ Olivier has done a great work with this script, I recommend his [blog](http://om
 With his permission here it is a modified version that shows the VG
 holder with the verbose switch:
 
-{% highlight bash %}
+{% highlight bash linenos %}
 #!/bin/sh
 #
 # ioscan_fc2.sh
