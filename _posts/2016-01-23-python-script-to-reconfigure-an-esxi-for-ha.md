@@ -26,7 +26,7 @@ If you have following my blog for some time you may remember a [post from 2011](
 The usage of the script is very simple and follow the guidelines used in other pyVmomi scripts. you need to provide the vCenter Server, user with administrative rights and of course the ESXi host.
 
 {% highlight text %}
-./reconfigure_host_for_ha.py -s vcsa-01.jreypo.io -u administrator@starlabs.local -e vsa-esx-01.jreyo.io
+./reconfigure_host_for_ha.py -s vcsa-01.jreypo.io -u administrator@starlabs.local -e vsan-esx-01.jreypo.io
 {% endhighlight %}
 
 I've found an issue with the verification of vCenter SSL certificate and `SmartConnect()`, described in [this pyVmomi issue](https://github.com/vmware/pyvmomi/issues/235) and in the same issue I found the workaround provided by another user.
