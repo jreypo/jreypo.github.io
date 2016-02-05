@@ -90,7 +90,7 @@ GET https://<chargeback_server>/vCenter-CB/api/costModels?version=2.5
 
 It will produce however a much more detailed response XML with the details of each of the configured Pricing Models.
 
-{% highlight xml linenos %}
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
 <Response xmlns="http://www.vmware.com/vcenter/chargeback/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="success" isValidLicense="true">
   <CostModels>

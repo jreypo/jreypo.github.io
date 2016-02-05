@@ -198,7 +198,7 @@ LOCAL_DS-DL380-02
 
 Finally to ease things at work I created a bunch of scripts that implement some of the above tasks, here it is an example. The syntax I used for all of them is `[script-name] <cluster-name>`.
 
-{% highlight powershell linenos %}
+{% highlight powershell %}
 # Get-ClusterAdvancedOption.ps1
 # PowerCLI script to get VMware HA advanced options of a given cluster
 #

@@ -126,7 +126,7 @@ As it can be seen in the above screenshot, the task is displayed in the vSphere 
 
 Finally I created the below script to simplify things in the future.
 
-{% highlight powershell linenos %}
+{% highlight powershell %}
 # Reconfigure-VMHostHA.ps1
 # PowerCLI script to reconfigure for VMware HA a VM Host
 #
