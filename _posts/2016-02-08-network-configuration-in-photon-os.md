@@ -10,6 +10,7 @@ categories:
 - DevOps
 - VMware
 - Sysadmin
+- Linux
 tags:
 - Cloud
 - cloud-native
