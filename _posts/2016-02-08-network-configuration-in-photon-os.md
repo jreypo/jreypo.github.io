@@ -100,7 +100,7 @@ First remove any DHCP related unit file. And create three new files:
 - `20-bond.netdev`
 - `30-bond-static.network`
 
-`10-en.network` will indicart `networkd` to put our `eno` interfaces under `bond0`.
+`10-en.network` will indicate `networkd` to put our `eno` interfaces under `bond0`.
 
 {% highlight text %}
 [Match]
