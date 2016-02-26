@@ -45,7 +45,6 @@ ceilome+ 26354  0.1  3.9 132172 40184 ?        Ss   18:35   0:01 /usr/bin/python
 ceilome+ 26410  7.7  3.9 135888 39952 ?        Ss   18:35   1:10 /usr/bin/python /usr/bin/ceilometer-collector --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilometer-collector.log
 ceilome+ 26466  0.2  4.1 134276 42448 ?        Ss   18:35   0:02 /usr/bin/python /usr/bin/ceilometer-agent-central --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilometer-agent-central.log
 ceilome+ 26520  0.1  3.9 132528 40660 ?        Ss   18:35   0:01 /usr/bin/python /usr/bin/ceilometer-alarm-evaluator --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilometer-alarm-evaluator.log
-viouser  26688  0.0  0.0   8860   648 pts/0    S+   18:50   0:00 grep --color=auto ceilometer
 {% endhighlight %}
 
 Access `controller01` node from VIO Manager server, elevate yourself to root and source `cloudadmin.rc`. Using Ceilometer client cli list and show some samples to check that the service is collecting data.
