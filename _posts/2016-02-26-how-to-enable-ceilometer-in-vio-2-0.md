@@ -26,7 +26,7 @@ In VIO 2.0 Ceilometer collected data can be used as an input for [Heat](https://
 
 **VMware Integrated OpenStack**, or VIO, 2.0 comes with Ceilometer disabled by default however enabling it is very easy as we are going to see.
 
-Before enabling Ceilometer make sure you have enough IP addresses available in the management pool since for Ceilometer 3 additional nodes will be deployed. If no IP addresses are available the deployment will fail and VIO Manager will automatically rollback the operation and delete the additional nodes. These nodes are
+Before enabling Ceilometer make sure you have enough IP addresses available in the management pool since for Ceilometer 3 additional nodes will be deployed. If no IP addresses are available the deployment will fail and VIO Manager will automatically rollback the operation and delete the additional nodes.
 
 From VIO plugin UI in vSphere Web Client go to **Manage -> Settings**, in the left pane access **Ceilometer** and click **Edit**.
 
