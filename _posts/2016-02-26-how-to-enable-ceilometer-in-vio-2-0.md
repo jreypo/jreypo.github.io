@@ -11,6 +11,7 @@ categories:
 tags:
 - OpenStack
 - VIO
+- VIO 2.0
 - VMware
 - VMware Integrated OpenStack
 - ceilometer
