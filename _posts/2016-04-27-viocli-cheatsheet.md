@@ -1,7 +1,7 @@
 ---
 layout: post
 title: viocli cheatsheet
-date: 2016-04-26
+date: 2016-04-27
 type: post
 published: true
 status: publish
