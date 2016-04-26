@@ -290,6 +290,6 @@ To install the agent use the following syntax.
 viouser@vio-manager:~$ sudo viocli hyperic install -d VIO-20
 {% endhighlight %}
 
-And we are done. Courteous comments are welcome.
+And we are done. Comments are welcome.
 
 -- Juanma
