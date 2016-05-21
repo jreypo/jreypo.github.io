@@ -13,10 +13,10 @@ I am Juan Manuel Rey, I live in Madrid with my incredible wife Gemma, our son Ja
 
 ## What I do for a living...
 
-[![](/images/radio_cto_v6.png)]({{site.url}}/images/radio_cto_v6.png)
+[![](/images/redhat-logo.jpg)]({{site.url}}/images/redhat-logo.jpg)
 
-I am a Senior Consultant working for VMware Professional Services, specialized in [NSX](https://www.vmware.com/products/nsx), [vCloud Director](https://www.vmware.com/products/vcloud-director) and [OpenStack](http://www.openstack.org). With more than fifteen years of experience in the industry as Unix, Virtualization and Cloud professional, and great experience in architecting and administer mission critical environments.
+I am a Senior Architect working for Red Hat in its Consulting organization, specialized in building cloud solutions for key customers using Open Source technologies. I am a big advocate of [OpenStack](http://www.openstack.org) and a self proclaimed Unix BSD fanboy. With more than fifteen years of experience in the industry as Unix, Virtualization and Cloud professional, and great experience in design and administer mission critical environments.
 
-I am also a [CTO Ambassador](http://blogs.vmware.com/cto/author/ctoambassadors/) at VMware, if you want to know more about us I suggest the article from my Chinese brother [Iwan Rahabok](https://twitter.com/e1_ang) [**On being a VMware CTO Ambassador**](http://virtual-red-dot.info/on-being-a-vmware-cto-ambassador/).
+Previously I used to work for VMware in PSO and was a member of its [CTO Ambassador](http://blogs.vmware.com/cto/author/ctoambassadors/) Program, with some of the most talented folks in the industry.
 
-I've been lucky enough to be awarded as **VMware vExpert** from 2011 to 2015. I'm interested in everything related to Unix, VMware, cloud, distributed systems and DevOps.
+I've been lucky enough to be awarded as **VMware vExpert** from 2011 to 2016. I'm interested in everything related to Unix, virtualization, cloud, distributed systems and DevOps.
