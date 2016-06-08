@@ -30,7 +30,7 @@ Fortunately Neutron provides with a mechanism to create ports within a tenant su
 | admin_state_up  | True                                 |
 | id              | 82c6d713-81e8-4c11-a808-f98184f278d0 |
 | mtu             | 0                                    |
-| name            | tenant-net                               |
+| name            | tenant-net                           |
 | router:external | False                                |
 | shared          | False                                |
 | status          | ACTIVE                               |
@@ -51,7 +51,7 @@ Fortunately Neutron provides with a mechanism to create ports within a tenant su
 | ip_version        | 4                                                |
 | ipv6_address_mode |                                                  |
 | ipv6_ra_mode      |                                                  |
-| name              | tenant-subnet                                       |
+| name              | tenant-subnet                                    |
 | network_id        | 82c6d713-81e8-4c11-a808-f98184f278d0             |
 | subnetpool_id     |                                                  |
 | tenant_id         | b4e6fc6d2dc242cc91130dbe20733f69                 |
