@@ -23,7 +23,7 @@ image:
 
 [OpenStack Rally](https://wiki.openstack.org/wiki/Rally) is a benchmarking and testing project for OpenStack, it provides a framework for performance, scalability and stress tests. Rally can simulate different use-cases on an existing cloud.
 
-My OpenStack operation teams have Rally deployed in its own virtual machine and with all tests files in an external shared filesystem and versioned with git, which a totally valid and recommendable way of running your Rally tests. However running Rally from a Docker container has also unquestionable benefits:
+Many OpenStack operation teams have Rally deployed in its own virtual machine and with all tests files in an external shared filesystem and versioned with git, which a totally valid and recommendable way of running your Rally tests. However running Rally from a Docker container has also unquestionable benefits:
 - Portability - If like me you are always on the road and like to have an immutable rally environment always at hand.
 - Integration with your CI/CD infrastructure, like Jenkins.
 
@@ -34,13 +34,13 @@ git clone https://github.com/openstack/rally.git
 docker build -t rally-docker .
 {% endhighlight %}
 
-However this container is built using Ubuntu 16.04 as the base image and I prefer to use CentOS or Fedora. I have created and publish a Docker container with all the Rally bits from RDO Mitaka repositories, if you just want to test it run the following command.
+However this container is built using Ubuntu 16.04 as the base image and I prefer to use CentOS or Fedora. I have created and published a Docker container with all the Rally bits from RDO Mitaka repositories, if you just want to test it run the following command.
 
 {% highlight text %}
 docker run --name rally-mitaka -t -i -v ~/rally_home:/home/rally jreypo/rally-rdo-mitaka
 {% endhighlight %}
 
-To manually build the container clone my [Github repo](https://github.com/jreypo/rally-docker-containers) change to `rally-rdo-mitaka` directory and edit the Dockerfile to make any modifications to suit your needs.
+To manually build the container clone my [Github repo](https://github.com/jreypo/rally-docker-containers), change to `rally-rdo-mitaka` directory and edit the Dockerfile to make any modifications to suit your needs.
 
 {% highlight dockerfile %}
 FROM centos:latest
