@@ -114,7 +114,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 [fedora@vagrant-instance ~]$
 {% endhighlight %}
 
-I am planning on investigating more in deep this provider so you can expect more articles around this in the future. Also I have created a new [Github repo]() with the above Vagrantfile and will upload more samples from my day to day tests.
+I am planning on investigating more in deep this provider so you can expect more articles around this in the future. Also I have created a new [Github repo](https://github.com/jreypo/vagrant-openstack-samples) with the above Vagrantfile and will upload more samples from my day to day tests.
 
 Courteous comments are welcome as always.
 
