@@ -25,7 +25,7 @@ I have to admit that at first I did not see the value of using Vagrant to provis
 
 ## Anatomy of the Vagrantfile for OpenStack
 
-Besides of the common options for any Vagrantfile there a set of minimum options for the OpenStack provider as described in the [provider Github repository](https://github.com/ggiamarchi/vagrant-openstack-provider).
+Besides of the common options for any Vagrantfile there is a set of minimum options for the OpenStack provider as described in the [provider Github repository](https://github.com/ggiamarchi/vagrant-openstack-provider).
 
 - `os.openstack_auth_url` - Keystone authentication URL.
 - `os.tenant_name` - The tenant where we will provision our instance.
