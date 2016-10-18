@@ -100,6 +100,6 @@ resources:
 
 As described in the first post execute a simple `vagrant up --provider openstack` and Vagrant will create the stack, kick off the instance, connect it to the new network and assign a floating IP address.
 
-Both files can be found in my `vagrant-openstack-samples` Github repository.
+Both files can be found in my `vagrant-openstack-samples` [Github repository](https://github.com/jreypo/vagrant-openstack-samples).
 
 -- Juanma
