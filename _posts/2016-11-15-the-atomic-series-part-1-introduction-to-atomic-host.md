@@ -25,8 +25,8 @@ comments: true
 Welcome to the Atomic Series! In this new series of articles I will discuss the different part of the Project Atomic ecosystem starting with the Atomic Host in this first part. I sincerely hope you like it found it helpful. The planned posts, for now are:
 
 - Part 1 - Introduction to Atomic Host
-- Part 2 - Atomic Registry
-- Part 3 - Atomic clusters
+- Part 2 - Atomic Clusters
+- Part 3 - Atomic Registry
 
 In the future I am planning to write more posts around Atomic but without numbering.
 
