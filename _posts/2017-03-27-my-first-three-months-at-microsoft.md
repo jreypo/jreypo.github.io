@@ -16,7 +16,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-When I joined Microsoft my friend, and former VMware colleague, Manfred Hoffer asked me to write something about my journey from being a Unix hardcore geek to join Microsoft. I've been postponing this for some time but since this week has marked the conclusion of my first three months at Microsoft I believed it was time to write a few lines about my experience.
+When I joined Microsoft my friend, and former VMware colleague, Manfred Hofer asked me to write something about my journey from being a Unix hardcore geek to join Microsoft. I've been postponing this for some time but since this week has marked the conclusion of my first three months at Microsoft I believed it was time to write a few lines about my experience.
 
 ## Working at Microsoft
 
