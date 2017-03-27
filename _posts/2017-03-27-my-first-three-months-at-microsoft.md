@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My first three months at Microsoft
-date: 2017-03-xx
+date: 2017-03-27
 type: post
 published: true
 status: publish
