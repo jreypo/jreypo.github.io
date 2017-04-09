@@ -20,7 +20,7 @@ comments: true
 
 When I joined Microsoft it was clear to me that I will have to switch to Windows as my main OS. Besides of using Windows 7 on Bootcamp during a couple of weeks I have not used Windows at work since I left HP in 2012 and at home I have always used either Linux, OS X or another BSD operating system.
 
-The more logical path it would have been to get a new MBP and use it in my new job, I love OS X (or macOS like is called now), is a fantastic OS, there are some really great applications for Mac like Omnigraffle or Alfred and also Microsoft is doing great things these days around collaboration on the Mac platform so I will feel at home with my beloved BSD operating system and the Office suite. There was a problem in my reasoning, coming from a 2015 MacBook Pro Retina 15" the latest MacBook Pro didn't look like a worhy spend of my money and to be honest in mind that laptiop is everything but pro. With that in mind I decided to look at what Microsoft had to offer me. 
+The more logical path it would have been to get a new MBP and use it in my new job, I love OS X (or macOS like is called now), is a fantastic OS, there are some really great applications for Mac like Omnigraffle or Alfred and also Microsoft is doing great things these days around collaboration on the Mac platform so I will feel at home with my beloved BSD operating system and the Office suite. There was a problem in my reasoning, coming from a 2015 MacBook Pro Retina 15" the latest MacBook Pro didn't look like a worhy spend of my money and to be honest in my mind that laptiop is everything but pro. With that in mind I decided to look at what Microsoft had to offer me. 
 
 # The hardware
 
