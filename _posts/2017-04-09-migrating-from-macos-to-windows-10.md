@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Migrating from OS X to Windows 10
-date: 2017-03-27
+title: Migrat4-09from OS X to Windows 10
+date: 2017-04-09
 type: post
 published: true
 status: publish
