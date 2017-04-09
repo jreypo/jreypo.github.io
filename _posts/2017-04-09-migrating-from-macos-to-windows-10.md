@@ -64,7 +64,7 @@ During these months I have been discovering some apps that helped me to have a b
 - [WSLtty](https://github.com/mintty/wsltty) - As I mentioned before for WSL I do not use the Windows console, instead I discovered WSLTTY. It is a version of MinTTY, the default terminal for Cygwin and Git Bash, for WSL. It provides a full Unix, xterm-compatible terminal emulation experience, supports 256 colors, has fullscreen mode, theming and many more. It doesn't support tabs but since I do all my work inside a tmux session this not an issue for me.
 - [Tweeten](http://tweeten.xyz/) - Like TweetDeck but better, also for Windows 10 it offers a native app which is better IMHO than the Chrome extension.  
 
-I am always looking for useful apps, both in the consumer and the productivity areas so please if you know more put it in the comments. 
+I am always looking for useful apps, both in the consumer and the productivity areas so please if you know more put them on the comments. 
 
 Finally, this is how the beast looks now.
 
