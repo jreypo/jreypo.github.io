@@ -8,10 +8,12 @@ status: publish
 categories:
 - Personal
 - Microsoft
+- Windows 10
 tags:
 - Personal
 - Microsoft
 - Career
+- Windows 10
 author: juan_manuel_rey
 comments: true
 ---
