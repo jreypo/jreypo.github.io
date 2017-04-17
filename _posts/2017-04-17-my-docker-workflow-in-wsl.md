@@ -68,7 +68,7 @@ To circumvent that I cmae up with a small script called `config-docker.sh` to co
 ```bash
 #!/bin/bash
 
-MACHINE_IP=`/mnt/c/Windows/System32/cmd.exe /C docker-machine.exe ls 2>/dev/null | grep default | awk '{ print $5 }'`
+MACHINE_IP=`'/mnt/c/Program Files/Docker Toolbox/docker-machine.exe' ls 2>/dev/null | grep default | awk '{ print $5}'`
 
 export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="$MACHINE_IP"
