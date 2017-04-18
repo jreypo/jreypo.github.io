@@ -37,7 +37,7 @@ There are other options that are mandatory if you ask me, like `os.keypair_name`
 
 Below is the Vagrantfile I have used for my test in my lab Red Hat OpenStack installation.
 
-{% highlight ruby %}
+```ruby
 require 'vagrant-openstack-provider'
 
 Vagrant.configure("2") do |config|
@@ -58,13 +58,13 @@ Vagrant.configure("2") do |config|
     os.security_groups = ["default","core_services"]
   end
 end
-{% endhighlight %}
+```
 
 ## Provision your first instance
 
 With our Vagrantfile ready, kicking off a new instance follows the same logic as always with a simple `vagrant up --provider openstack`.
 
-{% highlight text %}
+```
 ┌─[~/workspace/vagrant-vms/osp-vagrant][jrey:trantor]
 └─▪ vagrant up --provider openstack
 Bringing machine 'default' up with 'openstack' provider...
@@ -112,7 +112,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 [fedora@vagrant-instance ~]$
-{% endhighlight %}
+```
 
 I am planning on investigating more in deep this provider so you can expect more articles around this in the future. Also I have created a new [Github repo](https://github.com/jreypo/vagrant-openstack-samples) with the above Vagrantfile and will upload more samples from my day to day tests.
 

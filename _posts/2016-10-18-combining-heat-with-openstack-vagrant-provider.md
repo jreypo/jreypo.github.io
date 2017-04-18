@@ -26,7 +26,7 @@ To test the integration I created a simple Vagrantfile and a simple Heat stack. 
 
 Finally we define the instance to be provisioned and override any additional parameter, like `ssh.username`.
 
-{% highlight ruby %}
+```ruby
 require 'vagrant-openstack-provider'
 
 Vagrant.configure("2") do |config|
@@ -54,11 +54,11 @@ Vagrant.configure("2") do |config|
     end
   end
 end
-{% endhighlight %}
+```
 
 In the Heat stack we define the creation of the new network, subnet and router resources, in this case `labnet05`, `labsubnet05` and `router5` respectively.
 
-{% highlight yaml %}
+```yaml
 heat_template_version: 2015-04-30
 
 description: >
@@ -96,7 +96,7 @@ resources:
     properties:
       router_id: { get_resource: router5 }
       subnet_id: { get_resource: labsubnet05 }
-{% endhighlight %}
+```
 
 As described in the first post execute a simple `vagrant up --provider openstack` and Vagrant will create the stack, kick off the instance, connect it to the new network and assign a floating IP address.
 

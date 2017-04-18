@@ -28,7 +28,7 @@ image:
 
 If your TripleO deployment fails is relatively easy to clean your failed overcloud environment, use `heat stack-delete overcloud` and Heat will take charge of deleting all the stack, the associated deployments and power off the Ironic nodes.
 
-{% highlight text %}
+```
 [stack@undercloud ~]$ heat stack-delete overcloud
 Are you sure you want to delete this stack(s) [y/N]? y
 +--------------------------------------+------------+---------------+---------------------+--------------+
@@ -44,37 +44,37 @@ Are you sure you want to delete this stack(s) [y/N]? y
 | 45dd9db1-d4c2-48ce-8453-21007cd573b7 | overcloud  | DELETE_IN_PROGRESS | 2016-09-15T08:49:57 | None         |
 +--------------------------------------+------------+--------------------+---------------------+--------------+
 [stack@undercloud ~]$
-{% endhighlight %}
+```
 
 However there are sometimes when it does not work that way and you will need to manually reset your Ironic nodes. After enduring some pain during a Red Hat OSP Director deployment I decided to document the cleaning process and publish it here.
 
 Power off all Ironic nodes.
 
-{% highlight text %}
+```
 ironic node-set-power-state <IRONIC_NODE_ID> off`
-{% endhighlight %}
+```
 
 Set provision state to available, this was for me the tricky one and took me some trial error tests until I figured out because the parameter for `ironic node-set-provision-state` is not available but provide, actually there is no available parameter for this Ironic command.
 
-{% highlight text %}
+```
 ironic node-set-provision-state <IRONIC_NODE_ID> provide
-{% endhighlight %}
+```
 
 Disassociate the nova instances from the nodes.
 
-{% highlight text %}
+```
 ironic node-update <IRONIC_NODE_ID> remove instance_uuid
-{% endhighlight %}
+```
 
 Get the nodes out of maintenance state.
 
-{% highlight text %}
+```
 ironic node-set-maintenance <IRONIC_NODE_ID> false
-{% endhighlight %}
+```
 
 List the nodes to verify the executed steps.
 
-{% highlight text %}
+```
 [stack@undercloud ~]$ ironic node-list
 +--------------------------------------+-----------+---------------+-------------+--------------------+-------------+
 | UUID                                 | Name      | Instance UUID | Power State | Provisioning State | Maintenance |
@@ -85,7 +85,7 @@ List the nodes to verify the executed steps.
 | c7ee039f-31c8-4bfa-a47b-d2ad41104b65 | compute01 | None          | power off   | available          | False       |
 +--------------------------------------+-----------+---------------+-------------+--------------------+-------------+
 [stack@undercloud ~]$
-{% endhighlight %}
+```
 
 Finally clean all the nova instances with `nova delete`.
 

@@ -22,7 +22,7 @@ In **OpenStack** the most common way to provide connectivity to the instances is
 
 Fortunately Neutron provides with a mechanism to create ports within a tenant subnet, and their associated IP addresses, and then attach them to an instance at boot time. First we net to need to retrieve the network and subnet IDs.
 
-{% highlight text %}
+```
 [root@osp8 ~(keystone_tenant)]# neutron net-show tenant-net
 +-----------------+--------------------------------------+
 | Field           | Value                                |
@@ -57,11 +57,11 @@ Fortunately Neutron provides with a mechanism to create ports within a tenant su
 | tenant_id         | b4e6fc6d2dc242cc91130dbe20733f69                 |
 +-------------------+--------------------------------------------------+
 [root@osp8 ~(keystone_tenant)]#
-{% endhighlight %}
+```
 
 Proceed to create the port with `neutron port-create`command passing the subnet ID and the IP address we want to reserve as arguments.
 
-{% highlight text %}
+```
 [root@osp8 ~(keystone_tenant)]# neutron port-create tenant-net --fixed-ip subnet_id=649933b2-9cba-4bda-a71e-b1d337b3cc7a,ip_address=172.16.10.16
 Created a new port:
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
@@ -84,11 +84,11 @@ Created a new port:
 | tenant_id             | b4e6fc6d2dc242cc91130dbe20733f69                                                                             |
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
 [root@osp8 ~(keystone_tenant)]#
-{% endhighlight %}
+```
 
 Now with the port created we can boot our instance using the port ID as the argument for the `--nic` setting.
 
-{% highlight text %}
+```
 [root@bnk-osp8 ~(keystone_tenant)]# nova boot --nic port-id=6d9e348a-6f34-4086-8b62-fdc035f8f0e5 --flavor m2.tiny --image rhel-72 --key-name cloud-user dns-server
 +--------------------------------------+------------------------------------------------+
 | Property                             | Value                                          |
@@ -128,7 +128,7 @@ Now with the port created we can boot our instance using the port ID as the argu
 | af93c462-8fa3-4715-b234-e113c4a8af8b | dns-server | ACTIVE | -          | Running     | tenant-net=172.16.10.16          |
 +--------------------------------------+------------+--------+------------+-------------+----------------------------------+
 [root@bnk-osp8 ~(keystone_tenant)]#
-{% endhighlight %}
+```
 
 At this point you can proceed to configure the instance networking with the static IP address or you can simply leave it using DHCP, the great thing about this solution is that the instance will always get the same static IP address from the DHCP server as long as the port remain attached to it.
 

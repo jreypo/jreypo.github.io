@@ -25,7 +25,7 @@ comments: true
 
 I have written in the past about using [Cockpit](http://cockpit-project.org) with Fedora and CentOS 7 [here]({% post_url 2015-01-08-managing-your-fedora-server-with-cockpit %}) and [here]({% post_url  2015-01-09-how-to-install-cockpit-on-centos-7 %}). Today playing with one of my Lightwave instances I discovered that Cockpit is also available for VMware Photon OS. The Cockpit packages are available in the `photon-extras` repository. If you do have it enabled in your Photon instances add the following `photon-extras.repo` file in `/etc/yum.repos.d/`.
 
-{% highlight text %}
+```
 [photon-extras]
 name=VMware Photon Extras 1.0(x86_64)
 baseurl=https://dl.bintray.com/vmware/photon_extras
@@ -33,11 +33,11 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY
 gpgcheck=0
 enabled=1
 skip_if_unavailable=True
-{% endhighlight %}
+```
 
 Install `cockpit` package.
 
-{% highlight text %}
+```
 root@lightwave01 [ ~ ]# tdnf install cockpit
 Installing:
 device-mapper                                                              x86_64                                    2.02.116-2.ph1tp2
@@ -58,11 +58,11 @@ cockpit-bridge                                                             x86_6
 cockpit-shell                                                              noarch                                               0.55-1
 cockpit                                                                    x86_64                                               0.55-1
 Is this ok [y/N]:
-{% endhighlight %}
+```
 
 Next enable and start `cockpit.socket` with `systemctl`.
 
-{% highlight text %}
+```
 root@lightwave01 [ ~ ]# systemctl enable cockpit.socket
 root@lightwave01 [ ~ ]# systemctl start cockpit.socket
 root@lightwave01 [ ~ ]#
@@ -73,7 +73,7 @@ root@lightwave01 [ ~ ]# systemctl status cockpit.socket
      Docs: man:cockpit-ws(8)
    Listen: [::]:9090 (Stream)
 root@lightwave01 [ ~ ]#
-{% endhighlight %}
+```
 
 Open your favorite web browser and access Cockpit at **http://photon_server:9090**.
 
