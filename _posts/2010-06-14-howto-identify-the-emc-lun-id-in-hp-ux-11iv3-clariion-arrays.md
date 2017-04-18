@@ -35,7 +35,7 @@ And now the procedure:
 
 Launch an `inq` against the CLARiiON array.
 
-{% highlight text %}
+```
 [hpux-server]root:/ #/usr/local/bin/inq -clariion
 Inquiry utility, Version V7.3-891 (Rev 2.0)      (SIL Version V6.5.2.0 (Edit Level 891)
 Copyright (C) by EMC Corporation, all rights reserved.
@@ -76,7 +76,7 @@ DEVICE              :VEND    :PROD            :REV �
 /dev/rdsk/c10t0d6   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :     5242880:   6:  2f:ASSIGNED
 /dev/rdsk/c10t0d7   :DGC     :CX4-240WDR5     :HP03  :Ch2 CONT   :   419430400:   7:  30:ASSIGNED
 ...
-{% endhighlight %}
+```
 
 We are going to use the last disk (`c10t0d7`). Take a look at the CLUN column, this column gives the LUN ID (`0x30=48` for instance) on the Clariion array. So is Jean's understanding, and I fully agree with him, that `c10t0d7` disk match the 48 LUN on this CLARiiON array.
 

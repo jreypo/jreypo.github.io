@@ -21,7 +21,7 @@ If you need to determine the version of a Veritas `diskgroup` it can be done by 
 
 Execute `vxdg list <diskgroup>` and look for the version field in the output.
 
-{% highlight text %}
+```
 root@vmnode1:~# vxdg list dg_sap
 Group:     dg_sap
 dgid:      1273503890.14.vmnode1
@@ -40,13 +40,13 @@ config disk disk28 copy 1 len=24072 state=clean online
 log disk disk27 copy 1 len=3648
 log disk disk28 copy 1 len=3648
 root@vmnode1:~#
-{% endhighlight %}
+```
 
 -   `vxprint` command:
 
 Run `vxprint -l <diskgroup>` and again look for the versión field as shown in the example.
 
-{% highlight text %}
+```
 root@vmnode1:~# vxprint -l dg_sap
 Disk group: dg_sap
 
@@ -63,7 +63,7 @@ minors:   >= 4000
 cds=on
 
 root@vmnode1:~#
-{% endhighlight %}
+```
 
 And as Nelson Muntz like to say... smell you later ;-)
 

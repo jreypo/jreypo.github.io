@@ -27,7 +27,7 @@ The  AVIO Lan drivers for Linux HPVM guests are supported since HPVM4.0 but as 
 
 The first prerequisite is to have installed the HPVM management software, once you have this package installed look for a RPM package called `hpvm_lgssn` in `/opt/hpvm/guest-images/linux/DRIVERS`.
 
-{% highlight text %}
+```
 root@hpvm-host:/opt/hpvm/guest-images/linux/DRIVERS # ll
 total 584
  0 drwxr-xr-x 2 bin bin     96 Apr 13 18:47 ./
@@ -35,21 +35,21 @@ total 584
  8 -r--r--r-- 1 bin bin   7020 Mar 27  2009 README
 576 -rw-r--r-- 1 bin bin 587294 Mar 27  2009 hpvm_lgssn-4.1.0-3.ia64.rpm
 root@hpvm-host:/opt/hpvm/guest-images/linux/DRIVERS #
-{% endhighlight %}
+```
 
 Copy the package to the virtual machine with your favorite method and install it.
 
-{% highlight text %}
+```
 [sles10]:/var/tmp # rpm -ivh hpvm_lgssn-4.1.0-3.ia64.rpm
 Preparing...                ########################################### [100%]
 Installing...               ########################################### [100%]
 
 [sles10]:/var/tmp #
-{% endhighlight %}
+```
 
 Check the installation of the package.
 
-{% highlight text %}
+```
 [sles10]:~ # rpm -qa | grep hpvm
 hpvm-4.1.0-1
 hpvmprovider-4.1.0-1
@@ -81,7 +81,7 @@ hpvm_lgssn-4.1.0-3
 /opt/hpvm_drivers/lgssn/sles10/SP2
 /opt/hpvm_drivers/lgssn/sles10/SP2/lgssn.ko
 [sles10]:~ #
-{% endhighlight %}
+```
 
 There are two ways to install the driver, compile it or use one of the pre-compiled modules. These pre-compiled modules are for the following distributions and kernels:
 
@@ -94,7 +94,7 @@ For other kernels you must compile the driver. In the Linux box of the example I
 
 Go the path `/opt/hpvm_drivers/lgssn`, there you will find the sources of the driver. To compile and install execute a simple `make install`.
 
-{% highlight text %}
+```
 [sles10]:/opt/hpvm_drivers/lgssn # make install
 make -C /lib/modules/2.6.16.60-0.21-default/build SUBDIRS=/opt/hpvm_drivers/lgssn modules
 make[1]: Entering directory `/usr/src/linux-2.6.16.60-0.21-obj/ia64/default'
@@ -114,27 +114,27 @@ find /lib/modules/2.6.16.60-0.21-default -name lgssn.ko.gz -exec rm -f {} \; || 
 install -D -m 644 lgssn.ko /lib/modules/2.6.16.60-0.21-default/kernel/drivers/net/lgssn/lgssn.ko
 /sbin/depmod -a || true
 [sles10]:/opt/hpvm_drivers/lgssn #
-{% endhighlight %}
+```
 
 This will copy the driver to `/lib/module/<KERNEL_VERSION>/kernel/drivers/net/lgssn/`.
 
 To ensure that the new driver will loaded during the startup of the operative system first add the following line to `/etc/modprobe.conf`, one line for each interface configured for AVIO Lan.
 
-{% highlight text %}
+```
 alias eth1 lgssn
-{% endhighlight %}
+```
 
 The HPVM 4.2 manual said you have to issue the command `depmod -a` in order to inform the kernel about the change but if you look the above log will see that the last command executed by the make install is a `depmod -a`. Look into the `modules.dep` file to check that the corresponding line for the `lgssn` driver has been added.
 
-{% highlight text %}
+```
 [sles10]:~ # grep lgssn /lib/modules/2.6.16.60-0.21-default/modules.dep
 /lib/modules/2.6.16.60-0.21-default/kernel/drivers/net/lgssn/lgssn.ko:
 [sles10]:~ #
-{% endhighlight %}
+```
 
 At this point and if you have previously reconfigured the virtual machine, load the module and restart the network services.
 
-{% highlight text %}
+```
 [sles10]:/opt/hpvm_drivers/lgssn # insmod /lib/modules/2.6.16.60-0.21-default/kernel/drivers/net/lgssn/lgssn.ko
 [sles10]:/opt/hpvm_drivers/lgssn # lsmod |grep lgssn
 lgssn                 576136  0
@@ -189,11 +189,11 @@ Checking for network time protocol daemon (NTPD):               �
     eth2                                                              done
 Setting up service network  .  .  .  .  .  .  .  .  .  .  .  .  .  .  done
 [sles10]:/opt/hpvm_drivers/lgssn #
-{% endhighlight %}
+```
 
 If you have not configured the networking interface of the virtual machine shutdown the virtual machine and from the host modify each virtual NIC of the guest. Take into account that AVIO LAN drivers are not supported with `localnet` virtual switches.
 
-{% highlight text %}
+```
 root@hpvm-host:~ # hpvmmodify -P sles10 -m network:avio_lan:0,2:vswitch:vlan2:portid:4
 root@hpvm-host:~ # hpvmstatus -P sles10 -d
 [Virtual Machine Devices]
@@ -204,7 +204,7 @@ network:avio_lan:0,1,0x66F3F84E37D5:vswitch:vlan1:portid:4
 network:avio_lan:0,2,0x0ADCFDCB2C62:vswitch:vlan2:portid:4
 ...
 root@hpvm-host:~ #
-{% endhighlight %}
+```
 
 Finally start the virtual machine and check that everything went well and the drivers have been loaded.
 

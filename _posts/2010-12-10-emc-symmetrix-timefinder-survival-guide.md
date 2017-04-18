@@ -51,7 +51,7 @@ Following is a list of the most basic `symcli` commands necessary to get your wa
 
 #### Get the list of the Symmetrix devices
 
-{% highlight text %}
+```
 root:/# symdev list
 Symmetrix ID: 00029xxxxxxx
         Device Name           Directors                  Device
@@ -78,23 +78,23 @@ Sym  Physical               SA :P DA :IT  Config        Attribute Sts      (MB)
 0053 Not Visible            ???:? 01C:C0  2-Way Mir     N/A (SV)  RW       8632
 0054 Not Visible            ???:? 16B:C0  2-Way Mir     N/A (SV)  RW       8632
 …………………………………………………………………………………………………………………………………………………………………………………………………………………
-{% endhighlight %}
+```
 
 #### List all available devices from a device group
 
-{% highlight text %}
+```
 root:/# symld -g dg_oradev_01 list
-{% endhighlight %}
+```
 
 #### List host physical devices
 
-{% highlight text %}
+```
 root:/# sympd list
-{% endhighlight %}
+```
 
 #### List the disk groups:
 
-{% highlight text %}
+```
 root:/# /usr/symcli/bin/symdg list
 
                        D E V I C E      G R O U P S
@@ -111,25 +111,25 @@ root:/# /usr/symcli/bin/symdg list
  grupo1             RDF1     Yes    00029xxxxxxx    22     0     0      0
 
 root:/#
-{% endhighlight %}
+```
 
 #### Add devices to a disk group
 
 -   Add physical devices
 
-{% highlight text %}
+```
 root:/# symld -g dg_oradev_01 add pd /dev/dsk/c2t4d12
-{% endhighlight %}
+```
 
 -   Add Symmetrix devices
 
-{% highlight text %}
+```
 root:/# symld -g dg_oradev_01 add 006E
-{% endhighlight %}
+```
 
 #### Get diskgroup detailed info.
 
-{% highlight text %}
+```
 root:/# /usr/symcli/bin/symdg show dg_prod_01
 
 Group Name:  dg_prod_01
@@ -234,59 +234,59 @@ Group Name:  dg_prod_01
         }
 
 root:/#
-{% endhighlight %}
+```
 
 ### Timfinder commands
 
 #### Associate BCVs to a device group. There are two ways:
 
-{% highlight text %}
+```
 root:/# symbcv -sid xxxx -g dg_oradev_01 associate dev 0001
-{% endhighlight %}
+```
 
 #### Establish the mirrors
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 -full establish DEV001 BCV001
-{% endhighlight %}
+```
 
 #### Split operations.
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 split
-{% endhighlight %}
+```
 
 There are several additional split modes and/or modifiers.
 
 -   Instant
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 split -instant
-{% endhighlight %}
+```
 
 -   Force
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 split -force
-{% endhighlight %}
+```
 
 -   Differential
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 split -differential
-{% endhighlight %}
+```
 
 -   Reverse
 
-{% highlight text %}
+```
 root/# symmir -g dg_oradev_01 reverse split
-{% endhighlight %}
+```
 
 -   Reverse differential
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 reverse split -differential
-{% endhighlight %}
+```
 
 #### Restore the BCV mirrors.
 
@@ -294,28 +294,28 @@ The restore operation will copy the data from the BCV to the Standard device.
 
 -   Differential restore
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 restore
-{% endhighlight %}
+```
 
 -   Full restore
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 -full restore
-{% endhighlight %}
+```
 
 #### Reestablish operations.
 
 It is very important to tell the difference between *Restore* and *Reestablish*. Reestablish will do a differential
 update from the Standard device to the BCV device.
 
-{% highlight text %}
+```
 root:/# symmir -g dg_oradev_01 establish
-{% endhighlight %}
+```
 
 #### Get the list of BCV devices
 
-{% highlight text %}
+```
 root:/# symbcv list
 
 Symmetrix ID: 00029xxxxxxx
@@ -331,11 +331,11 @@ c4t1d0s2         0088              0 c4t0d0s2       
 c4t1d1s2         0089              0 c4t0d1s2        0085      0 Split
 c4t1d2s2         008A              0 c4t0d2s2        0086      0 Split
 c4t1d3s2         008B              0 c4t0d3s2        0087      0 Split
-{% endhighlight %}
+```
 
 #### Get the state of mirroring of the device pairs within a device group
 
-{% highlight text %}
+```
 root:/# /usr/symcli/bin/symmir -g dg_oracle_prod_01 query
 
 Device Group (DG) Name: dg_oracle_prod_01
@@ -369,11 +369,11 @@ Legend:
 (*): The paired BCV device is associated with this group.
 
 root:/#
-{% endhighlight %}
+```
 
 #### List all BCV sessions in a Symmetrix array
 
-{% highlight text %}
+```
 root:/# symmir list -sid xxxx
 
 Symmetrix ID: 00000000xxxx
@@ -398,7 +398,7 @@ Sym        Tracks     Sym      Tracks         STD <=> BC
 Total       --------          --------
   Tracks           0              8088
   MB(s)          0.0             505.5
-{% endhighlight %}
+```
 
 And we are done. As I said this is not a full guide so please if there is anything that you don't get please leave a comment and I will try to clarify. Also if any of you have additional tips or recipes for Timefinder please comment.
 

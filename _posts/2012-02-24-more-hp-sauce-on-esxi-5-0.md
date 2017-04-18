@@ -25,7 +25,7 @@ On my [first post about HP ESXi 5.0](/2012/01/09/new-esxcli-namespaces-included-
 
 If you list the software bundles and filter the output to display only the included by HP will notice an `hponcfg` package.
 
-{% highlight text %}
+```
 ~ # esxcli software vib list |grep Hewlett
 char-hpcru            5.0.0.8-1OEM.500.0.0.434156         Hewlett-Packard     PartnerSupported  2011-05-24 
 char-hpilo            500.9.0.0.8-1OEM.500.0.0.434156     Hewlett-Packard     PartnerSupported  2011-05-24 
@@ -33,11 +33,11 @@ hp-smx-provider       500.02.10.13.44-434156              Hew
 hpbootcfg             01-00.10                            Hewlett-Packard     PartnerSupported  2011-05-24 
 hponcfg               03-02.04                            Hewlett-Packard     PartnerSupported  2011-05-24 
 ~ #
-{% endhighlight %}
+```
 
 `hponcfg`, also included on ProLiant Support Pack for Linux, is a tool that enable a System Administrator to manage the iLO of a ProLiant server from the operative system.
 
-{% highlight text %}
+```
 ~ # esxcli software vib get -n hponcfg
 Hewlett-Packard_bootbank_hponcfg_03-02.04
    Name: hponcfg
@@ -61,19 +61,19 @@ Hewlett-Packard_bootbank_hponcfg_03-02.04
    Tags:
    Payloads: hponcfg
 ~ #
-{% endhighlight %}
+```
 
 The tool is located at `/opt/hp/tools`.
 
-{% highlight text %}
+```
 /opt/hp/tools # ls
 hpbootcfg         hpbootcfg_esxcli  hponcfg
 /opt/hp/tools #
-{% endhighlight %}
+```
 
 Launch the utility without arguments and you will get the usage and it will also display current firmware version of the iLO.
 
-{% highlight text %}
+```
 /opt/hp/tools # ./hponcfg
 HP Lights-Out Online Configuration utility
 Version 3.2-4 (c) Hewlett-Packard Company, 2011
@@ -103,11 +103,11 @@ USAGE:
   -g,  --get_hostinfo   Get the Host information
   -m,  --minfwlevel     Minimum firmware level
 /opt/hp/tools #
-{% endhighlight %}
+```
 
 As a non intrusive example you can use `-g` switch to get the server info.
 
-{% highlight text %}
+```
 /opt/hp/tools # ./hponcfg  -g
 HP Lights-Out Online Configuration utility
 Version 3.2-4 (c) Hewlett-Packard Company, 2011
@@ -116,7 +116,7 @@ Host Information:
                         Server Name: esxi01.hp.local
                         Server Number:
 /opt/hp/tools #
-{% endhighlight %}
+```
 
 I'll let you to investigate the rest of the options carefully.
 

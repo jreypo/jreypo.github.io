@@ -27,7 +27,7 @@ There is a Debian based bare-metal installer ISO named [**Proxmos Virtual Enviro
 
 -   Add the `yum` repository to the server:
 
-{% highlight text %}
+```
 [root@openvz ~]# cd /etc/yum.repos.d/
 [root@openvz yum.repos.d]# ls
 CentOS-Base.repo  CentOS-Media.repo
@@ -45,11 +45,11 @@ Saving to: `openvz.repo'
 
 [root@openvz yum.repos.d]# rpm --import http://download.openvz.org/RPM-GPG-Key-OpenVZ
 [root@openvz yum.repos.d]#
-{% endhighlight %}
+```
 
 -   Install the OpenVZ kernel, in my particular case I used the basic kernel but there are SMP+PAE, PAE and Xen kernels available:
 
-{% highlight text %}
+```
 [root@openvz yum.repos.d]# yum install ovzkernel
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -101,11 +101,11 @@ Installed:
 
 Complete!
 [root@openvz yum.repos.d]#
-{% endhighlight %}
+```
 
 -   Install OpenVZ management utilities:
 
-{% highlight text %}
+```
 [root@openvz yum.repos.d]# yum install vzctl vzquota
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -168,11 +168,11 @@ Dependency Installed:
 
 Complete!
 [root@openvz yum.repos.d]#
-{% endhighlight %}
+```
 
 -   Configure the kernel. The following adjustments must be done in the `/etc/sysctl.conf` file:
 
-{% highlight text %}
+```
 # On Hardware Node we generally need
 # packet forwarding enabled and proxy arp disabled
 net.ipv4.ip_forward = 1
@@ -189,11 +189,11 @@ kernel.sysrq = 1
 # We do not want all our interfaces to send redirects
 net.ipv4.conf.default.send_redirects = 1
 net.ipv4.conf.all.send_redirects = 0
-{% endhighlight %}
+```
 
 -   Disable SELinux:
 
-{% highlight text %}
+```
 [root@openvz ~]# cat /etc/sysconfig/selinux   
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
@@ -209,7 +209,7 @@ SELINUXTYPE=targeted
 # SETLOCALDEFS= Check local definition changes
 SETLOCALDEFS=0
 [root@openvz ~]#
-{% endhighlight %}
+```
 
 -   Reboot the sever with the new kernel.
 
@@ -217,19 +217,19 @@ SETLOCALDEFS=0
 
 -   Check OpenVZ service:
 
-{% highlight text %}
+```
 [root@openvz ~]# chkconfig --list vz
 vz              0:off   1:off   2:on    3:on    4:on    5:on    6:off
 [root@openvz ~]# service vz status
 OpenVZ is running...
 [root@openvz ~]#
-{% endhighlight %}
+```
 
 The first part is over, now we are going to create a VPS as a proof of concept.
 
 -   Download the template of the Linux distribution to install as VPS and place it in `/vz/template/cache`
 
-{% highlight text %}
+```
 [root@openvz /]# cd vz/template/cache/
 [root@openvz cache]# wget http://download.openvz.org/template/precreated/centos-5-x86.tar.gz
 --2010-04-04 23:20:20--  http://download.openvz.org/template/precreated/centos-5-x86.tar.gz
@@ -244,21 +244,21 @@ Saving to: `centos-5-x86.tar.gz'
 2010-04-04 23:23:19 (988 KB/s) - `centos-5-x86.tar.gz' saved [179985449/179985449]
 
 [root@openvz cache]#
-{% endhighlight %}
+```
 
 -   Create a new virtual machine using the template.
 
-{% highlight text %}
+```
 [root@openvz cache]# vzctl create 1 --ostemplate centos-5-x86
 Creating container private area (centos-5-x86)
 Performing postcreate actions
 Container private area was created
 [root@openvz cache]#
-{% endhighlight %}
+```
 
 -   We have a basic VPS created but it needs more tweaking before we can start it. Set the IP address, the DNS server, hostname, a name to identify it in the Host node and finally set the On Boot parameter to automatically start the container with the host.
 
-{% highlight text %}
+```
 [root@openvz cache]# vzctl set 1 --ipadd 192.168.1.70 --save
 Saved parameters for CT 1
 [root@openvz cache]# vzctl set 1 --name vps01 --save
@@ -271,11 +271,11 @@ Saved parameters for CT 1
 [root@openvz cache]# vzctl set 1 --onboot yes --save
  Saved parameters for CT 1
 [root@openvz cache]#
-{% endhighlight %}
+```
 
 -   Start the container and check it with `vzlist`.
 
-{% highlight text %}
+```
 [root@openvz cache]# vzctl start vps01
 Starting container ...
 Container is mounted
@@ -291,11 +291,11 @@ Container start in progress...
  CTID      NPROC STATUS  IP_ADDR         HOSTNAME                        
  1         10 running 192.168.1.70    vps01                           
 [root@openvz cache]#
-{% endhighlight %}
+```
 
 -   Enter the container and check that its operating system is up and running.
 
-{% highlight text %}
+```
 [root@openvz cache]# vzctl enter vps01
 entered into CT 1
 [root@vps01 /]#
@@ -307,11 +307,11 @@ Swap:            0          0          0
 [root@vps01 /]# uptime
  02:02:11 up 8 min,  0 users,  load average: 0.00, 0.00, 0.00
 [root@vps01 /]#
-{% endhighlight %}
+```
 
 -   To finish the test stop the container.
 
-{% highlight text %}
+```
 [root@openvz /]# vzctl stop 1
 Stopping container ...
 Container was stopped
@@ -321,7 +321,7 @@ Container is unmounted
  CTID      NPROC STATUS  IP_ADDR         HOSTNAME                        
  1          - stopped 192.168.1.70    vps01                           
 [root@openvz /]#
-{% endhighlight %}
+```
 
 And as I like to say... we are done ;-) Next time will try to cover more advanced topics.
 

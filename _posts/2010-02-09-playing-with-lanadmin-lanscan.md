@@ -29,7 +29,7 @@ Current release of HP-UX, 11.31, has the handy `nwmgr` to handle networking task
 ### Lanscan 
 `lanscan` is used to get information about the LAN interfaces.
 
-{% highlight text %}
+```
 root@sap01:~# lanscan
 Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
 Path     Address        In# State NamePPA        ID  Type      Support Mjr#
@@ -45,11 +45,11 @@ LinkAgg2 0x000000000000 902 DOWN  lan902 snap902 11  ETHER     Yes     119
 LinkAgg3 0x000000000000 903 DOWN  lan903 snap903 12  ETHER     Yes     119
 LinkAgg4 0x000000000000 904 DOWN  lan904 snap904 13  ETHER     Yes     119
 root@sap01:~#
-{% endhighlight %}
+```
 
 A verbose version can be obtained with the `-v` switch, but for me this switch has a glitch since you can't query for a single LAN card:
 
-{% highlight text %}
+```
 root@sap01:~# lanscan -v
 -------------------------------------------------------------------------------
 Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
@@ -65,11 +65,11 @@ iether
 -------------------------------------------------------------------------------
 ...
 root@sap01:~#
-{% endhighlight %}
+```
 
 There are other options for `lanscan` that can be used to obtain more simple info in a script friendly list format:
 
-{% highlight text %}
+```
 root@sap01:~# lanscan -a
 0x001A4B07F002
 0x001A4B07F003
@@ -95,7 +95,7 @@ lan902 snap902
 lan903 snap903
 lan904 snap904
 root@sap01:~#
-{% endhighlight %}
+```
 
 ### Lanadmin  
 
@@ -113,7 +113,7 @@ root@sap01:~#
 
 It can be used in two ways, if invoked with no options from the shell it will present a menu style interface where different tasks can be performed. Following is am example to illustrate.
 
-{% highlight text %}
+```
           LOCAL AREA NETWORK ONLINE ADMINISTRATION, Version 1.0
                        Tue , Feb 9,2010  14:22:27
 
@@ -198,13 +198,13 @@ LAN Interface test mode. LAN Interface PPA Number = 0
         specific = Go to Driver specific menu
 
 Enter command:
-{% endhighlight %}
+```
 
 When used with options from the command line `lanadmin` can perform the same tasks as as in the menu interface on each LAN card. Here are some of the most common features I've been using for years.
 
 - Display interface info:
 
-{% highlight text %}
+```
 root@sap01:~# lanadmin -x card_info  1
 *********** Version Information **********
 Driver version: B.11.23.0712
@@ -225,11 +225,11 @@ Recv Max Buf Descriptors: 1
 Send Coalesced Ticks: 150
 Recv Coalesced Ticks: 0
 root@sap01:~#
-{% endhighlight %}
+```
 
 - Display Auto-Port Aggregation status:
 
-{% highlight text %}
+```
 root@sap01:~# lanadmin -x -v 900
 Link Aggregate PPA #      : 900
 Number of Ports           : 2
@@ -238,43 +238,43 @@ Link Aggregation State    : LINKAGG MANUAL
 Load Balance Mode         : Hot Standby (LB_HOT_STANDBY)
 
 root@sap01:~#
-{% endhighlight %}
+```
 
 - Show speed settings:
 
-{% highlight text %}
+```
 root@sap01:/# lanadmin -x 1
 Speed = 1000 Full-Duplex.
 Autonegotiation = On.
 
 root@sap01:/#
-{% endhighlight %}
+```
 
 - Creating an Aggregation link:
 
-{% highlight text %}
+```
 roo@sap01:/# lanadmin -X -a 1 2 900
-{% endhighlight %}
+```
 
 - Show load balancing algorithm in APA:
 
-{% highlight text %}
+```
 root@sap02:/etc# lanadmin -x -l 900
 Load Balancing = Hot Standby (LB_HOT_STANDBY)
 root@sap02:/etc#
-{% endhighlight %}
+```
 
 - Display MAC address:
 
-{% highlight text %}
+```
 root@sap01:~# lanadmin -a 1  
 Station Address                 = 0x001a4b07f003
 root@sap01:~#
-{% endhighlight %}
+```
 
 - Display driver and adapter statistics:
 
-{% highlight text %}
+```
 root@sap01:/# lanadmin -x stats drv 1
 ****** Driver Statistics ******        
 In Packet Error                                        0
@@ -326,11 +326,11 @@ ifOutMulticastPkts_high                            �
 ifOutBroadcastPkts_low                                 0
 ifOutBroadcastPkts_high                                0
 root@sap01:/#
-{% endhighlight %}
+```
 
 - Show Vital Product Data, a really funny name ;-) don't you think?
 
-{% highlight text %}
+```
 root@sap01:/# lanadmin -x vpd 0
 *********** Vital Product Data **********
 Product Description: PCI/PCI-X 10/100/1000BT Dual Ethernet Adapter
@@ -344,16 +344,16 @@ EFI Version: 03048
 ROM Firmware Version: N/A
 Asset Tag: N/A
 root@sap01:/#
-{% endhighlight %}
+```
 
 - Show card type:
 
-{% highlight text %}
+```
 root@sap01:~# lanadmin -x type 1     
 1000Base-T
 
 root@sap01:~#
-{% endhighlight %}
+```
 
 And we are finished. Probably I'm forgetting a more interesting uses of `lanadmin` if you have other everyday use please comment :-)
 

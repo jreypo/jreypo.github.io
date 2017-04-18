@@ -26,9 +26,9 @@ With release of ESXi 5.0 the `esxcli` command has been also vastly improved. One
 
 The basic syntax for dns is:
 
-{% highlight text %}
+```
 ~# esxcli network ip dns
-{% endhighlight %}
+```
 
 This gives you two namespaces to work with:
 

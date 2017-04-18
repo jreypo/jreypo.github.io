@@ -28,18 +28,18 @@ Surprisingly when I installed ESXi 4.1 Update 1 everything was properly recogniz
 -   Motherboard: [Asrock Penryn 1600SLI-110dB](http://www.asrock.com/mb/overview.asp?Model=Penryn1600SLI-110dB)
 -   Nic: Embedded nVidia NForce Network Controller. Supported under the forcedeth driver
 
-{% highlight text %}
+```
 ~ # ethtool -i vmnic0
 driver: forcedeth
 version: 0.61.0.1-1vmw
 firmware-version:
 bus-info: 0000:00:14.0
 ~ #
-{% endhighlight %}
+```
 
 -   SATA controller: nVidia MCP51 SATA Controller.
 
-{% highlight text %}
+```
 ~ # vmkload_mod -s sata_nv
 vmkload_mod module information
  input file: /usr/lib/vmware/vmkmod/sata_nv.o
@@ -53,7 +53,7 @@ vmkload_mod module information
   heap_initial: int
     Initial heap size allocated for the driver.
 ~ #
-{% endhighlight %}
+```
 
 -   HDD1: 1 x 120GB SATA 7200RPM Seagate ST3120026AS.
 -   HDD2: 1 x 1TB SATA 7200RPM Seagate ST31000528AS.

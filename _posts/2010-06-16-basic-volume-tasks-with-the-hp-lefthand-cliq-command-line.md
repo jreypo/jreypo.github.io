@@ -35,7 +35,7 @@ The command to use is `createVolume`. The available options for this command are
 -   `description`
 -   `size` - The size can be set in MB, GB or TB.
 
-{% highlight text %}
+```
 CLIQ>createVolume volumeName=vjm-cluster2 size=2GB clusterName=iSCSI-CL replication=1 thinProvision=1 description="vep01-02 datastore"
 
 SAN/iQ Command Line Interface, v8.1.00.0047
@@ -48,7 +48,7 @@ RESPONSE
  description    Operation succeeded
 
 CLIQ>
-{% endhighlight %}
+```
 
 ### Assign a volume to the hosts
 
@@ -58,7 +58,7 @@ The command to use in this task is *assignVolume*. Few parameters are accepted b
 -   `ìnitiator` - The host/hosts IQNs.If the volume is going to be presented to more than one host the IQNs of the server must be separated by semicolons. One important tip, the operation must be done in one command, you can not assign the volume to a host in one command and to a new host in a second command, the last one will overwrite the first instead of adding the volume to one more host.
 -   Access wrights: The default is read-write (`rw`), read-only (`r`) or write-only (`w`) can also be set.
 
-{% highlight text %}
+```
 CLIQ>assignVolume volumeName=vjm-cluster2 initiator=iqn.1998-01.com.vmware:vep01-45602bf3;iqn.1998-01.com.vmware:vep02-5f779b32
 
 SAN/iQ Command Line Interface, v8.1.00.0047
@@ -71,11 +71,11 @@ RESPONSE
  description    Operation succeeded
 
 CLIQ>
-{% endhighlight %}
+```
 
 And now that the volume is created and assigned to several servers check its configuration with `getVolumeInfo`.
 
-{% highlight text %}
+```
 CLIQ>getVolumeInfo volumeName=vjm-cluster2
 
 SAN/iQ Command Line Interface, v8.1.00.0047
@@ -133,7 +133,7 @@ RESPONSE
  access          rw
 
 CLIQ>
-{% endhighlight %}
+```
 
 If you refresh the storage configuration of the ESXs hosts through vSphere Client the new volume will be displayed.
 
@@ -143,7 +143,7 @@ If you refresh the storage configuration of the ESXs hosts through vSphere Clien
 
 Finally we are going to delete another volume that is no longer in use by the server of my lab.
 
-{% highlight text %}
+```
 CLIQ>deleteVolume volumeName=testvolume
 
 SAN/iQ Command Line Interface, v8.1.00.0047
@@ -170,7 +170,7 @@ RESPONSE
  description    Volume 'testvolume' not found
 
 CLIQ>
-{% endhighlight %}
+```
 
 And we are done. As always comments are welcome.
 

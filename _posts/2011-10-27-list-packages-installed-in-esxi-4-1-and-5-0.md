@@ -32,17 +32,17 @@ His intention was to look for the version of the `qla2xxx` driver and my first t
 
 I tried `esxupdate` with no luck.
 
-{% highlight text %}
+```
 ~ # esxupdate query
 ----Bulletin ID----- -----Installed----- --------------Summary---------------
 ESXi410-201101223-UG 2011-01-13T05:09:39 3w-9xxx: scsi driver for VMware ESXi
 ESXi410-201101224-UG 2011-01-13T05:09:39 vxge: net driver for VMware ESXi    
 ~ #
-{% endhighlight %}
+```
 
 Then I suddenly thought that the ESXi Tech Support Mode is based on Busybox. If you have ever use a Busybox environment, like a QNAP NAS, you will probably remember that the way to install new software over the network is with `ipkg` command and to list the software packages already installed the syntax is `ipkg list_installed`.
 
-{% highlight text %}
+```
 ~ # ipkg list_installed
 emulex-cim-provider - 410.2.0.32.1-207424 -
 lsi-provider - 410.04.V0.24-140815 -
@@ -113,21 +113,21 @@ vmware-esx-drivers-usbcore-usb - 400.1.0.0.1-1vmw.1.4.348481 -
 vmware-esx-drivers-vmklinux-vmklinux - 4.1.0-1.4.348481 -
 Successfully terminated.
 ~ #
-{% endhighlight %}
+```
 
 There you are! There is one gotcha to get the version, it starts just after the 400.
 
 Next task of course was to do the same in ESXi 5.0.
 
-{% highlight text %}
+```
 ~ # ipkg list_installed
 -sh: ipkg: not found
 ~ #
-{% endhighlight %}
+```
 
 Ouch! `ipkg` has been removed from ESXi 5.0. The key to get the same list is `esxcli`.
 
-{% highlight text %}
+```
 ~ # esxcli software vib list
 Name                  Version                             Vendor  Acceptance Level  Install Date
 --------------------  ----------------------------------  ------  ----------------  ------------
@@ -191,7 +191,7 @@ scsi-qla4xxx          5.01.03.2-3vmw.500.0.0.469512       VMware�
 uhci-usb-uhci         1.0-3vmw.500.0.0.469512             VMware  VMwareCertified   2011-09-07 
 tools-light           5.0.0-0.0.469512                    VMware  VMwareCertified   2011-09-07 
 ~ #
-{% endhighlight %}
+```
 
 A final thought for all of you starting with vSphere 5, `esxcli` is the key in ESXi 5.0 shell.
 

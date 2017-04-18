@@ -30,7 +30,7 @@ Have to say that even with the initial disappointment about `hpvmclone`, cloning
 
 Let's assume we already have a cloned virtual machine, in this particular case I used `dd` to clone the virtual disk and later I created the IVM and added the storage device and the other resources but it also applied to the other method with minor changes.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmstatus -P vmnode2 -d
 [Virtual Machine Devices]
 
@@ -45,11 +45,11 @@ network:lan:0,2,0x3E9492C9F615:vswitch:vlan02
 [Misc Interface Details]
 serial:com1::tty:console
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 We start the virtual machine an access its console.Now we are going to follow some of the final steps of the third method described in my previous post. From the main `EFI Boot Manager` select the `Boot option maintenance menu` option.
 
-{% highlight text %}
+```
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option
@@ -58,11 +58,11 @@ Please select a boot option
      Boot option maintenance menu                                    
 
      Use ^ and v to change option(s). Use Enter to select an option
-{% endhighlight %}
+```
 
 Select Boot from a file and the select the first partition:
 
-{% highlight text %}
+```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Boot From a File.  Select a Volume
@@ -75,11 +75,11 @@ Boot From a File.  Select a Volume
     Load File [EFI Shell [Built-in]]                                
     Legacy Boot
     Exit
-{% endhighlight %}
+```
 
 Enter the EFI directory then the HPUX directory and finally select `hpux.file`. Like I said before this part is very similar to the final steps of Method 3.
 
-{% highlight text %}
+```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Select file or change to new directory:
@@ -89,11 +89,11 @@ Select file or change to new directory:
        03/10/10  04:21p           657,609 hpux.efi                  
        03/09/10  03:45p            24,576 nbp.efi                   
        Exit
-{% endhighlight %}
+```
 
 After this the machine will boot.
 
-{% highlight text %}
+```
    Filename: \EFI\HPUX\hpux.efi
  DevicePath: [Acpi(PNP0A03,0)/Pci(0|0)/Scsi(Pun0,Lun0)/HD(Part1,Sig71252358-2BCD-11DF-8000-D6217B60E588)/\EFI\HPUX\hpux.efi]
    IA-64 EFI Application 03/10/10  04:21p     657,609 bytes
@@ -119,13 +119,13 @@ loading MFSFILES directory (bootfs) to MFS
 Launching /stand/vmunix
 SIZE: Text:43425K + Data:7551K + BSS:22118K = Total:73096K
 ...
-{% endhighlight %}
+```
 
 When the VM is up login as root. The first tasks as always are to change hostname and network configuration to avoid conflicts.
 
 Next we are going recreate `lvmtab` since the current one contains the LVM configuration of the source virtual machine. Performing a simple `vgdisplay` will show it.
 
-{% highlight text %}
+```
 root@vmnode2:/# vgdisplay
 vgdisplay: Warning: couldn't query physical volume "/dev/disk/disk15_p2":
 The specified path does not correspond to physical volume attached to
@@ -152,11 +152,11 @@ Total Spare PVs             0              
 Total Spare PVs in use      0
 
 root@vmnode2:/#
-{% endhighlight %}
+```
 
 To correct this remove the `/etc/lvmtab` file and execute a new `vgscan`.
 
-{% highlight text %}
+```
 root@vmnode2:/# rm /etc/lvmtab
 /etc/lvmtab: ? (y/n) y
 root@vmnode2:/var/tmp/software# vgscan
@@ -169,21 +169,21 @@ Physical Volume "/dev/dsk/c1t1d0" contains no LVM information
 *** #1.  vgchange -a y
 *** #2.  lvlnboot -R
 root@vmnode2:/#
-{% endhighlight %}
+```
 
 Follow the recommended steps in `vgscan` output, the first step only applies if there are any other VGs in the system, if there is only `vg00` it is already active so this step is not necessary.
 
 Running `lvnlboot -R` is mandatory since we need to recover and update the links to the logical volumes in the Boot Data Reserved Area of the booting disk.
 
-{% highlight text %}
+```
 root@vmnode2:/# lvlnboot -R
 Volume Group configuration for /dev/vg00 has been saved in /etc/lvmconf/vg00.conf
 root@vmnode2:/#
-{% endhighlight %}
+```
 
 Now the LVM configuration is fixed, try again the `vgdisplay` command.
 
-{% highlight text %}
+```
 root@vmnode2:/# vgdisplay
 --- Volume groups ---
 VG Name                     /dev/vg00
@@ -206,11 +206,11 @@ Total Spare PVs             0
 Total Spare PVs in use      0
 
 root@vmnode2:/#
-{% endhighlight %}
+```
 
 With the LVM configuration fixed the next step is to indicate the booting disk to the system.
 
-{% highlight text %}
+```
 root@vmnode2:/# setboot -p /dev/disk/disk21_p2
 Primary boot path set to 0/0/0/0.0x0.0x0 (/dev/disk/disk21_p2)
 root@vmnode2:/#
@@ -221,11 +221,11 @@ Alternate bootpath :
 
 Autoboot is ON (enabled)
 root@vmnode2:/#
-{% endhighlight %}
+```
 
 Finally reboot the virtual machine and if we did everything correctly a new boot option will be available in **EFI Boot Manager**.
 
-{% highlight text %}
+```
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option
@@ -235,7 +235,7 @@ Please select a boot option
     Boot option maintenance menu                                    
 
     Use ^ and v to change option(s). Use Enter to select an option
-{% endhighlight %}
+```
 
 Let the system boot by itself through the new default option `HP-UX Primary Boot` and we are done.
 

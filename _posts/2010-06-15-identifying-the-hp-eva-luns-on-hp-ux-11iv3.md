@@ -24,7 +24,7 @@ Yesterday's post about CLARiiON reminded me a similar issue I observed when the 
 
 The key to match your disk in the HP-UX host with the LUN provided by the EVA arrays is the *wwid* attribute of the disk.
 
-{% highlight text %}
+```
 root@ignite:/ # scsimgr get_attr -D /dev/rdisk/disk10 -a wwid
 
         SCSI ATTRIBUTES FOR LUN : /dev/rdisk/disk10
@@ -35,7 +35,7 @@ default =
 saved =
 
 root@ignite:/ #
-{% endhighlight %}
+```
 
 If you look for this value in Command View will see that is the same as the World Wide LUN Name and the UUID.
 
@@ -45,7 +45,7 @@ If you look for this value in Command View will see that is the same as the Worl
 
 Thanks to my friend Jean and to Greg who reminded me that like Greg said in his comment is much easier to match the Word Wide LUN Name with the `evainfo` tool. Thanks to both of you :-)
 
-{% highlight text %}
+```
 root@hpux-server # evainfo -aP
 
 Devicefile                      Array                   WWNN                            Capacity        Controller/Port/Mode
@@ -57,7 +57,7 @@ Devicefile                      Array           
 /dev/rdisk/disk25       5001-4380-04C7-2D90 6005-08B4-000F-3EED-0000-5000-0056-0000       10240MB       Ctl-A/FP-1/Optimized
 /dev/rdisk/disk26       5001-4380-04C7-2D90 6005-08B4-000F-3EED-0000-5000-005A-0000       20480MB       Ctl-A/FP-1/Optimized
 /dev/rdisk/disk27       5001-4380-04C7-2D90 6005-08B4-000F-3EED-0000-5000-005E-0000      245760MB       Ctl-A/FP-1/Optimized
-{% endhighlight %}
+```
 
 Where can I get EVAinfo? Like Greg said EVAinfo is distributed on the HP StorageWorks Storage System Scripting Utility CD (SSSU) since 8.0 version. <span style="text-decoration:line-through;">Unfortunately I couldn't find, yet, a public download URL but the CD is distributed with the hardware so if you own an EVA is probably you already have the media.</span>
 

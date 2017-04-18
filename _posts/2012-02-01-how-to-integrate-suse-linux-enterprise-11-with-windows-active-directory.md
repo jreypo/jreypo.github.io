@@ -81,7 +81,7 @@ The first is the configuration file for the [`samba`](http://samba.org/) service
 
 The file resides in `/etc/samba`. Take a look at the contents of the file, the relevant part is the `global` section.
 
-{% highlight text %}
+```
 [global]
         workgroup = VJLAB
         passdb backend = tdbsam
@@ -102,13 +102,13 @@ The file resides in `/etc/samba`. Take a look at the contents of the file, the r
         template homedir = /home/%D/%U
         template shell = /bin/bash
         winbind refresh tickets = yes
-{% endhighlight %}
+```
 
 #### krb5.conf
 
 `krb5.conf` file is the Kerberos daemon configuration file which contains the necessary information for the Kerberos library.
 
-{% highlight text %}
+```
 jreypo@sles11-01:/etc> cat krb5.conf
 [libdefaults]
         default_realm = VJLAB.LOCAL
@@ -134,7 +134,7 @@ jreypo@sles11-01:/etc> cat krb5.conf
                 minimum_uid = 1
         }
 jreypo@sles11-01:/etc>
-{% endhighlight %}
+```
 
 #### nsswitch.conf
 
@@ -142,10 +142,10 @@ jreypo@sles11-01:/etc>
 
 Have a quick look into the file and you will notice the two fields changed, `passwd` and `group`. In both the `winbind `` option has been added in order to indicate the system to use `winbind`, the Name Service Switch daemon used to resolve NT server names.
 
-{% highlight text %}
+```
 passwd: compat winbind
 group:  compat winbind
-{% endhighlight %}
+```
 
 #### SSH single sign-on
 
@@ -161,11 +161,11 @@ To prevent this potentially dangerous situation we are going to limit the access
 
 First we need to look for the Domain Admins group ID within our Linux box. Log in as `DOMAIN\Administrator` and use the `id` command to get the user info.
 
-{% highlight text %}
+```
 VJLAB\administrator@sles11-01:~> id
 uid=10000(VJLAB\administrator) gid=10000(VJLAB\domain users) groups=10000(VJLAB\domain users),10001(VJLAB\schema admins),10002(VJLAB\domain admins),10003(VJLAB\enterprise admins),10004(VJLAB\group policy creator owners)
 VJLAB\administrator@sles11-01:~>
-{% endhighlight %}
+```
 
 There are several group IDs, for our purposes we need the `VJLAB\domain admins` which is `10002`.
 
@@ -181,7 +181,7 @@ On the right pane edit the properties of the account you want to be able to acce
 
 Now we need to modify how the pam daemon manage the authentication. Go back to SLES and edit `/etc/pam.d/sshd` configuration file.
 
-{% highlight text %}
+```
 #%PAM-1.0
 auth     requisite      pam_nologin.so
 auth     include        common-auth
@@ -189,18 +189,18 @@ account  include        common-account
 password include        common-password
 session  required       pam_loginuid.so
 session  include        common-session
-{% endhighlight %}
+```
 
 Delete the account line and add the following two lines.
 
-{% highlight text %}
+```
 account  sufficient     pam_localuser.so
 account  sufficient     pam_succeed_if.so gid = 10002
-{% endhighlight %}
+```
 
 The `sshd` file should look like this:
 
-{% highlight text %}
+```
 #%PAM-1.0
 auth     requisite      pam_nologin.so
 auth     include        common-auth
@@ -209,7 +209,7 @@ account  sufficient     pam_succeed_if.so gid = 10002
 password include        common-password
 session  required       pam_loginuid.so
 session  include        common-session
-{% endhighlight %}
+```
 
 What we did? First eliminated the ability to login via SSH for every user and later we allow the server local users and the Domain Admins to log into the server.
 

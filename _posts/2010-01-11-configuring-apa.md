@@ -51,7 +51,7 @@ The `nwmgr` command has replaced the old `lanscan`, `lanadmin` and `linkloop` co
 
 To begin show the current configuration:
 
-{% highlight text %}
+```
 [root@ignite] ~ # nwmgr -g
 
 Name/          Interface Station          Sub-   Interface      Related
@@ -76,29 +76,29 @@ lan902   Not_Enabled LB_MAC    0 Mbps                -
 lan903   Not_Enabled LB_MAC    0 Mbps                -
 lan904   Not_Enabled LB_MAC    0 Mbps                -
 [root@ignite] ~ #
-{% endhighlight %}
+```
 
 Now proceed with the creation of the new failover group:
 
-{% highlight text %}
+```
 [root@ignite] ~ # nwmgr -a -S apa -c lan900 -A links=0,1 -A mode=LAN_MONITOR
 Addition of links 0, 1 to lan900 succeeded.
 [root@ignite] ~ # nwmgr -s -S apa -A all --saved --from cu
 [root@ignite] ~ #
-{% endhighlight %}
+```
 
 Specific advanced parameters can also be set, in the example I used the parameters `rapid_arp_count` and `poll_interval`:
 
-{% highlight text %}
+```
 [root@ignite] / # nwmgr -a -S apa -c lan901 -A links=2,1,3 -A mode=LAN_MONITOR -A rapid_arp_count=5 -A poll_interval=0,500000
 Addition of links 0, 1 to lan900 succeeded.
 [root@ignite] / # nwmgr -s -S apa -A all --saved --from cu
 [root@ignite] / #
-{% endhighlight %}
+```
 
 To show the new config:
 
-{% highlight text %}
+```
 [root@ignite] ~ # nwmgr -g
 
 Name/          Interface Station          Sub-   Interface      Related
@@ -166,22 +166,22 @@ lan900 current values:
 lan900: flags=1843<UP,BROADCAST,RUNNING,MULTICAST,CKO>
  inet 10.31.4.37 netmask ffffff00 broadcast 10.31.4.255
 [root@ignite] ~ #
-{% endhighlight %}
+```
 
 If you want to delete an existent failover group:
 
-{% highlight text %}
+```
 [root@ignite] ~ # nwmgr -d -S apa -A links=all -c lan900 --force
 Deletion of links all ports from lan900 succeeded.
 [root@ignite] ~ # nwmgr -s -S apa -A all --saved --from cu
 [root@ignite] ~ #
-{% endhighlight %}
+```
 
 Or if you just want to remove a interface from the group:
 
-{% highlight text %}
+```
 [root@ignite] ~ # nwmgr -d -S apa -c lan901 -A links=1
-{% endhighlight %}
+```
 
 And we are finished, I still have 11.23 systems and I want APA for them too so I will post how to do it with the `lanadmin` command.
 

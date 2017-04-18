@@ -23,7 +23,7 @@ In the client:
 
 -   Boot your new server into the EFI Shell and with the `lanaddress` command search for our MAC:
 
-{% highlight text %}
+```
 Shell> lanaddress
 
 LAN Address Information
@@ -34,14 +34,14 @@ LAN Address Information
  Mac(YYYYYYYYYYYY)  Acpi(HWP0002,PNP0A03,100)/Pci(1|1)/Mac(YYYYYYYYYYYY)
  Mac(000000000000)  Acpi(HWP0002,PNP0A03,200)/Pci(2|0)/Mac(000000000000)
  Mac(00AA00AA00AA)  Acpi(HWP0002,PNP0A03,200)/Pci(2|1)/Mac(00AA00AA00AA)
-{% endhighlight %}
+```
 
 -   Create a new Direct Boot Profile:
 
-{% highlight text %}
+```
 Shell> dbprofile -dn newserver -sip 10.10.10.2 -cip 10.10.10.35 -gip 10.31.4.1 -m 255.255.255.0 -b "/opt/ignite/boot/nbp.efi"
 Creating profile newserver
-{% endhighlight %}
+```
 
 The `dbprofile` command is exclusive for partionable servers:
 
@@ -56,31 +56,31 @@ In the Ignite server:
 
 -   Create the directory `/var/opt/ignite/clients/<0xMAC_of_the_client>`.
 
-{% highlight text %}
+```
 [ignite]/var/opt/ignite/clients # mkdir 0xXXXXXXXXXXXX
-{% endhighlight %}
+```
 
 -   Put bin:sys as owner:group of the new directory.
 
-{% highlight text%}
+```
 [ignite]/var/opt/ignite/clients # chown bin:sys 0xXXXXXXXXXXXX
-{% endhighlight %}
+```
 
 -   Create a link `<client> -> <0xMAC_of_the_client>` in the same location.
 
-{% highlight text%}
+```
 [ignite]/var/opt/ignite/clients # ln -s 0xXXXXXXXXXXXX newserver
-{% endhighlight %}
+```
 
 -   Set `bin:bin` as owner of the link.
 
-{% highlight text%}
+```
 [ignite]/var/opt/ignite/clients # chown -h bin:bin newserver
-{% endhighlight %}
+```
 
 -   Copy the data from the "source client" to the "target client".
 
-{% highlight text%}
+```
 [ignite]/var/opt/ignite/clients/source_server # find CINDEX recovery | cpio -pdvma ../newserver
 ../newserver/CINDEX
 ../newserver/recovery/client_status
@@ -108,13 +108,13 @@ In the Ignite server:
 ../newserver/recovery/2009-04-07,11:50/archive_cfg
 ../newserver/recovery/2009-04-07,11:50/manifest
 65202 blocks
-{% endhighlight %}
+```
 
 Now we have to share the new directory via NFS. In HP-UX 11.31 is quite simple, add the corresponding line in `/etc/dfs/dfstab` and execute the `shareall -F nfs` command.
 
 In our example server it will shows like this:
 
-{% highlight text%}
+```
 [ignite]/etc/dfs # cat dfstab
 #       place share(1M) commands here for automatic execution #       on entering init state 3.
 #
@@ -123,13 +123,13 @@ In our example server it will shows like this:
 #       share  -F nfs  -o rw=engineering  -d "home dirs"  /home
 share -F nfs -o anon=2 /var/opt/ignite/clients
 share -F nfs -o sec=sys,anon=2,rw=newserver.my.dom /var/opt/ignite/recovery/archives/newserver
-{% endhighlight %}
+```
 
 If the newserver hostname is not included in your DNS you have to add it to the `/etc/hosts` of the Ignite server.
 
 The next step is in the client EFI Shell, we boot it with `lanboot` command.
 
-{% highlight text%}
+```
 Shell> lanboot select -dn newserver
  01 Acpi(HWP0002,PNP0A03,100)/Pci(1|0)/Mac(XXXXXXXXXXXX)
 02 Acpi(HWP0002,PNP0A03,100)/Pci(1|1)/Mac(YYYYYYYYYYYY)
@@ -306,11 +306,11 @@ Please confirm your choice by pressing RETURN or enter a new number:
                    [    Advanced Options      ]
 
       [  Reboot  ]                              [  Help  ]
-{% endhighlight %}
+```
 
 Now select `"Install HP-UX"` option. And the following screen appears where we select the `"OK"` option:
 
-{% highlight text%}
+```
 User Interface and Media Options
 
 This screen lets you pick from options that will determine if an
@@ -327,13 +327,13 @@ final networking parameters during the install, you will
 need to use the Advanced mode (or remote graphical interface).
 
 [   OK   ]                  [ Cancel ]                         [  Help  ]
-{% endhighlight %}
+```
 
 In the next screen we select the corresponding lan interface:
 
     LAN Interface Selection
 
-{% highlight text%}
+```
  More than one network interface was detected on the system.  You
  will need to select the interface to enable.  Only one interface
  can be enabled, and it must be the one connected to the network
@@ -352,11 +352,11 @@ In the next screen we select the corresponding lan interface:
  [ 0/2/2/0     lan2     0x001E0BFCEE92   HP_PCI-X_1000Mbps_Dual-port_Bu ]
 
  [ 0/2/2/1     lan3     0x001E0BFCEE93   HP_PCI-X_1000Mbps_Dual-port_Bu ]
-{% endhighlight %}
+```
 
 It starts to search for the DHCP server, press Crtl-C to stop it. The install process prompts us for the target client IP and hostname.
 
-{% highlight text%}
+```
 * Could not get DHCP information.  No host specific network defaults
  will be supplied.  (dhcpclient returned: 5)
 
@@ -376,11 +376,11 @@ It starts to search for the DHCP server, press Crtl-C to stop it. The install pr
  Is this networking information only temporary?  [ No  ]
 
  [   OK   ]                  [ Cancel ]                         [  Help  ]
-{% endhighlight %}
+```
 
 The new client is added to the Ignite-UX server. It shows a warning screen informing that the disk device is not present in the system and it will substituted, this is normal since we are installing from an Ignite image of other server. Select `"OK"`.
 
-{% highlight text%}
+```
 ----------------------------------------------------------------------------------------------
 +                           /opt/ignite/bin/itool ()                           +
 ¦                                                                              ¦
@@ -407,11 +407,11 @@ The new client is added to the Ignite-UX server. It shows a warning screen infor
 +------------------------------------------------------------------------------+
 
 ------------------------------------------------------------------------------------------------
-{% endhighlight %}
+```
 
 In the system tab enter the new hostname and IP address.
 
-{% highlight text%}
+```
 ------------------------------------------------------------------------------------------------
 +                           /opt/ignite/bin/itool ()                           +
 ¦                                                                              ¦
@@ -437,11 +437,11 @@ In the system tab enter the new hostname and IP address.
 ¦ [  Go!   ]                       [ Cancel ]                       [  Help  ] ¦
 +------------------------------------------------------------------------------+
 ------------------------------------------------------------------------------------------------
-{% endhighlight %}
+```
 
 Now review the other parameters such swap space, filesystems, root password, etc. If everything is fine select `"Go!"`, it will ask for confirmation:
 
-{% highlight text%}
+```
 ------------------------------------------------------------------------------------------------
 ++                             itool Confirmation                             ++
 ¦¦                                                                            ¦¦
@@ -468,7 +468,7 @@ Now review the other parameters such swap space, filesystems, root password, etc
 +¦ [  Go!   ]                      [ < Back ]                      [  Help  ] ¦+
  +----------------------------------------------------------------------------+
 ------------------------------------------------------------------------------------------------
-{% endhighlight %}
+```
 
 Select `"Go!"` again and the installation will begin. The warning message about `/var/adm/crash` filesystem is completely normal, the creation of that filesystem is performed after the installation of the Operative System, at least I use to.
 

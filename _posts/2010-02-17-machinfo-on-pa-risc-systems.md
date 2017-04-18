@@ -27,7 +27,7 @@ I tried a lot of them but since I discovered [Patrick Reut](http://forums11.itrc
 
 Here it an example output of the command:
 
-{% highlight text %}
+```
 root@tst1:/# which machinfo
 /usr/contrib/bin/machinfo
 root@tst1:/# ll /usr/contrib/bin/machinfo
@@ -72,5 +72,5 @@ c47t0d7 : HP      HS  (size = 15GB)
 c47t1d0 : HP      HS  (size = 15GB)
 
 root@tst1:/#
-{% endhighlight %}
+```
 Juanma.

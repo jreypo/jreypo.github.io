@@ -25,7 +25,7 @@ Long time since my last post about [HP Integrity Virtual Machines](http://h20338
 
 This is just a quick post on how to map a specific port of virtual switch to a specific VLAN. First retrieve the configuration of the vswitch.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmnet -S devlan12
 Name     Number State   Mode      NamePPA  MAC Address    IP Address
 ======== ====== ======= ========= ======== ============== ===============
@@ -44,17 +44,17 @@ Number  State        Adaptor  VLANID   Reserved VMs
 7       Active       lan      none     1            linuxvm2
 
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 We are going to map the port 5 to the VLAN 120 in order to isolate the traffic of that NFS server from the other virtual machines that aren't on the same VLAN. Again the command to use is `hpmvnet`.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmnet -S devlan12 -u portid:5:vlanid:120
-{% endhighlight %}
+```
 
 If you display again the HPVM network configuration for the `devlan12` vswitch the change will appear under the `Untagged VLANID` column.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmnet -S devlan12
 Name     Number State   Mode      NamePPA  MAC Address    IP Address
 ======== ====== ======= ========= ======== ============== ===============
@@ -73,6 +73,6 @@ Number  State        Adaptor  VLANID   Reserved VMs
 7       Active       lan      none     1            linuxvm2
 
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 Juanma.

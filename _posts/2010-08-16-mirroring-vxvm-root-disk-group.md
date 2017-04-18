@@ -23,7 +23,7 @@ Mirroring the root disk group of an HP-UX server is a very straightforward proce
 
 An example will explain better the whole process. Launch the mirroring operation.
 
-{% highlight text %}
+```
 root@robin:~# /etc/vx/bin/vxrootmir -v -b disk22
 VxVM vxrootmir INFO V-5-2-2501 11:38: Gathering information on the current VxVM root configuration
 VxVM vxrootmir INFO V-5-2-2441 11:38: Checking specified disk(s) for usability
@@ -47,11 +47,11 @@ VxVM vxrootmir INFO V-5-2-2551 11:46: Making mirror disk disk22 (/dev/rdisk/disk
 Alternate boot path set to 0/0/0/0.0x9.0x0 (/dev/rdisk/disk22)
 VxVM vxrootmir INFO V-5-2-1616 11:46: Disk disk22 is now a mirrored root disk
 root@robin:~#
-{% endhighlight %}
+```
 
 After the mirror operation is finished verify the contents of the `rootdg`.
 
-{% highlight text %}
+```
 root@robin:~# vxprint -htg rootdg
 DG NAME         NCONFIG      NLOG     MINORS   GROUP-ID
 ST NAME         STATE        DM_CNT   SPARE_CNT         APPVOL_CNT
@@ -129,11 +129,11 @@ sd rootdisk01-08 varvol-01   rootdisk01 23535616 5242880 0        c0t8d
 pl varvol-02    varvol       ENABLED  ACTIVE   5242880  CONCAT    -        RW
 sd rootdisk02-08 varvol-02   rootdisk02 23535616 5242880 0        c0t9d0s2 ENA
 root@robin:~#
-{% endhighlight %}
+```
 
 Then check the contents of the EFI partition and the `LABEL` file of the mirror disk.
 
-{% highlight text %}
+```
 root@robin:~# efi_ls -d /dev/rdisk/disk22_p1 /efi/hpux
 FileName                             Last Modified             Size
 .                                      6/ 9/2010                  0
@@ -152,11 +152,11 @@ Label Entry: 1, Root Volume start:  6032480; length: 1024 MB
 Label Entry: 2, Swap Volume start:  1838176; length: 4096 MB
 Label Entry: 3, Dump Volume start:  1838176; length: 4096 MB
 root@robin:~#
-{% endhighlight %}
+```
 
 Verify that the new disk has been set as the alternate boot device.
 
-{% highlight text %}
+```
 root@robin:~# setboot -v
 Primary bootpath : 0/0/0/0.0x8.0x0 (/dev/rdisk/disk20)
 HA Alternate bootpath :
@@ -167,7 +167,7 @@ setboot: error accessing firmware - Function is not available
 The firmware of your system does not support querying or changing the SpeedyBoot
 settings.
 root@robin:~#
-{% endhighlight %}
+```
 
 Finally reboot the server and from the EFI boot manager force the boot from the mirrored disk.
 

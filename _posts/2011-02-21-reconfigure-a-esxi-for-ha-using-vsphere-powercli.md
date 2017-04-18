@@ -32,7 +32,7 @@ I created a new cluster in my homelab with a problem in one of the hosts, I fixe
 
 First we are going to create a variable that contained the configuration of the ESXi I wanted to reconfigure.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % $vmhost = Get-VMHost esxi06.vjlab.local
 C:\
@@ -74,11 +74,11 @@ Uid                   : /VIServer=administrator@vcenter1.vjlab
 
 C:\
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 Next with the cmdlet `Get-View` I retrieved the .NET objects of the host ID and stored them in another variable.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % Get-View $vmhost.Id
 
@@ -114,7 +114,7 @@ Client              : VMware.Vim.VimClient
 
 C:\
 [vSphere PowerCLI] % $esxha = Get-View $vmhost.Id
-{% endhighlight %}
+```
 
 Now through the `$esxha` variable I invoked the method `ReconfigureHostForDAS` to reconfigure the ESXi, this method is part of the HostSystem object and its description can be found [here](http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html#reconfigureDAS)in the vSphere API reference.
 
@@ -126,7 +126,7 @@ As it can be seen in the above screenshot, the task is displayed in the vSphere 
 
 Finally I created the below script to simplify things in the future.
 
-{% highlight powershell %}
+```powershell
 # Reconfigure-VMHostHA.ps1
 # PowerCLI script to reconfigure for VMware HA a VM Host
 #
@@ -139,6 +139,6 @@ param([string]$esx)
 $vmhost = Get-VMHost $esx
 $esxha = Get-View $vmhost.Id
 $esxha.ReconfigureHostForDAS()
-{% endhighlight %}
+```
 
 Juanma.

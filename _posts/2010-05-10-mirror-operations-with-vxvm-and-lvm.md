@@ -29,27 +29,27 @@ Creating a mirror of a volume and later split it in LVM is quite easy an can be 
 
 It has to be done with the same number of disks and of the same size that the ones within the VG.
 
-{% highlight text %}
+```
 [root@sheldon] / # vgextend vg_oracle /dev/disk/disk26
 Volume group "vg_oracle" has been successfully extended.
 Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Create the mirror
 
-{% highlight text %}
+```
 [root@sheldon] / # lvextend -m 1 /dev/vg_oracle/lv_oracle /dev/disk/disk26
 The newly allocated mirrors are now being synchronized. This operation will
 take some time. Please wait ....
 Logical volume "/dev/vg_oracle/lv_oracle" has been successfully extended.
 Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Check the configuration
 
-{% highlight text %}
+```
 [root@sheldon] / # lvdisplay /dev/vg_oracle/lv_oracle
 --- Logical volumes ---
 LV Name                     /dev/vg_oracle/lv_oracle
@@ -70,18 +70,18 @@ IO Timeout (Seconds)        default             
 Number of Snapshots         0  
 
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Perform the split
 
-{% highlight text %}
+```
 [root@sheldon] / # lvsplit -s copy /dev/vg_oracle/lv_oracle
 Logical volume "/dev/vg_oracle/lv_oraclecopy" has been successfully created with
 character device "/dev/vg_oracle/rlv_oraclecopy".
 Logical volume "/dev/vg_oracle/lv_oracle" has been successfully split.
 Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Reestablish the mirror
 
@@ -89,14 +89,14 @@ If the VG are 1.0 or 2.0 version the merge can not be performed if the group is 
 
 The order to do the merge is the copy **FIRST** and the master **SECOND**. This is very important if don't want to sync the mirror in wrong direction.
 
-{% highlight text %}
+```
 [root@sheldon] / # lvmerge /dev/vg_oracle/lv_oraclecopy /dev/vg_oracle/lv_oracle
 Logical volume "/dev/vg_oracle/lv_oraclecopy" has been successfully merged
 with logical volume "/dev/vg_oracle/lv_oracle".
 Logical volume "/dev/vg_oracle/lv_oraclecopy" has been successfully removed.
 Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 ### VXVM
 
@@ -106,7 +106,7 @@ The process in VxVM is in many ways similar to the LVM one.
 
 Launch `vxdiskadm` tool and select `Add or initialize one or more disks`.
 
-{% highlight text %}
+```
 [root@sheldon] / # vxdiskadm
 
 Volume Manager Support Operations
@@ -142,11 +142,11 @@ Menu: VolumeManager/Disk
  q      Exit from menus
 
 Select an operation to perform:  1
-{% endhighlight %}
+```
 
 Enter the disk and answer the questions according to your configuration and exit the tool when the process is done.
 
-{% highlight text %}
+```
 Add or initialize disks
 Menu: VolumeManager/Disk/AddDisks
 
@@ -212,11 +212,11 @@ Adding disk device disk28 to disk group dg_sap with disk
  name dg_sap02.
 
 Add or initialize other disks? [y,n,q,?] (default: n)
-{% endhighlight %}
+```
 
 -   Check the configuration.
 
-{% highlight text %}
+```
 [root@sheldon] / # vxprint -g dg_sap
 TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
 dg dg_sap       dg_sap       -        -        -        -        -       -
@@ -228,11 +228,11 @@ v  sapvol       fsgen        ENABLED  204800   -        
 pl sapvol-01    sapvol       ENABLED  204800   -        ACTIVE   -       -
 sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -        -       -
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Create the mirror.
 
-{% highlight text %}
+```
 [root@sheldon] / # vxassist -g dg_sap mirror sapvol dg_sap02
 [root@sheldon] / #
 [root@sheldon] / # vxprint -g dg_sap                        
@@ -248,13 +248,13 @@ sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -    �
 pl sapvol-02    sapvol       ENABLED  204800   -        ACTIVE   -       -
 sd dg_sap02-01  sapvol-02    ENABLED  204800   0        -        -       -
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Break the mirror.
 
 To do this just disassociate the corresponding `plex` from the volume.
 
-{% highlight text %}
+```
 [root@sheldon] / # vxplex -g dg_sap dis sapvol-02
 [root@sheldon] / # vxprint -g dg_sap             
 TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
@@ -270,13 +270,13 @@ v  sapvol       fsgen        ENABLED  204800   -        
 pl sapvol-01    sapvol       ENABLED  204800   -        ACTIVE   -       -
 sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -        -       -
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   Reattach the `plex` to the volume and reestablish the mirror.
 
-{% highlight text %}
+```
 [root@sheldon] / # vxplex -g dg_sap att sapvol sapvol-02
-{% endhighlight %}
+```
 
 And we are done for now, more VxVM stuff in a future post.
 

@@ -31,18 +31,18 @@ There are two types of disks common to most platform where OpenBSD can run:
 
 Our disk for this example will be a SCSI one, sd3. Using `dmesg` check that the system has recognized the device.
 
-{% highlight text %}
+```
 [root@obsd ~]# dmesg |grep SCSI
 sd0 at scsibus1 targ 0 lun 0: <VMware,, VMware Virtual S, 1.0> SCSI2 0/direct fixed
 sd1 at scsibus1 targ 1 lun 0: <VMware,, VMware Virtual S, 1.0> SCSI2 0/direct fixed
 sd2 at scsibus1 targ 2 lun 0: <VMware,, VMware Virtual S, 1.0> SCSI2 0/direct fixed
 sd3 at scsibus1 targ 3 lun 0: <VMware,, VMware Virtual S, 1.0> SCSI2 0/direct fixed
 [root@obsd ~]#
-{% endhighlight %}
+```
 
 Next initialize the MBR of the disk using the default template. Use `fdisk -i` to perform the task.
 
-{% highlight text %}
+```
 [root@obsd ~]# fdisk -i sd3
 Do you wish to write new MBR and partition table? [n] y
 Writing MBR at offset 0.
@@ -57,7 +57,7 @@ Offset: 0       Signature: 0xAA55
  2: 00      0   0   0 -      0   0   0 [           0:           0 ] unused     
 *3: A6      0   1   2 -   1043 254  63 [          64:    16771796 ] OpenBSD    
 [root@obsd ~]#
-{% endhighlight %}
+```
 
 As it can be seen the partition number 3 has been initialize as OpenBSD. In the example we are using the whole disk for OpenBSD, if not you should enter in edition mode with `fdisk -i <disk>` and partition the disk appropriately.
 
@@ -75,7 +75,7 @@ In other BSD systems, like FreeBSD, these partitions are called slices however i
 
 And finally here it is an example on how to create a filesystem partition. Use `disklabel -E <disk>` to edit the disk.
 
-{% highlight text %}
+```
 [root@obsd ~]# disklabel -E sd3
 Label editor (enter '?' for help at any prompt)
 > p
@@ -116,13 +116,13 @@ drivedata: 0
   a:         16771776               64  4.2BSD   2048 16384    1
   c:         16777216                0  unused                  
 [root@obsd ~]#
-{% endhighlight %}
+```
 
 ### Create the file system
 
 Use `newfs` against the special raw device file to create the file system. By default OpenBSD uses the 4.3BSD file system to build file systems with backward compatibility with older boot ROMS, however it also support Fast File System (FFS) as the default format for filesystem smaller that 1TB and Enhanced Fast File System (FFS2) for file systems larger than 1TB.
 
-{% highlight text %}
+```
 [root@obsd ~]# newfs /dev/rsd3a
 /dev/rsd3a: 8192.0MB in 16777216 sectors of 512 bytes
 41 cylinder groups of 202.47MB, 12958 blocks, 25984 inodes each
@@ -130,11 +130,11 @@ super-block backups (for fsck -b #) at:
  32, 414688, 829344, 1244000, 1658656, 2073312, 2487968, 2902624, 3317280, 3731936, 4146592, 4561248, 4975904, 5390560, 5805216, 6219872, 6634528, 7049184, 7463840, 7878496, 8293152, 8707808, 9122464,
  9537120, 9951776, 10366432, 10781088, 11195744, 11610400, 12025056, 12439712, 12854368, 13269024, 13683680, 14098336, 14512992, 14927648, 15342304, 15756960, 16171616, 16586272,
 [root@obsd ~]#
-{% endhighlight %}
+```
 
 Next you can mount your newly created file system like any other Unix system.
 
-{% highlight text %}
+```
 [root@obsd ~]# mkdir /data
 [root@obsd ~]# mount /dev/sd3a /data
 [root@obsd ~]#
@@ -147,7 +147,7 @@ Filesystem     Size    Used   Avail Capacity  Mounted on
 /dev/sd0e      1.9G    5.1M    1.8G     0%    /var
 /dev/sd3a      7.9G    2.0K    7.5G     0%    /data
 [root@obsd ~]#
-{% endhighlight %}
+```
 
 And of course you can add it to the `/etc/fstab` file to provide persistence through a reboot of the system.
 

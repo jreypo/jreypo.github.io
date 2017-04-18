@@ -43,19 +43,19 @@ This is pretty obvious of course, the guest must be off.
 
 In both hosts root must have SSH access through public key authentication to the other.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: SSH execution error. Make sure ssh is setup right on both source and target systems.
-{% endhighlight %}
+```
 
 -   Shared devices:
 
 If the guest has a shared device like the CD/DVD of the host, the device has to be deleted from the guest configuration.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Device /dev/rdsk/c1t4d0 is shared.  Guest with shared storage devices cannot be migrated.
-{% endhighlight %}
+```
 
 -   Storage devices:
 
@@ -63,43 +63,43 @@ There are two consideration about storage devices.
 
 The storage devices of the guest must be physical disks. Migration of guests with lvols as storage devices is supported only in [HPVM 4.1](http://h20000.www2.hp.com/bizsupport/TechSupport/CoreRedirect.jsp?redirectReason=DocIndexPDF&prodSeriesId=4146132&targetPage=http%3A%2F%2Fbizsupport1.austin.hp.com%2Fbc%2Fdocs%2Fsupport%2FSupportManual%2Fc02018680%2Fc02018680.pdf "HPVM 4.1 Release Notes") release.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Target VM Host error - Device does not exist.
 hpvmmigrate: See HPVM command log file on target VM Host for more detail.
-{% endhighlight %}
+```
 
 The WWID of the device must be the same in both HPVM hosts.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Device WWID does not match.
 hpvmmigrate: See HPVM command log file on target VM Host for more detail.
-{% endhighlight %}
+```
 
 -   Network configuration:
 
 The virtual switch where the guest is connected to must be configured on the same network card in both hosts. For example if vSwitch `vlan2` is using `lan0` in host1 then it must be using `lan0` in host2 or the migration will fail.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Target VM Host error - vswitch validation failed.
 hpvmmigrate: See HPVM command log file on target VM Host for more detail.
-{% endhighlight %}
+```
 
 ### PROCEDURE
 
 If all the prerequisites explained before are met by our guest we can proceed with the migration. The command to use is `hpvmmigrate`, the name or the VM number and the hostname of the destination server have to be provided. Some of the resources of the virtual machines like number of CPU, amount of RAM or the machine label can also be modified.
 
-{% highlight text %}
+```
 root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Guest migrated successfully.
 root@ivmcl01:~ #
-{% endhighlight %}
+```
 
 Check the existence of the migrated guest in the destination host.
 
-{% highlight text %}
+```
 root@ivmcl02:~ # hpvmstatus
 [Virtual Machines]
 Virtual Machine Name VM #  OS Type State     #VCPUs #Devs #Nets Memory  Runsysid
@@ -114,7 +114,7 @@ hp-vxvm                  7 HPUX    On (OS)        2 
 ws2003                   8 WINDOWS Off            4     4     3   12 GB        0
 hpvm1                   10 HPUX    Off            1     1     1    3 GB        0
 root@ivmcl02:~ #
-{% endhighlight %}
+```
 
 As you can see once all the prerequisites have been met the migration is quite easy.
 

@@ -28,7 +28,7 @@ Some of the steps are obvious for any HP-UX Sysadmin, like VGs and LVs creation,
 
 -   Create a volume group for the IVM virtual disks.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # vgcreate -s 16 -e 6000 vg_vmtest /dev/dsk/c15t7d1
 Volume group "/dev/vg_vmtest" has been successfully created.
 Volume Group configuration for /dev/vg_vmtest has been saved in /etc/lvmconf/vg_vmtest.conf
@@ -69,11 +69,11 @@ Autoswitch                  On        
 Proactive Polling           On               
 
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 -   Create one `lvol` for each disk you want to add to your virtual machine, of course these logical volumes must belong to the volume group previously created.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # lvcreate -L 12000 -n ivm1d1 vg_vmtest
 Logical volume "/dev/vg_vmtest/ivm1d1" has been successfully created with
 character device "/dev/vg_vmtest/rivm1d1".
@@ -86,11 +86,11 @@ character device "/dev/vg_vmtest/rivm1d2".
 Logical volume "/dev/vg_vmtest/ivm1d2" has been successfully extended.
 Volume Group configuration for /dev/vg_vmtest has been saved in /etc/lvmconf/vg_vmtest.conf
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 -   Now we're going to do some real stuff. Create the IVM with the `hpvmcreate` command and use the `hpvmstatus` to check that everything went well :
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmcreate -P ivm1 -O hpux  
 [root@hpvmhost] ~ # hpvmstatus -P ivm1
 [Virtual Machine Details]
@@ -130,7 +130,7 @@ Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
 ======= ========== === === === === === ========= =========================
 serial  com1                           tty       console
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 We have a new virtual machine created but with no resources at all.
 
@@ -140,7 +140,7 @@ Since now we're going to use the *hpvmstatus* to verify every change made. This 
 
 -   Add more CPU and RAM. The default values are 1 vCPU and 2GB of RAM, more can be assigned with `hpvmmodify`:
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -c 2
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -r 4G
 [root@hpvmhost] ~ # hpvmstatus
@@ -156,11 +156,11 @@ rhel01                   6 LINUX   Off           
 hp-vxvm                  7 HPUX    On (OS)        2    17     3    6 GB        0
 ivm1                     8 HPUX    Off            2     0     0    4 GB        0
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 -   With the CPUs and RAM finished it's time to add the storage devices, as always we're going to use `hpvmmodify`:
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -a disk:scsi::lv:/dev/vg_vmtest/rivm1d1
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -a disk:scsi::lv:/dev/vg_vmtest/rivm1d2
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -a dvd:scsi::disk:/dev/rdsk/c1t4d0
@@ -205,11 +205,11 @@ Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
 ======= ========== === === === === === ========= =========================
 serial  com1                           tty       console
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 An important tip about the storage devices, remember that you have to use the character device file of the LV. If a block device is used you will get the following error:
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -a disk:scsi::lv:/dev/vg_vmtest/ivm1d1
 hpvmmodify: WARNING (ivm1): Expecting a character device file for disk backing file, but '/dev/vg_vmtest/ivm1d1' appears to be a block device.
 hpvmmodify: ERROR (ivm1): Illegal blk device '/dev/vg_vmtest/ivm1d1' as backing device.
@@ -217,11 +217,11 @@ hpvmmodify: ERROR (ivm1): Unable to add device '/dev/vg_vmtest/ivm1d1'.
 hpvmmodify: Unable to create device disk:scsi::lv:/dev/vg_vmtest/ivm1d1.
 hpvmmodify: Unable to modify the guest.
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 -   Virtual networking 1: First check the available virtual switches with `hpvmnet`:
 
-{% highlight text %}
+```
 [root@hpvmhost] / # hpvmnet
 Name     Number State   Mode      NamePPA  MAC Address    IP Address
 ======== ====== ======= ========= ======== ============== ===============
@@ -229,11 +229,11 @@ localnet      1 Up      Shared             N/A      
 vlan02        2 Up      Shared    lan3     0x000000000000 192.168.1.12
 vlan03        3 Up      Shared    lan4     0x001111111111 10.10.3.4
 [root@hpvmhost] / #
-{% endhighlight %}
+```
 
 -   Virtual Networking 2: Add a couple of `vnics` to the virtual machine.
 
-{% highlight text %}
+```
 [root@hpvmhost] / # hpvmmodify -P ivm1 -a network:lan:vswitch:vlan02
 [root@hpvmhost] / # hpvmmodify -P ivm1 -a network:lan:vswitch:localnet
 [root@hpvmhost] / #
@@ -280,11 +280,11 @@ Device  Adaptor    Bus Dev Ftn Tgt Lun Storage   Device
 ======= ========== === === === === === ========= =========================
 serial  com1                           tty       console
 [root@hpvmhost] / #
-{% endhighlight %}
+```
 
 -   And we have an IVM ready to be used. To start it use the  `hpvmstart` command and access its console with `hpvmconsole`, the interface is almost equal to GSP/MP.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmstart -P ivm1
 (C) Copyright 2000 - 2008 Hewlett-Packard Development Company, L.P.
 Opening minor device and creating guest machine container
@@ -330,7 +330,7 @@ hpvmstart: Successful start initiation of guest 'ivm1'
        (Use Ctrl-B to return to vMP main menu.)
 
 - - - - - - - - - - Prior Console Output - - - - - - - - - -
-{% endhighlight %}
+```
 
 And we are finished. I'm not going through the installation process since it's not the objective of this post and it is very well documented in the HP-UX documentation.
 

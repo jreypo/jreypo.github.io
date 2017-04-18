@@ -28,14 +28,14 @@ Following are some notes and tips I've been creating since the very first time I
 
 -   Show `powermt` command version
 
-{% highlight text %}
+```
 [root@totoro] / # powermt version
 EMC powermt for PowerPath (c) Version 5.1.0 (build 160)
-{% endhighlight %}
+```
 
 -   Display PowerPath configuration.
 
-{% highlight text %}
+```
 [root@totoro] / # powermt display
 Symmetrix logical device count=898
 CLARiiON logical device count=0
@@ -74,11 +74,11 @@ HP HSx logical device count=0
  31 0/5/1/0.102.43.19.6           optimal      19      0       -     0      0
 
 [root@totoro] / #
-{% endhighlight %}
+```
 
 -   Check for death paths and remove them.
 
-{% highlight text %}
+```
 [root@sheldon] / # powermt display
 Symmetrix logical device count=34
 CLARiiON logical device count=0
@@ -102,30 +102,30 @@ Do you want to remove it (y/n/a/q)? y
 Warning: Symmetrix device path c31t9d6 is currently dead.
 Do you want to remove it (y/n/a/q)? y
 [root@sheldon] / #
-{% endhighlight %}
+```
 
 -   List all devices.
 
-{% highlight text %}
+```
 [root@totoro] / # powermt display dev=all
-{% endhighlight %}
+```
 -   Remove all devices.
 
-{% highlight text %}
+```
 [root@totoro] / # powermt remove dev=all
-{% endhighlight %}
+```
 
 -   Add a new disk in HP-UX, configure it and save the config:
 
 After a rescan of the disks with `ioscan` and the creation of the device files with `insf` run the following command  to add the new disk to PowerPath
 
-{% highlight text %}
+```
 [root@totoro] / # powermt config
-{% endhighlight %}
+```
 
 Now display all the devices and look the for the `Logical device ID` of the disk.
 
-{% highlight text %}
+```
 [root@totoro] / # powermt display dev=all | more
 ...
 ...
@@ -142,13 +142,13 @@ state=alive; policy=SymmOpt; priority=0; queued-IOs=0
 29 1/0/8/1/0.21.47.0.0.1.3 c29t1d3 SP B1 active alive 0 1
 ...
 ...
-{% endhighlight %}
+```
 
 If everything went fine save the config.
 
-{% highlight text %}
+```
 [root@totoro] / # powermt save
-{% endhighlight %}
+```
 
 And these are the most common tasks I've been doing with PowerPath. I'll try to put some order into my notes and personal how-to files and write more posts like this one.
 

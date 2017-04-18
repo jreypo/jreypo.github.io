@@ -36,22 +36,22 @@ From the vMA shell we are going to use the command `vicfg-nas`. To clarify thing
 
 The option to create a new datastore is -a and additionally the address/hostname of the NFS servers, the share and a label for the new datastore must be provided.
 
-{% highlight text %}
+```
 [vi-admin@vma ~][esx01.mlab.local]$ vicfg-nas -l
 No NAS datastore found
 [vi-admin@vma ~][esx01.mlab.local]$ vicfg-nas -a -o openfiler.mlab.local -s /mnt/vg_nfs/lv_nfs01/nfs_datastore1 nfs_datastore1
 Connecting to NAS volume: nfs_datastore1
 nfs_datastore1 created and connected.
 [vi-admin@vma ~][esx01.mlab.local]$
-{% endhighlight %}
+```
 
 When the operation is done you can check the new datastore with `vicfg-nas -l`.
 
-{% highlight text %}
+```
 [vi-admin@vma ~][esx01.mlab.local]$ vicfg-nas -l
 nfs_datastore1 is /mnt/vg_nfs/lv_nfs01/nfs_datastore1 from openfiler.mlab.local mounted
 [vi-admin@vma ~][esx01.mlab.local]$
-{% endhighlight %}
+```
 
 ### PowerCLI
 

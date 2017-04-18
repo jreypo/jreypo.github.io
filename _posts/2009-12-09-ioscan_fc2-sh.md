@@ -20,15 +20,15 @@ Basically with this script you can obtain a small and comprehensive report of ev
 
 I find it very useful to set an alias for this script on the root's profile of every server in which I have the script.
 
-{% highlight text %}
+```
 [root@ignite] / # alias ifc
 alias ifc='/usr/local/scripts/ioscan_fc2.sh'
 [root@ignite] / #
-{% endhighlight %}
+```
 
 Show every disk:
 
-{% highlight text %}
+```
 [root@prod01] ~ # ifc | grep rdisk
 /dev/rdisk/disk1     0x600508e0000000004911c7e407303805 ONLINE     64000/0xfa00/0x0     136     round_robin  8
 /dev/rdisk/disk28    0x600508b40006cb7000006000094b0000 ONLINE     64000/0xfa00/0x2f    2       least_cmd_load 8
@@ -57,11 +57,11 @@ Show every disk:
 /dev/rdisk/disk122   0x600508b40006cb700000600009e40000 ONLINE     64000/0xfa00/0x47    32      least_cmd_load 8
 /dev/rdisk/disk127   0x600508b40006cb700000600009ef0000 ONLINE     64000/0xfa00/0x48    11      least_cmd_load 8
 [root@prod01] ~ #
-{% endhighlight %}
+```
 
 Single device query:
 
-{% highlight text %}
+```
 [root@prod01] ~ # ifc -D /dev/rdisk/disk127
 
 disk                 wwid                               state      lun_hw_path          size_gb load_bal     max_q_depth
@@ -71,11 +71,11 @@ disk                 wwid                   �
  0/3/0/0/0/1.0x50001fe15010bf4b.0x4019000000000000 ACTIVE     (LUN # 25, Flat Space Addressing)
  0/3/0/0/0/1.0x50001fe15010bf4f.0x4019000000000000 STANDBY    (LUN # 25, Flat Space Addressing)
 [root@prod01] ~ #
-{% endhighlight %}
+```
 
 Verbose mode:
 
-{% highlight text %}
+```
 [root@ignite] / # ifc -v
 
 disk                 wwid                               state      lun_hw_path          size_gb load_bal     max_q_depth
@@ -93,7 +93,7 @@ disk                 wwid                   �
 scope                                                   vg_holder
 "/escsi/esdisk/0x0/HP      /HSV210          /6110"      /dev/vgignite
 [root@ignite] / #
-{% endhighlight %}
+```
 
 As you can see, with `ioscan_fc2.sh` (aliased as `ifc` in my examples), a lot of useful information about the storage stack of an HP-UX can be obtained. Yes someone can say that the info is obtained with HP-UX commands and that's it is completely true but this script gets the info in a more elegant way and more important, at least for me, in one command.
 
@@ -102,7 +102,7 @@ Olivier has done a great work with this script, I recommend his [blog](http://om
 With his permission here it is a modified version that shows the VG
 holder with the verbose switch:
 
-{% highlight bash %}
+```bash
 #!/bin/sh
 #
 # ioscan_fc2.sh
@@ -207,7 +207,7 @@ do
  printf "%-55s %-40s\n" "${ddr_name}" "${vg}"
  fi
 done
-{% endhighlight %}
+```
 
 See you next time.
 

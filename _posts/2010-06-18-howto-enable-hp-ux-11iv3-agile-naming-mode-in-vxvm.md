@@ -24,7 +24,7 @@ By default Veritas Volume Manager uses HP-UX legacy naming scheme instead of the
 
 Display VxVM disk information  and get the current naming scheme.
 
-{% highlight text %}
+```
 root@robin:~# vxdisk list
 DEVICE       TYPE            DISK         GROUP        STATUS
 c0t0d0s2     auto:LVM        -            -            LVM
@@ -43,13 +43,13 @@ NAMING_SCHEME       PERSISTENCE         MODE           
 ===============================================
 OS Native           Yes                 Legacy              
 root@robin:~#
-{% endhighlight %}
+```
 
 As you can see the mode is se tot legacy and the disks are shown with their legacy device names. To change this use again `vxddladm` command.
 
-{% highlight text %}
+```
 root@robin:~# vxddladm set namingscheme=osn mode=new
-{% endhighlight %}
+```
 
 The parameter used are `namingscheme` and `mode`. The available options for the first are:
 
@@ -66,7 +66,7 @@ The second parameter is mode and of course defines which naming model will be us
 
 Now check the change by executing `vxdisk` and `vxddladm` commands.
 
-{% highlight text %}
+```
 root@robin:~# vxdisk list
 DEVICE       TYPE            DISK         GROUP        STATUS
 disk4_p2     auto:LVM        -            -            LVM
@@ -85,7 +85,7 @@ NAMING_SCHEME       PERSISTENCE         MODE           
 ===============================================
 OS Native           Yes                 New                 
 root@robin:~#
-{% endhighlight %}
+```
 
 Of course the naming scheme can be set back to the legacy scheme using the same procedure.
 

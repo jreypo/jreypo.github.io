@@ -16,7 +16,7 @@ comments: true
 
 `hpasmcli`, HP Management Command Line Interface, is a scriptable command line tool to manage and monitor the HP ProLiant servers through the `hpasmd` and `hpasmxld` daemons. It is part of the hp-health package that comes with the [**HP Proliant Support Pack**](http://h18000.www1.hp.com/products/servers/management/psp/index.html), or **PSP**.
 
-{% highlight text %}
+```
 [root@rhel4 ~]# rpm -qa | grep hp-health
 hp-health-8.1.1-14.rhel4
 [root@rhel4 ~]#
@@ -68,7 +68,7 @@ command line utilities.
 /usr/share/man/man8/hplog.8.gz
 /usr/share/man/man8/hpuid.8.gz
 [root@rhel4 ~]#
-{% endhighlight %}
+```
 
 This handy tool can be used to view and modify several BIOS settings of the server and to monitor the status of the different hardware components like fans, memory modules, temperature, power supplies, etc.
 
@@ -79,7 +79,7 @@ It can be used in two ways:
 
 The interactive shell supports TAB command completion and command recovery through a history buffer.
 
-{% highlight text %}
+```
 [root@rhel4 ~]# hpasmcli
 HP management CLI for Linux (v1.0)
 Copyright 2004 Hewlett-Packard Development Group, L.P.
@@ -91,24 +91,24 @@ NOTE: Some hpasmcli commands may not be supported on all Proliant servers.
 hpasmcli> help
 CLEAR  DISABLE  ENABLE  EXIT  HELP  NOTE  QUIT  REPAIR  SET  SHOW
 hpasmcli>
-{% endhighlight %}
+```
 
 As it can be seen in the above example several main tasks can be done, to get the usage of every command simply use HELP followed by the command.
 
-{% highlight text %}
+```
 hpasmcli> help show
 USAGE: SHOW [ ASR | BOOT | DIMM | F1 | FANS | HT | IML | IPL | NAME | PORTMAP | POWERSUPPLY | PXE | SERIAL | SERVER | TEMP | UID | WOL ]
 hpasmcli>
 hpasmcli> HELP SHOW BOOT
 USAGE: SHOW BOOT: Shows boot devices.
 hpasmcli>
-{% endhighlight %}
+```
 
 In my experience `SHOW` is the most used command above the others. Following are examples for some of the tasks.
 
 #### Display general information of the server
 
-{% highlight text %}
+```
 hpasmcli> SHOW SERVER
 System        : ProLiant DL380 G5
 Serial No.    : XXXXXXXXX     
@@ -145,11 +145,11 @@ Processor total  : 2
 Memory installed : 16384 MBytes
 ECC supported    : Yes
 hpasmcli>
-{% endhighlight %}
+```
 
 #### Show current temperatures
 
-{% highlight text %}
+```
 hpasmcli> SHOW TEMP
 Sensor   Location              Temp       Threshold
 ------   --------              ----       ---------
@@ -162,11 +162,11 @@ Sensor   Location              Temp       Threshold
 #7        CPU#2                30C/86F    127C/260F
 
 hpasmcli>
-{% endhighlight %}
+```
 
 #### Get the status of the server fans
 
-{% highlight text %}
+```
 hpasmcli> SHOW FAN
 Fan  Location        Present Speed  of max  Redundant  Partner  Hot-pluggable
 ---  --------        ------- -----  ------  ---------  -------  -------------
@@ -178,26 +178,26 @@ Fan  Location        Present Speed  of max  Redundant  Partner  Hot-
 #6   PROCESSOR_ZONE  Yes     NORMAL 36%     Yes        0        Yes          
 
 hpasmcli>
-{% endhighlight %}
+```
 
 #### Show device boot order configuration
 
-{% highlight text %}
+```
 hpasmcli> SHOW BOOT
 First boot device is: CDROM.
 One time boot device is: Not set.
 hpasmcli>
-{% endhighlight %}
+```
 
 #### Set USB key as first boot device
 
-{% highlight text %}
+```
 hpasmcli> SET BOOT FIRST USBKEY
-{% endhighlight %}
+```
 
 #### Show memory modules status
 
-{% highlight text %}
+```
 hpasmcli> SHOW DIMM
 DIMM Configuration
 ------------------
@@ -228,11 +228,11 @@ Size:          4096 MB
 Speed:         667 MHz
 Status:        Ok
 ...
-{% endhighlight %}
+```
 
 In the scripting mode `hpasmcli` can be used directly from the shell prompt with the `-s` option and the command between quotation marks, this of course allow you to process the output of the commands  like in the below example.
 
-{% highlight text %}
+```
 [root@rhel4 ~]# hpasmcli -s "show dimm" | egrep "Module|Status"
 Module #:      1
 Status:        Ok
@@ -251,11 +251,11 @@ Status:        Ok
 Module #:      8
 Status:        Ok
 [root@rhel4 ~]#
-{% endhighlight %}
+```
 
 To execute more than one command sequentially separate them with a semicolon.
 
-{% highlight text %}
+```
 [root@rhel4 ~]# hpasmcli -s "show fan; show temp"
 
 Fan  Location        Present Speed  of max  Redundant  Partner  Hot-pluggable
@@ -278,7 +278,7 @@ Sensor   Location              Temp       Threshold
 #7        CPU#2                30C/86F    127C/260F
 
 [root@rhel4 ~]#
-{% endhighlight %}
+```
 
 If you want to play more with `hpasmcli` go to its man page and to the ProLiant Support Pack [documentation](http://bizsupport2.austin.hp.com/bc/docs/support/SupportManual/c02532067/c02532067.pdf).
 

@@ -32,9 +32,9 @@ Now you can point your web browser to **http://esx_ip_address/ui** and login as 
 
 After that I wanted to make the change permanent and like in any normal RedHat Linux server I issued the classic `chkconfig` command.
 
-{% highlight text %}
+```
 [root@esx41-01 ~]# chkconfig vmware-webAccess on
-{% endhighlight %}
+```
 
 I thought  that everything was done, nothing so far from the reality, after a reboot of the server the Web Access was gone.
 

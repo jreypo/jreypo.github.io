@@ -30,7 +30,7 @@ I discovered is not a difficult task, just one important question to take into a
 
 To perform the operation we're going to use, as usual ;-), `hpvmmodify`. It comes with the `-m` switch to modify the I/O resources of an already existing virtual machine, but you have to specify the hardware address of the device. To identify the address of the network card  launch `hpvmstatus` with  `-d`, this options shows the output with the format used on the command line.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmstatus -P ivm1 -d
 [Virtual Machine Devices]
 ...
@@ -39,13 +39,13 @@ network:lan:0,0,0x56E9E3096A22:vswitch:vlan02
 network:lan:0,1,0xAED6F7FA4E3E:vswitch:localnet
 ...
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 As it can be seen in the Networking Interface Details the third field shows, separated by commas,  the lan bus, the device number and the MAC address of the `vNic`. We only need the first two values, that is the lan bus and device number, `0,0` in our the example.
 
 Now we can proceed.
 
-{% highlight text %}
+```
 [root@hpvmhost] ~ # hpvmmodify -P ivm2 -m network:lan:0,0:vswitch:vlan03   
 [root@hpvmhost] ~ #
 [root@hpvmhost] ~ # hpvmstatus -P ivm1
@@ -61,7 +61,7 @@ vswitch   lan        vlan03     9         0   0   0 56-
 vswitch   lan        localnet   9         0   1   0 ae-d6-f7-fa-4e-3e
 ...
 [root@hpvmhost] ~ #
-{% endhighlight %}
+```
 
 And we are done.
 

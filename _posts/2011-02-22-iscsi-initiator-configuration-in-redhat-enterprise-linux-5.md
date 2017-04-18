@@ -28,7 +28,7 @@ The following post will discuss about **iSCSI initiator** configuration in **Red
 
 First of all we need to get and install the `iscsi-initiator-utils` RPM package, you can use yum to get and install the package from any supported repository for [CentOS](http://www.centos.org/) or RHEL. You can also download the package from [RedHat Network](http://rhn.redhat.com/) if you have a valid RHN account and your system doesn't have internet connection.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# rpm -ivh /tmp/iscsi-initiator-utils-6.2.0.871-0.16.el5.x86_64.rpm
 Preparing...                ########################################### [100%]
    1:iscsi-initiator-utils  ########################################### [100%]
@@ -52,11 +52,11 @@ as well as the utility programs used to manage it. iSCSI is a protocol
 for distributed disk access using SCSI commands sent over Internet
 Protocol networks.
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 Next we are going to configure the initiator. The iSCSI initiator is composed by two services, `iscsi `and `iscsid`, enable them to start at system startup using `chkconfig`.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# chkconfig iscsi on
 [root@rhel5 ~]# chkconfig iscsid on
 [root@rhel5 ~]#
@@ -64,11 +64,11 @@ Next we are going to configure the initiator. The iSCSI initiator is composed by
 iscsi           0:off   1:off   2:on    3:on    4:on    5:on    6:off
 iscsid          0:off   1:off   2:on    3:on    4:on    5:on    6:off
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 Once iSCSI is configured start the service.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# service iscsi start
 iscsid is stopped
 Starting iSCSI daemon:                                     [  OK  ]
@@ -79,7 +79,7 @@ Setting up iSCSI targets: iscsiadm: No records found!
 [root@rhel5 ~]# service iscsi status
 iscsid (pid  14170) is running...
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 From P4000 CMC we need to add the server to the management group configuration like we would do with any other server.
 
@@ -87,23 +87,23 @@ From P4000 CMC we need to add the server to the management group configuration l
 
 The server iqn can be found in the file `/etc/iscsi/initiatorname.iscsi`.
 
-{% highlight text %}
+```
 [root@cl-node1 ~]# cat /etc/iscsi/initiatorname.iscsi
 InitiatorName=iqn.1994-05.com.redhat:2551bf29b48
 [root@cl-node1 ~]#
-{% endhighlight %}
+```
 
 Create any iSCSI volumes you need in the P4000 arrays and assign them to the RedHat system. Then to discover the presented LUNs, from the Linux server run the `iscsiadm` command.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# iscsiadm -m discovery -t sendtargets -p 192.168.126.60
 192.168.126.60:3260,1 iqn.2003-10.com.lefthandnetworks:mlab:62:lv-rhel01
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 Restart the iSCSI initiator to make the new block device available to the operative system.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# service iscsi restart
 Stopping iSCSI daemon:
 iscsid dead but pid file exists                            [  OK  ]
@@ -113,11 +113,11 @@ Setting up iSCSI targets: Logging in to [iface: default, target: iqn.2003-10.com
 Login to [iface: default, target: iqn.2003-10.com.lefthandnetworks:mlab:62:lv-rhel01, portal: 192.168.126.60,3260]: successful
                                                            [  OK  ]
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 Then check that the new disk is available, I used `lsscsi` but `fdisk -l` will do the trick too.
 
-{% highlight text %}
+```
 [root@rhel5 ~]# lsscsi
 [0:0:0:0]    disk    VMware,  VMware Virtual S 1.0   /dev/sda
 [2:0:0:0]    disk    LEFTHAND iSCSIDisk        9000  /dev/sdb
@@ -130,7 +130,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 
 Disk /dev/sdb doesn't contain a valid partition table
 [root@rhel5 ~]#
-{% endhighlight %}
+```
 
 At this point the iSCSI configuration is done, the new LUNs will be available through a system reboot as long as the iSCSI service is enabled.
 

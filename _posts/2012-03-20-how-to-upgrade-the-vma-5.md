@@ -52,7 +52,7 @@ Go to the System tab and perform the reboot. After the reboot is done you can ch
 
 And in the `/etc/vma-release` file.
 
-{% highlight text%}
+```
 vi-admin@vma:~> cat /etc/vma-release
 vMA 5.0.0 BUILD-643553
 
@@ -89,7 +89,7 @@ registered trademarks or trademarks of VMware, Inc. in the United States
 and/or other jurisdictions. All other marks and names mentioned herein may
 be trademarks of their respective companies.
 vi-admin@vma:~>
-{% endhighlight %}
+```
 
 The above procedure use the default VMware repository and your appliance must be able to resolve public DNS addresses and access the internet in order to download de upgrade bits.
 

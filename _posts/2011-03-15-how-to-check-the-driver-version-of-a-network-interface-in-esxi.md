@@ -28,24 +28,24 @@ Here are two quick ways to check the driver version of a network interface card.
 
 `vmkload_mod` is a tool to manage VMkernel modules. It can be used to load and unload modules, list the loaded modules and get the general information and available parameters of each module.
 
-{% highlight text %}
+```
 ~ # vmkload_mod -s bnx2x | grep Version
  Version: Version 1.54.1.v41.1-1vmw, Build: 260247, Interface: ddi_9_1 Built on: May 18 2010
 ~ #
-{% endhighlight %}
+```
 
 -   `ethtool`
 
 `ethtool` is a Linux command line tool that allow us to retrieve and modify the parameters of an ethernet device. It is present in the vast majority of Linux systems, including the ESX Service Console. Fortunately for us VMware has also included it within the busybox environment of the ESXi.
 
-{% highlight text %}
+```
 ~ # ethtool -i vmnic0
 driver: bnx2x
 version: 1.54.1.v41.1-1vmw
 firmware-version: BC:5.2.7 PHY:baa0:0105
 bus-info: 0000:02:00.0
 ~ #
-{% endhighlight %}
+```
 
 If you want to use PowerCLI for this task you should check Julian Wood ([@julian_wood](http://twitter.com/julian_wood)) [excellent post](http://www.wooditwork.com/2011/01/27/getting-nic-firmware-versions-with-powercli/) about it.
 

@@ -23,7 +23,7 @@ comments: true
 
 #### Step 1 - Clone the root disk
 
-{% highlight text %}
+```
 root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
 
 =======  04/21/10 09:05:53 EDT  BEGIN Clone System Image (user=root)  (jobid=sheldon-01)
@@ -42,11 +42,11 @@ root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
 =======  04/21/10 09:38:48 EDT  END Clone System Image succeeded. (user=root)  (jobid=sheldon-01)
 
 root@sheldon:/ #
-{% endhighlight %}
+```
 
 #### Step 2 - Mount the image
 
-{% highlight text %}
+```
 root@sheldon:/ # drd mount
 
 =======  04/21/10 09:41:20 EDT  BEGIN Mount Inactive System Image (user=root)  (jobid=sheldon)
@@ -58,11 +58,11 @@ root@sheldon:/ # drd mount
 =======  04/21/10 09:41:31 EDT  END Mount Inactive System Image succeeded. (user=root)  (jobid=sheldon)
 
 root@sheldon:/ #
-{% endhighlight %}
+```
 
 Check the mount by displaying the `drd00` volume group.
 
-{% highlight text %}
+```
 root@sheldon:/ # vgdisplay drd00
 
 VG Name                     /dev/drd00
@@ -85,11 +85,11 @@ Total Spare PVs             0              
 Total Spare PVs in use      0  
 
 root@sheldon:/ #
-{% endhighlight %}
+```
 
 #### Step 3 - Apply the patches on the mounted clone
 
-{% highlight text %}
+```
 root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
 
 =======  04/21/10 09:42:55 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
@@ -126,11 +126,11 @@ root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
 =======  04/21/10 09:44:38 EDT  END Executing Command On Inactive System Image succeeded. (user=root)  (jobid=sheldon)
 
 root@sheldon:/ #
-{% endhighlight %}
+```
 
 #### Step 4 - Check the installed patches on the DRD image
 
-{% highlight text %}
+```
 root@sheldon:/ # drd runcmd swlist patches_01
 
 =======  04/21/10 09:45:29 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
@@ -156,7 +156,7 @@ root@sheldon:/ # drd runcmd swlist patches_01
 =======  04/21/10 09:45:32 EDT  END Executing Command On Inactive System Image succeeded. (user=root)  (jobid=sheldon)
 
 root@sheldon:/ #
-{% endhighlight %}
+```
 
 #### Step 5 - Activate the image and reboot the server
 
@@ -164,7 +164,7 @@ At this point you only have to activate the patched image with the `drd activate
 
 If you want to activate and reboot at the same time use the `-x reboot=true` option as in the example below.
 
-{% highlight text %}
+```
 root@sheldon:/ # drd activate -x reboot=true
 
 =======  04/21/10 09:52:26 EDT  BEGIN Activate Inactive System Image
@@ -182,7 +182,7 @@ root@sheldon:/ # drd activate -x reboot=true
  * HA Alternate bootpath : <none> [] after activate.
  * Activating Inactive System Image
  * Rebooting System
-{% endhighlight %}
+```
 
 If everything goes well after the reboot give the patched server some time, I leave this to your own criteria, before restoring the mirror.
 

@@ -39,7 +39,7 @@ Device-mapper support is present in 2.6 kernels although there are patches for t
 
 `dmraid` supports several array types.
 
-{% highlight text %}
+```
 [root@caladan ~]# dmraid -l
 asr     : Adaptec HostRAID ASR (0,1,10)
 ddf1    : SNIA DDF1 (0,1,4,5,linear)
@@ -54,13 +54,13 @@ sil     : Silicon Image(tm) Medley(tm) (0,1,10)
 via     : VIA Software RAID (S,0,1,10)
 dos     : DOS partitions on SW RAIDs
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 Following are a couple of examples to show `dmraid` operation.
 
 #### Array discovering
 
-{% highlight text %}
+```
 [root@caladan ~]# dmraid -r
 /dev/dm-46: hpt45x, "hpt45x_chidjhaiaa-0", striped, ok, 320172928 sectors, data@ 0
 /dev/dm-50: hpt45x, "hpt45x_chidjhaiaa-0", striped, ok, 320172928 sectors, data@ 0
@@ -68,19 +68,19 @@ Following are a couple of examples to show `dmraid` operation.
 /dev/dm-58: hpt45x, "hpt45x_chidjhaiaa-1", striped, ok, 320172928 sectors, data@ 0
 
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Activate all discovered arrays
 
-{% highlight text %}
+```
 [root@caladan ~]# dmraid -ay
-{% endhighlight %}
+```
 
 #### Deactivate all discovered arrays
 
-{% highlight text %}
+```
 [root@caladan ~]# dmraid -an
-{% endhighlight %}
+```
 
 ### mdadm
 
@@ -103,12 +103,12 @@ Instead `mdadm` uses the MD (Multiple Devices) device driver, this driver provid
 
 The configuration of the MD devices is contained in the `/etc/mdadm.conf` file.
 
-{% highlight text %}
+```
 [root@caladan ~]# cat mdadm.conf
 ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
 ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 The `mdadm` tool has seven operation modes.
 
@@ -126,16 +126,16 @@ Finally below are examples of some of the more common operations with `mdadm`.
 
 #### Create a RAID1 array
 
-{% highlight text %}
+```
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid1 --raid-devices 2 /dev/sd[de]1
 mdadm: size set to 1044096K
 mdadm: array /dev/md1 started.
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Get detailed configuration of the array
 
-{% highlight text %}
+```
 [root@caladan ~]# mdadm --query --detail /dev/md1
 /dev/md1:
             Version : 00.90.01
@@ -162,29 +162,29 @@ mdadm: array /dev/md1 started.
            0       8       49        0      active sync   /dev/sdd1
            1       8       65        1      active sync   /dev/sde1
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Destroy the array
 
-{% highlight text %}
+```
 [root@caladan ~]# mdadm --remove /dev/md1
 [root@caladan ~]# mdadm --stop /dev/md1
 [root@caladan ~]# mdadm --detail /dev/md1
 mdadm: md device /dev/md1 does not appear to be active.
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Create a RAID5 array with an spare device
 
-{% highlight text %}
+```
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid5 --raid-devices 3 --spare-devices 1 /dev/sd[def]1 /dev/sdg1
 mdadm: array /dev/md1 started
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Check for the status of a task into the /proc/mdstat file.
 
-{% highlight text %}
+```
 [root@caladan ~]# cat /proc/mdstat
 Personalities : [raid6] [raid5] [raid4]
 md0 : active raid6 sdi1[7] sdh1[6] sdg1[5] sdf1[4] sde1[3] sdd1[2] sdc1[1] sdb1[0]
@@ -193,16 +193,16 @@ md0 : active raid6 sdi1[7] sdh1[6] sdg1[5] sdf1[4] sde1[3] sdd1[2] sdc1[1] sdb1[
 
 unused devices: <none>
 [root@caladan ~]#
-{% endhighlight %}
+```
 
 #### Generate the mdadm.conf file from the current active devices.
 
-{% highlight text %}
+```
 [root@caladan ~]# mdadm --detail --scan
 ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
 ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44
 [root@caladan ~]# mdadm --detail --scan >> mdadm.conf
-{% endhighlight %}
+```
 
 As a final thought, my recommendation is that if there is hardware RAID controller available, like the HP Smart Array P400 for example, go hard-RAID five by five and if not always use `mdadm` even if there is an onboard RAID controller.
 

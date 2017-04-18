@@ -32,7 +32,7 @@ To explain a bit the scenario. I currently have two datacenters in my homelab, o
 
 To do so we re going to use the `Set-VMHost` cmdlet.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State "Maintenance"
 
@@ -43,13 +43,13 @@ vcloud-esxi1... Maintenance     PoweredOn  ...t-88      126     56
 
 C:\
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 ### Step 2 - Move the host out of the cluster
 
 To perform this use the `Move-VMHost` cmdlet.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-dc
 
@@ -60,7 +60,7 @@ vcloud-esxi1... Maintenance     PoweredOn  ...t-88       92     5
 
 C:\
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 If you check now the vSphere Client will see the host out of the cluster but still in the same datacenter.
 
@@ -70,7 +70,7 @@ If you check now the vSphere Client will see the host out of the cluster but sti
 
 Now that our host is in maintenance mode and out of the cluster it is time to move it to the correct datacenter. Again we will use `Move-VMHost`.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-vcloud -Verbose
 VERBOSE: 03/02/2011 22:30:39 Move-VMHost Started execution
@@ -84,11 +84,11 @@ vcloud-esxi1... Maintenance     PoweredOn  ...t-88       63     5
 
 C:\
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 Finally put the ESXi out of maintenance mode.
 
-{% highlight text %}
+```
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State Connected
 
@@ -99,7 +99,7 @@ vcloud-esxi1... Connected       PoweredOn  ...t-88       98    
 
 C:\
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 Check that everything is OK with the vSphere Client and we are done.
 

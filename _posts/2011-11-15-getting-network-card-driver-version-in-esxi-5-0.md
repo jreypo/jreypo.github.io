@@ -32,7 +32,7 @@ This a quick follow-up post to the [How to check the driver version of a network
 
 First I have to say that the two methods described in my first post still work in ESXi 5.0 Shell.
 
-{% highlight text %}
+```
 ~ # vmware -l
 VMware ESXi 5.0.0 GA
 ~ #
@@ -45,11 +45,11 @@ version: 8.0.3.1-NAPI
 firmware-version: N/A
 bus-info: 0000:02:00.0
 ~ #
-{% endhighlight %}
+```
 
 Thanks to the new changes made by VMware in ESXi 5.0 we can now use `esxcli` to get the same result.
 
-{% highlight text %}
+```
 ~ # esxcli system module get -m e1000
    Module: e1000
    Module File: /usr/lib/vmware/vmkmod/e1000
@@ -65,11 +65,11 @@ Thanks to the new changes made by VMware in ESXi 5.0 we can now use `esxcli` to 
 ~ # esxcli system module get -m e1000 | grep Version
    Version: Version 8.0.3.1-NAPI, Build: 456551, Interface: 9.2 Built on: Jul 29 2011
 ~ #
-{% endhighlight %}
+```
 
 There is a big advantage on using `esxcli` over the other methods. In ESX(i) 4.x and ESXi 5.0 with the old procedure you had to be logged into the host but with `esxcli` it can be performed remotely using vSphere CLI.
 
-{% highlight text %}
+```
 vi-admin@vma:~[esxi5.vjlab.local]> esxcli system module get -m e1000
    Module: e1000
    Module File: /usr/lib/vmware/vmkmod/e1000
@@ -85,7 +85,7 @@ vi-admin@vma:~[esxi5.vjlab.local]>
 vi-admin@vma:~[esxi5.vjlab.local]> esxcli system module get -m e1000 | grep Version
    Version: Version 8.0.3.1-NAPI, Build: 456551, Interface: 9.2 Built on: Jul 29 2011
 vi-admin@vma:~[esxi5.vjlab.local]>
-{% endhighlight %}
+```
 
 But there is more, thanks to `Get-EsxCli` cmdlet the same operation can be done using PowerCLI, here it is how.
 

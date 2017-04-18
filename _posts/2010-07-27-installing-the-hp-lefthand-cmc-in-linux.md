@@ -23,9 +23,9 @@ Burn the iso  or mount it in your Linux system. Navigate trough the iso to `GUI
 
 Launch the installer passing it the full path to the installer properties file, in this case the file `MediaId.properties` that can be found on `GUI/Linux/Disk1/InstData`.
 
-{% highlight text %}
+```
 root@wopr:/mnt/iso/GUI/Linux/Disk1/InstData/VM# ./CMC_Installer.bin -f /mnt/iso/Linux/Disk1/InstData/MediaId.properties
-{% endhighlight %}
+```
 
 The CMC will be installed in `/opt/LeftHandNetworks/UI`. Once the installation is finished launch the CMC from the shell or create a launcher on your Gnome/KDE desktop and voilà you can now control your Lefthand Storage systems from your favorite Linux distro.
 

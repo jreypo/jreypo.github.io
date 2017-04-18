@@ -36,9 +36,9 @@ If you look into `host.deny` will see that everything is denied by default.
 
 Add the following line to the `host.allow` file.
 
-{% highlight text %}
+```
 sshd: ALL: ALLOW
-{% endhighlight %}
+```
 
 Now you can access the appliance via SSH.
 

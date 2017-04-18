@@ -19,7 +19,7 @@ comments: true
 
 Today I was performing a test in the vSphere cluster I have in my laptop and when I tried to connect to my vCenter Server with PowerCLI I got the following error.
 
-{% highlight text %}
+```
 C:\Users\juanma
 [vSphere PowerCLI] % get-vc vcenter.mlab.local -user Administrator -Password vmwarerules!
 Connect-VIServer : 24/01/2011 12:58:33    Connect-VIServer        Could not connect using the requested protocol.   
@@ -30,7 +30,7 @@ At line:1 char:7
 
 C:\Users\juanma
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 My first thought after that was to check network connectivity and the firewall configuration of the vCenter Server but everything was OK. Then after a quick search in the VMware Communities I found the solution in this [post](http://communities.vmware.com/message/1657689).
 
@@ -38,7 +38,7 @@ The problem was the proxy server configuration of PowerCLI, I'm used to do every
 
 First retrieve the PowerCLI proxy configuration with the `Get-PowerCLIConfiguration` cmdlet.
 
-{% highlight text %}
+```
 C:\Users\juanma
 [vSphere PowerCLI] % Get-PowerCLIConfiguration
 
@@ -49,11 +49,11 @@ UseSystemProxy  Multiple      
 
 C:\Users\juanma
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 As you can see `Proxy Policy` is set to `UseSystemProxy`. To set this value to `NoProxy` use the cmdlet `Set-PowerCLIConfiguration`.
 
-{% highlight text %}
+```
 C:\Users\juanma
 [vSphere PowerCLI] % Set-PowerCLIConfiguration -ProxyPolicy NoProxy
 
@@ -68,11 +68,11 @@ NoProxy         Multiple      
 
 C:\Users\juanma
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 Now try to reconnect to the vCenter Server and everything should go without errors.
 
-{% highlight text %}
+```
 C:\Users\juanma
 [vSphere PowerCLI] % get-vc vcenter.mlab.local -user Administrator -Password vmwarerules!
 WARNING: There were one or more problems with the server certificate:
@@ -87,6 +87,6 @@ vcenter.mlab.local                             443 
 
 C:\Users\juanma
 [vSphere PowerCLI] %
-{% endhighlight %}
+```
 
 Juanma.

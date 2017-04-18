@@ -29,59 +29,59 @@ This is a small cookbook about mirroring the `vg00` I've compiled throughout the
 
 First initialize the disk.
 
-{% highlight text %}
+```
 root@ayane:/# pvcreate -f -B /dev/rdsk/c0t6d0
-{% endhighlight %}
+```
 
 Now make the disk bootable writing the LIF header.
 
-{% highlight text %}
+```
 root@ayane:/# mkboot -l /dev/dsk/c0t6d0
-{% endhighlight %}
+```
 
 And the LIF files, I'm using the unenforced quorum option because in my example `vg00` has only two PVs.
 
-{% highlight text %}
+```
 root@ayane:/# mkboot -a 'hpux -lq' /dev/dsk/c0t6d0
-{% endhighlight %}
+```
 
 Add the new PV to `vg00`.
 
-{% highlight text %}
+```
 root@ayane:/# vgextend vg00 /dev/dsk/c0t6d0
-{% endhighlight %}
+```
 
 Create the mirrors of the logical volumes within `vg00` in the new PV.
 
-{% highlight text %}
+```
 root@ayane:/# for i in $(vgdisplay -v vg00 | grep "LV Name" | awk '{ print $3 };')
 > do
 > lvextend -m 1 $i /dev/dsk/c0t6d0
 > done
-{% endhighlight %}
+```
 
 When the mirror is finished.
 
-{% highlight text %}
+```
 root@ayane:/# lvlnboot -r /dev/vg00/lvol3 /dev/vg00
 root@ayane:/# lvlnboot -b /dev/vg00/lvol1 /dev/vg00
 root@ayane:/# lvlnboot -s /dev/vg00/lvol2 /dev/vg00
 root@ayane:/# lvlnboot -d /dev/vg00/lvol2 /dev/vg00
-{% endhighlight %}
+```
 
 Specify the new disk as alternate boot path and add it to `/stand/bootconf`.
 
-{% highlight text %}
+```
 root@ayane:/# setboot -a 0/0/0/3/0.6.0
 root@ayane:/# cat /stand/bootconf
 l  /dev/dsk/c0t5d0
 l  /dev/dsk/c0t6d0
 root@ayane:/#
-{% endhighlight %}
+```
 
 And it's done. To check that everything correct.
 
-{% highlight text %}
+```
 root@ayane:/# vgdisplay -v vg00
 --- Volume groups ---
 VG Name                     /dev/vg00
@@ -156,7 +156,7 @@ AUTO       -12289 1856    1        0          05/09/22 
 PAD        -12290 1864    1468     0          05/09/22 09:37:09
 LABEL      BIN    3336    8        0          07/07/17 19:42:29
 root@ayane:/#
-{% endhighlight %}
+```
 
 ### Itanium 11.23
 
@@ -168,7 +168,7 @@ The procedure of mirroring `vg00` in an Itanium HP-UX 11.23, although shares som
 
 Preparation of the disk:
 
-{% highlight text %}
+```
 root@asoka:/# touch /tmp/partitionfile
 root@asoka:/# cat <<EOF >> /tmp/partitionfile
 > 3
@@ -183,48 +183,48 @@ HPUX 100%
 HPSP 400MB
 root@asoka:/#
 root@asoka:/# idisk -wqf /tmp/partitionfile /dev/rdsk/c1t1d0
-{% endhighlight %}
+```
 
 Make it bootable and copy the AUTO file. As it can be viewed in the example below as `<number_of_partition>` has been added to the device in order to identify the partition in which the operation will be executed.
 
-{% highlight text %}
+```
 root@asoka:/# insf -eCdisk
 root@asoka:/# mkboot -e -l /dev/rdsk/c1t1d0
 root@asoka:/# echo "boot vmunix -lq" >> /tmp/AUTO.lq
 root@asoka:/# efi_cp -d /dev/rdsk/c1t1d0s1 /tmp/AUTO.lq /EFI/HPUX/AUTO
-{% endhighlight %}
+```
 
 Create the HPSP partition.
 
-{% highlight text %}
+```
 root@asoka:/# dd if=/dev/rdsk/c0t1d0s3 of=/dev/rdsk/c1t1d0s3 bs=1024k
-{% endhighlight %}
+```
 
 Like in PA-RISC initialize the PV and add it to the VG.
 
-{% highlight text %}
+```
 root@asoka:/# pvreate -f -B /dev/rdsk/c1t1d0s2
 root@asoka:/# vgextend vg00 /dev/dsk/c1t1d0s2
-{% endhighlight %}
+```
 
 Mirror the Logical Volumes.
 
-{% highlight text %}
+```
 root@asoka:/# for i in $(vgdisplay -v vg00 | grep "LV Name" | awk '{ print $3 };')
 > do
 > lvextend -m 1 $i /dev/dsk/c1t1d0s2
 > done
-{% endhighlight %}
+```
 
 Set the content of the LABEL file, edit the `/stand/bootconf` like in the PA-RISC procedure and add the new disk as alternate HA boot path.
 
-{% highlight text %}
+```
 root@asoka:/# setboot -h <HW_PATH>
-{% endhighlight %}
+```
 
 To check that everything is properly configured you can use the same commands as in PA-RISC and the command `idisk` to check the correct partitioning of the disk.
 
-{% highlight text %}
+```
 root@asoka:/# idisk -p /dev/rdsk/c1t1d0
 idisk version: 1.32
 
@@ -271,7 +271,7 @@ EFI Primary Header:
         Ending Lba Lo              = 0x88aa821
         Ending Lba Hi              = 0x0
 root@asoka:/#
-{% endhighlight %}
+```
 
 ### Itanium 11.31
 
@@ -279,7 +279,7 @@ The 11.31 section will be short since the procedure is almost equal to the 11.23
 
 A few of examples will show it.
 
-{% highlight text %}
+```
 root@piroko:/# efi_cp -d /dev/rdisk/disk4_p1 /tmp/AUTO.lq /EFI/HPUX/AUTO
 
 root@piroko:/# pvcreate -fB /dev/rdisk/disk4_p2
@@ -288,7 +288,7 @@ root@piroko:/# for i in $(vgdisplay -v vg00| grep "LV Name" | awk '{ print $3 };
 > do
 > lvextend -m 1 $i /dev/disk/disk4_p2
 > done
-{% endhighlight %}
+```
 
 And we are done. As always every comment or correction will be welcome.
 

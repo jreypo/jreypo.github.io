@@ -61,7 +61,7 @@ Following is an example to illustrate the process.
 
 First, with `diskinfo`, verify the size of the current boot disk and the new disk to check that they are the same.
 
-{% highlight text %}
+```
 root@robin:/# diskinfo /dev/rdsk/c0t0d0
 SCSI describe of /dev/rdsk/c0t0d0:
              vendor: HP      
@@ -78,22 +78,22 @@ SCSI describe of /dev/rdsk/c0t8d0:
                size: 40960000 Kbytes
    bytes per sector: 512
 root@robin:/#
-{% endhighlight %}
+```
 
 After that scrub the new disk, this will prevent possible problems during the creation process because if `vxcp_lvmroot` encounter LVM structures on the disk it will fail.
 
-{% highlight text %}
+```
 root@robin:~# dd if=/dev/zero of=/dev/rdsk/c0t8d0 bs=1048576 count=1024  
 1024+0 records in
 1024+0 records out
 root@robin:~#
-{% endhighlight %}
+```
 
 Finally launch the `vxcp_lvmroot` command. Before commencing the copy, `vxcp_lvmroot` will determine how many disks are required and will ensure that enough disks have been specified.
 
 Each one of the given disks for the conversion will be checked to make sure that aren't in use as LVM, VxVM or raw disks. Once the appropriate checks have been issued the disks will be given VxVM media names, the disk or disks containing the root will be given `rootdisk##` names and the other disks that are part of the `rootdg` will be given `rootaux##` names, `##` is a number starting on 01.
 
-{% highlight text %}
+```
 root@robin:~# /etc/vx/bin/vxcp_lvmroot -v -b c0t8d0
 VxVM vxcp_lvmroot INFO V-5-2-4668 10:42: Bootdisk is configured with new-style DSF
 VxVM vxcp_lvmroot INFO V-5-2-2499 10:42: Gathering information on LVM root volume group vg00
@@ -121,11 +121,11 @@ VxVM vxcp_lvmroot INFO V-5-2-4676 10:59: Making disk /dev/rdisk/disk20_p2 the pr
 VxVM vxcp_lvmroot INFO V-5-2-4663 10:59: Making disk /dev/rdisk/disk4_p2 the alternate boot disk
 VxVM vxcp_lvmroot INFO V-5-2-4671 10:59: Disk c0t8d0s2 is now a VxVM rootable boot disk
 root@robin:~#
-{% endhighlight %}
+```
 
 Now to verify the new VxVM boot disk, first check the newly created `rootdg` diskgroup.
 
-{% highlight text %}
+```
 root@robin:~# vxprint -htg rootdg
 DG NAME         NCONFIG      NLOG     MINORS   GROUP-ID
 ST NAME         STATE        DM_CNT   SPARE_CNT         APPVOL_CNT
@@ -184,11 +184,11 @@ v  varvol       -            ENABLED  ACTIVE   5242880  SE
 pl varvol-01    varvol       ENABLED  ACTIVE   5242880  CONCAT    -        RW
 sd rootdisk01-08 varvol-01   rootdisk01 23535616 5242880 0        c0t8d0s2 ENA
 root@robin:~#
-{% endhighlight %}
+```
 
 Verify the contents of the `LABEL` file.
 
-{% highlight text %}
+```
 root@robin:~# vxvmboot -v /dev/rdsk/c0t8d0s2
 
 LIF Label File @ (1k) block # 834 on VxVM Disk /dev/rdsk/c0t8d0s2:
@@ -197,11 +197,11 @@ Label Entry: 1, Root Volume start:  6032480; length: 1024 MB
 Label Entry: 2, Swap Volume start:  1838176; length: 4096 MB
 Label Entry: 3, Dump Volume start:  1838176; length: 4096 MB
 root@robin:~#
-{% endhighlight %}
+```
 
 Check the new boot paths and if everything is OK reboot the server.
 
-{% highlight text %}
+```
 root@robin:~# setboot -v
 Primary bootpath : 0/0/0/0.0x8.0x0 (/dev/rdisk/disk20)
 HA Alternate bootpath :
@@ -221,7 +221,7 @@ Broadcast Message from root (console) Wed Jun  9 11:11:37...
 SYSTEM BEING BROUGHT DOWN NOW ! ! !
 
 ...
-{% endhighlight %}
+```
 
 If everything went as expected the server will boot from the new disk and the migration process will be finished.
 

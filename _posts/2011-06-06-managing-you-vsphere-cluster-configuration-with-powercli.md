@@ -26,13 +26,13 @@ Managing VMware vSphere cluster configuration with the vSphere Client can be, so
 
 The first thing  to do is to properly setup the basics that will allow us to interact with the cluster. First get your cluster basic configuration and store it in a variable, `$cldl380` in the example.
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $cldl380 = get-cluster cluster-dl380-01
-{% endhighlight %}
+```
 
 Use the cmdlet to `Get-View` to get the .Net objects of the cluster and store the result in another variable.
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $viewdl380 = get-view $cldl380.Id
 [vSphere PowerCLI] C:\> $viewdl380
 
@@ -69,13 +69,13 @@ MoRef               : ClusterComputeResource-domain-c35
 Client              : VMware.Vim.VimClient
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 This variable is the base we are going to use to get the cluster configuration, now we are going to use it.
 
 #### Get the cluster resources summary
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $viewdl380.Summary
 
 CurrentFailoverLevel : 0
@@ -97,11 +97,11 @@ DynamicType          :
 DynamicProperty      :
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 #### Get VMware HA configuration
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $viewdl380.Configuration
 
 DasConfig       : VMware.Vim.ClusterDasConfigInfo
@@ -126,11 +126,11 @@ DynamicType             :
 DynamicProperty         :
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 #### Get cluster advanced options
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $viewdl380.Configuration.DasConfig.Option
 
 Key                                   Value                                 DynamicType                          DynamicProperty                     
@@ -140,11 +140,11 @@ das.isolationaddress2                 192.168.126.250
 das.usedefaultisolationaddress        false                                                                                                          
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 #### Get DRS basic configuration
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> $viewdl380.Configuration.DrsConfig
 
 Enabled                   : True
@@ -162,11 +162,11 @@ Key                                   Value                                 Dyna
 ForceAffinePoweron                    1
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 #### Get Virtual Port Groups of the cluster
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> Get-View $viewdl380.Network | Select-Object Name
 
 Name
@@ -177,11 +177,11 @@ Backend-v102
 Management-v105
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 #### Get the Datastores configured in the cluster
 
-{% highlight text %}
+```
 [vSphere PowerCLI] C:\> Get-View $viewdl380.Datastore | Select-Object Name
 
 Name
@@ -194,7 +194,7 @@ LOCAL_DS-DL380-01
 LOCAL_DS-DL380-02
 
 [vSphere PowerCLI] C:\>
-{% endhighlight %}
+```
 
 Finally to ease things at work I created a bunch of scripts that implement some of the above tasks, here it is an example. The syntax I used for all of them is `[script-name] <cluster-name>`.
 
@@ -214,7 +214,7 @@ $cluster = Get-Cluster $clustername
 $viewcluster = Get-View $cluster.Id
 
 $viewcluster.Configuration.DasConfig.Option
-{% endhighlight %}
+```
 
 From this point I'll leave to you to investigate all the possibilities, as always if you know a better way to do it, have any question or want to say anything about the post please comment. I'm also preparing a new post with all my small scripts and hope to publish them next week.
 
