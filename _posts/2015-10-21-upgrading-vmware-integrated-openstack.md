@@ -46,7 +46,7 @@ VIO Management Server.
 
 Stage the upgrade package.
 
-{% highlight text %}
+```
 viouser@vio-oms:~$ sudo viopatch add -l vio-1.0-upgrade_2.0.0.3037964_all.deb
 [sudo] password for viouser:
 vio-1.0-upgrade_2.0.0.3037964_all.deb patch has been added.
@@ -57,17 +57,17 @@ vio-1.0-upgrade 2.0.0.3037964 infra  No
 vio-patch-2     1.0.2.2813500 infra  Yes
 
 viouser@vio-oms:~$
-{% endhighlight %}
+```
 
 Upgrade the management server with `viopatch` command.
 
-{% highlight text %}
+```
 viouser@vio-oms:~$ sudo viopatch install -p vio-1.0-upgrade -v 2.0.0.3037964
 Installing patch vio-1.0-upgrade version 2.0.0.3037964
 done
 Installation complete for patch vio-1.0-upgrade version 2.0.0.3037964
 viouser@vio-oms:~$
-{% endhighlight %}
+```
 Go to the vSphere Web Client, logout and log back in to verify that the new version is correct.
 
 [![](/images/vio-oms-upgraded.png)]({{site.url}}/images/vio-oms-upgraded.png)

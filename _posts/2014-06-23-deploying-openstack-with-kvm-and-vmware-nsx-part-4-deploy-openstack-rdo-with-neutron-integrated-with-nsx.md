@@ -60,64 +60,64 @@ In the Neutron node install NSX Open vSwitch version as described in [Part 3]({%
 
 With the network interface configuration files properly setup exist your SSH session and log into the VM console to create the OVS bridges like the example below.
 
-{% highlight text %}
+```
 ovs-vsctl add-br br-ex
 ovs-vsctl br-set-external-id br-ex bridge-id br-ex
 ovs-vsctl set Bridge br-ex fail-mode=standalone
 ovs-vsctl add-port br-ex eth0
-{% endhighlight %}
+```
 
 ### OpenStack installation
 
 RDO relies on `packstack` for the installation of its different components. [Packstack](https://github.com/stackforge/packstack) is a tool that will install all required software in the nodes based on an answer file. Enable RDO and EPEL repos and install `openstack-packstack` package.
 
-{% highlight text %}
+```
 yum install -y http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 yum install -y http://repos.fedorapeople.org/repos/openstack/openstack-havana/rdo-release-havana-8.noarch.rpm
 yum install -y openstack-packstack
-{% endhighlight %}
+```
 
 Once it is installed generate a new answer file, we will use this file as a template for our installation.
 
-{% highlight text %}
+```
 packstack --gen-answer-file rdo_answers.txt
-{% endhighlight %}
+```
 
 Edit `packstack` answer file and modify the following entries, leave the rest with the default values. It is important to do not eliminate any entry or `packstack` execution will fail.
 
 Deactivate services we do not want to deploy.
 
-{% highlight text %}
+```
 CONFIG_SWIFT_INSTALL=n
 CONFIG_CEILOMETER_INSTALL=n
 CONFIG_NAGIOS_INSTALL=n
 CONFIG_CINDER_INSTALL=n
-{% endhighlight %}
+```
 
 Nova settings.
 
-{% highlight text %}
+```
 CONFIG_NOVA_COMPUTE_HOSTS=192.168.82.42
 CONFIG_NOVA_NETWORK_HOSTS=
-{% endhighlight %}
+```
 
 And finally Neutron settings. Don't set any L3 value since that part will be managed by NSX.
 
-{% highlight text %}
+```
 CONFIG_NEUTRON_SERVER_HOST=192.168.82.41
 CONFIG_NEUTRON_DHCP_HOSTS=192.168.82.41
 CONFIG_NEUTRON_METADATA_HOSTS=192.168.82.41
-{% endhighlight %}
+```
 
 Launch OpenStack installation process.
 
-{% highlight text %}
+```
 packstack --answer-file rdo_answers.txt
-{% endhighlight %}
+```
 
 The installation will take a while so you better grab a cup of coffee and have a look at the output while the software installs on each of the three nodes. If everything goes as expected we should see a similar message at the of the installation process.
 
-{% highlight text %}
+```
  **** Installation completed successfully ******
 
 Additional information:
@@ -131,7 +131,7 @@ Please, find your login credentials stored in the keystonerc_admin in your home 
  * The installation log file is available at: /var/tmp/packstack/20140617-001835-On5TCi/openstack-setup.log 
  * The generated manifests are available at: /var/tmp/packstack/20140617-001835-On5TCi/manifests 
 [root@cloud-controller ~]#
-{% endhighlight %}
+```
 
 Reboot the three nodes as instructed and proceed to the next step.
 
@@ -141,34 +141,34 @@ RDO `packstack` cannot configure Glance to use GlusterFS as its storage backend
 
 Stop Glance services.
 
-{% highlight text %}
+```
 service openstack-glance-registry stop
 service openstack-glance-api stop
-{% endhighlight %}
+```
 
 Install gluster required packages on the controller node.
 
-{% highlight text %}
+```
 yum install glusterfs-fuse glusterfs
-{% endhighlight %}
+```
 
 Mount GlusterFS share and set the ownership and permissions for `glance` user.
 
-{% highlight text %}
+```
 mount -t glusterfs gluster.vlab.local:gv0 /var/lib/glance/images
 chown -R glance:glance /var/lib/glance/images
-{% endhighlight %}
+```
 
 Start Glance services.
 
-{% highlight text %}
+```
 service openstack-glance-registry start
 service openstack-glance-api start
-{% endhighlight %}
+```
 
 With the installation finished OpenStack Horizon dashboard should be available at **http://cloud_controller_fqdn/dashboard**. Log in with the user admin, the password for this user can be found in the file `/root/keystonerc_admin` on the cloud controller node.
 
-{% highlight text %}
+```
 [root@cloud-controller ~]# cat keystonerc_admin
 export OS_USERNAME=admin
 export OS_TENANT_NAME=admin
@@ -176,7 +176,7 @@ export OS_PASSWORD=cd0ed5b5f251450f
 export OS_AUTH_URL=http://192.168.82.40:35357/v2.0/
 export PS1='[\u@\h \W(keystone_admin)]\$ '
 [root@cloud-controller ~]#
-{% endhighlight %}
+```
 
 If login fails with an unexpected error check that firewall is deactivated in all three nodes and that all services are up and running, in some of my deployments Neutron server did not start after a reboot and I had to start it manually.
 
@@ -194,23 +194,23 @@ VMware provides a set of RPM packages containing the NSX plugin and a VMware san
 
 A tar file containing all the source for both the plugin and Neutron itself is also available and instructions on how to compile and install it are provided in NSX documentation, during my first trials I took this path but this time I decided to use the upstream plugin instead since it was available in RDO repositories.
 
-{% highlight text %}
+```
 yum install openstack-neutron-nicira
-{% endhighlight %}
+```
 
 ### Configure NSX plugin
 
 Register the Neutron server as a transport node on the NSX Controller Cluster.
 
-{% highlight text %}
+```
 ovs-vsctl set-manager ssl:192.168.82.45
-{% endhighlight %}
+```
 
 Stop neutron services.
 
-{% highlight text %}
+```
 service neutron-server stop
-{% endhighlight %}
+```
 
 Edit `/etc/neutron/neutron.conf` file and set `core_plugin` value to `neutron.plugins.nicira.NeutronPlugin.NvpPluginV2`.
 
@@ -218,41 +218,41 @@ Configure `nvp.ini` file accordingly, this file can be found in `/etc/neutron/pl
 
 Set NSX admin user and password.
 
-{% highlight text %}
+```
 nvp_user = admin
 nvp_password = admin
-{% endhighlight %}
+```
 
 Configure NSX controllers IP addresses.
 
-{% highlight text %}
+```
 nvp_controllers = 192.168.82.45
-{% endhighlight %}
+```
 
 Set the default Transport Zone UUID and the L3 and L2 gateway services UUID, these values can be retrieved from the NSX Manager web.
 
-{% highlight text %}
+```
 default_tz_uuid = b948fd35-5737-4a30-8741-43134771d40c
 default_l3_gw_service_uuid = adee048c-3776-4bd2-ade1-42ab5c90bf9e
-{% endhighlight %}
+```
 
 Configure metadata for Nova instances, set `metadata_dhcp_host_route` to `False` in `[DEFAULT]` section. In `[nvp]` section set the metadata mode as `access_network`.
 
-{% highlight text %}
+```
 enable_metadata_access_network = True
 metadata_mode = access_network
-{% endhighlight %}
+```
 
 Create a `[database]` section and configure the connection to Neutron MySQL database, the data can be found on `neutron.conf` file.
 
-{% highlight text %}
+```
 [database]
 connection = mysql://neutron:ac2191a8661b4b66@192.168.82.40/ovs_neutron
-{% endhighlight %}
+```
 
 Finally before start Neutron services check `nvp.ini` with the command `neutron-check-nvp-config`. You should get something like this.
 
-{% highlight text %}
+```
 [root@neutron ~]# neutron-check-nvp-config /etc/neutron/plugins/nicira/nvp.ini
 ----------------------- Database Options -----------------------
         connection: mysql://neutron:ac2191a8661b4b66@192.168.82.40/ovs_neutron
@@ -274,17 +274,17 @@ Number of controllers found: 1
         Transport zones: [u'b948fd35-5737-4a30-8741-43134771d40c']
 Done.
 [root@neutron ~]#
-{% endhighlight %}
+```
 
 Start Neutron services
 
-{% highlight text %}
+```
 service neutron-server start
-{% endhighlight %}
+```
 
 Create a network neutron command line to test that everything is working as expected.
 
-{% highlight text %}
+```
 [root@cloud-controller ~(keystone_admin)]# neutron net-create nsx-test-net
 Created a new network:
 +-----------------------+--------------------------------------+
@@ -307,7 +307,7 @@ Created a new network:
 | 24f3b23f-a938-40e7-b026-14c8fb77ff34 | nsx-test-net |         |
 +--------------------------------------+--------------+---------+
 [root@cloud-controller ~(keystone_admin)]#
-{% endhighlight %}
+```
 
 Access NSX Manager web interface, navigate to Logical Switches and confirm that a new logical switch with the same name and UUID as the new OpenStack network has been created.
 

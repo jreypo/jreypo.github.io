@@ -27,15 +27,15 @@ After investigating a bit internally and thanks to my colleague Dimitri Desmidt 
 
 Open an SSH connection as `viouser` to the VIO Management Server and elevate to `root`. Launch `psql` with the following command:
 
-{% highlight text %}
+```
 /opt/vmware/vpostgres/current/bin/psql -U omsdb
-{% endhighlight %}
+```
 
 From `psql` prompt execute:
 
-{% highlight text %}
+```
 update cluster set status='RUNNING';
-{% endhighlight %}
+```
 
 After that logout and login back to Web Client and the cluster will be now in **Running** status.
 

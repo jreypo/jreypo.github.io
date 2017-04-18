@@ -54,36 +54,36 @@ Mark `Base` and `Standard` groups to be installed and leave the rest unchecked. 
 
 Disable SELinux with `setenfornce` command, also modify SELinux config to disable it during OS boot. I do not recommend to disable SELinux in a production environment but for a lab it will simplify things.
 
-{% highlight text %}
+```
 setenforce 0
 cp /etc/selinux/config /etc/selinux/config.orig
 sed -i s/SELINUX\=enforcing/SELINUX\=disabled/ /etc/selinux/config
-{% endhighlight %}
+```
 
 Check that hardware virtualization support is activated.
 
-{% highlight text %}
+```
 egrep -i 'vmx|svm' /proc/cpuinfo
-{% endhighlight %}
+```
 
 Install KVM packages.
 
-{% highlight text %}
+```
 yum install kvm libvirt python-virtinst qemu-kvm
-{% endhighlight %}
+```
 
 After installing a ton of dependencies and if t nothing failed enable and start the `libvirtd` service.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# chkconfig libvirtd on
 [root@kvm1 ~]# service libvirtd start
 Starting libvirtd daemon:                                  [  OK  ]
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 Verify that KVM has been correctly installed and it's loaded and running on the system.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# lsmod | grep kvm
 kvm_intel              53484  0
 kvm                   316506  1 kvm_intel
@@ -93,7 +93,7 @@ kvm                   316506  1 kvm_intel
 ----------------------------------------------------
 
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 ### Hypervisor networking setup
 
@@ -103,16 +103,16 @@ Disable Network Manager for both interfaces. Edit `/etc/sysconfig/network-script
 
 By default libvirt creates `virbr0` network bridge to be used for the virtual machines to access the external network through a NAT connection. We need to disable it to ensure that bridge components of Open vSwitch can load without any errors.
 
-{% highlight text %}
+```
 virsh net-destroy default
 virsh net-autostart --disable default
-{% endhighlight %}
+```
 
 #### Install Open vSwitch
 
 Copy the NSX OVS package to the KVM host and extract it.
 
-{% highlight text %}
+```
 [root@kvm1 nsx-ovs]# tar vxfz nsx-ovs-2.1.0-build33849-rhel64_x86_64.tar.gz
 ./
 ./nicira-flow-stats-exporter/
@@ -123,18 +123,18 @@ Copy the NSX OVS package to the KVM host and extract it.
 ./nicira-ovs-hypervisor-node-2.1.0.33849-1.x86_64.rpm
 ./nicira-ovs-hypervisor-node-debuginfo-2.1.0.33849-1.x86_64.rpm
 [root@kvm1 nsx-ovs]#
-{% endhighlight %}
+```
 
 Install Open vSwitch packages.
 
-{% highlight text %}
+```
 rpm -Uvh kmod-openvswitch-2.1.0.33849-1.el6.x86_64.rpm
 rpm -Uvh openvswitch-2.1.0.33849-1.x86_64.rpm
-{% endhighlight %}
+```
 
 Verify that Open vSwitch service is enabled and start it.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# chkconfig --list openvswitch
 openvswitch     0:off   1:off   2:on    3:on    4:on    5:on    6:off
 [root@kvm1 ~]#
@@ -148,11 +148,11 @@ Inserting openvswitch module                          
 Starting ovs-vswitchd                                      [  OK  ]
 Enabling remote OVSDB managers                             [  OK  ]
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 Install `nicira-ovs-hypervisor-node` package, this utility provides the infrastructure for distributed routing on the hypervisor. With the installation the integration bridge `br-int` and OVS SSL credentials will be created.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# rpm -Uvh nicira-ovs-hypervisor-node*.rpm
 Preparing...                ########################################### [100%]
    1:nicira-ovs-hypervisor-n########################################### [ 50%]
@@ -161,7 +161,7 @@ Running '/usr/sbin/ovs-integrate init'
 successfully generated self-signed certificates..
 successfully created the integration bridge..
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 There are other packages like `nicira-flow-stats-exporter` and `tcpdump-ovs` but they are not needed for OVS functioning. We can proceed now with OVS configuration.
 
@@ -169,16 +169,16 @@ There are other packages like `nicira-flow-stats-exporter` and `tcpdump-ovs` but
 
 The first step is to create OVS bridges for each network interface card of the hypervisor.
 
-{% highlight text %}
+```
 ovs-vsctl add-br br0
 ovs-vsctl br-set-external-id br0 bridge-id br0
 ovs-vsctl set Bridge br0 fail-mode=standalone
 ovs-vsctl add-port br0 eth0
-{% endhighlight %}
+```
 
 If you were logged in by an SSH session you have probably noticed that your connection is lost, this is because `br0` interface has taken control of the networking of the host and it doesn't have an IP address configured. To solve this access the host console and edit `ifcfg-eth0` file and modify to look like this.
 
-{% highlight text %}
+```
 DEVICE=eth0
 DEVICETYPE=ovs
 TYPE=OVSPort
@@ -190,11 +190,11 @@ NAME=eth0
 HOTPLUG=no
 HWADDR=00:0C:29:CA:34:FE
 NM_CONTROLLED=no
-{% endhighlight %}
+```
 
 Next create and edit `ifcfg-br0` file.
 
-{% highlight text %}
+```
 DEVICE=br0
 DEVICETYPE=ovs
 TYPE=OVSBridge
@@ -205,25 +205,25 @@ NETMASK=255.255.255.0
 GATEWAY=192.168.82.2
 IPV6INIT=no
 HOTPLUG=no
-{% endhighlight %}
+```
 
 Restart the network service and test the connection.
 
-{% highlight text %}
+```
 service network restart
-{% endhighlight %}
+```
 
 Repeat all the above steps for the second network interface.
 
 Finally configure NSX Controller Cluster as manager in Open vSwitch.
 
-{% highlight text %}
+```
 ovs-vsctl set-manager ssl:192.168.82.44
-{% endhighlight %}
+```
 
 Execute `ovs-vsctl show` command to review OVS current configuration.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# ovs-vsctl show
 383c3f17-5c53-4992-be8e-6e9b195e51d8
     Manager "ssl:192.168.82.44"
@@ -248,7 +248,7 @@ Execute `ovs-vsctl show` command to review OVS current configuration.
                 type: internal
     ovs_version: "2.1.0.33849"
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 #### Register OVS in NSX Controller
 
@@ -267,7 +267,7 @@ In Properties enter:
 
 For the Credential screen we are going to need the SSL certificate that was created along with the integration bridge during the NSX OVS installation. The PEM certificate file is `ovsclient-cert.pem` and is in `/etc/openvswitch` directory.
 
-{% highlight text %}
+```
 [root@kvm1 ~]# cat /etc/openvswitch/ovsclient-cert.pem
 -----BEGIN CERTIFICATE-----
 MIIDwjCCAqoCCQDZUob5H9tzvjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMC
@@ -293,7 +293,7 @@ Ix8d9S4NyDO91mDstIcXeNRUk8K64gEQSKxQO9QKmVAQBIlYAJVVXzfkXyHEiKTe
 XYf2HdXj
 -----END CERTIFICATE-----
 [root@kvm1 ~]#
-{% endhighlight %}
+```
 
 Copy the contents of the file and paste them in the **Security Certificate** text box.
 
@@ -324,35 +324,35 @@ Use the same partitioning schema of the KVM hosts for the system disk. Choose a 
 
 Disable SELinux.
 
-{% highlight text %}
+```
 sudo setenforce 0
 sudo cp /etc/selinux/config /etc/selinux/config.orig
 sudo sed -i s/SELINUX\=enforcing/SELINUX\=disabled/ /etc/selinux/config
-{% endhighlight %}
+```
 
 Stop and disable `firewalld`.
 
-{% highlight text %}
+```
 sudo systemctl disable firewalld.service
 sudo systemctl stop firewalld.service
-{% endhighlight %}
+```
 
 Install GlusterFS packages. There is no need to add any additional yum repository since Gluster is included in the standard Fedora repos.
 
-{% highlight text %}
+```
 sudo systemctl install glusterfs-server
-{% endhighlight %}
+```
 
 Enable Gluster services.
 
-{% highlight text %}
+```
 sudo systemctl enable glusterd.service
 sudo systemctl enable glusterfsd.service
-{% endhighlight %}
+```
 
 Start Gluster services.
 
-{% highlight text %}
+```
 [jrey@gluster ~]$ sudo systemctl start glusterd.service
 [jrey@gluster ~]$ sudo systemctl start glusterfsd.service
 [jrey@gluster ~]$
@@ -377,17 +377,17 @@ glusterfsd.service - GlusterFS brick processes (stopping only)
 Apr 28 17:17:45 gluster.vlab.local systemd[1]: Starting GlusterFS brick processes (stopping only)...
 Apr 28 17:17:45 gluster.vlab.local systemd[1]: Started GlusterFS brick processes (stopping only).
 [jrey@gluster ~]$
-{% endhighlight %}
+```
 
 Since we are running a one-node cluster there is no need to add any node to the trusted pool. In case you decide to run a multi-node environment you can setup the pool by running the following command on each node of the cluster. .
 
-{% highlight text %}
+```
 gluster peer probe <IP_ADDRESS_OF_OTHER_NODE>
-{% endhighlight %}
+```
 
 Edit the data disk with `fdisk` and create a single partition. Format the partition as XFS.
 
-{% highlight text %}
+```
 [jrey@gluster ~]$ sudo mkfs.xfs -i size=512 /dev/sdb1
 meta-data=/dev/sdb1              isize=512    agcount=4, agsize=4718528 blks
          =                       sectsz=512   attr=2, projid32bit=0
@@ -398,20 +398,20 @@ log      =internal log           bsize=4096   blocks=9215, vers
          =                       sectsz=512   sunit=0 blks, lazy-count=1
 realtime =none                   extsz=4096   blocks=0, rtextents=0
 [jrey@gluster ~]$
-{% endhighlight %}
+```
 
 Create the mount point for the new filesystem, mount the partition and edit `/etc/fstab` accordingly to make it persistent to reboots.
 
-{% highlight text %}
+```
 sudo mkdir -p /data/glance/
 sudo mount /dev/sdb1 /data/glance
 sudo mkdir -p /data/glance/brick1
 sudo echo "/dev/sdb1 /data/glance xfs defaults 0 0" >> /etc/fstab
-{% endhighlight %}
+```
 
 Create the Gluster volume and start it.
 
-{% highlight text %}
+```
 [jrey@gluster ~]$ sudo gluster volume create gv0 gluster.vlab.local:/data/glance/brick1
 volume create: gv0: success: please start the volume to access data
 [jrey@gluster ~]$
@@ -429,7 +429,7 @@ Transport-type: tcp
 Bricks:
 Brick1: gluster.vlab.local:/data/glance/brick1
 [jrey@gluster ~]$
-{% endhighlight %}
+```
 
 The configuration of the Gluster node is finished. In the next article we will install and configure OpenStack using the different components detailed during current and previous parts of the series.
 

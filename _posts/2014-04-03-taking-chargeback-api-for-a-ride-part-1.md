@@ -38,9 +38,9 @@ API syntax is actually very easy, it is composed of:
 
 It’s better illustrated with an example:
 
-{% highlight text %}
+```
 POST https://chargeback.corp.local/vCenter-CB/api/login?version=2.5
-{% endhighlight %}
+```
 
 We can map the above example with the different elements of the API syntax:
 
@@ -68,9 +68,9 @@ This is the most basic operation of all. In the REST Client paste the XML payloa
 
 Not every task needs an XML payload, in the following example we are going to get a list of the hierarchies using a GET method and with no message body. The URL to make the request would be:
 
-{% highlight text %}
+```
 https://<chargeback_server>/vCenter-CB/api/hierarchies?version=2.5
-{% endhighlight %}
+```
 
 After executing the request we can see in the REST Client the response from Chargeback in XML format.
 
@@ -84,13 +84,13 @@ If we go to Chargeback web UI we’ll see the listed hierarchies.
 
 Another simple request with no XML payload, with a similar syntax to the previous one:
 
-{% highlight text %}
+```
 GET https://<chargeback_server>/vCenter-CB/api/costModels?version=2.5
-{% endhighlight %}
+```
 
 It will produce however a much more detailed response XML with the details of each of the configured Pricing Models.
 
-{% highlight xml %}
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Response xmlns="http://www.vmware.com/vcenter/chargeback/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="success" isValidLicense="true">
   <CostModels>
@@ -159,15 +159,15 @@ It will produce however a much more detailed response XML with the details of ea
     </CostModel>
   </CostModels>
 </Response>
-{% endhighlight %}
+```
 
 ### Add a new hierarchy
 
 Invoked using a POST method, that corresponds with the CREATE operation from the table at the beginning of the post. The syntax for the request would be:
 
-{% highlight text%}
+```
 POST https://<chargeback_server>/vCenter-CB/api/hierarchy
-{% endhighlight %}
+```
 
 In this case I’m not going to put the version as a parameter. An XML payload with the details of the new hierarchy is required.
 

@@ -86,7 +86,7 @@ For our lab leaving the default values will suffice.
 
 For the next step get the SSL certificate from the Service Node. Establish an SSH session with the appliance as `admin` user and use the `show switch certificate` command. The output of the command can be a bit large, we just need the certificate itself.
 
-{% highlight text %}
+```
 -----BEGIN CERTIFICATE-----
 MIIDgjCCAmoCAQMwDQYJKoZIhvcNAQEEBQAwgYExCzAJBgNVBAYTAlVTMQswCQYD
 VQQIEwJDQTEVMBMGA1UEChMMT3BlbiB2U3dpdGNoMREwDwYDVQQLEwhzd2l0Y2hj
@@ -108,7 +108,7 @@ VMEoHYq7TwQXX6TR1eebjOKdeg4laOcsKystHTW+wuMBfOfcoYIuEZMQ7SOsRANe
 l1hm3VI7t1gxp38r9JbtEC2jCqqBMzR+ZrzmodLsn/VgFDv8QiUZ5tFHaWl+jhQ/
 JWxXqjLo42B6fRUA04wF6tJKnu3KDaVFIx4ssvKw2Q5u6PNSf8I=
 -----END CERTIFICATE-----
-{% endhighlight %}
+```
 
 Go back to the *Create Service Node* window and select **Security Certificate** as credential type and paste the certificate extracted from the Service Node in the **Security Certificate** text area.
 
@@ -152,9 +152,9 @@ The first one will transmit the encoded PEM certificates to the NSX Controller w
 
 With those arguments a registering command for our Service Node would be like this.
 
-{% highlight text %}
+```
 request transport-node-register nsxc.vlab.local admin admin mgmt-ip no tc-id 192.168.82.46 tc-uuid b948fd35-5737-4a30-8741-43134771d40c tc-type STT
-{% endhighlight %}
+```
 
 ### Create a Gateway Service
 

@@ -29,27 +29,27 @@ After looking a bit I finally found in GitHub the [sig-atomic-buildscripts](http
 
 Clone the GutHub repository.
 
-{% highlight text %}
+```
 git clone https://github.com/baude/sig-atomic-buildscripts
-{% endhighlight %}
+```
 
 Copy `virt7-testing.repo` file to `/etc/yum.repos.d` and install Cockpit.
 
-{% highlight text %}
+```
 yum install cockpit
-{% endhighlight %}
+```
 
 Enable Cockpit service.
 
-{% highlight text %}
+```
 [root@webtest ~]# systemctl enable cockpit.socket
 ln -s '/usr/lib/systemd/system/cockpit.socket' '/etc/systemd/system/sockets.target.wants/cockpit.socket'
 [root@webtest ~]#
-{% endhighlight %}
+```
 
 Add Cockpit to the list of trusted services in FirewallD.
 
-{% highlight text %}
+```
 [root@webtest ~]# firewall-cmd --permanent --zone=public --add-service=cockpit
 success
 [root@webtest ~]#
@@ -59,33 +59,33 @@ success
 [root@webtest ~]# firewall-cmd --list-services
 cockpit dhcpv6-client ssh
 [root@webtest ~]#
-{% endhighlight %}
+```
 
 Start Cockpit socket.
 
-{% highlight text %}
+```
 systemctl start cockpit.socket
-{% endhighlight %}
+```
 
 Do no try to access Cockpit yet, there is an [issue](https://github.com/cockpit-project/cockpit/issues/1581) about running Cockpit on stock CentOS/RHEL 7. To be able to start it we need first to modify the service file to disable SSL. Edit file `/usr/lib/systemd/system/cockpit.service` and modify `ExecStart` line to look like this.
 
-{% highlight text %}
+```
 ExecStart=/usr/libexec/cockpit-ws --no-tls
-{% endhighlight %}
+```
 
 I know this procedure will invalidate Cockpit for a production environment in RHEL7 at least for now but this is for my lab environment and I can live with it.
 
 Reload `systemd`.
 
-{% highlight text %}
+```
 systemctl daemon-reload
-{% endhighlight %}
+```
 
 Restart Cockpit.
 
-{% highlight text %}
+```
 systemctl restart cockpit
-{% endhighlight %}
+```
 
 Access Cockpit web interface, login as root and have fun :-)
 
