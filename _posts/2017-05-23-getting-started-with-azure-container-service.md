@@ -317,4 +317,6 @@ $ az network public-ip list -g acsrg1
 
 In the next post about Azure Container Service I will start with the creation and management of Kubernetes clusters on ACS, which happens to be my favorite container orchestrator :D
 
+Finally if you want to see some really cool stuff with Azure, ACS, DC/OS and vSphere check my friend Lior series of posts **Mesosphere DCOS, Azure, Docker, VMware & Everything Between**, [Part 1](http://imallvirtual.com/dcos-azure-docker-vmware-everything-part-1/), [Part 2](http://imallvirtual.com/mesosphere-dcos-azure-docker-vmware-everything-part-2/), [Part 3](http://imallvirtual.com/mesosphere-dcos-azure-docker-vmware-everything-part-3/) and [Part 4](http://imallvirtual.com/mesosphere-dcos-azure-docker-vmware-everything-part-4/) with more parts coming soon. 
+
 --Juanma
