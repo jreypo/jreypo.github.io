@@ -34,7 +34,6 @@ $ az group create --name acs-k8s-3 --location westeurope
 Location    Name
 ----------  ---------
 westeurope  acs-k8s-3
-
 ```
 
 Now we can create our cluster. To spin up your Kubernetes cluster you can of use the Azure Portal but I prefer to use [Azure CLI 2.0](https://github.com/Azure/azure-cli). We will need a pair of SSH keys and a Service Principal, I already have them created but if you omit the `--service-principal` option and add the `--generate-ssh-keys` during the `az acs create` operation it will generate both for you. 
