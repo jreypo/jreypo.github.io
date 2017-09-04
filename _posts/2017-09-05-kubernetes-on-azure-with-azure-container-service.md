@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Kubernetes on Azure with Azure Container Service
-date: 2017-05-xx
+date: 2017-09-05
 type: post
 published: true
 status: publish
