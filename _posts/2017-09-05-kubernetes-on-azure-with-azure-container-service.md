@@ -23,7 +23,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Have to admit that because months have passed since the [DC/OS post]() I almost dropped this article, since then ACS documentation around Kubernetes got a huge improvement and also some articles about K8S and ACS have been published by other bloggers. However in the end I decided to finish and publish it in order to give consistency and coherence to my ACS series, specially since I will get into more Kubernetes related topics in future articles. So without further ado lets deploy and explore Kubernetes on Azure Container Service.
+Have to admit that because months have passed since the [DC/OS post]({% post_url 2017-05-23-getting-started-with-azure-container-service %}) I almost dropped this article, since then ACS documentation around Kubernetes got a huge improvement and also some articles about K8S and ACS have been published by other bloggers. However in the end I decided to finish and publish it in order to give consistency and coherence to my ACS series, specially since I will get into more Kubernetes related topics in future articles. So without further ado lets deploy and explore Kubernetes on Azure Container Service.
 
 # Cluster Deployment
 
