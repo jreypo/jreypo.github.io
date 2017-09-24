@@ -26,7 +26,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-These days I've playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along wuth teh ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register it and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directoy of examples with the YAML file to start playing with it. 
+These days I've been playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along with the ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register it and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directoy of examples with the YAML file to start playing with it. 
 
 Edit the `aci-connector.yaml` file, add your Azure subscription information (you may need to create a Service Principal if do not want to use an existing one) and deploy it as a pod with `kubectl`
 
