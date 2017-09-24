@@ -89,7 +89,7 @@ ${ACI_REGION} not specified, defaulting to "westus"
 (node:1) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 ```
 
-I quickly figured out the issue, the ACI connector pod needs to run as a privileged container since OpenShift security is much more strigent that plain Kubernetes. I needed to create a Service Account aith `cluster-admin` role in order to be able to register the new node in the clusters and modify the YAML file to add the Security Context.  
+I quickly figured out the issue, the ACI connector pod needs to run as a privileged container since OpenShift security is much more stringent that plain Kubernetes. I needed to create a Service Account aith `cluster-admin` role in order to be able to register the new node in the clusters and modify the YAML file to add the Security Context.  
 
 Using `oc` utility create the new Service Account and with `oadm` give it the proper permissions. 
 
