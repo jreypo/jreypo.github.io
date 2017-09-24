@@ -26,7 +26,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-These days I've been playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along with the ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register it and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directoy of examples with the YAML file to start playing with it. 
+These days I've been playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along with the ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directoy of examples with the YAML file to start playing with it. 
 
 Edit the `aci-connector.yaml` file, add your Azure subscription information (you may need to create a Service Principal if do not want to use an existing one) and deploy it as a pod with `kubectl`
 
@@ -78,9 +78,9 @@ nginx       acidemorg        Succeeded            nginx                     13.6
 helloworld  acidemorg        Succeeded            microsoft/aci-helloworld  52.174.45.71:80   1.0 core/1.5 gb  Linux     westeurope
 ```
 
-With all of this in mind I decided to try the same exercise on the OpenShift Origin cluster I have on Azure internal subscription. But first remember that this is an experiment, **none of this is supported by Microsoft or Red Hat**. 
+With all of this in mind I decided to try the same exercise on the OpenShift Origin cluster I have on my Azure internal subscription. But first remember that this is just an experiment, **none of this is supported by Microsoft or Red Hat**. 
 
-As I was expecting the first try failed miserably, the pod kept restarting and the `aci-connector` node never appears, the pod logs shouted this errors.
+As I was expecting the first try failed miserably, the pod kept restarting and the `aci-connector` node never showed up, the pod logs shouted this errors.
 
 ```
 $ oc logs -f pod/aci-connector-4041558504-3zj08
@@ -91,7 +91,7 @@ ${ACI_REGION} not specified, defaulting to "westus"
 
 I quickly figured out the issue, the ACI connector pod needs to run as a privileged container since OpenShift security is much more strigent that plain Kubernetes. I needed to create a Service Account aith `cluster-admin` role in order to be able to register the new node in the clusters and modify the YAML file to add the Security Context.  
 
-Using `oc` utility create the new Service Account and the with `oadm` give it the proper permissions. 
+Using `oc` utility create the new Service Account and with `oadm` give it the proper permissions. 
 
 ```
 oc create serviceaccount aci-connector
@@ -134,7 +134,7 @@ spec:
           privileged: true
 ```
 
-Now proceed to deploy `aci-connector` with `oc`, the OpenShift client.
+Now proceed to deploy `aci-connector` with `oc`.
 
 ```
 $ oc create -f aci-connector.yaml
