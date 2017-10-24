@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AKS, a new Kubernetes managed service on Azure
+title: AKS, the new Kubernetes managed service on Azure
 date: 2017-10-24
 type: post
 published: true
@@ -145,6 +145,6 @@ aks-agentpool1-74041364-3   Ready     1m        v1.8.1
 aks-agentpool1-74041364-4   Ready     49s       v1.8.1
 ```
 
-This new service opens new possibilities and improve the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left any comment below with your findings, tips and impressions.
+This new service opens new possibilities and improve the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left me any comment below with your findings, tips and impressions.
 
 --Juanma
