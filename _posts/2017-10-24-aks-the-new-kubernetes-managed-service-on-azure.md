@@ -28,6 +28,8 @@ AKS is a new Azure service that provides customers with the possibility of deplo
 
 Microsoft Azure documentation has been also updated with the new service, check it out on this [link](https://docs.microsoft.com/en-us/azure/aks/).
 
+Finally a new [GitHub repo](https://github.com/Azure/AKS) has been created for users to report bugs and for service annoucements and updates from the AKS team.
+
 Let's deploy our first AKS cluster. We can use the Cloud Shell on the Azure portal or Azure CLI, I will use the last one from WSL on my Windwos 10 laptop. Before being able to do it we will need to upgrade the cli to its newest version, in my case I did it in all my systems with `sudo apt-get update && sudo apt-get upgrade azure-cli` on Ubuntu 16.04 on WSL and `dnf update -y azure-cli` on my Fedora 26 workstation at home.
 
 After the upgrade the new `aks` option will appear. 
@@ -145,6 +147,6 @@ aks-agentpool1-74041364-3   Ready     1m        v1.8.1
 aks-agentpool1-74041364-4   Ready     49s       v1.8.1
 ```
 
-This new service opens new possibilities and improve the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left me any comment below with your findings, tips and impressions.
+This new service opens new possibilities and improve the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left me any comment below with your findings, tips and impressions. Of course if you find any issues please open a bug on the above mentioned GitHub repository.
 
 --Juanma
