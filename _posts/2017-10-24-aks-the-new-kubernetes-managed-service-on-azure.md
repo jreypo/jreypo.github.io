@@ -147,6 +147,6 @@ aks-agentpool1-74041364-3   Ready     1m        v1.8.1
 aks-agentpool1-74041364-4   Ready     49s       v1.8.1
 ```
 
-This new service opens new possibilities and improve the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left me any comment below with your findings, tips and impressions. Of course if you find any issues please open a bug on the above mentioned GitHub repository.
+This new service opens new possibilities and improves the offering on Azure around containers, which in the end is good for Microsoft customers. I encourage you to try it and left me any comment below with your findings, tips and impressions. Of course if you find any issues please open a bug on the above mentioned GitHub repository.
 
 --Juanma
