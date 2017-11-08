@@ -204,7 +204,7 @@ users:
       name: azure
 ```
 
-With this the integration is done. The logical next step would be to start digging into Kubernetes RBAC API documentation and create less privileged roles more suitable for a real deployment. Also I will continue to investigate the possibility of using Active Directory groups instead of just users since that option is much more efficient in a real Kubernetes installation. 
+With this the integration is done. The logical next step would be to start digging into [Kubernetes RBAC API documentation](https://kubernetes.io/docs/admin/authorization/rbac/) and create less privileged roles more suitable for a real deployment. Also I will continue to investigate the possibility of using Active Directory groups instead of just users since that option is much more efficient in a real Kubernetes installation. 
 
 As always courteous comments are welcome. 
 
