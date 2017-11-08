@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Kubernetes 1.8 with RBAC enabled and Azure Active Directory integration
-date: 2017-11-xx
+date: 2017-11-08
 type: post
 published: true
 status: publish
