@@ -138,7 +138,7 @@ With our new Kubernetes 1.8 cluster deployed with RBAC enabled our next step wil
 Using `kubectl` create a new `clusterrolebinding` for the user, I am using a very simple example and giving my user on the Microsoft directory `cluster-admin` privileges. 
 
 ```
-$ kubectl create clusterrolebinding aad-default-cluster-admin-binding --clusterrole=cluster-admin --user=https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/#28354138-a93e-47a5-90a2-befef4e401fe
+$ kubectl create clusterrolebinding aad-default-cluster-admin-binding --clusterrole=cluster-admin --user=https://sts.windows.net/<YOUR_TENANT_ID>/#<YOUR_USER_ID>
 clusterrolebinding "aad-default-cluster-admin-binding" created
 ``` 
 
