@@ -27,7 +27,7 @@ comments: true
 
 After my previous [post about AAD integration with Kubernetes 1.8]({% post_url 2017-11-08-kubernetes-18-with-rbac-enabled-and-azure-active-directory-integration %}) I decided it would be interesting as well to write about the process to integrate OpenShift with Azure Active Directory.
 
-Although OpenShift V3 uses Kubernetes as its core, for the authentication of the users it does not make use of RBAC; this is because when OpenShift V3 was released Kubernetes lacked that capability and the engineers at Red Hat had to implement an authentication method and security method. Also OpenShift comes...
+Although OpenShift V3 uses Kubernetes as its core, for the authentication of the users it does not make use of RBAC; this is because when OpenShift V3 was released Kubernetes lacked that capability and the engineers at Red Hat had to implement an authentication method and security method. The authentication mechanism is part of what OpenShift provides on top of Kubernetes,among with the portal, network isolation and other features, and is in my opinion one of the most compelling parts of OpenShift. 
 
 # Azure AD App Registration
 
