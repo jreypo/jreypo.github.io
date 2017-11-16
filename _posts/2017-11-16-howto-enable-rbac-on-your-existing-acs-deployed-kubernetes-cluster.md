@@ -40,6 +40,7 @@ The process to enable RBAC on this cluster is pretty straigh forward.
 
 1. SSH into the master node(s). 
 2. Edit `/etc/kubernetes/manifests/kube-apiserver.yaml` and locate the `command` property. Should be something like this.
+
 ```yaml
 command:
     - "/hyperkube"
@@ -62,6 +63,7 @@ command:
     - "--storage-backend=etcd2"
     - "--v=4"
 ```
+
 3. Add `--authorization-mode=RBAC`.
 4. Reboot the nodes.
 
