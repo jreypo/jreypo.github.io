@@ -25,7 +25,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-In the article about [Kubernetes on ACS]({% post_url 2017-09-05-kubernetes-on-azure-with-azure-container-service %}) I briefly touch the topic of Kubernetes Ingress, originally I was ging to made a post about Ingress however I thought it woud be better to explain the different methods to expose a Kubernetes based app and how are they implemented on Azure.
+In the article about [Kubernetes on ACS]({% post_url 2017-09-05-kubernetes-on-azure-with-azure-container-service %}) I briefly touched the topic of Kubernetes Ingress, originally I was going to made a post about Ingress however I thought it woud be better to explain the different methods to expose a Kubernetes based app and how are they implemented on Azure.
 
 The way to expose your app is by using a Kubernetes Service. There are three types of services, or `ServiceTypes`. 
 
@@ -141,7 +141,7 @@ example-python-python   ClusterIP      10.0.53.32     <none>          80/TCP    
 kashti-kashti           LoadBalancer   10.0.83.80     52.237.35.43    80:32137/TCP     5d
 kubernetes              ClusterIP      10.0.0.1       <none>          443/TCP          5d
 ```
-The same procedure will be repeated for each app or api that needs external access, for a few of them it can work but in a public cloud provider the public IP addresses are not free and also you will probably exhaust the maximum allowed number public IP addresses, in Azure for example the default limit is 20 public IP addresses per subscription. There is another technical restriction in Azure, the standard Azure Load Balancer is not able to do SSL termination. If your deployments 
+The same procedure will be repeated for each app or api that needs external access, for a few of them it can work but in a public cloud provider the public IP addresses are not free and also you will probably exhaust the maximum allowed number public IP addresses, in Azure for example the default limit is 20 public IP addresses per subscription. There is another technical restriction in Azure, the standard Azure Load Balancer is not able to do SSL termination. If you are going to run just a few services then `LoadBalancer` is pefect solution, and tighly integrated on Azure, however for more complex deployments the best option is to use Kubernetes Ingress. 
 
 ## Internal Load Balancer
 
