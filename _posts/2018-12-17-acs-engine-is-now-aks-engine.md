@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ACS-Engine is now AKS-Engine
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: 2018-12-17 10:02:00 +0100
 type: post
 published: true
 status: publish
