@@ -197,6 +197,6 @@ $ az vm show -n aks-nodepool1-41320097-0 -g MC_k8s-demo-rg_aks-demo_westeurope -
 }
 ```
 
-Hope this post has been helpful, I wanted to use it not only to show how to get information from an AKS cluster but also as a good exmaple of how powerful can be the Azure CLI queries.
+Hope this post has been helpful, I wanted to use it not only to show how to get information from an AKS cluster but also as a good example of how powerful Azure CLI queries are.
 
 --Juanma
