@@ -175,8 +175,6 @@ Name     ResourceGroup    MasterVersion    NodePoolVersion    Upgrades
 default  k8s-demo-rg      1.11.5           1.11.5             1.11.8, 1.11.9, 1.12.6, 1.12.7
 ```
 
-# Retrieving node data
-
 Besides of the cluster, the Kubernetes nodes or to be more precise the Azure virtual machines were the node agent software is running, can also be queried to get some useful data. I already showed in a previous [post about the relationship between AKS and AKS-Engine]{% post_url 2019-02-11-what-is-the-relationshio-between-aks-and-aks-engine %} how to check for the `aks-engine` version used to deploy a cluster from the Azure tags of any of the ndoes. 
 
 ```
