@@ -33,7 +33,7 @@ The confusion is that many people tend to believe that these roles are Kubernete
 
 Both roles are intended exclusively to be used for retrieving credentials with the `az aks get-credentials` command.
 
-- Admin Role allows a to access the `Microsoft.ContainerService/managedClusters/listClusterAdminCredential/action` API to get the cluster administrator credentials.
+- Admin Role allows access to the `Microsoft.ContainerService/managedClusters/listClusterAdminCredential/action` API to get the cluster administrator credentials.
 - User Role permits access to the `Microsoft.ContainerService/managedClusters/listClusterUserCredential/action` API and retrieve the cluster user credentials.
 
 In both cases using `az aks get-credentials` command the credentials are merged into a new or an existing `kubeconfig` file. Keep in mind that the user credentials aren't limited to a specific namespace but will have access to all namespaces and will be able to deploy workloads in any of them. To achieve that kind of access you will need to implement RBAC in the cluster which combined with AAD can be very useful to limit the access of your developers and user to their specific namespaces, I will go on the details for this configuration in a future post. 
