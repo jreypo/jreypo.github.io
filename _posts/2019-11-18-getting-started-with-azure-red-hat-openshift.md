@@ -28,11 +28,11 @@ Azure Red Hat OpenShift was [announced](https://azure.microsoft.com/en-us/blog/o
 
 After the GA however not every Microsoft and Red Hat customer was able to freely try it in the classic pay as yo go model, instead there was a requirement to reserve four application nodes up-front for the first cluster. However this requirement has been finally lifted during Microsoft Ignite and from now on you can deploy Azure Red Hat OpenShift, or ARO for short, in a PAYG fashion like it should be with any cloud service. 
 
-With this in mind I am goign to describe the process to deploy your first ARO cluster. 
+With this in mind I am going to describe the process to deploy your first ARO cluster. 
 
 # Prerequisites
 
-Before deploying a cluster we will need to meet several requirements in order to integrate the authentication with Azure Active Directory. All the processes for the prerequisites using Azure Portal is very well described in ARO documentation [here](https://docs.microsoft.com/en-us/azure/openshift/howto-aad-app-configuration#create-an-azure-ad-app-registration), so instead of repeating that part I will instead demonstrate the process using Azure CLI. 
+Before deploying a cluster we will need to meet several requirements in order to integrate the authentication with Azure Active Directory. All the processes for the prerequisites using Azure Portal are very well described in ARO documentation [here](https://docs.microsoft.com/en-us/azure/openshift/howto-aad-app-configuration#create-an-azure-ad-app-registration), so instead of repeating that part I will instead demonstrate the process using Azure CLI. 
 
 We will need to perform two distinct operations:
 
@@ -92,7 +92,7 @@ $ echo $appId                                                                   
 57887cd0-868b-4e0d-88a7-519a0ad590cf
 ```
 
-## Confgure the application
+### Confgure the application
 
 With our application created we need to configure it, first set the owner which in my case is the `aroadmin` user. 
 
