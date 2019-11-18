@@ -116,7 +116,7 @@ Lets dig a bit in the previous command options before we continue.
 
 - `00000002-0000-0000-c000-000000000000` represents Azure Active Directory Graph API
 - `311a71cc-e848-46a1-bdf8-97ff7156d8e6` corresponds to `User.Read` API permission and the `Scope` option indicates this would be a delegated permission. 
-- `5778995a-e1bf-45b8-affa-663a9f3f4d04` corresponds to `Directory.Read.All` permission and the `Role` options tells the Azure AD API this would be an application permission.
+- `5778995a-e1bf-45b8-affa-663a9f3f4d04` corresponds to `Directory.Read.All` permission and the `Role` option tells Azure AD API this would be an application permission.
 
 To finish the API permissions we need to grant admin consent for this application, in order to grant the consent you need to be the Azure AD admin or request an admin to do it. 
 
