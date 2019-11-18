@@ -87,8 +87,8 @@ $ az ad group member list --group aro-group --query '[].{Name:displayName, NickN
 To be able to integrate our cluster with Azure Active Directory we will need to create an Azure AD application. 
 
 ```
-$ appId=$(az ad app create --display-name aro-aad --query appId -o tsv)                                                                                                    │
-$ echo $appId                                                                                                                                                                 │
+$ appId=$(az ad app create --display-name aro-aad --query appId -o tsv)
+$ echo $appId
 57887cd0-868b-4e0d-88a7-519a0ad590cf
 ```
 
