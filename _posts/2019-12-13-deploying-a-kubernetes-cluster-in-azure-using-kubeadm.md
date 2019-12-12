@@ -151,7 +151,7 @@ kubectl set on hold.
 azureuser@kube-master-lab:~$
 ```
 
-Repeat the same process for each of the nodes either manually ir by usign the below script, which can also be found as a [Gist on my GitHub](https://gist.github.com/jreypo/8264157231a649fe4d65762917d6a27f).
+Repeat the same process for each of the nodes either manually or by usign the below script, which can also be found as a [Gist on my GitHub](https://gist.github.com/jreypo/8264157231a649fe4d65762917d6a27f).
 
 ```bash
 #!/bin/bash
