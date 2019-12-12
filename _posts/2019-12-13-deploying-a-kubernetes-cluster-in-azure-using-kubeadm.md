@@ -289,22 +289,6 @@ azureuser@kube-master-lab:~$ sudo kubeadm init --config kubeadm.yml
 ...
 ...
 Your Kubernetes control-plane has initialized successfully!
-
-To start using your cluster, you need to run the following as a regular user:
-
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 172.10.1.4:6443 --token 81l08m.0g09hbdekfxczgs0 \
-    --discovery-token-ca-cert-hash sha256:a868e59818db186a2cb03a32c2478d7abafbf4ceae471532e1152fb4949298fd
-azureuser@kube-master-lab:~$
 ```
 
 As the output suggets create the `kubeconfig` to start using the cluster. 
