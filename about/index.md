@@ -7,7 +7,7 @@ comments: false
 share: false
 ---
 
-I am Juan Manuel Rey, I live in Madrid with my incredible wife Gemma, our son Jaime and Buffy, our adorable lady poodle. My kid and myself are proud die hard Star Wars fans, as you can see in the picture.
+I am Juan Manuel Rey, I live in Madrid with my incredible son Jaime and Buffy, our adorable lady poodle. My kid and myself are proud die hard Star Wars fans, as you can see in the picture.
 
 [![](/images/facetehforce-darthvader-jaime.jpg)]({{site.url}}/images/facetehforce-darthvader-jaime.jpg)
 
