@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Getting started with Azure Red Hat OpenShift
 date: 2019-11-18 11:45:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -207,7 +207,7 @@ To access our newly deployed ARO cluster and start working on it we have two mai
 
 From your favorite browser open the URL `https://<aro_public_hostname>` you will be prompted to login with your Azure AD user, use one of the ARO administrator accounts for this first login. 
 
-[![](/images/aro_console.png "Azure Red Hat OpenShift Console")]({{site.url}}/images/aro_console.png) 
+[![](/assets/images/aro_console.png "Azure Red Hat OpenShift Console")]({{site.url}}/assets/images/aro_console.png) 
 
 From here we can navigate to either *Cluster Console*, *Application Console* or *Service Catalog* which is the main landing page. I will not go in detail throughout all those sections since they are [perfectly detailed in O[penShift documentation](https://docs.openshift.com/).
 
@@ -215,11 +215,11 @@ From here we can navigate to either *Cluster Console*, *Application Console* or 
 
 The OpenShift command line is `oc`, which is basically `kuebctl` with additional functionality for OpenShift. To get the `oc` tool access the *Command Line Tools*, the link can be found in the upper right part of the *Service Catalog* are as shown in the following screen capture.
 
-[![](/images/command_line_tools.png)]({{site.url}}/images/command_line_tools.png)
+[![](/assets/images/command_line_tools.png)]({{site.url}}/assets/images/command_line_tools.png)
 
 To login into our ARO cluster wiht `oc` we will use a token. Get your token again from the *Service Catalog* area in the upper right corner by clicking in your user name and then in *Copy Login Command*.
 
-[![](/images/login_command.png)]({{site.url}}/images/login_command.png)
+[![](/assets/images/login_command.png)]({{site.url}}/assets/images/login_command.png)
 
 Paste the login command in your shell and execute it to log into the cluster. 
 

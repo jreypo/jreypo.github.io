@@ -1,14 +1,8 @@
-# Authors
-
 juan_manuel_rey:
-  name: Juan Manuel Rey
+  name: "Juan Manuel Rey"
+  bio: "Unix Geek. Sysadmin by heart. Creating more problems than solving them in Microsoft Azure engineering."
+  avatar: assets/images/bio-photo.jpg
   web: http://blog.jreypo.io
-#  email: Juan Manuel Rey
-  bio: "Unix Geek. Sysadmin by heart turned cloud architect. Working for Microsoft."
-  avatar: bio-photo-2.jpg
   twitter: jreypo
-  google:
-    plus: 
   github: jreypo
-  stackoverflow: 2454288/jreypo
   linkedin: jreypo

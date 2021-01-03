@@ -1,63 +1,118 @@
-# Site wide configuration
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-title:            Juanma's Blog
-locale:           en_US
-url:              https://blog.jreypo.io
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Juanma's Blog
+subtitle: "An old school Unix Geek living the era of Cloud"
+email:
+description: >- # this means to ignore newlines until "baseurl:"
+twitter_username: jreypo
+github_username: jreypo
+minimal_mistakes_skin: default
+search: true
 
+comments:
+  provider: "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
+  disqus:
+    shortname: jreypo # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
 
-# Jekyll configuration
+# Build settings
+markdown: kramdown
+remote_theme: mmistakes/minimal-mistakes
+# Outputting
+permalink: /:year/:month/:day/:title/
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
+timezone: ES # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-permalink:   /:categories/:title/
-markdown:    kramdown
-highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: compressed
-gems:
+include:
+  - _pages
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+# Plugins (previously gems:)
+plugins:
+  - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-redirect-from
   - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
 
-kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  enable_coderay: false
+author:
+  name   : "Juan Manuel Rey"
+  avatar : "/assets/images/bio-photo.jpg"
+  bio    : "Unix Geek. Sysadmin by heart. Creating more problems than solving them in Microsoft Azure engineering."
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://blog.jreypo.io"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/jreypo"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/jreypo"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/jreypo"
 
+footer:
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/jreypo"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/jreypo"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/jreypo"
 
-# Site owner
-owner:
-  name: Juan Manuel Rey
-  avatar: bio-photo.jpg
-  bio: "Unix Geek. Sysadmin by heart turned cloud architect. Working for Microsoft."
-  email: #username
-  disqus-shortname: jreypo
-  twitter: jreypo
-  facebook: #username
-  google:
-    plus: 
-    analytics: UA-71973346-1
-    verify:
-    ad-client:
-    ad-slot:
-  bing-verify:
-  github: jreypo
-  stackoverflow: 2454288/jreypo
-  linkedin: jreypo
-  xing: #username
-  instagram: #username
-  lastfm: #username
-  tumblr: #username
-  pinterest: #username
-  foursquare: #username
-  steam: #username
-  dribbble: #username
-  youtube: #username
-  soundcloud: #username
-  weibo: #username
-  flickr: #username
-  codepen: #username
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
-include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/

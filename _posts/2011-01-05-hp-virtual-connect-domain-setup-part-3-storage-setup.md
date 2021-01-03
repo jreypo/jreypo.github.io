@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'HP Virtual Connect Domain Setup - Part 3: Storage setup'
 date: 2011-01-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:

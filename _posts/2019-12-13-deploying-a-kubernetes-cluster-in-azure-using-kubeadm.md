@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Deploying a Kubernetes cluster in Azure using kubeadm
 date: 2019-12-13 00:15:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -21,7 +21,7 @@ tags:
 - Kubeadm
 - DevOps
 - Azure
-author: juan_manuel_rey
+
 comments: true
 ---
 
