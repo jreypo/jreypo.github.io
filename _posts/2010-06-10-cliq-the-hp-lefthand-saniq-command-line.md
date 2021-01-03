@@ -1,8 +1,8 @@
 ---
-layout: post
 title: CLIQ – The HP Lefthand SAN/iQ command-line
 date: 2010-06-10
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -31,7 +31,7 @@ The command line can be accessed through two ways, remotely from any windows mac
 
 To access the CLIQ via SSH the connection has to be done to the port `tcp/16022` instead of the SSH standard port and with the management group administration user. The connection can be established to any storage node of the group, the operation will apply to the whole group.
 
-[![CLIQ SSH access](/images/cliq_ssh1.jpg "CLIQ SSH access")]({{site.url}}/images/cliq_ssh1.jpg)
+[![CLIQ SSH access](/assets/images/cliq_ssh1.jpg "CLIQ SSH access")]({{site.url}}/assets/images/cliq_ssh1.jpg)
 
 ### Remote access
 
@@ -39,7 +39,7 @@ The other way to use the CLIQ shell is from a windows host with the **HP Lefthan
 
 Regarding the use of the CLIQ there is one main difference with the On-Node CLIQ, every command must include the address or DNS name of the storage node where the task is going to be performed and at least the username. The password can also be included but for security reasons is best to don't do it and be prompted. An encrypted key file with the necessary credentials can be used instead if you don't want to use the username and password parameters within the command.
 
-[![](/images/cliq_local.jpg "CLIQ remote shell")]({{site.utl}}/images/cliq_local.jpg)
+[![](/assets/images/cliq_local.jpg "CLIQ remote shell")]({{site.utl}}/assets/images/cliq_local.jpg)
 
 Of course this kind of access is perfect for scripting and automate some tasks.
 

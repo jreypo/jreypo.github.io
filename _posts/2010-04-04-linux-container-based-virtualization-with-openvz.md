@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Linux container-based virtualization with OpenVZ
 date: 2010-04-04
 type: post
+classes: wide
 published: true
 status: publish
 categories:

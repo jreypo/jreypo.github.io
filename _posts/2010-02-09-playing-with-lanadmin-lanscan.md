@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Playing with lanadmin & lanscan
 date: 2010-02-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:

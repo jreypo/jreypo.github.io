@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Tukwila, we are almost there
 date: 2010-02-03
 type: post
+classes: wide
 published: true
 status: publish
 categories:

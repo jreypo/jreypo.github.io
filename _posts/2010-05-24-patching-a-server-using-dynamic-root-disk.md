@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Patching a server using Dynamic Root Disk
 date: 2010-05-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

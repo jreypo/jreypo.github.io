@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Basic volume tasks with the HP Lefthand CLIQ command-line
 date: 2010-06-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -137,7 +137,7 @@ CLIQ>
 
 If you refresh the storage configuration of the ESXs hosts through vSphere Client the new volume will be displayed.
 
-[![](/images/volume_on_esx.jpg "new volume")]({{site.url}}/images/volume_on_esx.jpg)
+[![](/assets/images/volume_on_esx.jpg "new volume")]({{site.url}}/assets/images/volume_on_esx.jpg)
 
 ### Volume deletion
 

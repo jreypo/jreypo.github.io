@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP-UX 10.20, still around :-)
 date: 2010-02-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -28,11 +28,11 @@ Bash can be found on this [FTP site](http://ftp.hi.is/pub/unix/hpux/) and `lsof`
 
 Here it is screenshot of a PuTTY session and a couple of pictures of the beast taken with my E71:
 
-[![HP-UX 10.20](/images/10_20.jpg "HP-UX 10.20")]({{site.url}}/images/10_20.jpg)
+[![HP-UX 10.20](/assets/images/10_20.jpg "HP-UX 10.20")]({{site.url}}/assets/images/10_20.jpg)
 
-[![D330](/images/d330_view.jpg "D330")]({{site.url}}/images/d330_view.jpg)
+[![D330](/assets/images/d330_view.jpg "D330")]({{site.url}}/assets/images/d330_view.jpg)
 
-[![D330 Disks](/images/d330_disks.jpg "D330_disks")]({{site.url}}/images/d330_disks.jpg)
+[![D330 Disks](/assets/images/d330_disks.jpg "D330_disks")]({{site.url}}/assets/images/d330_disks.jpg)
 
 Does anyone of you have an old HP-UX 10.20 still around?
 

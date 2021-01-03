@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Howto get VxVM diskgroup version
 date: 2010-05-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:

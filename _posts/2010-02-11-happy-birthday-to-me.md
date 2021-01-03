@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Happy Birthday to me!
 date: 2010-02-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:

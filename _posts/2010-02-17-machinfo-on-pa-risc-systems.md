@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Machinfo on PA-RISC systems
 date: 2010-02-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -73,4 +73,5 @@ c47t1d0 : HP      HS  (size = 15GB)
 
 root@tst1:/#
 ```
+
 Juanma.

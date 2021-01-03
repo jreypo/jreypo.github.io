@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Double check! Always!
 date: 2010-02-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

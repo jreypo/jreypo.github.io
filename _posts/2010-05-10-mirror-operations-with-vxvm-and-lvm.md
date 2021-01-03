@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Mirror operations with VxVM and LVM
 date: 2010-05-10
 type: post
+classes: wide
 published: true
 status: publish
 categories:

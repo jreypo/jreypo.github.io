@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Identifying the HP EVA LUNs on HP-UX 11iv3
 date: 2010-06-15
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -39,7 +39,7 @@ root@ignite:/ #
 
 If you look for this value in Command View will see that is the same as the World Wide LUN Name and the UUID.
 
-[![](/images/eva_lun-id.jpg "EVA_LUN-ID")]({{site.url}}/images/eva_lun-id.jpg)
+[![](/assets/images/eva_lun-id.jpg "EVA_LUN-ID")]({{site.url}}/assets/images/eva_lun-id.jpg)
 
 ### **UPDATE**
 

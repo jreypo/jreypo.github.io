@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenVZ in CentOS 5.4
 date: 2010-04-04
 type: post
+classes: wide
 published: true
 status: publish
 categories:

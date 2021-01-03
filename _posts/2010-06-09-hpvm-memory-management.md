@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HPVM memory management
 date: 2010-06-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -140,7 +140,7 @@ Each way doesn't exclude the other one, you can set the system-wide parameters f
 
 Automatic memory reallocation is enabled by default on the VM host. Open the file `/etc/rc.config.d/hpvmconf` and check that `HPVMAMRENABLE=0` is not set to verify that automatic memory reallocation is enabled. The process `hpmvmamrd`, the automatic memory reallocation daemon, can also be check with a simple `ps`.
 
-[![](/images/hpvmamrd.jpg "hpvmamrd")]({{site.url}}/images/hpvmamrd.jpg)
+[![](/assets/images/hpvmamrd.jpg "hpvmamrd")]({{site.url}}/assets/images/hpvmamrd.jpg)
 
 In the same file two system-wide tunables can be configured.
 

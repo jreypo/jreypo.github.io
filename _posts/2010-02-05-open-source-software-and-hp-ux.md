@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Open Source software and HP-UX
 date: 2010-02-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -26,7 +26,7 @@ This is a short list of the packages I can't live without, all of them can be ob
 -   **GNU coreutils**. Provides with GNU version of many Unix commands,
     what can I say? I like the GNU *ls* colored output x-)
 
-[![GNU coreutils at work](/images/coreutils1.jpg "GNU coreutils at work")]({{site.url}}/images/coreutils1.jpg)
+[![GNU coreutils at work](/assets/images/coreutils1.jpg "GNU coreutils at work")]({{site.url}}/assets/images/coreutils1.jpg)
 
 -   `lsof` How can any sysadmin live without `lsof`?
 -   `sudo` Indispensable to allow scripts or users run certain commands as root or any other user.

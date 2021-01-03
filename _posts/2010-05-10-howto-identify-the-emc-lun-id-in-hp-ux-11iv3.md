@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Howto identify the EMC LUN ID in HP-UX 11iv3 - Symmetrix arrays
 date: 2010-05-10
 type: post
+classes: wide
 published: true
 status: publish
 categories:

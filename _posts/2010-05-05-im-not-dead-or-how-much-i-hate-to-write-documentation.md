@@ -1,8 +1,8 @@
 ---
-layout: post
 title: I'm not dead or how much I hate to write documentation
 date: 2010-05-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:

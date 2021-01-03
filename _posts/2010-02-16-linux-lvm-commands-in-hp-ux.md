@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Linux LVM commands in HP-UX
 date: 2010-02-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:

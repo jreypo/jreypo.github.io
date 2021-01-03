@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenVMS Month!
 date: 2010-02-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:

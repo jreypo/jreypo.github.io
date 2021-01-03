@@ -1,8 +1,8 @@
 ---
-layout: post
 title: New Generation Integrity Servers
 date: 2010-05-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -38,7 +38,7 @@ In the mid-range line there are three beautiful babies named BL860c_i2, BL870c_i
 
 The key for this new servers is modularity, BL860c_i2 is the base of her bigger sisters. HP has developed a new piece of hardware known as Integrity Blade Link Assembly which makes possible to combine  blade modules. The 870 is composed by two blade modules and the 890 by four. The 860 is no more than a single blade module with a single Link Assembly on its front. This way of combining the blades makes the 890 the only 8 socket blade currently available.
 
-[![](/images/blade_link_assembly.jpg "blade_link_assembly")]({{site.url}}/images/blade_link_assembly.jpg)
+[![](/assets/images/blade_link_assembly.jpg "blade_link_assembly")]({{site.url}}/assets/images/blade_link_assembly.jpg)
 
 The 870 and the 890 with 16 and 32 cores respectively are the logical replacement for the rx7640 and rx8640 but as many people have been saying since they were publicly presented there is of  the OLAR question or really the apparently lack of OLAR which in fact was one of the key features of the mid-range cell-based Integrity servers. We'll see how this issue is solved.
 
@@ -47,7 +47,7 @@ The 870 and the 890 with 16 and 32 cores respectively are the logical replacemen
 The new rx2800 and the new blades are great but the real shock for everybody came when HP announced the new Superdome 2. Ladies and gentlemen the new mission critical computing era is here, forget those fat and proprietary racks, forget everything you know about high-end servers and be welcome to the blade
 land.
 
-[![Superdome 2](/images/sd2.jpg "Superdome 2")]({{site.url}}/images/sd2.jpg)
+[![Superdome 2](/assets/images/sd2.jpg "Superdome 2")]({{site.url}}/assets/images/sd2.jpg)
 
 This new version of the HP flagship is based on the blade concept. Instead of cells we have cell-blades inside a new 18U enclosure based in the HP C7000 Blade Enclosure. Just remember one word... **commonality**. The new Superdome 2 will share a lot of parts with the C7000 and can be also managed through the same tools like the Onboard Administrator.
 

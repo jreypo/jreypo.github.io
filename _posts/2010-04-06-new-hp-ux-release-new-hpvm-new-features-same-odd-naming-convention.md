@@ -1,8 +1,8 @@
 ---
-layout: post
 title: New HP-UX release, new HPVM, new features... same odd naming convention
 date: 2010-04-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:

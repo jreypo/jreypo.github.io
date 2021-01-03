@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Guest migration in HPVM 3.5
 date: 2010-03-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

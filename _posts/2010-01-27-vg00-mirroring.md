@@ -1,8 +1,8 @@
 ---
-layout: post
 title: vg00 mirroring
 date: 2010-01-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:

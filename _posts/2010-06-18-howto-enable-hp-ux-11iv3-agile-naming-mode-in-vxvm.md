@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Howto enable HP-UX 11iv3 agile naming mode in VxVM
 date: 2010-06-18
 type: post
+classes: wide
 published: true
 status: publish
 categories:

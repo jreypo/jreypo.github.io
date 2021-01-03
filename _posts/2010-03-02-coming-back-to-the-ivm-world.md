@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Coming back to the IVM world
 date: 2010-03-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:

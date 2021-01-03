@@ -1,8 +1,8 @@
 ---
-layout: post
 title: UNIX95 and ps command
 date: 2010-02-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:

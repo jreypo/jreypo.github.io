@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HPVM clones first boot tasks
 date: 2010-03-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
