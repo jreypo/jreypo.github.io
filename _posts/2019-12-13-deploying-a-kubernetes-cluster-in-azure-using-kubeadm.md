@@ -21,7 +21,7 @@ tags:
 - Kubeadm
 - DevOps
 - Azure
-
+author: juan_manuel_rey
 comments: true
 ---
 
