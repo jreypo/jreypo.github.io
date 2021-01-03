@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Hello world!
 date: 2009-12-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:

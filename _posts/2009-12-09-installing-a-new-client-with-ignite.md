@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Installing a new client with Ignite
 date: 2009-12-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:
