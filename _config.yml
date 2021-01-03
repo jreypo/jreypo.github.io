@@ -78,6 +78,12 @@ author:
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/jreypo"
 
+analytics:
+  provider               : "google" # false (default), "google", "google-universal", "google-gtag", "custom"
+  google:
+    tracking_id          : UA-71973346-1
+    anonymize_ip         : # true, false (default)
+
 footer:
   links:
     - label: "Twitter"
