@@ -1,7 +1,8 @@
 ---
 title: Install ESXi from the Onboard Administrator
 date: 2011-05-03
-type: postclasses: wide
+type: post
+classes: wide
 published: true
 status: publish
 categories:

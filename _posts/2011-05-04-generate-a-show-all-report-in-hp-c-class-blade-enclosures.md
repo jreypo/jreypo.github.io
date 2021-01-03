@@ -1,7 +1,8 @@
 ---
 title: Generate a Show All report in HP c-Class Blade Enclosures
 date: 2011-05-04
-type: postclasses: wide
+type: post
+classes: wide
 published: true
 status: publish
 categories:
