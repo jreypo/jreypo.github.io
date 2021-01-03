@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenBSD and VirtualBox
 date: 2009-12-14
 type: post
+classes: wide
 published: true
 status: publish
 categories:

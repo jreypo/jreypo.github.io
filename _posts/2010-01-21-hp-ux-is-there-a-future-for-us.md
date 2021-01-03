@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP-UX.. Is there a future for us?
 date: 2010-01-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:

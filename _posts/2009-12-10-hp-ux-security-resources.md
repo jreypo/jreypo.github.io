@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP-UX security resources
 date: 2009-12-10
 type: post
+classes: wide
 published: true
 status: publish
 categories:

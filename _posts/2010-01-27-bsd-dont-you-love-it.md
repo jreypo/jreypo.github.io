@@ -1,8 +1,8 @@
 ---
-layout: post
 title: BSD, don't you love it?
 date: 2010-01-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:

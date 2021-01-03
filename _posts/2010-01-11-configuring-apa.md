@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Configuring APA
 date: 2010-01-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Console2, a Windows CMD replacement
 date: 2010-01-22
 type: post
+classes: wide
 published: true
 status: publish
 categories:

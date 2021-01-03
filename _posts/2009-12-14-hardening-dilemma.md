@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Hardening dilemma
 date: 2009-12-14
 type: post
+classes: wide
 published: true
 status: publish
 categories:
