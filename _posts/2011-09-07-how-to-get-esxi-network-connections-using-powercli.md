@@ -1,5 +1,5 @@
 ---
-title: How to get ESX(i) network connections using PowerCLI
+title: How to get ESXi network connections using PowerCLI
 date: 2011-09-07
 type: post
 classes: wide
