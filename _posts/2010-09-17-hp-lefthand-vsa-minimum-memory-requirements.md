@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP Lefthand VSA minimum memory requirements
 date: 2010-09-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -23,15 +23,15 @@ My VSAs are configured with various amounts of RAM ranging from 384MB to 1GB. 
 
 The VSA seemed to start without any problems and from the console everything looked fine.
 
-[![](/images/vsa_console1.jpg "VSA console")]({{site.url}}/images/vsa_console1.jpg)
+[![](/assets/images/vsa_console1.jpg "VSA console")]({{site.url}}/assets/images/vsa_console1.jpg)
 
 I started the CMC and quickly noticed that something was wrong, the status of the storage server was offline.
 
-[![](/images/storage_server_offline.jpg "storage_server_offline")]({{site.url}}/images/storage_server_offline.jpg)
+[![](/assets/images/storage_server_offline.jpg "storage_server_offline")]({{site.url}}/assets/images/storage_server_offline.jpg)
 
 I then looked into the alerts area and found one saying that there was not enough ram to start the configured features.
 
-[![](/images/no-memory.jpg "Not enough memory")]({{site.url}}/images/no-memory.jpg)
+[![](/assets/images/no-memory.jpg "Not enough memory")]({{site.url}}/assets/images/no-memory.jpg)
 
 OK then, the VSA doesn't work with 256MB of RAM; so which value is the minimum required in order to run the storage services?
 

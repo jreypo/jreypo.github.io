@@ -1,8 +1,8 @@
 ---
-layout: post
 title: '#vExpert 2011... Who?! Me?! Really?!'
 date: 2011-07-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -22,7 +22,7 @@ The vExpert program is the way VMware use to reward those individuals that have 
 
 I was shocked when I got the notice and I want to thank VMware and specially John Troyer ([@jtroyer](http://twitter.com/#!/jtroyer)) that included me with such great group of individuals like Nick Weaver ([@lynxbat](http://twitter.com/#!/lynxbat)), Mike Laverick ([@Mike_Laverick](http://twitter.com/#!/Mike_Laverick)) or my friend and colleague at HP Calvin Zito ([@HPStorageguy](http://twitter.com/#!/HPStorageGuy)). My VMware Community profile now features the cool vExpert logo.
 
-[![](/images/vexpert.png "vExpert 2011")]({{site.url}}/images/vexpert.png)
+[![](/assets/images/vexpert.png "vExpert 2011")]({{site.url}}/assets/images/vexpert.png)
 
 I hope to live up to the award :-)
 

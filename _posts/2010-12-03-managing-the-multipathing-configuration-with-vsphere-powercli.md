@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Managing the multipathing configuration with vSphere PowerCLI
 date: 2010-12-03
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Running ESXi 5 on ESXi 4.1? Yes you can!
 date: 2011-08-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -26,7 +26,7 @@ I used **Eric Gray's** ([@eric\_gray](http://twitter.com/#!/eric_gray)) procedur
 
 Here they are running on top of my whitebox, which is running ESXi 4.1 Update 1, the left one (esxi5) is created as RHEL6 and the right one (esxi5-02) RHEL5.
 
-[![](/images/esxi5.png "ESXi5")]({{site.url}}/images/esxi5.png)
+[![](/assets/images/esxi5.png "ESXi5")]({{site.url}}/assets/images/esxi5.png)
 
 I added also the `monitor_control.restrict_backdoor` option but have not try yet to run nested VMs. I'll do later and will update the post with the results.
 

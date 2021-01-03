@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Reconfigure an ESX(i) for HA using vSphere PowerCLI
 date: 2011-02-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -118,11 +118,11 @@ C:\
 
 Now through the `$esxha` variable I invoked the method `ReconfigureHostForDAS` to reconfigure the ESXi, this method is part of the HostSystem object and its description can be found [here](http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html#reconfigureDAS)in the vSphere API reference.
 
-[![](/images/reconfigureha.png "reconfigure for HA")]({{site.url}}/images/reconfigureha.png)
+[![](/assets/images/reconfigureha.png "reconfigure for HA")]({{site.url}}/assets/images/reconfigureha.png)
 
 As it can be seen in the above screenshot, the task is displayed in the vSphere client. You can also monitor the operation with the `Get-Task` cmdlet.
 
-[![](/images/get-task.png "Get-Task")]({{site.url}}/images/get-task.png)
+[![](/assets/images/get-task.png "Get-Task")]({{site.url}}/assets/images/get-task.png)
 
 Finally I created the below script to simplify things in the future.
 

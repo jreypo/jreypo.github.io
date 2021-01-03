@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP Technology@Work On Tour 2011 - Madrid
 date: 2011-05-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -32,9 +32,9 @@ and [VMware](http://www.vmware.com). I want to make a special mention about my c
 
 Finally I had the opportunity to take a couple of pictures of the booth and the almighty [Superdome2](http://h20338.www2.hp.com/integrity/w1/en/high-end/integrity-high-end-servers-superdome2.html) :-D
 
-[![](/images/img_20110505_132443.jpg "Superdome2")]({{site.url}}/images/img_20110505_132443_big.jpg)
+[![](/assets/images/img_20110505_132443.jpg "Superdome2")]({{site.url}}/assets/images/img_20110505_132443_big.jpg)
 
-[![](/images/img_20110505_140413.jpg "HP Technology@Work On Tour 2011 - Madrid")]({{site.url}}/images/img_20110505_140413_big.jpg)
+[![](/assets/images/img_20110505_140413.jpg "HP Technology@Work On Tour 2011 - Madrid")]({{site.url}}/assets/images/img_20110505_140413_big.jpg)
 
 I don't want to finish my post without mentioning the people from the registering area, I wasn't registered to the event but since I was an HP employee they were so kind to provide me with the proper accreditation that allowed to enter the booth.
 

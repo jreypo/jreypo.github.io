@@ -1,8 +1,8 @@
 ---
-layout: post
 title: iSCSI initiator configuration in RedHat Enterprise Linux 5
 date: 2011-02-22
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -83,7 +83,7 @@ iscsid (pid  14170) is running...
 
 From P4000 CMC we need to add the server to the management group configuration like we would do with any other server.
 
-[![](/images/p4000-addserver.png "P4000 CMC add server")]({{site.url}}/images/p4000-addserver.png)
+[![](/assets/images/p4000-addserver.png "P4000 CMC add server")]({{site.url}}/assets/images/p4000-addserver.png)
 
 The server iqn can be found in the file `/etc/iscsi/initiatorname.iscsi`.
 

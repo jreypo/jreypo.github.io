@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Installing the HP Lefthand CMC in Linux
 date: 2010-07-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -29,6 +29,6 @@ root@wopr:/mnt/iso/GUI/Linux/Disk1/InstData/VM# ./CMC_Installer.bin -f /mnt/iso/
 
 The CMC will be installed in `/opt/LeftHandNetworks/UI`. Once the installation is finished launch the CMC from the shell or create a launcher on your Gnome/KDE desktop and voilà you can now control your Lefthand Storage systems from your favorite Linux distro.
 
-[![](/images/cmc_ubuntu.png "CMC_Ubuntu")]({{site.url}}/images/cmc_ubuntu.png)
+[![](/assets/images/cmc_ubuntu.png "CMC_Ubuntu")]({{site.url}}/assets/images/cmc_ubuntu.png)
 
 Juanma.

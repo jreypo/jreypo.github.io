@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenBSD network interface trunking
 date: 2010-08-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:

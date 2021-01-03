@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Generate a Show All report in HP c-Class Blade Enclosures
 date: 2011-05-04
-type: post
+type: postclasses: wide
 published: true
 status: publish
 categories:
@@ -22,15 +21,15 @@ This report can be very useful for troubleshooting purposes and it's for sure 
 
 Login into the enclosure Onboard Administrator administration interface. From the main screen go to **Enclosure Settings -> Configuration Scripts**.
 
-[![](/images/oa-config-scripts.png "OA configuration scripts")]({{site.url}}/images/oa-config-scripts.png)
+[![](/assets/images/oa-config-scripts.png "OA configuration scripts")]({{site.url}}/assets/images/oa-config-scripts.png)
 
 You will see the interface to upload your customized scripts, a text box to point to an URL where the script is stored and two links named **SHOW CONFIG** and **SHOW ALL.**
 
-[![](/images/showall.png "Show All")]({{site.url}}/images/showall.png)
+[![](/assets/images/showall.png "Show All")]({{site.url}}/assets/images/showall.png)
 
 Click the **SHOW ALL** link, a new window or tab will open and after a few seconds a report will appear.
 
-[![](/images/report.png "Report")]({{site.url}}/images/report.png)
+[![](/assets/images/report.png "Report")]({{site.url}}/assets/images/report.png)
 
 Save it to your system and you are done. Now you can open the file with any text editor to look into the enclosure data.
 

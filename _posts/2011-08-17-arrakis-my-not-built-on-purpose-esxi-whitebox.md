@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Arrakis, my not built on purpose ESXi whitebox
 date: 2011-08-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -60,7 +60,7 @@ vmkload_mod module information
 
 Finally here it is a screenshot of the vSphere Client connected to the vCenter VM and showing the summary of the host.
 
-[![](/images/arrakis.png "Arrakis")]({{site.url}}/images/arrakis.png)
+[![](/assets/images/arrakis.png "Arrakis")]({{site.url}}/assets/images/arrakis.png)
 
 The other components of my homelab are a QNAP TS-219P NAS and an HP ProCurve 1810G-8 switch. I also have plans to add two more NICs and a SSD to the server as soon as possible and of course to build a new whitebox.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'HP Virtual Connect Domain Setup - Part 2: Network Setup'
 date: 2010-12-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -47,11 +47,11 @@ The network connections can be:
 
 The first screen of the wizard is the MAC Address Settings. As every server in the market the HP Blades come with factory-default MAC addresses already assigned to their network cards. However Virtual Connect can override these values while the server remains in the enclosure.
 
-[![](/images/network_wizard_1.png)]({{site.url}}/images/network_wizard_1.png)
+[![](/assets/images/network_wizard_1.png)]({{site.url}}/assets/images/network_wizard_1.png)
 
 Virtual Connect access the NICs through the Onboard Administrator and the server iLO to manage the MAC addresses. It provides 64 predefined and reserved MAC address ranges. The wizard will give you the option to use either an HP predefined range or an user defined one. HP recommends to use the predefined ranges.
 
-[![](/images/network_wizard_2.png)]({{site.url}}/images/network_wizard_2.png)
+[![](/assets/images/network_wizard_2.png)]({{site.url}}/assets/images/network_wizard_2.png)
 
 Once you have chosen the address range and click next the wizard will ask for confirmation before continue.
 
@@ -60,7 +60,7 @@ The next screen is **Server VLAN Tagging Support**. Here the wizard gives you tw
 -   Tunnel VLAN Tags
 -   Map VLAN Tags
 
-[![](/images/network_wizard_3.png)]({{site.url}}/images/network_wizard_3.png)
+[![](/assets/images/network_wizard_3.png)]({{site.url}}/assets/images/network_wizard_3.png)
 
 The first one, **Tunnel VLAN Tags**, supports only VLAN tagging on networks with dedicated uplinks where all VLAN tags passed through the VC Domain without modification and ports connected to networks using shared uplinks can only send and receive untagged frames.
 
@@ -77,7 +77,7 @@ In our example we're not going to check neither of them . Click next to move int
 
 Choose the network type you want to define and click next. I choose **Connection with uplink(s) dedicated to a single network**.
 
-[![](/images/network_wizard_4.png)]({{site.url}}/images/network_wizard_4.png)
+[![](/assets/images/network_wizard_4.png)]({{site.url}}/assets/images/network_wizard_4.png)
 
 The **Define Single Network** window shows up. First define the network name (prod_net_01 in my example). There are three configurable values.
 
@@ -85,25 +85,25 @@ The **Define Single Network** window shows up. First define the network name (pr
 -   **Private Network** - This option is intended to provide extra network security by isolating all server ports from each other within the VC Domain. All packets will be sent through the VC Domain and out the uplinks ports so the communication between the severs will go through an external L3 router that will redirect the traffic back to the Domain.
 -   **Enable VLAN Tunneling**.
 
-[![](/images/network_wizard_5.png)]({{site.url}}/images/network_wizard_5.png)
+[![](/assets/images/network_wizard_5.png)]({{site.url}}/assets/images/network_wizard_5.png)
 
 Click the **Advanced** button to configure **Advanced Network Settings**. Set the network link speeds that best suites your configuration.
 
-[![](/images/network_wizard_6.png)]({{site.url}}/images/network_wizard_6.png)
+[![](/assets/images/network_wizard_6.png)]({{site.url}}/assets/images/network_wizard_6.png)
 
 Again from the **Define Single Network** page we are going to assign a port to our network. Click on **Add Port** and select an uplink port.
 
-[![](/assets/network_wizard_7.png)]({{site.url}}/images/network_wizard_7.png)
+[![](/assets/images/network_wizard_7.png)]({{site.url}}/assets/images/network_wizard_7.png)
 
 Set the *Connection Mode* to *Auto* if the ports are trunked and to **Failve*r* if not.
 
 Click Apply and move onto the next screen. From this screen you can create as many additional networks as you need.
 
-[![](/images/network_wizard_8.png)]({{site.url}}/images/network_wizard_8.png)
+[![](/assets/images/network_wizard_8.png)]({{site.url}}/assets/images/network_wizard_8.png)
 
 Now we are going to create a network using VLAN tagging. Click **Next** an move again into the **Define Network Connection** page, select **Connection with uplink(s) carrying multiple networks (using VLAN tagging)** and click *Next*. The **Define Shared Uplink Port Set** page will be displayed.
 
-[![](/images/network_wizard_9.png)]({{site.url}}/images/network_wizard_9.png)
+[![](/assets/images/network_wizard_9.png)]({{site.url}}/assets/images/network_wizard_9.png)
 
 A shared uplink is the way Virtual Connect has to identify which uplinks carry multiple networks over the same cable. On shared uplinks the VLAN tags are added when packets leave the enclosure and added when leave. The external switch and the Virtual Connect Manager must be configured with the same VLAN tag ID for each network  on the shared uplinks. The uplinks enables multiple ports to be added in order to support port aggregation and link failover, with a consistent set of VLAN tags. Virtual Connect has no restriction on which VLAN IDs can be used so the VLANs already used in the external infrastructure can be used here.
 
@@ -112,11 +112,11 @@ VLAN.
 
 To finish the network creation assign a name (up to 64 characters with no spaces), add a port using the drop-down menu like in the single network process described above and add the networks you want to associate to the uplink. Finally click **Apply**.
 
-[![](/images/network_wizard_10.png)]({{site.url}}/images/network_wizard_10.png)
+[![](/assets/images/network_wizard_10.png)]({{site.url}}/assets/images/network_wizard_10.png)
 
 In the final screen you will see now the three networks associated to a **Shared Uplink Set**. You can check this also from the **Virtual Connect Manager** page in the **Ethernet Networks** area.
 
-[![](/images/network_wizard_11.png)]({{site.url}}/images/network_wizard_11.png)
+[![](/assets/images/network_wizard_11.png)]({{site.url}}/assets/images/network_wizard_11.png)
 
 And we are done with the **Network Setup**, in the next post I will show the storage part. As always any feedback would be welcome.
 

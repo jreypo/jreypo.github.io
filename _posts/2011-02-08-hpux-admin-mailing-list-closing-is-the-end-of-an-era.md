@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HPUX-admin mailing list closing. Is the end of an era.
 date: 2011-02-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:

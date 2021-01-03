@@ -1,8 +1,8 @@
 ---
-layout: post
 title: There is still time! Join VMware in the next step forward in Cloud infrastructure!
 date: 2011-07-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -17,7 +17,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-![](/images/vmware-raise-the-bari.png "VMware Cloud Infrastructure Event")
+[![](/assets/images/vmware-raise-the-bari.png "VMware Cloud Infrastructure Event")]({{site.url}}/assets/images/vmware-raise-the-bari.png) 
 
 Tomorrow, Tuesday July 12th, VMware CEO Paul Maritz and CTO Steve Herrod will host a worldwide online event titled **"Raising the Bar, Part V"**. In this event they plan to make an announcement about the next generation of Cloud infrastructure.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Moving hosts between datacenters with PowerCLI
 date: 2011-02-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -64,7 +64,7 @@ C:\
 
 If you check now the vSphere Client will see the host out of the cluster but still in the same datacenter.
 
-[![](/images/esxi_out_cluster.png "ESXi out of cluster1")]({{site.url}}/images/esxi_out_cluster.png)
+[![](/assets/images/esxi_out_cluster.png "ESXi out of cluster1")]({{site.url}}/assets/images/esxi_out_cluster.png)
 
 ### Step 3 - Move the host to the correct datacenter
 
@@ -103,6 +103,6 @@ C:\
 
 Check that everything is OK with the vSphere Client and we are done.
 
-[![](/images/esxi-vcloud-dc.png "ESXi server in vcloud-dc")]({{site.url}}/images/esxi-vcloud-dc.png)
+[![](/assets/images/esxi-vcloud-dc.png "ESXi server in vcloud-dc")]({{site.url}}/assets/images/esxi-vcloud-dc.png)
 
 Juanma.

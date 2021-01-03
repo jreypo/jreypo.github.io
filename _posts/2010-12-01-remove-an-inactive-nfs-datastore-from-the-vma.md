@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Remove an inactive NFS datastore using vSphere CLI from vMA
 date: 2010-12-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -33,7 +33,7 @@ After a restart of the network services in the Openfiler server to commit the ch
 
 First I tried to remove it from the vSphere Client and I received the following error message:
 
-[![](/images/inactive_datastore.png "Inactive datastore")]({{site.url}}/images/inactive_datastore.png)
+[![](/assets/images/inactive_datastore.png "Inactive datastore")]({{site.url}}/assets/images/inactive_datastore.png)
 
 I quickly switched to an SSH session in the vMA to check the state of the datastore, it appeared as `not mounted`.
 

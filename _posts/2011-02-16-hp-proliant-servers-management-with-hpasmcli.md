@@ -1,8 +1,8 @@
 ---
-layout: post
 title: HP ProLiant servers management with hpasmcli
 date: 2011-02-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:

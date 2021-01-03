@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Merry Christmas!
 date: 2010-12-22
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -18,6 +18,6 @@ With this picture of our son Jaime and our lady Buffy, my wife and me wish to yo
 
 **And I hope that Santa and the Three Wise Men bring everything you asked for your homelabs ;-)**
 
-[![](/images/jaime__buffy.jpg "Jaime & Buffy")]({{site.url}}/images/jaime__buffy.jpg)
+[![](/assets/images/jaime__buffy.jpg "Jaime & Buffy")]({{site.url}}/assets/images/jaime__buffy.jpg)
 
 Juanma.

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Howto set-up a VxVM boot disk from a LVM boot disk
 date: 2010-07-20
 type: post
+classes: wide
 published: true
 status: publish
 categories:

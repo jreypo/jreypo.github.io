@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to get ESX(i) network connections using PowerCLI
 date: 2011-09-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -30,15 +30,15 @@ The key to perform this tasks the `Get-EsxCli` cmdlet. This command was introduc
 
 The first task to do with `Get-EsxCli` is to create a wrapper using a variable that will expose `esxcli` functionality.
 
-[![](/images/get-esxcli.png "Get-EsxCli")]({{site.url}}/images/get-esxcli.png)
+[![](/assets/images/get-esxcli.png "Get-EsxCli")]({{site.url}}/assets/images/get-esxcli.png)
 
 As it can be seen in the screenshot, all the namespace of my whitebox are exposed just like with `esxcli` command. Now we are going to get the network connections of the host.
 
-[![](/images/esxi4_net-connection.png "ESXi4 network connections")]({{site.url}}/images/esxi4_net-connection.png)
+[![](/assets/images/esxi4_net-connection.png "ESXi4 network connections")]({{site.url}}/assets/images/esxi4_net-connection.png)
 
 Finally following is the syntax to get the network connections of an ESXi 5 server.
 
-[![](/images/esxi5_net-connection.png "ESXi5 network connections")]({{site.url}}/images/esxi5_net-connection.png)
+[![](/assets/images/esxi5_net-connection.png "ESXi5 network connections")]({{site.url}}/assets/images/esxi5_net-connection.png)
 
 In both cases I used the `Format-Table` cmdlet to get the output in a easily readable and useful format.
 

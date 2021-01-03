@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to create a new file system in OpenBSD
 date: 2011-03-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:

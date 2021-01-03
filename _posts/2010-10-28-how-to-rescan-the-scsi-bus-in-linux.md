@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to rescan the SCSI bus in Linux
 date: 2010-10-28
 type: post
+classes: wide
 published: true
 status: publish
 categories:

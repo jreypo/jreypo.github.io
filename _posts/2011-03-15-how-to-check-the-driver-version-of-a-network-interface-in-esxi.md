@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to check the driver version of a network interface in ESX(i)
 date: 2011-03-15
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Time is over... vSphere 5 is here and it comes with its own VSA
 date: 2011-07-12
 type: post
+classes: wide
 published: true
 status: publish
 categories:

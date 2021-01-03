@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'HP Virtual Connect Domain Setup – Part 4: Server Profiles'
 date: 2011-01-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -66,39 +66,39 @@ In addition to the above information the following points must be considered whe
 
 If you have worked in the past with the 2.x Virtual Connect Manager revisions I'm sure that you will remember the **Server Profile Wizard**. That wizard has been removed from the  3.x revisions of VCM.
 
-[![](/images/vc_230_wizard.png "VCM 2.30 Server Profile Wizard")]({{site.url}}/images/vc_230_wizard.png)
+[![](/assets/images/vc_230_wizard.png "VCM 2.30 Server Profile Wizard")]({{site.url}}/assets/images/vc_230_wizard.png)
 
 To start the server profile creation you have now to go to the **Virtual Connect Home** and in the **Server** area click on **Define Server Profile**.
 
-[![](/images/server_profiles_1.png "Define Server Profile")]({{site.url}}/images/server_profiles_1.png)
+[![](/assets/images/server_profiles_1.png "Define Server Profile")]({{site.url}}/assets/images/server_profiles_1.png)
 
 In the Define Server Profile screen first enter the name of the profile, ESX01 in the example, and choose if you want to use factory default MAC and WWN or the VC-predefined.
 
-[![](/images/server_profiles_2.png)]({{site.url}}/images/server_profiles_2.png)
+[![](/assets/images/server_profiles_2.png)]({{site.url}}/assets/images/server_profiles_2.png)
 
 Then move to **Ethernet Network Connections**. Here you can select the networks to assign to the ports, the port speed between AUTO, PREFERRED and CUSTOM and the PXE settings (ENABLED, DISABLED or USE-BIOS). By default there are only two connections created, to add more connections just right-click the area and choose *Add connection*.
 
-[![](/images/server_profiles_3.png)]({{site.url}}/images/server_profiles_3.png)
+[![](/assets/images/server_profiles_3.png)]({{site.url}}/assets/images/server_profiles_3.png)
 
 In Network Name if you choose Multiple Networks a new icon will appear that will allow you to edit this connection type. Click and a new section will show up, this section allows to select the **Shared Uplink Set** and the networks. There is also a checkbox to set if you want to force the same VLAN mappings as the **Shared Uplink Set** to the different networks.
 
-[![](/images/server_profiles_7.png)]({{site.url}}/images/server_profiles_7.png)
+[![](/assets/images/server_profiles_7.png)]({{site.url}}/assets/images/server_profiles_7.png)
 
 The next area is the **FC SAN Connections**. Assign the modules in the bays to the correspondent fabric and set the port speed.
 
-[![](/images/server_profiles_4.png)]({{site.url}}/images/server_profiles_4.png)
+[![](/assets/images/server_profiles_4.png)]({{site.url}}/assets/images/server_profiles_4.png)
 
 Also in this section you can define the SAN boot parameters, click on the checkbox, the page will dim and a pop-up will appear.There you can configure each FC connection as PRIMARY, SECONDARY, DISABLED or USE-BIOS and set the **Target Port Name** and the LUN.
 
-[![](/images/server_profiles_5.png)]({{site.url}}/images/server_profiles_5.png)
+[![](/assets/images/server_profiles_5.png)]({{site.url}}/assets/images/server_profiles_5.png)
 
 Finally we can assign the profile to a server bay.
 
-[![](/images/server_profiles_6.png)]({{site.url}}/images/server_profiles_6.png)
+[![](/assets/images/server_profiles_6.png)]({{site.url}}/assets/images/server_profiles_6.png)
 
 Click Apply and the new server profile will be done. You can always edit the existing server profiles from the **Server Profiles** screen in the VC administration interface.
 
-[![](/images/server_profiles_8.png)]({{site.url}}/images/server_profiles_8.png)
+[![](/assets/images/server_profiles_8.png)]({{site.url}}/assets/images/server_profiles_8.png)
 
 And this is the end. This series is done, if you have follow the correct steps outlined in the four posts you will have a fully operation Virtual Connect Domain. Of course there are a some topics I'd like to write about like iSCSI, FlexFabric and the VCM command line but I believe it's better to do it in their own dedicated posts, stay tuned.
 

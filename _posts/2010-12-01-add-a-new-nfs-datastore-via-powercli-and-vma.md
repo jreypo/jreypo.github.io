@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Add a new NFS datastore via PowerCLI and vSphere CLI from vMA
 date: 2010-12-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -59,6 +59,6 @@ In the second part of the post we are going to use **vSphere PowerCLI**, which a
 
 The cmdlet to create the new NFS datastore is `New-Datastore` and you must provide the ESX host, the NFS server, the path of the share and a name for the datastore. Then you can check that the new datastore has been properly added with `Get-Datastore`.
 
-[![](/images/new-datastore.png "New-DataStore")]({{site.url}}/images/new-datastore.png)
+[![](/assets/images/new-datastore.png "New-DataStore")]({{site.url}}/assets/images/new-datastore.png)
 
 Juanma.

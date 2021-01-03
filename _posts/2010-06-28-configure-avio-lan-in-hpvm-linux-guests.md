@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Configure AVIO Lan in HPVM Linux guests
 date: 2010-06-28
 type: post
+classes: wide
 published: true
 status: publish
 categories:

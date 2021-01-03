@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Time to vote for VMworld 2011 sessions! Vote for the HP ones!
 date: 2011-05-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Put ESXi server in maintenance mode from Tech Support Mode using vim-cmd
 date: 2011-08-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -26,15 +26,15 @@ If you need to put a host in maintenance mode and only have access through **ESX
 
 Put the host in maintenance mode:
 
-[![](/images/maintenance_mode_enter.png "Enter maintenance mode")]({{site.url}}/images/maintenance_mode_enter.png)
+[![](/assets/images/maintenance_mode_enter.png "Enter maintenance mode")]({{site.url}}/assets/images/maintenance_mode_enter.png)
 
 Check the state of the host.
 
-[![](/images/maintenance_mode_check.png "Check host state")]({{site.url}}/images/maintenance_mode_check.png)
+[![](/assets/images/maintenance_mode_check.png "Check host state")]({{site.url}}/assets/images/maintenance_mode_check.png)
 
 Get the ESXi out of maintenance mode.
 
-[![](/images/maintenance_mode_exit.png "Exit maintenance mode")]({{site.url}}/images/maintenance_mode_exit.png)
+[![](/assets/images/maintenance_mode_exit.png "Exit maintenance mode")]({{site.url}}/assets/images/maintenance_mode_exit.png)
 
 This procedure works in ESXi 4.x and ESXi 5.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Retrieving ESX(i) hardware info with PowerCLI
 date: 2011-06-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -23,7 +23,7 @@ comments: true
 
 We all know how to look for the basic hardware info of an ESX(i) server, just open the vSphere Client go to **Summary** tab and you will presented with the familiar summary screen that includes **General** section with the manufacturer, model, etc.
 
-[![](/images/general.png "General ESXi info")]({{site.url}}/images/general.png)
+[![](/assets/images/general.png "General ESXi info")]({{site.url}}/assets/images/general.png)
 
 We can also enter the **Configuration** tab and get a bit more detailed information for each hardware component.
 

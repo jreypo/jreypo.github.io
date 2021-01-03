@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Change vSphere PowerCLI proxy settings
 date: 2011-01-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

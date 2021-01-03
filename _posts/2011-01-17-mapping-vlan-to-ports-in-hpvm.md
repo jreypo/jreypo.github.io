@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Mapping VLAN to ports in HPVM
 date: 2011-01-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:

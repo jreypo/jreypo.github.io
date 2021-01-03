@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Cisco UCS Platform Emulator, first impressions
 date: 2010-10-12
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -25,19 +25,19 @@ The UCS Platform Emulator can be freely downloaded from the Cisco DeveloperNetwo
 The emulator is virtual machine with a [Linux CentOS](http://www.centos.org/) inside, you can run it with VMware Workstation as I do or with the free VMware Player. After firing it up,
 the startup process will go like any RedHat based Linux until you will get to a `Starting cisco_ucspe` message. Then It will start to decompress and install the emulator into the VM.
 
-[![](/images/cisco-ucs-platform-emulator-install.png "Cisco UCS Platform Emulator install")]({{site.url}}/images/cisco-ucs-platform-emulator-install.png)
+[![](/assets/images/cisco-ucs-platform-emulator-install.png "Cisco UCS Platform Emulator install")]({{site.url}}/assets/images/cisco-ucs-platform-emulator-install.png)
 
 After that process is finished you will get to login screen that ask you to use the user and password *config* in order to access the configuration menus of the UCSPE. From those menus you can set stuff like the number of UCS chassis to be used and the number of blades per chassis for example.
 
-[![](/images/cisco-ucs-platform-emulator-config1.png "Cisco UCS Platform Emulator config")]({{site.url}}/images/cisco-ucs-platform-emulator-config1.png)
+[![](/assets/images/cisco-ucs-platform-emulator-config1.png "Cisco UCS Platform Emulator config")]({{site.url}}/assets/images/cisco-ucs-platform-emulator-config1.png)
 
 Once you have configured the emulator point your web browser to the IP address of the emulator to access the UCS Manager. The network the UCSPE virtual machines is connected to must be configured to provide IP addresses with DHCP, I used the default NAT network the UCSPE came with. When you are in the web browser click the **LAUNCH** link.
 
-[![](/images/ucs_web_access.jpg "UCS_web_access")]({{site.url}}/images/ucs_web_access.jpg)
+[![](/assets/images/ucs_web_access.jpg "UCS_web_access")]({{site.url}}/assets/images/ucs_web_access.jpg)
 
 And here it is, in all its magnificence, the Cisco Unified ComputingSystem Manager.
 
-[![](/images/ucs_manager.jpg "UCS_manager")]({{site.url}}/images/ucs_manager.jpg)
+[![](/assets/images/ucs_manager.jpg "UCS_manager")]({{site.url}}/assets/images/ucs_manager.jpg)
 
 From here I will get familiar with the manager and try things like UCS Service Profile creation or playing with the UCS API. I will try to write about it in a future post.
 

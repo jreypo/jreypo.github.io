@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Managing your vSphere cluster configuration with PowerCLI
 date: 2011-06-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:

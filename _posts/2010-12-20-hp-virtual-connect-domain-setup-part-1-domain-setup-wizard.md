@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'HP Virtual Connect Domain Setup - Part 1: Domain Setup Wizard'
 date: 2010-12-20
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -35,11 +35,11 @@ For large-scale infrastructures there is a more scalable version of VCM known as
 
 Current series of articles will focus only on the Virtual Connect Manager GUI. Please take into account that I'm using **Virtual Connect 3.10** version in the whole series and there some differences with the VC 2.x revisions.
 
-[![](/images/vcm_login.png "VCM login page")]({{site.utl}}/images/vcm_login.png)
+[![](/assets/images/vcm_login.png "VCM login page")]({{site.utl}}/assets/images/vcm_login.png)
 
 When you login into the VCM for the first time a series of wizards will show up to help you with the initial setup of the domain. This article will cover the first of those wizards, the **Domain Setup Wizard**.
 
-[![](/images/domain_wizard_1.png "Wizard Domain first screen")]({{site.url}}/images/domain_wizard_1.png)
+[![](/assets/images/domain_wizard_1.png "Wizard Domain first screen")]({{site.url}}/assets/images/domain_wizard_1.png)
 
 This wizard will allow you to:
 
@@ -51,25 +51,25 @@ This wizard will allow you to:
 
 After the informative screen the first step will display. Here you have to provide the enclosure Onboard Administrator IP address and credentials, these credentials must have administrative level. Click next when finish.
 
-[![](/images/domain_wizard_2.png "Domain wizard screen")]({{site.url}}/images/domain_wizard_2.png)
+[![](/assets/images/domain_wizard_2.png "Domain wizard screen")]({{site.url}}/assets/images/domain_wizard_2.png)
 
 Now VC Domain Wizard will import all the servers and VC interconnect modules within the enclosure.
 
 In the next screen select the enclosure to import and click next.
 
-[![](/images/domain_wizard_3.png "Domain Wizard")]({{site.url}}/images/domain_wizard_3.png)
+[![](/assets/images/domain_wizard_3.png "Domain Wizard")]({{site.url}}/assets/images/domain_wizard_3.png)
 
 A pop-up will show up to inform that the networking of all the blades within the enclosure will be disabled until VC Networking is properly configured. of course it will ask for confirmation.
 
-[![](/images/domain_wizard_4.png)]({{site.url}}/images/domain_wizard_4.png)
+[![](/assets/images/domain_wizard_4.png)]({{site.url}}/assets/images/domain_wizard_4.png)
 
 After finishing the import the wizard will go the **General Settings** part. The Domain Setup Wizard automatically assigns a domain name based on the enclosure name, you can change the name when running the setup wizard or at any time later from the **Domain Settings** screen. The Virtual Connect domain name should be unique and can be up to 31 characters without spaces or special characters.
 
-[![](/images/domain_wizard_5.png)]({{site.url}}/images/domain_wizard_5.png)
+[![](/assets/images/domain_wizard_5.png)]({{site.url}}/assets/images/domain_wizard_5.png)
 
 Next step is to configure the local user accounts.
 
-[![](/images/domain_wizard_6.png)]({{site.url}}/images/domain_wizard_6.png)
+[![](/assets/images/domain_wizard_6.png)]({{site.url}}/assets/images/domain_wizard_6.png)
 
 By default the only local account is Administrator, this account cannot be deleted nor have domain privileges removed. You can also add up to 32 accounts with a combination of up to four levels of access. The available levels are:
 

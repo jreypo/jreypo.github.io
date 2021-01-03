@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Understanding RAID management in Linux
 date: 2010-11-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -88,7 +88,7 @@ Following are a couple of examples to show `dmraid` operation.
 
 To illustrate this take a look at the screenshot below. I created a RAID1 device, `/dev/md0`, I then show its configuration with  `mdadm --detail`. Later with *dmsetup ls* I list all the block devices seen by the device-mapper, as you can see there is no reference to `/dev/md0`.
 
-[![](/images/dmsetup-mdadm1.png "dmsetup mdadm")]({{site.url}}/images/dmsetup-mdadm1.png)
+[![](/assets/images/dmsetup-mdadm1.png "dmsetup mdadm")]({{site.url}}/assets/images/dmsetup-mdadm1.png)
 
 Instead `mdadm` uses the MD (Multiple Devices) device driver, this driver provides virtual devices created from another independent devices. Currently the MD driver supports the following RAID levels and configurations
 

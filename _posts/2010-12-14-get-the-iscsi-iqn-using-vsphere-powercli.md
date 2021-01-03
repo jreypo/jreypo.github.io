@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Get the iSCSI iqn of an ESX(i) using vSphere PowerCLI
 date: 2010-12-14
 type: post
+classes: wide
 published: true
 status: publish
 categories:

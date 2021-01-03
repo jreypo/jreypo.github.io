@@ -48,11 +48,11 @@ The next key concept to understand in **N_Port ID Virtualization** or **NPIV**. 
 
 And how manages Virtual Connect all this port stuff? I believe that an image is worth a thousand words, so first I will show with the below diagrams illustrate how FC ports and SAN are managed with and without Virtual Connect.
 
-[![](/images/blade-san-novc.png "SAN config without VC")]({{site.url}}/images/blade-san-novc.png)
+[![](/assets/images/blade-san-novc.png "SAN config without VC")]({{site.url}}/assets/images/blade-san-novc.png)
 
 As it can be seen the SAN switches, like the [Cisco MDS 9124e](http://h18000.www1.hp.com/storage/saninfrastructure/switches/mds9124e/index.html), that can be used in any blade enclosure including the HP ones are part of the SAN Fabric, that means the enclosure itself is part of the Fabric. These switches are connected to the SAN Core via E_ports or ISL.
 
-[![](/images/hp-vc-fc.png "SAN config with VC")]({{site.url}}/images/hp-vc-fc.png)
+[![](/assets/images/hp-vc-fc.png "SAN config with VC")]({{site.url}}/assets/images/hp-vc-fc.png)
 
 In this configuration the SAN boundary has been moved out of the enclosure. The VC-FC module includes an HBA Aggregator which is an NPIV device. It passes, transparently, the signals from multiple HBAs to a single switch port.
 
@@ -77,7 +77,7 @@ You can launch the wizard either from the Tools menu in the Virtual Connect page
 
 In this first page you can specify if you want to use the WWN settings that comes with the Fiber Channel HBA card or if the HP Virtual Connect supplied WWN settings.
 
-[![](/images/fc_wizard_1.png)]({{site.url}}/images/fc_wizard_1.png)
+[![](/assets/images/fc_wizard_1.png)]({{site.url}}/assets/images/fc_wizard_1.png)
 
 Virtual Connect will assign both a port WWN and a node WWN to a Fibre Channel port, the node WWN will always be the same as the port WWN incremented by one.
 
@@ -85,25 +85,25 @@ There is key advantage when configuring Virtual Connect to assign the WWNs and i
 
 In the wizard select **Virtual Connect assigned WWNs** and click **Next** to move into the **Assigned WWNs** screen.
 
-[![](/images/fc_wizard_2.png)]({{site.url}}/images/fc_wizard_2.png)
+[![](/assets/images/fc_wizard_2.png)]({{site.url}}/assets/images/fc_wizard_2.png)
 
 This screen is very similar to the MAC address range selection screen we saw in the previous post. Here you have to choose between an user defined WWNs range and an HP defined one. You must ensure that the selected range is unique within the environment.
 
 Next we are going to define the Fabric, first you'll be presented with a screen asking if you want to define the fabric.
 
-[![](/images/fc_wizard_3.png)]({{site.url}}/images/fc_wizard_3.png)
+[![](/assets/images/fc_wizard_3.png)]({{site.url}}/assets/images/fc_wizard_3.png)
 
 After that we have to enter the Fabric name, assign the uplink ports and configure the speed.
 
-[![](/images/fc_wizard_4.png "fc_")]({{site.url}}/images/fc_wizard_4.png)
+[![](/assets/images/fc_wizard_4.png "fc_")]({{site.url}}/assets/images/fc_wizard_4.png)
 
 After applying the configuration the wizard will move to the next screen where it will ask if you want to create more Fabric, for the example purposes I decided to create a another one named *fabric_prod2*.
 
-[![](/images/fc_wizard_6.png)]({{site.url}}/images/fc_wizard_6.png)
+[![](/assets/images/fc_wizard_6.png)]({{site.url}}/assets/images/fc_wizard_6.png)
 
 When you are done with the second fabric finish the wizard and the storage setup will be done. You can review and modify the configuration from the Virtual Connect main interface.
 
-[![](/images/vc-config.png "Virtual Connect main page")]({{images}}/images/vc-config.png)
+[![](/assets/images/vc-config.png "Virtual Connect main page")]({{images}}/assets/images/vc-config.png)
 
 The next post will be the last of the series and I will discuss about **Virtual Connect Server Profiles**. As always any feedback would be welcome.
 

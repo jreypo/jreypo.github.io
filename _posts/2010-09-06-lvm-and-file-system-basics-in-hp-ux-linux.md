@@ -1,8 +1,8 @@
 ---
-layout: post
 title: LVM and file system basics in HP-UX & Linux
 date: 2010-09-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:

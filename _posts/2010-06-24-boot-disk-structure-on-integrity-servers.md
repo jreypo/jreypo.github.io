@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Boot disk structure on Integrity servers
 date: 2010-06-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

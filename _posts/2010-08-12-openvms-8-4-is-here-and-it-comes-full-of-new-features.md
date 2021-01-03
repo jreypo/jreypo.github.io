@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenVMS 8.4 is here and it comes full of new features
 date: 2010-08-12
 type: post
+classes: wide
 published: true
 status: publish
 categories:
