@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Understanding AKS built-in roles
 date: 2019-04-10 09:55:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

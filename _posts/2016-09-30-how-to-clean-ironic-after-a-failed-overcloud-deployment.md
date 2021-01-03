@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to clean Ironic after a failed overcloud deployment
 date: 2016-09-30
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Combining Heat with OpenStack Vagrant provider
 date: 2016-10-18
 type: post
+classes: wide
 published: true
 status: publish
 categories:

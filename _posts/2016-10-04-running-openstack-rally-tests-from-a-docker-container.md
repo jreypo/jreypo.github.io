@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Running OpenStack Rally tests from a Docker container
 date: 2016-10-04
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -202,7 +202,7 @@ rally task report 0c3f4378-e46e-4903-a1c6-2c42628b06a9 --html-static --out /home
 
 Access the report from your browser.
 
-[![](/images/rally_nova.png)]({{site.url}}/images/rally_nova.png)
+[![](/assets/images/rally_nova.png)]({{site.url}}/assets/images/rally_nova.png)
 
 As you can see running Rally from a Docker container is pretty easy, keep in mind that my Docker images are very opinionated towards RDO/Red Hat OpenStack releases although it should be valid to be used with any OpenStack distribution. Anyway if you want a more neutral container but still based on Fedora/CentOS I encourage you to use the one created by my colleague [Juanma Parrilla](https://twitter.com/kerbeross), you can check his Github repo [docker-osp-rally](https://github.com/padajuan/docker-osp-rally).
 

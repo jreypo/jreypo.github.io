@@ -1,8 +1,8 @@
 ---
-layout: post
 title: New esxcli namespaces included on the HP ESXi image
 date: 2012-01-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:

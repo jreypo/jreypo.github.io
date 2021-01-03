@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Managing VIO with viocli
 date: 2016-04-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:

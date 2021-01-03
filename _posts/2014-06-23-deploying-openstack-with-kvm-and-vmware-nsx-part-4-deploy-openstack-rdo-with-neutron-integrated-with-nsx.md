@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 4: Deploy OpenStack RDO with Neutron integrated with NSX'
 date: 2014-06-23
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -182,7 +182,7 @@ If login fails with an unexpected error check that firewall is deactivated in al
 
 Once logged into horizon navigate to **Admin -> Hypervisor** and check that the KVM hypervisor is properly registered.
 
-[![](/images/screen-shot-2014-06-17-at-01-56-04.png)]({{site.url}}/images/screen-shot-2014-06-17-at-01-56-04.png)
+[![](/assets/images/screen-shot-2014-06-17-at-01-56-04.png)]({{site.url}}/assets/images/screen-shot-2014-06-17-at-01-56-04.png)
 
 ### Configure the NSX integration
 
@@ -311,7 +311,7 @@ Created a new network:
 
 Access NSX Manager web interface, navigate to Logical Switches and confirm that a new logical switch with the same name and UUID as the new OpenStack network has been created.
 
-[![](/images/screen-shot-2014-06-21-at-22-15-20.png)]({{site.url}}/images/screen-shot-2014-06-21-at-22-15-20.png)
+[![](/assets/images/screen-shot-2014-06-21-at-22-15-20.png)]({{site.url}}/assets/images/screen-shot-2014-06-21-at-22-15-20.png)
 
 Congratulations! We have successfully deployed a distributed installation of OpenStack with KVM as the underlying hypervisor and integrated with VMware NSX state of the art network virtualization software. In future posts out of this four article series we will discuss some tips and other parts of OpenStack and NSX. Courteous comments are welcome.
 

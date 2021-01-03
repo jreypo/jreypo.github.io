@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to get the network connections of an ESXi
 date: 2011-08-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -32,11 +32,11 @@ Please don't panic yet, because as always in VMware there is a solution for that
 
 I tested it in ESXi 4.1 and ESXi 4.1 Update 1. The `network` namespace is not available in ESXi 4.0.
 
-[![](/images/esxi4.png "ESXi 4.1 Update 1 network connections")]({{site.url}}/images/esxi4.png)
+[![](/assets/images/esxi4.png "ESXi 4.1 Update 1 network connections")]({{site.url}}/assets/images/esxi4.png)
 
 #### ESXi 5
 
-[![](/images/esxi51.png "ESXi 5 network connections")]({{site.url}}/images/esxi51.png)
+[![](/assets/images/esxi51.png "ESXi 5 network connections")]({{site.url}}/assets/images/esxi51.png)
 
 I used Remote Tech Support (SSH), simply known as SSH in ESXi5, in both examples but you can also launch the command from the vMA or using vSphere CLI from a Windows or a Linux machine.
 

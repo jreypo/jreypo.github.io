@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Migrating from OS X to Windows 10
 date: 2017-04-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -70,11 +70,11 @@ Finally, this is how the beast looks now.
 
 WSLtty in fullscreen mode with tmux:
 
-[![](/images/trantor_screen.jpg "Terminal session with tmux")]({{site.url}}/images/trantor_screen.jpg)
+[![](/assets/images/trantor_screen.jpg "Terminal session with tmux")]({{site.url}}/assets/images/trantor_screen.jpg)
 
 The decorations ;-)
 
-[![](/images/trantor_stickers.jpg "My stickers")]({{site.url}}/images/trantor_stickers.jpg)
+[![](/assets/images/trantor_stickers.jpg "My stickers")]({{site.url}}/assets/images/trantor_stickers.jpg)
 
 I hope this post is useful for those folks looking at moving from OS X to Windows 10. Comments are more than welcome.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'VMware Integrated #OpenStack is GA!'
 date: 2015-03-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -21,7 +21,7 @@ image:
   feature: openstack-banner.jpg
 ---
 
-[![](/images/teamopenstackvmware.png)]({{site.url}}/images/teamopenstackvmware.png)
+[![](/assets/images/teamopenstackvmware.png)]({{site.url}}/assets/images/teamopenstackvmware.png)
 
 [**VMware Integrated OpenStack**](http://www.vmware.com/products/openstack/) was made available for customers last Thursday. It is a exciting time to be part of VMware.
 

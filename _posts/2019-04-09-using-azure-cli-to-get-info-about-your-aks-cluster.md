@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Using Azure CLI to get info about your AKS cluster
 date: 2019-04-09 11:10:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

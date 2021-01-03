@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Win a free pass for VMworld 2012 or Microsoft TechEd 2012 thanks to Veeam
 date: 2012-03-13
 type: post
+classes: wide
 published: true
 status: publish
 categories:

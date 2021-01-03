@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VMworld Europe 2013. For me it’s all about the Community
 date: 2013-10-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:

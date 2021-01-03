@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Network configuration in Photon OS
 date: 2016-02-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:

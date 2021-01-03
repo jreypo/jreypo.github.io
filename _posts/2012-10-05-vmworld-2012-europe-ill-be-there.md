@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VMworld 2012 Europe... I'll be there
 date: 2012-10-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:

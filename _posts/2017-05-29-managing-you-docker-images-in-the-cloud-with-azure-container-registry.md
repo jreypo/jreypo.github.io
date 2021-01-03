@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Managing you Docker images in the cloud with Azure Container Registry
 date: 2017-05-29
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -136,23 +136,23 @@ However there is a method to remove an image from ACR but the caveat is that it 
 
 From Azure Portal access the storage account backing up your registry and then select Blobs.
 
-[![](/images/acr_delete_image_1.png)]({{site.url}}/images/acr_delete_image_1.png)
+[![](/assets/images/acr_delete_image_1.png)]({{site.url}}/assets/images/acr_delete_image_1.png)
 
 Inside Blobs navigate through the different folders until you get to Respositories. **\<no-name\> -> docker -> registry -> v2 -> repositories**. In repositories select one, in my case baseimages.
 
-[![](/images/acr_delete_image_2.png "Select repository")]({{site.url}}/images/acr_delete_image_2.png)
+[![](/assets/images/acr_delete_image_2.png "Select repository")]({{site.url}}/assets/images/acr_delete_image_2.png)
 
 Inside the repository select the container image, I choose fedora.
 
-[![](/images/acr_delete_image_3.png "Select container image")]({{site.url}}/images/acr_delete_image_3.png)
+[![](/assets/images/acr_delete_image_3.png "Select container image")]({{site.url}}/assets/images/acr_delete_image_3.png)
 
 Then click on **_manifests** and inside it select **tags**. The different tags for the image will be listed.
 
-[![](/images/acr_delete_image_4.png "Select the tag")]({{site.url}}/images/acr_delete_image_4.png)
+[![](/assets/images/acr_delete_image_4.png "Select the tag")]({{site.url}}/assets/images/acr_delete_image_4.png)
 
 Select the tag and then click on **Delete folder** at the top bar. 
 
-[![](/images/acr_delete_image_5.png "Delete folder")]({{site.url}}/images/acr_delete_image_5.png)
+[![](/assets/images/acr_delete_image_5.png "Delete folder")]({{site.url}}/assets/images/acr_delete_image_5.png)
 
 If we go back to Azure CLI and list the tags for `baseimages/fedora` the deleted one will not show up. 
 

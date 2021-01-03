@@ -1,8 +1,8 @@
 ---
-layout: post
 title: vCenter Server Appliance. Part 2 - vCenter associated services
 date: 2011-11-30
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -35,27 +35,27 @@ Additionally and although is not a service I decided to include a section about 
 
 Unlike the vCenter Windows version Syslog Collector comes bundled with the VCSA. As we saw in the previous post it can be configured from the VCSA web interface.
 
-[![](/images/image_thumb151_thumb.png "Syslog collector settings")]({{site.url}}/images/image_thumb151_thumb.png)
+[![](/assets/images/image_thumb151_thumb.png "Syslog collector settings")]({{site.url}}/assets/images/image_thumb151_thumb.png)
 
 But there are also a limited range of operations that can be done from the command line. Access the VCSA via SSH and make yourself root.
 
 Look if the Syslog Collector is enabled.
 
-[![](/images/image26.png)]({{site.url}}/images/image26.png)
+[![](/assets/images/image26.png)]({{site.url}}/assets/images/image26.png)
 
 Check its status.
 
-[![](/images/image27.png)]({{site.url}}/images/image27.png)
+[![](/assets/images/image27.png)]({{site.url}}/assets/images/image27.png)
 
 Start and stop the Syslog Collector service.
 
-[![](/images/vcsa_syslog_collector_startup.png "Syslog Collector service startup")]({{site.url}}/images/vcsa_syslog_collector_startup.png)
+[![](/assets/images/vcsa_syslog_collector_startup.png "Syslog Collector service startup")]({{site.url}}/assets/images/vcsa_syslog_collector_startup.png)
 
 This last option is quite useful since the web interface only allows to stop/start ALL the ESXi Services at once and not individually.
 
 If you want to take a look at the Syslog Collector configuration, the configuration file is located at `/etc/syslog-ng/syslog-collector.conf`.
 
-[![](/images/vcsa_syslog_collector_conf.png "syslog-collector.conf file")]({{site.url}}/images/vcsa_syslog_collector_conf.png)
+[![](/assets/images/vcsa_syslog_collector_conf.png "syslog-collector.conf file")]({{site.url}}/assets/images/vcsa_syslog_collector_conf.png)
 
 ### ESXi Dump Collector
 
@@ -63,19 +63,19 @@ Like the other services ESXi Dump Collector, also known as `netdumper`, comes in
 
 It can be configured from the appliance Web UI in the **Services** tab.
 
-[![](/images/esxi_network_coredump_settings.png "ESXi Network Coredump service settings")]({{site.url}}/images/esxi_network_coredump_settings.png)
+[![](/assets/images/esxi_network_coredump_settings.png "ESXi Network Coredump service settings")]({{site.url}}/assets/images/esxi_network_coredump_settings.png)
 
 From a root shell you can check the status of the service.
 
-[![](/images/check_netdumper_service.png "Check Network Coredump service")]({{site.url}}/images/check_netdumper_service.png)
+[![](/assets/images/check_netdumper_service.png "Check Network Coredump service")]({{site.url}}/assets/images/check_netdumper_service.png)
 
 And start/stop the service.
 
-[![](/images/start_stop_netdumper.png "ESXi Network Coredump service startup from shell")]({{site.url}}/images/start_stop_netdumper.png)
+[![](/assets/images/start_stop_netdumper.png "ESXi Network Coredump service startup from shell")]({{site.url}}/assets/images/start_stop_netdumper.png)
 
 The configuration of the Dump Collector is located at `/etc/sysconfig/netdumper`.
 
-[![](/images/netdumper_config_file.png "ESXi Network Coredump configuration file")]({{site.url}}/images/netdumper_config_file.png)
+[![](/assets/images/netdumper_config_file.png "ESXi Network Coredump configuration file")]({{site.url}}/assets/images/netdumper_config_file.png)
 
 Take a look at the following variables:
 
@@ -104,52 +104,52 @@ The configuration file for DHCP is `/etc/dhcpd.conf` but instead of using the de
 
 Once that is done edit the file, it should look like this.
 
-[![](/images/vcsa_dhcp_config_file.png "vCSA dhcp.conf file")]({{site.rul}}/images/vcsa_dhcp_config_file.png)
+[![](/assets/images/vcsa_dhcp_config_file.png "vCSA dhcp.conf file")]({{site.rul}}/assets/images/vcsa_dhcp_config_file.png)
 
 Substitute the values between `@@` with the values for your network. You may have to comment some of the lines. My `dhcpd.conf` file is below as
 reference:
 
-[![](/images/vjlab_dhcp_config_file.png "My dhcp.conf file")]({{site.url}}/images/vjlab_dhcp_config_file.png)
+[![](/assets/images/vjlab_dhcp_config_file.png "My dhcp.conf file")]({{site.url}}/assets/images/vjlab_dhcp_config_file.png)
 
 Next you have to modify the `/etc/sysconfig/dhcpd` file. In this file is where the interfaces to listen at for the DHCP server are configured.
 
 Check the `DCHP_INTERFACE` variable.
 
-[![](/images/dhcpd_interface.png "DHCPD interface variable")]({{site.url}}/images/dhcpd_interface.png)
+[![](/assets/images/dhcpd_interface.png "DHCPD interface variable")]({{site.url}}/assets/images/dhcpd_interface.png)
 
 If it is empty edit the file and set the value to `eth0`.
 
-[![](/images/dhcpd_interface_eth0.png "dhcpd interface set to eth0")]({{site.url}}/images/dhcpd_interface_eth0.png)
+[![](/assets/images/dhcpd_interface_eth0.png "dhcpd interface set to eth0")]({{site.url}}/assets/images/dhcpd_interface_eth0.png)
 
 With the configuration done we need to start the service.
 
-[![](/images/dhcpd_service_start.png "dhcpd service start")]({{site.url}}/images/dhcpd_service_start.png)
+[![](/assets/images/dhcpd_service_start.png "dhcpd service start")]({{site.url}}/assets/images/dhcpd_service_start.png)
 
 And configure the service startup level.
 
-[![](/images/dhcpd_service_level_configuration.png "dhcpd service startup level configuration")]({{site.url}}/images/dhcpd_service_level_configuration.png)
+[![](/assets/images/dhcpd_service_level_configuration.png "dhcpd service startup level configuration")]({{site.url}}/assets/images/dhcpd_service_level_configuration.png)
 
 #### TFTP
 
 The configuration file for TFTP server is `/etc/sysconfig/atftp`. There is no need to modify this file since it will work with the default values.
 
-[![](/images/atftpd_config_file.png "atftpd confguration file")]({{site.url}}/images/atftpd_config_file.png)
+[![](/assets/images/atftpd_config_file.png "atftpd confguration file")]({{site.url}}/assets/images/atftpd_config_file.png)
 
 To use a different directory for TFTP server modify the `ATFTPD_DIRECTORY` variable. If you list the contents of that directory you can see the PXE boot files used during the boot of the ESXi server by the Auto Deploy service.
 
-[![](/images/tftpboot_directory.png "/tftpboot directory")]({{site.url}}/images/tftpboot_directory.png)
+[![](/assets/images/tftpboot_directory.png "/tftpboot directory")]({{site.url}}/assets/images/tftpboot_directory.png)
 
 Start the `atftpd` daemon.
 
-[![](/images/atftpd_service_start.png "atftpd service start")]({{site.url}}/images/atftpd_service_start.png)
+[![](/assets/images/atftpd_service_start.png "atftpd service start")]({{site.url}}/assets/images/atftpd_service_start.png)
 
 And set the startup level for the service.
 
-[![](/images/atftpd_service_level_configuration.png "atftpd service startup level configuration")]({{site.url}}/images/atftpd_service_level_configuration.png)
+[![](/assets/images/atftpd_service_level_configuration.png "atftpd service startup level configuration")]({{site.url}}/assets/images/atftpd_service_level_configuration.png)
 
 With the DHCP and TFTP service properly configured and running we can now go back to the VCSA web administration interface and start Auto Deploy. To perform the startup of the service simply click on the **Start ESXi Services** button.
 
-[![](/images/esxi_autodeploy_status_vcsa_ui.png "ESXI Autodeploy service status")]({{site.url}}/images/esxi_autodeploy_status_vcsa_ui.png)
+[![](/assets/images/esxi_autodeploy_status_vcsa_ui.png "ESXI Autodeploy service status")]({{site.url}}/assets/images/esxi_autodeploy_status_vcsa_ui.png)
 
 ### Collecting vm-support scripts
 
@@ -161,15 +161,15 @@ For the VCSA the vSphere Client method is completely valid but of course since i
 
 As root go to `/usr/lib/vmware-vpx` and run the `vc-support.sh` script. By default this script will generate the bundle in the current directory but you specify an alternate location with the `-w` flag.
 
-[![](/images/vc_support_script_logs.png "vc-support.sh script execution")]({{site.url}}/images/vc_support_script_logs.png)
+[![](/assets/images/vc_support_script_logs.png "vc-support.sh script execution")]({{site.url}}/assets/images/vc_support_script_logs.png)
 
 When the operation is done the following message will appear.
 
-[![](/images/vc_support_finish_message.png)]({{site.url}}/images/vc_support_finish_message.png)
+[![](/assets/images/vc_support_finish_message.png)]({{site.url}}/assets/images/vc_support_finish_message.png)
 
 Go to the directory where the file has been generated to check it. You can have a quick look of the contents of the bundle using `unzip -l`.
 
-[![](/images/list_log_bundle_content.png "List log bundle content")]({{site.url}}/images/list_log_bundle_content.png)
+[![](/assets/images/list_log_bundle_content.png "List log bundle content")]({{site.url}}/assets/images/list_log_bundle_content.png)
 
 You can download the bundle to your system using you favorite SCP client.
 
@@ -177,17 +177,17 @@ You can download the bundle to your system using you favorite SCP client.
 
 Go the **vCenter Server** tab and in the **Status** section there is a link to generate the bundle.
 
-[![](/images/download_vc_support_bundle_vcsa_ui.png "Download vCenter Server log Support Bundle from vCSA web")]({{site.url}}/images/download_vc_support_bundle_vcsa_ui.png)
+[![](/assets/images/download_vc_support_bundle_vcsa_ui.png "Download vCenter Server log Support Bundle from vCSA web")]({{site.url}}/assets/images/download_vc_support_bundle_vcsa_ui.png)
 
 Click on the link, a new tab/windows will show up where the log of the operation is displayed. The page refresh every ten seconds until the operation is done.
 
-[![](/images/vc_support_bundle_ready.png "vCenter log Support Bundle ready for download")]({{site.url}}/images/vc_support_bundle_ready.png)
+[![](/assets/images/vc_support_bundle_ready.png "vCenter log Support Bundle ready for download")]({{site.url}}/assets/images/vc_support_bundle_ready.png)
 
 Then a link to download the bundle will appear. If you look carefully at the log you will see that this method is no more than a more user friendly version of the Linux shell one.
 
 This file is located at `/tmp/vc-support-bundle/<randomly_generated_directory>`.
 
-[![](/images/vc_support_bundle_location.png "vCenter Server log Support Bundle location")]({{site.url}}/images/vc_support_bundle_location.png)
+[![](/assets/images/vc_support_bundle_location.png "vCenter Server log Support Bundle location")]({{site.url}}/assets/images/vc_support_bundle_location.png)
 
 We are done with the vCenter services post. In the next posts I'll show you how to manage the embedded DB2 database.
 

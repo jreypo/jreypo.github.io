@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Change ESXi 5.0 hostname with esxcli
 date: 2011-11-15
 type: post
+classes: wide
 published: true
 status: publish
 categories:

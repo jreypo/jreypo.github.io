@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VMworld 2012, it's time to vote
 date: 2012-06-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:

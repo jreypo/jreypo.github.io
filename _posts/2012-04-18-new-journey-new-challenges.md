@@ -1,8 +1,8 @@
 ---
-layout: post
 title: New journey, new challenges.
 date: 2012-04-18
 type: post
+classes: wide
 published: true
 status: publish
 categories:

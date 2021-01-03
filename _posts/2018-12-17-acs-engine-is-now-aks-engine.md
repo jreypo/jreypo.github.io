@@ -1,8 +1,8 @@
 ---
-layout: post
 title: ACS-Engine is now AKS-Engine
 date: 2018-12-17 10:02:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

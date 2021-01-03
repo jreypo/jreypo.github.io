@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Give me OpenStack and give me Liberty!
 date: 2015-10-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -19,7 +19,7 @@ image:
   feature: openstack-banner.jpg
 ---
 
-[![](/images/resizedimage456224-openstack-liberty-logo.png)]({{ site.url }}/images/resizedimage456224-openstack-liberty-logo.png)
+[![](/assets/images/resizedimage456224-openstack-liberty-logo.png)]({{site.url}}/assets/images/resizedimage456224-openstack-liberty-logo.png)
 
 During this past week the **[OpenStackFoundation](https://www.openstack.org/foundation/)** has finally released **Liberty**, the latest version of our favorite cloud software. This is the twelfth iteration of OpenStack and bring many new great features. To name the most interesting to me.
 

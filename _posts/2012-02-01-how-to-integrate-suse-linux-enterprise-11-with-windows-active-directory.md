@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to integrate SUSE Linux Enterprise 11 with Windows Active Directory
 date: 2012-02-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -25,7 +25,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-[![](/images/suse_linux_logo1_thumb.jpg "SuSE Linux")](http://jreypo.files.wordpress.com/2012/02/suse_linux_logo1.jpg)Getting [SUSE Enterprise Linux](http://www.suse.com/products/server/) integrated with Microsoft Active Directory is much easier than it sounds.
+Getting [SUSE Enterprise Linux](http://www.suse.com/products/server/) integrated with Microsoft Active Directory is much easier than it sounds.
 
 There are a few prerequisites to meet before:
 
@@ -37,11 +37,11 @@ For this task we will use **YaST2**, the SUSE configuration tool.
 
 YaST2 can be run either in graphical...
 
-[![](/images/screenshot-yast2-control-center-1_thumb.png "YaST2 Control Center")]({{site.url}}/images/screenshot-yast2-control-center-1.png)
+[![](/assets/images/screenshot-yast2-control-center-1_thumb.png "YaST2 Control Center")]({{site.url}}/assets/images/screenshot-yast2-control-center-1.png)
 
 ...or in text mode.
 
-[![](/images/yast2_text_mode.png "YaST2 text mode")]({{site.url}}/images/yast2_text_mode.png)
+[![](/assets/images/yast2_text_mode.png "YaST2 text mode")]({{site.url}}/assets/images/yast2_text_mode.png)
 
 I decided to use the text mode since it will be by far the most common use case, anyway in both cases the procedure is exactly the same.
 
@@ -49,7 +49,7 @@ Go to `Network Services` section and later select `Windows Domain Membership`. T
 
 In the `Membership` area enter the domain name and configure the options that best suit your environment, including the other sections of the screen.
 
-[![](/images/yast2_windom_config.png "YaST2 Windows Domain configuration")]({{site.url}}/images/yast2_windom_config.png)
+[![](/assets/images/yast2_windom_config.png "YaST2 Windows Domain configuration")]({{site.url}}/assets/images/yast2_windom_config.png)
 
 I configure it to allow SSH single sign-on, more on this later, and to create a home directory for the user on his first login.
 
@@ -57,15 +57,15 @@ You should take into account the NTP configuration since it’s a critical compo
 
 Select `OK` to acknowledge your selection and a small pop-up will show up to inform that the host is not part of the domain and if you want to join it.
 
-[![](/images/yast2_domain_confirmation.png "YaST2 domain confirmation")]({{site.url}}/images/yast2_domain_confirmation.png)
+[![](/assets/images/yast2_domain_confirmation.png "YaST2 domain confirmation")]({{site.url}}/assets/images/yast2_domain_confirmation.png)
 
 Next you must enter the password of the domain Administrator.
 
-[![](/images/yast2_domain_admin_password.png "Domain Administrator password")]({{site.url}}/images/yast2_domain_admin_password.png)
+[![](/assets/images/yast2_domain_admin_password.png "Domain Administrator password")]({{site.url}}/assets/images/yast2_domain_admin_password.png)
 
 And YaST will finally confirm the success of the operation.
 
-[![](/images/yast2_domain_joined.png "Domain join confirmation")]({{site.url}}/images/yast2_domain_joined.png)
+[![](/assets/images/yast2_domain_joined.png "Domain join confirmation")]({{site.url}}/assets/images/yast2_domain_joined.png)
 
 At this point the basic configuration is done and the server should be integrated on the Windows Domain.
 
@@ -151,7 +151,7 @@ group:  compat winbind
 
 Finally we need to test the SSH connection to the host using a user account of the domain. When asked for the login credentials use the `DOMAIN\USER` formula for the user name.
 
-[![](/images/ssh_auth.png "SSH authentication")]({{site.url}}/images/ssh_auth.png)
+[![](/assets/images/ssh_auth.png "SSH authentication")]({{site.url}}/assets/images/ssh_auth.png)
 
 This kind of integration is very useful, specially for the bigger shops, because you don’t have to maintain the user list of your SLES servers individually, just only the root account since the other accounts can be centrally managed from the Windows Domain.
 
@@ -173,11 +173,11 @@ You should be asking yourself, but the GID is not 10002 but 10000? Yes you are r
 
 Fire up Server Manager and go to **Roles -> Active Directory Domain Services –> Active Directory Users and Computers –> DOMAIN –> Users**.
 
-[![](/images/server_manager.png "Windows Server Manager")]({{site.url}}/images/server_manager.png)
+[![](/assets/images/server_manager.png "Windows Server Manager")]({{site.url}}/assets/images/server_manager.png)
 
 On the right pane edit the properties of the account you want to be able to access the linux server via SSH. In my case I used my own account **juanma**. In the **Member of** tab select the Domain Admins group and click **Set Primary Group**.
 
-[![](/images/member_of.png "Member of tab")]({{site.url}}/images/member_of.png)
+[![](/assets/images/member_of.png "Member of tab")]({{site.url}}/assets/images/member_of.png)
 
 Now we need to modify how the pam daemon manage the authentication. Go back to SLES and edit `/etc/pam.d/sshd` configuration file.
 

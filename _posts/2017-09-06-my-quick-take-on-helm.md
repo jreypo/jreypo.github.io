@@ -1,8 +1,8 @@
 ---
-layout: post
 title: My quick take on Helm
 date: 2017-09-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:

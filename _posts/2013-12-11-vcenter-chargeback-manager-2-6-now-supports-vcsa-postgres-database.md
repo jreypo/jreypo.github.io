@@ -1,8 +1,8 @@
 ---
-layout: post
 title: vCenter Chargeback Manager 2.6 now supports vCSA Postgres database
 date: 2013-12-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -30,14 +30,14 @@ However amongst every other new feature the one that has immediately captured my
 
 In the **Add a New vCenter Server** dialog you will notice that Postgres now appears as an option.
 
-[![](/images/cbm_vc_vpostgres.png "Postgres DB for vCenter")]({{site.url}}/images/cbm_vc_vpostgres.png)
+[![](/assets/images/cbm_vc_vpostgres.png "Postgres DB for vCenter")]({{site.url}}/assets/images/cbm_vc_vpostgres.png)
 
 For this option there no need to configure database user, instance or port; just provide vCSA IP/FQDN, root user password and we are done.
 
-[![](/images/vc_postgres_db_config_cbm.png)]({{site.url}}/images/vc_postgres_db_config_cbm.png)
+[![](/assets/images/vc_postgres_db_config_cbm.png)]({{site.url}}/assets/images/vc_postgres_db_config_cbm.png)
 
 When the process is completed the newly configured vCenter Server and its database can be checked as always in the settings tab.
 
-[![](/images/cbm_vc_current_status.png "vCenter Server settings")]({{site.url}}/images/cbm_vc_current_status.png)
+[![](/assets/images/cbm_vc_current_status.png "vCenter Server settings")]({{site.url}}/assets/images/cbm_vc_current_status.png)
 
 Juanma.

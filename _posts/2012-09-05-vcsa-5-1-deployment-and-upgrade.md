@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VCSA 5.1– Deployment and upgrade
 date: 2012-09-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -26,21 +26,21 @@ The deployment of the vCSA 5.1 is very similar to the previous version. Use the 
 
 Here you can pre-set the networking configuration values of the appliance.
 
-[![](/images/deploy_ovf_net_properties.png "Networking Properties")]({{site.url}}/images/deploy_ovf_net_properties.png)
+[![](/assets/images/deploy_ovf_net_properties.png "Networking Properties")]({{site.url}}/assets/images/deploy_ovf_net_properties.png)
 
 If you are going to do a fresh vCSA or vSphere installation enter the appropriate values on each field. If you want to perform an upgrade instead leave them blank to get the info by DHCP or put a temporal IP address if there is no DCHP server in place. You don’t need to put here the final values since during the upgrading process all the network settings will be migrated.
 
 Let the deployment process finish and power on the vCenter appliance. During the boot process you can see how the network configuration is applied to the VM.
 
-[![](/images/vcsa_network_config_applied.png "Network configuration applied")]({{site.url}}/images/vcsa_network_config_applied.png)
+[![](/assets/images/vcsa_network_config_applied.png "Network configuration applied")]({{site.url}}/assets/images/vcsa_network_config_applied.png)
 
 And finally you will reach the familiar blue screen.
 
-[![](/images/vcsa_vm_os_console.png "vCSA console")]({{site.url}}/images/vcsa_vm_os_console.png)
+[![](/assets/images/vcsa_vm_os_console.png "vCSA console")]({{site.url}}/assets/images/vcsa_vm_os_console.png)
 
 That’s it, now proceed to the appliance web UI to complete vCSA setup. In your first log into the vCenter a wizard will appear.
 
-[![](/images/vcenter_config_wizard.png "vCenter configuration wizard")]({{site.url}}/images/vcenter_config_wizard.png)
+[![](/assets/images/vcenter_config_wizard.png "vCenter configuration wizard")]({{site.url}}/assets/images/vcenter_config_wizard.png)
 
 After accepting the EULA you will presented with four options:
 
@@ -49,11 +49,11 @@ After accepting the EULA you will presented with four options:
 -   Upload configuration file. Very useful in case your vCenter Server virtual machine gets corrupted or you messed it up, if have a saved copy of the most recent configuration file you can deploy a new appliance and quickly restore its settings by uploading it.
 -   Set custom configuration - I used this option for my homelab testing.
 
-[![](/images/vc_configuration_options.png "vCenter Configuration Options")]({{site.url}}/images/vc_configuration_options.png)
+[![](/assets/images/vc_configuration_options.png "vCenter Configuration Options")]({{site.url}}/assets/images/vc_configuration_options.png)
 
 In the next screen you choose which database you want to use, the vPostgres embedded or an Oracle external.
 
-[![](/images/select_vcsa_db.png "Select vCenter database")]({{site.url}}/images/select_vcsa_db.png)
+[![](/assets/images/select_vcsa_db.png "Select vCenter database")]({{site.url}}/assets/images/select_vcsa_db.png)
 
 Now we must choose the options for the **Single Sign On** server. vCenter 5.1 comes with a new component known as the Single Sign On server, or SSO.
 
@@ -63,15 +63,15 @@ In the Windows based vCenter installer SSO comes as a separate component that ca
 
 vCSA comes with the SSO embedded however it is prepared to use an external SSO server too. If choose the external SSO deployment mode all the appropriate information must be provided in this screen. Again as with the vCenter itself the database type must be set.
 
-[![](/images/vcsa_vc_wizard_sso_settings.png "Configure vCenter SSO")]({{site.url}}/images/vcsa_vc_wizard_sso_settings.png)
+[![](/assets/images/vcsa_vc_wizard_sso_settings.png "Configure vCenter SSO")]({{site.url}}/assets/images/vcsa_vc_wizard_sso_settings.png)
 
 Finally set the Active Directory configuration accordingly to your environment, review the configuration and click Start to begin.
 
-[![](/images/review_vcsa_vc_config.png "Review vCenter configuration")]({{site.url}}/images/review_vcsa_vc_config.png)
+[![](/assets/images/review_vcsa_vc_config.png "Review vCenter configuration")]({{site.url}}/assets/images/review_vcsa_vc_config.png)
 
 At the end if everything goes fine you will see a screen with a confirmation, click close and will see al the vCenter services up and ready in the main screen of the WebUI.
 
-[![](/images/vcsa_vima_main_screen.png "vCSA main screen")]({{site.url}}/images/vcsa_vima_main_screen.png)
+[![](/assets/images/vcsa_vima_main_screen.png "vCSA main screen")]({{site.url}}/assets/images/vcsa_vima_main_screen.png)
 
 The deployment and basic setup of the VCSA is done, at this point all other components and settings can be setup from here.
 
@@ -96,40 +96,40 @@ Deploy the appliance as shown above, log into the WebUI and in the wizard accept
 
 The next screen that will be displayed is the Local and Remote Appliance keys.
 
-[![](/images/vcsa_local_remote_keys.png "Local and Remote appliance keys")]({{site.url}}/images/vcsa_local_remote_keys.png)
+[![](/assets/images/vcsa_local_remote_keys.png "Local and Remote appliance keys")]({{site.url}}/assets/images/vcsa_local_remote_keys.png)
 
 Here we have put the current vCSA 5.0 key. To do so go to the **Upgrade** tab in vCSA 5.0 web interface. In the **Prepare** section select **source** and click **Set role**.
 
-[![](/images/set_appliance_upgrade_role.png "Set upgrade role")]({{site.url}}/images/set_appliance_upgrade_role.png)
+[![](/assets/images/set_appliance_upgrade_role.png "Set upgrade role")]({{site.url}}/assets/images/set_appliance_upgrade_role.png)
 
 Go back to the vCSA 5.1 and copy the **Local appliance key**. On the 5.0 appliance click on **Establish Trust** and paste the copied key in the **Remote key appliance** key field. Click on **Import remote key** and wait for the import to complete.
 
-[![](/images/import_local_appliance_key.png "Establish trust relationship")]({{site.url}}/images/import_local_appliance_key.png)
+[![](/assets/images/import_local_appliance_key.png "Establish trust relationship")]({{site.url}}/assets/images/import_local_appliance_key.png)
 
 In the vCSA 5.0 copy the **Local appliance key**. Go to 5.1 vCenter, paste that key on the **Remote appliance key** field of the setup wizard screen and click **Next**. The Pre-Upgrade Checker screen will show up.
 
-[![](/images/vcsa_pre_upgrade_checker.png "Pre-Upgrade checker")]({{site.url}}/images/vcsa_pre_upgrade_checker.png)
+[![](/assets/images/vcsa_pre_upgrade_checker.png "Pre-Upgrade checker")]({{site.url}}/assets/images/vcsa_pre_upgrade_checker.png)
 
 After this a check will be run against the ESX/ESXi managed by the old vCSA and it will generate a report.
 
-[![](/images/vcsa_pre_upgrade_report.png "vCenter Appliance Pre-upgrade report")]({{site.url}}/images/vcsa_pre_upgrade_report.png)
+[![](/assets/images/vcsa_pre_upgrade_report.png "vCenter Appliance Pre-upgrade report")]({{site.url}}/assets/images/vcsa_pre_upgrade_report.png)
 
 And the final screen will appear asking for confirmation. Click on the confirmation checkbox and in **Start**.
 
-[![](/images/vcsa_ready_to_upgrade.png "Ready to upgrade")]({{site.url}}/images/vcsa_ready_to_upgrade.png)
+[![](/assets/images/vcsa_ready_to_upgrade.png "Ready to upgrade")]({{site.url}}/assets/images/vcsa_ready_to_upgrade.png)
 
 During the upgrade vCSA 5.1 will shutdown the 5.0 virtual appliance and assumes its network identity.
 
 When the process is done a final screen will appear.
 
-[![](/images/vcsa_upgrade_finished.png "vCSA Upgrade done")]({{site.url}}/images/vcsa_upgrade_finished.png)
+[![](/assets/images/vcsa_upgrade_finished.png "vCSA Upgrade done")]({{site.url}}/assets/images/vcsa_upgrade_finished.png)
 
 If you want to check if the process is done log into the VCSA through SSH and list `vmware` services, `vmware-sso` just to name one will show up on the list.
 
-[![](/images/vcsa_list_vmware_services.png "List vmware services")]({{site.url}}/images/vcsa_list_vmware_services.png)
+[![](/assets/images/vcsa_list_vmware_services.png "List vmware services")]({{site.url}}/assets/images/vcsa_list_vmware_services.png)
 
 Also you can access the vSphere Web Client and will see the new 5.1 client.
 
-[![](/images/vsphere_51_web_client.png "vSphere Web Client 5.1")]({{site.url}}/images/vsphere_51_web_client.png)
+[![](/assets/images/vsphere_51_web_client.png "vSphere Web Client 5.1")]({{site.url}}/assets/images/vsphere_51_web_client.png)
 
 Juanma.

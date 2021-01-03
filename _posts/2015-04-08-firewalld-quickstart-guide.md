@@ -1,8 +1,8 @@
 ---
-layout: post
 title: FirewallD quickstart guide
 date: 2015-04-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:

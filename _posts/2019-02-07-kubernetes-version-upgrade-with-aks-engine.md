@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Kubernetes version upgrade with AKS-Engine
 date: 2019-02-07 19:45:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

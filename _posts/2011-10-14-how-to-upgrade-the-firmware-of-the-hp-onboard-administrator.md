@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to upgrade the firmware of the HP Onboard Administrator
 date: 2011-10-14
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -23,20 +23,20 @@ The update is a very straight forward process that can be done entirely through 
 
 Go to **Active Onboard Administrator –> Firmware Update**.
 
-[![](/images/oa1.png "OA Firmware Update")]({{site.url}}/images/oa1.png)
+[![](/assets/images/oa1.png "OA Firmware Update")]({{site.url}}/assets/images/oa1.png)
 
 From that screen you can upload the firmware from your system or enter an URL where the image is available. For our example we are going to use the upload option. Browse to the firmware image file and click **Upload**.
 
 The OA web administration interface will logout any connected user and will start the upgrading process.
 
-[![](/images/oa2.png "OA2")]({{site.url}}/images/oa2.png)
+[![](/assets/images/oa2.png "OA2")]({{site.url}}/assets/images/oa2.png)
 
 During the upgrade a progress bar like the one in the above screenshot will be shown and the OA will be reset when the process is complete.
 
-[![](/images/oa3.png "OA3")]({{site.url}}/images/oa3.png)
+[![](/assets/images/oa3.png "OA3")]({{site.url}}/assets/images/oa3.png)
 
 Finally log into the OS and from the **Active Onboard Administrator** screen check the OA version.
 
-[![](/images/oa4.png "OA4")]({{site.url}}/images/oa4.png)
+[![](/assets/images/oa4.png "OA4")]({{site.url}}/assets/images/oa4.png)
 
 Juanma.

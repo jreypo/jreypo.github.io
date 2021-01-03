@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Can VMware Workstation 8 be a boost for Hyper-V adoption? And ESXi 5?
 date: 2011-10-04
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to install Cockpit on CentOS 7
 date: 2015-01-09
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -89,7 +89,7 @@ systemctl restart cockpit
 
 Access Cockpit web interface, login as root and have fun :-)
 
-[![](/images/screen-shot-2015-01-09-at-01-57-51.png)]({{site.url}}/images/screen-shot-2015-01-09-at-01-57-51.png)
+[![](/assets/images/screen-shot-2015-01-09-at-01-57-51.png)]({{site.url}}/assets/images/screen-shot-2015-01-09-at-01-57-51.png)
 
 Juanma.
 

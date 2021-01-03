@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Python script to reconfigure an ESXi for HA
 date: 2016-01-23
 type: post
+classes: wide
 published: true
 status: publish
 categories:

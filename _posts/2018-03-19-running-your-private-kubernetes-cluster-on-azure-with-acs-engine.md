@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Running your private Kubernetes cluster on Azure with ACS Engine
 date: 2018-03-19
 type: post
+classes: wide
 published: true
 status: publish
 categories:

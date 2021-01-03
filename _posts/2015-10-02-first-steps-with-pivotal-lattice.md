@@ -1,8 +1,8 @@
 ---
-layout: post
 title: First steps with Pivotal Lattice
 date: 2015-10-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -63,15 +63,15 @@ ltc target 192.168.161.11.xip.io
 
 With the API endpoint set let's deploy our first application, for this example we will use Lattice example app. Run the `ltc create` command with the name of the new app and the container to be spun up as the arguments.
 
-[![](/images/screen-shot-2015-10-02-at-13-33-37.png)]({{site.url}}/images/screen-shot-2015-10-02-at-13-33-37.png)
+[![](/assets/images/screen-shot-2015-10-02-at-13-33-37.png)]({{site.url}}/assets/images/screen-shot-2015-10-02-at-13-33-37.png)
 
 Open your favorite browser and access https://my-app.192.168.161.11.xip.io.
 
-[![](/images/screen-shot-2015-10-02-at-13-44-24.png)]({{site.url}}/images/screen-shot-2015-10-02-at-13-44-24.png)
+[![](/assets/images/screen-shot-2015-10-02-at-13-44-24.png)]({{site.url}}/assets/images/screen-shot-2015-10-02-at-13-44-24.png)
 
 The index indicates the node that we are accessing. Next we will scale up the application adding two additional containers. Use `ltc scale` to add additional instances of the app and `ltc status` to retrieve the status.
 
-[![](/images/screen-shot-2015-10-02-at-14-22-40.png)]({{site.url}}/images/screen-shot-2015-10-02-at-14-22-40.png)
+[![](/assets/images/screen-shot-2015-10-02-at-14-22-40.png)]({{site.url}}/assets/images/screen-shot-2015-10-02-at-14-22-40.png)
 
 Another useful operation with `ltc` is the capacity to get the logs for your app.
 

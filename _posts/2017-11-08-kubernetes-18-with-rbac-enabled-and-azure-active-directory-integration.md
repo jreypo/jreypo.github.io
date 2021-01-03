@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Kubernetes 1.8 with RBAC enabled and Azure Active Directory integration
 date: 2017-11-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -32,23 +32,23 @@ Before deploying the new cluster and for the integration to work we will need to
 
 To create the apps in the Azure Portal go to *Azure Active Directory -> App registrations* and click on *New application registration*.
 
-[![](/images/aad_k8s_1.png "New app registration")]({{site.url}}/images/aad_k8s_1.png)
+[![](/assets/images/aad_k8s_1.png "New app registration")]({{site.url}}/assets/images/aad_k8s_1.png)
 
 For the Server App: 
 
-[![](/images/aad_k8s_api.png "Server app creation")]({{site.url}}/images/aad_k8s_api.png)
+[![](/assets/images/aad_k8s_api.png "Server app creation")]({{site.url}}/assets/images/aad_k8s_api.png)
 
 For the Client App:
 
-[![](/images/aad_k8s_native.png "Client app creation")]({{site.url}}/images/aad_k8s_native.png)
+[![](/assets/images/aad_k8s_native.png "Client app creation")]({{site.url}}/assets/images/aad_k8s_native.png)
 
 Once both apps are created we will need to grant access permissions to the Server Application from the Client Applicationt. On the Azure Portal access *Azure Active Directory -> App registrations*, select the Client Application and got to *Settings -> Required permissions*.
 
-[![](/images/aad_k8s_native_permissions_1.png "Client app permissions")]({{site.url}}/images/aad_k8s_native_permissions_1.png)
+[![](/assets/images/aad_k8s_native_permissions_1.png "Client app permissions")]({{site.url}}/assets/images/aad_k8s_native_permissions_1.png)
 
 Click *Add*, select the Server Application in *Select an API* section and enable the access persmisions. 
 
-[![](/images/aad_k8s_native_permissions_2.png "Client app permissions")]({{site.url}}/images/aad_k8s_native_permissions_2.png)
+[![](/assets/images/aad_k8s_native_permissions_2.png "Client app permissions")]({{site.url}}/assets/images/aad_k8s_native_permissions_2.png)
 
 # Deploy the cluster
 
@@ -157,7 +157,7 @@ To sign in, use a web browser to open the page https://aka.ms/devicelogin and en
 
 Open a browser access the https://aks.ms/devicelogin URL, enter the code and login with the account configured in the cluster role. 
 
-[![](/images/aad_k8s_kubectl_auth.png "Kubectl authentication through AAD")]({{site.url}}/images/aad_k8s_kubectl_auth.png)
+[![](/assets/images/aad_k8s_kubectl_auth.png "Kubectl authentication through AAD")]({{site.url}}/assets/images/aad_k8s_kubectl_auth.png)
 
 If the authentication is valid and the permissions and `clusterrolebinding` have been properly created the command will complete. 
 

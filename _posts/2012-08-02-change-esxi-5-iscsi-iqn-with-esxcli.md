@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Change ESXi 5 iSCSI iqn with esxcli
 date: 2012-08-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -29,15 +29,15 @@ As he said it would be tremendously useful if you need to physically replace the
 
 The task is as easier as the one described in last post. Using `esxcli` command with the `iscsi` namespace you can change the name and the alias of the adapter.
 
-[![](/images/esxcli_iscsi_namespaces.png "esxcli iSCSI namespace")]({{site.url}}/images/esxcli_iscsi_namespaces.png)
+[![](/assets/images/esxcli_iscsi_namespaces.png "esxcli iSCSI namespace")]({{site.url}}/assets/images/esxcli_iscsi_namespaces.png)
 
 As a precaution first retrieve the current `iqn` to check that it’s the correct server.
 
-[![](/images/get_iscsi_iqn_esxcli_vcli.png "Retrieve current iqn")]({{site.url}}/images/get_iscsi_iqn_esxcli_vcli.png)
+[![](/assets/images/get_iscsi_iqn_esxcli_vcli.png "Retrieve current iqn")]({{site.url}}/assets/images/get_iscsi_iqn_esxcli_vcli.png)
 
 To change the name you have to provide the adapter and the new name.
 
-[![](/images/set_iscsi_iqn_esxcli_vcli.png "Set new iSCSI iqn")]({{site.url}}/images/set_iscsi_iqn_esxcli_vcli.png)
+[![](/assets/images/set_iscsi_iqn_esxcli_vcli.png "Set new iSCSI iqn")]({{site.url}}/assets/images/set_iscsi_iqn_esxcli_vcli.png)
 
 Hope you find this useful, any comments and suggestions are welcome as always.
 

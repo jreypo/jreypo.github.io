@@ -1,8 +1,8 @@
 ---
-layout: post
 title: vMA 5 rejects SSH connections
 date: 2011-10-19
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -24,7 +24,7 @@ If you deploy **vMA 5.0** within your virtual infrastructure will find the first
 
 Try to check if SSH is enabled and running and will se that everything is OK.
 
-[![](/images/image6.png "image")]({{site.url}}/images/image6.png)
+[![](/assets/images/image6.png "image")]({{site.url}}/assets/images/image6.png)
 
 So you will be asking yourself, what the hell is going on? BTW restarting the service doesn’t help either.
 
@@ -32,7 +32,7 @@ The key to fix this issue is in the `hosts.deny` and `hosts.allow` files. In Uni
 
 If you look into `host.deny` will see that everything is denied by default.
 
-[![](/images/image7.png "image")]({{site.url}}/images/image7.png)
+[![](/assets/images/image7.png "image")]({{site.url}}/assets/images/image7.png)
 
 Add the following line to the `host.allow` file.
 
@@ -42,6 +42,6 @@ sshd: ALL: ALLOW
 
 Now you can access the appliance via SSH.
 
-[![](/images/image9.png)]({{site.url}}/images/image9.png)
+[![](/assets/images/image9.png)]({{site.url}}/assets/images/image9.png)
 
 Juanma.

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: DNF, the new Fedora package manager
 date: 2015-10-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -145,11 +145,11 @@ This is a very basic introduction to `dnf` capabilities but hopefully you have b
 
 Package installation and updates.
 
-[![](/images/screen-shot-2015-10-11-at-19-41-00.png)]({{site.url}}/images/screen-shot-2015-10-11-at-19-41-00.png)
+[![](/assets/images/screen-shot-2015-10-11-at-19-41-00.png)]({{site.url}}/assets/images/screen-shot-2015-10-11-at-19-41-00.png)
 
 Repository management.
 
-[![](/images/screen-shot-2015-10-11-at-18-54-47.png)]({{site.url}}/images/screen-shot-2015-10-11-at-18-54-47.png)
+[![](/assets/images/screen-shot-2015-10-11-at-18-54-47.png)]({{site.url}}/assets/images/screen-shot-2015-10-11-at-18-54-47.png)
 
 In the future if I find the time I'll write a new post with some advanced examples of `dnf` commands. Comments are welcome.
 

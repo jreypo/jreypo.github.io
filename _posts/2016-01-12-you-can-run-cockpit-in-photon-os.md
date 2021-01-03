@@ -1,8 +1,8 @@
 ---
-layout: post
 title: You can run Cockpit in Photon OS
 date: 2016-01-12
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -77,7 +77,7 @@ root@lightwave01 [ ~ ]#
 
 Open your favorite web browser and access Cockpit at **http://photon_server:9090**.
 
-[![](/images/cockpit_login_photon.png)]({{site.url}}/images/cockpit_login_photon.png)
+[![](/assets/images/cockpit_login_photon.png)]({{site.url}}/assets/images/cockpit_login_photon.png)
 
 You can notice the nice Photon logo :)
 

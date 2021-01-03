@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to fix VIO Web Client Plugin after a failed deployment
 date: 2015-06-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -21,7 +21,7 @@ image:
 
 It occurred to me recently that after recovering a VIO failed deployment, in my case an issue with one of the database nodes, in the Web Client Plugin the OpenStack Cluster still was in **Error** state.
 
-[![](/images/screen-shot-2015-06-01-at-12-25-15.png)]({{site.url}}/images/screen-shot-2015-06-01-at-12-25-15.png)
+[![](/assets/images/screen-shot-2015-06-01-at-12-25-15.png)]({{site.url}}/assets/images/screen-shot-2015-06-01-at-12-25-15.png)
 
 After investigating a bit internally and thanks to my colleague Dimitri Desmidt I was able to solve it.
 

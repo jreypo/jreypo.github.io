@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Upgrading VMware Integrated OpenStack
 date: 2015-10-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -42,7 +42,7 @@ Keep in mind that you will need to have enough hardware resources in your manage
 From VMware website download the `.deb` upgrade package and upload it to
 VIO Management Server.
 
-[![](/images/screen-shot-2015-10-20-at-12-59-50.png)]({{site.url}}/images/screen-shot-2015-10-20-at-12-59-50.png)
+[![](/assets/images/screen-shot-2015-10-20-at-12-59-50.png)]({{site.url}}/assets/images/screen-shot-2015-10-20-at-12-59-50.png)
 
 Stage the upgrade package.
 
@@ -70,59 +70,59 @@ viouser@vio-oms:~$
 ```
 Go to the vSphere Web Client, logout and log back in to verify that the new version is correct.
 
-[![](/images/vio-oms-upgraded.png)]({{site.url}}/images/vio-oms-upgraded.png)
+[![](/assets/images/vio-oms-upgraded.png)]({{site.url}}/assets/images/vio-oms-upgraded.png)
 
 ### Step 2 - Deploy a new VIO 2.0 environment
 
 With VIO Management Server upgraded is now time to deploy a fresh 2.0 environment. In the VIO plugin go to **Manage** section and a new **Upgrades** tab will be there. Before
 
-[![](/images/vio-upgrades-tab.png)]({{site.url}}/images/vio-upgrades-tab.png)
+[![](/assets/images/vio-upgrades-tab.png)]({{site.url}}/assets/images/vio-upgrades-tab.png)
 
 Before starting with the deployment check in the **Networks** tab that there are enough free IP address for the new deployment, if there aren't then add a new IP range.
 
-[![](/images/new_ip_range.png)]({{site.url}}/images/new_ip_range.png)
+[![](/assets/images/new_ip_range.png)]({{site.url}}/assets/images/new_ip_range.png)
 
-Click on the **Upgrade** ![](/images/screen-shot-2015-10-20-at-13-49-34.png) icon. Select if you want to participate in the Customer experience improvement program, my recommendation here is to say yes to help our engineering team to improve VIO upgrade experience even more ;-), and enter the name for the new deployment.
+Click on the **Upgrade** icon. Select if you want to participate in the Customer experience improvement program, my recommendation here is to say yes to help our engineering team to improve VIO upgrade experience even more ;-), and enter the name for the new deployment.
 
-[![](/images/deployment_name.png)]({{site.url}}/images/deployment_name.png)
+[![](/assets/images/deployment_name.png)]({{site.url}}/assets/images/deployment_name.png)
 
 Enter the IP addresses for the public and private load balanced IP addresses, keep in mind that these IP addresses must belong to the API subnet of the existing VIO 1.0 environment in case of the public and to the management network segment in the case of the private one.
 
-[![](/images/lb_vio2_ips.png)]({{site.url}}/images/lb_vio2_ips.png)
+[![](/assets/images/lb_vio2_ips.png)]({{site.url}}/assets/images/lb_vio2_ips.png)
 
 In the last screen review the configured values and click **Finish**. The new environment will be deployed and you will be able to monitor it from the **Upgrades** tab.
 
-[![](/images/vio2_new_deployment.png)]({{site.url}}/images/vio2_new_deployment.png)
+[![](/assets/images/vio2_new_deployment.png)]({{site.url}}/assets/images/vio2_new_deployment.png)
 
 ### Step 3 - Migrate the data
 
 With the new environment up and ready we can start the data migration. From the **Upgrades** tab right-click in the your existing VIO 1.0 installation and select **Migrate Data**.
 
-[![](/images/migrate_vio_data.png)]({{site.url}}/images/migrate_vio_data.png)
+[![](/assets/images/migrate_vio_data.png)]({{site.url}}/assets/images/migrate_vio_data.png)
 
 The migration wizard will ask for confirmation, click **OK**. During the data migration all OpenStack service will be unavailable.
 
-[![](/images/data_migration.png)]({{site.url}}/images/data_migration.png)
+[![](/assets/images/data_migration.png)]({{site.url}}/assets/images/data_migration.png)
 
 When the migration process is finished the status of the new VIO 2.0 environment will appear as **Migrated** and the previous VIO 1.0 will appear as **Stopped**.
 
-[![](/images/vio_migrated.png)]({{site.url}}/images/vio_migrated.png)
+[![](/assets/images/vio_migrated.png)]({{site.url}}/assets/images/vio_migrated.png)
 
 Open a browser and connect the VIO 2.0 public IP to access OpenStack Horizon interface, login and verify that all your workloads, networks, image, etc have been properly migrated. Logout from Horizon and go back to the Web Client. Now that the data has been migrated we need to migrate the original Public Virtual IP to the new environment.
 
 Right-click on VIO 1.0 deployment and from the menu select **Switch To New Deployment**.
 
-[![](/images/switch_vio_ip.png)]({{site.url}}/images/switch_vio_ip.png)
+[![](/assets/images/switch_vio_ip.png)]({{site.url}}/assets/images/switch_vio_ip.png)
 
 A new pop-up will appear asking for confirmation since again the OpenStack service will be unavailable during the IP reconfiguration.
 
 After the reconfiguration the new VIO 2.0 deployment will be in **Running** status and the Public Virtual IP will be the same as the former 1.0 deployment.
 
-[![](/images/migration_finished.png)]({{site.url}}/images/migration_finished.png)
+[![](/assets/images/migration_finished.png)]({{site.url}}/assets/images/migration_finished.png)
 
 The upgrading procedure is finished. We can now access now Horizon using the existing FQDN, verify that everything is still working and enjoy your new OpenStack Kilo environment.
 
-[![](/images/horizon_kilo.png)]({{site.url}}/images/horizon_kilo.png)
+[![](/assets/images/horizon_kilo.png)]({{site.url}}/assets/images/horizon_kilo.png)
 
 In the same way as patching, with VIO upgrading your OpenStack cloud does not have to be a painful experience, VIO provides the best OpenStack experience in a vSphere environment. Kudos to my colleagues of the **Team OpenStack @ VMware**.
 

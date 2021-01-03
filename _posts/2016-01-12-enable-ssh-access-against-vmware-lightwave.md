@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Enable SSH access against VMware Lightwave
 date: 2016-01-12
 type: post
+classes: wide
 published: true
 status: publish
 categories:

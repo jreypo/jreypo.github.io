@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to enable Ceilometer in VIO 2.0
 date: 2016-02-26
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -31,11 +31,11 @@ Before enabling Ceilometer make sure you have enough IP addresses available in t
 
 From VIO plugin UI in vSphere Web Client go to **Manage -> Settings**, in the left pane access **Ceilometer** and click **Edit**.
 
-[![](/images/vio_manage_settings.png)]({{site.url}}/images/vio_manage_settings.png)
+[![](/assets/images/vio_manage_settings.png)]({{site.url}}/assets/images/vio_manage_settings.png)
 
 In the pop-up check **Configure Ceilometer** and click **OK**.
 
-[![](/images/configure_ceilometer.png)]({{site.url}}/images/configure_ceilometer.png)
+[![](/assets/images/configure_ceilometer.png)]({{site.url}}/assets/images/configure_ceilometer.png)
 
 Open an SSH session to ceilometer server from VIO Manager node and list Ceilometer processes, you should get something like this.
 

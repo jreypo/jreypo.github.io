@@ -1,8 +1,8 @@
 ---
-layout: post
 title: vCenter Chargeback Manager services and processes
 date: 2014-01-30
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Voting time! The Top VMware & Virtualization election is open!
 date: 2012-01-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

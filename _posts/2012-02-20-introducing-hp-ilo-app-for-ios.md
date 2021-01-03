@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Introducing HP iLO app for iOS
 date: 2012-02-20
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -31,14 +31,14 @@ Following are a couple of screenshot from the app running on my iPad and another
 
 ##### Main screen
 
-[![](/images/ilo_app_main_screen.png "iLO App main screen")]({{site.url}}/images/ilo_app_main_screen.png)
+[![](/assets/images/ilo_app_main_screen.png "iLO App main screen")]({{site.url}}/assets/images/ilo_app_main_screen.png)
 
 ##### Configure iLO screen
 
-[![](/images/ilo_app_config_screen.png "iLO App configuration screen")]({{site.url}}/images/ilo_app_config_screen.png)
+[![](/assets/images/ilo_app_config_screen.png "iLO App configuration screen")]({{site.url}}/assets/images/ilo_app_config_screen.png)
 
 ##### iLO script output
 
-[![](/images/ilo3-script.jpg "iLO3 script output")]({{site.url}}/images/ilo3-script.jpg)
+[![](/assets/images/ilo3-script.jpg "iLO3 script output")]({{site.url}}/assets/images/ilo3-script.jpg)
 
 Juanma.

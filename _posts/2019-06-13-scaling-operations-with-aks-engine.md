@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Scaling operations with AKS-Engine
 date: 2019-06-13 05:12:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

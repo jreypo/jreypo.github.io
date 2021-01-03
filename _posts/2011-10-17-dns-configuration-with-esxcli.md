@@ -1,8 +1,8 @@
 ---
-layout: post
 title: DNS configuration with esxcli
 date: 2011-10-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -35,34 +35,34 @@ This gives you two namespaces to work with:
 -   `search`
 -   `server`
 
-[![](/images/esxcli_dns1.png)]({{site.url}}/images/esxcli_dns1.png)
+[![](/assets/images/esxcli_dns1.png)]({{site.url}}/assets/images/esxcli_dns1.png)
 
 With the first one you can manage the suffixes for DNS search and the second is for the DNS server to be used by the ESXi.
 
 ### Server operations
 
-[![](/images/image.png)]({{site.url}}/images/image.png)
+[![](/assets/images/image.png)]({{site.url}}/assets/images/image.png)
 
 Add a new server:
 
-[![](/images/image1.png)]({{site.url}}/images/image1.png)
+[![](/assets/images/image1.png)]({{site.url}}/assets/images/image1.png)
 
 Remove a configured server:
 
-[![](/images/image2.png)]({{site.url}}/images/image2.png)
+[![](/assets/images/image2.png)]({{site.url}}/assets/images/image2.png)
 
 ### Domain search operations
 
 List configured domain suffixes:
 
-[![](/images/image3.png)]({{site.url}}/images/image3.png)
+[![](/assets/images/image3.png)]({{site.url}}/assets/images/image3.png)
 
 Add a new domain:
 
-[![](/images/image4.png)]({{site.url}}/images/image4.png)
+[![](/assets/images/image4.png)]({{site.url}}/assets/images/image4.png)
 
 Remove a configured domain:
 
-[![](/images/image5.png)]({{site.url}}/images/image5.png)
+[![](/assets/images/image5.png)]({{site.url}}/assets/images/image5.png)
 
 Juanma.

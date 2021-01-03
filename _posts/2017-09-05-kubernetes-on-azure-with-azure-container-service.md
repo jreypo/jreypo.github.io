@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Kubernetes on Azure with Azure Container Service
 date: 2017-09-05
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -103,7 +103,7 @@ k8s-vnet-C188E3DA                                                acs-k8s-3      
 
 Also the deployed architecture for Kubernetes can be seen in the below diagram.
 
-[![](/images/kubernetes_acs_architecture.png "Kubernetes on ACS Architecture")]({{site.url}}/images/kubernetes_acs_architecture.png)
+[![](/assets/images/kubernetes_acs_architecture.png "Kubernetes on ACS Architecture")]({{site.url}}/assets/images/kubernetes_acs_architecture.png)
 
 We will now take a look at the Kubernetes components, you will need `kubectl` which the Kubernetes command line. If you do not have don't worry because Azure can get it installed for you with a simple command. 
 
@@ -135,7 +135,7 @@ Starting to serve on 127.0.0.1:8001
 
 Point then your favorite browser to http://127.0.0.1:8001/ui and have a look to Kubernetes dashboard.
 
-[![](/images/kubernetes_dashboard.png "Kubernetes UI")]({{site.url}}/images/kubernetes_dashboard.png)
+[![](/assets/images/kubernetes_dashboard.png "Kubernetes UI")]({{site.url}}/assets/images/kubernetes_dashboard.png)
 
 ## Networking resources
 
@@ -273,7 +273,7 @@ azure-vote-front-3648172574-1znnq   1/1       Running   0          5m
 
 Now access the Voting App using a browser to verify the deployment is working as expected. 
 
-[![](/images/azure_voting_app.png "Azure Voting App")]({{site.url}}/images/azure_vorting_app.png)
+[![](/assets/images/azure_voting_app.png "Azure Voting App")]({{site.url}}/assets/images/azure_vorting_app.png)
 
 Hope all of you find this post or at least part of it helpful and informative, stay tuned for more articles around Kubernetes on Azure. 
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Linux Kernel 3.7 and VMware Tools issue
 date: 2013-01-28
 type: post
+classes: wide
 published: true
 status: publish
 categories:

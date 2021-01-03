@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Playing with OpenStack Vagrant provider
 date: 2016-10-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:

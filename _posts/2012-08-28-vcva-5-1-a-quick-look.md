@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VCSA 5.1– A quick look
 date: 2012-08-28
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -30,7 +30,7 @@ With this new release of the **vCenter Server VA** a few new features have been 
 
 These new enhancements can be seen in the Summary section of the **vCenter Server Tab** as shown in the screenshot below.
 
-[![](/images/vcsa_summary.png "vCSA Summary")]({{site.url}}/images/vcsa_summary.png)
+[![](/assets/images/vcsa_summary.png "vCSA Summary")]({{site.url}}/assets/images/vcsa_summary.png)
 
 From here all the vCenter Service can be started and stopped. The Services Tab no longer exists and it’s now a section of the vCenter Server Tab.
 
@@ -41,18 +41,18 @@ There is also a Utilities are where you can:
 -   Generate a support bundle in case of an incidence with the vCenter Server.
 -   Download the configuration file of the VCSA and then open it in your favorite text editor.
 
-[![](/images/vcsa_config_file.png "vCSA configuration file")]({{site.url}}/images/vcsa_config_file.png)
+[![](/assets/images/vcsa_config_file.png "vCSA configuration file")]({{site.url}}/assets/images/vcsa_config_file.png)
 
 -   Launch again the Setup Wizard to configure the VCSA from scratch or make modifications to some of he initial settings.
 -   Upload the Windows Sysprep files to the vCenter VA.
 
 For this last option is quite simple, just click the **Upload** button.
 
-[![](/images/vcsa_upload_sysprep_files.png "Upload Sysprep files")]({{site.url}}/images/vcsa_upload_sysprep_files.png)
+[![](/assets/images/vcsa_upload_sysprep_files.png "Upload Sysprep files")]({{site.url}}/assets/images/vcsa_upload_sysprep_files.png)
 
 A new windows will open, select the operating system and browse for the location of the files.
 
-[![](/images/sysprep_files_upload_screen.png "Select Sysprep files OS")]({{site.url}}/images/sysprep_files_upload_screen.png)
+[![](/assets/images/sysprep_files_upload_screen.png "Select Sysprep files OS")]({{site.url}}/assets/images/sysprep_files_upload_screen.png)
 
 The files will be uploaded to `/etc/vmware-vpx/sysprep/<OS>`.
 
@@ -64,11 +64,11 @@ The **Services** section where the VCSA administrator can setup:
 -   vSphere Auto Deploy repository size
 -   Inventory size
 
-[![](/images/vcsa_vc_services.png "vCenter Services")]({{site.url}}/images/vcsa_vc_services.png)
+[![](/assets/images/vcsa_vc_services.png "vCenter Services")]({{site.url}}/assets/images/vcsa_vc_services.png)
 
 The **SSO section**. Here you can configure all the settings related to the newly introduced Single Sign On server.
 
-[![](/images/vcsa_sso_settings.png "vCSA SSO settings")]({{site.url}}/images/vcsa_sso_settings.png)
+[![](/assets/images/vcsa_sso_settings.png "vCSA SSO settings")]({{site.url}}/assets/images/vcsa_sso_settings.png)
 
 In the next post we will discuss about VCSA 5.1 initial deployment and how to upgrade from 5.0 and 5.1.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: My Docker workflow in Windows Subsystem for Linux
 date: 2017-04-17
 type: post
+classes: wide
 published: true
 status: publish
 categories:

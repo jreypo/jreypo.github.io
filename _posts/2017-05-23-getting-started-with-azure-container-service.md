@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Getting started with Azure Container Service
 date: 2017-05-23
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -100,7 +100,7 @@ A DC/OS ACS cluster contain manye different Azure resources:
 
 For DC/OS the deployed architecture can be seen in the below diagram:
 
-[![](/images/dcos_architecture.png "DC/OS Architecture")]({{site.url}}/images/dcos_architecture.png)
+[![](/assets/images/dcos_architecture.png "DC/OS Architecture")]({{site.url}}/assets/images/dcos_architecture.png)
 
 The agents are organized in two different pools, a public pool and a private pool. You workloads can be deployed to either of theses pools, however there will be differences in the accesibility of the instances since public agents are exposed to the internet through an Azure Load Balancer and private agents will be kept internal. These are basic [DC/OS security concepts](https://dcos.io/docs/1.7/administration/securing-your-cluster/) and are not imposed by Azure Container Service. 
 
@@ -195,15 +195,15 @@ After the tunnel is stablished point your local browser to the following URLs.
 
 - **DC/OS UI** - https://localhost:80
 
-[![](/images/dcos_ui.png "DC/OS web interface")]({{site.url}}/images/dcos_ui.png)
+[![](/assets/images/dcos_ui.png "DC/OS web interface")]({{site.url}}/assets/images/dcos_ui.png)
 
 - **Marathon** - http://localhost:80/marathon 
 
-[![](/images/marathon_ui.png "Marathon web console")]({{site.url}}/images/marathon_ui.png)
+[![](/assets/images/marathon_ui.png "Marathon web console")]({{site.url}}/assets/images/marathon_ui.png)
 
 - **Mesos** - http://localhost:80/mesos
 
-[![](/images/mesos_ui.png "Mesos web interface")]({{site.url}}/images/mesos_ui.png)
+[![](/assets/images/mesos_ui.png "Mesos web interface")]({{site.url}}/assets/images/mesos_ui.png)
 
 ## Agent instances
 

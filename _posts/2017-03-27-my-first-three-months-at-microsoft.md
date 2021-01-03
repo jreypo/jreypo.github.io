@@ -1,8 +1,8 @@
 ---
-layout: post
 title: My first three months at Microsoft
 date: 2017-03-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:

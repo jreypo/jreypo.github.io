@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup'
 date: 2014-05-07
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -256,14 +256,14 @@ With our OVS instance installed and running we can now inform NSX Controller of 
 
 Log into NSX Manager as admin user and go to *Dashboard*, from **Summary of Transport Components** table click **Add** in the Hypervisors row. Verify that Hypervisor is selected as transport node and move to the Basics screen. Enter a name for the hypervisor, usually the hostname of the server.
 
-[![](/images/screen-shot-2014-05-05-at-23-18-22.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-18-22.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-18-22.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-18-22.png)
 
 In Properties enter:
 
 -   Integration bridge ID, for us is `br-int`.
 -   Admin Status Enabled -  Enabled by default.
 
-[![](/images/screen-shot-2014-05-05-at-23-29-03.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-29-03.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-29-03.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-29-03.png)
 
 For the Credential screen we are going to need the SSL certificate that was created along with the integration bridge during the NSX OVS installation. The PEM certificate file is `ovsclient-cert.pem` and is in `/etc/openvswitch` directory.
 
@@ -297,7 +297,7 @@ XYf2HdXj
 
 Copy the contents of the file and paste them in the **Security Certificate** text box.
 
-[![](/images/screen-shot-2014-05-05-at-23-36-28.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-36-28.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-36-28.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-36-28.png)
 
 Finally add the Transport Connector with the values:
 
@@ -305,11 +305,11 @@ Finally add the Transport Connector with the values:
 -   Transport Zone UUID: The transport zone, in my case the UUID corresponding to **vlab-transport-zone**.
 -   IP Address - The address of the `br0` interface of the host.
 
-[![](/images/screen-shot-2014-05-05-at-23-41-57.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-41-57.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-41-57.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-41-57.png)
 
 Click **Save & View** and check that **Management** and **OpenFlow** connections are up.
 
-[![](/images/screen-shot-2014-05-05-at-23-52-16.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-52-16.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-52-16.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-52-16.png)
 
 ### GlusterFS setup
 

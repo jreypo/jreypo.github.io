@@ -1,8 +1,8 @@
 ---
-layout: post
 title: List packages installed in ESXi 4.1 and 5.0
 date: 2011-10-27
 type: post
+classes: wide
 published: true
 status: publish
 categories:

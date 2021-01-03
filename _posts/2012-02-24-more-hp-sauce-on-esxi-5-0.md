@@ -1,8 +1,8 @@
 ---
-layout: post
 title: More HP sauce on ESXi 5.0
 date: 2012-02-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

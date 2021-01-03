@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to get iSCSI iqn using esxcli in ESXi 5
 date: 2012-08-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -31,11 +31,11 @@ The method described in that article is still valid for ESXi 5.0 since the old `
 
 First task is to get a list of the iSCSI HBAs in order to know the name of the software iSCSI initiator.
 
-[![](/images/esxcli_list_hbas.png "List host HBAs")]({{site.url}}/images/esxcli_list_hbas.png)
+[![](/assets/images/esxcli_list_hbas.png "List host HBAs")]({{site.url}}/assets/images/esxcli_list_hbas.png)
 
 Next we get the info of the adapter.
 
-[![](/images/get_adapter_info_esxcli.png "Get adapter information")]({{site.url}}/images/get_adapter_info_esxcli.png)
+[![](/assets/images/get_adapter_info_esxcli.png "Get adapter information")]({{site.url}}/assets/images/get_adapter_info_esxcli.png)
 
 Look at the `Name` field to get the `iqn` and we are done.
 

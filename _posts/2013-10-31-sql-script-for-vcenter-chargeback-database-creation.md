@@ -1,8 +1,8 @@
 ---
-layout: post
 title: SQL script for vCenter Chargeback database creation
 date: 2013-10-31
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: My DevStack local.conf file
 date: 2014-06-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

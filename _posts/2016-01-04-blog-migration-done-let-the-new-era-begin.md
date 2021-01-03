@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Blog migration done... Let the new era begin!
 date: 2016-01-04
 type: post
+classes: wide
 published: true
 status: publish
 categories:

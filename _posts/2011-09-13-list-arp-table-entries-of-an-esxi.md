@@ -1,8 +1,8 @@
 ---
-layout: post
 title: List ARP table entries of an ESXi
 date: 2011-09-13
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -36,17 +36,17 @@ From ESXi [Tech Support Mode](http://kb.vmware.com/selfservice/microsites/search
 
 #### ESXi 4
 
-[![](/images/esxi4_tsm.png "ESXi4 TSM")]({{site.url}}/images/esxi4_tsm.png)
+[![](/assets/images/esxi4_tsm.png "ESXi4 TSM")]({{site.url}}/assets/images/esxi4_tsm.png)
 
 #### ESXi 5
 
-[![](/images/esxi5_tsm.png "ESXi5 TSM")]({{images.url}}/images/esxi5_tsm.png)
+[![](/assets/images/esxi5_tsm.png "ESXi5 TSM")]({{images.url}}/assets/images/esxi5_tsm.png)
 
 ### vCLI
 
 Again we need `esxcli` in order to get the ARP table.
 
-[![](/images/vcli.png "vCLI")]({{site.url}}/images/vcli.png)
+[![](/assets/images/vcli.png "vCLI")]({{site.url}}/assets/images/vcli.png)
 
 ### PowerCLI
 
@@ -55,10 +55,10 @@ table list.
 
 #### ESXi 4
 
-[![](/images/powercli_esxi4.png "PowerCLI ESXi4")]({{site.url}}/images/powercli_esxi4.png)
+[![](/assets/images/powercli_esxi4.png "PowerCLI ESXi4")]({{site.url}}/assets/images/powercli_esxi4.png)
 
 #### ESXi 5
 
-[![](/images/powercli_esxi5.png "PowerCLI ESXi5")]({{site.url}}/images/powercli_esxi5.png)
+[![](/assets/images/powercli_esxi5.png "PowerCLI ESXi5")]({{site.url}}/assets/images/powercli_esxi5.png)
 
 Juanma.

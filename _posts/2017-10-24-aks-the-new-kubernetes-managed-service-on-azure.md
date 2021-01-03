@@ -1,8 +1,8 @@
 ---
-layout: post
 title: AKS, the new Kubernetes managed service on Azure
 date: 2017-10-24
 type: post
+classes: wide
 published: true
 status: publish
 categories:

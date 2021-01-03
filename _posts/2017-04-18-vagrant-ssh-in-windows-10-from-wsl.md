@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Vagrant ssh in Windows 10 from WSL
 date: 2017-04-18
 type: post
+classes: wide
 published: true
 status: publish
 categories:

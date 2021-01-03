@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Open vSwitch and NSX vSwitch command equivalencies
 date: 2014-12-16
 type: post
+classes: wide
 published: true
 status: publish
 categories:

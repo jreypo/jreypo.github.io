@@ -1,8 +1,8 @@
 ---
-layout: post
 title: That's NOT all folks!
 date: 2013-10-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:

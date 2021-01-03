@@ -1,8 +1,8 @@
 ---
-layout: post
 title: A first look into the vMA 5
 date: 2011-09-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -60,17 +60,17 @@ The systems that can be managed from the vMA are:
 
 We are going to deploy the vMA 5 through the vSphere Client in the same manner as the vMA 4. Go to **File -> Deploy OVF** template and when the pop-up shows up browse for the vMA OVF and click next.
 
-[![](/images/ovf_deployment.png "vMA OVF deployment from vSphere Client")]({{site.url}}/images/ovf_deployment.png)
+[![](/assets/images/ovf_deployment.png "vMA OVF deployment from vSphere Client")]({{site.url}}/assets/images/ovf_deployment.png)
 
 Follow the screens until the last one to configure the datacenter and host or cluster where you want to deploy the vMA, configure the appliance to match your environment and click Finish to start the deployment.
 
-[![](/images/final_screen.png "Deployment final screen")]({{site.rul}}/images/final_screen.png)
+[![](/assets/images/final_screen.png "Deployment final screen")]({{site.rul}}/assets/images/final_screen.png)
 
 When the deployment is finished open the vMA virtual machine console and power it on. When the vMA boots for the first time it should be configured.
 
 Once the OS is up the first prompt will ask for the network configuration.
 
-[![](/images/vma5_network_configuration.png "vMA5 network configuration")]({{site.url}}/images/vma5_network_configuration.png)
+[![](/assets/images/vma5_network_configuration.png "vMA5 network configuration")]({{site.url}}/assets/images/vma5_network_configuration.png)
 
 In the next step you'll be asked for the password of vi-admin password. There is a major change here in comparison with the vMA 4, the vi-admin password must has an increased complexity and must contain at least:
 
@@ -82,7 +82,7 @@ In the next step you'll be asked for the password of vi-admin password. There is
 
 The reason to this new password policy comes from the SUSE Enterprise Linux Server operating system the vMA 5 is based on. William Lamw ([@lamw](http://www.twitter.com/lamw)) provides the link to the Novell Knowledge Base article related to this topic in his excellent post **[Tips and tricks for the vMA 5** ](http://www.virtuallyghetto.com/2011/07/tips-and-tricks-for-vma-5.html).
 
-[![](/images/vi-admin_password.png "vi-admin user password")]({{site.url}}/images/vi-admin_password.png)
+[![](/assets/images/vi-admin_password.png "vi-admin user password")]({{site.url}}/assets/images/vi-admin_password.png)
 
 Once network parameters and vi-admin password are configured the vMA should be ready to manage your vSphere servers and the console screen will appear.
 
@@ -90,27 +90,27 @@ The vMA5 can be managed from two ways:
 
 -   Text-based console
 
-[![](/images/vma5_console.png "vMA5 console")]({{site.url}}/images/vma5_console.png)
+[![](/assets/images/vma5_console.png "vMA5 console")]({{site.url}}/assets/images/vma5_console.png)
 
 From the text-based console you can launch the initial configuration for the vMA networking, set the Timezone of the vMA and login into the Linux command-line interface like in the previous releases of the vMA to manage the appliance from the Linux shell and of course to manage your vSphere infrastructure. As always SSH access is also allowed to the lastone.
 
 -   Browser-based Web UI
 
-[![](/images/vma5_web_login.png "vMA5 web interface")]({{site.url}}/images/vma5_web_login.png)
+[![](/assets/images/vma5_web_login.png "vMA5 web interface")]({{site.url}}/assets/images/vma5_web_login.png)
 
 The Web UI enables you only to manage the vMA itself and not the vCenter and ESX(i) servers. To access the Web UI point your browser to **https://<vma_address_or_hostname>:5480** and login as vi-admin user. From there you can do the following tasks:
 
 -   Check the status of the appliance, set the timezone and perform a system reboot or shutdown
 
-[![](/images/vma5_web_system.png "vMA5 Web UI System screen")]({{site.url}}/images/vma5_web_system.png)
+[![](/assets/images/vma5_web_system.png "vMA5 Web UI System screen")]({{site.url}}/assets/images/vma5_web_system.png)
 
 -   Manage the appliance network and proxy server settings
 
-[![](/images/vma5_web_network.png "vMA5 Web UI Network screen")]({{site.url}}/images/vma5_web_network.png)
+[![](/assets/images/vma5_web_network.png "vMA5 Web UI Network screen")]({{site.url}}/assets/images/vma5_web_network.png)
 
 -   Update the vMA 5
 
-[![](/images/vma5_web_update.png "vMA5 Web UI Update screen")]({{site.url}}/images/vma5_web_update.png)
+[![](/assets/images/vma5_web_update.png "vMA5 Web UI Update screen")]({{site.url}}/assets/images/vma5_web_update.png)
 
 This last option is of significance since now this is the way to update the vMA because the vma-update utility has been removed.
 

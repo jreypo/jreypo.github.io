@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to expose your Kubernetes workloads on Azure
 date: 2018-03-15
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -95,7 +95,7 @@ In an Azure deployed cluster this type of service will be used by inter-cluster 
 
 The `NodePort` service is no more than a port open in every node of the cluster, Kubernetes will take care of routing the incoming traffic to the service. The port will be allocated by the master(s) from a cluster configured pool, the defaul pool is 30000-32676. Take a look at the below daigram
 
-[![](/images/K8S-NodePort-Service.png "Kubernetes NodePort service")]({{site.url}}/images/K8S-NodePort-Service.png)
+[![](/assets/images/K8S-NodePort-Service.png "Kubernetes NodePort service")]({{site.url}}/assets/images/K8S-NodePort-Service.png)
 
 Of course `NodePort` services are supported in any Kubernetes cluster running on Azure, including those deployed with ACS, ACS Engine or AKS. However since the nodes aren't exposed directly to the internet the functionality is very limited, also usign a `NodePort` service for a production workload is not the best choice due to its limitations, however it can be used as building block for Ingress or a `LoadBalancer` service.
 
@@ -105,11 +105,11 @@ The `LoadBalancer` service is the standard and most common way of exposing your 
 
 The diagram below illustrates this example with two different apps being exposed to the outside via a `LoadBalancer` service that provisions an Azure Load Balancer with its corresponding public IP address. 
 
-[![](/images/K8S-LoadBalancer-Service.png "Kubernetes service")]({{site.url}}/images/K8S-LoadBalancer-Service.png)
+[![](/assets/images/K8S-LoadBalancer-Service.png "Kubernetes service")]({{site.url}}/assets/images/K8S-LoadBalancer-Service.png)
 
 The load balancer configuration can also be verified in the Azure portal.
 
-[![](/images/kubernetes-lb-azure.png "Azure Load Balancer for Kubernetes services")]({{site.url}}/images/kubernetes-lb-azure.png)
+[![](/assets/images/kubernetes-lb-azure.png "Azure Load Balancer for Kubernetes services")]({{site.url}}/assets/images/kubernetes-lb-azure.png)
 
 This doesn't mean that a new Azure LB is created for each service, as shown in the example AKS will deploy an Azure Load Balancer and publish all the services through it until it reaches the maximum allowed vaulues in terms of front'end IPs, rules, etc, and then it will provision a new Azure Load Balancer instance. For example in one of my AKS clusters I have three services exposed through the same load balancer instance. 
 
@@ -175,13 +175,13 @@ my-nginx     LoadBalancer   10.0.39.204   10.240.0.127   80:31052/TCP   7m
 
 The field `EXTERNAL-IP` shows an internal IP address belonging to the same subnet as the nodes of the cluster. Take a look into the Azure portal and verify the new internal load balancer has been created. 
 
-[![](/images/kubernetes-ilb-azure.png "Azure Internal Load Balancer for Kubernetes services")]({{site.url}}/images/kubernetes-ilb-azure.png)
+[![](/assets/images/kubernetes-ilb-azure.png "Azure Internal Load Balancer for Kubernetes services")]({{site.url}}/assets/images/kubernetes-ilb-azure.png)
 
 # Kubernetes Ingress
 
 Ingress is by far the most interesting and powerful of all the methods availabe in Kubernetes to expose your services. In the [Kubernetes official documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) Ingress is defined as *An API object that manages external access to the services in a cluster, typically HTTP*. Ingress can provide load balancing, SSL termination and name-based virtual hosting. However in the real sense Ingress is not a service but a construct that sits on top of your services as an entry point to the cluster, providing simple host and URL based HTTP routing capabilities. 
 
-[![](/images/K8S-Ingress-Service.png "Kubernetes Ingress")]({{site.url}}/images/K8S-Ingress-Service.png)
+[![](/assets/images/K8S-Ingress-Service.png "Kubernetes Ingress")]({{site.url}}/assets/images/K8S-Ingress-Service.png)
 
 Ingress has two main components:
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Some vCenter Chargeback Manager tips
 date: 2013-10-22
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -25,12 +25,12 @@ At one point the CBM installer will ask for the database details, apparently not
 
 -   **Port:** It says is optional but if you don’t enter the port the connection will fail. The default port is 1433 but of course fill it with the value from your installation.
 
-[![](/images/cbm_db_config.png "Chargeback database configuration")]({{site.url}}/images/cbm_db_config.png)
+[![](/assets/images/cbm_db_config.png "Chargeback database configuration")]({{site.url}}/assets/images/cbm_db_config.png)
 
 #### Adding a vCenter Server
 
 The first task you want to perform after Chargeback installation is to add a vCenter Server, in theory pretty easy until you get to the database screen. It is very important to remember that in the **Database URL** field you only need to put the database server IP address as shown in the screen capture.
 
-[![](/images/cbm_vc_conifig.png "vCenter database URL")]({{site.url}}/images/cbm_vc_conifig.png)
+[![](/assets/images/cbm_vc_conifig.png "vCenter database URL")]({{site.url}}/assets/images/cbm_vc_conifig.png)
 
 Juanma.

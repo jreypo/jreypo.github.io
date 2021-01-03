@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to assign fixed IP addresses in Neutron
 date: 2016-06-08
 type: post
+classes: wide
 published: true
 status: publish
 categories:

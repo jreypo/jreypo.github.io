@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'A first look into VMware Integrated #OpenStack (VIO)'
 date: 2015-02-02
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -32,7 +32,7 @@ image:
 For me this is a very special release because I have been one of the lucky internal adopters and beta testers of VIO. I have spent many hours working with several VIO builds and trying to help our incredible engineering team. This is in my opinion a really solid and well designed product and will be a game changer in the OpenStack world. Honestly I
 cannot be more excited :)
 
-[![](/images/image01.png)]({{site.url}}/images/image01.png)
+[![](/assets/images/image01.png)]({{site.url}}/assets/images/image01.png)
 
 VIO is basically a VMware supported OpenStack distribution prepared to run on top of an existing VMware infrastructure. VMware Integrated OpenStack will empower any VMware Administrator to easily deliver and operate an Enterprise production grade OpenStack cloud on VMware components. This means that you will be able at to take advantage of all VMware vSphere great features like HA, DRS or VSAN for your OpenStack cloud and also extend and integrate it with other VMware management components like [vRealize Operations](http://www.vmware.com/ap/products/vrealize-operations) and [vRealize Log Insight](http://www.vmware.com/products/vrealize-log-insight).
 
@@ -76,84 +76,84 @@ Now that we have seen a bit of VIO I am going to show how to perform an installa
 
 The first step is to deploy VIO OVA on our management cluster. From vSphere Web Client launch the **Deploy OVF Template** wizard and enter the URL to the VIO OVA file.
 
-[![](/images/image02.png)]({{site.url}}/images/image02.png)
+[![](/assets/images/image02.png)]({{site.url}}/assets/images/image02.png)
 
 Accept the EULA and proceed to configure the template. First as with any OVA template enter the name and the folder,
 
-[![](/images/image03.png)]({{site.url}}/images/image03.png)
+[![](/assets/images/image03.png)]({{site.url}}/assets/images/image03.png)
 
 Select the datastore and the storage format.
 
-[![](/images/image04.png)]({{site.url}}/images/image04.png)
+[![](/assets/images/image04.png)]({{site.url}}/assets/images/image04.png)
 
 Select the network for VIO Manager.
 
-[![](/images/image05.png)]({{site.url}}/images/image05.png)
+[![](/assets/images/image05.png)]({{site.url}}/assets/images/image05.png)
 
 Now we will customize the template, this includes entering the VIO Manager server networking settings, NTP, SSO lookup service URL and Syslog server.
 
-[![](/images/screen-shot-2015-01-31-at-00-32-27.png)]({{site.url}}/images/screen-shot-2015-01-31-at-00-32-27.png)
+[![](/assets/images/screen-shot-2015-01-31-at-00-32-27.png)]({{site.url}}/assets/images/screen-shot-2015-01-31-at-00-32-27.png)
 
 Go through the next two screens, click finish and start the deployment. Once it is finished you will have a new vApp with the two virtual machines. Our next step is to register the management server with vCenter, power on the OMS vApp and when the management server is fully started logout of vSphere Web Client. Log in back to vSphere Web Client, you will notice a new icon in the Home page.
 
-[![](/images/screen-shot-2015-02-01-at-02-34-35.png)]({{site.url}}/images/screen-shot-2015-02-01-at-02-34-35.png)
+[![](/assets/images/screen-shot-2015-02-01-at-02-34-35.png)]({{site.url}}/assets/images/screen-shot-2015-02-01-at-02-34-35.png)
 
 Access the VIO plugin interface and in the Summary you should see that VIO Manager has automatically registered itself with vCenter.
 
-[![](/images/image08.png)]({{site.url}}/images/image08.png)
+[![](/assets/images/image08.png)]({{site.url}}/assets/images/image08.png)
 
 From this screen you can also change the VIO Manager server in case you need to re-deploy a new one. To do so select the management server in the pop-up and click **OK**.
 
-[![](/images/screen-shot-2015-01-31-at-17-24-49.png)]({{site.url}}/images/screen-shot-2015-01-31-at-17-24-49.png)
+[![](/assets/images/screen-shot-2015-01-31-at-17-24-49.png)]({{site.url}}/assets/images/screen-shot-2015-01-31-at-17-24-49.png)
 
 Accept the SSL certificate to finish the procedure.
 
-[![](/images/screen-shot-2014-08-23-at-01-41-07.png)](https://jreypo.files.wordpress.com/2014/08/screen-shot-2014-08-23-at-01-41-07.png)
+[![](/assets/images/screen-shot-2014-08-23-at-01-41-07.png)]({{site.url}}/assets/images/screen-shot-2014-08-23-at-01-41-07.png)
 
 VIO Manager Server will now be displayed as connected in the **Summary** tab.
 
-[![](/images/image11.png)]({{site.url}}/images/image11.png)
+[![](/assets/images/image11.png)]({{site.url}}/assets/images/image11.png)
 
 ### Deploying OpenStack
 
 With VIO Manager running and connected to our vCenter it is time now to deploy OpenStack. Proceed to the *Getting Started* tab and click **Deploy OpenStack**.
 
-[![](/images/image12.png)]({{site.url}}/images/image12.png)
+[![](/assets/images/image12.png)]({{site.url}}/assets/images/image12.png)
 
 A new wizard will be launched. In the first screen we must select the deployment type. VIO allows to deploy a new OpenStack installation or deploy from a previously saved template file.
 
-[![](/images/image13.png)]({{site.url}}/images/image13.png)
+[![](/assets/images/image13.png)]({{site.url}}/assets/images/image13.png)
 
 Provide the vCenter administrative credentials.
 
-[![](/images/image14.png)]({{site.url}}/images/image14.png)
+[![](/assets/images/image14.png)]({{site.url}}/assets/images/image14.png)
 
 Select the management cluster where we are going to deploy VIO.
 
-[![](/images/image15.png)]({{site.url}}/images/image15.png)
+[![](/assets/images/image15.png)]({{site.url}}/assets/images/image15.png)
 
 Next you need to configure the Management and External networks. Select the appropriate vSphere port-groups for each network and fill in the network ranges, gateway, netmask and DNS server fields.
 
-[![](/images/image16.png)]({{site.url}}/images/image16.png)
+[![](/assets/images/image16.png)]({{site.url}}/assets/images/image16.png)
 
 Enter the values for the load balancer configuration:
 
 -   Public Virtual IP address
 -   Public Hostname, this hostname must resolve to the Public IP address.
 
-[![](/images/image17.png)]({{site.url}}/images/image17.png)
+[![](/assets/images/image17.png)]({{site.url}}/assets/images/image17.png)
 
 Add a cluster to be used for Nova.
 
-[![](/images/image18.png)]({{site.url}}/images/image18.png)
+[![](/assets/images/image18.png)]({{site.url}}/assets/images/image18.png)
 
 Add the datastores to be used by Nova to store the different instances. If you have a [VSAN](http://www.vmware.com/products/virtual-san) datastore keep in mind that to be able to use it with Nova the images stored in Glance have to be [streamOptimzed](https://blueprints.launchpad.net/nova/+spec/vmware-vsan-support).
 
-[![](/images/image19.png)]({{site.url}}/images/image19.png)
+[![](/assets/images/image19.png)]({{site.url}}/assets/images/image19.png)
 
 Select the datastore to be used by Glance image service.
 
-[![](/images/image20.png)]({{site.url}}/images/image20.png)
+[![](/assets/images/image20.png)]({{site.url}}/assets/images/image20.png)
 
 Configure Neutron networking. For Neutron there are two different options:
 
@@ -172,40 +172,40 @@ For NSX deployment you must enter:
 -   Virtual Distributed Switch for NSX networking.
 -   External Network. This a port group to be used as external network by instances in OpenStack via a virtual router. This port group should be accessible from compute, management and edge clusters.
 
-[![](/images/image21.png)]({{site.url}}/images/image21.png)
+[![](/assets/images/image21.png)]({{site.url}}/assets/images/image21.png)
 
 During the Neutron configuration the wizard will connect to the NSX Manager with the provided credentials and will ask to accept the SSL certificate.
 
-[![](/images/image22.png)]({{site.url}}/images/image22.png)
+[![](/assets/images/image22.png)]({{site.url}}/assets/images/image22.png)
 
 In the next screen the wizard will ask for the OpenStack admin user, password and project. Also you can select the Keystone type option:
 
 -   Database
 -   Active Directory as LDAP Server.
 
-[![](/images/image23.png)]({{site.url}}/images/image23.png)
+[![](/assets/images/image23.png)]({{site.url}}/assets/images/image23.png)
 
 Finally set the syslog server, it is not mandatory to set this value but it is highly recommended.
 
-[![](/images/image24.png)]({{site.url}}/images/image24.png)
+[![](/assets/images/image24.png)]({{site.url}}/assets/images/image24.png)
 
 Review the configuration and click **Finish**.
 
-[![](/images/screen-shot-2015-01-31-at-20-43-54.png)]({{site.url}}/images/screen-shot-2015-01-31-at-20-43-54.png)
+[![](/assets/images/screen-shot-2015-01-31-at-20-43-54.png)]({{site.url}}/assets/images/screen-shot-2015-01-31-at-20-43-54.png)
 
 The deployment will take some time, depending on your storage backend. In my testing lab took around one hour, but it is a nested environment running on NFS so you can expect much better times deploying in a real world setup. When it is finished you can review the different components of VIO with vSphere Web Client in *VMs and Templates*, there would be a new folder structure containing all VIO virtual machines.
 
-[![](/images/image25.png)]({{site.url}}/images/image25.png)
+[![](/assets/images/image25.png)]({{site.url}}/assets/images/image25.png)
 
 ## Validate your VIO installation
 
 In your favorite browser open an HTTPS session against the public hostname or virtual IP address configured during VIO installation. The Horizon portal login page will display.
 
-[![](/images/screen-shot-2015-02-01-at-22-50-41.png)]({{site.url}}/images/screen-shot-2015-02-01-at-22-50-41.png)
+[![](/assets/images/screen-shot-2015-02-01-at-22-50-41.png)]({{site.url}}/assets/images/screen-shot-2015-02-01-at-22-50-41.png)
 
 Enter the admin credentials and OpenStack admin Overview page will show up. The access the *Hypervisors* area and check that the selected cluster for Nova appears there.
 
-[![](/images/screen-shot-2015-02-01-at-22-53-19.png)]({{site.url}}/images/screen-shot-2015-02-01-at-22-53-19.png)
+[![](/assets/images/screen-shot-2015-02-01-at-22-53-19.png)]({{site.url}}/assets/images/screen-shot-2015-02-01-at-22-53-19.png)
 
 At this point VIO is setup and you can start to work in Horizon or using the CLI as with any other OpenStack distribution.
 

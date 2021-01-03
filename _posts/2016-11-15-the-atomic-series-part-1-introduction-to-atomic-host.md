@@ -1,8 +1,8 @@
 ---
-layout: post
 title: The Atomic Series. Part 1 - Introduction to Atomic Host
 date: 2016-11-15
 type: post
+classes: wide
 published: true
 status: publish
 categories:

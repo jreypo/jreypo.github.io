@@ -1,8 +1,8 @@
 ---
-layout: post
 title: VMware Lightwave multi-node domain setup
 date: 2016-01-11
 type: post
+classes: wide
 published: true
 status: publish
 categories:

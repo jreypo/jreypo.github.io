@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to configure a remote syslog server for NSX Controller
 date: 2015-09-30
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -28,7 +28,7 @@ NSX Manager has the option to configure a remote syslog server using its managem
 
 For this post I will use Firefox REST Client Add-on but you can use your favorite REST client. Firstly any REST API call will require at least the Authentication header, in Firefox REST Client click on **Authentication** drop-down menu, select **Basic Authentication** and enter the admin credentials.
 
-[![](/images/screen-shot-2015-09-30-at-02-25-19.png)]({{site.url}}/images/screen-shot-2015-09-30-at-02-25-19.png)
+[![](/assets/images/screen-shot-2015-09-30-at-02-25-19.png)]({{site.url}}/assets/images/screen-shot-2015-09-30-at-02-25-19.png)
 
 Additionally PUT and POST methods will require you to set a custom header with the following values that will define the content of the HTTP Request body. Use these values.
 
@@ -41,7 +41,7 @@ With these two headers set enter the API URL, in my case it is:
 
 To construct this URL you will need the controller ID that can be get in the NSX interface in vSphere Web Client as shown below.
 
-[![](/images/screen-shot-2015-09-30-at-02-50-38.png)]({{site.url}}/images/screen-shot-2015-09-30-at-02-50-38.png)
+[![](/assets/images/screen-shot-2015-09-30-at-02-50-38.png)]({{site.url}}/assets/images/screen-shot-2015-09-30-at-02-50-38.png)
 
 Select POST as the method. You will need to enter the body for the HTTP Request, in XML format. Use the below code as an example to build the content for the HTTP Request body.
 
@@ -49,11 +49,11 @@ Select POST as the method. You will need to enter the body for the HTTP Request,
 
 This XML code will indicate the NSX Manager to set the IP address in the `syslogServer` node as the remote syslog server for the controller in the URL. The protocol, port and log level are also defined.
 
-[![](/images/screen-shot-2015-09-17-at-01-14-19.png)]({{site.url}}/images/screen-shot-2015-09-17-at-01-14-19.png)
+[![](/assets/images/screen-shot-2015-09-17-at-01-14-19.png)]({{site.url}}/assets/images/screen-shot-2015-09-17-at-01-14-19.png)
 
 Submit the request and if everything is configured as described you will receive a `200 OK` status code.
 
-[![](/images/screen-shot-2015-09-17-at-01-15-06.png)]({{site.url}}/images/screen-shot-2015-09-17-at-01-15-06.png)
+[![](/assets/images/screen-shot-2015-09-17-at-01-15-06.png)]({{site.url}}/assets/images/screen-shot-2015-09-17-at-01-15-06.png)
 
 At this point the syslog server is configured for all NSX Controllers, you can check the status using also an API call with the same URL and selecting GET method.
 

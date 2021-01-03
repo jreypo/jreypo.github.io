@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Taking Chargeback API for a ride - Part 1
 date: 2014-04-03 22:25:19.000000000 +02:00
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -62,7 +62,7 @@ I’m not going to review every possible API, just a few examples to illustrate 
 
 This is the most basic operation of all. In the REST Client paste the XML payload in the Body area, select POST as the method to use and fill the URL field.
 
-[![](/images/rest_login.png "Chargeback API Login with REST client")]({{site.url}}/images/rest_login.png)
+[![](/assets/images/rest_login.png "Chargeback API Login with REST client")]({{site.url}}/assets/images/rest_login.png)
 
 ### Get hierarchy list
 
@@ -74,11 +74,11 @@ https://<chargeback_server>/vCenter-CB/api/hierarchies?version=2.5
 
 After executing the request we can see in the REST Client the response from Chargeback in XML format.
 
-[![](/images/get_hierarchies.PNG "Get hierarchies")]({{site.url}}/images/get_hierarchies.PNG)
+[![](/assets/images/get_hierarchies.PNG "Get hierarchies")]({{site.url}}/assets/images/get_hierarchies.PNG)
 
 If we go to Chargeback web UI we’ll see the listed hierarchies.
 
-[![](/images/hierarchy_cbm_ui.PNG "Chargeback hierarchy")]({{site.url}}/images/hierarchy_cbm_ui.PNG)
+[![](/assets/images/hierarchy_cbm_ui.PNG "Chargeback hierarchy")]({{site.url}}/assets/images/hierarchy_cbm_ui.PNG)
 
 ### Get all Pricing Models
 
@@ -173,11 +173,11 @@ In this case I’m not going to put the version as a parameter. An XML payload w
 
 {% gist jreypo/11114576 %}
 
-[![](/images/cbm_api_add_new_hierarchy.png "Add new hierarchy")]({{site.url}}/images/cbm_api_add_new_hierarchy.png)
+[![](/assets/images/cbm_api_add_new_hierarchy.png "Add new hierarchy")]({{site.url}}/assets/images/cbm_api_add_new_hierarchy.png)
 
 Login to Chargeback web interface to check that the new hierarchy is there.
 
-[![](/images/new_cbm_hierarchy_use_api.png "New hierarchy created")]({{site.url}}/images/new_cbm_hierarchy_use_api.png)
+[![](/assets/images/new_cbm_hierarchy_use_api.png "New hierarchy created")]({{site.url}}/assets/images/new_cbm_hierarchy_use_api.png)
 
 I hope that now you have at least a general understanding of how Chargeback API works and how easy is to interact with it. In the second post of the series we will review how to automate Chargeback using vCenter Orchestrator.
 

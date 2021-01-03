@@ -1,8 +1,8 @@
 ---
-layout: post
 title: OpenShift Container Platform integration with Azure Active Directory
 date: 2017-11-13
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -53,23 +53,23 @@ az ad app create --display-name OpenShiftAAD --homepage https://masterdnswdrnk7i
 
 In the Azure Portal access *Azure Active Directory -> App registrations* and click on *New application registration*. 
 
-[![](/images/ocp_aad_web_app_1.png "New App registration")]({{site.url}}/images/ocp_aad_web_app_1.png)
+[![](/assets/images/ocp_aad_web_app_1.png "New App registration")]({{site.url}}/assets/images/ocp_aad_web_app_1.png)
 
 In the create screen enter the name of the app, set the *Application type* to *Web app/API* and enter the OpenShift Console URL as the *Sign-on URL*.
 
-[![](/images/ocp_aad_web_app_2.png "New App registration parameters")]({{site.url}}/images/ocp_aad_web_app_2.png)
+[![](/assets/images/ocp_aad_web_app_2.png "New App registration parameters")]({{site.url}}/assets/images/ocp_aad_web_app_2.png)
 
 After the new app has been created open its properties and verify that the *Home page URL* value corresponds with the OpenShift Console URL. In this same page set the same URL as the value for the *App ID URI* field and save the changes.
 
-[![](/images/ocp_aad_web_app_3.png "App Properties")]({{site.url}}/images/ocp_aad_web_app_3.png)
+[![](/assets/images/ocp_aad_web_app_3.png "App Properties")]({{site.url}}/assets/images/ocp_aad_web_app_3.png)
 
 Access the *Reply URLs* section, delete any existing URL and add a new reply URL with the value of the Reply URL parameter we defined at the beginning. 
 
-[![](/images/ocp_aad_web_app_4.png "Set Reply URL")]({{site.url}}/images/ocp_aad_web_app_4.png)
+[![](/assets/images/ocp_aad_web_app_4.png "Set Reply URL")]({{site.url}}/assets/images/ocp_aad_web_app_4.png)
 
 Finally go to *Keys*. On *Passwords* enter a description to identify the password, set the duration and click *Save*. The value of the auto-generated password will be shown on save, take not of it since we will need it later during OpenShift configuration. 
 
-[![](/images/ocp_aad_web_app_5.png "App password")]({{site.url}}/images/ocp_aad_web_app_5.png)
+[![](/assets/images/ocp_aad_web_app_5.png "App password")]({{site.url}}/assets/images/ocp_aad_web_app_5.png)
 
 ## App permissions
 
@@ -77,7 +77,7 @@ Once the app is created, eith via Azure CLI or the portal, access *Azure Active 
 
 On the first step *Select an API* look for *Windows Azure Active Directory (Microsoft.Azure.ActiveDirectory)*, select if and then click *Select*. On the second step *Select Permissions* select *Sign in and read user profile* on the *Delegated Permissions* section and click *Select*. The final configuration should look like the image below. 
 
-[![](/images/app_permissions.png "App permissions")]({{site.url}}/images/app_permissions.png)
+[![](/assets/images/app_permissions.png "App permissions")]({{site.url}}/assets/images/app_permissions.png)
 
 # OpenShift configuration
 
@@ -155,11 +155,11 @@ sudo systemctl restart atomic-openshift-master
 
 To verify the configuration when the restart operation is finished open a browser and access OpenShift Console. In the login page you will see now two options for authentication, the original `htpasswd_auth` and a second one with the name of the app. 
 
-[![](/images/ocp_console_aad.png "OpenShift Console with AAD authentication")]({{site.url}}/images/ocp_console_aad.png)
+[![](/assets/images/ocp_console_aad.png "OpenShift Console with AAD authentication")]({{site.url}}/assets/images/ocp_console_aad.png)
 
 Select the second one and login using your Azure Active Directory credentials. In my case I have used my Microsoft user and you can see me logged into my OpenShift Origin lab on Azure.
 
-[![](/images/ocp_logged_with_aad_user.png "Logged into OpenShift Console with my AAD Microsoft user")]({{site.url}}/images/ocp_logged_with_aad_user.png)
+[![](/assets/images/ocp_logged_with_aad_user.png "Logged into OpenShift Console with my AAD Microsoft user")]({{site.url}}/assets/images/ocp_logged_with_aad_user.png)
 
 Hope this post has been helpful and interesting. Comments are welcome as always. 
 

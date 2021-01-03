@@ -1,9 +1,8 @@
 ---
-layout: post
-title: 'Deploying OpenStack with KVM and VMware NSX - Part 1: NSX overview and initial
-  setup'
+title: 'Deploying OpenStack with KVM and VMware NSX - Part 1: NSX overview and initial setup'
 date: 2014-04-29
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -110,11 +109,11 @@ For our lab purposes create four Ubuntu x64 virtual machines with 1vCPU, 1GB of 
 
 Power on the VM and on the boot screen select Automated Install.
 
-[![](/images/screen-shot-2014-04-27-at-20-49-15.png "NSX Controller installation")]({{site.url}}/images/screen-shot-2014-04-27-at-20-49-15.png)
+[![](/assets/images/screen-shot-2014-04-27-at-20-49-15.png "NSX Controller installation")]({{site.url}}/assets/images/screen-shot-2014-04-27-at-20-49-15.png)
 
 The installation will take several minutes to finish. When it's finished you will see a prompt like this in the virtual machine console.
 
-[![](/images/screen-shot-2014-04-27-at-22-42-11.png "NSX Controller console login")]({{site.url}}/images/screen-shot-2014-04-27-at-22-42-11.png)
+[![](/assets/images/screen-shot-2014-04-27-at-22-42-11.png "NSX Controller console login")]({{site.url}}/assets/images/screen-shot-2014-04-27-at-22-42-11.png)
 
 Login as `admin` user with password admin. In a normal deployment you will configure admin user password with `set admin user password` but for the lab is not needed.
 
@@ -298,7 +297,7 @@ It's normal since the Transport Node will not be able to connect to the NSX Cont
 
 Access the NSX Manager console, you have to see a similar screen.
 
-[![](/images/screen-shot-2014-04-28-at-00-47-54.png "NSX Manager console")]({{site.url}}/images/screen-shot-2014-04-28-at-00-47-54.png)
+[![](/assets/images/screen-shot-2014-04-28-at-00-47-54.png "NSX Manager console")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-00-47-54.png)
 
 Set the IP and the hostname and configure the default route, DNS and NTP server.
 
@@ -316,20 +315,20 @@ With this we have completed the installation and initial configuration of our fo
 
 Our next step is to connect our newly crested NSX Controller Cluster with NSX Manager. Access NSX Manager web interface and login as admin user.
 
-[![](/images/screen-shot-2014-04-28-at-01-10-19.png "NSX Manager login page")]({{site.url}}/images/screen-shot-2014-04-28-at-01-10-19.png)
+[![](/assets/images/screen-shot-2014-04-28-at-01-10-19.png "NSX Manager login page")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-10-19.png)
 
 After the login the Manager will indicate that there is no Controller Cluster added.
 
-[![](/images/screen-shot-2014-04-28-at-01-15-33.png "No Controller Cluster added")]({{site.url}}/images/screen-shot-2014-04-28-at-01-15-33.png)
+[![](/assets/images/screen-shot-2014-04-28-at-01-15-33.png "No Controller Cluster added")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-15-33.png)
 
 Click the **Add Cluster** button and enter the data for the NSX Controller Cluster.
 
-[![](/images/screen-shot-2014-04-28-at-01-26-03.png "Connect to NSX Controller Cluster")]({{site.url}}/images/screen-shot-2014-04-28-at-01-26-03.png)
+[![](/assets/images/screen-shot-2014-04-28-at-01-26-03.png "Connect to NSX Controller Cluster")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-26-03.png)
 
 If the connection is successful the a new screen will show up.
 
 [![Screen Shot 2014-04-28 at
-01.36.29](/images/screen-shot-2014-04-28-at-01-36-29.png "Configure NSX Controller Cluster")]({{site.url}}/images/screen-shot-2014-04-28-at-01-36-29.png)
+01.36.29](/assets/images/screen-shot-2014-04-28-at-01-36-29.png "Configure NSX Controller Cluster")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-36-29.png)
 
 Provide the following information:
 
@@ -340,11 +339,11 @@ Provide the following information:
 
 In the next screen enter the IP address of your syslog server or click **Use This NSX Manager** to use the NSX Manager as syslog server.
 
-[![](/images/screen-shot-2014-04-28-at-01-57-43.png "Configure syslog server")]({{site.url}}/images/screen-shot-2014-04-28-at-01-57-43.png)
+[![](/assets/images/screen-shot-2014-04-28-at-01-57-43.png "Configure syslog server")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-57-43.png)
 
 After clicking in **Configure** the Manager will finish the configuration of the Controller Cluster and will go back the previous screen where we can see the new cluster we have just added to the Manager.
 
-[![](/images/screen-shot-2014-04-28-at-02-01-44.png "Controller Cluster added")]({{site.url}}/images/screen-shot-2014-04-28-at-02-01-44.png)
+[![](/assets/images/screen-shot-2014-04-28-at-02-01-44.png "Controller Cluster added")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-02-01-44.png)
 
 In the next post we will see how to configure NSX Transport and Logical network elements. As always comments are welcome.
 

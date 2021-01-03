@@ -1,8 +1,8 @@
 ---
-layout: post
 title: AKS integration with Azure Container Registry
 date: 2019-10-16 15:28:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:

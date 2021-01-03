@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Power and maintenance operations in ESXi 5.1 with esxcli
 date: 2012-09-18
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -12,12 +12,10 @@ categories:
 tags:
 - esxcli
 - ESXi
-- esxi 5.1
 - sysadmin
 - systems administration
 - VMware
 - vSphere
-- vSphere 5.1
 author: juan_manuel_rey
 comments: true
 ---
@@ -28,7 +26,7 @@ Those new commands enable a system administrator to perform a shutdown, a reboot
 
 Under the `system` namespace the new commands are the equivalents of the classic `vicfg/esxcfg-hostops` which until now was the only way to perform such kind of operations with vCLI and are also accessible locally on ESXi Shell.
 
-[![](/images/esxcli_system_namespace.png "esxcli system namespace available commands")]({{site.url}}/images/esxcli_system_namespace.png)
+[![](/assets/images/esxcli_system_namespace.png "esxcli system namespace available commands")]({{site.url}}/assets/images/esxcli_system_namespace.png)
 
 ### Maintenance mode operations
 

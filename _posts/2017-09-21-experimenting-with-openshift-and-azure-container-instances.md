@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Experimenting with OpenShift and Azure Container Instances
 date: 2017-09-21
 type: post
+classes: wide
 published: true
 status: publish
 categories:

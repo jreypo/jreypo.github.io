@@ -1,8 +1,8 @@
 ---
-layout: post
 title: My first sponsor
 date: 2012-03-01
 type: post
+classes: wide
 published: true
 status: publish
 categories:

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: Taking Chargeback API for a ride - Part 2
 date: 2014-04-14
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -34,19 +34,19 @@ Open vCenter Orchestrator configuration website at **https://vco_server:8283** a
 
 Next we need to import Chargeback SSL certificate, go to **Network** and then to **SSL Trust Manager** tab. Enter Chargeback server URL in the **Import from URL** textbox and click **Import**.
 
-[![](/images/add_cbm_server_vco.png "Chargeback server URL")]({{site.url}}/images/add_cbm_server_vco.png)
+[![](/assets/images/add_cbm_server_vco.png "Chargeback server URL")]({{site.url}}/assets/images/add_cbm_server_vco.png)
 
 A screen with the details of our Chargeback server will appear, click **Import** to accept the certificate.
 
-[![](/images/vco_import_ssl_cert.png "Import SSL certificate")]({{site.url}}/images/vco_import_ssl_cert.png)
+[![](/assets/images/vco_import_ssl_cert.png "Import SSL certificate")]({{site.url}}/assets/images/vco_import_ssl_cert.png)
 
 Now from the **Chargeback (2.0.0)** area go to **New Server** tab, enter Chargeback server details and click **Apply Changes**.
 
-[![](/images/vco_add_cbm_details.png "Enter Chargeback server details")]({{site.url}}/images/vco_add_cbm_details.png)
+[![](/assets/images/vco_add_cbm_details.png "Enter Chargeback server details")]({{site.url}}/assets/images/vco_add_cbm_details.png)
 
 In vCO client our new Chargeback server will appear.
 
-[![](/images/cbm_vco_inventory.png "vCO inventory")]({{site.url}}/images/cbm_vco_inventory.png)
+[![](/assets/images/cbm_vco_inventory.png "vCO inventory")]({{site.url}}/assets/images/cbm_vco_inventory.png)
 
 ### Using vCO plugin for Chargeback Integration
 
@@ -62,7 +62,7 @@ We are going to automate a very easy task as our first example. Create a new wor
 
 In the Schema tab drag an **Action element**, a new windows will pop up to choose the action. Search for **getAllHiearchies** and select it.
 
-[![](/images/vco_cbm_get_all_hierarchies.png "Get all hierarchies")]({{site.url}}/images/vco_cbm_get_all_hierarchies.png)
+[![](/assets/images/vco_cbm_get_all_hierarchies.png "Get all hierarchies")]({{site.url}}/assets/images/vco_cbm_get_all_hierarchies.png)
 
 Check that the workflows attributes are correctly mapped as the input (cbmServer and cbmVersion) and output (hierarchyList) parameters of the action.
 
@@ -72,19 +72,19 @@ Next add a **Scriptable task** element to the workflow and edit it. Map **hierar
 
 Validate the workflow and save it. The scheme has to look like this.
 
-[![](/images/cbm_wf_schema.png "Workflow schema")]({{site.url}}/images/cbm_wf_schema.png)
+[![](/assets/images/cbm_wf_schema.png "Workflow schema")]({{site.url}}/assets/images/cbm_wf_schema.png)
 
 In the execution go to the **Logs** sub-tab in the main **Scheme** tab to check the results of the execution, if everything went as expected you should see something similar to the screenshot.
 
-[![](/images/cbm_list_hr_logs.png "Workflow logs")]({{site.url}}/images/cbm_list_hr_logs.png)
+[![](/assets/images/cbm_list_hr_logs.png "Workflow logs")]({{site.url}}/assets/images/cbm_list_hr_logs.png)
 
 You should be thinking that this example is a bit silly, and to be honest it is. There are few use cases that will require to dump the hierarchy list to vCO log. The purpose of this workflow is to illustrate Chargeback plugin Action elements. Open vCO API Explorer and have a look at all the already implemented Actions that can be used in your workflows.
 
-[![](/images/cbm_actions_vco_api_explorer.png "Chargeback Actions")]({{site.url}}/images/cbm_actions_vco_api_explorer.png)
+[![](/assets/images/cbm_actions_vco_api_explorer.png "Chargeback Actions")]({{site.url}}/assets/images/cbm_actions_vco_api_explorer.png)
 
 From basic administration tasks to search and reporting. Also Chargeback plugin comes with a set of Scripting Classes and objects that cover all Chargeback objects although as I mentioned before not all available methods are implemented.
 
-[![](/images/vco_cbm_scripting_classes.png "Scripting Classes")]({{site.url}}/images/vco_cbm_scripting_classes.png)
+[![](/assets/images/vco_cbm_scripting_classes.png "Scripting Classes")]({{site.url}}/assets/images/vco_cbm_scripting_classes.png)
 
 Make a call to a method from a scripting class is relatively easy as we will see in the following example. We want to get a hierarchy and later use in a different task. We can use a method from **CbServer** class: **getHierarchyByName**. It accepts the hierarchy name and CBM API version as parameters. Basic syntax would be:
 
@@ -102,19 +102,19 @@ vCenter Orchestrator has available an HTTP-REST plugin that enables it to interf
 
 vCenter Orchestrator plugin for REST APIs comes with a set of workflows for configuration purposes.
 
-[![](/images/vco_rest_wfs.png "REST plugin workflows")]({{site.url}}/images/vco_rest_wfs.png)
+[![](/assets/images/vco_rest_wfs.png "REST plugin workflows")]({{site.url}}/assets/images/vco_rest_wfs.png)
 
 We need to add first our Chargeback server as REST host. Launch the **Add a REST host** workflow. Enter the name of the REST host and the base URL for the API, leave the timeout settings with the default values.
 
-[![](/images/vco_add_rest_host.png "Add REST Host")]({{site.url}}/images/vco_add_rest_host.png)
+[![](/assets/images/vco_add_rest_host.png "Add REST Host")]({{site.url}}/assets/images/vco_add_rest_host.png)
 
 In the next two steps select Basic authentication mode…
 
-[![](/images/vco_add_rest_host_auth.png "Select authentication")]({{site.url}}/images/vco_add_rest_host_auth.png)
+[![](/assets/images/vco_add_rest_host_auth.png "Select authentication")]({{site.url}}/assets/images/vco_add_rest_host_auth.png)
 
 …shared session and enter Chargeback server credentials.
 
-[![](/images/vco_rest_host_cbm_credentials.png "Chargeback server credentials")]({{site.url}}/images/vco_rest_host_cbm_credentials.png)
+[![](/assets/images/vco_rest_host_cbm_credentials.png "Chargeback server credentials")]({{site.url}}/assets/images/vco_rest_host_cbm_credentials.png)
 
 Click submit and have a look at the workflow execution.
 
@@ -136,27 +136,27 @@ Below are the screenshots and parameters for the five REST  operations we need t
 
 ##### Login
 
-[![](/images/vco_add_rest_op_login.png "Login")]({{site.url}}/images/vco_add_rest_op_login.png)
+[![](/assets/images/vco_add_rest_op_login.png "Login")]({{site.url}}/assets/images/vco_add_rest_op_login.png)
 
 ##### Logout
 
-[![](/images/vco_add_rest_op_logout.png "Logout")]({{site.url}}/images/vco_add_rest_op_logout.png)
+[![](/assets/images/vco_add_rest_op_logout.png "Logout")]({{site.url}}/assets/images/vco_add_rest_op_logout.png)
 
 ##### Create a new hierarchy
 
-[![](/images/vco_add_rest_op_add_new_hierarchy.png "Create new hierarchy")]({{site.url}}/images/vco_add_rest_op_add_new_hierarchy.png)
+[![](/assets/images/vco_add_rest_op_add_new_hierarchy.png "Create new hierarchy")]({{site.url}}/assets/images/vco_add_rest_op_add_new_hierarchy.png)
 
 ##### Add a new Fixed Cost
 
-[![](/images/vco_add_rest_op_add_fixed_cost.png "Add Fixed Cost")]({{site.url}}/images/vco_add_rest_op_add_fixed_cost.png)
+[![](/assets/images/vco_add_rest_op_add_fixed_cost.png "Add Fixed Cost")]({{site.url}}/assets/images/vco_add_rest_op_add_fixed_cost.png)
 
 ##### Get task status
 
-[![](/images/vco_add_rest_op_get_task_status.png "Get Task Status")]({{site.url}}/images/vco_add_rest_op_get_task_status.png)
+[![](/assets/images/vco_add_rest_op_get_task_status.png "Get Task Status")]({{site.url}}/assets/images/vco_add_rest_op_get_task_status.png)
 
 Look at in the inventory in vCenter Orchestrator client and check that all the new added operations appear under Chargeback REST host.
 
-[![](/images/vco_rest_cbm_new_operations.png "New REST operations")]({{site.url}}/images/vco_rest_cbm_new_operations.png)
+[![](/assets/images/vco_rest_cbm_new_operations.png "New REST operations")]({{site.url}}/assets/images/vco_rest_cbm_new_operations.png)
 
 Now we can proceed to create our workflows.
 
@@ -172,15 +172,15 @@ We are going to reproduce one the examples from [Part 1]({% post_url 2014-04-03-
 -   restCreateHierarchy – Create hierarchy REST Operation
 -   loginStatus – Status of the login REST Operation.
 
-[![](/images/vco_rest_add_new_hr_attributes.png "Workflow attributes")]({{site.url}}/images/vco_rest_add_new_hr_attributes.png)
+[![](/assets/images/vco_rest_add_new_hr_attributes.png "Workflow attributes")]({{site.url}}/assets/images/vco_rest_add_new_hr_attributes.png)
 
 Next configure the input parameters, basically for our purposes here we will need the hierarchy name description.
 
-[![](/images/vco_rest_add_new_hr_parameters.png "Workflow parameters")]({{site.url}}/images/vco_rest_add_new_hr_parameters.png)
+[![](/assets/images/vco_rest_add_new_hr_parameters.png "Workflow parameters")]({{site.url}}/assets/images/vco_rest_add_new_hr_parameters.png)
 
 At the presentation layer the parameters will shown as **Name of the new hierarchy** and **Description for the new hierarchy**.
 
-[![](/images/vco_rest_add_new_hr_parameters_presentation.png "Presentation layer")]({{site.url}}/images/vco_rest_add_new_hr_parameters_presentation.png)
+[![](/assets/images/vco_rest_add_new_hr_parameters_presentation.png "Presentation layer")]({{site.url}}/assets/images/vco_rest_add_new_hr_parameters_presentation.png)
 
 Add two Scriptable tasks to the workflow, name the first as **API Login** and the second as **API Logout** and paste the code from the previous Login and Logout examples. Now add a third scriptable task to be executed after the login, name it as **Create Hierarchy* and edit it. Paste the below code in the **Scripting** tab.
 
@@ -190,11 +190,11 @@ Edit the API Login element and in the scripting tab add the following Javascript
 
 With this chunk of code will suffice to launch the operation, however there is no error control. The HTTP status code is not enough because the login operation can fail even with a 200 code, like the example below.
 
-[![](/images/vco_rest_add_new_hr_logs_failure.png)]({{site.url}}/images/vco_rest_add_new_hr_logs_failure.png)
+[![](/assets/images/vco_rest_add_new_hr_logs_failure.png)]({{site.url}}/assets/images/vco_rest_add_new_hr_logs_failure.png)
 
 To solve this we need to parse the response content. REST plugin scripting API provides a method to retrieve the content of the response as a string.
 
-[![](/images/vco_rest_add_new_hr_rest_response_content.png "REST response")]({{site.url}}/images/vco_rest_add_new_hr_rest_response_content.png)
+[![](/assets/images/vco_rest_add_new_hr_rest_response_content.png "REST response")]({{site.url}}/assets/images/vco_rest_add_new_hr_rest_response_content.png)
 
 The following code will do the trick.
 
@@ -204,13 +204,13 @@ Firstly we need to convert the string to and array, then we get the second eleme
 
 Add a **Decision** element to the workflow and bind the decision to the **loginStatus** parameter.
 
-[![](/images/vco_rest_add_new_hr_if_condition.png "Decision condition")]({{site.url}}/images/vco_rest_add_new_hr_if_condition.png)
+[![](/assets/images/vco_rest_add_new_hr_if_condition.png "Decision condition")]({{site.url}}/assets/images/vco_rest_add_new_hr_if_condition.png)
 
 Change the failure branch of the decision from **End workflow** to **Throw exception** and bind it to **loginStatus**. With this decision element we can force the workflow to end the execution if the API login operation was unsuccessful.
 
 Next edit the **Create hierarchy** element. Bind **restCreateHierarchy**, **cbmUser**, **cbmPassword** and **cbmVersion** attributes as input parameters, also bind **hierarchyName** and **hierarchyDescription** as input parameters.
 
-[![](/images/vco_rest_add_new_hr_bind_input_scripting_task.png "Bind input parameters")]({{site.url}}/images/vco_rest_add_new_hr_bind_input_scripting_task.png)
+[![](/assets/images/vco_rest_add_new_hr_bind_input_scripting_task.png "Bind input parameters")]({{site.url}}/assets/images/vco_rest_add_new_hr_bind_input_scripting_task.png)
 
 In the scripting tab paste this code.
 
@@ -220,15 +220,15 @@ The last part, this is the REST operation output is optional but again it can be
 
 Our workflow is done and it should look like this.
 
-[![](/images/vco_rest_add_new_hr_final_schema.png "Workflow final schema")]({{site.url}}/images/vco_rest_add_new_hr_final_schema.png)
+[![](/assets/images/vco_rest_add_new_hr_final_schema.png "Workflow final schema")]({{site.url}}/assets/images/vco_rest_add_new_hr_final_schema.png)
 
 Launch it and enter a name and a description to test it.
 
-[![](/images/vco_rest_add_new_hr_launch.png "Launch workflow")]({{site.url}}/images/vco_rest_add_new_hr_launch.png)
+[![](/assets/images/vco_rest_add_new_hr_launch.png "Launch workflow")]({{site.url}}/assets/images/vco_rest_add_new_hr_launch.png)
 
 Click Submit, check the workflow logs for any errors and if everything went as expected go to Chargeback UI and see that the new hierarchy is there.
 
-[![](/images/vco_rest_add_new_hr_new_hr_cbm_ui.png "New CBM hierarchy created")]({{site.url}}/images/vco_rest_add_new_hr_new_hr_cbm_ui.png)
+[![](/assets/images/vco_rest_add_new_hr_new_hr_cbm_ui.png "New CBM hierarchy created")]({{site.url}}/assets/images/vco_rest_add_new_hr_new_hr_cbm_ui.png)
 
 #### Add new Fixed Cost
 
@@ -242,7 +242,7 @@ For our second workflow we are going the same structure as before. hence the fir
 -   restAddFixed Cost – Add new fixed cost REST Operation
 -   loginStatus – Status of the login REST Operation.
 
-[![](/images/vco_rest_add_new_fixed_cost_attributes.png "Add New Fixed cost workflow attributes")]({{site.url}}/images/vco_rest_add_new_fixed_cost_attributes.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_attributes.png "Add New Fixed cost workflow attributes")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_attributes.png)
 
 Very similar to the hierarchy one. However in this case as input parameters we will need much more information.
 
@@ -253,15 +253,15 @@ Very similar to the hierarchy one. However in this case as input parameters we w
 -   isPowerStateBased – Configure the fixed cost to be applied only if the virtual machine is powered on. It’s not mandatory, default value is false.
 -   fixedCostType – Fixed cost type. A value of 0 represents a recurring fixed cost and 1 represents a one-time fixed cost. It’s not mandatory and the default value is 0.
 
-[![](/images/vco_rest_add_new_fixed_cost_input_parameters.png "Workflow input parameters")]({{site.url}}/images/vco_rest_add_new_fixed_cost_input_parameters.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_input_parameters.png "Workflow input parameters")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_input_parameters.png)
 
 Some of the input parameters are optional but we will use all to illustrate the example with all the possible details. At **Presentation** add a new property for the name and description to make them mandatory. You can also set the default values for the rest of the parameters.
 
-[![](/images/vco_rest_add_new_fixed_cost_input_parameters_presentation.png "Add new property")]({{site.url}}/images/vco_rest_add_new_fixed_cost_input_parameters_presentation.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_input_parameters_presentation.png "Add new property")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_input_parameters_presentation.png)
 
 Change the name of the second scriptable task to **Add new Fixed Cost** and edit it. Bind all the needed parameters and attributes.
 
-[![](/images/vco_rest_add_new_fixed_cost_bind_input_parameters.png "Bind input parameters")]({{site.url}}/images/vco_rest_add_new_fixed_cost_bind_input_parameters.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_bind_input_parameters.png "Bind input parameters")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_bind_input_parameters.png)
 
 In the XML payload we need to reflect all these parameters. Below is code for the scripting part.
 
@@ -269,15 +269,15 @@ In the XML payload we need to reflect all these parameters. Below is code for th
 
 Validate the workflow and save it. Execute it and fill in the input parameters.
 
-[![](/images/vco_rest_add_new_fixed_cost_wf_execution.png "Add New Fixed Cost workflow execution")]({{site.url}}/images/vco_rest_add_new_fixed_cost_wf_execution.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_wf_execution.png "Add New Fixed Cost workflow execution")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_wf_execution.png)
 
 Check in the Chargeback UI our newly created Fixed Cost.
 
-[![](/images/vco_rest_add_new_fixed_cost_cost_created_cbm_ui.png "New Fixed Cost created")]({{site.url}}/images/vco_rest_add_new_fixed_cost_cost_created_cbm_ui.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_cost_created_cbm_ui.png "New Fixed Cost created")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_cost_created_cbm_ui.png)
 
 We can also have a look at the API response in the workflow logs.
 
-[![](/images/vco_rest_add_new_fixed_cost_wf_logs_api_response.png "API response")]({{site.url}}/images/vco_rest_add_new_fixed_cost_wf_logs_api_response.png)
+[![](/assets/images/vco_rest_add_new_fixed_cost_wf_logs_api_response.png "API response")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_wf_logs_api_response.png)
 
 And we are done. This is the end of this two-post series and I hope that know you all have a better understanding of Chargeback API. As your next step my advice is to try to automate simple API tasks, even if they don't seem to be very useful, and then combine them into  more complex automation workflows along with vCenter and vCloud Director plugins.
 

@@ -1,8 +1,8 @@
 ---
-layout: post
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 2: Configure NSX Transport and Logical network views'
 date: 2014-05-06
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -42,19 +42,19 @@ A Transport Zone is a representation of the physical network used to to send tra
 
 Select **Network Components -> Transport Layer -> Transport Zones**.
 
-[![](/images/screen-shot-2014-04-28-at-22-30-40.png)]({{site.url}}/images/screen-shot-2014-04-28-at-22-30-40.png)
+[![](/assets/images/screen-shot-2014-04-28-at-22-30-40.png)]({{site.url}}/assets/images/screen-shot-2014-04-28-at-22-30-40.png)
 
 In the next screen click **Add** to launch the **Create Transport Zone** wizard. This same wizard can also be launched from the Dashboard screen in the **Summary of Transport Components** area click the **Add** button from the **Zones** row.
 
-[![](/images/screen-shot-2014-04-28-at-22-36-05.png)]({{site.url}}/images/screen-shot-2014-04-28-at-22-36-05.png)
+[![](/assets/images/screen-shot-2014-04-28-at-22-36-05.png)]({{site.url}}/assets/images/screen-shot-2014-04-28-at-22-36-05.png)
 
 Enter the name of the Transport Zone and click *Save & View*.
 
-[![](/images/screen-shot-2014-04-28-at-22-41-43.png)]({{site.url}}/images/screen-shot-2014-04-28-at-22-41-43.png)
+[![](/assets/images/screen-shot-2014-04-28-at-22-41-43.png)]({{site.url}}/assets/images/screen-shot-2014-04-28-at-22-41-43.png)
 
 The new transport zone will now be available.
 
-[![](/images/screen-shot-2014-04-29-at-00-11-59.png)]({{site.url}}/images/screen-shot-2014-04-29-at-00-11-59.png)
+[![](/assets/images/screen-shot-2014-04-29-at-00-11-59.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-00-11-59.png)
 
 With the Transport Zone created we can start configuring the transport nodes.
 
@@ -64,15 +64,15 @@ As we detailed in Part 1 the Service Node appliances are installed and configure
 
 From the **Summary of Transport Components** section in the Dashboard screen click **Add**.
 
-[![](/images/screen-shot-2014-04-29-at-00-29-14.png)]({{site.url}}/images/screen-shot-2014-04-29-at-00-29-14.png)
+[![](/assets/images/screen-shot-2014-04-29-at-00-29-14.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-00-29-14.png)
 
 The **Create Service Node** window will show up. In the first screen select **Service Node** as the **Transport Node Type** and click **Next**.
 
-[![](/images/screen-shot-2014-04-29-at-00-31-59.png)]({{site.url}}/images/screen-shot-2014-04-29-at-00-31-59.png)
+[![](/assets/images/screen-shot-2014-04-29-at-00-31-59.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-00-31-59.png)
 
 Enter the display name for the Service Node, in this case *nsxsn*.
 
-[![](/images/screen-shot-2014-04-29-at-00-39-15.png)]({{site.url}}/images/screen-shot-2014-04-29-at-00-39-15.png)
+[![](/assets/images/screen-shot-2014-04-29-at-00-39-15.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-00-39-15.png)
 
 In the Properties screen you will see three settings available.
 
@@ -82,7 +82,7 @@ In the Properties screen you will see three settings available.
 
 For our lab leaving the default values will suffice.
 
-[![](/images/screen-shot-2014-04-29-at-00-55-46.png)]({{site.url}}/images/screen-shot-2014-04-29-at-00-55-46.png)
+[![](/assets/images/screen-shot-2014-04-29-at-00-55-46.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-00-55-46.png)
 
 For the next step get the SSL certificate from the Service Node. Establish an SSH session with the appliance as `admin` user and use the `show switch certificate` command. The output of the command can be a bit large, we just need the certificate itself.
 
@@ -112,19 +112,19 @@ JWxXqjLo42B6fRUA04wF6tJKnu3KDaVFIx4ssvKw2Q5u6PNSf8I=
 
 Go back to the *Create Service Node* window and select **Security Certificate** as credential type and paste the certificate extracted from the Service Node in the **Security Certificate** text area.
 
-[![](/images/screen-shot-2014-04-29-at-01-08-43.png)]({{site.url}}/images/screen-shot-2014-04-29-at-01-08-43.png)
+[![](/assets/images/screen-shot-2014-04-29-at-01-08-43.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-01-08-43.png)
 
 The final step is to setup the **Transport Connectors**. Click **Add Connector**.
 
-[![](/images/screen-shot-2014-04-29-at-01-15-22.png)]({{site.url}}/images/screen-shot-2014-04-29-at-01-15-22.png)
+[![](/assets/images/screen-shot-2014-04-29-at-01-15-22.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-01-15-22.png)
 
 In the **Create Transport Connector** screen select STT as the **Transport Type**. Select the transport zone the we created before and enter the IP address of the Service Node.
 
-[![](/images/screen-shot-2014-04-29-at-01-20-01.png)]({{site.url}}/images/screen-shot-2014-04-29-at-01-20-01.png)
+[![](/assets/images/screen-shot-2014-04-29-at-01-20-01.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-01-20-01.png)
 
 Once the Connector is create click Save in the final screen and the new Service Node will be added to the NSX Controller.
 
-[![](/images/screen-shot-2014-04-29-at-01-25-08.png)]({{site.url}}/images/screen-shot-2014-04-29-at-01-25-08.png)
+[![](/assets/images/screen-shot-2014-04-29-at-01-25-08.png)]({{site.url}}/assets/images/screen-shot-2014-04-29-at-01-25-08.png)
 
 Now we need to finish the Gateway appliance configuration in a similar way as we did with the Service Node. Again from the Dashboard and the **Summary of Transport Components** section, launch the **Create Gateway** by clicking the **Add** button in the Gateways row. The rest of the steps are very similar to the Service Node process.
 
@@ -171,23 +171,23 @@ It's important to note that in an NSX deployment you may connect only one Gatewa
 
 From NSX Manager Dashboard go to **Summary of Transport Components** section and in **Gateway Services** click **Add**. In the first step of the Create Gateway Service wizard select the **L3 Gateway Service** from the drop-down menu.
 
-[![](/images/screen-shot-2014-05-03-at-13-11-51.png)]({{site.url}}/images/screen-shot-2014-05-03-at-13-11-51.png)
+[![](/assets/images/screen-shot-2014-05-03-at-13-11-51.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-13-11-51.png)
 
 In the second step configure the **Display Name** for the new service and click **Next**.
 
-[![](/images/screen-shot-2014-05-03-at-13-15-36.png)]({{site.url}}/images/screen-shot-2014-05-03-at-13-15-36.png)
+[![](/assets/images/screen-shot-2014-05-03-at-13-15-36.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-13-15-36.png)
 
 The third and final step is to bind our previously configured gateway node to the service. Click **Add Gateway**.
 
-[![](/images/screen-shot-2014-05-03-at-13-25-28.png)]({{site.url}}/images/screen-shot-2014-05-03-at-13-25-28.png)
+[![](/assets/images/screen-shot-2014-05-03-at-13-25-28.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-13-25-28.png)
 
 In the **Edit Gateway** pop-up select the UUID of the gateway node and the network interface to be used, leave the **Failure Zone ID** field blank. This last field is used for high availability of L3 services, I will try to write about this subject in a future post.
 
-[![](/images/screen-shot-2014-05-03-at-13-27-17.png)]({{site.url}}/images/screen-shot-2014-05-03-at-13-27-17.png)
+[![](/assets/images/screen-shot-2014-05-03-at-13-27-17.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-13-27-17.png)
 
 Click **Save & View** and check the newly created Gateway Service.
 
-[![](/images/screen-shot-2014-05-03-at-13-40-48.png)]({{site.url}}/images/screen-shot-2014-05-03-at-13-40-48.png)
+[![](/assets/images/screen-shot-2014-05-03-at-13-40-48.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-13-40-48.png)
 
 #### L2 Service Setup
 
@@ -197,7 +197,7 @@ To create a new L2 Gateway Service follow the same procedure as with L3 one and 
 -   Enter the name of the new service.
 -   Add the gateway and fill in the UUID and network interface fields, this screen is slightly different since there is no Failure Zone ID field.
 
-[![](/images/screen-shot-2014-05-03-at-19-06-50.png)]({{site.url}}/images/screen-shot-2014-05-03-at-19-06-50.png)
+[![](/assets/images/screen-shot-2014-05-03-at-19-06-50.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-19-06-50.png)
 
 Please have in mind that the example of the above screenshot will fail because you cannot use the same gateway appliance for two different L2 or L3 Gateway Services, if you need an L2 service deploy a new gateway node and configure it following the above steps.
 
@@ -219,11 +219,11 @@ Before starting with a simple walk-through of the process we need first to descr
 
 Let's start from the begging and create a Logical Switch. From **Summary of Logical Components** and in the **Dashboard** screen click **Add** in the Switches row.
 
-[![](/images/screen-shot-2014-05-05-at-22-09-20.png)]({{site.url}}/images/screen-shot-2014-05-05-at-22-09-20.png)
+[![](/assets/images/screen-shot-2014-05-05-at-22-09-20.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-09-20.png)
 
 Provide the name of new switch and click **Next**.
 
-[![](/images/screen-shot-2014-05-05-at-22-14-23.png)]({{site.url}}/images/screen-shot-2014-05-05-at-22-14-23.png)
+[![](/assets/images/screen-shot-2014-05-05-at-22-14-23.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-14-23.png)
 
 In **Properties** there are two different settings:
 
@@ -232,7 +232,7 @@ In **Properties** there are two different settings:
     -   Service Node - Traffic is sent  to the NSX Service Node to be flooded to L2 logical segment. This is the default and recommended setting.
     -   Source Node - BUM traffic is handled directly by the source hypervisor instead of a Service Node.
 
-[![](/images/screen-shot-2014-05-05-at-22-16-54.png)]({{site.url}}/images/screen-shot-2014-05-05-at-22-16-54.png)
+[![](/assets/images/screen-shot-2014-05-05-at-22-16-54.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-16-54.png)
 
 Next specify the transport binding for the logical switch. Click **Add Binding** and select the **Transport Type** and the **Transport Zone UUID**. I've selected STT our previously created transport zone respectively. For the transport type there are several types available:
 
@@ -243,7 +243,7 @@ Next specify the transport binding for the logical switch. Click **Add Binding**
 -   IPsec STT
 -   VXLAN
 
-[![](/images/screen-shot-2014-05-05-at-22-27-11.png)]({{site.url}}/images/screen-shot-2014-05-05-at-22-27-11.png)
+[![](/assets/images/screen-shot-2014-05-05-at-22-27-11.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-27-11.png)
 
 Click **Save & View** to review our new logical switch, leave the router connection for later.
 
@@ -253,11 +253,11 @@ Once one or more logical switches have been created we can start adding ports to
 
 Select the Logical Switch the port will belong to.
 
-[![](/images/screen-shot-2014-05-05-at-22-57-21.png)]({{site.url}}/images/screen-shot-2014-05-05-at-22-57-21.png)
+[![](/assets/images/screen-shot-2014-05-05-at-22-57-21.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-57-21.png)
 
 In **Basics** provide a descriptive name for the port, I tend to use the convention `vm_name-port`.
 
-[![](/images/screen-shot-2014-05-05-at-23-01-00.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-01-00.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-01-00.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-01-00.png)
 
 In the **Properties** screen you have the following filed available:
 
@@ -265,11 +265,11 @@ In the **Properties** screen you have the following filed available:
 -   Admin Status Enabled - Enabled by default.
 -   Logical Queue UUID - An optional parameter used to link the port to a QOS policy.
 
-[![](/images/screen-shot-2014-05-05-at-23-07-01.png)]({{site.url}}/images/screen-shot-2014-05-05-at-23-07-01.png)
+[![](/assets/images/screen-shot-2014-05-05-at-23-07-01.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-07-01.png)
 
 Leave the **Mirror Targets** settings with the default values and move forward to the **Attachment** screen. Select VIF, virtual machine interface, as **Attachment Type**, select a hypervisor and the network interface of the virtual machine.
 
-[![](/images/screen-shot-2014-05-06-at-01-32-23.png)]({{site.url}}/images/screen-shot-2014-05-06-at-01-32-23.png)
+[![](/assets/images/screen-shot-2014-05-06-at-01-32-23.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-01-32-23.png)
 
 Attachments can all be of type:
 
@@ -282,13 +282,13 @@ Attachments can all be of type:
 
 For example an Extended Network Bridged attachment should be configured like this.
 
-[![](/images/screen-shot-2014-05-06-at-01-36-12.png)]({{site.url}}/images/screen-shot-2014-05-06-at-01-36-12.png)
+[![](/assets/images/screen-shot-2014-05-06-at-01-36-12.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-01-36-12.png)
 
 ### Create a Logical Router
 
 Launch the **Create Logical Router** dialog and set the name of the new router in the first screen.
 
-[![](/images/screen-shot-2014-05-06-at-01-44-19.png)]({{site.url}}/images/screen-shot-2014-05-06-at-01-44-19.png)
+[![](/assets/images/screen-shot-2014-05-06-at-01-44-19.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-01-44-19.png)
 
 In Properties select the Routing Type:
 
@@ -299,17 +299,17 @@ Tick **Enable NAT Synchronization** checkbox in order to provide NAT service thr
 
 **Replication Mode** works in the same way as in the Logical Switch, **Service Node** is selected by default.
 
-[![](/images/screen-shot-2014-05-06-at-01-55-07.png)]({{site.url}}/images/screen-shot-2014-05-06-at-01-55-07.png)
+[![](/assets/images/screen-shot-2014-05-06-at-01-55-07.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-01-55-07.png)
 
 Configure the **Distributed Logical Router**. If the checkbox is unticked it means the logical router will be a **centralized logical router** and all network traffic between virtual machines will be forwarded to the NSX Service Nodes. On the contrary if you tick the checkbox it means it will be a **distributed logical router** and it will provide a one-hop routing of VM to VM traffic, to be able to use this feature all hypervisors running VMs using this router must be in the same transport zone.
 
-[![](/images/screen-shot-2014-05-06-at-02-03-39.png)]({{site.url}}/images/screen-shot-2014-05-06-at-02-03-39.png)
+[![](/assets/images/screen-shot-2014-05-06-at-02-03-39.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-02-03-39.png)
 
 Click **Save & View** to finish the process and review the new router. Optionally at the last step you can assign an L3 Gateway Service and configure the corresponding Logical Router Port.
 
 Select the UUID of the desired gateway service and configure the Logical Router Port settings. In the example I choose the basic configuration since I only need to provide the IP address for the port.
 
-[![](/images/screen-shot-2014-05-06-at-02-12-52.png)]({{site.url}}/images/screen-shot-2014-05-06-at-02-12-52.png)
+[![](/assets/images/screen-shot-2014-05-06-at-02-12-52.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-02-12-52.png)
 
 ### Add a Logical Router Port
 
@@ -317,11 +317,11 @@ To create and assign a logical port to an existent router launch the correspondi
 
 Select the Logical Router UUID from the drop-down.
 
-[![](/images/screen-shot-2014-05-06-at-22-12-57.png)]({{site.url}}/images/screen-shot-2014-05-06-at-22-12-57.png)
+[![](/assets/images/screen-shot-2014-05-06-at-22-12-57.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-22-12-57.png)
 
 Enter a name for the port and click Next to move to **Properties** step. The **Port Number** and **MAC Address** fields are optional, leave **Admin Status Enabled** checked. In the **IP Addresses** table add the required IP address, must be in IPv4 CIDR notation.
 
-[![](/images/screen-shot-2014-05-06-at-22-19-26.png)]({{site.url}}/images/screen-shot-2014-05-06-at-22-19-26.png)
+[![](/assets/images/screen-shot-2014-05-06-at-22-19-26.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-22-19-26.png)
 
 Configure the attachment. For router ports the attachments can be set to one of the following types:
 
@@ -331,7 +331,7 @@ Configure the attachment. For router ports the attachments can be set to one of 
 
 For my example lab this time I configured the attachment as a **Patch** one. You need to select the **Logical Switch UUID** and the **Peer Port UUID**, this peer port is port in the logical switch and you have to configure it either before creating the router port or you can create it at this step.
 
-[![](/images/screen-shot-2014-05-06-at-22-36-10.png)]({{site.url}}/images/screen-shot-2014-05-06-at-22-36-10.png)
+[![](/assets/images/screen-shot-2014-05-06-at-22-36-10.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-22-36-10.png)
 
 Click **Save** to finish the creation process.
 

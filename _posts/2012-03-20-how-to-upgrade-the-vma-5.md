@@ -1,8 +1,8 @@
 ---
-layout: post
 title: How to upgrade the vMA 5
 date: 2012-03-20
 type: post
+classes: wide
 published: true
 status: publish
 categories:
@@ -28,27 +28,27 @@ As you should remember from my [first post]({% post_url 2011-09-21-a-first-look-
 
 First access the web interface using `vi-admin` user as always.
 
-[![](/images/vma_vima_login.png "vMA login screen")]({{site.url}}/images/vma_vima_login.png)
+[![](/assets/images/vma_vima_login.png "vMA login screen")]({{site.url}}/assets/images/vma_vima_login.png)
 
 From the main screen go to the **Update** tab. In the **Status** screen click on **Check Updates**.
 
-[![](/images/vma_check_updates.png "Check Updates")]({{site.url}}/images/vma_check_updates.png)
+[![](/assets/images/vma_check_updates.png "Check Updates")]({{site.url}}/assets/images/vma_check_updates.png)
 
 After a few seconds a message will appear showing the new update available.
 
-[![](/images/vma_available_updates_screen.png "Available Updates")]({{site.url}}/images/vma_available_updates_screen.png)
+[![](/assets/images/vma_available_updates_screen.png "Available Updates")]({{site.url}}/assets/images/vma_available_updates_screen.png)
 
 Click on **Install Updates** and after asking for confirmation the update process will start.
 
-[![](/images/vma_installing_updates.png "Installing Updates")]({{site.url}}/images/vma_installing_updates.png)
+[![](/assets/images/vma_installing_updates.png "Installing Updates")]({{site.url}}/assets/images/vma_installing_updates.png)
 
 Once the update process is complete the appliance will ask for a system reboot.
 
-[![](/images/vma_system_reboot.png "System reboot required")]({{site.url}}/images/vma_system_reboot.png)
+[![](/assets/images/vma_system_reboot.png "System reboot required")]({{site.url}}/assets/images/vma_system_reboot.png)
 
 Go to the System tab and perform the reboot. After the reboot is done you can check the new version in the appliance console,
 
-[![](/images/vma_service_console.png "New vMA version")]({{site.url}}/images/vma_service_console.png)
+[![](/assets/images/vma_service_console.png "New vMA version")]({{site.url}}/assets/images/vma_service_console.png)
 
 And in the `/etc/vma-release` file.
 
