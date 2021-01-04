@@ -1,5 +1,5 @@
 ---
-title: How to install the vCloud Adapter in vC Ops 5.6
+title: How to install the vCloud Adapter in vCenter Operations 5.6
 date: 2012-12-21
 type: post
 classes: wide
@@ -19,7 +19,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Installing the vCloud Director adapter, or any vC Ops adapter, is a relatively easy task as we will explain in this post.
+Installing the vCloud Director adapter, or any vCenter Operations adapter, is a relatively easy task as we will explain in this post.
 
 Firstly you need to download the adapter from [ftp.integrien.com](ftp://ftp.integrien.com). Choose the `.PAK` file.
 
