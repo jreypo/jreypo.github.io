@@ -29,21 +29,21 @@ During this weeks I've been configuring APA failover groups in some of  my blad
 
 Log into the server SMH and go to **Tools** -> **Network Interface Configuration** -> **Auto Port Aggregation**.
 
-[![SMH Network Tools](/images/smh_network_tools_apa.jpg "SMH APA")]({{site.url}}/images/smh_network_tools_apa.jpg)
+[![SMH Network Tools](/assets/images/smh_network_tools_apa.jpg "SMH APA")]({{site.url}}/assets/images/smh_network_tools_apa.jpg)
 
 Now click on **Create Failover Group** and select the interfaces to add, you can also configure the advanced parameters for the group, when you're done click OK to finish the operation.
 
-[![APA Failover configuration](/images/apa_failover_advanced.jpg "APA Failover configuration")]({{site.url}}/images/apa_failover_advanced.jpg)
+[![APA Failover configuration](/assets/images/apa_failover_advanced.jpg "APA Failover configuration")]({{site.url}}/assets/images/apa_failover_advanced.jpg)
 
 Now  in the main page of APA the new group will be shown instead of the LAN interfaces the are part of the group:
 
-[![APA Main Page](/images/apa_finished.jpg "APA Main page")]({{site.url}}/images/apa_finished.jpg)
+[![APA Main Page](/assets/images/apa_finished.jpg "APA Main page")]({{site.url}}/assets/images/apa_finished.jpg)
 
 And this is it, the new APA Failover Group is configured and completely transparent to the users. From this point you can show the information about the newly created APA interface.
 
-[![APA Interface Configuration](/images/apa_showing_interface1.jpg "APA Interface Configuration")]({{site.url}}/images/apa_showing_interface1.jpg)
+[![APA Interface Configuration](/assets/images/apa_showing_interface1.jpg "APA Interface Configuration")]({{site.url}}/assets/images/apa_showing_interface1.jpg)
 
-[![APA Configuration](/images/apa_showing_config1.jpg "APA Configuration")]({{site.url}}/images/apa_showing_config1.jpg)
+[![APA Configuration](/assets/images/apa_showing_config1.jpg "APA Configuration")]({{site.url}}/assets/images/apa_showing_config1.jpg)
 
 ### nwmgr command
 
