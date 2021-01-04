@@ -103,7 +103,7 @@ Since the vCenter database is active the operation is not allowed, to force the 
 
 Then start again the database manager.
 
-[![](/assets/images/start_db2_db_manager.png "Start DB2 database manager")]{{site.url}}/assets/images/start_db2_db_manager.png)
+[![](/assets/images/start_db2_db_manager.png "Start DB2 database manager")]({{site.url}}/assets/images/start_db2_db_manager.png)
 
 We are going now to get the running instances. There are two commands to perform this operation, `db2ilist` and `db2 get instance`.
 
