@@ -26,7 +26,7 @@ It was an amazing experience for me, learning from great engineers and PMs in th
 
 [![](/assets/images/oh-yeah.jpg)]({{site.url}}/assets/images/oh-yeah.jpg)
 
-The two managers in the team and our director gave the incredible opportunity of joining their team, the same team I had been working with for none months. In November I officially joined as Senior Program Manager. If you are asking yourself if I will move to Redmond when all this COVID shit is over the answer is no, I will stay in Madrid which is perfect for me since I cannot move to the US for personal reasons, at least for now.
+The two managers in the team and our director gave me the incredible opportunity of joining their team, the same team I had been working with for nine months. In November I officially joined as Senior Program Manager. If you are asking yourself if I will move to Redmond when all this COVID shit is over the answer is no, I will stay in Madrid which is perfect for me since I cannot move to the US for personal reasons, at least for now.
 
 So reflecting back 2020 has been a great year for me in many ways, I have been to achieve a goal I set many years ago whe I was working at VMware, to join an engineering team and stay in Spain at the same time. I cannot express how grateful I am for this, specially to Eduardo, Ram and Brett who decided to trust me and to my former manager Manuel who supported me in this journey. 
 
