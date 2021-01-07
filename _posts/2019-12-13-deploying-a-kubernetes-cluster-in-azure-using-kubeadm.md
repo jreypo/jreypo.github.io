@@ -25,15 +25,15 @@ author: juan_manuel_rey
 comments: true
 ---
 
-The easisest way to have a [Kubernetes](https://kubernetes.io/) cluster up and running in Azure in a short amount of time is by using [AKS service](https://azure.microsoft.com/es-es/services/kubernetes-service/), also if you want a more granular control of your cluster or a more customized cluster you can alway use [AKS-Egine](https://github.com/azure/aks-engine).
+The easiest way to have a [Kubernetes](https://kubernetes.io/) cluster up and running in Azure in a short amount of time is by using [AKS service](https://azure.microsoft.com/es-es/services/kubernetes-service/), also if you want a more granular control of your cluster or a more customized cluster you can alway use [AKS-Egine](https://github.com/azure/aks-engine).
 
 However this time I wanted to take a different approach and use a more widely used tool very popular amongst the Kubernetes community like `kuebadm`. I like `kubeadm` as a fantastic way to learn the internals of Kubernetes, also I used the content of this post as part of the preparation for [CKA certification](https://www.cncf.io/certification/cka/) exam, which I am planning to take in December or January. 
 
 # Create Azure infrastructure
 
-The first thing we myst do is create the necessary infrastructure in our subscription, this includes the instances and the network. 
+The first thing we myst do is create the necessary infrastructure in our subscription, this includes the instances and the network.
 
-Create the resource group
+Create the resource group.
 
 ```
 az group create --name k8s-lab-rg3 --location westeurope
@@ -91,9 +91,9 @@ az vm list --resource-group $RG -d
 
 # Prepare the cluster master and node instances 
 
-With the instances up and running we need to install the software we will use to create our Kubernetes cluster. 
+With the instances up and running we need to install the software we will use to create our Kubernetes cluster.
 
-Access the master and install `docker`, install one of the validated Docker releases for the Kubernetes to be installed. In my case I will use Kubernetes 1.16 and Docker 18.09.
+Access the master and install `docker`, remember to install a Docker release validated for Kubernetes. In my case I will use Kubernetes 1.16 and Docker 18.09.
 
 ```
 azureuser@kube-master-lab:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -151,7 +151,7 @@ kubectl set on hold.
 azureuser@kube-master-lab:~$
 ```
 
-Repeat the same process for each of the nodes either manually or by usign the below script, which can also be found as a [Gist on my GitHub](https://gist.github.com/jreypo/8264157231a649fe4d65762917d6a27f).
+Repeat the same process for each of the nodes either manually or by using the below script, which can also be found as a [Gist on my GitHub](https://gist.github.com/jreypo/8264157231a649fe4d65762917d6a27f).
 
 ```bash
 #!/bin/bash
@@ -195,9 +195,9 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ## Create `kubeadm` configuration
 
-To bootstrap a cluster integrated with Azure, this is using the Azure cloud provider, using `kubeadm` we will need a `kuebadm` configuration file. In this file we will specify the Cluster Manager and API Server parameters instructing `kubeadm` to configure it with `--cloud-provider=azure` flag. For more information on Kubernetes cloud providres with `kubeadm` review the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/?source=post_page-----357210e2eb50----------------------#kubeadm).
+To bootstrap a cluster integrated with Azure, this is using the Azure cloud provider, using `kubeadm` we will need a `kuebadm` configuration file. In this file we will specify the Cluster Manager and API Server parameters instructing `kubeadm` to configure it with `--cloud-provider=azure` flag. For more information on Kubernetes cloud providers with `kubeadm` review the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/?source=post_page-----357210e2eb50----------------------#kubeadm).
 
-Below is my `kubeadm.yaml` configuration file, you can use it and adjuts the networking parameters to your preferences. 
+Below is my `kubeadm.yaml` configuration file, you can use it and adjust the networking parameters to your preference.
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -307,7 +307,7 @@ kubeadm join 172.10.1.4:6443 --token 81l08m.0g09hbdekfxczgs0 \
 azureuser@kube-master-lab:~$
 ```
 
-As the output suggets create the `kubeconfig` to start using the cluster. 
+As the output suggests create a `kubeconfig` file to start using the cluster.
 
 ```
 azureuser@kube-master-lab:~$ mkdir -p $HOME/.kube
@@ -375,7 +375,7 @@ azureuser@kube-master=lab:~$
 
 ## Bootstrap the nodes
 
-SSH into the first node and execute `kubeadm join` from master `kuebadm init` output. If you did not take note of the command or more thant 24 hours have passed do not worry since we can easily reconstruct it with the following commands. 
+SSH into the first node and execute `kubeadm join` from master `kuebadm init` output. If you did not take note of the command or more than 24 hours have passed do not worry since we can easily reconstruct it with the following commands.
 
 ```
 azureuser@kube-master-lab:~$ kubeadm token create
@@ -425,6 +425,6 @@ azureuser@kube-master-lab:~$
 
 With the nodes properly joined the cluster is ready to be used. 
 
-Thanks for reading! Hope this whole procedure has been helpful and instructive, as always if you have any comments, questions or suggestions please leave them in the comments or reach out to me on Twitter. 
+Thanks for reading! Hope this whole procedure has been helpful and instructive, as always if you have any comments, questions or suggestions please leave them in the comments or reach out to me on Twitter.
 
 --Juanma
