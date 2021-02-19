@@ -24,7 +24,7 @@ As I said in my previous post I moved last year to Microsoft Azure engineering i
 
 # What is Azure VMware Solution?
 
-Well, that's easy. Azure VMware Solution, or AVS, is a first-party Azure service that allows customers to run native VMware workloads on Azure. The important part if **first-party**, because **AVS is Azure**, it not a third party service or a partner delivered service, Microsoft operates and supports the service which has been built in collaboration with VMware. It provides the customer with a vSphere-based Private Cloud, built on dedicated hardware on an Azure region.
+Well, that's easy. Azure VMware Solution, or AVS, is a first-party Azure service that allows customers to run native VMware workloads on Azure. The important part is **first-party**, because **AVS is Azure**, it not a third party service or a partner delivered service, Microsoft operates and supports the service which has been built in collaboration with VMware. It provides the customer with a vSphere-based Private Cloud, built on dedicated hardware on an Azure region.
 
 All provisioned private clouds have vCenter Server, vSAN, vSphere, and NSX-T. You can migrate workloads from your on-premises environments, deploy new virtual machines (VMs), and consume Azure services from your private clouds. VMware HCX Advanced is also provided in the AVS software stack to enable the workload migration scenarios and limited disaster recovery
 
