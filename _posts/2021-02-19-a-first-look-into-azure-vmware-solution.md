@@ -2,6 +2,7 @@
 title: A first look into Azure VMware Solution
 date: 2021-02-19 15:00:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:
