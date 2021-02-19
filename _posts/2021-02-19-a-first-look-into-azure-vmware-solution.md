@@ -1,5 +1,4 @@
 ---
-layout: post
 title: A first look into Azure VMware Solution
 date: 2021-02-19 15:00:00 +0100
 type: post
@@ -51,7 +50,7 @@ On the hardware side AV36 is the only SKU available today to deploy your AVS Pri
 
 As seen in the previous section AVS is built on top of VMware Cloud Foundation, deployed on dedicated, bare-metal Azure hosts. The architecture of the service is more or less like this one.
 
-[![](/images/avs_architecture.png)]({{site.url}}/images//avs_architecture.png)
+[![](/assets/images/avs_architecture.png)]({{site.url}}/images//avs_architecture.png)
 
 To enable the connectivity between AVS workloads and the main Azure fabric [ExpressRoute Gloabl Reach](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-global-reach) is used. ExpressRoute is a dedicated line that enables customers to connect their on-premises environment into Azure and Global Reach is an ExpressRoute add-on that allows to link ExpressRoute circuits together to make a private network between customer on-premises networks, in this case is used to link AVS ExpressRoute circuit with an existing customer circuit. Since transitive routing between circuits is not enabled on Azure ExpressRoute Gateways, the usage of Global Reach is mandatory in order to interconnect an on-premises vSphere environment and AVS.
 
@@ -78,7 +77,7 @@ Microsoft.AVS  RegistrationRequired  Registered
 
 Once the provider is registered go to [Azure Portal](https://portal.azure.com), on the main screen click on **Create a Resource** and search for Azure VMware Solution to deploy a new Private Cloud.
 
-[![](/images/avs-create-screen.png)]({{site.url}}/images/avs-create-screen.png)
+[![](/assets/images/avs-create-screen.png)]({{site.url}}/images/avs-create-screen.png)
 
 In the above screen the following parameters are needed.
 
@@ -113,11 +112,11 @@ Once the deployment is complete the quickest way to access your private cloud wo
 
 vCenter Server and NSX-T Managers URLs and credentials can be retrieved from Azure portal in the **Identity** blade of the AVS private cloud.
 
-[![](/images/avs-identity.png)]({{site.url}}/images/avs-identity.png)
+[![](/assets/images/avs-identity.png)]({{site.url}}/images/avs-identity.png)
 
 From the desktop of the jumpbox access vCenter Server and NSX-T Manager to verify that everything is up and runnning.
 
-[![](/images/avs-identity.png)]({{site.url}}/images/avs-identity.png)
+[![](/assets/images/avs-bastion.png)]({{site.url}}/images/avs-bastion.png)
 
 At this point the next steps will be configure NSX-T DHCP and network segments and deploy a virtual machine, i encourage you to review Azure VMware Solution documentation for the details. I will go more deep into NSX-T and general network architecture in AVS in a future post.
 
