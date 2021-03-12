@@ -163,11 +163,11 @@ sudo systemctl start pi-hole.service
 
 Access yoour Pi-Hole at `http://pi_hole_ip/admin`, login and see the magic happen :)
 
-[![](/assets/images/pi-hole.png)]({{site.url}}/images/pi-hole.png)
+[![](/assets/images/pi-hole.png)]({{site.url}}/assets/images/pi-hole.png)
 
 FInally I installed `cockpit-podman` package to keep track of this and future podman containers from [Cockpit](https://cockpit-project.org/). 
 
-[![](/assets/images/cockpit-podman.png)]({{site.url}}/images/cockpit-podman.png)
+[![](/assets/images/cockpit-podman.png)]({{site.url}}/assets/images/cockpit-podman.png)
 
 Please left any comments about your usage of pi-hole, experience with podman, etc.
 
