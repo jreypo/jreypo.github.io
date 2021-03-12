@@ -2,6 +2,7 @@
 title: Running pi-hole as a podman container in Fedora
 date: 2021-03-12 19:00:00 +0100
 type: post
+classes: wide
 published: true
 status: publish
 categories:
