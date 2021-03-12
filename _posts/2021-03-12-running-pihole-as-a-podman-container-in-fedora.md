@@ -31,10 +31,10 @@ Install Fedora 33 in a virtual machine or like in my case in a physical system, 
 
 After the OS is install run  `dnf update` to get latest Fedora updates and install Podman.
 
-'''
+```
 sudo dnf update -y
 sudo dnf install -y podman 
-'''
+```
 
 Next we need to adjust Fedora network configuration. By default Fedora Server comes with [**NetworkManager**](https://wiki.gnome.org/Projects/NetworkManager/) to manage networking and `systemd-resolved` service enabled, we will maintain **NetworkManager** but will configure static `ipv4` addressing, FirewallD DNS servers using `nmcli` tool and disable `systemd-resolved`.
 
