@@ -29,7 +29,7 @@ If you have never heard about Podman, or Pod Manager, it is a daemonless contain
 
 Install Fedora 33 in a virtual machine or like in my case in a physical system, is up to you to decide the type of installation but for me minimal installation is more than enough to keep the system and its attack surface as small as possible. 
 
-After the OS is install run  `dnf update` to get latest Fedora updates and install Podman.
+After the OS is installed run `dnf update` to get latest Fedora updates and install Podman.
 
 ```
 sudo dnf update -y
