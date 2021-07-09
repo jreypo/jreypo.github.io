@@ -1,5 +1,4 @@
 ---
-layout: post
 title: A look into CBL-Mariner, Microsoft's internal Linux distribution
 date: 2021-07-09 13:45:00 +0100
 type: post
