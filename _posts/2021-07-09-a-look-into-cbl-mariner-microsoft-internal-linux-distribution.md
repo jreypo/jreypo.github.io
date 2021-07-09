@@ -55,7 +55,7 @@ The installation process is very fast in both cases, it took around 29 seconds f
 
 ## CBL-Mariner overview
 
-CBL-Mariner feels like similar Linux distros like Fedora or Photon-OS, which is expected since in the [Acknowledgments](https://github.com/microsoft/CBL-Mariner#acknowledgments) section of their GitHub repo they list both projects because the team used their SPEC files as starting point and reference. 
+CBL-Mariner feels very similar to other Linux distros like Fedora or Photon-OS, which is expected since in the [Acknowledgments](https://github.com/microsoft/CBL-Mariner#acknowledgments) section of their GitHub repo they list both projects because the team used their SPEC files as starting point and reference. 
 
 As anyone will expect in any modern Linux distro `systemd` it is used as CBL-Mariner system manager. After installing my Mariner VM I had to access it throught vSphere console becuase there is no SSH daemon installed in the default installation but it can be easily installed using `tdnf`.
 
