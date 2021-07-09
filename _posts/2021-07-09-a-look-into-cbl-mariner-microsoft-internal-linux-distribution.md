@@ -73,12 +73,12 @@ CBL-Mariner also supports an image-based update mechanism for atomic servicing a
 In terms of software available after the installation there are two pacakges repositories, `base` and `update`, configured in the system. 
 
 ```
-jreypo@cbl-mariner [ ~ ]$ sudo tdnf repolist
+vadmin@cbl-mariner [ ~ ]$ sudo tdnf repolist
 Loaded plugin: tdnfrepogpgcheck
 repo id             repo name                               status
 mariner-official-baseCBL-Mariner Official Base 1.0 x86_64    enabled
 mariner-official-updateCBL-Mariner Official Update 1.0 x86_64  enabled
-jreypo@cbl-mariner [ ~ ]$
+vadmin@cbl-mariner [ ~ ]$
 ```
 Around 3300 pacakges are available between both repositories. In my case it was a very pleasnt surprise to find `open-vm-tools` package, since I run my CBL-Mariner instances on vSphere is fantastic to have the VMware Tools packages available. 
 
