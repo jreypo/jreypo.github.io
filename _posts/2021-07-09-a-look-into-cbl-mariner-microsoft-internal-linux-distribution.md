@@ -18,7 +18,7 @@ comments: true
 
 Mariner or more exactly CBL-Mariner where CBL stands for *Common Base Linux*, is a Linux distribution created by Microsoft's Linux System Group which is the same team at Microsoft which created the [Linux kernel used for Windows Subsystem for Linux version 2](https://github.com/microsoft/WSL2-Linux-Kernel), or WSL2. The goal of Mariner is to be used as an internal Linux distribution for Microsoft’s engineering teams to build cloud infrastructure and edge products and services. 
 
-Of course Mariner is open source and it has its own repo under [Microsoft's GitHub](https://github.com/microsoft/CBL-Mariner) organization. No ISOs or images of Mariner are provided, however the repo has instructions to build them on Ubuntu 18.04. There are a series of prerrequistes listed in this [GitHub page](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/building/prerequisites.md) that roughly include Docker, RPM tools, ISO build tools and Golang, amongst others. 
+Of course Mariner is open source and it has its own repo under [Microsoft's GitHub](https://github.com/microsoft/CBL-Mariner) organization. No ISOs or images of Mariner are provided, however the repo has instructions to build them on Ubuntu 18.04. There are a series of prerequisites listed in this [GitHub page](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/building/prerequisites.md) that roughly include Docker, RPM tools, ISO build tools and Golang, amongst others. 
 
 The build process for an ISO is very straightforward, it relays on pre-compiled RPM packages from [CBL-Mariner package repository](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/building/prerequisites.md). Since I wanted to install Mariner on my vSphere 7 homelab I choose to create the ISO.
 
@@ -55,7 +55,7 @@ The installation process is very fast in both cases, it took around 29 seconds f
 
 CBL-Mariner feels very similar to other Linux distros like Fedora or Photon-OS, which is expected since in the [Acknowledgments](https://github.com/microsoft/CBL-Mariner#acknowledgments) section of their GitHub repo they list both projects because the team used their SPEC files as starting point and reference. 
 
-As anyone will expect in any modern Linux distro `systemd` it is used as CBL-Mariner system manager. After installing my Mariner VM I had to access it throught vSphere console becuase there is no SSH daemon installed in the default installation but it can be easily installed using `tdnf`.
+As anyone will expect in any modern Linux distro `systemd` it is used as CBL-Mariner system manager. After installing my Mariner VM I had to access it through vSphere console because there is no SSH daemon installed in the default installation, but it can be easily installed using `tdnf`.
 
 ```
 sudo tdnf install -y openssh-server
@@ -68,7 +68,7 @@ CBL-Mariner package system is RPM-based. The package update system uses both `dn
 
 CBL-Mariner also supports an image-based update mechanism for atomic servicing and rollback using [RPM-OSTree](https://rpm-ostree.readthedocs.io/en/stable/), `rpm-ostree` is an open source tool based on [OSTree](https://ostreedev.github.io/ostree/introduction/) to manage bootable, immutable, versioned filesystem trees. The idea behind rpm-ostree is to use a client-server architecture to keep Linux hosts updated and in sync with the latest packages in a reliable manner.
 
-In terms of software available after the installation there are two pacakges repositories, `base` and `update`, configured in the system. 
+In terms of software available after the installation there are two package repositories, `base` and `update`, configured in the system. 
 
 ```
 vadmin@cbl-mariner [ ~ ]$ sudo tdnf repolist
@@ -78,13 +78,13 @@ mariner-official-baseCBL-Mariner Official Base 1.0 x86_64    enabled
 mariner-official-updateCBL-Mariner Official Update 1.0 x86_64  enabled
 vadmin@cbl-mariner [ ~ ]$
 ```
-Around 3300 pacakges are available between both repositories. In my case it was a very pleasnt surprise to find `open-vm-tools` package, since I run my CBL-Mariner instances on vSphere is fantastic to have the VMware Tools packages available. 
+Around 3300 packages are available between both repositories. In my case it was a very pleasant surprise to find `open-vm-tools` package, since I run my CBL-Mariner instances on vSphere is fantastic to have the VMware Tools packages available. 
 
 ### Security by default
 
 CBL-Mariner follows the secure-by-default principle, most aspects of the OS have been built with an emphasis on security. It comes with a hardened kernel, signed updates, ASLR, compiler-based hardening and tamper-resistant logs amongst many features.
 
-All Mariner security features are listed in [CBL-Mariner's GitHub repositry](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/security/security-features.md). 
+All Mariner security features are listed in [CBL-Mariner's GitHub repository](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/security/security-features.md). 
 
 I hope this quick overview of CBL-Mariner has been interesting. I encourage you to look at Mariner's GitHub repo and to create your own ISO and/or VHDX images. 
 
