@@ -84,7 +84,7 @@ Around 3300 pacakges are available between both repositories. In my case it was 
 
 ### Security by default
 
-CBL-Mariner follows the secure-by-default principle, most aspects of the OS have been built with an emphasis on security. It comes with a hardened kernel, signed updates, ASLR, compiler-based hardening and tamper-resistant logs amongst mamy features.
+CBL-Mariner follows the secure-by-default principle, most aspects of the OS have been built with an emphasis on security. It comes with a hardened kernel, signed updates, ASLR, compiler-based hardening and tamper-resistant logs amongst many features.
 
 All Mariner security features are listed in [CBL-Mariner's GitHub repositry](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/security/security-features.md). 
 
