@@ -63,7 +63,7 @@ plugins:
 author:
   name   : "Juan Manuel Rey"
   avatar : "/assets/images/bio-photo.jpeg"
-  bio    : "Unix Geek. Sysadmin by heart. Creating more problems than solving them in Microsoft Azure engineering."
+  bio    : "Nerd. Engineer. Unix Geek. Sysadmin by heart. Creating more problems than solving them in Microsoft Azure engineering."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
