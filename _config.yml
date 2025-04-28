@@ -29,7 +29,7 @@ comments:
 
 # Build settings
 markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes@4.27.0
+remote_theme: mmistakes/minimal-mistakes@4.26.2
 # Outputting
 permalink: /:year/:month/:day/:title/
 paginate: 5 # amount of posts to show
@@ -68,7 +68,7 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://blog.jreypo.io"
-    - label: "X / Twitter"
+    - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
@@ -88,7 +88,7 @@ analytics:
 bing_site_verification   : 9E4C27EEF9E87E298B32ED7B5CAB0C85
 footer:
   links:
-    - label: "X / Twitter"
+    - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
