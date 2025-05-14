@@ -16,7 +16,7 @@ tags:
 
 Welcome to the next article in the Azure DevOps Server series. In this article, we’ll dive into what Variable Groups are, how they can be used securely in Azure DevOps Server, and walk through some practical examples.
 
-In self-hosted DevOps environments, keeping secrets secure while maintaining flexibility can be a challenge. Let's be honest, we are all guilty of hardcoding credentials in a local script to keep things simple and move fast but that is not the proper way to do it and if you are using your homelab to level up your skills, better do it the right way since the beginning.
+In self-hosted DevOps environments, keeping secrets secure while maintaining flexibility can be a challenge. Let's be honest, we are all guilty of hardcoding credentials in a local script to keep things simple and move fast. But that is not the proper way to do it and if you are using your homelab to level up your skills, better do it the right way since the beginning.
 
 **Azure DevOps Server** offers a powerful yet often underutilized feature—**Variable Groups**—to help manage credentials, tokens, and configuration values safely across your pipelines.
 
@@ -140,6 +140,6 @@ steps:
 
 If you're managing your own build infrastructure with Azure DevOps Server, **Variable Groups** are an indispensable tool for staying secure and scalable. Take the time to centralize secrets, enforce permissions, and eliminate credential sprawl across your pipelines.
 
-In the next article I will cover self-hosted agents, whet they are, how the y work and how to deploy them in you lab.
+In the next article I will cover self-hosted agents, what they are, how they work and how to deploy different types of self-hosted in you lab.
 
 --Juanma
