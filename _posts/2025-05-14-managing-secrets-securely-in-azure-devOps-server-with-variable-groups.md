@@ -1,5 +1,5 @@
 ---
-title: "Managing Secrets Securely in Azure DevOps Server with Variable Groups: A Practical Guide for On-Prem Pipelines"
+title: "Managing Secrets Securely in Azure DevOps Server with Variable Groups"
 date: 2025-5-13 13:10:00 +0100
 type: post
 classes: wide
