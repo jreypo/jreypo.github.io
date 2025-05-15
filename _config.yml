@@ -69,7 +69,7 @@ author:
       icon: "fas fa-fw fa-link"
       url: "https://blog.jreypo.io"
     - label: "Twitter"
-      icon: "fab fa-fw fa-square-twitter"
+      icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -89,7 +89,7 @@ bing_site_verification   : 9E4C27EEF9E87E298B32ED7B5CAB0C85
 footer:
   links:
     - label: "Twitter"
-      icon: "fab fa-fw fa-square-twitter"
+      icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
