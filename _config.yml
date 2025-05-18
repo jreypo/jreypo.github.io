@@ -19,6 +19,7 @@ email:
 description: >- # this means to ignore newlines until "baseurl:"
 twitter_username: jreypo
 github_username: jreypo
+
 minimal_mistakes_skin: dark
 search: true
 
@@ -29,12 +30,12 @@ comments:
 
 # Build settings
 markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes@4.27.1
+remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:year/:month/:day/:title/
-paginate: 3 # amount of posts to show
+paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: ES # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: "Europe/Madrid" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
   - _pages
@@ -77,6 +78,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/jreypo"
+    - label: "BlueSky"
+      icon: "fab fa-fw fa-bluesky"
+      url: "https://bsky.app/profile/jreypo.bsky.social"
 
 analytics:
   provider               : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
@@ -88,7 +92,7 @@ analytics:
 bing_site_verification   : 9E4C27EEF9E87E298B32ED7B5CAB0C85
 footer:
   links:
-    - label: "Twitter"
+    - label: "X/Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
@@ -97,6 +101,9 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/jreypo"
+    - label: "BlueSky"
+      icon: "fab fa-fw fa-square-bluesky"
+      url: "https://bsky.app/profile/jreypo.bsky.social"
 
 defaults:
   # _posts
