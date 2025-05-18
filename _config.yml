@@ -93,7 +93,7 @@ bing_site_verification   : 9E4C27EEF9E87E298B32ED7B5CAB0C85
 footer:
   links:
     - label: "X/Twitter"
-      icon: "fab fa-fw fa-twitter-square"
+      icon: "fab fa-fw a-square-x-twitter"
       url: "https://twitter.com/jreypo"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
