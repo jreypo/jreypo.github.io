@@ -13,6 +13,8 @@ tags:
 - Azure DevOps Server
 - Azure Pipelines
 - DevOps
+author: juan_manuel_rey
+comments: true
 ---
 
 Azure DevOps **pipeline triggers** allow you to automate the execution of CI/CD pipelines in response to events like code changes, pull requests, schedules, or other pipeline completions. In this article of my series about Azure DevOps, we will explore how pipeline triggers work in **Azure DevOps Services** and **Azure DevOps Server**. We’ll cover the types of triggers available, provide YAML pipeline examples, and discuss best practices, advanced configurations, and troubleshooting.
