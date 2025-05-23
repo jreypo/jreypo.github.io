@@ -1,6 +1,6 @@
 ---
 title: "Azure DevOps Pipeline Triggers Explained"
-date: 2025-5-23 9:30:00 +0100
+date: 2025-05-23 9:30:00 +0100
 type: post
 classes: wide
 published: true
