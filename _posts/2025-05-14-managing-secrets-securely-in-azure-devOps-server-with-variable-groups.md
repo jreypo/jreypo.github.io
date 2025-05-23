@@ -1,6 +1,6 @@
 ---
 title: "Managing Secrets Securely in Azure DevOps Server with Variable Groups"
-date: 2025-5-13 13:10:00 +0100
+date: 2025-05-13 13:10:00 +0100
 type: post
 classes: wide
 published: true
@@ -12,6 +12,8 @@ tags:
 - Microsoft
 - Azure DevOps Server
 - DevOps
+author: juan_manuel_rey
+comments: true
 ---
 
 Welcome to the next article in the Azure DevOps Server series. In this article, we’ll dive into what Variable Groups are, how they can be used securely in Azure DevOps Server, and walk through some practical examples.
