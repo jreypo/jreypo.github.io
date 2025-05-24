@@ -32,9 +32,9 @@ I've used Red Hat Enterprise Linux 5.5 as the Linux version and 11iv3 as the HP-
 
 The following topics will covered:
 
--   Volume group creation.
--   Logical volume operations.
--   File system operations.
+- Volume group creation.
+- Logical volume operations.
+- File system operations.
 
 ## Volume group creation
 

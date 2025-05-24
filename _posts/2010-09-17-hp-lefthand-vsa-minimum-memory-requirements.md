@@ -37,9 +37,9 @@ OK then, the VSA doesn't work with 256MB of RAM; so which value is the minimum r
 
 After looking into several docs I found the answer in the [P4000 Quick Start VSA user guide](http://bizsupport2.austin.hp.com/bc/docs/support/SupportManual/c02063198/c02063198.pdf). The minimum amount of RAM required is 384MB for the laptop version and 1GB for the ESX version. Also in the VSA Install and Configure Guide, that comes with the VSA, the following values are provided for the ESX version and for the new Hyper-V version:
 
--   500GB to 4.5TB - 1GB of RAM
--   4.5TB to 9TB - 2GB of RAM
--   9TB to 10TB - 3GB of RAM
+- 500GB to 4.5TB - 1GB of RAM
+- 4.5TB to 9TB - 2GB of RAM
+- 9TB to 10TB - 3GB of RAM
 
 After that I configured again the VSA with 384MB and the problem was fixed and the alarm disappeared.
 

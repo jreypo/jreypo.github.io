@@ -25,12 +25,12 @@ The first thing you must learn about RAID technologies in Linux is that they hav
 
 There are two tools to manage RAID in Linux.
 
--   `dmraid`
--   `mdadm`
+- `dmraid`
+- `mdadm`
 
 `dmraid` is used to discover and activate software (ATA)RAID arrays, commonly known as fakeRAID, and `mdadm` is used to manage Linux Software RAID devices.
 
-### dmraid
+## dmraid
 
 `dmraid`, uses `libdevmapper` and the device-mapper kernel driver to perform all the tasks.
 
@@ -58,7 +58,7 @@ dos     : DOS partitions on SW RAIDs
 
 Following are a couple of examples to show `dmraid` operation.
 
-#### Array discovering
+### Array discovering
 
 ```
 [root@caladan ~]# dmraid -r
@@ -70,7 +70,7 @@ Following are a couple of examples to show `dmraid` operation.
 [root@caladan ~]#
 ```
 
-#### Activate all discovered arrays
+### Activate all discovered arrays
 
 ```
 [root@caladan ~]# dmraid -ay
@@ -82,7 +82,7 @@ Following are a couple of examples to show `dmraid` operation.
 [root@caladan ~]# dmraid -an
 ```
 
-### mdadm
+## mdadm
 
 `mdadm`, is a tool to manage the Linux software RAID arrays. This tool has nothing to do with the device-mapper, in fact the device-mapper is not aware of the RAID arrays created with `mdadm`.
 
@@ -124,7 +124,7 @@ A more detailed description of every major operation mode is provided in `mdadm`
 
 Finally below are examples of some of the more common operations with `mdadm`.
 
-#### Create a RAID1 array
+### Create a RAID1 array
 
 ```
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid1 --raid-devices 2 /dev/sd[de]1
@@ -133,7 +133,7 @@ mdadm: array /dev/md1 started.
 [root@caladan ~]#
 ```
 
-#### Get detailed configuration of the array
+### Get detailed configuration of the array
 
 ```
 [root@caladan ~]# mdadm --query --detail /dev/md1
@@ -164,7 +164,7 @@ mdadm: array /dev/md1 started.
 [root@caladan ~]#
 ```
 
-#### Destroy the array
+### Destroy the array
 
 ```
 [root@caladan ~]# mdadm --remove /dev/md1
@@ -174,7 +174,7 @@ mdadm: md device /dev/md1 does not appear to be active.
 [root@caladan ~]#
 ```
 
-#### Create a RAID5 array with an spare device
+### Create a RAID5 array with an spare device
 
 ```
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid5 --raid-devices 3 --spare-devices 1 /dev/sd[def]1 /dev/sdg1
@@ -182,7 +182,7 @@ mdadm: array /dev/md1 started
 [root@caladan ~]#
 ```
 
-#### Check for the status of a task into the /proc/mdstat file.
+### Check for the status of a task into the /proc/mdstat file.
 
 ```
 [root@caladan ~]# cat /proc/mdstat
@@ -195,7 +195,7 @@ unused devices: <none>
 [root@caladan ~]#
 ```
 
-#### Generate the mdadm.conf file from the current active devices.
+### Generate the mdadm.conf file from the current active devices.
 
 ```
 [root@caladan ~]# mdadm --detail --scan

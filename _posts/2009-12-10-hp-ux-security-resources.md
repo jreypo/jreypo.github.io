@@ -19,11 +19,11 @@ Recently a friend asked me about HP-UX security and where to find useful informa
 
 [HP Docs](http://docs.hp.com/) is the first place to look for information, there you will find a lot of docs regarding HP-UX security, [IPFilter](http://docs.hp.com/en/internet.html#IPFilter), [HP-UX Bastille](http://docs.hp.com/en/5992-5099A/index.html) and other products and manuals concerning [security](http://docs.hp.com/en/internet.html#IPFilter). Following is a reference of useful docs that can be found on this site:
 
--   The most up to date document is [**HP-UX System Administrator's Guide: Security Management**](http://docs.hp.com/en/5992-6416/5992-6416.pdf), this is the main reference for any HP-UX admin. It covers HP-UX 11iv3 and is filled with detailed information on how-to protect your system, how is the security implemented in HP-UX and an appendix with references to other security products of HP that can be used to hardening your systems.
--   [HP-UX 11i Security Containment Administrator's Guide](http://docs.hp.com/en/5991-8678/index.html) HP-UX 11.23
--   [HP9000 Computer Systems: Administering Your HP-UX Trusted System](http://docs.hp.com/en/B2355-90121/index.html). Useful information concerning older systems.
--   [HP-UX System Administration Tasks: HP9000](http://docs.hp.com/en/B2355-90672/index.html). It has full chapter about system security, useful for older systems.
--   [Managing Systems and Workgroups: A Guide for HP-UX System Administrators](http://docs.hp.com/en/B2355-90950/B2355-90950.pdf). HP-UX 11iv1 and 11iv2 information.
+- The most up to date document is [**HP-UX System Administrator's Guide: Security Management**](http://docs.hp.com/en/5992-6416/5992-6416.pdf), this is the main reference for any HP-UX admin. It covers HP-UX 11iv3 and is filled with detailed information on how-to protect your system, how is the security implemented in HP-UX and an appendix with references to other security products of HP that can be used to hardening your systems.
+- [HP-UX 11i Security Containment Administrator's Guide](http://docs.hp.com/en/5991-8678/index.html) HP-UX 11.23
+- [HP9000 Computer Systems: Administering Your HP-UX Trusted System](http://docs.hp.com/en/B2355-90121/index.html). Useful information concerning older systems.
+- [HP-UX System Administration Tasks: HP9000](http://docs.hp.com/en/B2355-90672/index.html). It has full chapter about system security, useful for older systems.
+- [Managing Systems and Workgroups: A Guide for HP-UX System Administrators](http://docs.hp.com/en/B2355-90950/B2355-90950.pdf). HP-UX 11iv1 and 11iv2 information.
 
 Second in our small list is the yet classic but still very useful Kevin Steves' great document "[**Building a Bastion Host Using HP-UX 11**](http://www.windowsecurity.com/whitepapers/Building_a_Bastion_Host_Using_HPUX_11.html)". This is without any doubt (at least for me) the best document about HP-UX hardening ever done. Although it was written seven years ago it still applies to a wide variety of areas.
 

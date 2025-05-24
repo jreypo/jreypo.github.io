@@ -29,7 +29,7 @@ Getting the multipathing policy using PowerCLI is a very simple an straight-forw
 
 I test this procedure in the past with ESX/ESXi 3.5 and 4.0.
 
-## Get the multipahing policy
+## Get the multipathing policy
 
 ```
 [vSphere PowerCLI] C:\> $h = get-vmhost esx01.mlab.local

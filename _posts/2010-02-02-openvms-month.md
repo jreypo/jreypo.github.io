@@ -27,11 +27,11 @@ The official roadmap can be reviewed [here](http://h71000.www7.hp.com/openvms/ro
 
 If you want to give OpenVMS a try here are a some resources to start.
 
--   [HP OpenVM site](http://h71000.www7.hp.com/index.html?jumpid=/go/openvms).
--   [OpenVMS documentation](http://h71000.www7.hp.com/doc/index.html?jumpid=/go/openvms/doc).
--   [OpenVMS Community Portal](http://www.openvms.org/), along with the OpenVMS Hobbyist Portal they are the best non-HP resources for OpenVMS.
--   The [OpenVMS Hobbyist Portal](http://www.openvmshobbyist.org/news.php) it has a small but great list of links regarding OpenVMS, information about emulators, white papers, software downloads and the famous [OpenVMS Hobbyist Kits](http://www.montagar.com/hobbyist/mount.html) for sale, ther are Alpha and a VAX versions for $30 each shipping included.
--   There is also an OpenVMS forum at [ITRC](http://forums11.itrc.hp.com/service/forums/familyhome.do?familyId=288 "OpeVMS ITRC forum").
+- [HP OpenVM site](http://h71000.www7.hp.com/index.html?jumpid=/go/openvms).
+- [OpenVMS documentation](http://h71000.www7.hp.com/doc/index.html?jumpid=/go/openvms/doc).
+- [OpenVMS Community Portal](http://www.openvms.org/), along with the OpenVMS Hobbyist Portal they are the best non-HP resources for OpenVMS.
+- The [OpenVMS Hobbyist Portal](http://www.openvmshobbyist.org/news.php) it has a small but great list of links regarding OpenVMS, information about emulators, white papers, software downloads and the famous [OpenVMS Hobbyist Kits](http://www.montagar.com/hobbyist/mount.html) for sale, ther are Alpha and a VAX versions for $30 each shipping included.
+- There is also an OpenVMS forum at [ITRC](http://forums11.itrc.hp.com/service/forums/familyhome.do?familyId=288 "OpeVMS ITRC forum").
 
 Apart from those links David Douthitt has written today an entry in his blog [Unix Administratosphere](http://administratosphere.wordpress.com/) about Alpha emulators, all of them capable of running OpenVMS, a great starting point to any newcomer.
 

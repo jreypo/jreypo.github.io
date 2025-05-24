@@ -25,7 +25,7 @@ As I said in my first post about OpenVZ I decided to set-up a test server. Since
 
 There is a Debian based bare-metal installer ISO named [**Proxmos Virtual Environment**](http://pve.proxmox.com/wiki/Downloads) and OpenVZ is also supported in many Linux distributions, each one has its own installation method, but I choose CentOS for my Host node server because is one of my favorite Linux server distros.
 
--   Add the `yum` repository to the server:
+- Add the `yum` repository to the server:
 
 ```
 [root@openvz ~]# cd /etc/yum.repos.d/
@@ -47,7 +47,7 @@ Saving to: `openvz.repo'
 [root@openvz yum.repos.d]#
 ```
 
--   Install the OpenVZ kernel, in my particular case I used the basic kernel but there are SMP+PAE, PAE and Xen kernels available:
+- Install the OpenVZ kernel, in my particular case I used the basic kernel but there are SMP+PAE, PAE and Xen kernels available:
 
 ```
 [root@openvz yum.repos.d]# yum install ovzkernel
@@ -103,7 +103,7 @@ Complete!
 [root@openvz yum.repos.d]#
 ```
 
--   Install OpenVZ management utilities:
+- Install OpenVZ management utilities:
 
 ```
 [root@openvz yum.repos.d]# yum install vzctl vzquota
@@ -170,7 +170,7 @@ Complete!
 [root@openvz yum.repos.d]#
 ```
 
--   Configure the kernel. The following adjustments must be done in the `/etc/sysctl.conf` file:
+- Configure the kernel. The following adjustments must be done in the `/etc/sysctl.conf` file:
 
 ```
 # On Hardware Node we generally need
@@ -191,7 +191,7 @@ net.ipv4.conf.default.send_redirects = 1
 net.ipv4.conf.all.send_redirects = 0
 ```
 
--   Disable SELinux:
+- Disable `SELinux`:
 
 ```
 [root@openvz ~]# cat /etc/sysconfig/selinux   
@@ -211,11 +211,11 @@ SETLOCALDEFS=0
 [root@openvz ~]#
 ```
 
--   Reboot the sever with the new kernel.
+- Reboot the sever with the new kernel.
 
 [![OpenVZ kernel boot](/images/openvz-2010-04-04-23-05-08.png "OpenVZ kernel boot")]({{site.url}}/images/openvz-2010-04-04-23-05-08.png)
 
--   Check OpenVZ service:
+- Check OpenVZ service:
 
 ```
 [root@openvz ~]# chkconfig --list vz
@@ -227,7 +227,7 @@ OpenVZ is running...
 
 The first part is over, now we are going to create a VPS as a proof of concept.
 
--   Download the template of the Linux distribution to install as VPS and place it in `/vz/template/cache`
+- Download the template of the Linux distribution to install as VPS and place it in `/vz/template/cache`
 
 ```
 [root@openvz /]# cd vz/template/cache/
@@ -246,7 +246,7 @@ Saving to: `centos-5-x86.tar.gz'
 [root@openvz cache]#
 ```
 
--   Create a new virtual machine using the template.
+- Create a new virtual machine using the template.
 
 ```
 [root@openvz cache]# vzctl create 1 --ostemplate centos-5-x86
@@ -256,7 +256,7 @@ Container private area was created
 [root@openvz cache]#
 ```
 
--   We have a basic VPS created but it needs more tweaking before we can start it. Set the IP address, the DNS server, hostname, a name to identify it in the Host node and finally set the On Boot parameter to automatically start the container with the host.
+- We have a basic VPS created but it needs more tweaking before we can start it. Set the IP address, the DNS server, hostname, a name to identify it in the Host node and finally set the On Boot parameter to automatically start the container with the host.
 
 ```
 [root@openvz cache]# vzctl set 1 --ipadd 192.168.1.70 --save
@@ -273,7 +273,7 @@ Saved parameters for CT 1
 [root@openvz cache]#
 ```
 
--   Start the container and check it with `vzlist`.
+- Start the container and check it with `vzlist`.
 
 ```
 [root@openvz cache]# vzctl start vps01
@@ -293,7 +293,7 @@ Container start in progress...
 [root@openvz cache]#
 ```
 
--   Enter the container and check that its operating system is up and running.
+- Enter the container and check that its operating system is up and running.
 
 ```
 [root@openvz cache]# vzctl enter vps01
@@ -309,7 +309,7 @@ Swap:            0          0          0
 [root@vps01 /]#
 ```
 
--   To finish the test stop the container.
+- To finish the test stop the container.
 
 ```
 [root@openvz /]# vzctl stop 1

@@ -17,11 +17,11 @@ comments: true
 
 Along my career as HP-UX administrator one of the most useful tools has been **Ignite-UX**. This is, IMHO, the most powerful backup/recovery/deployment tool above any other currently present in the Unix OS family (Solaris JumpStart, RH Kickstart, AIX NIM...).
 
-It allows you to deploy several clients simultaneously, create install images (golden images), perform OS backups for disaster recovery, etc. In this post I will show how to manually set-up a new Itanium server with Ignite-UX from the "ignited image" of another server. The example shows an Itanium partionable system, the procedure for a non-partionable client is slightly different and I will talk about it in a future post.
+It allows you to deploy several clients simultaneously, create install images (golden images), perform OS backups for disaster recovery, etc. In this post I will show how to manually set-up a new Itanium server with Ignite-UX from the "ignited image" of another server. The example shows an Itanium partitionable system, the procedure for a non-partitionable client is slightly different and I will talk about it in a future post.
 
 In the client:
 
--   Boot your new server into the EFI Shell and with the `lanaddress` command search for our MAC:
+- Boot your new server into the EFI Shell and with the `lanaddress` command search for our MAC:
 
 ```
 Shell> lanaddress
@@ -36,7 +36,7 @@ LAN Address Information
  Mac(00AA00AA00AA)  Acpi(HWP0002,PNP0A03,200)/Pci(2|1)/Mac(00AA00AA00AA)
 ```
 
--   Create a new Direct Boot Profile:
+- Create a new Direct Boot Profile:
 
 ```
 Shell> dbprofile -dn newserver -sip 10.10.10.2 -cip 10.10.10.35 -gip 10.31.4.1 -m 255.255.255.0 -b "/opt/ignite/boot/nbp.efi"
@@ -45,40 +45,40 @@ Creating profile newserver
 
 The `dbprofile` command is exclusive for partionable servers:
 
-1.  `-dn`  Name of the new profile
-2.  `-sip` IP address of the Ignite-UX server.
-3.  `-cip` Address of the client.
-4.  `-gip` Gateway.
-5.  `-m` Network Mask.
-6.  `-b` Boot file name.
+1. `-dn`  Name of the new profile
+2. `-sip` IP address of the Ignite-UX server.
+3. `-cip` Address of the client.
+4. `-gip` Gateway.
+5. `-m` Network Mask.
+6. `-b` Boot file name.
 
 In the Ignite server:
 
--   Create the directory `/var/opt/ignite/clients/<0xMAC_of_the_client>`.
+- Create the directory `/var/opt/ignite/clients/<0xMAC_of_the_client>`.
 
 ```
 [ignite]/var/opt/ignite/clients # mkdir 0xXXXXXXXXXXXX
 ```
 
--   Put bin:sys as owner:group of the new directory.
+- Put bin:sys as owner:group of the new directory.
 
 ```
 [ignite]/var/opt/ignite/clients # chown bin:sys 0xXXXXXXXXXXXX
 ```
 
--   Create a link `<client> -> <0xMAC_of_the_client>` in the same location.
+- Create a link `<client> -> <0xMAC_of_the_client>` in the same location.
 
 ```
 [ignite]/var/opt/ignite/clients # ln -s 0xXXXXXXXXXXXX newserver
 ```
 
--   Set `bin:bin` as owner of the link.
+- Set `bin:bin` as owner of the link.
 
 ```
 [ignite]/var/opt/ignite/clients # chown -h bin:bin newserver
 ```
 
--   Copy the data from the "source client" to the "target client".
+- Copy the data from the "source client" to the "target client".
 
 ```
 [ignite]/var/opt/ignite/clients/source_server # find CINDEX recovery | cpio -pdvma ../newserver
@@ -331,30 +331,30 @@ need to use the Advanced mode (or remote graphical interface).
 
 In the next screen we select the corresponding lan interface:
 
-    LAN Interface Selection
-
 ```
- More than one network interface was detected on the system.  You
- will need to select the interface to enable.  Only one interface
- can be enabled, and it must be the one connected to the network
- that can be used in contacting the install and/or SD servers.
+LAN Interface Selection
 
- Use the <tab> and/or arrow keys to move to the desired LAN device
- to enable, then press <Return>.
+More than one network interface was detected on the system.  You
+will need to select the interface to enable.  Only one interface
+can be enabled, and it must be the one connected to the network
+that can be used in contacting the install and/or SD servers.
 
- HW Path    Interface   Station Address  Description
- ----------------------------------------------------------
+Use the <tab> and/or arrow keys to move to the desired LAN device
+to enable, then press <Return>.
 
- [ 0/1/1/0     lan0     0x001E0BFCEE94   HP_PCI-X_1000Mbps_Dual-port_Bu ]
+HW Path    Interface   Station Address  Description
+----------------------------------------------------------
 
- [ 0/1/1/1     lan1     0x001E0BFCEE95   HP_PCI-X_1000Mbps_Dual-port_Bu ]
+[ 0/1/1/0     lan0     0x001E0BFCEE94   HP_PCI-X_1000Mbps_Dual-port_Bu ]
 
- [ 0/2/2/0     lan2     0x001E0BFCEE92   HP_PCI-X_1000Mbps_Dual-port_Bu ]
+[ 0/1/1/1     lan1     0x001E0BFCEE95   HP_PCI-X_1000Mbps_Dual-port_Bu ]
 
- [ 0/2/2/1     lan3     0x001E0BFCEE93   HP_PCI-X_1000Mbps_Dual-port_Bu ]
+[ 0/2/2/0     lan2     0x001E0BFCEE92   HP_PCI-X_1000Mbps_Dual-port_Bu ]
+
+[ 0/2/2/1     lan3     0x001E0BFCEE93   HP_PCI-X_1000Mbps_Dual-port_Bu ]
 ```
 
-It starts to search for the DHCP server, press Crtl-C to stop it. The install process prompts us for the target client IP and hostname.
+It starts to search for the DHCP server, press `Crtl-C` to stop it. The install process prompts us for the target client IP and hostname.
 
 ```
 * Could not get DHCP information.  No host specific network defaults

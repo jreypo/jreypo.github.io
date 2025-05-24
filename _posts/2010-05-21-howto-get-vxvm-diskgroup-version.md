@@ -17,7 +17,7 @@ comments: true
 
 If you need to determine the version of a Veritas `diskgroup` it can be done by two ways:
 
--   `vxdg` command:
+- `vxdg` command:
 
 Execute `vxdg list <diskgroup>` and look for the version field in the output.
 
@@ -42,7 +42,7 @@ log disk disk28 copy 1 len=3648
 root@vmnode1:~#
 ```
 
--   `vxprint` command:
+- `vxprint` command:
 
 Run `vxprint -l <diskgroup>` and again look for the versión field as shown in the example.
 

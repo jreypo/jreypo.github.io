@@ -26,36 +26,36 @@ Creating a Veritas Volume Manager boot disk using the LVM boot disks as its sour
 
 I'm going to take for granted that all of you understand the basic structure of boot disks on Itanium servers. If you have read my [post]({% post_url 2010-06-24-boot-disk-structure-on-integrity-servers %} ) about boot disk structure on Integrity servers you will remember that the disks are composed by three partitions:
 
--   EFI
--   OS Partition.
--   HPSP - HP Service Partition.
+- EFI
+- OS Partition.
+- HPSP - HP Service Partition.
 
 For the purpose of this post the only relevant partition is the OS Partition, also named as `HPUX` in HP-UX hosts.
 
 Unlike LVM, where the volumes are named with numbers (lvol1, lvol2...), in VxVM the volumes follow a specific naming convention that reflects the usage of each one of them:
 
--   `standvol`
--   `swapvol`
--   `rootvol`
--   `usrvol`
--   `varvol`
--   `tmpvol`
--   `optvol`
+- `standvol`
+- `swapvol`
+- `rootvol`
+- `usrvol`
+- `varvol`
+- `tmpvol`
+- `optvol`
 
 Veritas volumes support also a `usetype` field used to provide additional information about the volume to VxVM itself. The three most common use types on HP-UX are:
 
--   fsgen - File systems and general purpose volumes
--   swap - Swap volumes
--   root - Used for the volume that contains the root file system
+- fsgen - File systems and general purpose volumes
+- swap - Swap volumes
+- root - Used for the volume that contains the root file system
 
 The following restrictions must be taken into account for any VxVM boot disk:
 
--   As in LVM the volumes involved in the boot process (`standvol`, `swapvol` and `rootvol`) must be contiguous.
--   The above volumes can have only one subdisk and can't span to additional disks.
--   The volumes within the root disk can not use dirty region logging (DRL).
--   The private region size is 1MB rather than the default value of 32MB.
--   The `/stand` file system can only be configured with VxFS data layout version 5 or the system will not boot.
--   In PA-RISC systems the `/stand` file system must be HFS, this is necessary because the PA-RISC HP-UX kernel loader is not VxFS-aware.
+- As in LVM the volumes involved in the boot process (`standvol`, `swapvol` and `rootvol`) must be contiguous.
+- The above volumes can have only one subdisk and can't span to additional disks.
+- The volumes within the root disk can not use dirty region logging (DRL).
+- The private region size is 1MB rather than the default value of 32MB.
+- The `/stand` file system can only be configured with VxFS data layout version 5 or the system will not boot.
+- In PA-RISC systems the `/stand` file system must be HFS, this is necessary because the PA-RISC HP-UX kernel loader is not VxFS-aware.
 
 Following is an example to illustrate the process.
 

@@ -23,7 +23,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-The  AVIO Lan drivers for Linux HPVM guests are supported since HPVM4.0 but as you will see enabling it is a little more complicated than in HP-UX guests.
+The AVIO Lan drivers for Linux HPVM guests are supported since HPVM4.0 but as you will see enabling it is a little more complicated than in HP-UX guests.
 
 The first prerequisite is to have installed the HPVM management software, once you have this package installed look for a RPM package called `hpvm_lgssn` in `/opt/hpvm/guest-images/linux/DRIVERS`.
 
@@ -90,7 +90,7 @@ There are two ways to install the driver, compile it or use one of the pre-compi
 -   SLES10 SP1 (2.6.16.46-0.12)
 -   SLES10 SP2 (2.6.16.60-0.21)
 
-For other kernels you must compile the driver. In the Linux box of the example I had a supported kernels and distro (SLES10 SP2) but instead of using the pre-compiled one I decided to go through the whole process.
+For other kernels you must compile the driver. In the Linux box of the example I had a supported kernel and distro (SLES10 SP2) but instead of using the pre-compiled one I decided to go through the whole process.
 
 Go the path `/opt/hpvm_drivers/lgssn`, there you will find the sources of the driver. To compile and install execute a simple `make install`.
 

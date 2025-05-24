@@ -27,13 +27,13 @@ Typically any Sysadmin would configure and manage P4000 storage nodes through th
 
 The command line can be accessed through two ways, remotely from any windows machine or via SSH.
 
-### SSH access
+## SSH access
 
 To access the CLIQ via SSH the connection has to be done to the port `tcp/16022` instead of the SSH standard port and with the management group administration user. The connection can be established to any storage node of the group, the operation will apply to the whole group.
 
 [![CLIQ SSH access](/assets/images/cliq_ssh1.jpg "CLIQ SSH access")]({{site.url}}/assets/images/cliq_ssh1.jpg)
 
-### Remote access
+## Remote access
 
 The other way to use the CLIQ shell is from a windows host with the **HP Lefthand CLI shell* installed on it. The software is included in the SAN/iQ Management Software DVD can be obtained along with other tools and documentation for the P4000 series in the following URL: <http://www.hp.com/go/p4000downloads>.
 

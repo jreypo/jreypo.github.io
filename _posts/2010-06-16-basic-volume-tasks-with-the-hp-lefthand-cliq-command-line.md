@@ -20,20 +20,20 @@ Following with the series of posts about the HP Lefthand SAN systems in this pos
 
 I used the Lefthand VSA and the ESX4 servers from my home lab to illustrate the procedure. The commands are executed locally in the VSA via SSH. The following tasks will be covered:
 
--   Volume creation.
--   Assign a volume to one or more hosts.
--   Volume deletion.
+- Volume creation.
+- Assign a volume to one or more hosts.
+- Volume deletion.
 
-### Volume creation
+## Volume creation
 
 The command to use is `createVolume`. The available options for this command are:
 
--   `volumeName`
--   `clusterName` - The cluster where the volume will be created on.
--   `replication` -  The replication level from 1 (none) to 4 (4-way replication)
--   `thinProvision` - 1 (Thin provisioning) or 2 (Full provision).
--   `description`
--   `size` - The size can be set in MB, GB or TB.
+- `volumeName`
+- `clusterName` - The cluster where the volume will be created on.
+- `replication` -  The replication level from 1 (none) to 4 (4-way replication)
+- `thinProvision` - 1 (Thin provisioning) or 2 (Full provision).
+- `description`
+- `size` - The size can be set in MB, GB or TB.
 
 ```
 CLIQ>createVolume volumeName=vjm-cluster2 size=2GB clusterName=iSCSI-CL replication=1 thinProvision=1 description="vep01-02 datastore"
@@ -50,13 +50,13 @@ RESPONSE
 CLIQ>
 ```
 
-### Assign a volume to the hosts
+## Assign a volume to the hosts
 
 The command to use in this task is *assignVolume*. Few parameters are accepted by this command:
 
--   `volumeName`
--   `ìnitiator` - The host/hosts IQNs.If the volume is going to be presented to more than one host the IQNs of the server must be separated by semicolons. One important tip, the operation must be done in one command, you can not assign the volume to a host in one command and to a new host in a second command, the last one will overwrite the first instead of adding the volume to one more host.
--   Access wrights: The default is read-write (`rw`), read-only (`r`) or write-only (`w`) can also be set.
+- `volumeName`
+- `ìnitiator` - The host/hosts IQNs.If the volume is going to be presented to more than one host the IQNs of the server must be separated by semicolons. One important tip, the operation must be done in one command, you can not assign the volume to a host in one command and to a new host in a second command, the last one will overwrite the first instead of adding the volume to one more host.
+- Access wrights: The default is read-write (`rw`), read-only (`r`) or write-only (`w`) can also be set.
 
 ```
 CLIQ>assignVolume volumeName=vjm-cluster2 initiator=iqn.1998-01.com.vmware:vep01-45602bf3;iqn.1998-01.com.vmware:vep02-5f779b32
@@ -139,7 +139,7 @@ If you refresh the storage configuration of the ESXs hosts through vSphere Clien
 
 [![](/assets/images/volume_on_esx.jpg "new volume")]({{site.url}}/assets/images/volume_on_esx.jpg)
 
-### Volume deletion
+## Volume deletion
 
 Finally we are going to delete another volume that is no longer in use by the server of my lab.
 

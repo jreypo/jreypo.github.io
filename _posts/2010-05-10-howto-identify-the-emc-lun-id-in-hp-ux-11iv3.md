@@ -49,7 +49,7 @@ state=alive; policy=SymmOpt; priority=0; queued-IOs=0
 
 But if you are in 11.31 you will find a small problem to perform this. PowerPath is not recommended in HP-UX 11iv3 because it can cause conflicts with the new native multipathing of v3.
 
-You can use the trick of doing a simple `ll -tr` in the `/dev/disk` directory just after the hardware scan and the device file creation, but this way is valid only if you have one or two disks with the same size. What if you have several disks with multiple sizes and want to use each disk for a different VG and/or task? The storage people will only provide the LUN IDs but you will not have the tool to match those IDs with your disks.
+You can use the trick of doing a simple `ls -ltr` in the `/dev/disk` directory just after the hardware scan and the device file creation, but this way is valid only if you have one or two disks with the same size. What if you have several disks with multiple sizes and want to use each disk for a different VG and/or task? The storage people will only provide the LUN IDs but you will not have the tool to match those IDs with your disks.
 
 Fortunately there is way to circumvent the lack of PowerPath in 11iv3. We are going to use the same disk as in the previous example, the 0CED.
 

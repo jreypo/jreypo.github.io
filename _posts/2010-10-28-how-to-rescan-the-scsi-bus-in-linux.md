@@ -1,5 +1,5 @@
 ---
-title: How to rescan the SCSI bus in Linux
+title: How to re-scan the SCSI bus in Linux
 date: 2010-10-28
 type: post
 classes: wide
@@ -33,7 +33,7 @@ From a root shell execute the following command:
 
 After that if you do a `fdsik -l` will see the new disks.
 
-If you want to rescan your box for new fiber channel disks the command is slightly different.
+If you want to re-scan your box for new fiber channel disks the command is slightly different.
 
 ```
 [root@redhat ~# echo "1" > /sys/class/fc_host/host#/issue_lip
@@ -55,6 +55,6 @@ Usage: hp_rescan -ailh[n]
 [root@redhat /]#
 ```
 
-If you know other ways to rescan the SCSI bus in a Linux server please comment.
+If you know other ways to re-scan the SCSI bus in a Linux server please comment.
 
 Juanma.

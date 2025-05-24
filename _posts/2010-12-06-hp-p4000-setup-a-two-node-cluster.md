@@ -28,8 +28,8 @@ This post will outline the necessary steps to create a standard (no-multisite) *
 
 The cluster is composed by:
 
--   2 HP P4000 Virtual Storage Appliances
--   1 HP P4000 Failover Manager
+- 2 HP P4000 Virtual Storage Appliances
+- 1 HP P4000 Failover Manager
 
 The **Failover Manager**, or FOM, is a specialized version of the SAN/iQ software. It runs as a virtual appliance in VMware, thought the most common situation is to run it in a ESX/ESXi servers running it under VMware player or Server is also supported.
 

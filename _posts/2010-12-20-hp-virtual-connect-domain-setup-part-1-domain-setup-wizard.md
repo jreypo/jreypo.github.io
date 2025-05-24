@@ -43,11 +43,11 @@ When you login into the VCM for the first time a series of wizards will show up 
 
 This wizard will allow you to:
 
--   Import enclosure configuration and communication settings
--   Name the domain
--   Set the IP address of the Virtual Connect Manager
--   Set up the local user accounts and its permissions and privileges
--   Confirm that the stacking links provide connectivity and redundancy
+- Import enclosure configuration and communication settings
+- Name the domain
+- Set the IP address of the Virtual Connect Manager
+- Set up the local user accounts and its permissions and privileges
+- Confirm that the stacking links provide connectivity and redundancy
 
 After the informative screen the first step will display. Here you have to provide the enclosure Onboard Administrator IP address and credentials, these credentials must have administrative level. Click next when finish.
 
@@ -73,10 +73,10 @@ Next step is to configure the local user accounts.
 
 By default the only local account is Administrator, this account cannot be deleted nor have domain privileges removed. You can also add up to 32 accounts with a combination of up to four levels of access. The available levels are:
 
--   Virtual Connect Domain
--   Server
--   Networking
--   Storage
+- Virtual Connect Domain
+- Server
+- Networking
+- Storage
 
 There is also an **Advanced** area for each account where you can set **Strong Passwords** requirement and the minimum password length.
 

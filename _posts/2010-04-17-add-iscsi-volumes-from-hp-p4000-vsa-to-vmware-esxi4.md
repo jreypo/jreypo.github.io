@@ -25,7 +25,7 @@ comments: true
 
 In today's post I will try to explain step by step how to add an iSCSI volume from the HP Lefthand P4000 VSA to a VMware ESXi4 server.
 
-### Step One: Create a volume
+## Step One: Create a volume
 
 Lets suppose we already have a configured storage appliance, I showed how to create a cluster in my [previous post]({% post_url 2010-04-09-first-hands-on-with-the-hp-lefthand-p4000-vsa %}) so I will not repeat that part here. Open the Centralized Management Console and go to **Management Group -> Cluster -> Volumes and Snapshots**.
 
@@ -49,7 +49,7 @@ When everything is configured click OK and the volume will be created. After the
 
 At this point we have a new volume with some RAID protection level, none in this particular case since it's a single node cluster. Next step is to assign the volume to a server.
 
-### Step Two: ESXi iSCSI configuration
+## Step Two: ESXi iSCSI configuration
 
 Connect to the chosen ESXi4 Server through vSphere Client and from the **Configuration** tab in the right pane go to the **Networking** area and click the *Add Networking* link
 
@@ -89,7 +89,7 @@ Once iSCSI is enabled its properties window will be populated.
 
 Click close, the server will ask for rescan of the adapter but at this point it is not necessary so it can be skipped.
 
-### Step Three: Add the volume to the ESXi server
+## Step Three: Add the volume to the ESXi server
 
 Now, that we have our volume created and the iSCSI adapter of our ESXi server activated, the next step is to add the storage to server.
 
@@ -113,7 +113,7 @@ Now go back to the vSphere client and launch again the properties of the iSCSI a
 
 [![](/assets/images/dynamic_discovery.png)]({{site.url}}/assets/images/dynamic_discovery.png)
 
-Click **Close** and the server will ask again to rescan the adapter, now say yes and after the rescanning process the iSCSI LUN will show up.
+Click **Close** and the server will ask again to re-scan the adapter, now say yes and after the re-scanning process the iSCSI LUN will show up.
 
 [![](/assets/images/iscsi_lun.png)]({{site.url}}/assets/images/iscsi_lun.png)
 

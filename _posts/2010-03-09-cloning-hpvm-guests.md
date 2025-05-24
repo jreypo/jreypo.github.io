@@ -95,10 +95,10 @@ At that point and since I really wanted to use both machines in a test cluster I
 
 After reading again the official documentation, a few dozens posts regarding HPVM cloning and HPVM in general and a few very nice posts in Daniel Parkes' [HP-UX Tips & Tricks](http://www.hpuxtips.es/) site I finally came up with three different methods to successfully and *physically* clone an Integrity Virtual Machine.
 
-### METHOD 1: Using `dd`
+## METHOD 1: Using `dd`
 
--   Create the LVM structure for the new virtual machine on the host.
--   Use `dd` to copy every storage device from the source virtual machine.
+Create the LVM structure for the new virtual machine on the host.
+Use `dd` to copy every storage device from the source virtual machine.
 
 ```
 [root@hpvmhost] ~ # dd if=/dev/vg_vmtest/rivm1d1 of=/dev/vg_vmtest/rclone01_d1 bs=1024k
@@ -111,7 +111,7 @@ After reading again the official documentation, a few dozens posts regarding HPV
 [root@hpvmhost] ~ #
 ```
 
--   Using `hpvmclone` create the new machine and in the same command add the new storage devices and delete the old ones from its configuration, any resource can also be modified at this point like with `hpvmcreate`.
+Using `hpvmclone` create the new machine and in the same command add the new storage devices and delete the old ones from its configuration, any resource can also be modified at this point like with `hpvmcreate`.
 
 ```
 [root@hpvmhost] ~ # hpvmclone -P ivm1 -N clone01 -d disk:scsi:0,2,0:lv:/dev/vg_vmtest/rivm1d1 \
@@ -123,16 +123,16 @@ After reading again the official documentation, a few dozens posts regarding HPV
 [root@hpvmhost] ~ #
 ```
 
--   Start the new virtual machine and make the necessary changes to the guest OS (network, hostname, etc).
+Start the new virtual machine and make the necessary changes to the guest OS (network, hostname, etc).
 
-### METHOD 2: Clone the virtual storage devices at the same time the IVM is cloned.
+## METHOD 2: Clone the virtual storage devices at the same time the IVM is cloned
 
 Yes, yes and yes it can be done with `hpvmclone`, you have to use the `-b` switch and provide the storage resource to use.
 
 I really didn't test this procedure with other devices apart from the booting disk/disks. In theory the man page of the command and the HPVM documentation states that this option can be used to specify the booting device of the clone but I used to clone a virtual machine with one boot disk and one with two disks and in both cases it worked without problems.
 
--   As in METHOD 1 create the necessary LVM infrastructure for the new IVM.
--   Once the lvols are created clone the virtual machine.
+- As in METHOD 1 create the necessary LVM infrastructure for the new IVM.
+- Once the lvols are created clone the virtual machine.
 
 ```
 [root@hpvmhost] ~ # hpvmclone -P ivm1 -N vxcl01 -a disk:scsi::lv:/dev/vg_vmtest/rvxcl01_d1 \
@@ -151,17 +151,17 @@ hpvmclone: Virtual storage cloned successfully.
 [root@hpvmhost] ~ #
 ```
 
--   Start the virtual machine.
--   Now log into the virtual machine to check the start-up process and to make any change needed.
+- Start the virtual machine.
+- Now log into the virtual machine to check the start-up process and to make any change needed.
 
-### METHOD 3: Dynamic Root Disk.
+## METHOD 3: Dynamic Root Disk
 
 Since with DRD a clone of `vg00` can be produced we can use it too to clone an Integrity Virtual Machine.
 
--   First step is to create a new `lvol` that will contain the clone of `vg00`, it has to be at least the same size as the original disk.
--   Install the last DRD version supported on the virtual machin to clone.
--   Add the new volume to the source virtual machine and from the guest OS re-scan for the new disk.
--   Now proceed with the DRD clone.
+- First step is to create a new `lvol` that will contain the clone of `vg00`, it has to be at least the same size as the original disk.
+- Install the last DRD version supported on the virtual machin to clone.
+- Add the new volume to the source virtual machine and from the guest OS re-scan for the new disk.
+- Now proceed with the DRD clone.
 
 ```
 root@ivm2:~# drd clone -v -x overwrite=true -t /dev/disk/disk15   
@@ -187,7 +187,7 @@ NOTE:    There may be LVM 2 volumes configured that will not be recognized.
 root@ivm2:~#
 ```
 
--   Mount the new image.
+Mount the new image.
 
 ```
 root@ivm2:~# drd mount -v
@@ -206,9 +206,9 @@ root@ivm2:~# drd mount -v
 root@ivm2:~#
 ```
 
--   On the mounted image edit the `netconf` file and modify the hostname to "" and remove any network configuration such as IP address, gateway, etc. The image is mounted on `/var/opt/drd/mnts/sysimage_001`.
--   Move or delete the DRD XML registry file in `/var/opt/drd/mnts/sysimage_001/var/opt/drd/registry` in order to avoid any problems during the boot of the clone since the source disk will not be present.
--   Unmount the image.
+- On the mounted image edit the `netconf` file and modify the hostname to "" and remove any network configuration such as IP address, gateway, etc. The image is mounted on `/var/opt/drd/mnts/sysimage_001`.
+- Move or delete the DRD XML registry file in `/var/opt/drd/mnts/sysimage_001/var/opt/drd/registry` in order to avoid any problems during the boot of the clone since the source disk will not be present.
+- Unmount the image.
 
 ```
 root@ivm2:~# drd umount -v
@@ -226,7 +226,7 @@ root@ivm2:~# drd umount -v
 root@ivm2:~#
 ```
 
--   Now we are going to create the new virtual machine with `hpvmclone`. Of course the new IVM can be created through `hpvmcreate` and add the new disk as its boot disk.
+Now we are going to create the new virtual machine with `hpvmclone`. Of course the new IVM can be created through `hpvmcreate` and add the new disk as its boot disk.
 
 ```
 [root@hpvmhost] ~ # hpvmclone -P ivm2 -N ivm3 -B manual -d disk:scsi:0,1,0:lv:/dev/vg_vmtest/rivm2disk
@@ -273,8 +273,9 @@ serial  com1                           tty     �
 [root@hpvmhost] ~ #
 ```
 
--   Final step is to boot the newly create machine, from the EFI menu we're going to create a new boot file.
--   First select the *Boot option maintenance menu*:
+Final step is to boot the newly create machine, from the EFI menu we're going to create a new boot file.
+
+- First select the *Boot option maintenance menu*:
 
 ```
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
@@ -288,7 +289,7 @@ Please select a boot option
     Use ^ and v to change option(s). Use Enter to select an option
 ```
 
--   Now go to `Add a Boot Option`.
+- Now go to `Add a Boot Option`.
 
 ```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
@@ -314,7 +315,7 @@ Main Menu. Select an Operation
     SerialNumber-->[VM01010008          ]
 ```
 
--   Select the first partition of the disk.
+- Select the first partition of the disk.
 
 ```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
@@ -330,7 +331,7 @@ Add a Boot Option.  Select a Volume
     Exit
 ```
 
--   Select the first option.
+- Select the first option.
 
 ```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
@@ -342,7 +343,7 @@ Select file or change to new directory:
     Exit
 ```
 
--   Enter the HPUX directory.
+- Enter the HPUX directory.
 
 ```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
@@ -359,7 +360,7 @@ Select file or change to new directory:
     Exit
 ```
 
--   Select the `hpux.efi` file.
+- Select the `hpux.efi` file.
 
 ```
 EFI Boot Maintenance Manager ver 1.10 [14.62]
@@ -373,7 +374,7 @@ Select file or change to new directory:
     Exit
 ```
 
--   Enter `BOOTDISK` as description and None as BootOption Data Type. Save changes.
+- Enter `BOOTDISK` as description and None as BootOption Data Type. Save changes.
 
 ```
 Filename: \EFI\HPUX\hpux.efi
@@ -389,7 +390,7 @@ Enter BootOption Data Type [A-Ascii U-Unicode N-No BootOption] :  None
 Save changes to NVRAM [Y-Yes N-No]:
 ```
 
--   Go back to the EFI main menu and boot from the new option.
+- Go back to the EFI main menu and boot from the new option.
 
 ```
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
@@ -426,7 +427,7 @@ Launching /stand/vmunix
 SIZE: Text:41555K + Data:6964K + BSS:20747K = Total:69267K
 ```
 
--   Finally the OS will ask some questions about the network configuration and other parameters, answer what suits better
+- Finally the OS will ask some questions about the network configuration and other parameters, answer what suits better
     your needing.
 
 ```
@@ -457,7 +458,8 @@ Press [y] for yes or [n] for no, then press [Enter] y
 
 And we are done.
 
-### Conclusions
+## Conclusions
+
 I have to say that at the beginning the cloning system of HPVM disappointed me; but after a while I got used to it.
 
 In my opinion the best method of the above is the second if you have one boot disk, and I really can't see a reason to have a `vg00` with several PVs on a virtual machine. If you have an IVM as template and need to produce many copies as quickly as possible this method is perfect.

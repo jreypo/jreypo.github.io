@@ -22,7 +22,7 @@ comments: true
 
 Yesterday's post about CLARiiON reminded me a similar issue I observed when the storage array is an HP EVA. If you ask for the disk serial number with `scsimgr` you always get the same number, in fact this number is the serial of the HSV controller.
 
-The key to match your disk in the HP-UX host with the LUN provided by the EVA arrays is the *wwid* attribute of the disk.
+The key to match your disk in the HP-UX host with the LUN provided by the EVA arrays is the `wwid` attribute of the disk.
 
 ```
 root@ignite:/ # scsimgr get_attr -D /dev/rdisk/disk10 -a wwid
@@ -41,7 +41,7 @@ If you look for this value in Command View will see that is the same as the Worl
 
 [![](/assets/images/eva_lun-id.jpg "EVA_LUN-ID")]({{site.url}}/assets/images/eva_lun-id.jpg)
 
-### **UPDATE**
+## **UPDATE**
 
 Thanks to my friend Jean and to Greg who reminded me that like Greg said in his comment is much easier to match the Word Wide LUN Name with the `evainfo` tool. Thanks to both of you :-)
 
@@ -59,7 +59,7 @@ Devicefile                      Array           
 /dev/rdisk/disk27       5001-4380-04C7-2D90 6005-08B4-000F-3EED-0000-5000-005E-0000      245760MB       Ctl-A/FP-1/Optimized
 ```
 
-Where can I get EVAinfo? Like Greg said EVAinfo is distributed on the HP StorageWorks Storage System Scripting Utility CD (SSSU) since 8.0 version. <span style="text-decoration:line-through;">Unfortunately I couldn't find, yet, a public download URL but the CD is distributed with the hardware so if you own an EVA is probably you already have the media.</span>
+Where can I get EVAinfo? Like Greg said EVAinfo is distributed on the HP StorageWorks Storage System Scripting Utility CD (SSSU) since 8.0 version. ~Unfortunately I couldn't find, yet, a public download URL but the CD is distributed with the hardware so if you own an EVA is probably you already have the media~.
 
 Thanks to Jean, man it seems that I owe you more than a couple of beers ;-D, here it is the URL of the CD. You will find the EVAinfo utility inside the **HP StorageWorks Command View SSSU v9.2 software** ISO.
 
