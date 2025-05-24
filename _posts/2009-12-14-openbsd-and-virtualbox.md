@@ -15,7 +15,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-I've been using **OpenBSD** since the 3.0 version as desktop, in my home servers and even in production systems, some time ago I decided to virtualize my OpenBSD infrastructure first with VMware Server and later with VirtualBox (both of them with Linux as the host system) which is much more powerfull; but when I started to use VirtualBox a year or so ago I discovered that installing OpenBSD in VirtualBox can be a pain in the ass.
+I've been using **OpenBSD** since the 3.0 version as desktop, in my home servers and even in production systems, some time ago I decided to virtualize my OpenBSD infrastructure first with VMware Server and later with VirtualBox (both of them with Linux as the host system) which is much more powerful; but when I started to use VirtualBox a year or so ago I discovered that installing OpenBSD in VirtualBox can be a pain in the ass.
 
 The installation went smoothly until I got the following error:
 

@@ -30,7 +30,7 @@ comments: true
 
 As a small follow-up to yesterday's post about [NFS shares with Openfiler]({% post_url 2010-11-30-configure-nfs-shares-in-openfiler-for-your-vsphere-homelab %} "Configure NFS shares in Openfiler for your vSphere homelab") in the following article I will show how to add a new datastore to an ESX server using vSphere CLI from the vMA appliance and PowerCLI.
 
-### From vMA
+## From vMA
 
 From the vMA shell we are going to use the command `vicfg-nas`. To clarify things a bit for the newcomers, `vicfg-nas` and `esxcfg-nas` are the same command, in fact `esxcfg-nas` is no more than a link to the first.
 
@@ -53,7 +53,7 @@ nfs_datastore1 is /mnt/vg_nfs/lv_nfs01/nfs_datastore1 from openfiler.mlab.local 
 [vi-admin@vma ~][esx01.mlab.local]$
 ```
 
-### PowerCLI
+## PowerCLI
 
 In the second part of the post we are going to use **vSphere PowerCLI**, which as you already know is a PowerShell module to manage vSphere/VI3 infrastructure. I will write more about PowerCLI in the since I'm very fond with it.
 

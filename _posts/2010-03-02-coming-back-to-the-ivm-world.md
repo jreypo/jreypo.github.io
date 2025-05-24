@@ -26,7 +26,7 @@ First logical step in order to get proficient again with IVM is to create a new 
 
 Some of the steps are obvious for any HP-UX Sysadmin, like VGs and LVs creation, but I decided to show the commands in order to maintain some consistency across this how-to/checklist/what-ever-you-like-to-call-it.
 
--   Create a volume group for the IVM virtual disks.
+- Create a volume group for the IVM virtual disks.
 
 ```
 [root@hpvmhost] ~ # vgcreate -s 16 -e 6000 vg_vmtest /dev/dsk/c15t7d1
@@ -71,7 +71,7 @@ Proactive Polling           On               
 [root@hpvmhost] ~ #
 ```
 
--   Create one `lvol` for each disk you want to add to your virtual machine, of course these logical volumes must belong to the volume group previously created.
+- Create one `lvol` for each disk you want to add to your virtual machine, of course these logical volumes must belong to the volume group previously created.
 
 ```
 [root@hpvmhost] ~ # lvcreate -L 12000 -n ivm1d1 vg_vmtest
@@ -88,7 +88,7 @@ Volume Group configuration for /dev/vg_vmtest has been saved in /etc/lvmconf/vg_
 [root@hpvmhost] ~ #
 ```
 
--   Now we're going to do some real stuff. Create the IVM with the `hpvmcreate` command and use the `hpvmstatus` to check that everything went well :
+- Now we're going to do some real stuff. Create the IVM with the `hpvmcreate` command and use the `hpvmstatus` to check that everything went well :
 
 ```
 [root@hpvmhost] ~ # hpvmcreate -P ivm1 -O hpux  
@@ -138,7 +138,7 @@ If you have read the [HPVM documentation](http://docs.hp.com/en/T2767-90180/inde
 
 Since now we're going to use the *hpvmstatus* to verify every change made. This command can be invoked without options to show a general summary or can query a single virtual machine, a verbose option is also available with `-V`. Take a look of its man page to check more options.
 
--   Add more CPU and RAM. The default values are 1 vCPU and 2GB of RAM, more can be assigned with `hpvmmodify`:
+- Add more CPU and RAM. The default values are 1 vCPU and 2GB of RAM, more can be assigned with `hpvmmodify`:
 
 ```
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -c 2
@@ -158,7 +158,7 @@ ivm1                     8 HPUX    Off         �
 [root@hpvmhost] ~ #
 ```
 
--   With the CPUs and RAM finished it's time to add the storage devices, as always we're going to use `hpvmmodify`:
+- With the CPUs and RAM finished it's time to add the storage devices, as always we're going to use `hpvmmodify`:
 
 ```
 [root@hpvmhost] ~ # hpvmmodify -P ivm1 -a disk:scsi::lv:/dev/vg_vmtest/rivm1d1
@@ -219,7 +219,7 @@ hpvmmodify: Unable to modify the guest.
 [root@hpvmhost] ~ #
 ```
 
--   Virtual networking 1: First check the available virtual switches with `hpvmnet`:
+- Virtual networking 1: First check the available virtual switches with `hpvmnet`:
 
 ```
 [root@hpvmhost] / # hpvmnet
@@ -231,7 +231,7 @@ vlan03        3 Up      Shared    lan4     0x001111111111 10.
 [root@hpvmhost] / #
 ```
 
--   Virtual Networking 2: Add a couple of `vnics` to the virtual machine.
+- Virtual Networking 2: Add a couple of `vnics` to the virtual machine.
 
 ```
 [root@hpvmhost] / # hpvmmodify -P ivm1 -a network:lan:vswitch:vlan02
@@ -282,7 +282,7 @@ serial  com1                           tty     �
 [root@hpvmhost] / #
 ```
 
--   And we have an IVM ready to be used. To start it use the  `hpvmstart` command and access its console with `hpvmconsole`, the interface is almost equal to GSP/MP.
+- And we have an IVM ready to be used. To start it use the  `hpvmstart` command and access its console with `hpvmconsole`, the interface is almost equal to GSP/MP.
 
 ```
 [root@hpvmhost] ~ # hpvmstart -P ivm1

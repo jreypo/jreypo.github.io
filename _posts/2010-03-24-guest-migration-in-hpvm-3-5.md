@@ -26,20 +26,20 @@ As I already said many times my current HPVM version is 3.5 so it doesn't suppor
 
 Currently there are two methods to perform migrations:
 
--   HPVM commands.
--   MC/ServiceGuard.
+- HPVM commands.
+- MC/ServiceGuard.
 
 In this post I will only cover the HPVM way. I will leave HPVM ServiceGuard clusters for a future post but as many of you already know moving a guest between cluster nodes is like moving any other ServiceGuard package since the guests are managed by SG as packages.
 
-### PREREQUISITES
+## PREREQUISITES
 
 There is a certain list of prerequisites the guest has to met in order to be successfully migrated between hosts.
 
--   Off-line state:
+- Off-line state:
 
 This is pretty obvious of course, the guest must be off.
 
--   SSH configuration:
+- SSH configuration:
 
 In both hosts root must have SSH access through public key authentication to the other.
 
@@ -48,7 +48,7 @@ root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: SSH execution error. Make sure ssh is setup right on both source and target systems.
 ```
 
--   Shared devices:
+- Shared devices:
 
 If the guest has a shared device like the CD/DVD of the host, the device has to be deleted from the guest configuration.
 
@@ -57,7 +57,7 @@ root@ivmcl01:~ # hpvmmigrate -P hpvm1 -h ivmcl02
 hpvmmigrate: Device /dev/rdsk/c1t4d0 is shared.  Guest with shared storage devices cannot be migrated.
 ```
 
--   Storage devices:
+- Storage devices:
 
 There are two consideration about storage devices.
 
@@ -77,7 +77,7 @@ hpvmmigrate: Device WWID does not match.
 hpvmmigrate: See HPVM command log file on target VM Host for more detail.
 ```
 
--   Network configuration:
+- Network configuration:
 
 The virtual switch where the guest is connected to must be configured on the same network card in both hosts. For example if vSwitch `vlan2` is using `lan0` in host1 then it must be using `lan0` in host2 or the migration will fail.
 
@@ -87,7 +87,7 @@ hpvmmigrate: Target VM Host error - vswitch validation failed.
 hpvmmigrate: See HPVM command log file on target VM Host for more detail.
 ```
 
-### PROCEDURE
+## PROCEDURE
 
 If all the prerequisites explained before are met by our guest we can proceed with the migration. The command to use is `hpvmmigrate`, the name or the VM number and the hostname of the destination server have to be provided. Some of the resources of the virtual machines like number of CPU, amount of RAM or the machine label can also be modified.
 
@@ -118,7 +118,7 @@ root@ivmcl02:~ #
 
 As you can see once all the prerequisites have been met the migration is quite easy.
 
-### CONCLUSION
+## CONCLUSION
 
 Even with the disadvantage of lacking online migration the guest migration feature can be of usefulness to balance the load between HPVM hosts.
 

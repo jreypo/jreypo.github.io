@@ -26,14 +26,14 @@ PowerPath is a multipathing software for Unix operating systems from EMC. If you
 
 Following are some notes and tips I've been creating since the very first time I found Powerpath, of course this isn't a full user guide but a sort of personal quick reference. I decide to put it here in the hope that it will be helpful to anyone and for my personal use.
 
--   Show `powermt` command version
+- Show `powermt` command version
 
 ```
 [root@totoro] / # powermt version
 EMC powermt for PowerPath (c) Version 5.1.0 (build 160)
 ```
 
--   Display PowerPath configuration.
+- Display PowerPath configuration.
 
 ```
 [root@totoro] / # powermt display
@@ -76,7 +76,7 @@ HP HSx logical device count=0
 [root@totoro] / #
 ```
 
--   Check for death paths and remove them.
+- Check for death paths and remove them.
 
 ```
 [root@sheldon] / # powermt display
@@ -104,18 +104,19 @@ Do you want to remove it (y/n/a/q)? y
 [root@sheldon] / #
 ```
 
--   List all devices.
+- List all devices.
 
 ```
 [root@totoro] / # powermt display dev=all
 ```
--   Remove all devices.
+
+- Remove all devices.
 
 ```
 [root@totoro] / # powermt remove dev=all
 ```
 
--   Add a new disk in HP-UX, configure it and save the config:
+- Add a new disk in HP-UX, configure it and save the config:
 
 After a rescan of the disks with `ioscan` and the creation of the device files with `insf` run the following command  to add the new disk to PowerPath
 

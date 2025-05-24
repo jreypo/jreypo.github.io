@@ -25,7 +25,7 @@ Long time since my last post, Christmas you know ;-) BTW Merry Christmas and Hap
 
 During this weeks I've been configuring APA failover groups in some of  my blades and I thought It would be interesting to post how I did it. There are two ways to configure APA in HP-UX 11.31, through the SMH and with the `nwmgr` command. The screenshots are in Spanish since this is how the SMH of my servers are configured.
 
-### SMH
+## SMH
 
 Log into the server SMH and go to **Tools** -> **Network Interface Configuration** -> **Auto Port Aggregation**.
 
@@ -45,7 +45,7 @@ And this is it, the new APA Failover Group is configured and completely transpar
 
 [![APA Configuration](/assets/images/apa_showing_config1.jpg "APA Configuration")]({{site.url}}/assets/images/apa_showing_config1.jpg)
 
-### nwmgr command
+## `nwmgr` Command
 
 The `nwmgr` command has replaced the old `lanscan`, `lanadmin` and `linkloop` commands in 11.31. I have to say that I prefer this way instead of the SMH one to do any APA or LAN related tasks. SMH require `TCP/2301` and `TCP/2381` ports to be open and accessible and this is not always possible mainly because security policies but to use `nwmgr` you only need access to the server through SSH.
 

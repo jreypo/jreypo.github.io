@@ -14,7 +14,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-My first post is about one small, but great, piece of software I found some time ago in Olivier's site [mayoxide](http://www.mayoxide.com/). This script is named `ioscan_fc2.sh` and you can find it in the software/toolbox area.
+My first post is about one small, but great, piece of software I found some time ago in Olivier's site [Mayoxide](http://www.mayoxide.com/). This script is named `ioscan_fc2.sh` and you can find it in the software/toolbox area.
 
 Basically with this script you can obtain a small and comprehensive report of every agile disk device in a 11.31 system. You can put the script in verbose mode with the -v switch and obtain more detailed info, you can also query for a single disk (`-D`) or a single LUN (`-H`). A few examples will be better to show how it works.
 

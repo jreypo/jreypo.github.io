@@ -22,14 +22,14 @@ comments: true
 
 Network interface trunking is the OpenBSD equivalent of HP-UX Auto-Port Aggregation feature. It allows to combine two or more physical interfaces into a virtual one that will send the outgoing traffic through the physical ports with an algorithm that depends on the trunking protocol configured.
 
-The trunk driver has been available since OpenBSD 3.8, then it only supported the roundrobin protocol, and in the current version, OpenBSD 4.7, it supports the following protocols:
+The trunk driver has been available since OpenBSD 3.8, then it only supported the Round-robin protocol, and in the current version, OpenBSD 4.7, it supports the following protocols:
 
--   **Broadcast:** Sends frames to all ports of the trunk and equally receives frames from any port.
--   **Roundrobin:** Distributes outgoing traffic through all active ports and accepts incoming traffic from any active port.
--   **Failover:** Sends and receives traffic only through the master port. If the master port becomes unavailable, the next active port is used. The first interface added is the master port; any interfaces added after that are used as failover devices.
--   **Loadbalance:** The Loadbalance protocol balances the outgoing traffic across the active ports based on hashed protocol header information and accepts incoming traffic from any active port. The hash includes the Ethernet source and destination address, and, if available, the VLAN tag, and the IP source and destination address.
--   **LACP:** Used to provide redundancy and increase link speed, it uses the IEEE 802.3ad Link Aggregation Control Protocol (LACP) and the Marketer Protocol. It requires a LACP capable switch.
--   **None:** This protocol disables any traffic without disabling the trunk interface itself.
+- **Broadcast:** Sends frames to all ports of the trunk and equally receives frames from any port.
+- **Round-robin:** Distributes outgoing traffic through all active ports and accepts incoming traffic from any active port.
+- **Failover:** Sends and receives traffic only through the master port. If the master port becomes unavailable, the next active port is used. The first interface added is the master port; any interfaces added after that are used as failover devices.
+- **Loadbalance:** The Loadbalance protocol balances the outgoing traffic across the active ports based on hashed protocol header information and accepts incoming traffic from any active port. The hash includes the Ethernet source and destination address, and, if available, the VLAN tag, and the IP source and destination address.
+- **LACP:** Used to provide redundancy and increase link speed, it uses the IEEE 802.3ad Link Aggregation Control Protocol (LACP) and the Marketer Protocol. It requires a LACP capable switch.
+- **None:** This protocol disables any traffic without disabling the trunk interface itself.
 
 Lets create a failover trunk interface as an example. First we are going to activate the physical interfaces and add them to the `trunk0` interface.
 
@@ -50,7 +50,8 @@ trunk0: flags=8802<BROADCAST,SIMPLEX,MULTICAST> mtu 1500
         status: active
 [obsd47]/#
 ```
-Secondly configure the trunking protocol and the IP address of the interface.
+
+Configure the trunking protocol and the IP address of the interface.
 
 ```
 [obsd47]/# ifconfig trunk0 trunkproto failover 192.168.126.5 netmask 255.255.255.0 up

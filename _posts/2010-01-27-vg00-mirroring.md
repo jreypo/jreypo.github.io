@@ -25,7 +25,7 @@ comments: true
 
 This is a small cookbook about mirroring the `vg00` I've compiled throughout the years, well it's really more like a list with the commands but I believe it can be of usefulness for some of the newbies out there. It covers HP-UX 11.23 for PA-RISC and 11.23 and 11.31 for IA64.
 
-### PA-RISC 11.23
+## PA-RISC 11.23
 
 First initialize the disk.
 
@@ -158,13 +158,13 @@ LABEL      BIN    3336    8        0          07/07/1
 root@ayane:/#
 ```
 
-### Itanium 11.23
+## Itanium 11.23
 
 The procedure of mirroring `vg00` in an Itanium HP-UX 11.23, although shares some part with the PA-RISC differs in some critical area. The main difference is the partitioning of the disk, the boot disks in an Integrity server must have an specific layout with three partitions:
 
-1.  EFI
-2.  HPUX
-3.  HPSP (HP Service Partition)
+1. EFI
+2. HPUX
+3. HPSP (HP Service Partition)
 
 Preparation of the disk:
 
@@ -273,9 +273,9 @@ EFI Primary Header:
 root@asoka:/#
 ```
 
-### Itanium 11.31
+## Itanium 11.31
 
-The 11.31 section will be short since the procedure is almost equal to the 11.23 one. You have to take into account that if you have migrated to the new agile view (and you should have ;-D ) a few things will change. The new agile view use `_p1`, `_p2` and `_p3` to identify the partitions of the disk instead of the classic `s1`, `s2` &  `s3 `` and the paths will change from  `dsk/rdsk `` to `disk/rdisk`, the names of the devices as well.
+The 11.31 section will be short since the procedure is almost equal to the 11.23 one. You have to take into account that if you have migrated to the new agile view (and you should have ;-D ) a few things will change. The new agile view use `_p1`, `_p2` and `_p3` to identify the partitions of the disk instead of the classic `s1`, `s2` &  `s3` and the paths will change from `dsk/rdsk` to `disk/rdisk`, the names of the devices as well.
 
 A few of examples will show it.
 

@@ -23,7 +23,7 @@ comments: true
 
 Like other virtualization software, HP Integrity Virtual Machines comes with several memory management capabilities. In this new post about HPVM I will try to explain what are these capabilities, their purpose and how to configure and use them.
 
-### Dynamic memory
+## Dynamic memory
 
 Dynamic memory is an HPVM feature that allow you to resize the amount of memory of a guest without rebooting it. The HPVM manual mention an example in which dynamic memory is applicable.
 
@@ -45,9 +45,9 @@ root@hinata:~ # hpvmmodify -P batman -x ram_dyn_type=driver
 
 There are three possible values for the `ram_dyn_type` option:
 
-1.  None: Self explanatory.
-2.  Any: In the next boot of the guest it will check if dynamic memory is enabled and if the driver is loaded. If the dynamic memory driver is in place the option will change its value to `driver`.
-3.  Driver: When the `ram_dyn_type` is set to `driver` it means that every dynamic memory control and range is functional.
+1. None: Self explanatory.
+2. Any: In the next boot of the guest it will check if dynamic memory is enabled and if the driver is loaded. If the dynamic memory driver is in place the option will change its value to `driver`.
+3. Driver: When the `ram_dyn_type` is set to `driver` it means that every dynamic memory control and range is functional.
 
 Specify the minimum amount of RAM to be allocated to the guest, the default unit is MB but GB can also be used.
 
@@ -125,7 +125,7 @@ Driver Mode(s)          : STARTED ENABLED
 root@batman:~#
 ```
 
-### Automatic memory reallocation
+## Automatic memory reallocation
 
 The new HPVM 4.2 version from March expands dynamic memory with an interesting feature called **Automatic Memory Reallocation**. This new feature provides the possibility of automated changes in the amount of memory used by a guest based on load conditions.
 
@@ -133,8 +133,8 @@ Automatic memory reallocation is only supported on HP-UX guests with dynamic mem
 
 Automatic memory reallocation can be configured through two ways:
 
-1.  System-wide values.
-2.  On a per-VM basis.
+1. System-wide values.
+2. On a per-VM basis.
 
 Each way doesn't exclude the other one, you can set the system-wide parameters for every VM and later customize some of the virtual machines adjusting their parameters to any additional requirement.
 
@@ -144,8 +144,8 @@ Automatic memory reallocation is enabled by default on the VM host. Open the fil
 
 In the same file two system-wide tunables can be configured.
 
-1.  `HPVMCHUNKSIZE`
-2.  `HPVMAMRWAITTIME`
+1. `HPVMCHUNKSIZE`
+2. `HPVMAMRWAITTIME`
 
 The first parameter determine the number of megabytes by the guest will attempt to grow if there is memory pressure. If the parameter is not set the default value will be 256MB. The best practice for this parameter is to be a multiple of the dynamic memory chunk size.
 
@@ -167,12 +167,9 @@ Take into account that if `amr` is not enabled the entitlement could be set but 
 
 The entitlement value can be modified online by the system administrator at any time, but there are some rules that apply:
 
-1.  If there is not enough memory to grow the VM memory to the specified
-    entitlement the operation will fail.
-2.  The memory of virtual machine can not be grown beyond its
-    maximum memory.
-3.  The virtual machine memory always have to be set to a value between
-    `ram_dyn_max` and `ram_dyn_min` parameters, no more no less.
+1. If there is not enough memory to grow the VM memory to the specified entitlement the operation will fail.
+2. The memory of virtual machine can not be grown beyond its maximum memory.
+3. The virtual machine memory always have to be set to a value between `ram_dyn_max` and `ram_dyn_min` parameters, no more no less.
 
 When the memory of a guest is resized by default the `HPVMCHUNKSIZE` value is used but a per-VM chunk size can also be set. To do so use the `amr_chunk_size` parameter.
 

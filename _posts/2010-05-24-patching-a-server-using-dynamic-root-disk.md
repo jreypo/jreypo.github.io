@@ -21,7 +21,7 @@ comments: true
 
 **Dynamic Root Disk**, or DRD for short, is a nice and handy tool that every HP-UX Sysadmin should know how to use. In an HPVM related post I showed how to use DRD to clone a virtual machine but today I will explain the purpose DRD was intended when it was first introduced, patching a server. I'm going to assume you have an spare disk for the task and of course have DRD installed in the server.
 
-#### Step 1 - Clone the root disk
+## Step 1 - Clone the root disk
 
 ```
 root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
@@ -44,7 +44,7 @@ root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
 root@sheldon:/ #
 ```
 
-#### Step 2 - Mount the image
+## Step 2 - Mount the image
 
 ```
 root@sheldon:/ # drd mount
@@ -87,7 +87,7 @@ Total Spare PVs in use      0  
 root@sheldon:/ #
 ```
 
-#### Step 3 - Apply the patches on the mounted clone
+## Step 3 - Apply the patches on the mounted clone
 
 ```
 root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
@@ -128,7 +128,7 @@ root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
 root@sheldon:/ #
 ```
 
-#### Step 4 - Check the installed patches on the DRD image
+## Step 4 - Check the installed patches on the DRD image
 
 ```
 root@sheldon:/ # drd runcmd swlist patches_01
@@ -158,7 +158,7 @@ root@sheldon:/ # drd runcmd swlist patches_01
 root@sheldon:/ #
 ```
 
-#### Step 5 - Activate the image and reboot the server
+## Step 5 - Activate the image and reboot the server
 
 At this point you only have to activate the patched image with the `drd activate` command and schedule a reboot of the server.
 

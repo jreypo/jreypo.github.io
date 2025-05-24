@@ -27,7 +27,7 @@ I don't have sample output for every command, been more than a year since the la
 
 **This is not a complete Timefinder usage guide**, just my personal notes taken from my direct experience with product.
 
-### Timefinder Basics
+## Timefinder Basics
 
 EMC Timefinder is a replication solution that creates full volume copies. For the full-HP guys out there this is very similar to the XP or EVA Business Copy product.
 
@@ -45,11 +45,11 @@ There are several optional components.
 
 Timefinder allows to retain multiple copies at different checkpoints for lowered RPO and RTO.
 
-### Symcli basics
+## Symcli basics
 
 Following is a list of the most basic `symcli` commands necessary to get your way around when you perform any Symmetrix task, including Timefinder.
 
-#### Get the list of the Symmetrix devices
+### Get the list of the Symmetrix devices
 
 ```
 root:/# symdev list
@@ -80,19 +80,19 @@ Sym  Physical               SA :P DA :IT  Config        Attribute Sts      (MB)
 …………………………………………………………………………………………………………………………………………………………………………………………………………………
 ```
 
-#### List all available devices from a device group
+### List all available devices from a device group
 
 ```
 root:/# symld -g dg_oradev_01 list
 ```
 
-#### List host physical devices
+### List host physical devices
 
 ```
 root:/# sympd list
 ```
 
-#### List the disk groups:
+### List the disk groups:
 
 ```
 root:/# /usr/symcli/bin/symdg list
@@ -113,7 +113,7 @@ root:/# /usr/symcli/bin/symdg list
 root:/#
 ```
 
-#### Add devices to a disk group
+### Add devices to a disk group
 
 -   Add physical devices
 
@@ -127,7 +127,7 @@ root:/# symld -g dg_oradev_01 add pd /dev/dsk/c2t4d12
 root:/# symld -g dg_oradev_01 add 006E
 ```
 
-#### Get diskgroup detailed info.
+### Get diskgroup detailed info.
 
 ```
 root:/# /usr/symcli/bin/symdg show dg_prod_01
@@ -236,21 +236,21 @@ Group Name:  dg_prod_01
 root:/#
 ```
 
-### Timfinder commands
+## Timfinder commands
 
-#### Associate BCVs to a device group. There are two ways:
+### Associate BCVs to a device group. There are two ways:
 
 ```
 root:/# symbcv -sid xxxx -g dg_oradev_01 associate dev 0001
 ```
 
-#### Establish the mirrors
+### Establish the mirrors
 
 ```
 root:/# symmir -g dg_oradev_01 -full establish DEV001 BCV001
 ```
 
-#### Split operations.
+### Split operations.
 
 ```
 root:/# symmir -g dg_oradev_01 split
@@ -288,7 +288,7 @@ root/# symmir -g dg_oradev_01 reverse split
 root:/# symmir -g dg_oradev_01 reverse split -differential
 ```
 
-#### Restore the BCV mirrors.
+### Restore the BCV mirrors.
 
 The restore operation will copy the data from the BCV to the Standard device.
 
@@ -371,7 +371,7 @@ Legend:
 root:/#
 ```
 
-#### List all BCV sessions in a Symmetrix array
+### List all BCV sessions in a Symmetrix array
 
 ```
 root:/# symmir list -sid xxxx

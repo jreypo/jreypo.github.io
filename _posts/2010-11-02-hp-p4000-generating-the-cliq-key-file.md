@@ -19,8 +19,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-As I explained in my [first post]({% post_url 2010-06-10-cliq-the-hp-lefthand-saniq-command-line %}) about the SAN/iQ command line, to remotely manage a P4000 storage array instead of
-providing the username/password credentials in every command you can specify an encrypted file which contains the user/password information.
+As I explained in my [first post]({% post_url 2010-06-10-cliq-the-hp-lefthand-saniq-command-line %}) about the SAN/iQ command line, to remotely manage a P4000 storage array instead of providing the username/password credentials in every command you can specify an encrypted file which contains the user/password information.
 
 To create this file, known as the key file, just use the `createKey` command and provide the username, password, array IP address or DNS name and the name of the file.
 

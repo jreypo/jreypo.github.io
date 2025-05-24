@@ -24,14 +24,14 @@ This standard affect commands and syscalls in various ways and it is not set by 
 
 Currently I only use this mode with the ps command. This command has some options that can only be used if the UNIX95 variable is declared. I have a couple of alias in my profile to take advantage of this options.
 
--   With this command you can get a sort of equivalent of the Solaris `ptree` command.
+- With this command you can get a sort of equivalent of the Solaris `ptree` command.
 
 ```
 root@asoka:/# alias ptree
 alias ptree='UNIX95=1 ps -eHf'
 ```
 
--   Get the top 15 CPU consuming processes:
+- Get the top 15 CPU consuming processes:
 
 ```
 root@asoka:/# alias pcpu

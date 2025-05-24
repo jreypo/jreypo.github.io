@@ -22,7 +22,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Following with my re-learning HPVM process today I've been playing around with my virtual switches and a question had arise.
+Following with my re-learning **HPVM** process today I've been playing around with my virtual switches and a question had arise.
 
 How can I move a virtual Nic from one vSwitch to another?
 

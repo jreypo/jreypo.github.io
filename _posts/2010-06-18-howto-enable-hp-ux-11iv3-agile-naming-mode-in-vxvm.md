@@ -53,16 +53,16 @@ root@robin:~# vxddladm set namingscheme=osn mode=new
 
 The parameter used are `namingscheme` and `mode`. The available options for the first are:
 
--   `ebn` - Enclosure based names.
--   `osn` - Operative system names.
+- `ebn` - Enclosure based names.
+- `osn` - Operative system names.
 
 If `ebn` is used neither `legacy` mode nor `new` mode can be set since hardware names provided by the disk array will be used so use `osn` as naming scheme.
 
 The second parameter is mode and of course defines which naming model will be used in the `osn` naming scheme. The following three values can be set:
 
--   `default`
--   `legacy`
--   `new`
+- `default`
+- `legacy`
+- `new`
 
 Now check the change by executing `vxdisk` and `vxddladm` commands.
 

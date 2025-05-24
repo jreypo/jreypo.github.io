@@ -26,13 +26,13 @@ Last week was, without any doubt, one of the most exciting of the year. The new 
 
 This new whole line of Integrity machines are based on **Tukwila**, the latest iteration of the Itanium processor line which was presented by Intel early this year, and with one exception all of them are based in the blade form factor. Let's take a quick look of the new servers.
 
-### Entry-level
+## Entry-level
 
 In this area, and as the only rack server of the new line, we have the rx28000, at first look it seems no more than a remake of the rx2660 but if you go deeper will find a powerful machine with 2 Quad-core or Dual-core Itanium 9300 processors and a maximum of 192GB of RAM.
 
 That's a considerable amount of power for a server of this kind. I personally like this server and have to convince my manager to kindly donate one for my home lab ;-)
 
-### Mid-range
+## Mid-range
 
 In the mid-range line there are three beautiful babies named BL860c_i2, BL870c_i2 and BL890c_i2.
 
@@ -42,7 +42,7 @@ The key for this new servers is modularity, BL860c_i2 is the base of her bigger 
 
 The 870 and the 890 with 16 and 32 cores respectively are the logical replacement for the rx7640 and rx8640 but as many people have been saying since they were publicly presented there is of  the OLAR question or really the apparently lack of OLAR which in fact was one of the key features of the mid-range cell-based Integrity servers. We'll see how this issue is solved.
 
-### High-End
+## High-End
 
 The new rx2800 and the new blades are great but the real shock for everybody came when HP announced the new Superdome 2. Ladies and gentlemen the new mission critical computing era is here, forget those fat and proprietary racks, forget everything you know about high-end servers and be welcome to the blade
 land.

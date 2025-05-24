@@ -21,10 +21,10 @@ comments: true
 
 The **P400 Virtual Storage Appliance** is a storage product from HP, its features include:
 
--   Synchronous replication to remote sites.
--   Snapshot capability.
--   Thin provisioning.
--   Network RAID.
+- Synchronous replication to remote sites.
+- Snapshot capability.
+- Thin provisioning.
+- Network RAID.
 
 It can be used to create a virtual iSCSI SAN to provide shared storage for ESX environments.
 
@@ -34,7 +34,7 @@ After the import the appliance into VMware Workstation you will see that it come
 
 At that point I fired up the appliance and started to play with my VSA.
 
-### First Step - Basic configuration.
+## First Step - Basic configuration
 
 A couple of minutes after have been started the appliance will show the log-in prompt.
 
@@ -64,7 +64,7 @@ The final part is for group management configuration, in fact to remove the VSA 
 
 Now we have our P4000 configured to be managed through CMC. I will not explain the CMC installation since it's just an almost *next -> next* task.
 
-### Second step - VSA management with Centralized Management Console.
+## Second step - VSA management with Centralized Management Console
 
 Launch the CMC. The **Find Nodes Wizard** will pop-up.
 
@@ -84,7 +84,7 @@ Click **Finish** and if the VSA is online the wizard will find it and add it to 
 
 Now the VSA is managed through the CMC but it is not part of a management group.
 
-### Step Three - Add more storage.
+## Step Three - Add more storage
 
 The first basic tasks we're going to do with the VSA prior to Management Creation is to add more storage.
 
@@ -114,7 +114,7 @@ Next you will see the disk active and already added to the RAID.
 
 [![](/assets/images/p4000_add-new-disk_7.png)]({{site.url}}/assets/images/p4000_add-new-disk_7.png)
 
-### Step four - Management group creation.
+## Step four - Management group creation
 
 We're going to create the most basic configuration possible with a P4000 VSA. One VSA in a single management group and part of a single-node cluster.
 

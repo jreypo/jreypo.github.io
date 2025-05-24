@@ -21,11 +21,11 @@ comments: true
 
 In today post I will show how to create and brake a mirrored volume in **Veritas Volume Manager** and **Logical Volume Manager**.
 
-### LVM
+## LVM
 
 Creating a mirror of a volume and later split it in LVM is quite easy an can be done with a few commands. I'm going to suppose that the original volume is already created.
 
--   Extend the Volume Group that contain the `lvol`
+- Extend the Volume Group that contain the `lvol`
 
 It has to be done with the same number of disks and of the same size that the ones within the VG.
 
@@ -36,7 +36,7 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 [root@sheldon] / #
 ```
 
--   Create the mirror
+- Create the mirror
 
 ```
 [root@sheldon] / # lvextend -m 1 /dev/vg_oracle/lv_oracle /dev/disk/disk26
@@ -47,7 +47,7 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 [root@sheldon] / #
 ```
 
--   Check the configuration
+- Check the configuration
 
 ```
 [root@sheldon] / # lvdisplay /dev/vg_oracle/lv_oracle
@@ -72,7 +72,7 @@ Number of Snapshots         0  
 [root@sheldon] / #
 ```
 
--   Perform the split
+- Perform the split
 
 ```
 [root@sheldon] / # lvsplit -s copy /dev/vg_oracle/lv_oracle
@@ -83,7 +83,7 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 [root@sheldon] / #
 ```
 
--   Reestablish the mirror
+- Reestablish the mirror
 
 If the VG are 1.0 or 2.0 version the merge can not be performed if the group is in shared mode, for the 2.1 volume groups the `lvmerge` can be done in any mode.
 
@@ -98,11 +98,11 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 [root@sheldon] / #
 ```
 
-### VXVM
+## VXVM
 
 The process in VxVM is in many ways similar to the LVM one.
 
--   Add a new disk/disks to the `diskgroup`
+- Add a new disk/disks to the `diskgroup`
 
 Launch `vxdiskadm` tool and select `Add or initialize one or more disks`.
 
@@ -214,7 +214,7 @@ Adding disk device disk28 to disk group dg_sap with disk
 Add or initialize other disks? [y,n,q,?] (default: n)
 ```
 
--   Check the configuration.
+- Check the configuration.
 
 ```
 [root@sheldon] / # vxprint -g dg_sap
@@ -230,7 +230,7 @@ sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -    �
 [root@sheldon] / #
 ```
 
--   Create the mirror.
+- Create the mirror.
 
 ```
 [root@sheldon] / # vxassist -g dg_sap mirror sapvol dg_sap02
@@ -250,7 +250,7 @@ sd dg_sap02-01  sapvol-02    ENABLED  204800   0        -    �
 [root@sheldon] / #
 ```
 
--   Break the mirror.
+- Break the mirror.
 
 To do this just disassociate the corresponding `plex` from the volume.
 
@@ -272,7 +272,7 @@ sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -    �
 [root@sheldon] / #
 ```
 
--   Reattach the `plex` to the volume and reestablish the mirror.
+- Reattach the `plex` to the volume and reestablish the mirror.
 
 ```
 [root@sheldon] / # vxplex -g dg_sap att sapvol sapvol-02

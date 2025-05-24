@@ -51,9 +51,11 @@ pv_name=/dev/disk/disk1_p2:pv_status=available:total_pe=4322:free_pe=2783:autosw
 [root@nfscl02] ~ #
 ```
 
-Because of this I decided to write three scripts to emulate the behavior of `vgs`, `lvs` and `pvs` on my HP-UX servers. This scripts take advantage of the mentioned LVM2 `-F` switch so they will not work on HP-UX 11.23 or any other previous versions. If anyones recognize the scripting style is because I grab some parts of the code from Olivier's [ioscan\_fc2.sh](http://jreypo.wordpress.com/2009/12/09/ioscan_fc2-sh/) and adapted them to my needs so credit goes to him also :-)
+Because of this I decided to write three scripts to emulate the behavior of `vgs`, `lvs` and `pvs` on my HP-UX servers. This scripts take advantage of the mentioned LVM2 `-F` switch so they will not work on HP-UX 11.23 or any other previous versions. If anyone recognize the scripting style is because I grab some parts of the code from Olivier's [ioscan\_fc2.sh](http://jreypo.wordpress.com/2009/12/09/ioscan_fc2-sh/) and adapted them to my needs so credit goes to him also :-)
 
--   **VGS:** List the volume group on the `/etc/lvmtab` file, if the server is part of a cluster the volume groups active on other nodes will be showed as deactivated. With the `-v` switch single VGs can be queried.
+## VGS
+
+List the volume group on the `/etc/lvmtab` file, if the server is part of a cluster the volume groups active on other nodes will be showed as deactivated. With the `-v` switch single VGs can be queried.
 
 ```
 root@cldpp01:~# ./vgs.sh
@@ -146,8 +148,9 @@ do
 done
 ```
 
+## LVS
 
--   **LVS:** Like its Linux counterpart shows a list with every active logical volume. As in `vgs.sh` with the `-v` switch you can ask the list of a specific volume group.
+Like its Linux counterpart shows a list with every active logical volume. As in `vgs.sh` with the `-v` switch you can ask the list of a specific volume group.
 
 ```
 root@asoka:/# ./lvs.sh -v vg00
@@ -236,7 +239,9 @@ do
 done
 ```
 
--   **PVS:** And now the last one. List the activated physical volumes, if a VGs is not active on the current node its PVs wouldn't be shown. Like in `pvs.sh` and `vgs.sh` there is a `-v` switch.
+## PVS
+
+And now the last one. List the activated physical volumes, if a VGs is not active on the current node its PVs wouldn't be shown. Like in `pvs.sh` and `vgs.sh` there is a `-v` switch.
 
 ```
 root@oracle:~# ./pvs.sh

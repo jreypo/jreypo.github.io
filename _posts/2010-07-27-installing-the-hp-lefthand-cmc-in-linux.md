@@ -17,7 +17,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-May be some of you are not aware of this but the HP Lefthand Central Management Console application is available not only for Windows but for Linux and HP-UX also. The application is included on the SAN/iQ Management Software DVD that can be downloaded from [here](http://www.hp.com/go/P4000downloads).
+May be some of you are not aware of this but the **HP Lefthand Central Management Console** application is available not only for Windows but for Linux and HP-UX also. The application is included on the SAN/iQ Management Software DVD that can be downloaded from [here](http://www.hp.com/go/P4000downloads).
 
 Burn the iso  or mount it in your Linux system. Navigate trough the iso to `GUI/Linux/Disk1/InstData`, there you will find two files and a directory named `VM`. Get into the directory and will find the installer `CMC_Installer.bin`.
 
