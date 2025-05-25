@@ -23,9 +23,9 @@ image:
 
 During this past week the **[OpenStackFoundation](https://www.openstack.org/foundation/)** has finally released **Liberty**, the latest version of our favorite cloud software. This is the twelfth iteration of OpenStack and bring many new great features. To name the most interesting to me.
 
--   Enhanced Manageability - Finer-grained access controls and security settings, a new role-based access control (RBAC) for the Heat and Neutron and simplified management capabilities.
--   Enhanced Orchestration - Heat comes with lots of new resources for management, automation and orchestration to support all new Liberty management capabilities.
--   Container Management - [Mangum](https://wiki.openstack.org/wiki/Magnum), the container management piece of OpenStack, makes its debut with Liberty. With support for container cluster management software like Kubernetes, Mesos and Docker Swarm.
+- Enhanced Manageability - Finer-grained access controls and security settings, a new role-based access control (RBAC) for the Heat and Neutron and simplified management capabilities.
+- Enhanced Orchestration - Heat comes with lots of new resources for management, automation and orchestration to support all new Liberty management capabilities.
+- Container Management - [Mangum](https://wiki.openstack.org/wiki/Magnum), the container management piece of OpenStack, makes its debut with Liberty. With support for container cluster management software like Kubernetes, Mesos and Docker Swarm.
 
 I'm eager to get my hands dirty with Magnum and all new Heat capabilities.
 

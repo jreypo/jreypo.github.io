@@ -32,9 +32,9 @@ DELETE | DELETE
 
 API syntax is actually very easy, it is composed of:
 
--   Request method
--   Base URL
--   API signature
+- Request method
+- Base URL
+- API signature
 
 It’s better illustrated with an example:
 
@@ -44,9 +44,9 @@ POST https://chargeback.corp.local/vCenter-CB/api/login?version=2.5
 
 We can map the above example with the different elements of the API syntax:
 
--   `POST`  –This is the request method
--   `https://chargeback.corp.local/vCenter-CB/api` – This the base URL
--   `/login` – This is the API signature, composed of the path to the API we want to call.
+- `POST`  –This is the request method
+- `https://chargeback.corp.local/vCenter-CB/api` – This the base URL
+- `/login` – This is the API signature, composed of the path to the API we want to call.
 
 We have also included the API version, I usually includes the version as an URL parameter but as we will see later is not really required. Some of the tasks will need also URL parameters that will be placed after the signature.
 
@@ -58,13 +58,13 @@ For our first ride with CBM API we will use Firefox REST Client add-on, can be f
 
 I’m not going to review every possible API, just a few examples to illustrate how it works.
 
-### Login operation
+## Login operation
 
 This is the most basic operation of all. In the REST Client paste the XML payload in the Body area, select POST as the method to use and fill the URL field.
 
 [![](/assets/images/rest_login.png "Chargeback API Login with REST client")]({{site.url}}/assets/images/rest_login.png)
 
-### Get hierarchy list
+## Get hierarchy list
 
 Not every task needs an XML payload, in the following example we are going to get a list of the hierarchies using a GET method and with no message body. The URL to make the request would be:
 
@@ -80,7 +80,7 @@ If we go to Chargeback web UI we’ll see the listed hierarchies.
 
 [![](/assets/images/hierarchy_cbm_ui.PNG "Chargeback hierarchy")]({{site.url}}/assets/images/hierarchy_cbm_ui.PNG)
 
-### Get all Pricing Models
+## Get all Pricing Models
 
 Another simple request with no XML payload, with a similar syntax to the previous one:
 
@@ -161,7 +161,7 @@ It will produce however a much more detailed response XML with the details of ea
 </Response>
 ```
 
-### Add a new hierarchy
+## Add a new hierarchy
 
 Invoked using a POST method, that corresponds with the CREATE operation from the table at the beginning of the post. The syntax for the request would be:
 

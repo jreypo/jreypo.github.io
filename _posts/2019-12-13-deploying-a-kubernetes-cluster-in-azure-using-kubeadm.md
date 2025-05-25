@@ -25,23 +25,23 @@ author: juan_manuel_rey
 comments: true
 ---
 
-The easiest way to have a [Kubernetes](https://kubernetes.io/) cluster up and running in Azure in a short amount of time is by using [AKS service](https://azure.microsoft.com/es-es/services/kubernetes-service/), also if you want a more granular control of your cluster or a more customized cluster you can alway use [AKS-Egine](https://github.com/azure/aks-engine).
+The easiest way to have a [Kubernetes](https://kubernetes.io/) cluster up and running in Azure in a short amount of time is by using [AKS service](https://azure.microsoft.com/es-es/services/kubernetes-service/), also if you want a more granular control of your cluster or a more customized cluster you can alway use [AKS-Engine](https://github.com/azure/aks-engine).
 
-However this time I wanted to take a different approach and use a more widely used tool very popular amongst the Kubernetes community like `kuebadm`. I like `kubeadm` as a fantastic way to learn the internals of Kubernetes, also I used the content of this post as part of the preparation for [CKA certification](https://www.cncf.io/certification/cka/) exam, which I am planning to take in December or January. 
+However this time I wanted to take a different approach and use a more widely used tool very popular amongst the Kubernetes community like `kuebadm`. I like `kubeadm` as a fantastic way to learn the internals of Kubernetes, also I used the content of this post as part of the preparation for [CKA certification](https://www.cncf.io/certification/cka/) exam, which I am planning to take in December or January.
 
-# Create Azure infrastructure
+## Create Azure infrastructure
 
 The first thing we myst do is create the necessary infrastructure in our subscription, this includes the instances and the network.
 
 Create the resource group.
 
-```
+```azurecli
 az group create --name k8s-lab-rg3 --location westeurope
 ```
 
 Create a VNet, during the creation of the VNet we will declare as well the subnet for our cluster. 
 
-```
+```azurecli
 az network vnet create --name k8s-lab-vnet --resource-group k8s-lab-rg3 --location westeurope --address-prefixes 172.10.0.0/16 --subnet-name k8s-lab-net1 --subnet-prefixes 172.10.1.0/24
 ```
 
@@ -89,7 +89,7 @@ done
 az vm list --resource-group $RG -d
 ```
 
-# Prepare the cluster master and node instances 
+## Prepare the cluster master and node instances 
 
 With the instances up and running we need to install the software we will use to create our Kubernetes cluster.
 
@@ -191,9 +191,9 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-# Create the cluster
+## Create the cluster
 
-## Create `kubeadm` configuration
+### Create `kubeadm` configuration
 
 To bootstrap a cluster integrated with Azure, this is using the Azure cloud provider, using `kubeadm` we will need a `kuebadm` configuration file. In this file we will specify the Cluster Manager and API Server parameters instructing `kubeadm` to configure it with `--cloud-provider=azure` flag. For more information on Kubernetes cloud providers with `kubeadm` review the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/?source=post_page-----357210e2eb50----------------------#kubeadm).
 
@@ -272,7 +272,7 @@ Next create `/etc/kubernetes/cloud.conf` file, it will contain the configuration
 }
 ```
 
-## Bootstrap the master node
+### Bootstrap the master node
 
 Initialize the master, or control plane node, passing `kuebadm.yaml` as configuration parameter. Make sure that the instance name in Azure is the same as the hostname or `kubeadm` will fail fail to initialize the `kubelet`.
 
@@ -319,7 +319,7 @@ kube-master   NotReady   master   12m   v1.16.3   172.10.1.4    51.144.178.87   
 azureuser@kube-master:~$
 ```
 
-## Install a networking add-on
+### Install a networking add-on
 
 Next is to install a networking add-on in the master, in my example I am going to use [Calico](https://www.projectcalico.org/) but can you choose another if you want. First retrieve `calico.yaml` manifest from `https://docs.projectcalico.org/v3.8/manifests/calico.yaml` edit it and replace `CALICO_IPV4POOL_CIDR` value of `192.168.0.0/16` with the one from `podSubnet` property defined in ourt `kubeadm.yaml` file, in my case `10.11.0.0/16`.
 
@@ -373,7 +373,7 @@ kube-master   Ready    master   11m   v1.16.3   172.10.1.4    51.144.178.87   Ub
 azureuser@kube-master=lab:~$
 ```
 
-## Bootstrap the nodes
+### Bootstrap the nodes
 
 SSH into the first node and execute `kubeadm join` from master `kuebadm init` output. If you did not take note of the command or more than 24 hours have passed do not worry since we can easily reconstruct it with the following commands.
 
@@ -423,7 +423,7 @@ kube-node-2   NotReady   <none>   19s    v1.16.3   172.10.1.7    <none>         
 azureuser@kube-master-lab:~$
 ```
 
-With the nodes properly joined the cluster is ready to be used. 
+With the nodes properly joined the cluster is ready to be used.
 
 Thanks for reading! Hope this whole procedure has been helpful and instructive, as always if you have any comments, questions or suggestions please leave them in the comments or reach out to me on Twitter.
 

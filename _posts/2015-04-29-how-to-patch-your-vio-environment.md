@@ -25,7 +25,7 @@ image:
 
 After the patch was released I thought it was a perfect time to upgrade my VIO lab, document the procedure and publish it, so without further ado lets get some patches installed!
 
-### Step 1 - Upload and install the patch
+## Step 1 - Upload and install the patch
 
 Get the patch from [VIO product download page](https://my.vmware.com/group/vmware/info?slug=datacenter_cloud_infrastructure/vmware_integrated_openstack/1_0), of course you need to have the proper rights to do it, the patch is a Debian package in `deb` format. There are some caveats here, the way to upload and install the patch is using vSphere Web Client from **Manage ->  Updates**.
 
@@ -64,7 +64,7 @@ Installation complete for patch vio-patch-1 version 1.0.1.2668568
 viouser@vio-manager:~$
 ```
 
-### Step 2 - Verify the installation
+## Step 2 - Verify the installation
 
 Log out and log in back in vSphere Web Client. The new version and build number can be verified in the Summary tab.
 

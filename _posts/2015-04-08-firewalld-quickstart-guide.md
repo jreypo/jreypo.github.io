@@ -29,7 +29,7 @@ comments: true
 
 FirewallD was first introduced in Fedora 18 and has been the default firewall mechanism for Fedora since then. Finally this year Red Hat decided to include it in RHEL 7, and of course it also made its way to the different RHEL clones like CentOS 7 and Scientific Linux 7.
 
-### Checking FirewallD service status
+## Checking FirewallD service status
 
 To get the basic status of the service simply use `firewall-cmd --state`.
 
@@ -62,19 +62,19 @@ systemctl enable firewalld.service
 systemctl disable firewalld.service
 ```
 
-### Managing firewall zones
+## Managing firewall zones
 
 FirewallD introduces the zones concept, a zone is no more than a way to define the level of trust for a set of connections. A connection definition can only be part of one zone at the same time but zones can be grouped. There is a set of predefined zones:
 
--   **Public** - For use in public areas. Only selected incoming connections are accepted.
--   **Drop** - Any incoming network packets are dropped, there is no reply. Only outgoing network connections are possible.
--   **Block** - Any incoming network connections are rejected with an icmp-host-prohibited message for IPv4 and icmp6-adm-prohibited for IPv6. Only network connections initiated within this system are possible.
--   **External** - For use on external networks with masquerading enabled especially for routers. Only selected incoming connections are accepted.
--   **DMZ** - For computers DMZ network, with limited access to the internal network. Only selected incoming connections are accepted.
--   **Work** - For use in work areas. Only selected incoming connections are accepted.
--   **Home** - For use in home areas. Only selected incoming connections are accepted.
--   **Trusted** - All network connections are accepted.
--   **Internal** - For use on internal networks. Only selected incoming connections are accepted.
+- **Public** - For use in public areas. Only selected incoming connections are accepted.
+- **Drop** - Any incoming network packets are dropped, there is no reply. Only outgoing network connections are possible.
+- **Block** - Any incoming network connections are rejected with an icmp-host-prohibited message for IPv4 and icmp6-adm-prohibited for IPv6. Only network connections initiated within this system are possible.
+- **External** - For use on external networks with masquerading enabled especially for routers. Only selected incoming connections are accepted.
+- **DMZ** - For computers DMZ network, with limited access to the internal network. Only selected incoming connections are accepted.
+- **Work** - For use in work areas. Only selected incoming connections are accepted.
+- **Home** - For use in home areas. Only selected incoming connections are accepted.
+- **Trusted** - All network connections are accepted.
+- **Internal** - For use on internal networks. Only selected incoming connections are accepted.
 
 By default all interfaces are assigned to the public zone. Each zone is defined in its own XML file stored in `/usr/lib/firewalld/zones`. For example the public zone XML file looks like this.
 
@@ -144,7 +144,7 @@ Change the default zone.
 firewall-cmd --set-default-zone=home
 ```
 
-### Interfaces and sources
+## Interfaces and sources
 
 Zones can be bound to a network interface and to a specific network addressing or source.
 
@@ -177,7 +177,7 @@ List the sources assigned to a zone, in this case `work`.
 [root@centos7 ~]#
 ```
 
-### Services
+## Services
 
 FirewallD can assign services permanently to a zone, for example to assign `http` service to the `dmz` zone. A service can be also assigned to multiple zones.
 
@@ -197,11 +197,11 @@ http ssh
 [root@centos7 ~]#
 ```
 
-### Other operations
+## Other operations
 
 Besides of Zones, interfaces and Services management FirewallD like other firewalls can perform several network related operations like masquerading, set direct rules and manage ports.
 
-#### Masquerading and port forwarding
+### Masquerading and port forwarding
 
 Add masquerading to a zone.
 
@@ -229,7 +229,7 @@ A destination address can also bee added to the above command.
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=8080:toaddr=172.16.10.21
 ```
 
-#### Set direct rules
+### Set direct rules
 
 Create a firewall rule for `8080/tcp` port.
 
@@ -237,7 +237,7 @@ Create a firewall rule for `8080/tcp` port.
 firewall-cmd --direct --add-rule ipv4 filter INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
 ```
 
-#### Port management
+### Port management
 
 Allow a port temporary in a zone.
 

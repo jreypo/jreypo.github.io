@@ -21,11 +21,11 @@ comments: true
 
 Installing the vCloud Director adapter, or any vCenter Operations adapter, is a relatively easy task as we will explain in this post.
 
-Firstly you need to download the adapter from [ftp.integrien.com](ftp://ftp.integrien.com). Choose the `.PAK` file.
+First you need to download the adapter from [ftp.integrien.com](ftp://ftp.integrien.com). Choose the `.PAK` file.
 
 [![](/assets/images/vcops_vcd_adapter_pak_file.png "vCloud Adapter PAK file")]({{site.url}}/assets/images/vcops_vcd_adapter_pak_file.png)
 
-Once it is downloaded log into vC Ops Admin UI **https://vcops-ui-vm/admin**. From the **Update** tab browse for the downloaded file and click **Update**.
+Once it is downloaded log into vC Ops Admin UI `https://vcops-ui-vm/admin`. From the **Update** tab browse for the downloaded file and click **Update**.
 
 [![](/assets/images/install_vcops_vcd_adapter.png "Install vCloud adapter")]({{site.url}}/assets/images/install_vcops_vcd_adapter.png)
 
@@ -33,13 +33,13 @@ It will ask for confirmation and the will present you the EULA. Accept it and cl
 
 [![](/assets/images/vcops_vcd_accept_eula.png "Accept EULA")]({{site.url}}/assets/images/vcops_vcd_accept_eula.png)
 
-Will ask for confirmation again.  During the updating process you will be automatically logged out from the Administration Portal, will be unable to log back in until the update is done.
+Will ask for confirmation again. During the updating process you will be automatically logged out from the Administration Portal, will be unable to log back in until the update is done.
 
 The update process can take a few minutes so grab a coffee and wait until it’s done.
 
 [![](/assets/images/vcd_adapter_updating_progress.png "Updating progress")]({{site.url}}/assets/images/vcd_adapter_updating_progress.png)
 
-Once the vCloud Adapter installation is done proceed to vCenter Operations Custom UI **https://vcops-ui-vm/custom**. From the **Admin** menu go to **Support**.
+Once the vCloud Adapter installation is done proceed to vCenter Operations Custom UI `https://vcops-ui-vm/custom`. From the **Admin** menu go to **Support**.
 
 [![](/assets/images/vcops_ui_admin_support.png)]({{site.url}}/assets/images/vcops_ui_admin_support.png)
 

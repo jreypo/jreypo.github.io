@@ -24,7 +24,7 @@ comments: true
 
 **[Fedora 22](https://getfedora.org/)** was released a few months ago and amongst many new features it came with a replacement for `yum` as package manager called `dnf`, or DaNdiFied YUM, oh yes `yum` is still around but it is now considered legacy software. Also DNF will become in the near future the default package manager for RHEL and CentOS so it is for the best that you get familiarized with it sooner than later.
 
-### DNF Commands
+## DNF Commands
 
 The first thing you need to understand about `dnf` is that many commands are basically still the same but there are differences. Package management commands can be executed with almost the same syntax previously used with `yum`.
 
@@ -139,7 +139,7 @@ curl-0:7.40.0-7.fc22.x86_64
 
 This is a very basic introduction to `dnf` capabilities but hopefully you have been able to get how it works. My advice is to review [DNF documentation](http://dnf.readthedocs.org/en/latest/index.html) for all the details.
 
-### The Photon Connection
+## The Photon Connection
 
 [**VMware Photon**](https://vmware.github.io/photon/) comes with `tdnf` (Tiny DNF); this is a development by VMware that comes with compatible repository and package management capabilities. Not every `dnf` command is available but the basic ones are there.
 

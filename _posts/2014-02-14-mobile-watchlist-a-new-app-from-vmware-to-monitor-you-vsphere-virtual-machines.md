@@ -41,7 +41,7 @@ Tap on a VM and you will access its details, configured resources, VM Tools stat
 As you can see from the screenshot this a multi screen so slide to the left and you can get a console screenshot of the virtual machine and perform different actions on the virtual machine.
 
 [![](/assets/images/photo-14-02-14-18-56-46.png "Virtual Machine console")]({{site.url}}/assets/images/photo-14-02-14-18-56-46.png)
-   
+
 [![](/assets/images/photo-14-02-14-18-56-49.png "Actions")]({{site.url}}/assets/images/photo-14-02-14-18-56-49.png)
 
 I hope this is a step towards a new set of mobile apps from VMware focused on the administration of the different components of a virtual and cloud infrastructure :)

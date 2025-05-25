@@ -37,24 +37,23 @@ Welcome to Part 4 for this series about OpenStack and VMware NSX. To do a quick 
 
 If you remember the first post where I described the components of the lab, there were three OpenStack dedicated nodes:
 
--   Cloud controller node
--   Neutron networking node
--   Nova compute node
+- Cloud controller node
+- Neutron networking node
+- Nova compute node
 
-Instead of installing from scratch I decided to go with one of the OpenStack distributions: [**RDO**](http://openstack.redhat.com/Main_Page). What is RDO and why I
-decided for it? RDO is a community distribution of OpenStack sponsored by [**Red Hat**](http://www.redhat.com/), yes I just say Red Hat so please stop the eye rolling.
+Instead of installing from scratch I decided to go with one of the OpenStack distributions: [**RDO**](http://openstack.redhat.com/Main_Page). What is RDO and why I decided for it? RDO is a community distribution of OpenStack sponsored by [**Red Hat**](http://www.redhat.com/), yes I just say Red Hat so please stop the eye rolling.
 
 RDO is the upstream version of RHEL OpenStack Platform, the commercial version of OpenStack by Red Hat. During the last months I tried several flavors of OpenStack and while I still think that installing from scratch is the best way to learn, in fact is what I did for my first labs, RDO gives me the possibility to quickly create my testing labs. Also RHEL OP Version 4, based on RDO, is supported with VMware NSX and I really couldn't resist myself to try it.
 
-### Installation prerequisites
+## Installation prerequisites
 
 Before proceeding with the installation there are some preparations weneed to perform on the OpenStack nodes.
 
-#### SSH key generation
+### SSH key generation
 
 Generate a new SSH key to be later distributed on the OpenStack nodes during the installation. Use `ssh-keygen` to generate the new key.
 
-#### Neutron server preparation
+### Neutron server preparation
 
 In the Neutron node install NSX Open vSwitch version as described in [Part 3]({% post_url 2014-05-07-deploying-openstack-with-kvm-and-vmware-nsx-part-3-kvm-hypervisor-and-gluster-storage-setup %}) for the KVM nodes, the network interface configuration it's quite similar.
 
@@ -67,7 +66,7 @@ ovs-vsctl set Bridge br-ex fail-mode=standalone
 ovs-vsctl add-port br-ex eth0
 ```
 
-### OpenStack installation
+## OpenStack installation
 
 RDO relies on `packstack` for the installation of its different components. [Packstack](https://github.com/stackforge/packstack) is a tool that will install all required software in the nodes based on an answer file. Enable RDO and EPEL repos and install `openstack-packstack` package.
 
@@ -135,7 +134,7 @@ Please, find your login credentials stored in the keystonerc_admin in your home 
 
 Reboot the three nodes as instructed and proceed to the next step.
 
-#### Configure Glance to use GlusterFS
+### Configure Glance to use GlusterFS
 
 RDO `packstack` cannot configure Glance to use GlusterFS as its storage backend during the installation and it has to be configured afterwards. Fortunately the necessary steps are documented on [RDO site](http://openstack.redhat.com/Using_GlusterFS_for_Glance_with_RDO_Havana).
 
@@ -184,11 +183,11 @@ Once logged into horizon navigate to **Admin -> Hypervisor** and check that the 
 
 [![](/assets/images/screen-shot-2014-06-17-at-01-56-04.png)]({{site.url}}/assets/images/screen-shot-2014-06-17-at-01-56-04.png)
 
-### Configure the NSX integration
+## Configure the NSX integration
 
 At this point we have a working OpenStack installation with Neutron using the Open vSwitch plugin, now we will proceed to integrate our shiny OpenStack cloud with NSX.
 
-#### Install NSX Neutron plugin
+### Install NSX Neutron plugin
 
 VMware provides a set of RPM packages containing the NSX plugin and a VMware sanctioned version of Neutron, however I found that this packages were older than my Havana installation and didn't want to brake any dependencies and spend hours trying to fix my installation.
 
@@ -198,7 +197,7 @@ A tar file containing all the source for both the plugin and Neutron itself is a
 yum install openstack-neutron-nicira
 ```
 
-### Configure NSX plugin
+## Configure NSX plugin
 
 Register the Neutron server as a transport node on the NSX Controller Cluster.
 

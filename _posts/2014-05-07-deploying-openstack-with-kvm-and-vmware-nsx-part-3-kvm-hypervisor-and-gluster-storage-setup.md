@@ -41,14 +41,14 @@ image:
 
 Welcome to the third post of my series about OpenStack. In the [first]{(% post_url 2014-04-29-deploying-openstack-with-kvm-and-vmware-nsx-part-1-nsx-overview-and-initial-setup %}) and [second]({% post_url 2014-05-06-deploying-openstack-with-kvm-and-vmware-nsx-part-2-configure-nsx-transport-and-logical-network-views %}) posts we saw in detail how to prepare the basic network infrastructure of our future OpenStack cloud using VMware NSX. In this third one we are going to install and configure the KVM compute host and the shared storage of the lab.
 
-### KVM setup
+## KVM setup
 
 Create and install two CentOS 6.4 virtual machines with 2 vCPU, 2 GB of RAM, 2 network interfaces (E1000) and one 16GB disk. For the partitioning schema I have used the following one:
 
--   sda1 - 512MB - `/boot`
--   sda2 - Rest of the disk - LVM PV
-    -   `lv_root` - 13.5GB - `/`
-    -   `lv_swap` - 2GB - `swap`
+- `sda1` - 512MB - `/boot`
+- `sda2` - Rest of the disk - LVM PV
+  - `lv_root` - 13.5GB - `/`
+  - `lv_swap` - 2GB - `swap`
 
 Mark `Base` and `Standard` groups to be installed and leave the rest unchecked. Set the hostname during the installation and leave the networking configuration with the default values. Please have in mind that you will need to have a DHCP server on your network, in my case I'm using the one that comes with VMware Fusion if you don't have one then you will have to set here a temporary IP address in order to able to install the KVM software. Once the installation is done reboot your virtual machine and open a root SSH session to proceed with the rest of the configuration tasks.
 
@@ -95,7 +95,7 @@ kvm                   316506  1 kvm_intel
 [root@kvm1 ~]#
 ```
 
-### Hypervisor networking setup
+## Hypervisor networking setup
 
 With KVM software installed and ready we can now move on to configure the networking for both hosts and integrate them into our NSX deployment.
 
@@ -108,7 +108,7 @@ virsh net-destroy default
 virsh net-autostart --disable default
 ```
 
-#### Install Open vSwitch
+### Install Open vSwitch
 
 Copy the NSX OVS package to the KVM host and extract it.
 
@@ -165,7 +165,7 @@ successfully created the integration bridge..
 
 There are other packages like `nicira-flow-stats-exporter` and `tcpdump-ovs` but they are not needed for OVS functioning. We can proceed now with OVS configuration.
 
-#### Configure Open vSwitch
+### Configure Open vSwitch
 
 The first step is to create OVS bridges for each network interface card of the hypervisor.
 
@@ -250,7 +250,7 @@ Execute `ovs-vsctl show` command to review OVS current configuration.
 [root@kvm1 ~]#
 ```
 
-#### Register OVS in NSX Controller
+### Register OVS in NSX Controller
 
 With our OVS instance installed and running we can now inform NSX Controller of its existence either via NVP API or NSX Manager, in our case we will use the later.
 
@@ -260,8 +260,8 @@ Log into NSX Manager as admin user and go to *Dashboard*, from **Summary of Tran
 
 In Properties enter:
 
--   Integration bridge ID, for us is `br-int`.
--   Admin Status Enabled -  Enabled by default.
+- Integration bridge ID, for us is `br-int`.
+- Admin Status Enabled -  Enabled by default.
 
 [![](/assets/images/screen-shot-2014-05-05-at-23-29-03.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-29-03.png)
 
@@ -301,9 +301,9 @@ Copy the contents of the file and paste them in the **Security Certificate** tex
 
 Finally add the Transport Connector with the values:
 
--   Transport Type: STT
--   Transport Zone UUID: The transport zone, in my case the UUID corresponding to **vlab-transport-zone**.
--   IP Address - The address of the `br0` interface of the host.
+- Transport Type: STT
+- Transport Zone UUID: The transport zone, in my case the UUID corresponding to **vlab-transport-zone**.
+- IP Address - The address of the `br0` interface of the host.
 
 [![](/assets/images/screen-shot-2014-05-05-at-23-41-57.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-41-57.png)
 
@@ -311,14 +311,14 @@ Click **Save & View** and check that **Management** and **OpenFlow** connections
 
 [![](/assets/images/screen-shot-2014-05-05-at-23-52-16.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-52-16.png)
 
-### GlusterFS setup
+## GlusterFS setup
 
 I choose **[GlusterFS](http://www.gluster.org/)** for my OpenStack lab for two reasons.  I have used it in the past so this has been a good opportunity for me to refresh and enhance my rusty Gluster skills, and it's supported as storage backend for Glance in OpenStack. Instead of going with CentOS again this time I choose Fedora 20 for my Gluster VM, a real world GlusterFS cluster will have at least two node but for our lab one will be enough.
 
 Create a Fedora x64 virtual machine with 1 vCPU, 1GB of RAM and one network interface. For the storage part use the following:
 
--   System disk: 16GB
--   Data disk: 72GB
+- System disk: 16GB
+- Data disk: 72GB
 
 Use the same partitioning schema of the KVM hosts for the system disk. Choose a Minimal installation and add the Standard group. Configure the hostname and the IP address of the node, set the root password and create a user as administrator, I'm using here my personal user `jrey.`
 

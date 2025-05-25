@@ -28,7 +28,7 @@ VMware provides a plugin for the integration between vCO and CBM, however there 
 
 Second gotcha of the plugin is that it doesn’t cover every possible API within Chargeback, yes you heard it correctly. To cover those parts we need to use the vCO plugin for REST APIs, of course this plugin needs some configuration before being able to interact with Chargeback but will see later how to do it.
 
-### Add Chargeback server to vCenter Orchestrator inventory
+## Add Chargeback server to vCenter Orchestrator inventory
 
 Open vCenter Orchestrator configuration website at **https://vco_server:8283** and install Chargeback and REST plugins. I’m not going to describe the process of installing a plugin since it is fairly well documented in [vCO documentation](http://pubs.vmware.com/vsphere-55/index.jsp?topic=%2Fcom.vmware.vsphere.vco_install_config.doc%2FGUID-01019DF6-AF58-4E77-BD66-437907505924.html).
 
@@ -48,17 +48,17 @@ In vCO client our new Chargeback server will appear.
 
 [![](/assets/images/cbm_vco_inventory.png "vCO inventory")]({{site.url}}/assets/images/cbm_vco_inventory.png)
 
-### Using vCO plugin for Chargeback Integration
+## Using vCO plugin for Chargeback Integration
 
 vCenter Orchestrator plugin for Chargeback allows to perform several administration tasks in a Chargeback server and also cost management, service management and configuration tasks. Following is an example workflow for a configuration and management action.
 
-#### List all hierarchies
+### List all hierarchies
 
 We are going to automate a very easy task as our first example. Create a new workflow and name it *List Hierarchies*. As workflow parameters add:
 
--   cbmServer – Your Chargeback server. Type **Chargeback:ChargebackServer**.
--   cbmVersion – Chargeback API version, 2.0. Type **string**.
--   hierarchyList – The list of hierarchies- Type **Array/Chargeback:Hierarchy**.
+- cbmServer – Your Chargeback server. Type **Chargeback:ChargebackServer**.
+- cbmVersion – Chargeback API version, 2.0. Type **string**.
+- hierarchyList – The list of hierarchies- Type **Array/Chargeback:Hierarchy**.
 
 In the Schema tab drag an **Action element**, a new windows will pop up to choose the action. Search for **getAllHiearchies** and select it.
 
@@ -94,11 +94,11 @@ The hierarchy scripting object is now instantiated and we can get any property f
 
 {% gist jreypo/11114757 %}
 
-### Using vCO HTTP-REST plugin with Chargeback
+## Using vCO HTTP-REST plugin with Chargeback
 
 vCenter Orchestrator has available an HTTP-REST plugin that enables it to interface with systems without a plugin or, like CBM case, to be able to execute some operations not implemented in the plugin. Current vCO plugin doesn’t have implemented the possibility to manage fixed costs in Chargeback. However using the plugin for REST APIs we can circumvent that shortage. But before creating any workflow we need to configure the REST plugin for Chargeback.
 
-#### Configure REST plugin
+### Configure REST plugin
 
 vCenter Orchestrator plugin for REST APIs comes with a set of workflows for configuration purposes.
 
@@ -120,37 +120,37 @@ Click submit and have a look at the workflow execution.
 
 If everything went fine we cam see our new REST host in vCO inventory under HTTP-REST. Next step is add the API operations we need to execute using this plugin. Or course you have to add a Login and Logout operation and for our example we are going to add the following ones:
 
--   Create new Hierarchy
--   Add new Fixed Cost
--   Get Task Status – We will not use this one in any of the workflows of the post but I decided to add it to show how to add URL parameters
+- Create new Hierarchy
+- Add new Fixed Cost
+- Get Task Status – We will not use this one in any of the workflows of the post but I decided to add it to show how to add URL parameters
 
 Launch **Add a REST operation** workflow and enter the following parameters:
 
--   Parent host – Our previously added REST host.
--   Name – a unique name for the operation.
--   Template URL – This the API signature in the case of Chargeback. The URL can contain placeholder for parameters to be provided during request phase of the operation.
--   HTTP Method.
--   Content Type – Optional parameter only for POST and PUT methods.
+- Parent host – Our previously added REST host.
+- Name – a unique name for the operation.
+- Template URL – This the API signature in the case of Chargeback. The URL can contain placeholder for parameters to be provided during request phase of the operation.
+- HTTP Method.
+- Content Type – Optional parameter only for POST and PUT methods.
 
 Below are the screenshots and parameters for the five REST  operations we need to add.
 
-##### Login
+### Login
 
 [![](/assets/images/vco_add_rest_op_login.png "Login")]({{site.url}}/assets/images/vco_add_rest_op_login.png)
 
-##### Logout
+### Logout
 
 [![](/assets/images/vco_add_rest_op_logout.png "Logout")]({{site.url}}/assets/images/vco_add_rest_op_logout.png)
 
-##### Create a new hierarchy
+### Create a new hierarchy
 
 [![](/assets/images/vco_add_rest_op_add_new_hierarchy.png "Create new hierarchy")]({{site.url}}/assets/images/vco_add_rest_op_add_new_hierarchy.png)
 
-##### Add a new Fixed Cost
+### Add a new Fixed Cost
 
 [![](/assets/images/vco_add_rest_op_add_fixed_cost.png "Add Fixed Cost")]({{site.url}}/assets/images/vco_add_rest_op_add_fixed_cost.png)
 
-##### Get task status
+### Get task status
 
 [![](/assets/images/vco_add_rest_op_get_task_status.png "Get Task Status")]({{site.url}}/assets/images/vco_add_rest_op_get_task_status.png)
 
@@ -160,17 +160,17 @@ Look at in the inventory in vCenter Orchestrator client and check that all the n
 
 Now we can proceed to create our workflows.
 
-#### Add a new Hierarchy to Chargeback
+### Add a new Hierarchy to Chargeback
 
 We are going to reproduce one the examples from [Part 1]({% post_url 2014-04-03-taking-chargeback-api-for-a-ride-part-1 %}) using vCO. First create a new empty workflow. As attributes we are going to use the following ones:
 
--   cbmVersion – Chargeback API version, 2.0.
--   cbmUser – User with administrative privileges in Chargeback
--   cbmPassword – Password of the above user
--   restLogin – Login REST Operation
--   restLogout – Logout REST Operation
--   restCreateHierarchy – Create hierarchy REST Operation
--   loginStatus – Status of the login REST Operation.
+- cbmVersion – Chargeback API version, 2.0.
+- cbmUser – User with administrative privileges in Chargeback
+- cbmPassword – Password of the above user
+- restLogin – Login REST Operation
+- restLogout – Logout REST Operation
+- restCreateHierarchy – Create hierarchy REST Operation
+- loginStatus – Status of the login REST Operation.
 
 [![](/assets/images/vco_rest_add_new_hr_attributes.png "Workflow attributes")]({{site.url}}/assets/images/vco_rest_add_new_hr_attributes.png)
 
@@ -230,28 +230,28 @@ Click Submit, check the workflow logs for any errors and if everything went as e
 
 [![](/assets/images/vco_rest_add_new_hr_new_hr_cbm_ui.png "New CBM hierarchy created")]({{site.url}}/assets/images/vco_rest_add_new_hr_new_hr_cbm_ui.png)
 
-#### Add new Fixed Cost
+### Add new Fixed Cost
 
 For our second workflow we are going the same structure as before. hence the first task is duplicate our first workflow and edit the copy. As input parameters we will use:
 
--   cbmVersion – Chargeback API version, 2.0.
--   cbmUser – User with administrative privileges in Chargeback
--   cbmPassword – Password of the above user
--   restLogin – Login REST Operation
--   restLogout – Logout REST Operation
--   restAddFixed Cost – Add new fixed cost REST Operation
--   loginStatus – Status of the login REST Operation.
+- cbmVersion – Chargeback API version, 2.0.
+- cbmUser – User with administrative privileges in Chargeback
+- cbmPassword – Password of the above user
+- restLogin – Login REST Operation
+- restLogout – Logout REST Operation
+- restAddFixed Cost – Add new fixed cost REST Operation
+- loginStatus – Status of the login REST Operation.
 
 [![](/assets/images/vco_rest_add_new_fixed_cost_attributes.png "Add New Fixed cost workflow attributes")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_attributes.png)
 
 Very similar to the hierarchy one. However in this case as input parameters we will need much more information.
 
--   fixedCostName – Fixed Cost name
--   fixedCostDescription – Fixed Cost Description
--   fixedCostCurrency – ID for the currency. A full list of the currencies supported by Chargeback can be found in the [API Reference](https://www.vmware.com/support/vcbm/doc/api_ref_2_6.zip). US Dollar is 104 and Euro 31.
--   isProrated – Configure the new fixed cost as prorated or not. Default value is true. Cannot be used with one-time fixed costs.
--   isPowerStateBased – Configure the fixed cost to be applied only if the virtual machine is powered on. It’s not mandatory, default value is false.
--   fixedCostType – Fixed cost type. A value of 0 represents a recurring fixed cost and 1 represents a one-time fixed cost. It’s not mandatory and the default value is 0.
+- fixedCostName – Fixed Cost name
+- fixedCostDescription – Fixed Cost Description
+- fixedCostCurrency – ID for the currency. A full list of the currencies supported by Chargeback can be found in the [API Reference](https://www.vmware.com/support/vcbm/doc/api_ref_2_6.zip). US Dollar is 104 and Euro 31.
+- isProrated – Configure the new fixed cost as prorated or not. Default value is true. Cannot be used with one-time fixed costs.
+- isPowerStateBased – Configure the fixed cost to be applied only if the virtual machine is powered on. It’s not mandatory, default value is false.
+- fixedCostType – Fixed cost type. A value of 0 represents a recurring fixed cost and 1 represents a one-time fixed cost. It’s not mandatory and the default value is 0.
 
 [![](/assets/images/vco_rest_add_new_fixed_cost_input_parameters.png "Workflow input parameters")]({{site.url}}/assets/images/vco_rest_add_new_fixed_cost_input_parameters.png)
 

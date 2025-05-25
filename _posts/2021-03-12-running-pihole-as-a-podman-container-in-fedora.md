@@ -21,13 +21,13 @@ I run Pi-Hole at home to filter and block ad traffic, is a fantastic piece of of
 
 For the last year and a half or so I have been running pi-hole on a CentOS 7 virtual machine, it's been working great but I wanted to move it outside of my ESXi host and separate it from my lab workloads. Many people use a Raspberry Pi to run it and my original intention was exactly that and use [Portainer](https://www.portainer.io/) to manage the container like I was doing on CentOS, however I had a [GIGABYTE GB-BXBT-2807](https://www.gigabyte.com/Mini-PcBarebone/GB-BXBT-2807-rev-10) mini PC laying around. This little fella used to be my media center, is a NUC-like machine with a dual-core Intel Celeron N2807 CPU, 8GB of RAM and a 60GB SSD. It has enough room not only for Pi-Hole but also for other workloads I am planning to run to support my home network.
 
-I decided to move from CentOS to Fedora Server so I installed version 33. Fedora 33 comes with a caveat, since it uses [cgroupvs2](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html) Docker does not work. But that is not the end of the world because it has [Podman](https://podman.io/) available instead, I've used it in the past for testing purposes but never to run any serious workloads at home, there are ways to install Docker in Fedora 33 but I decided to use the default option and try run Pi-Hole on it. 
+I decided to move from CentOS to Fedora Server so I installed version 33. Fedora 33 comes with a caveat, since it uses [cgroupvs2](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html) Docker does not work. But that is not the end of the world because it has [Podman](https://podman.io/) available instead, I've used it in the past for testing purposes but never to run any serious workloads at home, there are ways to install Docker in Fedora 33 but I decided to use the default option and try run Pi-Hole on it.
 
-If you have never heard about Podman, or Pod Manager, it is a daemonless container engine for OCI Conainers on Linux originally developed by Red Hat as an open source project and intended to replace Docker in the Fedora/CentOS/RHEL ecosystem. 
+If you have never heard about Podman, or Pod Manager, it is a daemonless container engine for OCI Containers on Linux originally developed by Red Hat as an open source project and intended to replace Docker in the Fedora/CentOS/RHEL ecosystem.
 
 ## Prepare the server
 
-Install Fedora 33 in a virtual machine or like in my case in a physical system, is up to you to decide the type of installation but for me minimal installation is more than enough to keep the system and its attack surface as small as possible. 
+Install Fedora 33 in a virtual machine or like in my case in a physical system, is up to you to decide the type of installation but for me minimal installation is more than enough to keep the system and its attack surface as small as possible.
 
 After the OS is installed run `dnf update` to get latest Fedora updates and install Podman.
 
@@ -40,7 +40,7 @@ Next we need to adjust Fedora network configuration. By default Fedora Server co
 
 ### Set an static IP address
 
-Modify your existing connection with `nmcli`, my connection is `ens192` but you should run `nmcli connection` to get a list of the existing connections and use the appropiate one.
+Modify your existing connection with `nmcli`, my connection is `ens192` but you should run `nmcli connection` to get a list of the existing connections and use the appropriate one.
 
 ```
 sudo nmcli connection modify ens192 ipv4.method manual
@@ -86,7 +86,7 @@ sudo podman volume create pihole_pihole
 sudo podman volume create pihole_dnsmasq
 ```
 
-Pull latest `pihole` container image. 
+Pull latest `pihole` container image.
 
 ```
 sudo podman pull pihole/pihole
@@ -154,7 +154,7 @@ After creating the service unit file and before staring the service configure SE
 setsebool -P container_manage_cgroup on
 ```
 
-Enable and start the new service and reboot to verify it runs at boot. 
+Enable and start the new service and reboot to verify it runs at boot.
 
 ```
 sudo systemctl enable pi-hole.service
@@ -165,7 +165,7 @@ Access yoour Pi-Hole at `http://pi_hole_ip/admin`, login and see the magic happe
 
 [![](/assets/images/pi-hole.png)]({{site.url}}/assets/images/pi-hole.png)
 
-FInally I installed `cockpit-podman` package to keep track of this and future podman containers from [Cockpit](https://cockpit-project.org/). 
+FInally I installed `cockpit-podman` package to keep track of this and future podman containers from [Cockpit](https://cockpit-project.org/).
 
 [![](/assets/images/cockpit-podman.png)]({{site.url}}/assets/images/cockpit-podman.png)
 

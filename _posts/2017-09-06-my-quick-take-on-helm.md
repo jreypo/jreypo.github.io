@@ -22,15 +22,15 @@ author: juan_manuel_rey
 comments: true
 ---
 
-[**Helm**](https://helm.sh/) is one of those tools I've been watching from a safe distance for some time, always curious but never find the time to play with it. I decided to change that, specially since Helm was created by the awesome folks at DEIS which are now part of Microsoft. 
+[**Helm**](https://helm.sh/) is one of those tools I've been watching from a safe distance for some time, always curious but never find the time to play with it. I decided to change that, specially since Helm was created by the awesome folks at DEIS which are now part of Microsoft.
 
-# What is Helm
+## What is Helm
 
-When DEIS introduced Helm for the first time it was described as The Kubernetes Package Manager, an open source project that allows to package, install and manage Kubernetes applications. During my experience these past weeks that is what I found, if you are familiar with Linux pacakge managers like `apt` or `dnf` then you will feel at home using `helm` client to deploy charts on your Kubernetes clusters. 
+When DEIS introduced Helm for the first time it was described as The Kubernetes Package Manager, an open source project that allows to package, install and manage Kubernetes applications. During my experience these past weeks that is what I found, if you are familiar with Linux package managers like `apt` or `dnf` then you will feel at home using `helm` client to deploy charts on your Kubernetes clusters.
 
-Helms is made of two differentiated components, `helm` command line client and Tiller which is the server-side component that will be installed on the cluster and that will interact with Kubernete API server. [Helm documentation](https://docs.helm.sh/) provides much more details around the architecture of Helm.
+Helms is made of two differentiated components, `helm` command line client and Tiller which is the server-side component that will be installed on the cluster and that will interact with Kubernetes API server. [Helm documentation](https://docs.helm.sh/) provides much more details around the architecture of Helm.
 
-# Install and configure Helm
+## Install and configure Helm
 
 Helm is currently available for Linux and macOS, there is an experimental version for Windows but who needs a Window version when you have Windows Subsystem for Linux. Yes Helm can be installed on a Linux distro running on WSL using the Linux installation script, actually I installed Helm on Ubuntu 16.04, which runs on my Windows 10 laptop on top of Windows Subsystem for Linux.
 
@@ -45,7 +45,7 @@ helm installed into /usr/local/bin/helm
 Run 'helm init' to configure helm.
 ```
 
-Executing `helm init` will initialize Helm locally, connect to the default Kubernetes cluster and deploy Tiller under the `kube-system` namespace. If your Kubernetes cluster has been deployed using Azure Container Service then tiller comes already deployed, execute `helm init --upgrade` instead. 
+Executing `helm init` will initialize Helm locally, connect to the default Kubernetes cluster and deploy Tiller under the `kube-system` namespace. If your Kubernetes cluster has been deployed using Azure Container Service then tiller comes already deployed, execute `helm init --upgrade` instead.
 
 ```
 $ helm init --upgrade
@@ -63,9 +63,9 @@ Tiller (the Helm server-side component) has been upgraded to the current version
 Happy Helming!
 ```
 
-However right now there is bug with Tiller on ACS, a few seconds after you upgrade Tiller a new pod with the previous version (2.5.1) will be re-deployed and the upgraded version will be removed. This bug has been reported on [ACS Github repository](https://github.com/Azure/ACS/issues/55), Tiller addon has been marked as a cluster service therefore Kubernetes will not allow any updates to it through the API which what `helm` does, instead the only way to update the version is by modifying the YAML manifest defining the deployment on the master(s). ACS team has already fix the issue and will be rolled up through all Azure regions during the next weeks. 
+However right now there is bug with Tiller on ACS, a few seconds after you upgrade Tiller a new pod with the previous version (2.5.1) will be re-deployed and the upgraded version will be removed. This bug has been reported on [ACS Github repository](https://github.com/Azure/ACS/issues/55), Tiller addon has been marked as a cluster service therefore Kubernetes will not allow any updates to it through the API which what `helm` does, instead the only way to update the version is by modifying the YAML manifest defining the deployment on the master(s). ACS team has already fix the issue and will be rolled up through all Azure regions during the next weeks.
 
-In the meantime the quick fix is to update the deployment manifest located in `/etc/kubernetes/addons/kube-tiller-deployment.yaml` and replace `image: gcrio.azureedge.net/kubernetes-helm/tiller:v2.5.1` with the correct version. 
+In the meantime the quick fix is to update the deployment manifest located in `/etc/kubernetes/addons/kube-tiller-deployment.yaml` and replace `image: gcrio.azureedge.net/kubernetes-helm/tiller:v2.5.1` with the correct version.
 
 After Helm initialization list the pods running under the `kube-system` namespace and you will see a Tiller one.
 
@@ -87,7 +87,7 @@ kubernetes-dashboard-3995387264-npwk5           1/1       Running   0          7
 tiller-deploy-3019006398-k2tl2                  1/1       Running   0          43s
 ```
 
-# Deploy a chart
+## Deploy a chart
 
 I found the process to deploy a chart very intuitive, like a said is very much like using any other package manager. Of course many of the charts will requrie some extra arguments or configuration files but thaat is expeced. 
 
@@ -178,6 +178,7 @@ NAME                     DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 winsome-quoll-rabbitmq   1         1         1            0           30s
 
 ```
+
 The details for this chart and many more from the stable and the incubator repositories can be found on the Kubernetes [Helm Charts](https://github.com/kubernetes/charts) Github repo. There are a few examples on ACS documentation as well.
 
 Comments are welcome!

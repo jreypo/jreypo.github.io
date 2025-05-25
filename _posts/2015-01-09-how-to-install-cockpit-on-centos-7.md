@@ -92,5 +92,3 @@ Access Cockpit web interface, login as root and have fun :-)
 [![](/assets/images/screen-shot-2015-01-09-at-01-57-51.png)]({{site.url}}/assets/images/screen-shot-2015-01-09-at-01-57-51.png)
 
 Juanma.
-
- 

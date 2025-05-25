@@ -31,14 +31,14 @@ Or the vSphere Client will not show some of information about the host or the VM
 
 [![](/assets/images/vc_client_no_host_info.png)]({{site.url}}/assets/images/vc_client_no_host_info.png)
 
-We all have seen those kind of errors in our homelabs from time to time. In the Windows-based vCenter it was relatively easy to solve, close the client, log into the vCenter, restart the vCenter Server service and in the next login into the vSphere Client everything will go as expected.
+We all have seen those kind of errors in our homelab from time to time. In the Windows-based vCenter it was relatively easy to solve, close the client, log into the vCenter, restart the vCenter Server service and in the next login into the vSphere Client everything will go as expected.
 
 However how can we resolve this issue in the vCenter Linux appliance? Can’t be easier.
 
 There are two ways to restart the vCenter services in the vCSA:
 
--   From he WebUI administration interface
--   From the command line
+- From he WebUI administration interface
+- From the command line
 
 For the first method log into the WebUI of the vCSA by accessing **https://vCSA_URL:5480** with your favorite web browser.
 

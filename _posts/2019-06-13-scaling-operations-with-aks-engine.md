@@ -24,7 +24,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-After reviewing how to perform Kubernetes version upgrades with AKS-Engine in a [previous post]({% post_url 2019-02-07-kubernetes-version-upgrade-with-aks-engine %}) the next logical step is show how to scale our Kubernetes clusters with AKS-Engine. I will cover manual scaling of the cluster, of course you can always deploy and configure the [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler). 
+After reviewing how to perform Kubernetes version upgrades with AKS-Engine in a [previous post]({% post_url 2019-02-07-kubernetes-version-upgrade-with-aks-engine %}) the next logical step is show how to scale our Kubernetes clusters with AKS-Engine. I will cover manual scaling of the cluster, of course you can always deploy and configure the [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler).
 
 There are several scaling scenarios that can achieved using AKS-Engine:
 
@@ -34,7 +34,7 @@ There are several scaling scenarios that can achieved using AKS-Engine:
 
 Keep in mind also that the scaling operations will require the API model file used originally to deploy the cluster.
 
-# Resize an existing nodepool
+## Resize an existing nodepool
 
 To resize an existing nodepool the best way is tu use the `aks-engine scale` command. The arguments are very similar to the ones used for the upgrade and include:
 
@@ -70,9 +70,9 @@ k8s-agentpool1-44862260-vmss000006   Ready    agent    3m8s   v1.12.2
 k8s-master-44862260-0                Ready    master   61d    v1.12.2
 ```
 
-# Add a new nodepool
+## Add a new nodepool
 
-To add a new `nodepool` to your cluster you will need to edit the `apimodel.json` file, in the `_output/<cluster-fqdn>` directory, and add a `nodepool` entry in the `agentPoolProfiles ` array. For example my current `agentPoolProfiles` looks like this one:
+To add a new `nodepool` to your cluster you will need to edit the `apimodel.json` file, in the `_output/<cluster-fqdn>` directory, and add a `nodepool` entry in the `agentPoolProfiles` array. For example my current `agentPoolProfiles` looks like this one:
 
 ```json
 "agentPoolProfiles": [
@@ -169,16 +169,16 @@ I will need to copy the `nodepool1` entry and modify it accordingly.
 },
 ```
 
-Once the `apimodel` file is modified run `aks-engine generate --api-model _output/<clustername>/apimodel.json`. This operation will update the original `azuredeploy.json` and `azuredeploy.parameters.json` files used durign the ARM template deployment. 
+Once the `apimodel` file is modified run `aks-engine generate --api-model _output/<clustername>/apimodel.json`. This operation will update the original `azuredeploy.json` and `azuredeploy.parameters.json` files used during the ARM template deployment. 
 
-After the `aks-engine generate` operation is done then run  `az group deployment create --template-file _output/<clustername>/azuredeploy.json --parameters _output/<clustername>/azuredeploy.parameters.json --resource-group` <my-resource-group>`
+After the `aks-engine generate` operation is done then run  `az group deployment create --template-file _output/<clustername>/azuredeploy.json --parameters _output/<clustername>/azuredeploy.parameters.json --resource-group <my-resource-group>`
 
-# Remove a nodepool
+## Remove a nodepool
 
 Removing a nodepool from an existing cluster is very similar to the adding operation, just edit the `_output/<clustername>/apimodel.json` file, remove the nodepool entry and then run again the `aks-engine generate` and `az group deployment create` commands.
 
 However there is a catch, you have to manually drain the nodes in your nodepool before executing `az group deployment create`. After the operation is finished review your resource group to verify that every related resource has been correctly eliminated.
 
-Hope the post helps to clarify the different scaling scenarios with AKS-Engine. Comments as always are welcome. 
+Hope the post helps to clarify the different scaling scenarios with AKS-Engine. Comments as always are welcome.
 
 --Juanma

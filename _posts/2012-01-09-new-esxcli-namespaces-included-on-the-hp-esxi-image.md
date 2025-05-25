@@ -68,8 +68,8 @@ Hewlett-Packard_bootbank_hp-smx-provider_500.02.10.13.44-434156
 
 Aside from the drivers and monitoring agents, the HP image also adds two additional namespaces to `esxcli`.
 
--   `hp`
--   `hpbootcfg`
+- `hp`
+- `hpbootcfg`
 
 The first one, hp, manage the HP NMI driver.
 

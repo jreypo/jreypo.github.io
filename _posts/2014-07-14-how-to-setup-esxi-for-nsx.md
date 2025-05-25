@@ -24,7 +24,7 @@ comments: true
 
 In the series of posts about OpenStack and KVM we saw how to add a KVM node to NSX for multi-hypervisor environments as a transport node. In this post we will discuss how to perform the same procedure for an ESXi host.
 
-### NSX vSwitch installation
+## NSX vSwitch installation
 
 Before proceeding with the installation keep in mind that NSX vSwitch can run on an ESXi host simultaneously only with VMware Standard Switch, distributed switches are not supported.
 
@@ -67,7 +67,7 @@ nsx-vswitch      1536        1
 ~ #
 ```
 
-### NSX vSwitch configuration
+## NSX vSwitch configuration
 
 With NSX vSwitch installed proceed to the configuration. First connect an uplink to the switch, this will create an NVS bridge which is the equivalent of an OVS bridge in Open vSwitch.
 
@@ -186,7 +186,7 @@ NSX-Bridge                                  NSX
 ~ #
 ```
 
-### Add ESXi as transport node
+## Add ESXi as transport node
 
 The final part of the procedure is to add our new ESXi server as transport node to NSX. Log into NSX Manager web UI and initiate the wizard to add a new Hypervisor. First specify the name of the new hypervisor.
 

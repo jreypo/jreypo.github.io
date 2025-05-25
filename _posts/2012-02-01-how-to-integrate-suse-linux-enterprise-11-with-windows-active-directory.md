@@ -29,9 +29,9 @@ Getting [SUSE Enterprise Linux](http://www.suse.com/products/server/) integrated
 
 There are a few prerequisites to meet before:
 
--   Samba client must be installed.
--   Packages samba-winbind and krb5-client must be installed.
--   The primary DNS server must be the Domain Controller.
+- Samba client must be installed.
+- Packages samba-winbind and krb5-client must be installed.
+- The primary DNS server must be the Domain Controller.
 
 For this task we will use **YaST2**, the SUSE configuration tool.
 
@@ -71,11 +71,11 @@ At this point the basic configuration is done and the server should be integrate
 
 Under the hood this process has modified several configuration files in order the get the system ready to authenticate against Active Directory:
 
--   `smb.conf`
--   `krb5.conf`
--   `nsswitch.conf`
+- `smb.conf`
+- `krb5.conf`
+- `nsswitch.conf`
 
-#### smb.conf
+## smb.conf
 
 The first is the configuration file for the [`samba`](http://samba.org/) service. As you should know Samba is an open source implementation of the Windows SMB/CIFS protocol, it allows Unix systems to integrate almost transparently into a Windows Domain infrastructure and also provides file and print services for Windows clients.
 
@@ -104,7 +104,7 @@ The file resides in `/etc/samba`. Take a look at the contents of the file, the r
         winbind refresh tickets = yes
 ```
 
-#### krb5.conf
+## krb5.conf
 
 `krb5.conf` file is the Kerberos daemon configuration file which contains the necessary information for the Kerberos library.
 
@@ -136,7 +136,7 @@ jreypo@sles11-01:/etc> cat krb5.conf
 jreypo@sles11-01:/etc>
 ```
 
-#### nsswitch.conf
+## nsswitch.conf
 
 `nsswitch.conf` file as stated by its man page is the *System Databases and Name Service Switch configuration file*. Basically it includes the different databases of the system to look for authentication information when user tries to log into the server.
 
@@ -147,7 +147,7 @@ passwd: compat winbind
 group:  compat winbind
 ```
 
-#### SSH single sign-on
+## SSH single sign-on
 
 Finally we need to test the SSH connection to the host using a user account of the domain. When asked for the login credentials use the `DOMAIN\USER` formula for the user name.
 

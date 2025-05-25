@@ -29,5 +29,3 @@ My DevStack instance is a Fedora 20 virtual machine with 2 vCPUs and 2GB of memo
 My `local.conf` file is no rocket science as you have seen, but may be it can be of help to anyone wanting to quickly setup a DevStack+vSphere development environment.
 
 Juanma.
-
- 

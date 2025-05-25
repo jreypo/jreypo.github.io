@@ -24,7 +24,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-AKS is a new Azure service that provides customers with the possibility of deploying a managed Kubernetes cluster on their Azure subscription. Similarly to Google GKE the new service will allow access to the nodes only and the masters will be managed by Microsoft. Read the [official announcement here](https://azure.microsoft.com/en-us/blog/introducing-azure-container-service-aks-managed-kubernetes-and-azure-container-registry-geo-replication/), includes some nice videos by [Scott Hanselman](https://twitter.com/shanselman) and [Gabe Monroy](https://twitter.com/gabrtv). 
+AKS is a new Azure service that provides customers with the possibility of deploying a managed Kubernetes cluster on their Azure subscription. Similarly to Google GKE the new service will allow access to the nodes only and the masters will be managed by Microsoft. Read the [official announcement here](https://azure.microsoft.com/en-us/blog/introducing-azure-container-service-aks-managed-kubernetes-and-azure-container-registry-geo-replication/), includes some nice videos by [Scott Hanselman](https://twitter.com/shanselman) and [Gabe Monroy](https://twitter.com/gabrtv).
 
 Microsoft Azure documentation has been also updated with the new service, check it out on this [link](https://docs.microsoft.com/en-us/azure/aks/).
 
@@ -32,9 +32,9 @@ Finally a new [GitHub repo](https://github.com/Azure/AKS) has been created for u
 
 Let's deploy our first AKS cluster. We can use the Cloud Shell on the Azure portal or Azure CLI, I will use the last one from WSL on my Windwos 10 laptop. Before being able to do it we will need to upgrade the cli to its newest version, in my case I did it in all my systems with `sudo apt-get update && sudo apt-get upgrade azure-cli` on Ubuntu 16.04 on WSL and `dnf update -y azure-cli` on my Fedora 26 workstation at home.
 
-After the upgrade the new `aks` option will appear. 
+After the upgrade the new `aks` option will appear.
 
-```
+```azurecli
 $ az aks -h
 
 Group
@@ -54,9 +54,9 @@ Commands:
     wait           : Wait for a managed Kubernetes cluster to reach a desired state.
 ```
 
-If you are using Azure CLI from your system instead of the Cloud Shell it is very important to re-register the `ContainerService` provider in order to have access to the AKS resource type. 
+If you are using Azure CLI from your system instead of the Cloud Shell it is very important to re-register the `ContainerService` provider in order to have access to the AKS resource type.
 
-```
+```azurecli
 $ az provider register --namespace Microsoft.ContainerService
 Registering is still on-going. You can monitor using 'az provider show -n Microsoft.ContainerService'
 $ az provider show -n Microsoft.ContainerService
@@ -65,9 +65,9 @@ Namespace                   RegistrationState
 Microsoft.ContainerService  Registered
 ```
 
-Create a new resource group and a new service principal or reuse an existing one, like with standard ACS. For now, AKS is only available in UK West and West US 2 Azure regions so remember to set the location of the resource group to one of those two regions. Like on ACS we can specify the number of agents and the size of them and as a new addition we can set the Kubernetes version. 
+Create a new resource group and a new service principal or reuse an existing one, like with standard ACS. For now, AKS is only available in UK West and West US 2 Azure regions so remember to set the location of the resource group to one of those two regions. Like on ACS we can specify the number of agents and the size of them and as a new addition we can set the Kubernetes version.
 
-```
+```azurecli
 $ az group create -n aksrg -l westus2
 Location    Name
 ----------  ------
@@ -79,9 +79,9 @@ Location    Name     ResourceGroup
 westus2     aks-cl1  aksrg
 ```
 
-Using Azure CLI retrieve the credentials and take a look at the cluster. 
+Using Azure CLI retrieve the credentials and take a look at the cluster.
 
-```
+```azurecli
 $ az aks get-credentials -g aksrg -n aks-cl1
 Merged "aks-cl1" as current context in /home/jurey/.kube/config
 $ kubectl get node
@@ -93,7 +93,7 @@ aks-agentpool1-74041364-2   Ready     11m       v1.7.7
 
 Now let's upgrade those nodes to a newer version :D
 
-```
+```azurecli
 $ az aks get-versions -g aksrg -n aks-cl1
 Name     ResourceGroup    MasterVersion    MasterUpgrades    AgentPoolVersion    AgentPoolUpgrades
 -------  ---------------  ---------------  ----------------  ------------------  -------------------
@@ -105,7 +105,7 @@ Are you sure you want to perform this operation? (y/n): y
 
 This command will upgrade first the masters as you can expect, during that time the cluster will be unavailable. After a few minutes the masters will be back, and the nodes will be gradually upgraded.
 
-```
+```azurecli
 $ az aks get-versions -g aksrg -n aks-cl1
 Name     ResourceGroup    MasterVersion    MasterUpgrades    AgentPoolVersion    AgentPoolUpgrades
 -------  ---------------  ---------------  ----------------  ------------------  -------------------
@@ -119,7 +119,7 @@ aks-agentpool1-74041364-1   Ready     26m       v1.7.7    <none>        Debian G
 aks-agentpool1-74041364-2   Ready     27m       v1.7.7    <none>        Debian GNU/Linux 8 (jessie)   4.11.0-1013-azure
 ```
 
-And after some time all the nodes will appear with the new version. 
+And after some time all the nodes will appear with the new version.
 
 ```
 $ kubectl get node -o wide
@@ -129,10 +129,10 @@ aks-agentpool1-74041364-1   Ready     11m       v1.8.1    <none>        Debian G
 aks-agentpool1-74041364-2   Ready     3m        v1.8.1    <none>        Debian GNU/Linux 8 (jessie)   4.11.0-1013-azure
 ```
 
-When the upgrade is done we can add mode nodes to try the scale feature, very similar to the ACS scaling feature. 
+When the upgrade is done we can add mode nodes to try the scale feature, very similar to the ACS scaling feature.
 
-```
-$ az aks scale --resource-group aksrg --name aks-cl1 --agent-count 5 --no-wait --verbose
+```azurecli
+az aks scale --resource-group aksrg --name aks-cl1 --agent-count 5 --no-wait --verbose
 ```
 
 Watch the progress with `kubectl` until the new nodes are added the cluster.

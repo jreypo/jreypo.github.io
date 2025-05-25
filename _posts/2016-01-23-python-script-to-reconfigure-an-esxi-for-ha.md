@@ -35,6 +35,6 @@ Grab the code from the below [gist](https://gist.github.com/jreypo/1fd33accaee46
 
 {% gist jreypo/1fd33accaee46c31c1b6 %}
 
-I've created a new repository on Github called [`pvymomi-scripts`](https://github.com/jreypo/pyvmomi-scripts) where I'll be publishing more of my old scripts as soon as I code them in Python. Also, at least for this one, I have opened a pull request to [pyVmomi Community Samples]() repository to get it included.
+I've created a new repository on Github called [`pvymomi-scripts`](https://github.com/jreypo/pyvmomi-scripts) where I'll be publishing more of my old scripts as soon as I code them in Python. Also, at least for this one, I have opened a pull request to [pyVmomi Community Samples](https://github.com/vmware/pyvmomi-community-samples) repository to get it included.
 
 -- Juanma

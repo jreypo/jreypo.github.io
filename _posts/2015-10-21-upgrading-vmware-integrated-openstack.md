@@ -31,13 +31,13 @@ This new version of VIO has all OpenStack code updated up to the latest Kilo re
 
 With a new VIO version hot of the press it is time now to upgrade your VIO 1.0.x environment to 2.0 and take advantage of all those new great goodies. The upgrade process is pretty straightforward and consist of three main stages.
 
--   Upgrade VIO Management Server
--   Deploy a new VIO 2.0 environment
--   Perform the data migration
+- Upgrade VIO Management Server
+- Deploy a new VIO 2.0 environment
+- Perform the data migration
 
 Keep in mind that you will need to have enough hardware resources in your management cluster to be able to host two full fledged VIO installations at the same time during the migration process. Just for the sake of transparency, the lab environment where I test the upgrade is based on vSphere 5.5 Update 2, NSX for vSphere 6.1.4 and VIO 1.0.2.
 
-### Step 1 - Upgrade VIO Management Server
+## Step 1 - Upgrade VIO Management Server
 
 From VMware website download the `.deb` upgrade package and upload it to
 VIO Management Server.
@@ -72,7 +72,7 @@ Go to the vSphere Web Client, logout and log back in to verify that the new vers
 
 [![](/assets/images/vio-oms-upgraded.png)]({{site.url}}/assets/images/vio-oms-upgraded.png)
 
-### Step 2 - Deploy a new VIO 2.0 environment
+## Step 2 - Deploy a new VIO 2.0 environment
 
 With VIO Management Server upgraded is now time to deploy a fresh 2.0 environment. In the VIO plugin go to **Manage** section and a new **Upgrades** tab will be there. Before
 
@@ -94,7 +94,7 @@ In the last screen review the configured values and click **Finish**. The new en
 
 [![](/assets/images/vio2_new_deployment.png)]({{site.url}}/assets/images/vio2_new_deployment.png)
 
-### Step 3 - Migrate the data
+## Step 3 - Migrate the data
 
 With the new environment up and ready we can start the data migration. From the **Upgrades** tab right-click in the your existing VIO 1.0 installation and select **Migrate Data**.
 

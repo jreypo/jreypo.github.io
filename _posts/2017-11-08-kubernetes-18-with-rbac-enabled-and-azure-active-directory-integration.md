@@ -22,11 +22,11 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Role-based access control, or RBAC, has been around in Kubernetes for some time however it wasn't until the recently released 1.8 version that finally reached the stable status. With that in mind and due to some customer requirements around RBAC I decided to try the Kubernetes integration with Azure Active Directory, in this post I'd like to document the process. 
+Role-based access control, or RBAC, has been around in Kubernetes for some time however it wasn't until the recently released 1.8 version that finally reached the stable status. With that in mind and due to some customer requirements around RBAC I decided to try the Kubernetes integration with Azure Active Directory, in this post I'd like to document the process.
 
-Before going on with the post I have to say that this post would have been impossible without the help of my friend and colleague [Alessandro Vozza](https://twitter.com/bongo), he provided many invaluable tips and sources of information. 
+Before going on with the post I have to say that this post would have been impossible without the help of my friend and colleague [Alessandro Vozza](https://twitter.com/bongo), he provided many invaluable tips and sources of information.
 
-# Prerequisites
+## Prerequisites
 
 Before deploying the new cluster and for the integration to work we will need to create two Azure Active Directory App Registrations, one as `Web App/API` and another as `Native` type. The first one will represent the Server App and the Second the Client App. 
 
@@ -34,7 +34,7 @@ To create the apps in the Azure Portal go to *Azure Active Directory -> App regi
 
 [![](/assets/images/aad_k8s_1.png "New app registration")]({{site.url}}/assets/images/aad_k8s_1.png)
 
-For the Server App: 
+For the Server App:
 
 [![](/assets/images/aad_k8s_api.png "Server app creation")]({{site.url}}/assets/images/aad_k8s_api.png)
 
@@ -42,17 +42,17 @@ For the Client App:
 
 [![](/assets/images/aad_k8s_native.png "Client app creation")]({{site.url}}/assets/images/aad_k8s_native.png)
 
-Once both apps are created we will need to grant access permissions to the Server Application from the Client Applicationt. On the Azure Portal access *Azure Active Directory -> App registrations*, select the Client Application and got to *Settings -> Required permissions*.
+Once both apps are created we will need to grant access permissions to the Server Application from the Client Application. On the Azure Portal access *Azure Active Directory -> App registrations*, select the Client Application and got to *Settings -> Required permissions*.
 
 [![](/assets/images/aad_k8s_native_permissions_1.png "Client app permissions")]({{site.url}}/assets/images/aad_k8s_native_permissions_1.png)
 
-Click *Add*, select the Server Application in *Select an API* section and enable the access persmisions. 
+Click *Add*, select the Server Application in *Select an API* section and enable the access persmisions.
 
 [![](/assets/images/aad_k8s_native_permissions_2.png "Client app permissions")]({{site.url}}/assets/images/aad_k8s_native_permissions_2.png)
 
-# Deploy the cluster
+## Deploy the cluster
 
-To deploy our Kubernetes 1.8 cluster we will use [ACS-Engine](github.com/Azure/acs-engine), this is the core component of Azure Container Service and will allow us to deploy a customized Kubernetes cluster on Azure. First create the cluster definition, you can use `kubernetes.json` example file from `acs-engine` repo as starting point. The file should look similar to the following one. 
+To deploy our Kubernetes 1.8 cluster we will use [ACS-Engine](github.com/Azure/acs-engine), this is the core component of Azure Container Service and will allow us to deploy a customized Kubernetes cluster on Azure. First create the cluster definition, you can use `kubernetes.json` example file from `acs-engine` repo as starting point. The file should look similar to the following one.
 
 ```json
 {
@@ -102,7 +102,7 @@ To deploy our Kubernetes 1.8 cluster we will use [ACS-Engine](github.com/Azure/a
 }
 ```
 
-With the cluster definition created use `acs-engine` command to generate the ARM template files for the cluster. 
+With the cluster definition created use `acs-engine` command to generate the ARM template files for the cluster.
 
 ```
 $ acs-engine generate --api-model k8s-18-aad.json
@@ -110,9 +110,9 @@ INFO[0000] Generating assets into _output/aad-k8s-18...
 $
 ```
 
-Create a new resource group and deploy the cluster with azure-cli passing the template JSON files from the `_output` directory as parameters for the `az group deployment create` command. 
+Create a new resource group and deploy the cluster with azure-cli passing the template JSON files from the `_output` directory as parameters for the `az group deployment create` command.
 
-```
+```azurecli
 $ az group create -n k8s-aad-demo -l westeurope
 Location    Name
 ----------  ------------
@@ -131,35 +131,35 @@ k8s-agentpool1-73809577-2   Ready     1d        v1.8.0    <none>        Debian G
 k8s-master-73809577-0       Ready     1d        v1.8.0    <none>        Debian GNU/Linux 8 (jessie)   4.4.0-97-generic
 ```
 
-# Configure AAD integration
+## Configure AAD integration
 
-With our new Kubernetes 1.8 cluster deployed with RBAC enabled our next step will be to configure the integration for the users, unfortunately for now this has to be done on a user by user fashion since I wasn't able to make the process work for Active Directory groups. 
+With our new Kubernetes 1.8 cluster deployed with RBAC enabled our next step will be to configure the integration for the users, unfortunately for now this has to be done on a user by user fashion since I wasn't able to make the process work for Active Directory groups.
 
-Using `kubectl` create a new `clusterrolebinding` for the user, I am using a very simple example and giving my user on the Microsoft directory `cluster-admin` privileges. 
+Using `kubectl` create a new `clusterrolebinding` for the user, I am using a very simple example and giving my user on the Microsoft directory `cluster-admin` privileges.
 
 ```
 $ kubectl create clusterrolebinding aad-default-cluster-admin-binding --clusterrole=cluster-admin --user=https://sts.windows.net/<YOUR_TENANT_ID>/#<YOUR_USER_ID>
 clusterrolebinding "aad-default-cluster-admin-binding" created
-``` 
+```
 
 Set `KUBECONFIG` varible to use the configuration generated by `acs-engine` for the Azure region the cluster was deployed on.
 
 ```
-$ export KUBECONFIG=`pwd`/_output/aad-k8s-18/kubeconfig/kubeconfig.westeurope.json
+export KUBECONFIG=`pwd`/_output/aad-k8s-18/kubeconfig/kubeconfig.westeurope.json
 ```
 
-Execute any `kubectl` command, you will be prompted with a message to sign in with a Microsoft account using a web browser, this message is the same as when you do an `az login`. 
+Execute any `kubectl` command, you will be prompted with a message to sign in with a Microsoft account using a web browser, this message is the same as when you do an `az login`.
 
 ```
 $ kubectl get nodes
 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code DCLNEUVK9 to authenticate.
 ```
 
-Open a browser access the https://aks.ms/devicelogin URL, enter the code and login with the account configured in the cluster role. 
+Open a browser access the https://aks.ms/devicelogin URL, enter the code and login with the account configured in the cluster role.
 
 [![](/assets/images/aad_k8s_kubectl_auth.png "Kubectl authentication through AAD")]({{site.url}}/assets/images/aad_k8s_kubectl_auth.png)
 
-If the authentication is valid and the permissions and `clusterrolebinding` have been properly created the command will complete. 
+If the authentication is valid and the permissions and `clusterrolebinding` have been properly created the command will complete.
 
 ```
 $ kubectl get nodes
@@ -171,7 +171,7 @@ k8s-agentpool1-73809577-2   Ready     14d       v1.8.0
 k8s-master-73809577-0       Ready     14d       v1.8.0
 ```
 
-You can retrieve `kubectl` configuration to verify the values. 
+You can retrieve `kubectl` configuration to verify the values.
 
 ```
 $ kubectl config view
@@ -204,8 +204,8 @@ users:
       name: azure
 ```
 
-With this the integration is done. The logical next step would be to start digging into [Kubernetes RBAC API documentation](https://kubernetes.io/docs/admin/authorization/rbac/) and create less privileged roles more suitable for a real deployment. Also I will continue to investigate the possibility of using Active Directory groups instead of just users since that option is much more efficient in a real Kubernetes installation. 
+With this the integration is done. The logical next step would be to start digging into [Kubernetes RBAC API documentation](https://kubernetes.io/docs/admin/authorization/rbac/) and create less privileged roles more suitable for a real deployment. Also I will continue to investigate the possibility of using Active Directory groups instead of just users since that option is much more efficient in a real Kubernetes installation.
 
-As always courteous comments are welcome. 
+As always courteous comments are welcome.
 
 --Juanma
