@@ -32,8 +32,8 @@ For this post I will use Firefox REST Client Add-on but you can use your favorit
 
 Additionally PUT and POST methods will require you to set a custom header with the following values that will define the content of the HTTP Request body. Use these values.
 
--   Name: Content-Type
--   Value: application/xml
+- Name: Content-Type
+- Value: application/xml
 
 With these two headers set enter the API URL, in my case it is:
 

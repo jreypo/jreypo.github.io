@@ -26,7 +26,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-These days I've been playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along with the ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directoy of examples with the YAML file to start playing with it. 
+These days I've been playing in my mind with the idea of combining OpenShift and Azure Container Instances. Along with the ACI announcement back in July Microsoft released on GitHub an [ACI Connector for Kubernetes project](https://github.com/Azure/aci-connector-k8s). This project opens the possibility of deploying ACI from Kubernetes, what it does basically is mimic the Kubelet interface and register itself into the Kubernetes data plane as a node with unlimited capacity. The repo provides a directory of examples with the YAML file to start playing with it.
 
 Edit the `aci-connector.yaml` file, add your Azure subscription information (you may need to create a Service Principal if do not want to use an existing one) and deploy it as a pod with `kubectl`
 
@@ -35,7 +35,7 @@ $ kubectl create -f aci-connector.yaml
 deployment "aci-connector" created
 ```
 
-This will deploy a pod into the default namespace and will create the `aci-connector` node. 
+This will deploy a pod into the default namespace and will create the `aci-connector` node.
 
 ```
 $ kubectl get pod
@@ -68,9 +68,9 @@ sise-2343179185-p7xzv            1/1       Running   0          13d
 twocontainers                    2/2       Running   120        13d
 ```
 
-And if you check your container instance in Azure you will see a new `nginx` container there. 
+And if you check your container instance in Azure you will see a new `nginx` container there.
 
-```
+```azurecli
 $ az container list
 Name        ResourceGroup    ProvisioningState    Image                     IP:ports          CPU/Memory       OsType    Location
 ----------  ---------------  -------------------  ------------------------  ----------------  ---------------  --------  ----------
@@ -91,7 +91,7 @@ ${ACI_REGION} not specified, defaulting to "westus"
 
 I quickly figured out the issue, the ACI connector pod needs to run as a privileged container since OpenShift security is much more stringent that plain Kubernetes. I needed to create a Service Account with `cluster-admin` role in order to be able to register the new node in the clusters and modify the YAML file to add the Security Context.  
 
-Using `oc` utility create the new Service Account and with `oadm` give it the proper permissions. 
+Using `oc` utility create the new Service Account and with `oadm` give it the proper permissions.
 
 ```
 oc create serviceaccount aci-connector
@@ -173,9 +173,8 @@ After digging a bit more and discussing this with a couple of colleagues and the
 Error: The server '172.30.182.251:5000' in the 'imageRegistryCredentials' of container group 'nginx' is invalid. It should be a valid host name without protocol.
 ```
 
-And much more errors that in the end pointed me to what I believe is at least one of the issues. OpenShift comes with its own container registry, used amongst other tasks for for S2I (Source to Image), and ACI tried to pull the image from it and obviously cannot reach it since is not exposed to the outside world. The good thing is that OpenShift supports external registries as well, and this basically will lead me to my next experiment which is trying to integrate OpenShift with Azure Container Registry. 
+And much more errors that in the end pointed me to what I believe is at least one of the issues. OpenShift comes with its own container registry, used amongst other tasks for for S2I (Source to Image), and ACI tried to pull the image from it and obviously cannot reach it since is not exposed to the outside world. The good thing is that OpenShift supports external registries as well, and this basically will lead me to my next experiment which is trying to integrate OpenShift with Azure Container Registry.
 
-Will publish a new post soon about the integration with ACR and a second post about my experiments with ACI and OpenShift. In the meantime all kind of suggestions are welcome so please leave a comment or reach me on Twitter. 
+Will publish a new post soon about the integration with ACR and a second post about my experiments with ACI and OpenShift. In the meantime all kind of suggestions are welcome so please leave a comment or reach me on Twitter.
 
 --Juanma
-

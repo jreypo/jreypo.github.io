@@ -25,8 +25,8 @@ Yes, you have heard correctly. The people from **Veeam** are willing to kindly g
 
 The promotion is called **Virtualization Lovers** and you only have to register at their website:
 
--   [Spanish site here.](http://go.veeam.com/promo-virtualization-lovers-mar2012-es.html?utm_source=jreypo.wordpress.com&utm_medium=text&utm_campaign=EMEA_lover)
--   [English site here.](http://go.veeam.com/for-virtualization-lovers.html?ad=large&utm_source=jreypo.wordpress.com&utm_medium=text&utm_campaign=EMEA_lover)
+- [Spanish site here.](http://go.veeam.com/promo-virtualization-lovers-mar2012-es.html?utm_source=jreypo.wordpress.com&utm_medium=text&utm_campaign=EMEA_lover)
+- [English site here.](http://go.veeam.com/for-virtualization-lovers.html?ad=large&utm_source=jreypo.wordpress.com&utm_medium=text&utm_campaign=EMEA_lover)
 
 You have until March 26, 2012.
 

@@ -22,7 +22,7 @@ comments: true
 
 As I said in my previous post I moved last year to Microsoft Azure engineering in the Azure VMware Solution product group, so it makes total sense that my first post in the new era of the blog is about AVS. Let's begin!
 
-# What is Azure VMware Solution?
+## What is Azure VMware Solution?
 
 Well, that's easy. Azure VMware Solution, or AVS, is a first-party Azure service that allows customers to run native VMware workloads on Azure. The important part is **first-party**, because **AVS is Azure**, it not a third party service or a partner delivered service, Microsoft operates and supports the service which has been built in collaboration with VMware. It provides the customer with a vSphere-based Private Cloud, built on dedicated hardware on an Azure region.
 
@@ -30,7 +30,7 @@ All provisioned private clouds have vCenter Server, vSAN, vSphere, and NSX-T. Yo
 
 Today the service is available in East US, West US, North Central US, Canada Central, UK South, West Europe, Japan East and Australia East regions, with more Azure regions coming in the near future.
 
-## AvS Service Components
+### AVS Service Components
 
 AVS comes with the following VMware products bundled and licensed, no need for customer to buy additional licenses separately from VMware.
 
@@ -47,7 +47,7 @@ On the hardware side AV36 is the only SKU available today to deploy your AVS Pri
 - **Storage vSAN Capacity** - 8 × 1.92 TB SSD
 - **Network** - 2 Dual Port 25 GbE
 
-## AVS Architecture
+### AVS Architecture
 
 As seen in the previous section AVS is built on top of VMware Cloud Foundation, deployed on dedicated, bare-metal Azure hosts. The architecture of the service is more or less like this one.
 
@@ -59,17 +59,17 @@ ExpressRoute Global Reach is needed as well for VMware HCX since it is not suppo
 
 [Azure Virtual WAN](https://docs.microsoft.com/en-gb/azure/virtual-wan/) acts as a communications hub between on-premises and Azure IaaS and PaaS services, for AVS running workloads Azure VWAN will provide Public IP capabilities through its integrated Azure Firewall.
 
-# Getting started with the service
+## Getting started with the service
 
 Getting started with AVS service requires for your Azure subscription to be whitelisted and get quota assigned, follow instructions on [AVS documentation](https://docs.microsoft.com/en-us/azure/azure-vmware/enable-azure-vmware-solution). With the quota assigned register the Azure VMware Solution resource provider using Azure CLI.
 
-```
+```azurecli
 az provider register -n Microsoft.AVS --subscription <your subscription ID>
 ```
 
 Check the registration state until it appears as `Registered`.
 
-```
+```azurecli
 $ az provider show -n Microsoft.AVS
 Namespace      RegistrationPolicy    RegistrationState
 -------------  --------------------  -------------------

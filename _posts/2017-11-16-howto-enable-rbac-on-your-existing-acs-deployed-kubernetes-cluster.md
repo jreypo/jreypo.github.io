@@ -23,7 +23,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-On a my [post about AAD integration with Kubernetes 1.8]({% post_url 2017-11-08-kubernetes-18-with-rbac-enabled-and-azure-active-directory-integration %}) I explained how to deploy a Kubernetes 1.8 cluster with RBAC enabled using [ACS-Engine](github.com/Azure/acs-engine). However after that post I got a couple of questions about how to enable RBAC on a cluster deployed using Azure Container Service. 
+On a my [post about AAD integration with Kubernetes 1.8]({% post_url 2017-11-08-kubernetes-18-with-rbac-enabled-and-azure-active-directory-integration %}) I explained how to deploy a Kubernetes 1.8 cluster with RBAC enabled using [ACS-Engine](github.com/Azure/acs-engine). However after that post I got a couple of questions about how to enable RBAC on a cluster deployed using Azure Container Service.
 
 Currently in ACS the Kubernetes version is 1.7.7.
 
@@ -36,9 +36,9 @@ k8s-agent-537d3417-2    Ready     1d        v1.7.7    <none>        Debian GNU/L
 k8s-master-537d3417-0   Ready     1d        v1.7.7    <none>        Debian GNU/Linux 8 (jessie)   4.4.0-98-generic
 ```
 
-The process to enable RBAC on this cluster is pretty straigh forward. 
+The process to enable RBAC on this cluster is pretty straight forward.
 
-1. SSH into the master node(s). 
+1. SSH into the master node(s).
 2. Edit `/etc/kubernetes/manifests/kube-apiserver.yaml` and locate the `command` property. Should be something like this.
 
 ```yaml
@@ -69,4 +69,4 @@ command:
 
 And we are done. After the reboot follow the same instructions detailed in my post about RBAC with AAD on Kubernetes 1.8 to integrate it with your Azure Active Directory Domain. Also remember that ACS deploys Kuberneetes 1.7 and RBAC was still experimental on that version and may behave different from 1.8.
 
---Juanma. 
+--Juanma.

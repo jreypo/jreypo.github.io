@@ -71,9 +71,9 @@ Username: vagrant
 Private key: C:/Users/jurey/Documents/workspace/vagrant-vms/precise64/.vagrant/machines/default/virtualbox/private_key
 ```
 
-Of course WSL comes with the `ssh` client installed but `vagrant.exe` is a Windows program and it looks under the Windows PATH for ssh.exe and of course there is none. Many people have been solving this by using Vagrant from Git Bash or by adding the Git for Windows bin folder to the Windows PATH variable, I wouldn't recommend this last one since it can get you into some issues with overlapping names for Windows and unix-like binaries. Of course you can use PuTTY or any other SSH client for Windows to do open an SSH session with the vagrant box using the provided credentials. For me none of those solutions were fine since my final goal is to use WSL as my main shell in Windows 10. 
+Of course WSL comes with the `ssh` client installed but `vagrant.exe` is a Windows program and it looks under the Windows PATH for ssh.exe and of course there is none. Many people have been solving this by using Vagrant from Git Bash or by adding the Git for Windows bin folder to the Windows PATH variable, I wouldn't recommend this last one since it can get you into some issues with overlapping names for Windows and unix-like binaries. Of course you can use PuTTY or any other SSH client for Windows to do open an SSH session with the vagrant box using the provided credentials. For me none of those solutions were fine since my final goal is to use WSL as my main shell in Windows 10.
 
-To solved it I coded a small shell script that allow me to seamlessly ssh into the vagrant box. It support with single and with multbox configurations. For the multi box configurations it accepts the name of the box as argument, for single box however there is a caveat, it will work as long as the box is named `default` if it is a different name then pass the name of the box as argument. 
+To solved it I coded a small shell script that allow me to seamlessly ssh into the vagrant box. It support with single and with multbox configurations. For the multi box configurations it accepts the name of the box as argument, for single box however there is a caveat, it will work as long as the box is named `default` if it is a different name then pass the name of the box as argument.
 
 ```bash
 #!/bin/bash
@@ -90,10 +90,10 @@ if [[ "$1" == "" ]]; then
 else
   ssh -p `get_port` -i `pwd_alias`/.vagrant/machines/$1/virtualbox/private_key vagrant@127.0.0.1
 fi
-``` 
+```
 
-Finally I have added this script and the one from the Docker post to a new [WSL Tools](https://github.com/jreypo/WSL-Tools) repo on Github and will be adding there more scripts and workarounds for WSL. 
+Finally I have added this script and the one from the Docker post to a new [WSL Tools](https://github.com/jreypo/WSL-Tools) repo on Github and will be adding there more scripts and workarounds for WSL.
 
-Please comment if you have any tip around using Vagrant from WSL. 
+Please comment if you have any tip around using Vagrant from WSL.
 
 -- Juanma

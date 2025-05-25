@@ -37,14 +37,14 @@ During this series we will see how to deploy OpenStack with KVM as the underlyin
 
 To illustrate the post I have created a lab with virtual machines running on VMware Fusion in my MacBook Pro, but you can use any virtualization software you want as long as it allows you to expose the virtualization extensions to the virtual machine, for the KVM compute node. We will need the following virtual machines
 
--   Cloud controller node
--   Nova compute node with KVM
--   Neutron networking node
--   GlusterFS storage node
--   NSX Controller
--   NSX Manager
--   NSX Service Node
--   NSX Gateway
+- Cloud controller node
+- Nova compute node with KVM
+- Neutron networking node
+- GlusterFS storage node
+- NSX Controller
+- NSX Manager
+- NSX Service Node
+- NSX Gateway
 
 I'll provide the exact hardware config of each virtual machine in its own part. We will deploy OpenStack Havana using as reference one of the architectures described in OpenStack Havana installation guide.
 
@@ -52,10 +52,10 @@ You are probably asking yourself now why I'm using Havana when Icehouse was rele
 
 The software versions to be used are:
 
--   OpenStack Havana
--   CentOS 6.4 - For OpenStack nodes
--   Fedora 20 - For GlusterFS storage node
--   NSX for Multi-Hypervisor 4.1
+- OpenStack Havana
+- CentOS 6.4 - For OpenStack nodes
+- Fedora 20 - For GlusterFS storage node
+- NSX for Multi-Hypervisor 4.1
 
 I have another Fedora 20 virtual machine providing DNS and NTP services for the lab, I'm planning to add DHCP and OpenLDAP capabilities in the future.
 
@@ -65,8 +65,8 @@ I have another Fedora 20 virtual machine providing DNS and NTP services for the 
 
 The first concept you need to understand in NSX are the network views. NSX defines two network views:
 
--   Logical Network View
--   Transport Network View
+- Logical Network View
+- Transport Network View
 
 The **Logical Network View** is a representation of the network services and connectivity that a virtual machine "see" in the cloud, basically for the operating system running inside the VM the logical network view is *the network* that it is connected to. The Logical Network View is completely independent from the underlying physical network. It is made of the logical ports, switches and routers that interconnects the different virtual machines within a tenant and connect them to the outside physical network. In a cloud each tenant will have its own logical network view and would isolated from other tenants views.
 
@@ -80,10 +80,10 @@ An NSX deployment will be made out of the Control Plane and Data Plane. Addition
 
 The Control Plane is made of the **NSX Controller Cluster**. This is an OpenFlow controller that manages all the Open vSwitch devices running on the transport nodes and a logical network manager that allow to build and maintain all the logical networks carried by the transport nodes. It provides consistency between logical network view and transport network view. Internally it has several roles to manage the different tasks it is responsible of.
 
--   Transport node management: Maintains connections with the different OVS instances.
--   Logical network management: Monitors when endhosts get connected and disconnected from OVS. Also implements logical connectivity and policies by configuring OVS forwarding states.
--   Data persistence and replication: Stores data from OVS devices and NVP API to provides persistence across all nodes of the cluster in case of failure.
--   API server: Handles HTTP requests from external elements.
+- Transport node management: Maintains connections with the different OVS instances.
+- Logical network management: Monitors when endhosts get connected and disconnected from OVS. Also implements logical connectivity and policies by configuring OVS forwarding states.
+- Data persistence and replication: Stores data from OVS devices and NVP API to provides persistence across all nodes of the cluster in case of failure.
+- API server: Handles HTTP requests from external elements.
 
 The NSX Controller is an scalable out cluster running on x86 hardware, it supports a minimum of three nodes and a maximum of five. Single node clusters are not supported although for the lab I deployed a single-node one.
 
@@ -332,10 +332,10 @@ If the connection is successful the a new screen will show up.
 
 Provide the following information:
 
--   Name of the cluster
--   Contact email address of the administrator
--   Automatically Use New IPs - This setting, checked by default, will add all the IP address of the members form this cluster as eligible to receive API call from the NSX Manager.
--   Make Active Cluster
+- Name of the cluster
+- Contact email address of the administrator
+- Automatically Use New IPs - This setting, checked by default, will add all the IP address of the members form this cluster as eligible to receive API call from the NSX Manager.
+- Make Active Cluster
 
 In the next screen enter the IP address of your syslog server or click **Use This NSX Manager** to use the NSX Manager as syslog server.
 

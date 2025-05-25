@@ -27,13 +27,13 @@ comments: true
 
 [**Lattice**](http://lattice.cf/) is the latest addition from [**Pivotal**](http://pivotal.io/) to its portfolio of open source projects. Lattice leverages various components from [**Cloud Foundry**](http://pivotal.io/platform), in order to run containerized workloads in a cluster.
 
--   **Diego** - The new Cloud Foundry elastic runtime. Acts as an action-based scheduler and provides support for Docker images.
--   **Doppler** - The log and metric aggregator for the platform and the running workloads.
--   **Gorouter** - A software-based router with reverse proxy capabilities. Dynamically updated as the containers are spun up and down.
+- **Diego** - The new Cloud Foundry elastic runtime. Acts as an action-based scheduler and provides support for Docker images.
+- **Doppler** - The log and metric aggregator for the platform and the running workloads.
+- **Gorouter** - A software-based router with reverse proxy capabilities. Dynamically updated as the containers are spun up and down.
 
 The first fact we need to understand about Lattice is that it is not intended to run production workloads. Instead Lattice is meant to be run on [Virtualbox](https://www.virtualbox.org/) or VMware Fusion using [Vagrant](https://www.vagrantup.com/). In the end Lattice is an easy way to leverage all the power of Cloud Foundry for running containers, in your laptop and without having to bother about all Cloud Foundry installation details.
 
-### Deploying Lattice
+## Deploying Lattice
 
 Installing and running Lattice in your laptop is relatively easy process, first of all we will need  First download the latest package from [GitHub Releases](https://github.com/cloudfoundry-incubator/lattice/releases) page for Lattice, there are packages available for Linux and OS X.
 
@@ -45,7 +45,7 @@ unzip lattice-bundle-v0.4.3-osx.zip
 
 Now copy the `ltc` utility to a directory in your PATH, I always use `/usr/local/bin` for this kind of binaries.
 
-### Running Lattice
+## Running Lattice
 
 Running Lattice should be quite simple, just change to `vagrant` directory on Lattice installation path, then execute `vagrant up` command and that's it. However there is a caveat, by default the Vagranfile will use the IP address 192.168.11.11 if `LATTICE_SYSTEM_IP` variable is not provided during the execution.
 
@@ -65,7 +65,7 @@ With the API endpoint set let's deploy our first application, for this example w
 
 [![](/assets/images/screen-shot-2015-10-02-at-13-33-37.png)]({{site.url}}/assets/images/screen-shot-2015-10-02-at-13-33-37.png)
 
-Open your favorite browser and access https://my-app.192.168.161.11.xip.io.
+Open your favorite browser and access `https://my-app.192.168.161.11.xip.io`.
 
 [![](/assets/images/screen-shot-2015-10-02-at-13-44-24.png)]({{site.url}}/assets/images/screen-shot-2015-10-02-at-13-44-24.png)
 

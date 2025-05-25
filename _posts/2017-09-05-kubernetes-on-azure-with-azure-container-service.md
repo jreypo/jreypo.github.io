@@ -25,30 +25,30 @@ comments: true
 
 Have to admit that because months have passed since the [DC/OS post]({% post_url 2017-05-23-getting-started-with-azure-container-service %}) I almost dropped this article, since then ACS documentation around Kubernetes got a huge improvement and also some articles about K8S and ACS have been published by other bloggers. However in the end I decided to finish and publish it in order to give consistency and coherence to my ACS series, specially since I will get into more Kubernetes related topics in future articles. So without further ado lets deploy and explore Kubernetes on Azure Container Service.
 
-# Cluster Deployment
+## Cluster Deployment
 
-As with everything in Azure we need a resource group, it is the basic construct for any Azure deployment based on the ARM model and it will act as a boundary and logic container for all the resources that will form our Kubernetes cluster. You can use an existing one or you can create a new one, in our example we will take the second path. 
+As with everything in Azure we need a resource group, it is the basic construct for any Azure deployment based on the ARM model and it will act as a boundary and logic container for all the resources that will form our Kubernetes cluster. You can use an existing one or you can create a new one, in our example we will take the second path.
 
-```
+```azurecli
 $ az group create --name acs-k8s-3 --location westeurope
 Location    Name
 ----------  ---------
 westeurope  acs-k8s-3
 ```
 
-Now we can create our cluster. To spin up your Kubernetes cluster you can of use the Azure Portal but I prefer to use [Azure CLI 2.0](https://github.com/Azure/azure-cli). We will need a pair of SSH keys and a Service Principal, I already have them created but if you omit the `--service-principal` option and add the `--generate-ssh-keys` during the `az acs create` operation it will generate both for you. 
+Now we can create our cluster. To spin up your Kubernetes cluster you can of use the Azure Portal but I prefer to use [Azure CLI 2.0](https://github.com/Azure/azure-cli). We will need a pair of SSH keys and a Service Principal, I already have them created but if you omit the `--service-principal` option and add the `--generate-ssh-keys` during the `az acs create` operation it will generate both for you.
 
-```
+```azurecli
 $ az acs create -g acs-k8s-3 -n k8s-cl3 --orchestrator-type kubernetes --service-principal 11111111-1111-1111-1111-111111111111 --client-secret=xxxxxxxxx -d k8s-cl3 --admin-username azuser --verbose
 ```
 
 I choose the defaults for Master and Agent count, one and three respectively, and my default ssh key from `.ssh/id_rsa.pub`.
 
-# Exploring the cluster
+## Exploring the cluster
 
-Lets explore the cluster like we did with our DC/OS one. 
+Lets explore the cluster like we did with our DC/OS one.
 
-```
+```azurecli
 $ az vm list -d -g acs-k8s-3
 Name                   ResourceGroup    PowerState    Location
 ---------------------  ---------------  ------------  ----------
@@ -58,7 +58,7 @@ k8s-agent-C188E3DA-2   acs-k8s-3        VM running    westeurope
 k8s-master-C188E3DA-0  acs-k8s-3        VM running    westeurope
 ```
 
-The first noticeable difference with DC/OS is the lack fo VM Scale Sets. Why you maybe asking since Azure VMSS brings a lot benefits around scaling the cluster, the problem is that VMSS does not support attached disks and due to that persistent volumes in Kubernetes would not work with VMSS. The lack of VMSS brings a couple of issues like the ina also there is no Application Gateway for ingress traffic, another neat feature from VMSS, but to solve this we can use an NGINX ingress controller, I'll get to this in more detail later in a future post. 
+The first noticeable difference with DC/OS is the lack fo VM Scale Sets. Why you maybe asking since Azure VMSS brings a lot benefits around scaling the cluster, the problem is that VMSS does not support attached disks and due to that persistent volumes in Kubernetes would not work with VMSS. The lack of VMSS brings a couple of issues like the ina also there is no Application Gateway for ingress traffic, another neat feature from VMSS, but to solve this we can use an NGINX ingress controller, I'll get to this in more detail later in a future post.
 
 Our ACS Kubernetes deployment includes:
 
@@ -69,9 +69,9 @@ Our ACS Kubernetes deployment includes:
 - Load balancers
 - Public IP address for the master(s)
 
-We can list all the resources usin Azure CLI.
+We can list all the resources using Azure CLI.
 
-```
+```azurecli
 $ az resource list -g acs-k8s-3
 Name                                                             ResourceGroup    Location    Type                                          Status
 ---------------------------------------------------------------  ---------------  ----------  --------------------------------------------  --------
@@ -105,15 +105,15 @@ Also the deployed architecture for Kubernetes can be seen in the below diagram.
 
 [![](/assets/images/kubernetes_acs_architecture.png "Kubernetes on ACS Architecture")]({{site.url}}/assets/images/kubernetes_acs_architecture.png)
 
-We will now take a look at the Kubernetes components, you will need `kubectl` which the Kubernetes command line. If you do not have don't worry because Azure can get it installed for you with a simple command. 
+We will now take a look at the Kubernetes components, you will need `kubectl` which the Kubernetes command line. If you do not have don't worry because Azure can get it installed for you with a simple command.
 
-```
+```azurecli
 az acs kubernetes install-cli
 ```
 
-Now we will need to configure `kubectl` with the proper credenetials to interact with our shiny Kubernetes cluster Again this can be easily achieved using Azure CLI, and interact with the cluster usign `kubectl`.
+Now we will need to configure `kubectl` with the proper credentials to interact with our shiny Kubernetes cluster Again this can be easily achieved using Azure CLI, and interact with the cluster usign `kubectl`.
 
-```
+```azurecli
 $ az acs kubernetes get-credentials -n k8s-cl3 -g acs-k8s-3
 $
 $ kubectl get nodes
@@ -133,7 +133,7 @@ $ kubectl proxy
 Starting to serve on 127.0.0.1:8001
 ```
 
-Point then your favorite browser to http://127.0.0.1:8001/ui and have a look to Kubernetes dashboard.
+Point then your favorite browser to `http://127.0.0.1:8001/ui` and have a look to Kubernetes dashboard.
 
 [![](/assets/images/kubernetes_dashboard.png "Kubernetes UI")]({{site.url}}/assets/images/kubernetes_dashboard.png)
 
@@ -155,11 +155,11 @@ k8s-master-C188E3DA-routetable                                   acs-k8s-3      
 k8s-vnet-C188E3DA                                                acs-k8s-3        westeurope  Microsoft.Network/virtualNetworks
 ```
 
-The main difference is that due to the lack of VMSS the network interfaces of the agents are listed as separate resources and that there is only one Public IP Address resources since the nodes aren't exposed to the public side unlinke DC/OS public agents. 
+The main difference is that due to the lack of VMSS the network interfaces of the agents are listed as separate resources and that there is only one Public IP Address resources since the nodes aren't exposed to the public side unlinke DC/OS public agents.
 
 There are two load balancers, one is exposed to the internet and holds our cluster public IP address. The second one is internal to balance the traffic across the masters.
 
-```
+```azurecli
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------
@@ -167,15 +167,15 @@ westeurope  k8s-master-internal-lb-C188E3DA  Succeeded            acs-k8s-3     
 westeurope  k8s-master-lb-C188E3DA           Succeeded            acs-k8s-3        a7fed639-bb33-49f9-9593-c83fbf4c1dfe
 ```
 
-# Deploy your first application on K8S
+## Deploy your first application on K8S
 
 It's time to deploy our first app on Kubernetes, we will use the example Voting App from the ACS documentation. First clone the repo from Github.
 
 ```
-$ git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
+git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
 ```
 
-Create the deployment using the YAML manifests from `kubernetes-manifests` directory. 
+Create the deployment using the YAML manifests from `kubernetes-manifests` directory.
 
 ```
 $ kubectl create -f ./azure-voting-app-redis/kubernetes-manifests/azure-vote-all-in-one-redis.yml
@@ -200,7 +200,7 @@ kubernetes         10.0.0.1       <none>        443/TCP        6d
 
 ```
 
-Use `kubectl` to verify each deployment and its corresponding service. 
+Use `kubectl` to verify each deployment and its corresponding service.
 
 ```
 $ kubectl describe deployment azure-vote-back
@@ -246,9 +246,9 @@ Session Affinity:       None
 Events:                 <none>
 ```
 
-The `azure-vote-front` service will be exposed to the public and as you can see it is still on `<pending>` status waiting for a public IP address. This IP address will be assigned by the Azure fabric to a newly created Azure Load Balancer, this is part of the native integration between Kubernetes and Azure. 
+The `azure-vote-front` service will be exposed to the public and as you can see it is still on `<pending>` status waiting for a public IP address. This IP address will be assigned by the Azure fabric to a newly created Azure Load Balancer, this is part of the native integration between Kubernetes and Azure.
 
-```
+```azurecli
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------
@@ -257,7 +257,7 @@ westeurope  k8s-master-internal-lb-C188E3DA  Succeeded            acs-k8s-3     
 westeurope  k8s-master-lb-C188E3DA           Succeeded            acs-k8s-3        a7fed639-bb33-49f9-9593-c83fbf4c1dfe
 ```
 
-The `k8s-cl3` load balancer has been created and configured, and after a few minutes `azure-vote-front` service gets its new public IP address from Azure. 
+The `k8s-cl3` load balancer has been created and configured, and after a few minutes `azure-vote-front` service gets its new public IP address from Azure.
 
 ```
 $ kubectl get svc
@@ -271,10 +271,10 @@ azure-vote-back-3048739398-bkwgr    1/1       Running   0          5m
 azure-vote-front-3648172574-1znnq   1/1       Running   0          5m
 ```
 
-Now access the Voting App using a browser to verify the deployment is working as expected. 
+Now access the Voting App using a browser to verify the deployment is working as expected.
 
 [![](/assets/images/azure_voting_app.png "Azure Voting App")]({{site.url}}/assets/images/azure_vorting_app.png)
 
-Hope all of you find this post or at least part of it helpful and informative, stay tuned for more articles around Kubernetes on Azure. 
+Hope all of you find this post or at least part of it helpful and informative, stay tuned for more articles around Kubernetes on Azure.
 
 --Juanma

@@ -30,13 +30,13 @@ Welcome to the Atomic Series! In this new series of articles I will discuss the 
 
 In the future I am planning to write more posts around Atomic but without numbering.
 
-# What is Project Atomic?
+## What is Project Atomic?
 
 [**Project Atomic**](http://www.projectatomic.io/) is the name of the community, sponsored by Red Hat, that encompass a set of Open Source projects geared towards creating of a new family of operating systems and infrastructure to run container-based workloads.  
 
 The basic building block of the project is the Atomic Host, a lightweight container operating system, however the project also serves as the umbrella of projects like rpm-ostree, Atomic Registry, Atomic App or Cockpit which are also components of Openshift Origin, the upstream of Red Hat Openshift Container Platform. Project Atomic includes the upstream work on Docker and Kubernetes communities.
 
-# What is Atomic Host
+## What is Atomic Host
 
 Atomic Host is a lightweight container optimized operating system designed to be immutable, currently available as Fedora and CentOS flavors, is also the upstream of Red Hat Enterprise Linux Atomic Host. It is very important to understand that Atomic Host is not a new Linux distribution but it is built on the foundation of Fedora, CentOS and Red Hat Enterprise Linux.
 

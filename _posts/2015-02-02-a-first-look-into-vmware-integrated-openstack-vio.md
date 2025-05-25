@@ -42,27 +42,27 @@ VIO is made by two main building blocks, first the VIO Manager and second OpenSt
 
 The OpenStack services in VIO are deployed as a distributed highly available solution formed by the following components:
 
--   OpenStack controllers. Two virtual machines running Horizon Dashboard, Nova (API, scheduler and VNC) services, Keystone, Heat, Glance, and Cinder services in an active-active cluster.
--   Memcached cluster.
--   RabbitMQ cluster, for messaging services used by all OpenStack services.
--   Load Balancer virtual machines, an active-active cluster managing the internal and public virtual IP addresses.
--   Nova Compute machine, running the n-cpu service.
--   Database cluster. A three node MariaDB Galera cluster that stores the OpenStack metadata.
--   Object Storage machine, running Swift services.
--   DHCP nodes. These nodes are only required if NSX is not selected as provider for Neutron.
+- OpenStack controllers. Two virtual machines running Horizon Dashboard, Nova (API, scheduler and VNC) services, Keystone, Heat, Glance, and Cinder services in an active-active cluster.
+- Memcached cluster.
+- RabbitMQ cluster, for messaging services used by all OpenStack services.
+- Load Balancer virtual machines, an active-active cluster managing the internal and public virtual IP addresses.
+- Nova Compute machine, running the n-cpu service.
+- Database cluster. A three node MariaDB Galera cluster that stores the OpenStack metadata.
+- Object Storage machine, running Swift services.
+- DHCP nodes. These nodes are only required if NSX is not selected as provider for Neutron.
 
 ## Installation requirements
 
 To be able to successfully deploy VIO you will need at least the following:
 
--   One management cluster with two to three hosts, depending on the hardware resources of the hosts.
--   One Edge cluster. As with any NSX for vSphere deployment it is recommended to deploy a separate cluster to run all Edge gateway instances.
--   One compute cluster to be used by Nova to run instances. One ESXi host will be enough but again that will depend on how much resources are available and what kind of workloads you want to run.
--   Management network with at least 15 static IP addresses available.
--   External network with a minimum of two IP addresses available. This is the network where Horizon portal will be exposed and that will be used by the tenants to access OpenStack APIs and services.
--   Data network, only needed if NSX is going to be used. The different tenant logical network will be created on top of this, the management network can be used but it is recommended to have a     separate network.
--   NSX for vSphere, 6.1.2 at minimum. It has to be setup prior to VIO deployment if NSX plugin is going to be used with Neutron.
--   Distributed Port Group. In case of choosing DVS-based networking a vSphere port-group tagged with VLAN 4095 must be setup. This port group will be used as the data network.
+- One management cluster with two to three hosts, depending on the hardware resources of the hosts.
+- One Edge cluster. As with any NSX for vSphere deployment it is recommended to deploy a separate cluster to run all Edge gateway instances.
+- One compute cluster to be used by Nova to run instances. One ESXi host will be enough but again that will depend on how much resources are available and what kind of workloads you want to run.
+- Management network with at least 15 static IP addresses available.
+- External network with a minimum of two IP addresses available. This is the network where Horizon portal will be exposed and that will be used by the tenants to access OpenStack APIs and services.
+- Data network, only needed if NSX is going to be used. The different tenant logical network will be created on top of this, the management network can be used but it is recommended to have a     separate network.
+- NSX for vSphere, 6.1.2 at minimum. It has to be setup prior to VIO deployment if NSX plugin is going to be used with Neutron.
+- Distributed Port Group. In case of choosing DVS-based networking a vSphere port-group tagged with VLAN 4095 must be setup. This port group will be used as the data network.
 
 The hardware requirements are around 56 vCPU, 192GB of memory and 605GB of storage. To that you have to add NSX for vSphere required resources for the NSX Manager, the three NSX Controllers and the NSX Edge pool, if NSX is going to be used.
 
@@ -138,8 +138,8 @@ Next you need to configure the Management and External networks. Select the appr
 
 Enter the values for the load balancer configuration:
 
--   Public Virtual IP address
--   Public Hostname, this hostname must resolve to the Public IP address.
+- Public Virtual IP address
+- Public Hostname, this hostname must resolve to the Public IP address.
 
 [![](/assets/images/image17.png)]({{site.url}}/assets/images/image17.png)
 
@@ -157,20 +157,20 @@ Select the datastore to be used by Glance image service.
 
 Configure Neutron networking. For Neutron there are two different options:
 
--   DVS-based networking
--   NSX networking
+- DVS-based networking
+- NSX networking
 
 For DVS simply select the Virtual Distributed Switch where you created the port-group for the data network with the VLAN 4095 configured.
 
 For NSX deployment you must enter:
 
--   NSX Manager IP address.
--   NSX Manager administrative username.
--   NSX Manager administrative user password.
--   VDN Scope. Basically the Transport Zone in NSX-v to be used as transport layer for data traffic.
--   Edge Cluster. A vSphere cluster to deploy the NSX Edge instances.
--   Virtual Distributed Switch for NSX networking.
--   External Network. This a port group to be used as external network by instances in OpenStack via a virtual router. This port group should be accessible from compute, management and edge clusters.
+- NSX Manager IP address.
+- NSX Manager administrative username.
+- NSX Manager administrative user password.
+- VDN Scope. Basically the Transport Zone in NSX-v to be used as transport layer for data traffic.
+- Edge Cluster. A vSphere cluster to deploy the NSX Edge instances.
+- Virtual Distributed Switch for NSX networking.
+- External Network. This a port group to be used as external network by instances in OpenStack via a virtual router. This port group should be accessible from compute, management and edge clusters.
 
 [![](/assets/images/image21.png)]({{site.url}}/assets/images/image21.png)
 
@@ -180,8 +180,8 @@ During the Neutron configuration the wizard will connect to the NSX Manager with
 
 In the next screen the wizard will ask for the OpenStack admin user, password and project. Also you can select the Keystone type option:
 
--   Database
--   Active Directory as LDAP Server.
+- Database
+- Active Directory as LDAP Server.
 
 [![](/assets/images/image23.png)]({{site.url}}/assets/images/image23.png)
 

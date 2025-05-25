@@ -24,9 +24,9 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Performing a version upgrade in [Kubernetes](https://kubernetes.io/) can be a challenging task. With [AKS](https://azure.microsoft.com/en-us/services/container-service/), and the likes, you have that resolved and solutions like [Red Hat OpenShift](https://www.openshift.com/) also provide a set of tools for this the upgrade operation.. However what happens if you have deployed your Kubernetes cluster on Azure using [AKS-Engine](https://github.com/Azure/aks-engine)? Well, fortunately for you AKS-Engine has you covered. 
+Performing a version upgrade in [Kubernetes](https://kubernetes.io/) can be a challenging task. With [AKS](https://azure.microsoft.com/en-us/services/container-service/), and the likes, you have that resolved and solutions like [Red Hat OpenShift](https://www.openshift.com/) also provide a set of tools for this the upgrade operation.. However what happens if you have deployed your Kubernetes cluster on Azure using [AKS-Engine](https://github.com/Azure/aks-engine)? Well, fortunately for you AKS-Engine has you covered.
 
-Before performing any operation, upgrade or any other, I strongly recommend you to download and use the latest `aks-engine` version, I've found issues in the upgrade operation wiht older versions. In my case I am using version 0.29.1.
+Before performing any operation, upgrade or any other, I strongly recommend you to download and use the latest `aks-engine` version, I've found issues in the upgrade operation with older versions. In my case I am using version 0.29.1.
 
 ```
 $ aks-engine version
@@ -35,7 +35,7 @@ GitCommit: b35549b
 GitTreeState: clean
 ```
 
-To demostrate the upgrade procedure I provioned a 1.11.5 cluster with one master in an Azure Availabbility Set and three nodes in a Virtual Machine Scale Set. To upgrade the Kubernetes version first get the available versions to upgrade to. 
+To demonstrate the upgrade procedure I provisioned a 1.11.5 cluster with one master in an Azure Availability Set and three nodes in a Virtual Machine Scale Set. To upgrade the Kubernetes version first get the available versions to upgrade to.
 
 ```
 $ kubectl get nodes -o wide
@@ -81,7 +81,7 @@ Pick a version, in our example I will use 1.12.2, and run the `aks-engine upgrad
 - AAD Service Principal ID.
 - AAD Service Principal Secret.
 
-The output for the command should be similar to the one below. 
+The output for the command should be similar to the one below.
 
 ```
 $ aks-engine upgrade --deployment-dir _output/k8s-lab-cl2/ --auth-method client_secret --location westeurope --client-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx --client-secret xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --upgrade-version 1.12.2 --resource-group k8s-lab-cl2 --subscription-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx 
@@ -156,9 +156,9 @@ INFO[1557] Completed upgrading all VMSS
 INFO[1557] Cluster upgraded successfully to Kubernetes version 1.12.2
 ```
 
-During the upgrade process `aks-engine` will go through the different instances that form the cluster, starting with the masters, and cordon the node, delete the instance, provision a new instance, install the new Kubernetes version and finally add the new node to the cluster. 
+During the upgrade process `aks-engine` will go through the different instances that form the cluster, starting with the masters, and cordon the node, delete the instance, provision a new instance, install the new Kubernetes version and finally add the new node to the cluster.
 
-Verify the new Kubernetes version after the upgrade is finished. 
+Verify the new Kubernetes version after the upgrade is finished.
 
 ```
 $ kubectl get nodes -o wide
@@ -169,6 +169,6 @@ k8s-agentpool1-44862260-vmss000005   Ready    agent    39m   v1.12.2   10.240.0.
 k8s-master-44862260-0                Ready    master   11h   v1.12.2   10.255.255.5   <none>        Ubuntu 16.04.5 LTS   4.15.0-1036-azure   docker://3.0.1
 ```
 
-As you can see the master and the nodes are in Kubernetes 1.12.2 version, also since the availability profile of my nodes is `VirtualMachineScaleSets` the nodes are newly deployed. 
+As you can see the master and the nodes are in Kubernetes 1.12.2 version, also since the availability profile of my nodes is `VirtualMachineScaleSets` the nodes are newly deployed.
 
 --Juanma

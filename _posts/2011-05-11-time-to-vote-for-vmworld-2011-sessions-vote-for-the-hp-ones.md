@@ -25,7 +25,6 @@ registering process is very easy. The voting process is open until May
 
 I checked the sessions at VMworld site and all look very interesting, you should review the complete list and vote for the ones you like the most. However I also want to see a deep HP presence in VMworld since I firmly believe that **[HP](www.hp.com)** has a lot to offer for VMware environments, also some of the most talented guys in the company have sent a bunch of damn good sessions for this VMworld, and because of that I compiled the following list which includes every session proposed by the HP folks. If you think like me please vote for their sessions.
 
-
 | SESSION | TITLE |
 | :---: | --- |
 | 2152 | Storage Selection Techniques for Building a VMware Based Private Cloud |

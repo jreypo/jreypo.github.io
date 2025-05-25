@@ -25,21 +25,21 @@ author: juan_manuel_rey
 comments: true
 ---
 
-In the article about [Kubernetes on ACS]({% post_url 2017-09-05-kubernetes-on-azure-with-azure-container-service %}) I briefly touched the topic of Kubernetes Ingress, originally I was going to made a post about Ingress however I thought it woud be better to explain the different methods to expose a Kubernetes based app and how are they implemented on Azure.
+In the article about [Kubernetes on ACS]({% post_url 2017-09-05-kubernetes-on-azure-with-azure-container-service %}) I briefly touched the topic of Kubernetes Ingress, originally I was going to made a post about Ingress however I thought it would be better to explain the different methods to expose a Kubernetes based app and how are they implemented on Azure.
 
-The way to expose your app is by using a Kubernetes Service. There are three types of services, or `ServiceTypes`. 
+The way to expose your app is by using a Kubernetes Service. There are three types of services, or `ServiceTypes`.
 
 - `ClusterIP`
 - `NodePort`
 - `LoadBalancer`
 
-And there is also another special way of exposing your workloads known as **Kubernetes Ingress**. I will briefly touch the first two and go deeper into `LoadBalancer` and Ingress since those are more relevant for Azure. 
+And there is also another special way of exposing your workloads known as **Kubernetes Ingress**. I will briefly touch the first two and go deeper into `LoadBalancer` and Ingress since those are more relevant for Azure.
 
-# `ClusterIP ServiceType`
+## `ClusterIP ServiceType`
 
-`ClusterIP` is the default Kubernetes `ServiceType`. When a service is set to `ClsuterIP` Kubernetes wil expose the service on an cluster internal IP and the service will only be reacheable within the cluster. All the Kuebrnetes services realted to the cluster are exposed as `ClusterIP` types.
+`ClusterIP` is the default Kubernetes `ServiceType`. When a service is set to `ClusterIP` Kubernetes wil expose the service on an cluster internal IP and the service will only be reachable within the cluster. All the Kubernetes services related to the cluster are exposed as `ClusterIP` types.
 
-Lets a see a quick example, we will deploy an NGINX server and exposed it with a `CluterIP` type service.
+Lets a see a quick example, we will deploy an NGINX server and exposed it with a `ClusterIP` type service.
 
 ```yaml
 apiVersion: v1
@@ -76,7 +76,7 @@ spec:
         - containerPort: 80
 ```  
 
-Deploy it with `kubectl` and check the pods and service created. 
+Deploy it with `kubectl` and check the pods and service created.
 
 ```
 $ kubectl get pods
@@ -91,19 +91,19 @@ my-nginx     ClusterIP   10.0.199.84   <none>        80/TCP    1m
 
 In an Azure deployed cluster this type of service will be used by inter-cluster service communication like in any other cluster and it will not be reacheable from the outside even if we use the [Azure CNI plugin](https://github.com/Azure/azure-container-networking) for container networking. 
 
-# `NodePort ServiceType`
+## `NodePort ServiceType`
 
-The `NodePort` service is no more than a port open in every node of the cluster, Kubernetes will take care of routing the incoming traffic to the service. The port will be allocated by the master(s) from a cluster configured pool, the defaul pool is 30000-32676. Take a look at the below daigram
+The `NodePort` service is no more than a port open in every node of the cluster, Kubernetes will take care of routing the incoming traffic to the service. The port will be allocated by the master(s) from a cluster configured pool, the default pool is 30000-32676. Take a look at the below diagram.
 
 [![](/assets/images/K8S-NodePort-Service.png "Kubernetes NodePort service")]({{site.url}}/assets/images/K8S-NodePort-Service.png)
 
-Of course `NodePort` services are supported in any Kubernetes cluster running on Azure, including those deployed with ACS, ACS Engine or AKS. However since the nodes aren't exposed directly to the internet the functionality is very limited, also usign a `NodePort` service for a production workload is not the best choice due to its limitations, however it can be used as building block for Ingress or a `LoadBalancer` service.
+Of course `NodePort` services are supported in any Kubernetes cluster running on Azure, including those deployed with ACS, ACS Engine or AKS. However since the nodes aren't exposed directly to the internet the functionality is very limited, also using a `NodePort` service for a production workload is not the best choice due to its limitations, however it can be used as building block for Ingress or a `LoadBalancer` service.
 
-# `LoadBalancer ServiceType`
+## `LoadBalancer ServiceType`
 
-The `LoadBalancer` service is the standard and most common way of exposing your services to the outside world from a Kubernetes cluster running ontop a cloud infrastructure like Microsoft Azure. This `ServiceType` will leverage the cloud provider built-in mechanism to provision and configrue a load balancer. On Azure this will provision an [Azure Load Balancer](https://docs.microsoft.com/en-us/azure/load-balancer/) and configure the load balncing rules, health probes, backend pools and frontend IPs. 
+The `LoadBalancer` service is the standard and most common way of exposing your services to the outside world from a Kubernetes cluster running ontop a cloud infrastructure like Microsoft Azure. This `ServiceType` will leverage the cloud provider built-in mechanism to provision and configrue a load balancer. On Azure this will provision an [Azure Load Balancer](https://docs.microsoft.com/en-us/azure/load-balancer/) and configure the load balncing rules, health probes, backend pools and frontend IPs.
 
-The diagram below illustrates this example with two different apps being exposed to the outside via a `LoadBalancer` service that provisions an Azure Load Balancer with its corresponding public IP address. 
+The diagram below illustrates this example with two different apps being exposed to the outside via a `LoadBalancer` service that provisions an Azure Load Balancer with its corresponding public IP address.
 
 [![](/assets/images/K8S-LoadBalancer-Service.png "Kubernetes service")]({{site.url}}/assets/images/K8S-LoadBalancer-Service.png)
 
@@ -113,7 +113,7 @@ The load balancer configuration can also be verified in the Azure portal.
 
 This doesn't mean that a new Azure LB is created for each service, as shown in the example AKS will deploy an Azure Load Balancer and publish all the services through it until it reaches the maximum allowed vaulues in terms of front'end IPs, rules, etc, and then it will provision a new Azure Load Balancer instance. For example in one of my AKS clusters I have three services exposed through the same load balancer instance. 
 
-```
+```azurecli
 $ az network lb list
 Location       Name                    ProvisioningState    ResourceGroup                           ResourceGuid
 -------------  ----------------------  -------------------  --------------------------------------  ------------------------------------
@@ -141,11 +141,12 @@ example-python-python   ClusterIP      10.0.53.32     <none>          80/TCP    
 kashti-kashti           LoadBalancer   10.0.83.80     52.237.35.43    80:32137/TCP     5d
 kubernetes              ClusterIP      10.0.0.1       <none>          443/TCP          5d
 ```
-The same procedure will be repeated for each app or api that needs external access, for a few of them it can work but in a public cloud provider the public IP addresses are not free and also you will probably exhaust the maximum allowed number public IP addresses, in Azure for example the default limit is 20 public IP addresses per subscription. There is another technical restriction in Azure, the standard Azure Load Balancer is not able to do SSL termination. If you are going to run just a few services then `LoadBalancer` is pefect solution, and tighly integrated on Azure, however for more complex deployments the best option is to use Kubernetes Ingress. 
+
+The same procedure will be repeated for each app or api that needs external access, for a few of them it can work but in a public cloud provider the public IP addresses are not free and also you will probably exhaust the maximum allowed number public IP addresses, in Azure for example the default limit is 20 public IP addresses per subscription. There is another technical restriction in Azure, the standard Azure Load Balancer is not able to do SSL termination. If you are going to run just a few services then `LoadBalancer` is perfect solution, and tightly integrated on Azure, however for more complex deployments the best option is to use Kubernetes Ingress.
 
 ## Internal Load Balancer
 
-By default a `LoadBalancer` service will provision a public Azure Load Balancer, however an internal one can also be provisioned in order to expose the service to other internal workloads running on you Azure subcription(s). Keep in mind that although this configuration will work with any Kubernetes installation on Azure is only useful with manually or ACS Engine deployed clusters since at this moment custom VNET and VNET Peering are not supported with AKS. 
+By default a `LoadBalancer` service will provision a public Azure Load Balancer, however an internal one can also be provisioned in order to expose the service to other internal workloads running on you Azure subscription(s). Keep in mind that although this configuration will work with any Kubernetes installation on Azure is only useful with manually or ACS Engine deployed clusters since at this moment custom VNET and VNET Peering are not supported with AKS.
 
 To provision an internal `LoadBalancer` we will need to add the following annotations to the service.
 
@@ -173,13 +174,13 @@ my-nginx     LoadBalancer   10.0.39.204   10.240.0.127   80:31052/TCP   7m
 
 ```
 
-The field `EXTERNAL-IP` shows an internal IP address belonging to the same subnet as the nodes of the cluster. Take a look into the Azure portal and verify the new internal load balancer has been created. 
+The field `EXTERNAL-IP` shows an internal IP address belonging to the same subnet as the nodes of the cluster. Take a look into the Azure portal and verify the new internal load balancer has been created.
 
 [![](/assets/images/kubernetes-ilb-azure.png "Azure Internal Load Balancer for Kubernetes services")]({{site.url}}/assets/images/kubernetes-ilb-azure.png)
 
-# Kubernetes Ingress
+## Kubernetes Ingress
 
-Ingress is by far the most interesting and powerful of all the methods availabe in Kubernetes to expose your services. In the [Kubernetes official documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) Ingress is defined as *An API object that manages external access to the services in a cluster, typically HTTP*. Ingress can provide load balancing, SSL termination and name-based virtual hosting. However in the real sense Ingress is not a service but a construct that sits on top of your services as an entry point to the cluster, providing simple host and URL based HTTP routing capabilities. 
+Ingress is by far the most interesting and powerful of all the methods available in Kubernetes to expose your services. In the [Kubernetes official documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) Ingress is defined as *An API object that manages external access to the services in a cluster, typically HTTP*. Ingress can provide load balancing, SSL termination and name-based virtual hosting. However in the real sense Ingress is not a service but a construct that sits on top of your services as an entry point to the cluster, providing simple host and URL based HTTP routing capabilities.
 
 [![](/assets/images/K8S-Ingress-Service.png "Kubernetes Ingress")]({{site.url}}/assets/images/K8S-Ingress-Service.png)
 
@@ -212,7 +213,7 @@ spec:
           servicePort: 80
 ```
 
-Deployed as a pod the Ingress Controller will route the traffic to the corresponding service following the rules defined on the Ingress Resouce. On top of Ingress a `LoadBalancer` service needs to be deployed in order to expose the Ingress controller to the outside, this will be the main entry point into the cluster.
+Deployed as a pod the Ingress Controller will route the traffic to the corresponding service following the rules defined on the Ingress Resource. On top of Ingress a `LoadBalancer` service needs to be deployed in order to expose the Ingress controller to the outside, this will be the main entry point into the cluster.
 
 There are several Ingress Controllers available to be used on Azure.
 
@@ -220,7 +221,7 @@ There are several Ingress Controllers available to be used on Azure.
 - [Heptio Contour](https://github.com/heptio/contour)
 - [Traefik](https://traefik.io/)
 
-The most common, and almost the de-facto standard in Kubernetes, is NGINX. It is also the [recommended one right now for AKS](https://docs.microsoft.com/en-us/azure/aks/ingress). NGINX is the only one I've used, but I am dying to try the other two specially Contour so expect a future blog post on it. For Traefik I found [this blog post](http://hypernephelist.com/2017/10/17/getting-started-with-traefik-and-k8s-using-acs.html) describing how to use with Azure Container Service. 
+The most common, and almost the de-facto standard in Kubernetes, is NGINX. It is also the [recommended one right now for AKS](https://docs.microsoft.com/en-us/azure/aks/ingress). NGINX is the only one I've used, but I am dying to try the other two specially Contour so expect a future blog post on it. For Traefik I found [this blog post](http://hypernephelist.com/2017/10/17/getting-started-with-traefik-and-k8s-using-acs.html) describing how to use with Azure Container Service.
 
 ## Deploying Ingress with NGINX Ingress Controller
 
@@ -230,7 +231,7 @@ The installation of Ingress is very well described on [AKS documentation](https:
 helm install stable/nginx-ingress
 ```
 
-The installation will deploy two pods for the NGINX contoller and two services, one of them of `LoadBalancer` type. 
+The installation will deploy two pods for the NGINX contoller and two services, one of them of `LoadBalancer` type.
 
 ```
 $ kubectl get pods -o wide
@@ -272,8 +273,8 @@ Events:
   Normal  CREATE  25s   ingress-controller  Ingress default/my-ingress
 ```
 
-If you want to learn more about Ingress I highly recommend you to read the official Kubernetes Ingress documentation and the docs section of `nginx-ingress` GitHub repository. 
+If you want to learn more about Ingress I highly recommend you to read the official Kubernetes Ingress documentation and the docs section of `nginx-ingress` GitHub repository.
 
-We are done for now, in a future post I will touch the topic of deploying and using Contour on AKS. 
+We are done for now, in a future post I will touch the topic of deploying and using Contour on AKS.
 
 -- Juanma

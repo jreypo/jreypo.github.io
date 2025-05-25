@@ -1,5 +1,5 @@
 ---
-title: VCSA 5.1– Deployment and upgrade
+title: vCSA 5.1 – Deployment and upgrade
 date: 2012-09-05
 type: post
 classes: wide
@@ -20,7 +20,7 @@ comments: true
 
 In the [last post]({% post_url 2012-08-28-vcva-5-1-a-quick-look %}) we discussed about the new features and changes that comes with version 5.1 of the **VMware vCenter Server Appliance**. In this new one I will explain how to deploy it and perform an upgrade.
 
-### VCSA Deployment
+## vCSA Deployment
 
 The deployment of the vCSA 5.1 is very similar to the previous version. Use the vSphere Client to deploy a new OVF template and browse to the vCSA OVA package, follow the instructions until you get to the **Networking Properties** screen.
 
@@ -44,10 +44,10 @@ That’s it, now proceed to the appliance web UI to complete vCSA setup. In your
 
 After accepting the EULA you will presented with four options:
 
--   Configure with default settings
--   Upgrade from a previous version, which also gives you the option to use the default Single Sign On configuration.
--   Upload configuration file. Very useful in case your vCenter Server virtual machine gets corrupted or you messed it up, if have a saved copy of the most recent configuration file you can deploy a new appliance and quickly restore its settings by uploading it.
--   Set custom configuration - I used this option for my homelab testing.
+- Configure with default settings
+- Upgrade from a previous version, which also gives you the option to use the default Single Sign On configuration.
+- Upload configuration file. Very useful in case your vCenter Server virtual machine gets corrupted or you messed it up, if have a saved copy of the most recent configuration file you can deploy a new appliance and quickly restore its settings by uploading it.
+- Set custom configuration - I used this option for my homelab testing.
 
 [![](/assets/images/vc_configuration_options.png "vCenter Configuration Options")]({{site.url}}/assets/images/vc_configuration_options.png)
 
@@ -73,9 +73,9 @@ At the end if everything goes fine you will see a screen with a confirmation, cl
 
 [![](/assets/images/vcsa_vima_main_screen.png "vCSA main screen")]({{site.url}}/assets/images/vcsa_vima_main_screen.png)
 
-The deployment and basic setup of the VCSA is done, at this point all other components and settings can be setup from here.
+The deployment and basic setup of the vCSA is done, at this point all other components and settings can be setup from here.
 
-### VCSA Upgrade
+## vCSA Upgrade
 
 The upgrade of the vCenter Server Appliance will allow to update to a different OS version and migrate to a different database.
 
@@ -85,10 +85,10 @@ The major upgrade is supported from 5.0 and updates to 5.1.
 
 The upgrading process is relatively simple:
 
--   Deploy vCSA 5.1.
--   Set the 5.0 appliance as source and 5.1 as destination.
--   Establish a connection between both VCSAs.
--   Import network configuration of existing VCSA.
+- Deploy vCSA 5.1.
+- Set the 5.0 appliance as source and 5.1 as destination.
+- Establish a connection between both VCSAs.
+- Import network configuration of existing VCSA.
 
 Prior to the upgrading the vCSA 5.1 must have a valid network connection and vCenter Server service must be stopped and un-configured.
 
@@ -124,7 +124,7 @@ When the process is done a final screen will appear.
 
 [![](/assets/images/vcsa_upgrade_finished.png "vCSA Upgrade done")]({{site.url}}/assets/images/vcsa_upgrade_finished.png)
 
-If you want to check if the process is done log into the VCSA through SSH and list `vmware` services, `vmware-sso` just to name one will show up on the list.
+If you want to check if the process is done log into the vCSA through SSH and list `vmware` services, `vmware-sso` just to name one will show up on the list.
 
 [![](/assets/images/vcsa_list_vmware_services.png "List vmware services")]({{site.url}}/assets/images/vcsa_list_vmware_services.png)
 

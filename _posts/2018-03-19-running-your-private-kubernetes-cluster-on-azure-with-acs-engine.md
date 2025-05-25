@@ -25,7 +25,7 @@ comments: true
 
 The AKS team has released this week [version v0.14.0](https://github.com/Azure/acs-engine/releases/tag/v0.14.0) of [ACS Engine](https://github.com/Azure/acs-engine). Amongst the many new features and fixed bugs the team has enabled the possibility of creating full private Kubernetes clusters on Azure, meaning that the masters will not be exposed outside of Azure. This will allow for very interesting use cases for Kubernetes on Azure combined with custom VNET deployments and VNET peering, same for those customers with their Azure environments connected to on-prem either with Site to Site VPN or Express Route.  
 
-Without further ado lets deploy our shiny private Kubernetes cluster. First create the cluster definition and on the `kubernetesConfig` api model set `privateCluster` to `true`
+Without further ado lets deploy our shiny private Kubernetes cluster. First create the cluster definition and on the `kubernetesConfig` api model set `privateCluster` to `true`.
 
 ```json
       "kubernetesConfig": {
@@ -34,7 +34,7 @@ Without further ado lets deploy our shiny private Kubernetes cluster. First crea
       }}
 ```
 
-Since this a non-public cluster, to access the masters and execute `kubectl` commands against the API server we will need a jumpbox. The new feature allows to define also the jumpbox if we do not have one or do not want to create it manully. 
+Since this a non-public cluster, to access the masters and execute `kubectl` commands against the API server we will need a jumpbox. The new feature allows to define also the jumpbox if we do not have one or do not want to create it manully.
 
 ```json
       "kubernetesConfig": {
@@ -50,9 +50,10 @@ Since this a non-public cluster, to access the masters and execute `kubectl` com
           }
       }
 ```
-However right now there is [bug](https://github.com/Azure/acs-engine/issues/2474) on the jumpbox implementation with some missing variables when the deployment is with custom VNET and managed disks configurations, but the [fix is already merged](https://github.com/Azure/acs-engine/pull/2477) on the `acs-engine` master branch and a new release containing this and other fixes will be out sooner than later. For now I would recommend to either use `StorageAccount` for the jumpbox `storageProfile` or provision it manually afterwards. 
 
-My cluster definition file looks like this. 
+However right now there is [bug](https://github.com/Azure/acs-engine/issues/2474) on the jumpbox implementation with some missing variables when the deployment is with custom VNET and managed disks configurations, but the [fix is already merged](https://github.com/Azure/acs-engine/pull/2477) on the `acs-engine` master branch and a new release containing this and other fixes will be out sooner than later. For now I would recommend to either use `StorageAccount` for the jumpbox `storageProfile` or provision it manually afterwards.
+
+My cluster definition file looks like this.
 
 ```json
 {
@@ -119,7 +120,7 @@ $
 
 Create the resource group and deploy the cluster. 
 
-```
+```azurecli
 $ az group create --name k8s-priv-rg -l eastus
 Location    Name
 ----------  -----------
@@ -127,7 +128,7 @@ eastus      k8s-priv-rg
 $ az group deployment create --name k8s-priv --resource-group k8s-priv-rg --template-file _output/k8s-priv/azuredeploy.json --parameters _output/k8s-priv/azuredeploy.parameters.json --verbose
 ```
 
-WHen the deployment is finished ssh into the jumpbox, `kubectl` should be automatically configured, and get the cluster info. 
+WHen the deployment is finished ssh into the jumpbox, `kubectl` should be automatically configured, and get the cluster info.
 
 ```
 azuser@jumpbox:~$ kubectl cluster-info
@@ -139,8 +140,8 @@ Metrics-server is running at https://10.255.255.5/api/v1/namespaces/kube-system/
 tiller-deploy is running at https://10.255.255.5/api/v1/namespaces/kube-system/services/tiller-deploy:tiller/proxy
 ```
 
-You can see that our Kubernetes master is exposed on a private address instead of being on the internet. 
+You can see that our Kubernetes master is exposed on a private address instead of being on the internet.
 
-As I said, this opens many new possibilities for Kubernetes on Azure. Comments are welcome. 
+As I said, this opens many new possibilities for Kubernetes on Azure. Comments are welcome.
 
 -- Juanma

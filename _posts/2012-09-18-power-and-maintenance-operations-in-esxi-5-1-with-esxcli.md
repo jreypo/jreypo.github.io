@@ -28,13 +28,12 @@ Under the `system` namespace the new commands are the equivalents of the classic
 
 [![](/assets/images/esxcli_system_namespace.png "esxcli system namespace available commands")]({{site.url}}/assets/images/esxcli_system_namespace.png)
 
-### Maintenance mode operations
+## Maintenance mode operations
 
-Getting the basic usage of the command is as simple as always. You can
-perform two operations.
+Getting the basic usage of the command is as simple as always. You can perform two operations.
 
--   Get the state of the host
--   Put the the host in or out of Maintenance Mode
+- Get the state of the host
+- Put the the host in or out of Maintenance Mode
 
 ```
 ~ # esxcli system maintenanceMode
@@ -45,7 +44,7 @@ Available Commands:
 ~ #
 ```
 
-##### Get the state of the host
+### Get the state of the host
 
 ```
 ~ # esxcli system maintenanceMode get
@@ -53,7 +52,7 @@ Disabled
 ~ #
 ```
 
-##### Put the host in Maintenance Mode
+### Put the host in Maintenance Mode
 
 ```
 ~ # esxcli system maintenanceMode set -e true -t 0
@@ -63,7 +62,7 @@ Enabled
 ~ #
 ```
 
-### Power operations
+## Power operations
 
 With the `shutdown` command the host can be either rebooted or shutdown. If the ESXi server is not in Maintenance Mode mode the operation will not be allowed.
 
@@ -90,13 +89,13 @@ Cmd options:
 ~ #
 ```
 
-##### Power off the host
+### Power off the host
 
 ```
 ~ # esxcli system shutdown poweroff --delay=10 --reason=”Hardware maintenance”
 ```
 
-##### Reboot the host
+### Reboot the host
 
 ```
 ~ # esxcli system shutdown reboot -d 10 –r “Patches applied”

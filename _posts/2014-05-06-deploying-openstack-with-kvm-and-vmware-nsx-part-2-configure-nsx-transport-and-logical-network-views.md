@@ -76,9 +76,9 @@ Enter the display name for the Service Node, in this case *nsxsn*.
 
 In the Properties screen you will see three settings available.
 
--   Management Rendezvous Server - Used to designate the Service Node Management Rendezvous, it will proxy management traffic between NSX Controller Cluster and remote NSX Gateways.
--   Admin Status Enabled - Used to enable or disable the Transport Node.
--   Tunnel Keep Alive Spray - Used to improve the health testing of transport node's tunnels.
+- Management Rendezvous Server - Used to designate the Service Node Management Rendezvous, it will proxy management traffic between NSX Controller Cluster and remote NSX Gateways.
+- Admin Status Enabled - Used to enable or disable the Transport Node.
+- Tunnel Keep Alive Spray - Used to improve the health testing of transport node's tunnels.
 
 For our lab leaving the default values will suffice.
 
@@ -128,27 +128,27 @@ Once the Connector is create click Save in the final screen and the new Service 
 
 Now we need to finish the Gateway appliance configuration in a similar way as we did with the Service Node. Again from the Dashboard and the **Summary of Transport Components** section, launch the **Create Gateway** by clicking the **Add** button in the Gateways row. The rest of the steps are very similar to the Service Node process.
 
--   Select Gateway as **Transport Node Type**
--   Get the SSL certificate from NSX Gateway with the `show switch certificate` command.
--   Configure the credentials using the SSL certificate
--   Create an STT Transport Connector and set the IP address of the Gateway
+- Select Gateway as **Transport Node Type**
+- Get the SSL certificate from NSX Gateway with the `show switch certificate` command.
+- Configure the credentials using the SSL certificate
+- Create an STT Transport Connector and set the IP address of the Gateway
 
 All the above Transport Node related tasks can be achieved through the command line by using the `request transport-node-register` command. This is a hidden command that can be used to register Service Nodes or Gateways in a NSX Controller Cluster. According to NSX documentation there are two versions of the command:
 
--   `cert` - Used for production environments
--   `mgmt-ip` - Used for testing environments
+- `cert` - Used for production environments
+- `mgmt-ip` - Used for testing environments
 
 The first one will transmit the encoded PEM certificates to the NSX Controller while the second will use the appliance management IP as the credential. The arguments for both versions are:
 
--   `controller-ip-url` - Switch manager address of the NSX Controller Cluster, accepts IP or hostname and the TCP port to connect to.
--   `ctrler-username` - NSX administration account for the Controller.
--   `ctrler-password` - NSX administration account password.
--   `mgmt-ip` - The IP address of the transport node.
--   `cert` - As we detailed before this one is exclusive of `mgmt-ip` and viceversa.
--   `rendezvous-yes-or-no` - Simply pass yes or no to indicate that the transport node is a Management Rendezvous Server one.
--   `tc-ip-address` - IP address of the transport node  connector.
--   `tc-zone.uuid` - Transport Zone to be associated with the transport node.
--   `tc-type` - Encapsulation format for the transport node's transport connector.
+- `controller-ip-url` - Switch manager address of the NSX Controller Cluster, accepts IP or hostname and the TCP port to connect to.
+- `ctrler-username` - NSX administration account for the Controller.
+- `ctrler-password` - NSX administration account password.
+- `mgmt-ip` - The IP address of the transport node.
+- `cert` - As we detailed before this one is exclusive of `mgmt-ip` and viceversa.
+- `rendezvous-yes-or-no` - Simply pass yes or no to indicate that the transport node is a Management Rendezvous Server one.
+- `tc-ip-address` - IP address of the transport node  connector.
+- `tc-zone.uuid` - Transport Zone to be associated with the transport node.
+- `tc-type` - Encapsulation format for the transport node's transport connector.
 
 With those arguments a registering command for our Service Node would be like this.
 
@@ -162,8 +162,8 @@ The next step would be to setup a Gateway Service. My lab lives within VMware Fu
 
 Remember that Gateway services can be of two types:
 
--   L2 Gateway Service - Will expand logical network by connecting it to a physical L2 segment.
--   L3 Gateway Service - Connects virtual router ports to physical to physical IP networks.
+- L2 Gateway Service - Will expand logical network by connecting it to a physical L2 segment.
+- L3 Gateway Service - Connects virtual router ports to physical to physical IP networks.
 
 It's important to note that in an NSX deployment you may connect only one Gateway Service, either L2 or L3, to a given L2 physical segment.
 
@@ -193,9 +193,9 @@ Click **Save & View** and check the newly created Gateway Service.
 
 To create a new L2 Gateway Service follow the same procedure as with L3 one and launch the **Create Gateway Service** wizard.
 
--   Select **L2 Gateway Service**.
--   Enter the name of the new service.
--   Add the gateway and fill in the UUID and network interface fields, this screen is slightly different since there is no Failure Zone ID field.
+- Select **L2 Gateway Service**.
+- Enter the name of the new service.
+- Add the gateway and fill in the UUID and network interface fields, this screen is slightly different since there is no Failure Zone ID field.
 
 [![](/assets/images/screen-shot-2014-05-03-at-19-06-50.png)]({{site.url}}/assets/images/screen-shot-2014-05-03-at-19-06-50.png)
 
@@ -209,11 +209,11 @@ In any typical OpenStack deployment the logical network elements will usually be
 
 Before starting with a simple walk-through of the process we need first to describe the different elements of the Logical Network. NSX Logical Network provide a similar functionality of a dedicated Ethernet switch. It recreates entities like switches, routers and ports and provides management functionality for them through NVP API.
 
--   **Logical Switch** - Recreates an Ethernet-type L2 service-model, containing logical switch ports that can be configured to implement a set of security and QoS policies.
--   **Logical Router** - Provides L3 routing services for the logical network. Can be configured to offer other services such as NAT and routed connections to the external physical network.
--   **Logical Switch Port** - Represents and provides a logical connection point for virtual machines network interfaces (VIF), router patch connections or an L2 gateway connection to an external network.
--   **Logical Router Port** - Provides the logical connection point for a patch connection to a switch or L3 gateway connections.
--   **Logical Port Attachment** - This is the logical equivalent of connecting a network cable between an interface and a switch port.
+- **Logical Switch** - Recreates an Ethernet-type L2 service-model, containing logical switch ports that can be configured to implement a set of security and QoS policies.
+- **Logical Router** - Provides L3 routing services for the logical network. Can be configured to offer other services such as NAT and routed connections to the external physical network.
+- **Logical Switch Port** - Represents and provides a logical connection point for virtual machines network interfaces (VIF), router patch connections or an L2 gateway connection to an external network.
+- **Logical Router Port** - Provides the logical connection point for a patch connection to a switch or L3 gateway connections.
+- **Logical Port Attachment** - This is the logical equivalent of connecting a network cable between an interface and a switch port.
 
 ### Create a Logical Switch
 
@@ -227,21 +227,21 @@ Provide the name of new switch and click **Next**.
 
 In **Properties** there are two different settings:
 
--   **Port Isolation Enabled** - This setting basically disables VM to VM communication by preventing communication between the different logical ports of the switch.
--   **Replication Mode** - Determines which transport node handle replication of broadcast, unknown-unicast and multicast (BUM) traffic. There are two possible values:
-    -   Service Node - Traffic is sent  to the NSX Service Node to be flooded to L2 logical segment. This is the default and recommended setting.
-    -   Source Node - BUM traffic is handled directly by the source hypervisor instead of a Service Node.
+- **Port Isolation Enabled** - This setting basically disables VM to VM communication by preventing communication between the different logical ports of the switch.
+- **Replication Mode** - Determines which transport node handle replication of broadcast, unknown-unicast and multicast (BUM) traffic. There are two possible values:
+  - Service Node - Traffic is sent  to the NSX Service Node to be flooded to L2 logical segment. This is the default and recommended setting.
+  - Source Node - BUM traffic is handled directly by the source hypervisor instead of a Service Node.
 
 [![](/assets/images/screen-shot-2014-05-05-at-22-16-54.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-16-54.png)
 
 Next specify the transport binding for the logical switch. Click **Add Binding** and select the **Transport Type** and the **Transport Zone UUID**. I've selected STT our previously created transport zone respectively. For the transport type there are several types available:
 
--   STT
--   GRE
--   Bridge
--   IPsec GRE
--   IPsec STT
--   VXLAN
+- STT
+- GRE
+- Bridge
+- IPsec GRE
+- IPsec STT
+- VXLAN
 
 [![](/assets/images/screen-shot-2014-05-05-at-22-27-11.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-22-27-11.png)
 
@@ -261,9 +261,9 @@ In **Basics** provide a descriptive name for the port, I tend to use the convent
 
 In the **Properties** screen you have the following filed available:
 
--   Port number - Optional parameter.
--   Admin Status Enabled - Enabled by default.
--   Logical Queue UUID - An optional parameter used to link the port to a QOS policy.
+- Port number - Optional parameter.
+- Admin Status Enabled - Enabled by default.
+- Logical Queue UUID - An optional parameter used to link the port to a QOS policy.
 
 [![](/assets/images/screen-shot-2014-05-05-at-23-07-01.png)]({{site.url}}/assets/images/screen-shot-2014-05-05-at-23-07-01.png)
 
@@ -273,12 +273,12 @@ Leave the **Mirror Targets** settings with the default values and move forward t
 
 Attachments can all be of type:
 
--   None
--   Extended Network Bridge
--   Mult-Domain Interconnect
--   L2 Gateway
--   Patch to logical router port
--   VTEP L2 Gateway
+- None
+- Extended Network Bridge
+- Mult-Domain Interconnect
+- L2 Gateway
+- Patch to logical router port
+- VTEP L2 Gateway
 
 For example an Extended Network Bridged attachment should be configured like this.
 
@@ -292,8 +292,8 @@ Launch the **Create Logical Router** dialog and set the name of the new router i
 
 In Properties select the Routing Type:
 
--   Routing Table - Allows to define static routes on the logical router
--   Single Default Route - Defines a single default route for all traffic, routing all traffic through the L3 Gateway connecting the router to the datacenter physical network.
+- Routing Table - Allows to define static routes on the logical router
+- Single Default Route - Defines a single default route for all traffic, routing all traffic through the L3 Gateway connecting the router to the datacenter physical network.
 
 Tick **Enable NAT Synchronization** checkbox in order to provide NAT service through this logical router and want NAT rules to survive in the event of a Gateway failover.
 
@@ -301,7 +301,7 @@ Tick **Enable NAT Synchronization** checkbox in order to provide NAT service thr
 
 [![](/assets/images/screen-shot-2014-05-06-at-01-55-07.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-01-55-07.png)
 
-Configure the **Distributed Logical Router**. If the checkbox is unticked it means the logical router will be a **centralized logical router** and all network traffic between virtual machines will be forwarded to the NSX Service Nodes. On the contrary if you tick the checkbox it means it will be a **distributed logical router** and it will provide a one-hop routing of VM to VM traffic, to be able to use this feature all hypervisors running VMs using this router must be in the same transport zone.
+Configure the **Distributed Logical Router**. If the checkbox is un-ticked it means the logical router will be a **centralized logical router** and all network traffic between virtual machines will be forwarded to the NSX Service Nodes. On the contrary if you tick the checkbox it means it will be a **distributed logical router** and it will provide a one-hop routing of VM to VM traffic, to be able to use this feature all hypervisors running VMs using this router must be in the same transport zone.
 
 [![](/assets/images/screen-shot-2014-05-06-at-02-03-39.png)]({{site.url}}/assets/images/screen-shot-2014-05-06-at-02-03-39.png)
 
@@ -325,9 +325,9 @@ Enter a name for the port and click Next to move to **Properties** step. The **P
 
 Configure the attachment. For router ports the attachments can be set to one of the following types:
 
--   None
--   L3 Gateway
--   Patch
+- None
+- L3 Gateway
+- Patch
 
 For my example lab this time I configured the attachment as a **Patch** one. You need to select the **Logical Switch UUID** and the **Peer Port UUID**, this peer port is port in the logical switch and you have to configure it either before creating the router port or you can create it at this step.
 
