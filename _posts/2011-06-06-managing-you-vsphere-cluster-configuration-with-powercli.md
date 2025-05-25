@@ -26,13 +26,13 @@ Managing VMware vSphere cluster configuration with the vSphere Client can be, so
 
 The first thing  to do is to properly setup the basics that will allow us to interact with the cluster. First get your cluster basic configuration and store it in a variable, `$cldl380` in the example.
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $cldl380 = get-cluster cluster-dl380-01
 ```
 
 Use the cmdlet to `Get-View` to get the .Net objects of the cluster and store the result in another variable.
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $viewdl380 = get-view $cldl380.Id
 [vSphere PowerCLI] C:\> $viewdl380
 
@@ -73,9 +73,9 @@ Client              : VMware.Vim.VimClient
 
 This variable is the base we are going to use to get the cluster configuration, now we are going to use it.
 
-#### Get the cluster resources summary
+## Get the cluster resources summary
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $viewdl380.Summary
 
 CurrentFailoverLevel : 0
@@ -99,9 +99,9 @@ DynamicProperty      :
 [vSphere PowerCLI] C:\>
 ```
 
-#### Get VMware HA configuration
+## Get VMware HA configuration
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $viewdl380.Configuration
 
 DasConfig       : VMware.Vim.ClusterDasConfigInfo
@@ -128,9 +128,9 @@ DynamicProperty         :
 [vSphere PowerCLI] C:\>
 ```
 
-#### Get cluster advanced options
+## Get cluster advanced options
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $viewdl380.Configuration.DasConfig.Option
 
 Key                                   Value                                 DynamicType                          DynamicProperty                     
@@ -142,9 +142,9 @@ das.usedefaultisolationaddress        false
 [vSphere PowerCLI] C:\>
 ```
 
-#### Get DRS basic configuration
+## Get DRS basic configuration
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> $viewdl380.Configuration.DrsConfig
 
 Enabled                   : True
@@ -164,9 +164,9 @@ ForceAffinePoweron                    1
 [vSphere PowerCLI] C:\>
 ```
 
-#### Get Virtual Port Groups of the cluster
+## Get Virtual Port Groups of the cluster
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> Get-View $viewdl380.Network | Select-Object Name
 
 Name
@@ -179,9 +179,9 @@ Management-v105
 [vSphere PowerCLI] C:\>
 ```
 
-#### Get the Datastores configured in the cluster
+## Get the Datastores configured in the cluster
 
-```
+```powershell-interactive
 [vSphere PowerCLI] C:\> Get-View $viewdl380.Datastore | Select-Object Name
 
 Name
@@ -203,7 +203,7 @@ Finally to ease things at work I created a bunch of scripts that implement some 
 # PowerCLI script to get VMware HA advanced options of a given cluster
 #
 # Juan Manuel Rey - juanmanuel (dot) reyportal (at) gmail (dot) com
-# http://blog.jreypo.io
+# http://jreypo.io
 #
 # Syntax: Get-ClusterAdvancedOption.ps1 &lt;cluster-name&gt;
 #

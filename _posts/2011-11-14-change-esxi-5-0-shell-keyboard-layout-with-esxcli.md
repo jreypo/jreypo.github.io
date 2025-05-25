@@ -25,17 +25,17 @@ If you have to login into the ESXi 5.0 Shell and the keyboard layout is not the 
 
 As always in vSphere 5 we are going to use `esxcli` command to get the job done.
 
-#### Get current keyboard layout
+## Get current keyboard layout
 
 [![](/assets/images/esxi_key_layout.png "Get current layout")]({{site.url}}/assets/images/esxi_key_layout.png)
 
 As you can see we are using `system settings keyboard layout` namespaces and the command `get`. The other available commands are `list` and `set`.
 
-#### List available layouts
+## List available layouts
 
 [![](/assets/images/esx_avail_layouts.png "List available layouts")]({{site.url}}/assets/images/esx_avail_layouts.png)
 
-#### Change keyboard layout
+## Change keyboard layout
 
 The syntax for the command can be retrieved by appending `–help` to the command.
 

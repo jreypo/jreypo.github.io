@@ -74,8 +74,8 @@ This handy tool can be used to view and modify several BIOS settings of the serv
 
 It can be used in two ways:
 
--   Interactive shell
--   Within a script
+- Interactive shell
+- Within a script
 
 The interactive shell supports TAB command completion and command recovery through a history buffer.
 
@@ -106,7 +106,7 @@ hpasmcli>
 
 In my experience `SHOW` is the most used command above the others. Following are examples for some of the tasks.
 
-#### Display general information of the server
+## Display general information of the server
 
 ```
 hpasmcli> SHOW SERVER
@@ -147,7 +147,7 @@ ECC supported    : Yes
 hpasmcli>
 ```
 
-#### Show current temperatures
+## Show current temperatures
 
 ```
 hpasmcli> SHOW TEMP
@@ -164,7 +164,7 @@ Sensor   Location              Temp       Threshold
 hpasmcli>
 ```
 
-#### Get the status of the server fans
+## Get the status of the server fans
 
 ```
 hpasmcli> SHOW FAN
@@ -180,7 +180,7 @@ Fan  Location        Present Speed  of max  Redundant  Partner  Hot-
 hpasmcli>
 ```
 
-#### Show device boot order configuration
+## Show device boot order configuration
 
 ```
 hpasmcli> SHOW BOOT
@@ -189,13 +189,13 @@ One time boot device is: Not set.
 hpasmcli>
 ```
 
-#### Set USB key as first boot device
+## Set USB key as first boot device
 
 ```
 hpasmcli> SET BOOT FIRST USBKEY
 ```
 
-#### Show memory modules status
+## Show memory modules status
 
 ```
 hpasmcli> SHOW DIMM

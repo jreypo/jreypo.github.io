@@ -22,12 +22,12 @@ Another self-reference short post that can be useful for any [OpenBSD](http://ww
 
 Also I'll explain the basics about how disks and partitions are managed in OpenBSD
 
-### Identify and prepare the disk
+## Identify and prepare the disk
 
 There are two types of disks common to most platform where OpenBSD can run:
 
--   IDE disks. Identified as `wdX`
--   SCSI disks and devices that use SCSI commands. Identified as `sdX`. This category includes also the USB and SATA disks.
+- IDE disks. Identified as `wdX`
+- SCSI disks and devices that use SCSI commands. Identified as `sdX`. This category includes also the USB and SATA disks.
 
 Our disk for this example will be a SCSI one, sd3. Using `dmesg` check that the system has recognized the device.
 
@@ -61,7 +61,7 @@ Offset: 0       Signature: 0xAA55
 
 As it can be seen the partition number 3 has been initialize as OpenBSD. In the example we are using the whole disk for OpenBSD, if not you should enter in edition mode with `fdisk -i <disk>` and partition the disk appropriately.
 
-### Partition the disk using disklabel
+## Partition the disk using `disklabel`
 
 Here you can be confused, because really we are going to partition the partition. These partition are also known as **Filesystem Partitions** since is on top of them where the filesystems and swap devices are created. And the `fdisk` partitions are known as **MBR Partitions**.
 
@@ -69,9 +69,9 @@ In other BSD systems, like FreeBSD, these partitions are called slices however i
 
 `disklabel` partitions are identified by appending a letter to the disk identifier, like `sd3a` which represents the first partition of the SCSI disk 3. There are some reserved letters:
 
--  `a` - represents always the root partition of the disk.
--  `b` - is always use a swap device.
--  `c` - represents the whole disk.
+- `a` - represents always the root partition of the disk.
+- `b` - is always use a swap device.
+- `c` - represents the whole disk.
 
 And finally here it is an example on how to create a filesystem partition. Use `disklabel -E <disk>` to edit the disk.
 
@@ -118,7 +118,7 @@ drivedata: 0
 [root@obsd ~]#
 ```
 
-### Create the file system
+## Create the file system
 
 Use `newfs` against the special raw device file to create the file system. By default OpenBSD uses the 4.3BSD file system to build file systems with backward compatibility with older boot ROMS, however it also support Fast File System (FFS) as the default format for filesystem smaller that 1TB and Enhanced Fast File System (FFS2) for file systems larger than 1TB.
 

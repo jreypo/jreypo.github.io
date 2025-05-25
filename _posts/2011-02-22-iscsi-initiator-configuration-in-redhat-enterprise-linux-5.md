@@ -54,7 +54,7 @@ Protocol networks.
 [root@rhel5 ~]#
 ```
 
-Next we are going to configure the initiator. The iSCSI initiator is composed by two services, `iscsi `and `iscsid`, enable them to start at system startup using `chkconfig`.
+Next we are going to configure the initiator. The iSCSI initiator is composed by two services, `iscsi` and `iscsid`, enable them to start at system startup using `chkconfig`.
 
 ```
 [root@rhel5 ~]# chkconfig iscsi on

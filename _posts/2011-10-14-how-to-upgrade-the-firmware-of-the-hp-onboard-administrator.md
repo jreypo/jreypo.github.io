@@ -16,8 +16,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-A post mostly for documentation sake on how to upgrade the firmware of the [Onboard Administrator](http://h18004.www1.hp.com/products/blades/components/onboard/index.html?jumpid=reg_R1002_USEN)
-of an [HP BladeSystem](http://h18004.www1.hp.com/products/blades/bladesystem/index.html) enclosure.
+A post mostly for documentation sake on how to upgrade the firmware of the [Onboard Administrator](http://h18004.www1.hp.com/products/blades/components/onboard/index.html?jumpid=reg_R1002_USEN) of an [HP BladeSystem](http://h18004.www1.hp.com/products/blades/bladesystem/index.html) enclosure.
 
 The update is a very straight forward process that can be done entirely through the OA web administration interface.
 

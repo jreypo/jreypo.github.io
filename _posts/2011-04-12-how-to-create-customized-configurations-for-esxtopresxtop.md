@@ -47,7 +47,7 @@ At this point you can customized the field to display in the other views (CPU, n
 
 [![](/assets/images/save_custom_file.png "Save esxtop config to file")]({{site.url}}/assets/images/save_custom_file.png)
 
-Exit `esxtop` and run it again but loading the saved config file, instead of the default one, by using` -c <config_file>`.
+Exit `esxtop` and run it again but loading the saved config file, instead of the default one, by using `-c <config_file>`.
 
 [![](/assets/images/load_custom_config.png "Load esxtop custom config file")]({{site.url}}/assets/images/load_custom_config.png)
 

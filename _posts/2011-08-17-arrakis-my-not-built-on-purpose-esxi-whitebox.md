@@ -23,10 +23,10 @@ I've been running all my labs within VMware Workstation on my custom made workst
 
 Surprisingly when I installed ESXi 4.1 Update 1 everything was properly recognized so I thought it could be of help to post the hardware configuration for other vGeeks out there that could be looking for working hardware components for their homelabs.
 
--   Processor: Intel Core 2 Quad Q9550. Supports FT!
--   Memory: 8GB
--   Motherboard: [Asrock Penryn 1600SLI-110dB](http://www.asrock.com/mb/overview.asp?Model=Penryn1600SLI-110dB)
--   Nic: Embedded nVidia NForce Network Controller. Supported under the forcedeth driver
+- Processor: Intel Core 2 Quad Q9550. Supports FT!
+- Memory: 8GB
+- Motherboard: [Asrock Penryn 1600SLI-110dB](http://www.asrock.com/mb/overview.asp?Model=Penryn1600SLI-110dB)
+- Nic: Embedded nVidia NForce Network Controller. Supported under the forcedeth driver
 
 ```
 ~ # ethtool -i vmnic0
@@ -37,7 +37,7 @@ bus-info: 0000:00:14.0
 ~ #
 ```
 
--   SATA controller: nVidia MCP51 SATA Controller.
+- SATA controller: nVidia MCP51 SATA Controller.
 
 ```
 ~ # vmkload_mod -s sata_nv
@@ -55,8 +55,8 @@ vmkload_mod module information
 ~ #
 ```
 
--   HDD1: 1 x 120GB SATA 7200RPM Seagate ST3120026AS.
--   HDD2: 1 x 1TB SATA 7200RPM Seagate ST31000528AS.
+- HDD1: 1 x 120GB SATA 7200RPM Seagate ST3120026AS.
+- HDD2: 1 x 1TB SATA 7200RPM Seagate ST31000528AS.
 
 Finally here it is a screenshot of the vSphere Client connected to the vCenter VM and showing the summary of the host.
 

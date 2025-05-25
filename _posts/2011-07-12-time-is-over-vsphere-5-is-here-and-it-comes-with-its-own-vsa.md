@@ -24,17 +24,17 @@ comments: true
 
 Today has been a great day for the people of **VMware**, they presented [**vSphere 5**](http://www.vmware.com/products/vsphere/overview.html) in a huge online event and a lot of new interesting features have been finally unveiled.
 
--   Storage DRS.
--   Profile-Driven Storage.
--   VAAI v2.
--   vSphere Auto Deploy.
--   Software FCoE initiator.
--   Up to 32 vCPUs and 1TB of RAM per virtual machine.
--   VMFS5.
--   New vSphere HA framework.
--   vSphere Web Client (we've been expecting something like this for Linux ad Mac OS X)
--   vCenter Server Appliance. On Linux!
--   New vSphere Storage Appliance.
+- Storage DRS.
+- Profile-Driven Storage.
+- VAAI v2.
+- vSphere Auto Deploy.
+- Software FCoE initiator.
+- Up to 32 vCPUs and 1TB of RAM per virtual machine.
+- VMFS5.
+- New vSphere HA framework.
+- vSphere Web Client (we've been expecting something like this for Linux ad Mac OS X)
+- vCenter Server Appliance. On Linux!
+- New vSphere Storage Appliance.
 
 All of them are incredibly cool features however there is one that instantly got my attention:
 
