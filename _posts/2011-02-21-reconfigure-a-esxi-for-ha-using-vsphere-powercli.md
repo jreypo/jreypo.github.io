@@ -32,7 +32,7 @@ I created a new cluster in my homelab with a problem in one of the hosts, I fixe
 
 First we are going to create a variable that contained the configuration of the ESXi I wanted to reconfigure.
 
-```powershell-interactive
+```
 C:\
 [vSphere PowerCLI] % $vmhost = Get-VMHost esxi06.vjlab.local
 C:\
@@ -78,7 +78,7 @@ C:\
 
 Next with the cmdlet `Get-View` I retrieved the .NET objects of the host ID and stored them in another variable.
 
-```powershell-interactive
+```
 C:\
 [vSphere PowerCLI] % Get-View $vmhost.Id
 

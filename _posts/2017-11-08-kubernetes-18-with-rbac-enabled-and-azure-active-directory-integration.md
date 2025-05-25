@@ -112,7 +112,7 @@ $
 
 Create a new resource group and deploy the cluster with azure-cli passing the template JSON files from the `_output` directory as parameters for the `az group deployment create` command.
 
-```azurecli
+```
 $ az group create -n k8s-aad-demo -l westeurope
 Location    Name
 ----------  ------------

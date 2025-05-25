@@ -63,13 +63,13 @@ ExpressRoute Global Reach is needed as well for VMware HCX since it is not suppo
 
 Getting started with AVS service requires for your Azure subscription to be whitelisted and get quota assigned, follow instructions on [AVS documentation](https://docs.microsoft.com/en-us/azure/azure-vmware/enable-azure-vmware-solution). With the quota assigned register the Azure VMware Solution resource provider using Azure CLI.
 
-```azurecli
+```
 az provider register -n Microsoft.AVS --subscription <your subscription ID>
 ```
 
 Check the registration state until it appears as `Registered`.
 
-```azurecli
+```
 $ az provider show -n Microsoft.AVS
 Namespace      RegistrationPolicy    RegistrationState
 -------------  --------------------  -------------------

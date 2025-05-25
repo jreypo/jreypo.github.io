@@ -60,7 +60,7 @@ During these months I have been discovering some apps that helped me to have a b
 
 - [Wox](https://github.com/Wox-launcher/Wox) - Wox is a launcher for Windows, the only suitable replacement for [Alfred](https://www.alfredapp.com/) I have found.
 - [Visual Studio Code](https://code.visualstudio.com/) - On OS X and Linux I was using Atom, although Atom is of course available in Windows ans is still one of the best editors available when I joined Microsoft I decided to embrace VS Code. The experience is superb and the best is that you can set the Bash shell from the Windows Subsystem for Linux as the default terminal.
-- [Hyper](https://hyper.is/) - Hyper is a cross-platform terminal emulator written in Javascript, supports tabs, screen splitting, just to name a few features and has a huge plethora of plugins. I use Hyper as my default terminal for Powershell. 
+- [Hyper](https://hyper.is/) - Hyper is a cross-platform terminal emulator written in Javascript, supports tabs, screen splitting, just to name a few features and has a huge plethora of plugins. I use Hyper as my default terminal for Powershell.
 - [WSLtty](https://github.com/mintty/wsltty) - As I mentioned before for WSL I do not use the Windows console, instead I discovered WSLTTY. It is a version of MinTTY, the default terminal for Cygwin and Git Bash, for WSL. It provides a full Unix, xterm-compatible terminal emulation experience, supports 256 colors, has fullscreen mode, theming and many more. It doesn't support tabs but since I do all my work inside a tmux session this not an issue for me.
 - [Tweeten](http://tweeten.xyz/) - Like TweetDeck but better, also for Windows 10 it offers a native app which is better IMHO than the Chrome extension.  
 

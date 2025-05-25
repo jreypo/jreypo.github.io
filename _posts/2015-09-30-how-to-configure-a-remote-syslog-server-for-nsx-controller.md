@@ -37,7 +37,9 @@ Additionally PUT and POST methods will require you to set a custom header with
 
 With these two headers set enter the API URL, in my case it is:
 
-**https://nsxm-01.mcorp.local/api/2.0/vdn/controller/controller-1/syslog**
+```
+https://nsxm-01.mcorp.local/api/2.0/vdn/controller/controller-1/syslog
+```
 
 To construct this URL you will need the controller ID that can be get in the NSX interface in vSphere Web Client as shown below.
 

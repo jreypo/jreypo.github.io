@@ -120,7 +120,7 @@ $
 
 Create the resource group and deploy the cluster. 
 
-```azurecli
+```
 $ az group create --name k8s-priv-rg -l eastus
 Location    Name
 ----------  -----------

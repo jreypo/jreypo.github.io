@@ -70,7 +70,7 @@ twocontainers                    2/2       Running   120        13d
 
 And if you check your container instance in Azure you will see a new `nginx` container there.
 
-```azurecli
+```
 $ az container list
 Name        ResourceGroup    ProvisioningState    Image                     IP:ports          CPU/Memory       OsType    Location
 ----------  ---------------  -------------------  ------------------------  ----------------  ---------------  --------  ----------

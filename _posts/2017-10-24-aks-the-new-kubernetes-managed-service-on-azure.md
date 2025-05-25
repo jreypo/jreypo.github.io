@@ -34,7 +34,7 @@ Let's deploy our first AKS cluster. We can use the Cloud Shell on the Azure port
 
 After the upgrade the new `aks` option will appear.
 
-```azurecli
+```
 $ az aks -h
 
 Group
@@ -56,7 +56,7 @@ Commands:
 
 If you are using Azure CLI from your system instead of the Cloud Shell it is very important to re-register the `ContainerService` provider in order to have access to the AKS resource type.
 
-```azurecli
+```
 $ az provider register --namespace Microsoft.ContainerService
 Registering is still on-going. You can monitor using 'az provider show -n Microsoft.ContainerService'
 $ az provider show -n Microsoft.ContainerService
@@ -67,7 +67,7 @@ Microsoft.ContainerService  Registered
 
 Create a new resource group and a new service principal or reuse an existing one, like with standard ACS. For now, AKS is only available in UK West and West US 2 Azure regions so remember to set the location of the resource group to one of those two regions. Like on ACS we can specify the number of agents and the size of them and as a new addition we can set the Kubernetes version.
 
-```azurecli
+```
 $ az group create -n aksrg -l westus2
 Location    Name
 ----------  ------
@@ -81,7 +81,7 @@ westus2     aks-cl1  aksrg
 
 Using Azure CLI retrieve the credentials and take a look at the cluster.
 
-```azurecli
+```
 $ az aks get-credentials -g aksrg -n aks-cl1
 Merged "aks-cl1" as current context in /home/jurey/.kube/config
 $ kubectl get node
@@ -93,7 +93,7 @@ aks-agentpool1-74041364-2   Ready     11m       v1.7.7
 
 Now let's upgrade those nodes to a newer version :D
 
-```azurecli
+```
 $ az aks get-versions -g aksrg -n aks-cl1
 Name     ResourceGroup    MasterVersion    MasterUpgrades    AgentPoolVersion    AgentPoolUpgrades
 -------  ---------------  ---------------  ----------------  ------------------  -------------------
@@ -105,7 +105,7 @@ Are you sure you want to perform this operation? (y/n): y
 
 This command will upgrade first the masters as you can expect, during that time the cluster will be unavailable. After a few minutes the masters will be back, and the nodes will be gradually upgraded.
 
-```azurecli
+```
 $ az aks get-versions -g aksrg -n aks-cl1
 Name     ResourceGroup    MasterVersion    MasterUpgrades    AgentPoolVersion    AgentPoolUpgrades
 -------  ---------------  ---------------  ----------------  ------------------  -------------------
@@ -131,7 +131,7 @@ aks-agentpool1-74041364-2   Ready     3m        v1.8.1    <none>        Debian G
 
 When the upgrade is done we can add mode nodes to try the scale feature, very similar to the ACS scaling feature.
 
-```azurecli
+```
 az aks scale --resource-group aksrg --name aks-cl1 --agent-count 5 --no-wait --verbose
 ```
 

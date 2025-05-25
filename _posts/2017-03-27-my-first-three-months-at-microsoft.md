@@ -28,7 +28,7 @@ In short I am having a lot of fun and learning tons of new things even if the jo
 
 ## What will happen with the blog?
 
-I know the blog has been quiet durign these months, but that has been on purpose. Back in December I decided to hold the blo a few months until I was able to at least know the basics of my new role, to be honest I am not sure if that will ever happen given the ammount of new and cool things a I have to learn so I decided to lift the curfew and start writting again. Obviously, the contents of the blog will chenge to reflect my day to day work in Azure. This means that I will not write any more articles about OpenStack for example. However I am planning to expand my container related content, like the Atomic Host series and add a lot of new content about cloud infrastructure, containers and cloud-native applications, all around but not restricted to Azure.
+I know the blog has been quiet during these months, but that has been on purpose. Back in December I decided to hold the blo a few months until I was able to at least know the basics of my new role, to be honest I am not sure if that will ever happen given the ammount of new and cool things a I have to learn so I decided to lift the curfew and start writing again. Obviously, the contents of the blog will chenge to reflect my day to day work in Azure. This means that I will not write any more articles about OpenStack for example. However I am planning to expand my container related content, like the Atomic Host series and add a lot of new content about cloud infrastructure, containers and cloud-native applications, all around but not restricted to Azure.
 
 Hope you like it!
 

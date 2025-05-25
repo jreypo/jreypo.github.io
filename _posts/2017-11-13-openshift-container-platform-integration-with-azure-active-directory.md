@@ -45,7 +45,7 @@ For both cases we will need to have the different parameters prepared in advance
 
 You can create the Azure App Registration with just one command.
 
-```azurecli
+```
 az ad app create --display-name OpenShiftAAD --homepage https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/console --reply-urls https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/oauth2callback/OpenShiftAAD --identifier-uris https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/console --password <YOU_SUPER_AWESOME_PASSWORD>
 ```
 

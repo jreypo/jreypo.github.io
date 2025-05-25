@@ -19,7 +19,7 @@ comments: true
 
 Today I was performing a test in the vSphere cluster I have in my laptop and when I tried to connect to my vCenter Server with PowerCLI I got the following error.
 
-```powershell-interactive
+```
 C:\Users\juanma
 [vSphere PowerCLI] % get-vc vcenter.mlab.local -user Administrator -Password vmwarerules!
 Connect-VIServer : 24/01/2011 12:58:33    Connect-VIServer        Could not connect using the requested protocol.   
@@ -38,7 +38,7 @@ The problem was the proxy server configuration of PowerCLI, I'm used to do every
 
 First retrieve the PowerCLI proxy configuration with the `Get-PowerCLIConfiguration` cmdlet.
 
-```powershell-interactive
+```
 C:\Users\juanma
 [vSphere PowerCLI] % Get-PowerCLIConfiguration
 
@@ -53,7 +53,7 @@ C:\Users\juanma
 
 As you can see `Proxy Policy` is set to `UseSystemProxy`. To set this value to `NoProxy` use the cmdlet `Set-PowerCLIConfiguration`.
 
-```powershell-interactive
+```
 C:\Users\juanma
 [vSphere PowerCLI] % Set-PowerCLIConfiguration -ProxyPolicy NoProxy
 
@@ -72,7 +72,7 @@ C:\Users\juanma
 
 Now try to reconnect to the vCenter Server and everything should go without errors.
 
-```powershell-interactive
+```
 C:\Users\juanma
 [vSphere PowerCLI] % get-vc vcenter.mlab.local -user Administrator -Password vmwarerules!
 WARNING: There were one or more problems with the server certificate:

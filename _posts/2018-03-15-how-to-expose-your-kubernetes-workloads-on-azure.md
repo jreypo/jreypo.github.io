@@ -113,7 +113,7 @@ The load balancer configuration can also be verified in the Azure portal.
 
 This doesn't mean that a new Azure LB is created for each service, as shown in the example AKS will deploy an Azure Load Balancer and publish all the services through it until it reaches the maximum allowed vaulues in terms of front'end IPs, rules, etc, and then it will provision a new Azure Load Balancer instance. For example in one of my AKS clusters I have three services exposed through the same load balancer instance. 
 
-```azurecli
+```
 $ az network lb list
 Location       Name                    ProvisioningState    ResourceGroup                           ResourceGuid
 -------------  ----------------------  -------------------  --------------------------------------  ------------------------------------

@@ -38,13 +38,13 @@ One of the advantages of using ACR with your ACS clusters or Azure services is t
 
 As always create your resource group.
 
-```azurecli
+```
 az group create -n acr-rg -l westeurope
 ```
 
 Now create the registry, provide the name for the registry, the resource group and the SKU which as of today is just `Basic`.
 
-```azurecli
+```
 az acr create -n registryprod -g acr-rg -l westeurope --sku Basic
 ```
 
@@ -53,7 +53,7 @@ This operation will produce two resources in Azure.
 - The registry, behind the scenes a Docker registry has been deployed.
 - One Storage Account to store the images.
 
-```azurecli
+```
 $ az resource list -g acr-rg
 Name                ResourceGroup    Location    Type                                    Status
 ------------------  ---------------  ----------  --------------------------------------  --------
@@ -67,7 +67,7 @@ The registry is automcatically assigned a fqdn with the form `<registry_name>.az
 
 Te registry is created but right now is not usable since there is no way to authenticate. ACR by default does not even have an admin user, although it can be enabled during the `create` task it can also be enabled afterwards as we will see now.
 
-```azurecli
+```
 $ az acr update -n registryprod --admin-enabled true
 NAME          RESOURCE GROUP    LOCATION    LOGIN SERVER             CREATION DATE                     ADMIN ENABLED
 ------------  ----------------  ----------  -----------------------  --------------------------------  ---------------
@@ -82,13 +82,13 @@ Having an admin account is useful however the best option is to use a service ac
 
 You can create a new Service Principal, assigning the proper role and scope over ACR during the operation. The roles can be `Owner`, `Contributor` or `Reader`. The first one will give the SP account full control over ACR, the second will allow to push and pull images and the last one will have read-only permissions allowing the SP account just to pull Docker images from the registry.
 
-```azurecli
+```
 az ad sp create-for-rbac --scopes /subscriptions/11111111-1111-1111-1111-1111111111111/resourcegroups/acr-rg/providers/Microsoft.ContainerRegistry/registries/registryprod --role Owner --password <password>
 ```
 
 Alternatively you can use an existing service principal and assign access to your registry.
 
-```azurecli
+```
 az role assignment create --scope /subscriptions/11111111-1111-1111-1111-1111111111111/resourcegroups/acr-rg/providers/Microsoft.ContainerRegistry/registries/registryprod --role Owner --assignee <app-id>
 ```
 
@@ -106,7 +106,7 @@ Azure CLI allows you to perform some basic tasks for the images stored in a regi
 
 List the repositories currently in the registry.
 
-```azurecli
+```
 $ az acr repository list -n registryprod
 Result
 --------------------
@@ -120,7 +120,7 @@ webservers/nginx
 
 Retrieve the tags of a given registry.
 
-```azurecli
+```
 $ az acr repository show-tags -n acrinfra1 --repository baseimages/fedora
 Result
 --------
@@ -154,9 +154,9 @@ Select the tag and then click on **Delete folder** at the top bar.
 
 [![](/assets/images/acr_delete_image_5.png "Delete folder")]({{site.url}}/assets/images/acr_delete_image_5.png)
 
-If we go back to Azure CLI and list the tags for `baseimages/fedora` the deleted one will not show up. 
+If we go back to Azure CLI and list the tags for `baseimages/fedora` the deleted one will not show up.
 
-```azurecli
+```
 $ az acr repository show-tags -n acrinfra1 --repository baseimages/fedora
 Result
 --------
