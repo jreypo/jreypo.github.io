@@ -23,21 +23,21 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Welcome back to this three-part series of articles about the new vCenter Server Appliance. In this second post we will see how the additional vCenter services work in the VCSA and how to configure them.
+Welcome back to this three-part series of articles about the new vCenter Server Appliance. In this second post we will see how the additional vCenter services work in the vCSA and how to configure them.
 
--   Syslog Collector
--   ESXi Dump Collector (AKA Netdumper)
--   Auto Deploy
+- Syslog Collector
+- ESXi Dump Collector (AKA Netdumper)
+- Auto Deploy
 
 Additionally and although is not a service I decided to include a section about how to collect the vm-support scripts in the VCSA.
 
-### Syslog Collector
+## Syslog Collector
 
 Unlike the vCenter Windows version Syslog Collector comes bundled with the VCSA. As we saw in the previous post it can be configured from the VCSA web interface.
 
 [![](/assets/images/image_thumb151_thumb.png "Syslog collector settings")]({{site.url}}/assets/images/image_thumb151_thumb.png)
 
-But there are also a limited range of operations that can be done from the command line. Access the VCSA via SSH and make yourself root.
+But there are also a limited range of operations that can be done from the command line. Access the vCSA via SSH and make yourself root.
 
 Look if the Syslog Collector is enabled.
 
@@ -57,7 +57,7 @@ If you want to take a look at the Syslog Collector configuration, the configurat
 
 [![](/assets/images/vcsa_syslog_collector_conf.png "syslog-collector.conf file")]({{site.url}}/assets/images/vcsa_syslog_collector_conf.png)
 
-### ESXi Dump Collector
+## ESXi Dump Collector
 
 Like the other services ESXi Dump Collector, also known as `netdumper`, comes installed with the VCSA and like the Syslog Collector is enabled by default.
 
@@ -79,26 +79,26 @@ The configuration of the Dump Collector is located at `/etc/sysconfig/netdumper`
 
 Take a look at the following variables:
 
--   `NETDUMPER_DIR` - Storage point for the cores.
--   `NETDUMPER_DIR_MAX` - Amount of space configured for the cores.
--   `NETDUMPER_PORT` - TCP port of the service, set from the web UI.
--   `NETDUMPER_LOG_FILE` - Netdumper log file location
--   `NETDUMPER_OPTIONS`
+- `NETDUMPER_DIR` - Storage point for the cores.
+- `NETDUMPER_DIR_MAX` - Amount of space configured for the cores.
+- `NETDUMPER_PORT` - TCP port of the service, set from the web UI.
+- `NETDUMPER_LOG_FILE` - Netdumper log file location
+- `NETDUMPER_OPTIONS`
 
 From this file you can manually customize all those values, however for the port I prefer to use the web interface.
 
-### Auto Deploy
+## Auto Deploy
 
 Auto Deploy is the only one of the three services that is not enabled by default. As in the Windows based vCenter version Auto Deploy relies on two services:
 
--   DHCP
--   TFTP
+- DHCP
+- TFTP
 
 In the vCenter Server Appliance those services are included in the SuSE Linux the appliance is based on. However by default those services are 0stopped and are configured to do not start during the system startup process.
 
 These services require of some configuration before they can be used.
 
-#### DHCP
+### DHCP
 
 The configuration file for DHCP is `/etc/dhcpd.conf` but instead of using the default configuration file make a backup of this file and substitute the original with a copy of `/etc/dhcpd.conf.template`.
 
@@ -129,7 +129,7 @@ And configure the service startup level.
 
 [![](/assets/images/dhcpd_service_level_configuration.png "dhcpd service startup level configuration")]({{site.url}}/assets/images/dhcpd_service_level_configuration.png)
 
-#### TFTP
+### TFTP
 
 The configuration file for TFTP server is `/etc/sysconfig/atftp`. There is no need to modify this file since it will work with the default values.
 
@@ -151,13 +151,13 @@ With the DHCP and TFTP service properly configured and running we can now go bac
 
 [![](/assets/images/esxi_autodeploy_status_vcsa_ui.png "ESXI Autodeploy service status")]({{site.url}}/assets/images/esxi_autodeploy_status_vcsa_ui.png)
 
-### Collecting vm-support scripts
+## Collecting vm-support scripts
 
 We all know how to generate a support bundle in previous vCenter Server versions and in the 5.0 Windows based one using the vSphere Client or from Windows OS.
 
 For the VCSA the vSphere Client method is completely valid but of course since it is running on SuSE Linux the Windows method doesn't apply. Instead VMware has provided us with two additional methods, one from the Web administration interface and one from the Linux shell.
 
-#### Linux shell method
+### Linux shell method
 
 As root go to `/usr/lib/vmware-vpx` and run the `vc-support.sh` script. By default this script will generate the bundle in the current directory but you specify an alternate location with the `-w` flag.
 
@@ -173,7 +173,7 @@ Go to the directory where the file has been generated to check it. You can have 
 
 You can download the bundle to your system using you favorite SCP client.
 
-#### Web UI method
+### Web UI method
 
 Go the **vCenter Server** tab and in the **Status** section there is a link to generate the bundle.
 

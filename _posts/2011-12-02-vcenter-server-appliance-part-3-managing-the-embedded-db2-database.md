@@ -21,13 +21,13 @@ author: juan_manuel_rey
 comments: true
 ---
 
-In this last post about the vCenter Server Appliance we will see a glimpse on how to manage the embedded database that comes bundle with the VCSA.
+In this last post about the vCenter Server Appliance we will see a glimpse on how to manage the embedded database that comes bundle with the vCSA.
 
-First I must say that **I AM NOT A DB2 ADMIN**. I got this info by playing with the VCSA in my homelab, digging a bit into the DB2 documentation and googling a lot. Use the information provided in this post at your own risk.
+First I must say that **I AM NOT A DB2 ADMIN**. I got this info by playing with the vCSA in my homelab, digging a bit into the DB2 documentation and googling a lot. Use the information provided in this post at your own risk.
 
 If you still want to risk the integrity of your precious appliance please keep reading :-)
 
-### "Disassembling" the database installation
+## "Disassembling" the database installation
 
 Before starting to launch commands against the database we need to know a bit about it. Since this is SuSE Linux check the `rpm` packages installed.
 
@@ -43,10 +43,10 @@ When you select **embedded** and click **Save Settings** is when vCSA starts the
 
 There are four are files, the same showed by the `rpm` command.
 
--   `db2exc_972_LNX_x86_64.tar.gz` - The DB2 database itself.
--   `do_db2_install` - The installation script.
--   `db2_create_script.sql` - SQL script used by the installation script to create the vCenter database and the schema.
--   `db2expc.rsp` - An answer file used during the installation.
+- `db2exc_972_LNX_x86_64.tar.gz` - The DB2 database itself.
+- `do_db2_install` - The installation script.
+- `db2_create_script.sql` - SQL script used by the installation script to create the vCenter database and the schema.
+- `db2expc.rsp` - An answer file used during the installation.
 
 Feel free to take a more detailed look at the files.
 
@@ -60,7 +60,7 @@ Change to `current` and the database directory structure will show up. There is 
 
 The log file is called `db2install.history` again my advice is to review this log file, along with the installation files it can be a real learning experience about the DB2 installation process.
 
-### Identifying the database
+## Identifying the database
 
 OK we know how the database was installed now we need to know how it works. Check for the DB2 processes.
 
@@ -68,9 +68,9 @@ OK we know how the database was installed now we need to know how it works. Chec
 
 Apart from root there are three other users:
 
--   `db2inst1`
--   `db2fenc1`
--   `dasusr1`
+- `db2inst1`
+- `db2fenc1`
+- `dasusr1`
 
 Look for these users in `/etc/passwd`.
 
@@ -78,8 +78,7 @@ Look for these users in `/etc/passwd`.
 
 The user `db2inst1` is the only one who has a login shell, this is the database admin user.
 
-The home directory for the three users is the same that symlink `home` pointed at in `/opt/db2`. This is where the DB2 environment is loaded
-from.
+The home directory for the three users is the same that symlink `home` pointed at in `/opt/db2`. This is where the DB2 environment is loaded from.
 
 Make yourself `db2inst1` to load the DB2 environment. For the majority of the operations we will use the `db2` command. `db2` is the **IBM DB2 Command Line Processor**, it runs SQL statements against the database and it can be used in interactive mode, command mode and batch processing mode.
 
@@ -87,7 +86,7 @@ First thing is to know which DB2 version is installed. Use the `db2ls` command.
 
 [![](/assets/images/dbls2_command.png)]({{site.url}}/assets/images/dbls2_command.png)
 
-As you can see the VCSA is running IBM DB2 9.7.0 FixPack 2. The Install Path is also displayed.
+As you can see the vCSA is running IBM DB2 9.7.0 FixPack 2. The Install Path is also displayed.
 
 Next is checking DB2 database manager. Use the `db2start` command to check if the manager is running.
 
@@ -127,19 +126,19 @@ Once the connection is established we can get detailed information about the dat
 
 [![](/assets/images/get_vcdb_config.png "Get VCDB database configuration")]({{site.url}}/assets/images/get_vcdb_config.png)
 
-List the tablespaces of the database.
+List the `tablespaces` of the database.
 
 [![](/assets/images/list_db_tablespaces.png "List database tablespaces")]({{site.url}}/assets/images/list_db_tablespaces.png)
 
 There are many more options available within db2 utility, I'll let up to you to investigate them further.
 
-### Querying the DB2 database
+## Querying the DB2 database
 
 The final part of our trip is to interrogate the DB2 database. We will use the `isql` utility, that comes bundles with the VCSA, to perform a few basic SQL queries. This tool is part of the [unixODBC](http://www.unixodbc.org/) project, you can find more about it in their website.
 
 And again we will use the db2 command line processor.
 
-#### isql
+### isql
 
 You don't need `db2inst1` user to use `isql`, being `root` will suffice. To connect to the vCenter database first we need vc user credentials. This is not a system user but a database one.
 
@@ -169,7 +168,7 @@ Get the virtual datacenter ID, contained in the `vpx_datacenter` table.
 
 [![](/assets/images/get_virtual_dc_id.png "Get Virtual Datacenter ID")]({{site.url}}/assets/images/get_virtual_dc_id.png)
 
-#### db2 command line processor
+### db2 command line processor
 
 Make yourself `db2inst1` user and launch the `db2` shell.
 

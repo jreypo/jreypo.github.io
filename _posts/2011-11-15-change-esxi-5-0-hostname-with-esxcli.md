@@ -63,7 +63,7 @@ Interesting, you can change the short hostname, the domain or the fully qualifie
 
 We are going to try all of them.
 
-#### Domain
+## Domain
 
 ```
 ~ # esxcli system hostname set --domain=jreypo.local
@@ -75,7 +75,7 @@ We are going to try all of them.
 ~ #
 ```
 
-#### Short hostname
+## Short hostname
 
 ```
     ~ # esxcli system hostname set --host=esxi5-2
@@ -87,7 +87,7 @@ We are going to try all of them.
     ~ #
 ```
 
-#### Fully qualified domain name
+## Fully qualified domain name
 
 ```
 ~ # esxcli system hostname set --fqdn=esxi5.vjlab.local

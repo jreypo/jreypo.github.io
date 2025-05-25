@@ -30,34 +30,34 @@ Like we found before for `netstat` there is no `arp` command available from with
 
 In this quick post I'll show you the different ways to list the ARP table entries of an ESXi server, as always both for ESXi 4 and ESXi 5.
 
-### Tech Support Mode
+## Tech Support Mode
 
 From ESXi [Tech Support Mode](http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1017910)we need to relay in `esxcli`.
 
-#### ESXi 4
+### ESXi 4
 
 [![](/assets/images/esxi4_tsm.png "ESXi4 TSM")]({{site.url}}/assets/images/esxi4_tsm.png)
 
-#### ESXi 5
+### ESXi 5
 
 [![](/assets/images/esxi5_tsm.png "ESXi5 TSM")]({{images.url}}/assets/images/esxi5_tsm.png)
 
-### vCLI
+## vCLI
 
 Again we need `esxcli` in order to get the ARP table.
 
 [![](/assets/images/vcli.png "vCLI")]({{site.url}}/assets/images/vcli.png)
 
-### PowerCLI
+## PowerCLI
 
 In this case we are going to use `esxcli` but trough the `Get-EsxCli` cmdlet. First we retrieve the `esxcli` instance and then we get the ARP
 table list.
 
-#### ESXi 4
+### ESXi 4
 
 [![](/assets/images/powercli_esxi4.png "PowerCLI ESXi4")]({{site.url}}/assets/images/powercli_esxi4.png)
 
-#### ESXi 5
+### ESXi 5
 
 [![](/assets/images/powercli_esxi5.png "PowerCLI ESXi5")]({{site.url}}/assets/images/powercli_esxi5.png)
 

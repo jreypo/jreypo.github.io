@@ -32,14 +32,14 @@ The basic syntax for dns is:
 
 This gives you two namespaces to work with:
 
--   `search`
--   `server`
+- `search`
+- `server`
 
 [![](/assets/images/esxcli_dns1.png)]({{site.url}}/assets/images/esxcli_dns1.png)
 
 With the first one you can manage the suffixes for DNS search and the second is for the DNS server to be used by the ESXi.
 
-### Server operations
+## Server operations
 
 [![](/assets/images/image.png)]({{site.url}}/assets/images/image.png)
 
@@ -51,7 +51,7 @@ Remove a configured server:
 
 [![](/assets/images/image2.png)]({{site.url}}/assets/images/image2.png)
 
-### Domain search operations
+## Domain search operations
 
 List configured domain suffixes:
 

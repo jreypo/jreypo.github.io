@@ -24,7 +24,7 @@ comments: true
 
 Here are two quick ways to check the driver version of a network interface card. The commands must be executed in the ESX COS or ESX(i) Tech Support Mode.
 
--   `vmkload_mod`
+## `vmkload_mod`
 
 `vmkload_mod` is a tool to manage VMkernel modules. It can be used to load and unload modules, list the loaded modules and get the general information and available parameters of each module.
 
@@ -34,7 +34,7 @@ Here are two quick ways to check the driver version of a network interface card.
 ~ #
 ```
 
--   `ethtool`
+## `ethtool`
 
 `ethtool` is a Linux command line tool that allow us to retrieve and modify the parameters of an ethernet device. It is present in the vast majority of Linux systems, including the ESX Service Console. Fortunately for us VMware has also included it within the busybox environment of the ESXi.
 

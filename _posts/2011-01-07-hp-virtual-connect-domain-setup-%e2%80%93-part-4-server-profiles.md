@@ -26,9 +26,9 @@ image:
 
 This is the fourth and last part of this series of posts about Virtual Connect, the first three were:
 
--   [**HP Virtual Connect Domain Setup - Part 1: Domain Setup Wizard**]({% post_url 2010-12-20-hp-virtual-connect-domain-setup-part-1-domain-setup-wizard %} "HP Virtual Connect Domain Setup – Part 1: Domain Setup Wizard")
--   [**HP Virtual Connect Domain Setup - Part 2: Networking Setup**]({% post_url 2010-12-21-hp-virtual-connect-domain-setup-part-2-network-setup %} "HP Virtual Connect Domain Setup – Part 2: Network Setup")
--   [**HP Virtual Connect Domain Setup - Part 3: Storage Setup**]({% post_url 2011-01-05-hp-virtual-connect-domain-setup-part-3-storage-setup %} "HP Virtual Connect Domain Setup – Part 3: Storage Setup")
+- [**HP Virtual Connect Domain Setup - Part 1: Domain Setup Wizard**]({% post_url 2010-12-20-hp-virtual-connect-domain-setup-part-1-domain-setup-wizard %} "HP Virtual Connect Domain Setup – Part 1: Domain Setup Wizard")
+- [**HP Virtual Connect Domain Setup - Part 2: Networking Setup**]({% post_url 2010-12-21-hp-virtual-connect-domain-setup-part-2-network-setup %} "HP Virtual Connect Domain Setup – Part 2: Network Setup")
+- [**HP Virtual Connect Domain Setup - Part 3: Storage Setup**]({% post_url 2011-01-05-hp-virtual-connect-domain-setup-part-3-storage-setup %} "HP Virtual Connect Domain Setup – Part 3: Storage Setup")
 
 In this final post I will discuss **Server Profiles**, what are they and how to create. As in the rest of the series I'm using **Virtual Connect 3.10**.
 
@@ -36,11 +36,11 @@ So, what is a Server Profile? We can define a Virtual Connect server profile as 
 
 The server profile includes:
 
--   MAC address.
--   Pre-boot Execution Environment (PXE) enablement.
--   Network connection setting for each NIC port and WWN.
--   SAN fabric connection.
--   SAN boot parameter setting for each Fibre Channel HBA port.
+- MAC address.
+- Pre-boot Execution Environment (PXE) enablement.
+- Network connection setting for each NIC port and WWN.
+- SAN fabric connection.
+- SAN boot parameter setting for each Fibre Channel HBA port.
 
 Once the server profile is created you can apply it to any server within the VC Domain. There is a maximum of 64 fully populated VC Server Profiles in a VC Domain.
 
@@ -56,13 +56,13 @@ If a blade server is moved from a Virtual Connect managed enclosure to a non VC 
 
 In addition to the above information the following points must be considered when working with server profiles:
 
--   Blade server and card firmware revision must be at a revision that supports Virtual Connect profile assignment.
--   Before creating the first server profile select whether to use Virtual Connect administered MAC and WWN ranges or the local factory default values.
--   After an enclosure is imported into a VC Domain the blades will remain isolated from networks and SAN fabrics until a server profile is assigned.
--   When Virtual Connect administered MACs and/or WWNs or when changing Fibre Channel boot parameters the servers must be powered off in order to receive or relinquish a server profile.
--   Fibre Channel SAN connections will display in the profile server screen only if the VC-FC module in the enclosure managed by Virtual Connect. If there is no VC-FC module the FC option wouldn't appear in the server profile screen until a module has been added.
--   Some server profile SAN boor settings, like the controller boot order, are applied only after the server has been booted with the final mezzanine card configuration.
--   If PXE or SAN boot settings are made outside of Virtual Connect, the settings defined by the server profile will be restored after the blade server completes the next boot cycle.
+- Blade server and card firmware revision must be at a revision that supports Virtual Connect profile assignment.
+- Before creating the first server profile select whether to use Virtual Connect administered MAC and WWN ranges or the local factory default values.
+- After an enclosure is imported into a VC Domain the blades will remain isolated from networks and SAN fabrics until a server profile is assigned.
+- When Virtual Connect administered MACs and/or WWNs or when changing Fibre Channel boot parameters the servers must be powered off in order to receive or relinquish a server profile.
+- Fibre Channel SAN connections will display in the profile server screen only if the VC-FC module in the enclosure managed by Virtual Connect. If there is no VC-FC module the FC option wouldn't appear in the server profile screen until a module has been added.
+- Some server profile SAN boor settings, like the controller boot order, are applied only after the server has been booted with the final mezzanine card configuration.
+- If PXE or SAN boot settings are made outside of Virtual Connect, the settings defined by the server profile will be restored after the blade server completes the next boot cycle.
 
 If you have worked in the past with the 2.x Virtual Connect Manager revisions I'm sure that you will remember the **Server Profile Wizard**. That wizard has been removed from the  3.x revisions of VCM.
 

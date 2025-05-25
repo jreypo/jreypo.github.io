@@ -20,32 +20,31 @@ author: juan_manuel_rey
 comments: true
 ---
 
-With vSphere 5 VMware has released the vCenter Server Appliance, or VCSA, a linux based alternative to the classic Windows vCenter. During the next three articles I will detail how to deploy and configure the VCSA, the vCenter additional services and how to manage the embedded database.
+With vSphere 5 VMware has released the vCenter Server Appliance, or vCSA, a linux based alternative to the classic Windows vCenter. During the next three articles I will detail how to deploy and configure the vCSA, the vCenter additional services and how to manage the embedded database.
 
-### vCSA Feature and Limitations
+## vCSA Feature and Limitations
 
 The vCSA appliance is a [SuSE Linux Enterprise Server 11](http://www.suse.com/products/server/) 64-bit virtual machine with the vCenter Server software and its associated services pre-installed. These services include:
 
--   ESXi Dump Collector
--   ESXi Syslog Collector
--   vSphere Auto Deploy
+- ESXi Dump Collector
+- ESXi Syslog Collector
+- vSphere Auto Deploy
 
-I will explain how these services are configured in the VCSA in the next article.
+I will explain how these services are configured in the vCSA in the next article.
 
 The appliance has a minimum requirements of 4GB of RAM, 7GB of disk space and 2 vCPUs. For a more detailed descriptions of vCSA requirements you should check this VMware Knowledge Base article:
 
--   [Minimum requirements for the VMware vCenter Server 5.x Appliance](http://kb.vmware.com/kb/2005086)
+- [Minimum requirements for the VMware vCenter Server 5.x Appliance](http://kb.vmware.com/kb/2005086)
 
-The are some limitations for the VCSA, the following vCenter Server features are not supported:
+The are some limitations for the vCSA, the following vCenter Server features are not supported:
 
--   IPv6
--   Linked mode
--   SQL Server as backend database
--   Security Support Provider Interface (SSPI)
--   VMware Update Manager can't be installed in the VCSA, you have to
-    use an additional Windows based VM or physical server. ****
+- IPv6
+- Linked mode
+- SQL Server as backend database
+- Security Support Provider Interface (SSPI)
+- VMware Update Manager can't be installed in the VvSA, you have to use an additional Windows based VM or physical server. ****
 
-### vCSA Configuration
+## vCSA Configuration
 
 The vCenter appliance can be deployed only on hosts ESX(i) 4.x or later and like the appliance produced by VMware it comes in OVF format.
 
@@ -59,7 +58,7 @@ Power on the vCenter Server Appliance and open its console.
 
 [![image](/assets/images/vcsa_console.png "vCSA Console")]({{site.url}}/assets/images/vcsa_console.png)
 
-From the console we can configure the VCSA networking and timezone and we can log into the SLES console.
+From the console we can configure the vCSA networking and timezone and we can log into the SLES console.
 
 Select **Configure Network**, a new screen will show and the appliance will ask for its IP address, hostname, gateway and DNS configuration. Answer the questions according to your network environment.
 
@@ -103,7 +102,7 @@ Last for the *vCenter Server* tab is the **Storage** screen where you can config
 
 [![](/assets/images/vcsa_log_core_files.png "vCSA log and core file storage settings")]({{site.url}}/assets/images/vcsa_log_core_files.png)
 
-The next tab is **Services*^. From this tab you can configure, start/stop the **ESXi Services** (Syslog, Netdumper, Auto Deploy) and start/stop the vSphere Web Client.
+The next tab is **Services**. From this tab you can configure, start/stop the **ESXi Services** (Syslog, Netdumper, Auto Deploy) and start/stop the vSphere Web Client.
 
 [![](/assets/images/vc_services_status.png "vCenter services status")]({{site.url}}/assets/images/vc_services_status.png)
 
@@ -111,7 +110,7 @@ In the **Status** section you can start and stop the services and in the other s
 
 [![](/assets/images/vcsa_esxi_syslog_collector.png "ESXi Syslog Collecto settings")]({{site.url}}/assets/images/vcsa_esxi_syslog_collector.png)
 
-Move to **Authentication** tab. The vCenter Server Appliance can be configured to use a NIS or Active Directory. Again if you set any of them you'll need to restart the VCSA for the changes to take effect.
+Move to **Authentication** tab. The vCenter Server Appliance can be configured to use a NIS or Active Directory. Again if you set any of them you'll need to restart the vCSA for the changes to take effect.
 
 [![](/assets/images/vcsa_ad_settings.png "Active Directory settings")]({{site.url}}/assets/images/vcsa_ad_settings.png)
 
@@ -135,7 +134,7 @@ Finally there is the Upgrade tab. You are not going use this tab until the next 
 
 [![](/assets/images/vcsa_prepare_for_upgrade.png)]({{site.url}}/assets/images/vcsa_prepare_for_upgrade.png)
 
-The vCSA can not be upgraded in the same manner as its Windows counterpart. Instead you'll have to deploy the new version within your infrastructure and use this interface to establish a trusted connection between the new and old VCSAs. The new appliance will import all data, shutdown the old one and finally take control of its inventory.
+The vCSA can not be upgraded in the same manner as its Windows counterpart. Instead you'll have to deploy the new version within your infrastructure and use this interface to establish a trusted connection between the new and old vCSAs. The new appliance will import all data, shutdown the old one and finally take control of its inventory.
 
 We are done with the configuration of the appliance. In the second post of the series I will discuss about the vCenter associated services.
 

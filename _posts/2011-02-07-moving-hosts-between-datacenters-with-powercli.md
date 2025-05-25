@@ -28,11 +28,11 @@ To be honest, fixing this is not a big deal. Just put the host in maintenance mo
 
 To explain a bit the scenario. I currently have two datacenters in my homelab, one for my day to day tests and labs and another one for [vCloud Director](http://www.vmware.com/products/vcloud-director/).
 
-### Step 1 - Put the host in maintenance mode
+## Step 1 - Put the host in maintenance mode
 
 To do so we re going to use the `Set-VMHost` cmdlet.
 
-```
+```powershell-interactive
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State "Maintenance"
 
@@ -45,11 +45,11 @@ C:\
 [vSphere PowerCLI] %
 ```
 
-### Step 2 - Move the host out of the cluster
+## Step 2 - Move the host out of the cluster
 
 To perform this use the `Move-VMHost` cmdlet.
 
-```
+```powershell-interactive
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-dc
 
@@ -66,11 +66,11 @@ If you check now the vSphere Client will see the host out of the cluster but sti
 
 [![](/assets/images/esxi_out_cluster.png "ESXi out of cluster1")]({{site.url}}/assets/images/esxi_out_cluster.png)
 
-### Step 3 - Move the host to the correct datacenter
+## Step 3 - Move the host to the correct datacenter
 
 Now that our host is in maintenance mode and out of the cluster it is time to move it to the correct datacenter. Again we will use `Move-VMHost`.
 
-```
+```powershell-interactive
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-vcloud -Verbose
 VERBOSE: 03/02/2011 22:30:39 Move-VMHost Started execution
@@ -88,7 +88,7 @@ C:\
 
 Finally put the ESXi out of maintenance mode.
 
-```
+```powershell-interactive
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State Connected
 

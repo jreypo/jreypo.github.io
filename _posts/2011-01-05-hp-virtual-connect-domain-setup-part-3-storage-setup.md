@@ -35,14 +35,14 @@ Before we start with the wizard and all the setup task is important to explain t
 
 The first concept to understand are the several key Fibre Channel port types. There a three basic FC ports:
 
--   **N_Port (Node Port)** - An N_Port is a port within a node that provides Fibre Channel attachment like an HBA port. VC-FC module uplink ports are N_ports.
--   **F_Port (Fabric Port)** - This a port on a FC switch connected to an N_port and addressable by it. These are commonly used in Edge or Core switches. The VC-FC module's downlink ports are F_ports in order to allow the HBAs to login into them.
--   **E_Port (Expansion Port)** - These are switch ports used for switch-to-switch connections known as Inter Switch Link or ISL.
+- **N_Port (Node Port)** - An N_Port is a port within a node that provides Fibre Channel attachment like an HBA port. VC-FC module uplink ports are N_ports.
+- **F_Port (Fabric Port)** - This a port on a FC switch connected to an N_port and addressable by it. These are commonly used in Edge or Core switches. The VC-FC module's downlink ports are F_ports in order to allow the HBAs to login into them.
+- **E_Port (Expansion Port)** - These are switch ports used for switch-to-switch connections known as Inter Switch Link or ISL.
 
 Additionally there are two other ports, however these ports are not typically seen in Virtual Connect environments.
 
--   **NL_Port (Node Loop Port)** - An N_port capable of Arbitrated Loop function.
--   **FL_Port (Fabric Loop Port)** - An F_port capable of Arbitrated Loop function.
+- **NL_Port (Node Loop Port)** - An N_port capable of Arbitrated Loop function.
+- **FL_Port (Fabric Loop Port)** - An F_port capable of Arbitrated Loop function.
 
 The next key concept to understand in **N_Port ID Virtualization** or **NPIV**. It's a T11 FC standard than can be defined as a Fibre Channel facility that allows to assign multiple N\_Port\_IDs to a single N_Port, this is a physical N_port having multiple port WWNs. Of course the VC-FC module must be connected to a Fibre Channel switch that supports NPIV.
 
@@ -58,20 +58,20 @@ In this configuration the SAN boundary has been moved out of the enclosure. The 
 
 Here it is how the whole process would go:
 
-1.  VC-FC module uplink port issue a Login Request, a *FLOGI* to the SAN and advertise itself as NPIV capable port.
-2.  Upon receiving an *Accept* from the Fabric it would begin to process server requests.
-3.  Server HBAs would begin normal Fabric login process with the WWNs.
-4.  VC-FC module would translate *FLOGI* requests into an *FDISC* requests since a single N\_Port can only receive one *FLOGI* request.
-5.  SAN switch would reply with an *Accept* and provide HBAs with Fabric addresses.
-6.  The *Accept* frames would reach uninterrupted the HBAs.
-7.  From then on all the traffic will be carried over the sane link for all HBA connections.
+1. VC-FC module uplink port issue a Login Request, a *FLOGI* to the SAN and advertise itself as NPIV capable port.
+2. Upon receiving an *Accept* from the Fabric it would begin to process server requests.
+3. Server HBAs would begin normal Fabric login process with the WWNs.
+4. VC-FC module would translate *FLOGI* requests into an *FDISC* requests since a single N\_Port can only receive one *FLOGI* request.
+5. SAN switch would reply with an *Accept* and provide HBAs with Fabric addresses.
+6. The *Accept* frames would reach uninterrupted the HBAs.
+7. From then on all the traffic will be carried over the sane link for all HBA connections.
 
 Now the the basic concepts are explained and, hopefully clear, it's tim to configure the storage.
 
 We are going to use the **Fibre Channel Setup Wizard** to:
 
--   Identify the World Wide Names (WWNs) to be used by the servers.
--   Define the available SAN fabrics.
+- Identify the World Wide Names (WWNs) to be used by the servers.
+- Define the available SAN fabrics.
 
 You can launch the wizard either from the Tools menu in the Virtual Connect page or right after finishing the **Network Setup Wizard**. From the welcome screen click Next and move into the **World Wide Name (WWN) Settings** page.
 
