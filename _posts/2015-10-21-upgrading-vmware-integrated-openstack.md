@@ -68,6 +68,7 @@ done
 Installation complete for patch vio-1.0-upgrade version 2.0.0.3037964
 viouser@vio-oms:~$
 ```
+
 Go to the vSphere Web Client, logout and log back in to verify that the new version is correct.
 
 [![](/assets/images/vio-oms-upgraded.png)]({{site.url}}/assets/images/vio-oms-upgraded.png)

@@ -29,7 +29,7 @@ Have to admit that because months have passed since the [DC/OS post]({% post_url
 
 As with everything in Azure we need a resource group, it is the basic construct for any Azure deployment based on the ARM model and it will act as a boundary and logic container for all the resources that will form our Kubernetes cluster. You can use an existing one or you can create a new one, in our example we will take the second path.
 
-```azurecli
+```
 $ az group create --name acs-k8s-3 --location westeurope
 Location    Name
 ----------  ---------
@@ -38,8 +38,8 @@ westeurope  acs-k8s-3
 
 Now we can create our cluster. To spin up your Kubernetes cluster you can of use the Azure Portal but I prefer to use [Azure CLI 2.0](https://github.com/Azure/azure-cli). We will need a pair of SSH keys and a Service Principal, I already have them created but if you omit the `--service-principal` option and add the `--generate-ssh-keys` during the `az acs create` operation it will generate both for you.
 
-```azurecli
-$ az acs create -g acs-k8s-3 -n k8s-cl3 --orchestrator-type kubernetes --service-principal 11111111-1111-1111-1111-111111111111 --client-secret=xxxxxxxxx -d k8s-cl3 --admin-username azuser --verbose
+```
+az acs create -g acs-k8s-3 -n k8s-cl3 --orchestrator-type kubernetes --service-principal 11111111-1111-1111-1111-111111111111 --client-secret=xxxxxxxxx -d k8s-cl3 --admin-username azuser --verbose
 ```
 
 I choose the defaults for Master and Agent count, one and three respectively, and my default ssh key from `.ssh/id_rsa.pub`.
@@ -48,7 +48,7 @@ I choose the defaults for Master and Agent count, one and three respectively, an
 
 Lets explore the cluster like we did with our DC/OS one.
 
-```azurecli
+```
 $ az vm list -d -g acs-k8s-3
 Name                   ResourceGroup    PowerState    Location
 ---------------------  ---------------  ------------  ----------
@@ -71,7 +71,7 @@ Our ACS Kubernetes deployment includes:
 
 We can list all the resources using Azure CLI.
 
-```azurecli
+```
 $ az resource list -g acs-k8s-3
 Name                                                             ResourceGroup    Location    Type                                          Status
 ---------------------------------------------------------------  ---------------  ----------  --------------------------------------------  --------
@@ -107,13 +107,13 @@ Also the deployed architecture for Kubernetes can be seen in the below diagram.
 
 We will now take a look at the Kubernetes components, you will need `kubectl` which the Kubernetes command line. If you do not have don't worry because Azure can get it installed for you with a simple command.
 
-```azurecli
+```
 az acs kubernetes install-cli
 ```
 
 Now we will need to configure `kubectl` with the proper credentials to interact with our shiny Kubernetes cluster Again this can be easily achieved using Azure CLI, and interact with the cluster usign `kubectl`.
 
-```azurecli
+```
 $ az acs kubernetes get-credentials -n k8s-cl3 -g acs-k8s-3
 $
 $ kubectl get nodes
@@ -159,7 +159,7 @@ The main difference is that due to the lack of VMSS the network interfaces of th
 
 There are two load balancers, one is exposed to the internet and holds our cluster public IP address. The second one is internal to balance the traffic across the masters.
 
-```azurecli
+```
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------
@@ -248,7 +248,7 @@ Events:                 <none>
 
 The `azure-vote-front` service will be exposed to the public and as you can see it is still on `<pending>` status waiting for a public IP address. This IP address will be assigned by the Azure fabric to a newly created Azure Load Balancer, this is part of the native integration between Kubernetes and Azure.
 
-```azurecli
+```
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------

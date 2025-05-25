@@ -53,7 +53,7 @@ The installation process is very fast in both cases, it took around 29 seconds f
 
 ## CBL-Mariner overview
 
-CBL-Mariner feels very similar to other Linux distros like Fedora or Photon-OS, which is expected since in the [Acknowledgments](https://github.com/microsoft/CBL-Mariner#acknowledgments) section of their GitHub repo they list both projects because the team used their SPEC files as starting point and reference. 
+CBL-Mariner feels very similar to other Linux distros like Fedora or Photon-OS, which is expected since in the [Acknowledgments](https://github.com/microsoft/CBL-Mariner#acknowledgments) section of their GitHub repo they list both projects because the team used their SPEC files as starting point and reference.
 
 As anyone will expect in any modern Linux distro `systemd` it is used as CBL-Mariner system manager. After installing my Mariner VM I had to access it through vSphere console because there is no SSH daemon installed in the default installation, but it can be easily installed using `tdnf`.
 
@@ -64,7 +64,7 @@ sudo systemctl enable --now sshd.service
 
 ### Package and update system
 
-CBL-Mariner package system is RPM-based. The package update system uses both `dnf` and `tdnf`, [Tiny DNF](https://github.com/vmware/tdnf) is a package manager based on `dnf` and coming from VMware's Photon OS. 
+CBL-Mariner package system is RPM-based. The package update system uses both `dnf` and `tdnf`, [Tiny DNF](https://github.com/vmware/tdnf) is a package manager based on `dnf` and coming from VMware's Photon OS.
 
 CBL-Mariner also supports an image-based update mechanism for atomic servicing and rollback using [RPM-OSTree](https://rpm-ostree.readthedocs.io/en/stable/), `rpm-ostree` is an open source tool based on [OSTree](https://ostreedev.github.io/ostree/introduction/) to manage bootable, immutable, versioned filesystem trees. The idea behind rpm-ostree is to use a client-server architecture to keep Linux hosts updated and in sync with the latest packages in a reliable manner.
 
@@ -79,7 +79,7 @@ mariner-official-updateCBL-Mariner Official Update 1.0 x86_64  enabled
 vadmin@cbl-mariner [ ~ ]$
 ```
 
-Around 3300 packages are available between both repositories. In my case it was a very pleasant surprise to find `open-vm-tools` package, since I run my CBL-Mariner instances on vSphere is fantastic to have the VMware Tools packages available. 
+Around 3300 packages are available between both repositories. In my case it was a very pleasant surprise to find `open-vm-tools` package, since I run my CBL-Mariner instances on vSphere is fantastic to have the VMware Tools packages available.
 
 ### Security by default
 

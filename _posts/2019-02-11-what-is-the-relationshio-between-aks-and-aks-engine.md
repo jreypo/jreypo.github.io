@@ -34,7 +34,7 @@ All the node instances deployed in an AKS cluster has the `aks-engine` version u
 
 Using Azure CLI retrieve the list of nodes of our cluster.
 
-```azurecli
+```
 $ az vm list -g MC_aksrg-ready_aks-ready_canadacentral
 Name                      ResourceGroup                           Location       Zones
 ------------------------  --------------------------------------  -------------  -------
@@ -47,7 +47,7 @@ For our example we will use the first node `aks-nodepool1-68968121-0`. To get th
 
 With Azure CLI get the instance Azure Tags.
 
-```azurecli
+```
 $ az vm show -n aks-nodepool1-68968121-0 -g MC_AKSRG-READY_AKS-READY_CANADACENTRAL --query '[tags]' -o json
 [
   {

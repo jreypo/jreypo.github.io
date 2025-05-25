@@ -28,7 +28,7 @@ Azure Red Hat OpenShift was [announced](https://azure.microsoft.com/en-us/blog/o
 
 After the GA however not every Microsoft and Red Hat customer was able to freely try it in the classic pay as yo go model, instead there was a requirement to reserve four application nodes up-front for the first cluster. However this requirement has been finally lifted during Microsoft Ignite and from now on you can deploy Azure Red Hat OpenShift, or ARO for short, in a PAYG fashion like it should be with any cloud service.
 
-With this in mind I am going to describe the process to deploy your first ARO cluster. 
+With this in mind I am going to describe the process to deploy your first ARO cluster.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ We will need to perform two distinct operations:
 
 First create the Azure AD security group
 
-```azurecli
+```
 $ az ad group create --display-name aro-group --mail-nickname aro-group -o json
 {
   "deletionTimestamp": null,
@@ -68,9 +68,9 @@ $ az ad group create --display-name aro-group --mail-nickname aro-group -o json
 }
 ```
 
-With the group created take note of the `objectId` property, we will need later to create the cluster. Next step is to add the accounts fo the future ARO administrators to this group, in my case I  will add a custom account I created in my tenant. 
+With the group created take note of the `objectId` property, we will need later to create the cluster. Next step is to add the accounts fo the future ARO administrators to this group, in my case I  will add a custom account I created in my tenant.
 
-```azurecli
+```
 $ az ad group member add --group aro-group --member-id 804fb062-a879-4e72-aaca-8be50e6dc49a
 $ az ad group member list --group aro-group --query '[].{Name:displayName, NickName:mailNickname, Id:objectId}' -o json
 [
@@ -86,7 +86,7 @@ $ az ad group member list --group aro-group --query '[].{Name:displayName, NickN
 
 To be able to integrate our cluster with Azure Active Directory we will need to create an Azure AD application.
 
-```azurecli
+```
 $ appId=$(az ad app create --display-name aro-aad --query appId -o tsv)
 $ echo $appId
 57887cd0-868b-4e0d-88a7-519a0ad590cf
@@ -96,7 +96,7 @@ $ echo $appId
 
 With our application created we need to configure it, first set the owner which in my case is the `aroadmin` user.
 
-```azurecli
+```
 $ az ad app owner add --id $appId --owner-object-id 804fb062-a879-4e72-aaca-8be50e6dc49a
 $ az ad app owner list --id $appId --query '[].{Name:displayName}' -o json
 [
@@ -108,7 +108,7 @@ $ az ad app owner list --id $appId --query '[].{Name:displayName}' -o json
 
 Next step is add the permissions to the specific Azure Active Directory Graph APIs. We need to add permissions for `Directory.Read.All` and `User.Read`. The first one is defined as an *Application* type and will allow the app to *Read directory data*. the second will be granted as *Delegated* and will enable the app to *Sing in and read user profile*
 
-```azurecli
+```
 az ad app permission add --id $appId --api 00000002-0000-0000-c000-000000000000 --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope 5778995a-e1bf-45b8-affa-663a9f3f4d04=Role
 ```
 
@@ -120,7 +120,7 @@ Lets dig a bit in the previous command options before we continue.
 
 To finish the API permissions we need to grant admin consent for this application, in order to grant the consent you need to be the Azure AD admin or request an admin to do it.
 
-```azurecli
+```
 $ az ad app permission admin-consent --id $appId
 $ az ad app permission list --id $appId -o json
 [
@@ -146,13 +146,13 @@ $ az ad app permission list --id $appId -o json
 
 Generate a secure password by any method and add as secret to the application.
 
-```azurecli
+```
 az ad app update --id $appId --password <SUPER_SECRET_PASSWORD>
 ```
 
 Finally update the application to disable [implicit grant flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow) using ID Tokens.
 
-```azurecli
+```
 az ad app update --id $appId --set oauth2AllowIdTokenImplicitFlow=false
 ```
 
@@ -162,7 +162,7 @@ There is one more setting to configure, the Redirect URI, but we cannot set it u
 
 Once all prerequisites are finished we can proceed with the cluster creation. Create a new resource group, although this resource group will not contain the resources of the cluster but I will explain thsi later. 
 
-```azurecli
+```
 az group create --name arorg --location westeurope
 ```
 
@@ -176,7 +176,7 @@ The parameters needed for the create operation are:
 - Customer Admin Group ID - The ID of the Azure AD security group created before that includes all the admin accounts.
 - Application Node count - By default is 4 but in my case I am deploying just two application nodes.
 
-```azurecli
+```
 $ az openshift create -n aro-cl1 -g arorg -c 2 --aad-client-app-id $apId --aad-client-app-secret <SUPER_SECRET_PASSWORD> --aad-tenant-id b40a365a-9f29-4480-b1f9-2gf9179421de --customer-admin-group-id 4f2aefef-a111-4f84-b980-99c989a4e0cc -l westeurope
 $ az openshift list
 Name     Location    ResourceGroup    OpenShiftVersion    ProvisioningState    PublicHostname
@@ -188,7 +188,7 @@ aro-cl1  westeurope  arorg            v3.11               Succeeded            o
 
 Update the Azure AD app registration with the URL `https://<aro_public_hostname>/oauth2callback/Azure%20AD`.
 
-```azurecli
+```
 $ az ad app update --id $appId --reply-urls https://openshift.3a298ccfc966456481fe.westeurope.azmosa.io/oauth2callback/Azure%20AD
 $ az ad app show --id $appId --query replyUrls -o json
 [

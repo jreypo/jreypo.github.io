@@ -35,13 +35,13 @@ The first thing we myst do is create the necessary infrastructure in our subscri
 
 Create the resource group.
 
-```azurecli
+```
 az group create --name k8s-lab-rg3 --location westeurope
 ```
 
 Create a VNet, during the creation of the VNet we will declare as well the subnet for our cluster. 
 
-```azurecli
+```
 az network vnet create --name k8s-lab-vnet --resource-group k8s-lab-rg3 --location westeurope --address-prefixes 172.10.0.0/16 --subnet-name k8s-lab-net1 --subnet-prefixes 172.10.1.0/24
 ```
 
