@@ -21,11 +21,11 @@ image:
   feature: openstack-banner.jpg
 ---
 
-VIO 2.0 comes with several command line utilities, in a previous [post](http://blog.jreypo.io/openstack/vmware/how-to-patch-your-vio-environment/) I showed the usage of `viopatch` to perform patching of an existing VIO installation. In this post I will discuss `viocli` which is the main command line utility that allow, via several subcommands, to perform many maintenance and administration operations from VIO Manager. We will cover the most commonly used and useful `viocli` subcommands.
+VIO 2.0 comes with several command line utilities, in a previous [post]({% post_url 2015-04-29-how-to-patch-your-vio-environment %}) I showed the usage of `viopatch` to perform patching of an existing VIO installation. In this post I will discuss `viocli` which is the main command line utility that allow, via several subcommands, to perform many maintenance and administration operations from VIO Manager. We will cover the most commonly used and useful `viocli` subcommands.
 
 `viocli` must always be run using `sudo`. The available subcommands can be retrieved with a simple `viocli -h`
 
-```
+```text
 viouser@vio-manager:~$ viocli -h
 usage: viocli [-h]
               {backup,recover,restore,show,upgrade,rollback,deployment,services,hyperic,dbverify,ds-migrate-prep}
@@ -54,7 +54,7 @@ optional arguments:
 
 To get the help for any of the subcommands run `viocli <command> -h`. The configuration for `viocli` can be found in `/opt/vmware/vio/etc/viocli.conf`
 
-```
+```text
 viouser@vio-manager:/opt/vmware/vio/etc$ cat viocli.conf
 [DEFAULT]
 deployment=VIO
@@ -73,7 +73,7 @@ viouser@vio-manager:/opt/vmware/vio/etc$
 
 ### Usage
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli deployment -h
 usage: viocli deployment [-h] [-v] [-d [NAME]] [-p]
                          {start,stop,pause,resume,configure,cert-req-create,cert-update,getlogs,default}
@@ -103,19 +103,19 @@ viouser@vio-manager:~$
 
 ### Start a deployment
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli deployment start -d VIO-20
 ```
 
 ### Stop a deployment
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli deployment stop -d VIO-20
 ```
 
 ### Get the logs
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli deployment getlogs -d VIO-20
 ```
 
@@ -123,7 +123,7 @@ viouser@vio-manager:~$ sudo viocli deployment getlogs -d VIO-20
 
 Used to retrieve the list of nodes of a VIO deployment and get information about the deployment's inventory file.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli show -d VIO-20
 hostname         role           vm name                ip
 ---------------  -------------  ---------------------  ---------------
@@ -142,17 +142,17 @@ viouser@vio-manager:~$
 
 `viocli services` can be used to start and stop the services within a VIO deployment. The main differerence with `viocli deployment` is that `services` will only start/stop the services running on the virtual machines and `deployment` subcommand will start/stop the whole OpenStack cluster, including the virtual machines.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli services start
 ```
 
 ## viocli upgrade
 
-The recommended to perform a major version upgrade in VIO is still the vSphere Web Client, as I shown in [VIO upgrade post](http://blog.jreypo.io/openstack/vmware/upgrading-vmware-integrated-openstack/), however using `viocli upgrade` the upgrade can also be performed from VIO Manager shell.
+The recommended to perform a major version upgrade in VIO is still the vSphere Web Client, as I shown in [VIO upgrade post]({% post_url 2015-10-21-upgrading-vmware-integrated-openstack %}), however using `viocli upgrade` the upgrade can also be performed from VIO Manager shell.
 
 ### Usage
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli upgrade -h
 usage: viocli upgrade [-h] [-v] [-d [NAME]] [-p] [-n [NEW_DEPLOYMENT_NAME]]
                       [--public-vip [PUBLIC_VIP]]
@@ -178,7 +178,7 @@ viouser@vio-manager:~$
 
 ### Perform an upgrade
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli upgrade -d VIO-10 -p -n VIO-20 --public-vip 192.168.130.120 --internal-vip 172.16.20.120
 ```
 
@@ -186,7 +186,7 @@ viouser@vio-manager:~$ sudo viocli upgrade -d VIO-10 -p -n VIO-20 --public-vip 1
 
 This `viocli` subcommand will allow to rollback a VIO upgrade in case of any failure during the upgrade operation.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli rollback --deployment VIO-10 --progress --force
 ```
 
@@ -196,13 +196,13 @@ This command allows to perform a backup of the VIO Manager server of the OpenSta
 
 ### Management Server backup
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli backup mgmt_server 192.168.1.99:/vio_backup
 ```
 
 ### OpenStack database backup
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli backup openstack_db -d VIO 192.168.1.99:/vio_backup
 ```
 
@@ -212,13 +212,13 @@ viouser@vio-manager:~$ sudo viocli backup openstack_db -d VIO 192.168.1.99:/vio_
 
 ### Management Server restore
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli restore mgmt_server -d VIO vio_os_db_20160202205408 192.168.1.99:/vio_backup
 ```
 
 ### OpenStack database restore
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli restore openstack_db -d VIO vio_os_db_20160202205408 192.168.1.99:/vio_backup
 ```
 
@@ -232,7 +232,7 @@ Recovery operations can be executed by node with `-n` or by role with `-r`. Get 
 
 The following example shows the recovery operation for the controller01 node.
 
-```
+```text
 viouser@vio-manager:~$ viocli recover -n controller01
 ```
 
@@ -240,7 +240,7 @@ viouser@vio-manager:~$ viocli recover -n controller01
 
 The following example show the recover of the OpenStack DB role, that will perform the recovery of all DB nodes. As it can be seen the name of the backup and the NFS path must be provided.
 
-```
+```text
 viouser@vio-manager:~$ viocli recover -r DB -dn vio_os_db_20160202205408 -nfs 192.168.1.99:/vio_backup
 ```
 
@@ -248,7 +248,7 @@ viouser@vio-manager:~$ viocli recover -r DB -dn vio_os_db_20160202205408 -nfs 19
 
 The `dbverify` command allows and administrator to verify an OpenStack database before doing an upgrade. It can find knows issued like duplicated or missing keys, that may casue problems during the upgrade operation.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli dbverify -d VIO-20
 Running data validation against deployment: VIO-20 ...
 Data validation completed, results are as follows:
@@ -263,7 +263,7 @@ viouser@vio-manager:~$
 
 `viocli hyperic` can be used to manage the Hyperic agent. Tasks like installation, configuration, and start/stop can be performed.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli hyperic -h
 usage: viocli hyperic [-h] [-v] [-d [NAME]]
                       {install,config,uninstall,stop,start} ...
@@ -286,7 +286,7 @@ viouser@vio-manager:~$
 
 To install the agent use the following syntax.
 
-```
+```text
 viouser@vio-manager:~$ sudo viocli hyperic install -d VIO-20
 ```
 

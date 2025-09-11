@@ -32,7 +32,7 @@ I created a new cluster in my homelab with a problem in one of the hosts, I fixe
 
 First we are going to create a variable that contained the configuration of the ESXi I wanted to reconfigure.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % $vmhost = Get-VMHost esxi06.vjlab.local
 C:\
@@ -78,7 +78,7 @@ C:\
 
 Next with the cmdlet `Get-View` I retrieved the .NET objects of the host ID and stored them in another variable.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % Get-View $vmhost.Id
 
@@ -116,7 +116,7 @@ C:\
 [vSphere PowerCLI] % $esxha = Get-View $vmhost.Id
 ```
 
-Now through the `$esxha` variable I invoked the method `ReconfigureHostForDAS` to reconfigure the ESXi, this method is part of the HostSystem object and its description can be found [here](http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html#reconfigureDAS)in the vSphere API reference.
+Now through the `$esxha` variable I invoked the method `ReconfigureHostForDAS` to reconfigure the ESXi, this method is part of the HostSystem object and its description can be found [in the vSphere API reference](http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html#reconfigureDAS).
 
 [![](/assets/images/reconfigureha.png "reconfigure for HA")]({{site.url}}/assets/images/reconfigureha.png)
 
@@ -131,7 +131,7 @@ Finally I created the below script to simplify things in the future.
 # PowerCLI script to reconfigure for VMware HA a VM Host
 #
 # Juan Manuel Rey - juanmanuel (dot) reyportal (at) gmail (dot) com
-# http://blog.jreypo.io
+# https://jreypo.io
 #
 
 param([string]$esx)

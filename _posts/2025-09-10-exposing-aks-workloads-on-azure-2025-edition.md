@@ -18,7 +18,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-In cloud-native architecture, getting traffic into your Kubernetes cluster is critical. Back in 2018 I published an article in the blog about [how Kubernetes workloads could be exposed on Azure](% post_url 2018-03-15-how-to-expose-your-kubernetes-workloads-on-azure %). Since then, Azure Kubernetes Service (AKS) and Kubernetes networking have evolved significantly, introducing new ingress controllers and load balancing features. This updated guide revisits how to expose your AKS-hosted workloads, comparing **modern ingress options** (like NGINX, Azure Application Gateway Ingress Controller, and the new Gateway API) and detailing **load-balancing strategies** (external vs. internal, L4 vs L7).
+In cloud-native architecture, getting traffic into your Kubernetes cluster is critical. Back in 2018 I published an article in the blog about [how Kubernetes workloads could be exposed on Azure]({% post_url 2018-03-15-how-to-expose-your-kubernetes-workloads-on-azure %}). Since then, Azure Kubernetes Service (AKS) and Kubernetes networking have evolved significantly, introducing new ingress controllers and load balancing features. This updated guide revisits how to expose your AKS-hosted workloads, comparing **modern ingress options** (like NGINX, Azure Application Gateway Ingress Controller, and the new Gateway API) and detailing **load-balancing strategies** (external vs. internal, L4 vs L7).
 
 ## Service Types and Load Balancers in AKS
 

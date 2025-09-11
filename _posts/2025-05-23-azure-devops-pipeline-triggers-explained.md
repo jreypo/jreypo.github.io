@@ -155,7 +155,7 @@ resources:
 
 ## Disabling Automatic Triggers with `trigger: none`
 
-If you remember in the previous [article about Variable Groups](% post_url 2025-05-14-managing-secrets-securely-in-azure-devOps-server-with-variable-groups %) I had a pipeline example with the trigger `none`. A trigger can be set to `none` to **disable automatic runs** (e.g., no CI or PR triggers).
+If you remember in the previous [article about Variable Groups]({% post_url 2025-05-14-managing-secrets-securely-in-azure-devOps-server-with-variable-groups %}) I had a pipeline example with the trigger `none`. A trigger can be set to `none` to **disable automatic runs** (e.g., no CI or PR triggers).
 
 ```yaml
 trigger: none
