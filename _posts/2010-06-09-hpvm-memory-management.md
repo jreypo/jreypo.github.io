@@ -39,7 +39,7 @@ Lets see how to enable an configure dynamic memory.
 
 First thing to do is to enable dynamic memory.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_dyn_type=driver
 ```
 
@@ -51,25 +51,25 @@ There are three possible values for the `ram_dyn_type` option:
 
 Specify the minimum amount of RAM to be allocated to the guest, the default unit is MB but GB can also be used.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_dyn_min=1024
 ```
 
 Next set the maximum memory.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_dyn_max=4G
 ```
 
 Set the amount of memory to be allocated when the guests starts, this value must be greater than the minimum one.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_dyn_target_start=2048
 ```
 
 Check the status of the guest to see the newly configured options.
 
-```
+```text
 root@hinata:~ # hpvmstatus -r -P batman
 [Virtual Machine entitlements]
  Percent       Cumulative
@@ -97,7 +97,7 @@ DynMem  Memory   DynMem  DynMem DynMem  Comfort Total    Free   Avail�
 
 Once dynamic memory is properly configured, from the VM host, the memory of a guest can be manually resized to a value between the `ram_dyn_min` and `ram_dyn_max` parameters in increments of the default chunk size, which is 64MB.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_target=3136
 ```
 
@@ -105,7 +105,7 @@ There is one final option named `dynamic_memory_control`, with this option the s
 
 Just to show a small example from the guest side, to view the dynamic memory configuration:
 
-```
+```text
 root@batman:~# hpvmmgmt -V -l ram
 [Dynamic Memory Information]
 =======================================
@@ -153,13 +153,13 @@ The second one set the maximum number of seconds that any VM startup process wil
 
 With the above parameter set to its defaults or customized the next step is to enable automatic memory reallocation in the virtual machines. The `amr` feature is DISABLED by default on the VMs. To enable use the `amr_enable` option.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x amr_enable=1
 ```
 
 Now set the memory entitlement for the virtual machine. The entitlement is the minimum amount of RAM guaranteed to the virtual machine.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x ram_dyn_entitlement=1500
 ```
 
@@ -173,7 +173,7 @@ The entitlement value can be modified online by the system administrator at any 
 
 When the memory of a guest is resized by default the `HPVMCHUNKSIZE` value is used but a per-VM chunk size can also be set. To do so use the `amr_chunk_size` parameter.
 
-```
+```text
 root@hinata:~ # hpvmmodify -P batman -x amr_chunk_resize=512
 ```
 
@@ -181,7 +181,7 @@ As in the system-wide parameter the recommendation is to set the chunk size to a
 
 Finally to display the configuration and the current use of the virtual machines resource entitlements use `hpvmstatus -r`.
 
-```
+```text
 root@hinata:~ # hpvmstatus -r
 [Virtual Machine Resource Entitlement]
 [Virtual CPU entitlement]

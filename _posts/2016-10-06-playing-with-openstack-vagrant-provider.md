@@ -64,7 +64,7 @@ end
 
 With our Vagrantfile ready, kicking off a new instance follows the same logic as always with a simple `vagrant up --provider openstack`.
 
-```
+```text
 ┌─[~/workspace/vagrant-vms/osp-vagrant][jrey:trantor]
 └─▪ vagrant up --provider openstack
 Bringing machine 'default' up with 'openstack' provider...

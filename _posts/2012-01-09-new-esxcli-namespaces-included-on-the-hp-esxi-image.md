@@ -27,7 +27,7 @@ This images comes bundled with utilities and drivers not included in the standar
 
 You can retrieve the packages specifically provided by using `esxcli` command.
 
-```
+```text
 ~ # esxcli software vib list |grep Hewlett-Packard
 char-hpcru            5.0.0.8-1OEM.500.0.0.434156         Hewlett-Packard     PartnerSupported  2011-04-16 
 char-hpilo            500.9.0.0.8-1OEM.500.0.0.434156     Hewlett-Packard     PartnerSupported  2011-04-16 
@@ -40,7 +40,7 @@ hponcfg               03-02.04                  
 
 To get detailed information of any of those packages use the following command.
 
-```
+```text
 ~ # esxcli software vib get -n hp-smx-provider
 Hewlett-Packard_bootbank_hp-smx-provider_500.02.10.13.44-434156
    Name: hp-smx-provider
@@ -73,7 +73,7 @@ Aside from the drivers and monitoring agents, the HP image also adds two additio
 
 The first one, hp, manage the HP NMI driver.
 
-```
+```text
 ~ # esxcli hp
 Usage: esxcli hp {cmd} [cmd options]
 Available Namespaces:
@@ -87,7 +87,7 @@ Available Commands:
 
 The `hpbootcfg` namespace is used to configure the device boot order of the server. This can be permanent or a one time boot change.
 
-```
+```text
 ~ # esxcli hpbootcfg
 Usage: esxcli hpbootcfg {cmd} [cmd options]
 Available Commands:

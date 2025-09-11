@@ -22,7 +22,7 @@ In **OpenStack** the most common way to provide connectivity to the instances is
 
 Fortunately Neutron provides with a mechanism to create ports within a tenant subnet, and their associated IP addresses, and then attach them to an instance at boot time. First we net to need to retrieve the network and subnet IDs.
 
-```
+```text
 [root@osp8 ~(keystone_tenant)]# neutron net-show tenant-net
 +-----------------+--------------------------------------+
 | Field           | Value                                |
@@ -61,7 +61,7 @@ Fortunately Neutron provides with a mechanism to create ports within a tenant su
 
 Proceed to create the port with `neutron port-create`command passing the subnet ID and the IP address we want to reserve as arguments.
 
-```
+```text
 [root@osp8 ~(keystone_tenant)]# neutron port-create tenant-net --fixed-ip subnet_id=649933b2-9cba-4bda-a71e-b1d337b3cc7a,ip_address=172.16.10.16
 Created a new port:
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
@@ -88,7 +88,7 @@ Created a new port:
 
 Now with the port created we can boot our instance using the port ID as the argument for the `--nic` setting.
 
-```
+```text
 [root@bnk-osp8 ~(keystone_tenant)]# nova boot --nic port-id=6d9e348a-6f34-4086-8b62-fdc035f8f0e5 --flavor m2.tiny --image rhel-72 --key-name cloud-user dns-server
 +--------------------------------------+------------------------------------------------+
 | Property                             | Value                                          |

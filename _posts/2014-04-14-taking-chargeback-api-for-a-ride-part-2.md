@@ -52,7 +52,7 @@ In vCO client our new Chargeback server will appear.
 
 vCenter Orchestrator plugin for Chargeback allows to perform several administration tasks in a Chargeback server and also cost management, service management and configuration tasks. Following is an example workflow for a configuration and management action.
 
-### List all hierarchies
+## List all hierarchies
 
 We are going to automate a very easy task as our first example. Create a new workflow and name it *List Hierarchies*. As workflow parameters add:
 

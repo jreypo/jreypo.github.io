@@ -27,13 +27,13 @@ After investigating a bit internally and thanks to my colleague Dimitri Desmidt 
 
 Open an SSH connection as `viouser` to the VIO Management Server and elevate to `root`. Launch `psql` with the following command:
 
-```
+```text
 /opt/vmware/vpostgres/current/bin/psql -U omsdb
 ```
 
 From `psql` prompt execute:
 
-```
+```text
 update cluster set status='RUNNING';
 ```
 

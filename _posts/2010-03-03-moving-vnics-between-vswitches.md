@@ -30,7 +30,7 @@ I discovered is not a difficult task, just one important question to take into a
 
 To perform the operation we're going to use, as usual ;-), `hpvmmodify`. It comes with the `-m` switch to modify the I/O resources of an already existing virtual machine, but you have to specify the hardware address of the device. To identify the address of the network card  launch `hpvmstatus` with  `-d`, this options shows the output with the format used on the command line.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmstatus -P ivm1 -d
 [Virtual Machine Devices]
 ...
@@ -45,7 +45,7 @@ As it can be seen in the Networking Interface Details the third field shows, sep
 
 Now we can proceed.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmmodify -P ivm2 -m network:lan:0,0:vswitch:vlan03   
 [root@hpvmhost] ~ #
 [root@hpvmhost] ~ # hpvmstatus -P ivm1

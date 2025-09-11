@@ -52,7 +52,7 @@ Go to the System tab and perform the reboot. After the reboot is done you can ch
 
 And in the `/etc/vma-release` file.
 
-```
+```text
 vi-admin@vma:~> cat /etc/vma-release
 vMA 5.0.0 BUILD-643553
 

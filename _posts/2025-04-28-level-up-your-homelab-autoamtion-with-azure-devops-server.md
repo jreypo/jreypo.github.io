@@ -131,13 +131,13 @@ Go to **Application Tier -> Team Project Collections** in the Administration Con
 
 Finally, access your Azure DevOps Server at:
 
-```
+```text
 https://<ado_server_ip_or_fqdn>/
 ```
 
 or
 
-```
+```text
 https://<ado_server_ip_or_fqdn>/<your_collection_name>
 ```
 

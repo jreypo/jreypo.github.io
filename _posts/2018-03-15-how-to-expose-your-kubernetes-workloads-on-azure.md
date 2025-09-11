@@ -78,7 +78,7 @@ spec:
 
 Deploy it with `kubectl` and check the pods and service created.
 
-```
+```text
 $ kubectl get pods
 NAME                       READY     STATUS    RESTARTS   AGE
 my-nginx-5d69b5ff7-4mdcq   1/1       Running   0          1m
@@ -89,7 +89,7 @@ kubernetes   ClusterIP   10.0.0.1      <none>        443/TCP   131d
 my-nginx     ClusterIP   10.0.199.84   <none>        80/TCP    1m
 ```
 
-In an Azure deployed cluster this type of service will be used by inter-cluster service communication like in any other cluster and it will not be reacheable from the outside even if we use the [Azure CNI plugin](https://github.com/Azure/azure-container-networking) for container networking. 
+In an Azure deployed cluster this type of service will be used by inter-cluster service communication like in any other cluster and it will not be reacheable from the outside even if we use the [Azure CNI plugin](https://github.com/Azure/azure-container-networking) for container networking.
 
 ## `NodePort ServiceType`
 
@@ -101,7 +101,7 @@ Of course `NodePort` services are supported in any Kubernetes cluster running on
 
 ## `LoadBalancer ServiceType`
 
-The `LoadBalancer` service is the standard and most common way of exposing your services to the outside world from a Kubernetes cluster running ontop a cloud infrastructure like Microsoft Azure. This `ServiceType` will leverage the cloud provider built-in mechanism to provision and configrue a load balancer. On Azure this will provision an [Azure Load Balancer](https://docs.microsoft.com/en-us/azure/load-balancer/) and configure the load balncing rules, health probes, backend pools and frontend IPs.
+The `LoadBalancer` service is the standard and most common way of exposing your services to the outside world from a Kubernetes cluster running on top a cloud infrastructure like Microsoft Azure. This `ServiceType` will leverage the cloud provider built-in mechanism to provision and configure a load balancer. On Azure this will provision an [Azure Load Balancer](https://docs.microsoft.com/en-us/azure/load-balancer/) and configure the load balancing rules, health probes, backend pools and frontend IPs.
 
 The diagram below illustrates this example with two different apps being exposed to the outside via a `LoadBalancer` service that provisions an Azure Load Balancer with its corresponding public IP address.
 
@@ -111,9 +111,9 @@ The load balancer configuration can also be verified in the Azure portal.
 
 [![](/assets/images/kubernetes-lb-azure.png "Azure Load Balancer for Kubernetes services")]({{site.url}}/assets/images/kubernetes-lb-azure.png)
 
-This doesn't mean that a new Azure LB is created for each service, as shown in the example AKS will deploy an Azure Load Balancer and publish all the services through it until it reaches the maximum allowed vaulues in terms of front'end IPs, rules, etc, and then it will provision a new Azure Load Balancer instance. For example in one of my AKS clusters I have three services exposed through the same load balancer instance. 
+This doesn't mean that a new Azure LB is created for each service, as shown in the example AKS will deploy an Azure Load Balancer and publish all the services through it until it reaches the maximum allowed vaulues in terms of front'end IPs, rules, etc, and then it will provision a new Azure Load Balancer instance. For example in one of my AKS clusters I have three services exposed through the same load balancer instance.
 
-```
+```text
 $ az network lb list
 Location       Name                    ProvisioningState    ResourceGroup                           ResourceGuid
 -------------  ----------------------  -------------------  --------------------------------------  ------------------------------------
@@ -159,7 +159,7 @@ metadata:
 
 Lets create the example NGINX deployment with `LoadBalancer` service and the internal annotations.
 
-```
+```text
 $ kubectl create -f nginx-svc-ilb.yaml
 service "my-nginx" created
 deployment "my-nginx" created
@@ -227,13 +227,13 @@ The most common, and almost the de-facto standard in Kubernetes, is NGINX. It is
 
 The installation of Ingress is very well described on [AKS documentation](https://docs.microsoft.com/en-us/azure/aks/ingress) but I will briefly describe the process for the sake of completion of the article. Thanks to [Helm](https://helm.sh/) deploying an Ingress Controller on your Kubernetes cluster is is as easy as:
 
-```
+```text
 helm install stable/nginx-ingress
 ```
 
 The installation will deploy two pods for the NGINX contoller and two services, one of them of `LoadBalancer` type.
 
-```
+```text
 $ kubectl get pods -o wide
 NAME                                                 READY     STATUS             RESTARTS   AGE       IP            NODE
 nginx-ingress-controller-5b4b998b67-mlkqj            1/1       Running            0          30d       10.244.5.23   aks-nodepool1-68968121-1
@@ -247,7 +247,7 @@ nginx-ingress-default-backend   ClusterIP      10.0.56.240    <none>          80
 
 Create now the Ingress Resource, I am using the above minimal example.
 
-```
+```text
 $ kubectl create -f ingress-example.yml
 ingress "my-ingress" created
 $ kubectl get ingress

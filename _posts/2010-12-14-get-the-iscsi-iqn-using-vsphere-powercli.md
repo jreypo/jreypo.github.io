@@ -27,7 +27,7 @@ In yesterday's [post]({% post_url 2010-12-13-get-the-iscsi-iqn-of-an-esxi-using-
 
 The approach to be taken is very similar to the one we used to manage the [multipathing configuration]({% post_url 2010-12-03-managing-the-multipathing-configuration-with-vsphere-powercli %} "Managing the multipathing configuration with vSphere PowerCLI").
 
-```
+```text
 [vSphere PowerCLI] C:\> $h = Get-VMhost esx02.mlab.local
 [vSphere PowerCLI] C:\> $hostview = Get-View $h.id
 [vSphere PowerCLI] C:\> $storage = Get-View $hostview.ConfigManager.StorageSystem

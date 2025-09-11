@@ -35,7 +35,7 @@ And now the procedure:
 
 Launch an `inq` against the CLARiiON array.
 
-```
+```text
 [hpux-server]root:/ #/usr/local/bin/inq -clariion
 Inquiry utility, Version V7.3-891 (Rev 2.0)      (SIL Version V6.5.2.0 (Edit Level 891)
 Copyright (C) by EMC Corporation, all rights reserved.

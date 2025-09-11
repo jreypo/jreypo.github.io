@@ -33,7 +33,7 @@ By default in Photon OS DHCP comes enabled for all present network interfaces. T
 
 If you are used to work with Red Hat or any of its variants your first move will be to look at `/etc/sysconfig/network-scripts/` however there is nothing there, actually the path does not even exists. In Photon the network subsystem is controlled by `systemd-networkd`.
 
-```
+```text
 root@lightwave02 [ /etc/systemd/network ]# cat 10-dhcp-en.network
 [Match]
 Name=*
@@ -45,7 +45,7 @@ root@lightwave02 [ /etc/systemd/network ]#
 
 Drop a unit file in `/etc/systemd/network` to configure static IP address for a certain interface. Remove the unit file used for DHCP, name the file `10-static-en.network` and include the following content.
 
-```
+```ini
 [Match]
 Name=eno1
 
@@ -59,7 +59,7 @@ The `[Match]` section defines the network interfaces the configruation will be a
 
 To apply the new settings restart `systemd-networkd` service.
 
-```
+```text
 systemctl restart systemd-networkd
 ```
 
@@ -72,7 +72,7 @@ If you need to configure static IP for one interface and leave DHCP for the rest
 
 In the first one include a configuration similar to the one described before and for the second one use the following DHCP unit file.
 
-```
+```ini
 [Match]
 Name=en*
 
@@ -84,7 +84,7 @@ DHCP=yes˚
 
 To configure static routes, in the file `10-static-en.network` add any additional static routing information under the `[Route]` section.
 
-```
+```ini
 [Route]
 Gateway=192.168.161.10
 Destination=172.16.10.0/24
@@ -102,7 +102,7 @@ First remove any DHCP related unit file. And create three new files:
 
 `10-en.network` will indicate `networkd` to put our `eno` interfaces under `bond0`.
 
-```
+```ini
 [Match]
 Name=eno*
 
@@ -112,7 +112,7 @@ Bond=bond0
 
 `20-bond.netdev` defines the behavior of the `bond0` interface.
 
-```
+```ini
 [NetDev]
 Name=bond0
 Kind=bond
@@ -126,7 +126,7 @@ The section `[NetDev]` defines the name and kind of the network device and `[Bon
 
 Finally `30-bond-static.network` stores the IP configuration for `bond0`.
 
-```
+```ini
 [Match]
 Name=bond0
 

@@ -42,13 +42,13 @@ I used Remote Tech Support (SSH), simply known as SSH in ESXi5, in both examples
 
 ## vMA 4.1
 
-```
+```text
 [vi-admin@vma ~]$ esxcli --server=arrakis.jreypo.local --username=root network connection list
 ```
 
 ## vMA 5
 
-```
+```text
 vi-admin@vma5:~> esxcli --server=esxi5.jreypo.local --username=root network ip connection list
 ```
 

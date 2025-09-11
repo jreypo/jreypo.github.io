@@ -33,7 +33,7 @@ The trunk driver has been available since OpenBSD 3.8, then it only supported th
 
 Lets create a failover trunk interface as an example. First we are going to activate the physical interfaces and add them to the `trunk0` interface.
 
-```
+```text
 [obsd47]/# ifconfig em1 up
 [obsd47]/# ifconfig em2 up
 [obsd47]/# ifconfig trunk0 trunkport em1
@@ -53,7 +53,7 @@ trunk0: flags=8802<BROADCAST,SIMPLEX,MULTICAST> mtu 1500
 
 Configure the trunking protocol and the IP address of the interface.
 
-```
+```text
 [obsd47]/# ifconfig trunk0 trunkproto failover 192.168.126.5 netmask 255.255.255.0 up
 [obsd47]/# ifconfig
 lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 33200
@@ -104,7 +104,7 @@ pflog0: flags=141<UP,RUNNING,PROMISC> mtu 33200
 
 At this point we have a configured trunk interface in failover, but of course we want to make these changes persistent through a reboot of the server. We need to create a configuration file for each of the physical interfaces and another one for the trunk interface.
 
-```
+```text
 [obsd47]/# echo "up" >hostname.em1
 [obsd47]/# echo "up" >hostname.em2
 [obsd47]/# echo "trunkproto failover trunkport em1 trunkport em2 192.168.126.5 netmask 255.255.255.0" > hostname.trunk0

@@ -51,7 +51,7 @@ The `nwmgr` command has replaced the old `lanscan`, `lanadmin` and `linkloop` co
 
 To begin show the current configuration:
 
-```
+```text
 [root@ignite] ~ # nwmgr -g
 
 Name/          Interface Station          Sub-   Interface      Related
@@ -80,7 +80,7 @@ lan904   Not_Enabled LB_MAC    0 Mbps                -
 
 Now proceed with the creation of the new failover group:
 
-```
+```text
 [root@ignite] ~ # nwmgr -a -S apa -c lan900 -A links=0,1 -A mode=LAN_MONITOR
 Addition of links 0, 1 to lan900 succeeded.
 [root@ignite] ~ # nwmgr -s -S apa -A all --saved --from cu
@@ -89,7 +89,7 @@ Addition of links 0, 1 to lan900 succeeded.
 
 Specific advanced parameters can also be set, in the example I used the parameters `rapid_arp_count` and `poll_interval`:
 
-```
+```text
 [root@ignite] / # nwmgr -a -S apa -c lan901 -A links=2,1,3 -A mode=LAN_MONITOR -A rapid_arp_count=5 -A poll_interval=0,500000
 Addition of links 0, 1 to lan900 succeeded.
 [root@ignite] / # nwmgr -s -S apa -A all --saved --from cu
@@ -98,7 +98,7 @@ Addition of links 0, 1 to lan900 succeeded.
 
 To show the new config:
 
-```
+```text
 [root@ignite] ~ # nwmgr -g
 
 Name/          Interface Station          Sub-   Interface      Related
@@ -170,7 +170,7 @@ lan900: flags=1843<UP,BROADCAST,RUNNING,MULTICAST,CKO>
 
 If you want to delete an existent failover group:
 
-```
+```text
 [root@ignite] ~ # nwmgr -d -S apa -A links=all -c lan900 --force
 Deletion of links all ports from lan900 succeeded.
 [root@ignite] ~ # nwmgr -s -S apa -A all --saved --from cu
@@ -179,7 +179,7 @@ Deletion of links all ports from lan900 succeeded.
 
 Or if you just want to remove a interface from the group:
 
-```
+```text
 [root@ignite] ~ # nwmgr -d -S apa -c lan901 -A links=1
 ```
 

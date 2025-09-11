@@ -33,7 +33,7 @@ After a small research through the [vSphere CLI](http://www.vmware.com/support/d
 
 First list the SCSI devices available in the system to get the iSCSI hba.
 
-```
+```text
 [root@esx02 ~]# esxcfg-scsidevs -a
 vmhba0  mptspi            link-n/a  pscsi.vmhba0                            (0:0:16.0) LSI Logic / Symbios Logic LSI Logic Parallel SCSI Controller
 vmhba1  ata_piix          link-n/a  ide.vmhba1                              (0:0:7.1) Intel Corporation Virtual Machine Chipset
@@ -44,7 +44,7 @@ vmhba33 iscsi_vmk         online    iscsi.vmhba33          
 
 After that Jon uses the command `vmkiscsi-tool` to get the iqn.
 
-```
+```text
 [root@esx02 ~]# vmkiscsi-tool -I -l vmhba33
 iSCSI Node Name: iqn.1998-01.com.vmware:esx02-42b0f47e
 [root@esx02 ~]#
@@ -56,7 +56,7 @@ There is no `vmkiscsi-tool` command in the vMA, instead we are going to use the 
 
 With `vicfg-scsidevs` we can obtain the iqn listed in the `UID` column.
 
-```
+```text
 [vi-admin@vma ~][esx02.mlab.local]$ vicfg-scsidevs -a             
 Adapter_ID  Driver      UID                                     PCI      Vendor & Model
 vmhba0      mptspi      pscsi.vmhba0                            (0:16.0) LSI Logic Parallel SCSI Controller
@@ -68,7 +68,7 @@ vmhba33     iscsi_vmk   iqn.1998-01.com.vmware:esx02-42b0f47e   ()   
 
 And with `vicfg-iscsi` we can get the iqn providing the `vmhba` device.
 
-```
+```text
 [vi-admin@vma ~][esx02.mlab.local]$ vicfg-iscsi --iscsiname --list vmhba33
 iSCSI Node Name   : iqn.1998-01.com.vmware:esx02-42b0f47e
 iSCSI Node Alias  :

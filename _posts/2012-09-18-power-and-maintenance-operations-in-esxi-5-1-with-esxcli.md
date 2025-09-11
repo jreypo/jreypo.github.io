@@ -35,7 +35,7 @@ Getting the basic usage of the command is as simple as always. You can perform t
 - Get the state of the host
 - Put the the host in or out of Maintenance Mode
 
-```
+```text
 ~ # esxcli system maintenanceMode
 Usage: esxcli system maintenanceMode {cmd} [cmd options]
 Available Commands:
@@ -46,7 +46,7 @@ Available Commands:
 
 ### Get the state of the host
 
-```
+```text
 ~ # esxcli system maintenanceMode get
 Disabled
 ~ #
@@ -54,7 +54,7 @@ Disabled
 
 ### Put the host in Maintenance Mode
 
-```
+```text
 ~ # esxcli system maintenanceMode set -e true -t 0
 ~ #
 ~ # esxcli system maintenanceMode get
@@ -66,7 +66,7 @@ Enabled
 
 With the `shutdown` command the host can be either rebooted or shutdown. If the ESXi server is not in Maintenance Mode mode the operation will not be allowed.
 
-```
+```text
 ~ # esxcli system shutdown
 Usage: esxcli system shutdown {cmd} [cmd options]
 Available Commands:
@@ -77,7 +77,7 @@ Available Commands:
 
 For both task the delay and reason parameter must be provided.
 
-```
+```text
 ~ # esxcli system shutdown poweroff
 Error: Missing required parameter -r|--reason
 Usage: esxcli system shutdown poweroff [cmd options]
@@ -91,13 +91,13 @@ Cmd options:
 
 ### Power off the host
 
-```
+```text
 ~ # esxcli system shutdown poweroff --delay=10 --reason=”Hardware maintenance”
 ```
 
 ### Reboot the host
 
-```
+```text
 ~ # esxcli system shutdown reboot -d 10 –r “Patches applied”
 ```
 

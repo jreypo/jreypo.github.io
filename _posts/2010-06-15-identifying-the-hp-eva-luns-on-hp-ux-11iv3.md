@@ -24,7 +24,7 @@ Yesterday's post about CLARiiON reminded me a similar issue I observed when the 
 
 The key to match your disk in the HP-UX host with the LUN provided by the EVA arrays is the `wwid` attribute of the disk.
 
-```
+```text
 root@ignite:/ # scsimgr get_attr -D /dev/rdisk/disk10 -a wwid
 
         SCSI ATTRIBUTES FOR LUN : /dev/rdisk/disk10
@@ -45,7 +45,7 @@ If you look for this value in Command View will see that is the same as the Worl
 
 Thanks to my friend Jean and to Greg who reminded me that like Greg said in his comment is much easier to match the Word Wide LUN Name with the `evainfo` tool. Thanks to both of you :-)
 
-```
+```text
 root@hpux-server # evainfo -aP
 
 Devicefile                      Array                   WWNN                            Capacity        Controller/Port/Mode

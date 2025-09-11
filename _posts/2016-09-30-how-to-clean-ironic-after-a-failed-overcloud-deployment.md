@@ -28,7 +28,7 @@ image:
 
 If your TripleO deployment fails is relatively easy to clean your failed overcloud environment, use `heat stack-delete overcloud` and Heat will take charge of deleting all the stack, the associated deployments and power off the Ironic nodes.
 
-```
+```text
 [stack@undercloud ~]$ heat stack-delete overcloud
 Are you sure you want to delete this stack(s) [y/N]? y
 +--------------------------------------+------------+---------------+---------------------+--------------+
@@ -50,31 +50,31 @@ However there are sometimes when it does not work that way and you will need to 
 
 Power off all Ironic nodes.
 
-```
+```text
 ironic node-set-power-state <IRONIC_NODE_ID> off`
 ```
 
 Set provision state to available, this was for me the tricky one and took me some trial error tests until I figured out because the parameter for `ironic node-set-provision-state` is not available but provide, actually there is no available parameter for this Ironic command.
 
-```
+```text
 ironic node-set-provision-state <IRONIC_NODE_ID> provide
 ```
 
 Disassociate the nova instances from the nodes.
 
-```
+```text
 ironic node-update <IRONIC_NODE_ID> remove instance_uuid
 ```
 
 Get the nodes out of maintenance state.
 
-```
+```text
 ironic node-set-maintenance <IRONIC_NODE_ID> false
 ```
 
 List the nodes to verify the executed steps.
 
-```
+```text
 [stack@undercloud ~]$ ironic node-list
 +--------------------------------------+-----------+---------------+-------------+--------------------+-------------+
 | UUID                                 | Name      | Instance UUID | Power State | Provisioning State | Maintenance |

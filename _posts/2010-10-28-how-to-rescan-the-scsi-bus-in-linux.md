@@ -27,7 +27,7 @@ Yes it is true, there is no `ioscan` in Linux and that means that every time you
 
 From a root shell execute the following command:
 
-```
+```text
 [root@redhat ~]# echo "- - -" > /sys/class/scsi_host/<host_number>/scan
 ```
 
@@ -35,13 +35,13 @@ After that if you do a `fdsik -l` will see the new disks.
 
 If you want to re-scan your box for new fiber channel disks the command is slightly different.
 
-```
+```text
 [root@redhat ~# echo "1" > /sys/class/fc_host/host#/issue_lip
 ```
 
 For the fiber channel part there are also third party utilities. HP for example provides `hp_rescan` which comes with the [Proliant Support Pack](http://h18013.www1.hp.com/products/servers/management/psp/index.html?jumpid=servers/psp).
 
-```
+```text
 [root@redhat /]# hp_rescan -h
 hp_rescan: rescans LUNs on HP supported FC adapters
 Usage: hp_rescan -ailh[n]

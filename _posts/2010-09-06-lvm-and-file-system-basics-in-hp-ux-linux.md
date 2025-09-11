@@ -46,7 +46,7 @@ The example used is valid to 11iv2 and 11iv3 HP-UX versions, with the exception 
 
 First create the physical volumes.
 
-```
+```text
 root@hp-ux:/# pvcreate -f /dev/rdisk/disk10
 Physical volume "/dev/rdisk/disk10" has been successfully created.
 root@hp-ux:/#
@@ -57,7 +57,7 @@ root@hp-ux:/#
 
 In `/dev` create a directory named as the new volume group, change the ownership to `root:root` and the permissions to `755`.
 
-```
+```text
 root@hp-ux:/# mkdir -p /dev/vg_new
 root@hp-ux:/# chown root:root /dev/vg_new
 root@hp-ux:/# chmod 755 /dev/vg_new
@@ -67,20 +67,20 @@ Go into the VG subdirectory and create the group device special file. For the Li
 
 For LVM 1.0 volume groups the major number must be 64 and for the LVM 2.0 one must be 128. Regarding the minor number, the first two digits will uniquely identify the volume group and the remaining digits must be `0000`. In the below example we're creating a 1.0 volume group.
 
-```
+```text
 root@hp-ux:/dev/vg_new# mknod group c 64 0x010000
 ```
 
 Change the ownership to `root:sys` and the permissions to `640`.
 
-```
+```text
 root@hp-ux:/dev/vg_new# chown root:sys group
 root@hp-ux:/dev/vg_new# chmod 640 group
 ```
 
 And create the volume group with the `vgcreate` command, the arguments passed are the two physical volumes previously created and the size in megabytes of the physical extent. The last one is optional and if is not provided the default of 4MB will be automatically set.
 
-```
+```text
 root@hp-ux:/# vgcreate -s 16 vg_new /dev/disk/disk10 /dev/disk/disk11
 Volume group "/dev/vg_new" has been successfully created.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
@@ -128,7 +128,7 @@ Create the physical volumes. Here it is where the first difference appears. In H
 
 For the whole disk the process is pretty much the same as in HP-UX.
 
-```
+```text
 [root@rhel /]# pvcreate -f /dev/sdb
   Physical volume "/dev/sdb" successfully created
 [root@rhel /]# pvdisplay /dev/sdb
@@ -149,7 +149,7 @@ For the whole disk the process is pretty much the same as in HP-UX.
 
 If you decide to use partitions for the PVs the first, and obvious, thing to do is partition the disk. To setup the disk we'll use the `fdisk` tool, following is an example session:
 
-```
+```text
 [root@rhel /]# fdisk /dev/sdc
 
 Command (m for help): n
@@ -187,7 +187,7 @@ Syncing disks.
 
 To explain the session first a new partition is created with the command `n` and the size of the partition is set (in this particular case we are using the whole disk); then we must change the partition type, which by default is set to Linux, to Linux LVM and to do that we use the command `t` and issue `8e` as the corresponding hexadecimal code, the available values for the partition types can be shown  by typing `L`.
 
-```
+```text
 Command (m for help): t
 Selected partition 1
 Hex code (type L to list codes): L
@@ -218,11 +218,12 @@ Hex code (type L to list codes): L
 1c  Hidden W95 FAT3 75  PC/IX           be  Solaris boot    ff  BBT            
 Hex code (type L to list codes):
 ```
+
 The changes are written with `w`.
 
 Once the partitions are correctly created, setup the physical volumes.
 
-```
+```text
 [root@rhel /]# pvcreate -f /dev/sdc1
   Physical volume "/dev/sdc1" successfully created
 [root@rhel /]# pvcreate -f /dev/sdd1
@@ -236,9 +237,10 @@ Once the partitions are correctly created, setup the physical volumes.
   /dev/sdd1        lvm2 --   203.98M 203.98M
 [root@rhel /]#
 ```
+
 Now that the PVs are created we can proceed with the volume group creation.
 
-```
+```text
 [root@rhel /]# vgcreate vg_new /dev/sdc1 /dev/sdd1
  Volume group "vg_new" successfully created
 [root@rhel /]# vgdisplay -v vg_new
@@ -290,7 +292,7 @@ In this part we will see how to create a logical volume, extend this LV and then
 
 The logical volume creation can be done with the `lvcreate` command. With the `-L` option we can specify the size in MB of the new lvol, if `-l` is used instead the size must be provided in logical extents.
 
-```
+```text
 root@hp-ux:/# lvcreate -n lvol_test -L 256 vg_new
 Logical volume "/dev/vg_new/lvol_test_S2" has been successfully created with
 character device "/dev/vg_new/rlvol_test_S2".
@@ -319,7 +321,7 @@ root@hp-ux:/#
 
 Extend a volume. Of course the first prerequisite to extend a volume is to have enough free physical extends in the volume group.
 
-```
+```text
 root@hp-ux:~# lvextend -L 384 /dev/vg_new/lvol_test
 Logical volume "/dev/vg_new/lvol_test" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
@@ -347,7 +349,7 @@ root@hp-ux:/#
 
 The final step of this part is to remove the logical volume.
 
-```
+```text
 root@hp-ux:/# lvremove /dev/vg_new/lvol_test
 The logical volume "/dev/vg_new/lvol_test" is not empty;
 do you really want to delete the logical volume (y/n) : y
@@ -360,7 +362,7 @@ root@hp-ux:/#
 
 Create the logical volume with the `lvcreate` command, the most basic options (`-L`, `-l`, `-n`) are the same as in HP-UX.
 
-```
+```text
 [root@rhel /]# lvcreate -n lv_test -L 256 vg_new
   Logical volume "lv_test" created
 [root@rhel /]# lvdisplay /dev/vg_new/lv_test
@@ -384,7 +386,7 @@ Create the logical volume with the `lvcreate` command, the most basic options (`
 
 Now extend the logical volume to 384 megabytes as we did in HP-UX.
 
-```
+```text
 [root@rhel /]# lvextend -L 384 /dev/vg_new/lv_test
   Extending logical volume lv_test to 384.00 MB
   Logical volume lv_test successfully resized
@@ -410,7 +412,7 @@ Now extend the logical volume to 384 megabytes as we did in HP-UX.
 
 Remove a volume from the system, like creation and extension is a very straight forward process that can be done with one command.
 
-```
+```text
 [root@rhel /]# lvremove /dev/vg_new/lv_test
 Do you really want to remove active logical volume lv_test? [y/n]: y
   Logical volume "lv_test" successfully removed
@@ -427,7 +429,7 @@ The final section of the post is about the basic file system operation, we are g
 
 Creating the file system with the `newfs` command.
 
-```
+```text
 root@hp-ux:/# newfs -F vxfs -o largefiles /dev/vg_new/rlvol_test
  version 7 layout
  393216 sectors, 393216 blocks of size 1024, log size 1024 blocks
@@ -437,7 +439,7 @@ root@hp-ux:/#
 
 Create the mount point and mount the filesystem.
 
-```
+```text
     root@hp-ux:/# mkdir /data
     root@hp-ux:/# mount /dev/vg_new/lvol_test /data
 ```
@@ -446,7 +448,7 @@ Filesystem extension, in the current section we are going to suppose that the vo
 
 After we create a new physical volume in the disk12 we are going to extend the `vg_new` VG.
 
-```
+```text
 root@hp-ux:/# vgextend vg_new /dev/disk/disk12
 Volume group "vg_new" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
@@ -504,7 +506,7 @@ root@hp-ux:/#
 
 The next part is to extend the logical volume just as we did in the logical volume operations section.
 
-```
+```text
 root@hp-ux:/# lvextend -L 512 /dev/vg_new/lvol_test
 Logical volume "/dev/vg_new/lvol_test" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
@@ -515,7 +517,7 @@ And finally the most creepy part of the part of the process, extending the file 
 
 Use the command `fsadm` and with the `-b` option issue the new size in KB as the argument, in the example we want to extend to 512MB, in KB is 524288.
 
-```
+```text
 root@hp-ux:/# fsadm -F vxfs -b 524288 /data
 vxfs fsadm: V-3-23585: /dev/vg00/rlvol5 is currently 7731200 sectors - size will be increased
 root#hp-ux:/#
@@ -532,7 +534,7 @@ Here in the filesystem part is where the commands are completely different to HP
 
 To create an ext3 file system issue the command `mkfs.ext3` using the logical volume to create the file system on as the argument.
 
-```
+```text
 [root@rhel ~]# mkfs.ext3 /dev/vg_new/lv_test
 mke2fs 1.39 (29-May-2006)
 Filesystem label=
@@ -560,7 +562,7 @@ This filesystem will be automatically checked every 35 mounts or
 
 As in HP-UX create the mount point and mount the file system.
 
-```
+```text
 [root@rhel ~]# mkdir /data
 [root@rhel ~]# mount /dev/vg_new/lv_test /data
 [root@rhel ~]# df -h /data
@@ -572,7 +574,7 @@ Filesystem            Size  Used Avail Use% Mounted on
 
 The final part of the section is the file system extension, as we did in the HP-UX part the first task is to extend the volume group.
 
-```
+```text
 [root@rhel ~]# vgextend vg_new /dev/sde1
   Volume group "vg_new" successfully extended
 [root@rhel ~]# vgdisplay -v vg_new
@@ -635,7 +637,7 @@ The final part of the section is the file system extension, as we did in the HP-
 
 Extend the logical volume with `lvextend`.
 
-```
+```text
 [root@rhel ~]# lvextend -L 512 /dev/vg_new/lv_test
   Extending logical volume lv_test to 512.00 MB
   Logical volume lv_test successfully resized
@@ -653,7 +655,7 @@ Extend the logical volume with `lvextend`.
 
 Finally resize the file system, to do that use the `resize2fs` tool. Unlike in HP-UX with `fsadm`, that needs the new size as an argument  in order to extend the file system, if you simply issue the logical volume as the argument the `resize2fs` utility will extend the file system to the maximum size available in the LV.
 
-```
+```text
 [root@rhel ~]# resize2fs /dev/vg_new/lv_test
 resize2fs 1.39 (29-May-2006)
 Filesystem at /dev/vg_new/lv_test is mounted on /data; on-line resizing required

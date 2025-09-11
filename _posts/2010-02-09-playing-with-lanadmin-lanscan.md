@@ -30,7 +30,7 @@ Current release of HP-UX, 11.31, has the handy `nwmgr` to handle networking task
 
 `lanscan` is used to get information about the LAN interfaces.
 
-```
+```text
 root@sap01:~# lanscan
 Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
 Path     Address        In# State NamePPA        ID  Type      Support Mjr#
@@ -50,7 +50,7 @@ root@sap01:~#
 
 A verbose version can be obtained with the `-v` switch, but for me this switch has a glitch since you can't query for a single LAN card:
 
-```
+```text
 root@sap01:~# lanscan -v
 -------------------------------------------------------------------------------
 Hardware Station        Crd Hdw   Net-Interface  NM  MAC       HP-DLPI DLPI
@@ -70,7 +70,7 @@ root@sap01:~#
 
 There are other options for `lanscan` that can be used to obtain more simple info in a script friendly list format:
 
-```
+```text
 root@sap01:~# lanscan -a
 0x001A4B07F002
 0x001A4B07F003
@@ -114,7 +114,7 @@ root@sap01:~#
 
 It can be used in two ways, if invoked with no options from the shell it will present a menu style interface where different tasks can be performed. Following is am example to illustrate.
 
-```
+```text
           LOCAL AREA NETWORK ONLINE ADMINISTRATION, Version 1.0
                        Tue , Feb 9,2010  14:22:27
 
@@ -205,7 +205,7 @@ When used with options from the command line `lanadmin` can perform the same tas
 
 - Display interface info:
 
-```
+```text
 root@sap01:~# lanadmin -x card_info  1
 *********** Version Information **********
 Driver version: B.11.23.0712
@@ -230,7 +230,7 @@ root@sap01:~#
 
 - Display Auto-Port Aggregation status:
 
-```
+```text
 root@sap01:~# lanadmin -x -v 900
 Link Aggregate PPA #      : 900
 Number of Ports           : 2
@@ -243,7 +243,7 @@ root@sap01:~#
 
 - Show speed settings:
 
-```
+```text
 root@sap01:/# lanadmin -x 1
 Speed = 1000 Full-Duplex.
 Autonegotiation = On.
@@ -253,13 +253,13 @@ root@sap01:/#
 
 - Creating an Aggregation link:
 
-```
+```text
 roo@sap01:/# lanadmin -X -a 1 2 900
 ```
 
 - Show load balancing algorithm in APA:
 
-```
+```text
 root@sap02:/etc# lanadmin -x -l 900
 Load Balancing = Hot Standby (LB_HOT_STANDBY)
 root@sap02:/etc#
@@ -267,7 +267,7 @@ root@sap02:/etc#
 
 - Display MAC address:
 
-```
+```text
 root@sap01:~# lanadmin -a 1  
 Station Address                 = 0x001a4b07f003
 root@sap01:~#
@@ -275,7 +275,7 @@ root@sap01:~#
 
 - Display driver and adapter statistics:
 
-```
+```text
 root@sap01:/# lanadmin -x stats drv 1
 ****** Driver Statistics ******        
 In Packet Error                                        0
@@ -331,7 +331,7 @@ root@sap01:/#
 
 - Show Vital Product Data, a really funny name ;-) don't you think?
 
-```
+```text
 root@sap01:/# lanadmin -x vpd 0
 *********** Vital Product Data **********
 Product Description: PCI/PCI-X 10/100/1000BT Dual Ethernet Adapter
@@ -349,7 +349,7 @@ root@sap01:/#
 
 - Show card type:
 
-```
+```text
 root@sap01:~# lanadmin -x type 1     
 1000Base-T
 

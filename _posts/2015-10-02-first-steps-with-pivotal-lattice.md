@@ -39,7 +39,7 @@ Installing and running Lattice in your laptop is relatively easy process, first 
 
 Unzip the package in a directory with the rest of your virtual machines.
 
-```
+```text
 unzip lattice-bundle-v0.4.3-osx.zip
 ```
 
@@ -51,13 +51,13 @@ Running Lattice should be quite simple, just change to `vagrant` directory on La
 
 To avoid this issue pass `LATTICE_SYSTEM_IP` variable to Vagrant during the execution. I personally have used both [VMware Fusion](http://www.vmware.com/products/fusion) and [VMware AppCatalyst](https://communities.vmware.com/community/vmtn/devops/vmware-appcatalyst) but you can use Virtualbox too. For the AppCatalyst the only requirement is to have `appcatalyst-daemon` running since it is needed by the Vagrant provider.
 
-```
+```text
 LATTICE_SYSTEM_IP=192.168.161.11 vagrant up --provider vmware_fusion
 ```
 
 With this we will have our Lattice instance up and running. Next we need to tell `ltc` how to connect to our Lattice instance, this operation is called targeting.
 
-```
+```text
 ltc target 192.168.161.11.xip.io
 ```
 
@@ -75,7 +75,7 @@ The index indicates the node that we are accessing. Next we will scale up the ap
 
 Another useful operation with `ltc` is the capacity to get the logs for your app.
 
-```
+```text
  2015-10-02 14:23:18 ☆ trantor in ~
 ○ → ltc logs my-app
 10/02 14:30:11.10 [APP|2] Lattice-app. Says Hello. on index: 2

@@ -16,7 +16,7 @@ comments: true
 
 `hpasmcli`, HP Management Command Line Interface, is a scriptable command line tool to manage and monitor the HP ProLiant servers through the `hpasmd` and `hpasmxld` daemons. It is part of the hp-health package that comes with the [**HP Proliant Support Pack**](http://h18000.www1.hp.com/products/servers/management/psp/index.html), or **PSP**.
 
-```
+```text
 [root@rhel4 ~]# rpm -qa | grep hp-health
 hp-health-8.1.1-14.rhel4
 [root@rhel4 ~]#
@@ -79,7 +79,7 @@ It can be used in two ways:
 
 The interactive shell supports TAB command completion and command recovery through a history buffer.
 
-```
+```text
 [root@rhel4 ~]# hpasmcli
 HP management CLI for Linux (v1.0)
 Copyright 2004 Hewlett-Packard Development Group, L.P.
@@ -95,7 +95,7 @@ hpasmcli>
 
 As it can be seen in the above example several main tasks can be done, to get the usage of every command simply use HELP followed by the command.
 
-```
+```text
 hpasmcli> help show
 USAGE: SHOW [ ASR | BOOT | DIMM | F1 | FANS | HT | IML | IPL | NAME | PORTMAP | POWERSUPPLY | PXE | SERIAL | SERVER | TEMP | UID | WOL ]
 hpasmcli>
@@ -108,7 +108,7 @@ In my experience `SHOW` is the most used command above the others. Following are
 
 ## Display general information of the server
 
-```
+```text
 hpasmcli> SHOW SERVER
 System        : ProLiant DL380 G5
 Serial No.    : XXXXXXXXX     
@@ -149,7 +149,7 @@ hpasmcli>
 
 ## Show current temperatures
 
-```
+```text
 hpasmcli> SHOW TEMP
 Sensor   Location              Temp       Threshold
 ------   --------              ----       ---------
@@ -166,7 +166,7 @@ hpasmcli>
 
 ## Get the status of the server fans
 
-```
+```text
 hpasmcli> SHOW FAN
 Fan  Location        Present Speed  of max  Redundant  Partner  Hot-pluggable
 ---  --------        ------- -----  ------  ---------  -------  -------------
@@ -182,7 +182,7 @@ hpasmcli>
 
 ## Show device boot order configuration
 
-```
+```text
 hpasmcli> SHOW BOOT
 First boot device is: CDROM.
 One time boot device is: Not set.
@@ -191,13 +191,13 @@ hpasmcli>
 
 ## Set USB key as first boot device
 
-```
+```text
 hpasmcli> SET BOOT FIRST USBKEY
 ```
 
 ## Show memory modules status
 
-```
+```text
 hpasmcli> SHOW DIMM
 DIMM Configuration
 ------------------
@@ -232,7 +232,7 @@ Status:        Ok
 
 In the scripting mode `hpasmcli` can be used directly from the shell prompt with the `-s` option and the command between quotation marks, this of course allow you to process the output of the commands  like in the below example.
 
-```
+```text
 [root@rhel4 ~]# hpasmcli -s "show dimm" | egrep "Module|Status"
 Module #:      1
 Status:        Ok
@@ -255,7 +255,7 @@ Status:        Ok
 
 To execute more than one command sequentially separate them with a semicolon.
 
-```
+```text
 [root@rhel4 ~]# hpasmcli -s "show fan; show temp"
 
 Fan  Location        Present Speed  of max  Redundant  Partner  Hot-pluggable

@@ -45,7 +45,7 @@ For both cases we will need to have the different parameters prepared in advance
 
 You can create the Azure App Registration with just one command.
 
-```
+```text
 az ad app create --display-name OpenShiftAAD --homepage https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/console --reply-urls https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/oauth2callback/OpenShiftAAD --identifier-uris https://masterdnswdrnk7iozqvo2.westeurope.cloudapp.azure.com:8443/console --password <YOU_SUPER_AWESOME_PASSWORD>
 ```
 
@@ -129,27 +129,27 @@ Save the file and restart the OpenShift Master services. This procedure will dif
 
 - Multi-master OpenShift Origin
 
-```
+```text
 sudo systemctl restart origin-master-api
 sudo systemctl restart origin-master-controllers
 ```
 
 - Single-master OpenShift Origin
 
-```
+```text
 sudo systemctl restart origin-master
 ```
 
 - Multi-master OpenShift Container Platform
 
-```
+```text
 sudo systemctl restart atomic-openshift-master-api
 sudo systemctl restart atomic-openshift-master-controllers
 ```
 
 - Single-master OpenShift Container Platform
 
-```
+```text
 sudo systemctl restart atomic-openshift-master
 ```
 

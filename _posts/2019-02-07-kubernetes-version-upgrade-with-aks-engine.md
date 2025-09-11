@@ -28,7 +28,7 @@ Performing a version upgrade in [Kubernetes](https://kubernetes.io/) can be a ch
 
 Before performing any operation, upgrade or any other, I strongly recommend you to download and use the latest `aks-engine` version, I've found issues in the upgrade operation with older versions. In my case I am using version 0.29.1.
 
-```
+```text
 $ aks-engine version
 Version: v0.29.1
 GitCommit: b35549b
@@ -37,7 +37,7 @@ GitTreeState: clean
 
 To demonstrate the upgrade procedure I provisioned a 1.11.5 cluster with one master in an Azure Availability Set and three nodes in a Virtual Machine Scale Set. To upgrade the Kubernetes version first get the available versions to upgrade to.
 
-```
+```text
 $ kubectl get nodes -o wide
 NAME                                 STATUS    ROLES     AGE       VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
 k8s-agentpool1-44862260-vmss000000   Ready     agent     3m        v1.11.5   10.240.0.66    <none>        Ubuntu 16.04.5 LTS   4.15.0-1035-azure   docker://3.0.1
@@ -83,7 +83,7 @@ Pick a version, in our example I will use 1.12.2, and run the `aks-engine upgrad
 
 The output for the command should be similar to the one below.
 
-```
+```text
 $ aks-engine upgrade --deployment-dir _output/k8s-lab-cl2/ --auth-method client_secret --location westeurope --client-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx --client-secret xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --upgrade-version 1.12.2 --resource-group k8s-lab-cl2 --subscription-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx 
 INFO[0000] validating...
 INFO[0019] Name suffix: 44862260
@@ -160,7 +160,7 @@ During the upgrade process `aks-engine` will go through the different instances 
 
 Verify the new Kubernetes version after the upgrade is finished.
 
-```
+```text
 $ kubectl get nodes -o wide
 NAME                                 STATUS   ROLES    AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
 k8s-agentpool1-44862260-vmss000003   Ready    agent    49m   v1.12.2   10.240.0.127   <none>        Ubuntu 16.04.5 LTS   4.15.0-1036-azure   docker://3.0.1

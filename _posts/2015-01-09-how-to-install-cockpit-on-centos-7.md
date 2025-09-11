@@ -29,19 +29,19 @@ After looking a bit I finally found in GitHub the [sig-atomic-buildscripts](http
 
 Clone the GutHub repository.
 
-```
+```text
 git clone https://github.com/baude/sig-atomic-buildscripts
 ```
 
 Copy `virt7-testing.repo` file to `/etc/yum.repos.d` and install Cockpit.
 
-```
+```text
 yum install cockpit
 ```
 
 Enable Cockpit service.
 
-```
+```text
 [root@webtest ~]# systemctl enable cockpit.socket
 ln -s '/usr/lib/systemd/system/cockpit.socket' '/etc/systemd/system/sockets.target.wants/cockpit.socket'
 [root@webtest ~]#
@@ -49,7 +49,7 @@ ln -s '/usr/lib/systemd/system/cockpit.socket' '/etc/systemd/system/sockets.targ
 
 Add Cockpit to the list of trusted services in FirewallD.
 
-```
+```text
 [root@webtest ~]# firewall-cmd --permanent --zone=public --add-service=cockpit
 success
 [root@webtest ~]#
@@ -63,13 +63,13 @@ cockpit dhcpv6-client ssh
 
 Start Cockpit socket.
 
-```
+```text
 systemctl start cockpit.socket
 ```
 
 Do no try to access Cockpit yet, there is an [issue](https://github.com/cockpit-project/cockpit/issues/1581) about running Cockpit on stock CentOS/RHEL 7. To be able to start it we need first to modify the service file to disable SSL. Edit file `/usr/lib/systemd/system/cockpit.service` and modify `ExecStart` line to look like this.
 
-```
+```ini
 ExecStart=/usr/libexec/cockpit-ws --no-tls
 ```
 
@@ -77,13 +77,13 @@ I know this procedure will invalidate Cockpit for a production environment in RH
 
 Reload `systemd`.
 
-```
+```text
 systemctl daemon-reload
 ```
 
 Restart Cockpit.
 
-```
+```text
 systemctl restart cockpit
 ```
 

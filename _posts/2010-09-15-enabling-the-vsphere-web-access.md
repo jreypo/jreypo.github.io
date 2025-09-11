@@ -32,7 +32,7 @@ Now you can point your web browser to **http://esx_ip_address/ui** and login as 
 
 After that I wanted to make the change permanent and like in any normal RedHat Linux server I issued the classic `chkconfig` command.
 
-```
+```text
 [root@esx41-01 ~]# chkconfig vmware-webAccess on
 ```
 

@@ -25,7 +25,7 @@ comments: true
 
 First of all we will need two VMware Photon virtual machines with static IP addresses and unique hostnames, these will be our domain controllers. Then on each of them list the available repositories for `tdnf`.
 
-```
+```text
 root@lightwave01 [ ~ ]# tdnf repolist
 repo id             repo name                               status
 photon-updates      VMware Photon Linux 1.0(x86_64)Updates  enabled
@@ -36,7 +36,7 @@ root@lightwave01 [ ~ ]#
 
 If the `lightwave` is not there we need to add it. Go to `/etc/yum.repos.d/` and create the file `lightwave.repo`, edit it and add the following content.
 
-```
+```ini
 [lightwave]
 name=VMware Lightwave 1.0(x86_64)
 baseurl=https://dl.bintray.com/vmware/lightwave
@@ -48,7 +48,7 @@ skip_if_unavailable=True
 
 Then check that if the repository `photon-extras` is present and if not repeat the same process but with the below content.
 
-```
+```text
 [photon-extras]
 name=VMware Photon Extras 1.0(x86_64)
 baseurl=https://dl.bintray.com/vmware/photon_extras
@@ -60,7 +60,7 @@ skip_if_unavailable=True
 
 Install `vmware-lightwave-server` package.
 
-```
+```text
 tdnf install vmware-lightwave-server
 ```
 
@@ -68,7 +68,7 @@ tdnf install vmware-lightwave-server
 
 With Lightwave Server installed in both nodes promote the first one to domain controller. Provide the domain, in my case `lightwave.local` and the administration password.
 
-```
+```text
 root@lightwave01 [ ~ ]# /opt/vmware/bin/ic-promote --domain lightwave.local --password VMware1!
 20160110184918:INFO:Setting up system as Infrastructure standalone node
 20160110184918:INFO:Starting service [dcerpc]
@@ -90,7 +90,7 @@ root@lightwave01 [ ~ ]#
 
 Now that our fist domain controller is ready lets create our first user in the domain. For this task we will use `dir-cli` command, also in `/opt/vmware/bin` path.
 
-```
+```text
 root@lightwave01 [ ~ ]# /opt/vmware/bin/dir-cli user create --account jreypo --first-name "Juan Manuel" --last-name Rey --user-password "VMware1!"
 Enter password for administrator@lightwave.local:
 User account [jreypo] created successfully
@@ -101,7 +101,7 @@ root@lightwave01 [ ~ ]#
 
 To configure the second domain controller we will use the same `ic-promote` command but with the `--partner` option to indicate the primary domain controller.
 
-```
+```text
 rootlightwave02 [ ~ ]# /opt/vmware/bin/ic-promote --partner lightwave01.jreypo.io --domain lightwave.local
 Password (administrator@lightwave.local):
 20160111083335:INFO:Setting up system as Infrastructure partner node
@@ -127,13 +127,13 @@ rootlightwave02 [ ~ ]#
 
 With both domain controllers configured now we are going to join one Photon Docker host to the domain in order to verify the setup. First we need to install the client tools, configure the same `lightwave` and `photon-extras` repositories and install `vmware-lightwave-clients` package.
 
-```
+```text
 tdnf install vmware-lightwave-clients
 ```
 
 With the client tools installed use the command `ic-join` to join the domain.
 
-```
+```text
 root [ ~ ]# /opt/vmware/bin/ic-join --domain lightwave.local --domain-controller lightwave01.jreypo.io --password VMware1!
 20160111133217:INFO:Setting up system as client to Infrastructure node at [lightwave01.jreypo.io]
 20160111133217:INFO:Validating credentials to partner [lightwave01.jreypo.io] at domain [lightwave.local]

@@ -27,7 +27,7 @@ I tried a lot of them but since I discovered [Patrick Reut](http://forums11.itrc
 
 Here it an example output of the command:
 
-```
+```text
 root@tst1:/# which machinfo
 /usr/contrib/bin/machinfo
 root@tst1:/# ll /usr/contrib/bin/machinfo

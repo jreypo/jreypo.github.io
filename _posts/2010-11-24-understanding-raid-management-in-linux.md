@@ -39,7 +39,7 @@ Device-mapper support is present in 2.6 kernels although there are patches for t
 
 `dmraid` supports several array types.
 
-```
+```text
 [root@caladan ~]# dmraid -l
 asr     : Adaptec HostRAID ASR (0,1,10)
 ddf1    : SNIA DDF1 (0,1,4,5,linear)
@@ -60,7 +60,7 @@ Following are a couple of examples to show `dmraid` operation.
 
 ### Array discovering
 
-```
+```text
 [root@caladan ~]# dmraid -r
 /dev/dm-46: hpt45x, "hpt45x_chidjhaiaa-0", striped, ok, 320172928 sectors, data@ 0
 /dev/dm-50: hpt45x, "hpt45x_chidjhaiaa-0", striped, ok, 320172928 sectors, data@ 0
@@ -72,13 +72,13 @@ Following are a couple of examples to show `dmraid` operation.
 
 ### Activate all discovered arrays
 
-```
+```text
 [root@caladan ~]# dmraid -ay
 ```
 
-#### Deactivate all discovered arrays
+### Deactivate all discovered arrays
 
-```
+```text
 [root@caladan ~]# dmraid -an
 ```
 
@@ -92,18 +92,18 @@ To illustrate this take a look at the screenshot below. I created a RAID1 device
 
 Instead `mdadm` uses the MD (Multiple Devices) device driver, this driver provides virtual devices created from another independent devices. Currently the MD driver supports the following RAID levels and configurations
 
--   RAID1
--   RAID4
--   RAID5
--   RAID6
--   RAID0
--   LINEAR (a concatenated array)
--   MULTIPATH
--   FAULTY (an special failed array type for testing purposes)
+- RAID1
+- RAID4
+- RAID5
+- RAID6
+- RAID0
+- LINEAR (a concatenated array)
+- MULTIPATH
+- FAULTY (an special failed array type for testing purposes)
 
 The configuration of the MD devices is contained in the `/etc/mdadm.conf` file.
 
-```
+```text
 [root@caladan ~]# cat mdadm.conf
 ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
 ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44
@@ -112,13 +112,13 @@ ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c4
 
 The `mdadm` tool has seven operation modes.
 
-1.  Assemble
-2.  Build
-3.  Create
-4.  Manage
-5.  Misc
-6.  Follow or Monitor
-7.  Grow
+1. Assemble
+2. Build
+3. Create
+4. Manage
+5. Misc
+6. Follow or Monitor
+7. Grow
 
 A more detailed description of every major operation mode is provided in `mdadm` man page.
 
@@ -126,7 +126,7 @@ Finally below are examples of some of the more common operations with `mdadm`.
 
 ### Create a RAID1 array
 
-```
+```text
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid1 --raid-devices 2 /dev/sd[de]1
 mdadm: size set to 1044096K
 mdadm: array /dev/md1 started.
@@ -135,7 +135,7 @@ mdadm: array /dev/md1 started.
 
 ### Get detailed configuration of the array
 
-```
+```text
 [root@caladan ~]# mdadm --query --detail /dev/md1
 /dev/md1:
             Version : 00.90.01
@@ -166,7 +166,7 @@ mdadm: array /dev/md1 started.
 
 ### Destroy the array
 
-```
+```text
 [root@caladan ~]# mdadm --remove /dev/md1
 [root@caladan ~]# mdadm --stop /dev/md1
 [root@caladan ~]# mdadm --detail /dev/md1
@@ -176,15 +176,15 @@ mdadm: md device /dev/md1 does not appear to be active.
 
 ### Create a RAID5 array with an spare device
 
-```
+```text
 [root@caladan ~]# mdadm --create /dev/md1 --verbose --level raid5 --raid-devices 3 --spare-devices 1 /dev/sd[def]1 /dev/sdg1
 mdadm: array /dev/md1 started
 [root@caladan ~]#
 ```
 
-### Check for the status of a task into the /proc/mdstat file.
+### Check for the status of a task into the /proc/mdstat file
 
-```
+```text
 [root@caladan ~]# cat /proc/mdstat
 Personalities : [raid6] [raid5] [raid4]
 md0 : active raid6 sdi1[7] sdh1[6] sdg1[5] sdf1[4] sde1[3] sdd1[2] sdc1[1] sdb1[0]
@@ -195,9 +195,9 @@ unused devices: <none>
 [root@caladan ~]#
 ```
 
-### Generate the mdadm.conf file from the current active devices.
+### Generate the `mdadm.conf` file from the current active devices
 
-```
+```text
 [root@caladan ~]# mdadm --detail --scan
 ARRAY /dev/md1 level=raid5 num-devices=3 spares=1 UUID=5c9d6a69:4a0f120b:f6b02789:3bbc8698
 ARRAY /dev/md0 level=raid1 num-devices=2 UUID=b36f1b1c:87cf9497:73b81e8c:79ee3c44

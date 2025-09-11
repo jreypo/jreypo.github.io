@@ -46,7 +46,7 @@ VIO Management Server.
 
 Stage the upgrade package.
 
-```
+```text
 viouser@vio-oms:~$ sudo viopatch add -l vio-1.0-upgrade_2.0.0.3037964_all.deb
 [sudo] password for viouser:
 vio-1.0-upgrade_2.0.0.3037964_all.deb patch has been added.
@@ -61,7 +61,7 @@ viouser@vio-oms:~$
 
 Upgrade the management server with `viopatch` command.
 
-```
+```text
 viouser@vio-oms:~$ sudo viopatch install -p vio-1.0-upgrade -v 2.0.0.3037964
 Installing patch vio-1.0-upgrade version 2.0.0.3037964
 done

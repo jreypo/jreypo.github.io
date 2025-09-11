@@ -31,7 +31,7 @@ I test this procedure in the past with ESX/ESXi 3.5 and 4.0.
 
 ## Get the multipathing policy
 
-```
+```text
 [vSphere PowerCLI] C:\> $h = get-vmhost esx01.mlab.local
 [vSphere PowerCLI] C:\> $hostview = get-view $h.id
 [vSphere PowerCLI] C:\> $storage = get-view $hostView.ConfigManager.StorageSystem
@@ -50,7 +50,7 @@ vmhba1:0:12 → {vmhba1:1:12, vmhba1:0:12} → VMware.Vim.HostMultipathInfoFixed
 
 We are going to change the policy for the LUN 12.
 
-```
+```text
 [vSphere PowerCLI] C:\> $lunId = "vmhba1:0:12"
 [vSphere PowerCLI] C:\> $storagepolicy = new-object VMware.Vim.HostMultipathInfoLogicalUnitPolicy
 [vSphere PowerCLI] C:\> $storagepolicy.policy = "rr"
@@ -61,7 +61,7 @@ We are going to change the policy for the LUN 12.
 
 If you look closely at the last line will see that the value has change from `VMware.Vim.HostMultipathInfoFixedLogicalUnitPolicy` to `VMware.Vim.HostMultipathInfoLogicalUnitPolicy`.
 
-```
+```text
 [vSphere PowerCLI] C:\> $h = get-vmhost "ESXIPAddress"
 [vSphere PowerCLI] C:\> $hostview = get-view $h.id
 [vSphere PowerCLI] C:\> $storage = get-view $hostView.ConfigManager.StorageSystem

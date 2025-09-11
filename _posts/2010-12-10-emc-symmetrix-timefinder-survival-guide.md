@@ -33,15 +33,15 @@ EMC Timefinder is a replication solution that creates full volume copies. For th
 
 There are two basic types of replication:
 
--   TimefinderClone - Creates point-in-time copies.
--   Timefinder/Snap - Creates pointer-based replicas, snapshots, only the changed data is written.
+- TimefinderClone - Creates point-in-time copies.
+- Timefinder/Snap - Creates pointer-based replicas, snapshots, only the changed data is written.
 
 There are several optional components.
 
--   Timefinder/Mirror.
--   Timefinder/CG (Consistency Groups)
--   Timefinder/EIM (Exchange Integration Modules)
--   Timefinder/SIM (SQL Integration Modules)
+- Timefinder/Mirror.
+- Timefinder/CG (Consistency Groups)
+- Timefinder/EIM (Exchange Integration Modules)
+- Timefinder/SIM (SQL Integration Modules)
 
 Timefinder allows to retain multiple copies at different checkpoints for lowered RPO and RTO.
 
@@ -51,7 +51,7 @@ Following is a list of the most basic `symcli` commands necessary to get your wa
 
 ### Get the list of the Symmetrix devices
 
-```
+```text
 root:/# symdev list
 Symmetrix ID: 00029xxxxxxx
         Device Name           Directors                  Device
@@ -82,19 +82,19 @@ Sym  Physical               SA :P DA :IT  Config        Attribute Sts      (MB)
 
 ### List all available devices from a device group
 
-```
+```text
 root:/# symld -g dg_oradev_01 list
 ```
 
 ### List host physical devices
 
-```
+```text
 root:/# sympd list
 ```
 
-### List the disk groups:
+### List the disk groups
 
-```
+```text
 root:/# /usr/symcli/bin/symdg list
 
                        D E V I C E      G R O U P S
@@ -115,21 +115,21 @@ root:/#
 
 ### Add devices to a disk group
 
--   Add physical devices
+- Add physical devices
 
-```
+```text
 root:/# symld -g dg_oradev_01 add pd /dev/dsk/c2t4d12
 ```
 
--   Add Symmetrix devices
+- Add Symmetrix devices
 
-```
+```text
 root:/# symld -g dg_oradev_01 add 006E
 ```
 
-### Get diskgroup detailed info.
+### Get diskgroup detailed info
 
-```
+```text
 root:/# /usr/symcli/bin/symdg show dg_prod_01
 
 Group Name:  dg_prod_01
@@ -238,84 +238,83 @@ root:/#
 
 ## Timfinder commands
 
-### Associate BCVs to a device group. There are two ways:
+### Associate BCVs to a device group. There are two ways
 
-```
+```text
 root:/# symbcv -sid xxxx -g dg_oradev_01 associate dev 0001
 ```
 
 ### Establish the mirrors
 
-```
+```text
 root:/# symmir -g dg_oradev_01 -full establish DEV001 BCV001
 ```
 
-### Split operations.
+### Split operations
 
-```
+```text
 root:/# symmir -g dg_oradev_01 split
 ```
 
 There are several additional split modes and/or modifiers.
 
--   Instant
+- Instant
 
-```
+```text
 root:/# symmir -g dg_oradev_01 split -instant
 ```
 
--   Force
+- Force
 
-```
+```text
 root:/# symmir -g dg_oradev_01 split -force
 ```
 
--   Differential
+- Differential
 
-```
+```text
 root:/# symmir -g dg_oradev_01 split -differential
 ```
 
--   Reverse
+- Reverse
 
-```
+```text
 root/# symmir -g dg_oradev_01 reverse split
 ```
 
--   Reverse differential
+- Reverse differential
 
-```
+```text
 root:/# symmir -g dg_oradev_01 reverse split -differential
 ```
 
-### Restore the BCV mirrors.
+### Restore the BCV mirrors
 
 The restore operation will copy the data from the BCV to the Standard device.
 
--   Differential restore
+- Differential restore
 
-```
+```text
 root:/# symmir -g dg_oradev_01 restore
 ```
 
--   Full restore
+- Full restore
 
-```
+```text
 root:/# symmir -g dg_oradev_01 -full restore
 ```
 
-#### Reestablish operations.
+### Reestablish operations
 
-It is very important to tell the difference between *Restore* and *Reestablish*. Reestablish will do a differential
-update from the Standard device to the BCV device.
+It is very important to tell the difference between *Restore* and *Reestablish*. Reestablish will do a differential update from the Standard device to the BCV device.
 
-```
+```text
 root:/# symmir -g dg_oradev_01 establish
 ```
 
-#### Get the list of BCV devices
+### Get the list of BCV devices
 
-```
+```text
 root:/# symbcv list
 
 Symmetrix ID: 00029xxxxxxx
@@ -333,9 +332,9 @@ c4t1d2s2         008A              0 c4t0d2s2       
 c4t1d3s2         008B              0 c4t0d3s2        0087      0 Split
 ```
 
-#### Get the state of mirroring of the device pairs within a device group
+### Get the state of mirroring of the device pairs within a device group
 
-```
+```text
 root:/# /usr/symcli/bin/symmir -g dg_oracle_prod_01 query
 
 Device Group (DG) Name: dg_oracle_prod_01
@@ -373,7 +372,7 @@ root:/#
 
 ### List all BCV sessions in a Symmetrix array
 
-```
+```text
 root:/# symmir list -sid xxxx
 
 Symmetrix ID: 00000000xxxx

@@ -38,7 +38,7 @@ API syntax is actually very easy, it is composed of:
 
 It’s better illustrated with an example:
 
-```
+```rest
 POST https://chargeback.corp.local/vCenter-CB/api/login?version=2.5
 ```
 
@@ -68,7 +68,7 @@ This is the most basic operation of all. In the REST Client paste the XML payloa
 
 Not every task needs an XML payload, in the following example we are going to get a list of the hierarchies using a GET method and with no message body. The URL to make the request would be:
 
-```
+```text
 https://<chargeback_server>/vCenter-CB/api/hierarchies?version=2.5
 ```
 
@@ -84,7 +84,7 @@ If we go to Chargeback web UI we’ll see the listed hierarchies.
 
 Another simple request with no XML payload, with a similar syntax to the previous one:
 
-```
+```rest
 GET https://<chargeback_server>/vCenter-CB/api/costModels?version=2.5
 ```
 
@@ -165,7 +165,7 @@ It will produce however a much more detailed response XML with the details of ea
 
 Invoked using a POST method, that corresponds with the CREATE operation from the table at the beginning of the post. The syntax for the request would be:
 
-```
+```rest
 POST https://<chargeback_server>/vCenter-CB/api/hierarchy
 ```
 

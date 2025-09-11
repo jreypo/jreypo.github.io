@@ -73,7 +73,7 @@ The exact URL will vary with agent version. Azure DevOps Services always offers 
 
 **Tip:** Make a directory for the agent and download into it. For example:
 
-```bash
+```text
 mkdir ~/azure-pipelines-agent && cd ~/azure-pipelines-agent
 # ...then download into this directory...
 ```
@@ -82,19 +82,19 @@ mkdir ~/azure-pipelines-agent && cd ~/azure-pipelines-agent
 
 Once you have the `.tar.gz` file, extract the archive:
 
-```bash
+```text
 tar -xzf azure-pipelines-agent.tar.gz
 ```
 
 This will unpack the agent files into the current directory (e.g., `~/azure-pipelines-agent`). Before configuring, ensure required dependencies are in place. As mentioned, **Git** should be installed. The agent comes with a script to help install any other required libraries:
 
-```bash
+```text
 sudo ./bin/installdependencies.sh
 ```
 
 At this point, I ran into my first issue. As of this writing, **Debian 12** ships with `libicu72`, which wasn't included in the older Azure Pipelines agent dependency script. Here's the relevant part of the installation output:
 
-```bash
+```text
 adoadmin@ado-agent-01:~/azure-pipelines-agent$ sudo ./bin/installdependencies.sh
 [sudo] password for vadmin:
 --------OS Information--------
@@ -132,7 +132,7 @@ As you can see, the script tries to install several outdated `libicu` versions t
 
 To fix this, install the correct version manually:
 
-```bash
+```text
 sudo apt-get install -y libicu72
 ```
 
@@ -187,7 +187,7 @@ After importing the certificate, you can proceed with running `config.sh`.
 
 **Example Output**: Agent Configuration Process.
 
-```bash
+```text
 ./config.sh
 
   ___                      ______ _            _ _
@@ -234,7 +234,7 @@ At this point, the agent is configured but not yet running as a background servi
 
 **A. Run Interactively (for testing):** Simply execute the run script in the foreground:
 
-```bash
+```text
 ./run.sh
 ```
 
@@ -242,7 +242,7 @@ You will see the agent connect to Azure DevOps and wait for jobs. In this mode, 
 
 **B. Run as a Service (daemon):** For a long-term agent, you'll want it running continuously in the background, even after reboots. The agent bundle provides a **systemd service installer** script to set this up:
 
-```bash
+```text
 sudo ./svc.sh install <username>
 ```
 
@@ -250,7 +250,7 @@ Replace `<username>` with the Linux user that should run the agent service. It's
 
 After installation, start the service:
 
-```bash
+```text
 sudo ./svc.sh start
 Input 'vsts.agent.ado-server.Default.ado-agent-01.service' is not an absolute file system path, escaping is likely not going to be reversible.
 
@@ -272,7 +272,7 @@ Jun 11 11:14:47 ado-agent-01.starlabs.local runsvc.sh[12558]: .path=/usr/local/b
 
 The agent will now run in the background. You can check status with:
 
-```bash
+```text
 sudo ./svc.sh status
 Input 'vsts.agent.ado-server.Default.ado-agent-01.service' is not an absolute file system path, escaping is likely not going to be reversible.
 
@@ -302,7 +302,7 @@ Jun 11 11:14:51 ado-agent-01.starlabs.local runsvc.sh[12562]: 2025-06-11 15:14:5
 
 And to stop it:
 
-```bash
+```text
 sudo ./svc.sh stop
 ```
 
@@ -398,7 +398,7 @@ Let's break down what this Dockerfile does:
 The `start.sh` script will handle obtaining the agent and configuring it automatically whenever a container starts. Create a file `start.sh` in the same folder with contents like:
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Helper to print headings
@@ -474,7 +474,7 @@ Let's summarize what this script does:
 
 With the Dockerfile and start.sh in the same directory, build the image:
 
-```bash
+```text
 docker build -t azure-pipelines-agent:linux .
 ```
 
@@ -484,7 +484,7 @@ This will produce a Docker image named `azure-pipelines-agent:linux` (you can na
 
 Now you can create container instances of this image. To run one agent container, use:
 
-```bash
+```text
 docker run -e AZP_URL="https://ado-server.local/DefaultCollection" \
   -e AZP_TOKEN="your_pat_here" \
   -e AZP_AGENT_NAME="homelab-docker-agent" \
@@ -514,7 +514,7 @@ The container will startup, and our `start.sh` will configure the agent and conn
 
 **Ephemeral agents:** If you want each job to run on a new container (so that the environment is always clean), you can run the agent with the `--once` flag. One way to do this is add `--once` at the end of the `docker run` command:
 
-```bash
+```text
 docker run --rm -e AZP_URL="..." -e AZP_TOKEN="..." ... azure-pipelines-agent:linux --once
 ```
 

@@ -180,7 +180,7 @@ After setting `trigger: none` and `pr: none`, you can **manually trigger the pip
 
 In the case of Azure DevOps Services you can also trigger it via the **Azure CLI**:
 
-```bash
+```text
 az pipelines run --name "<pipeline_name>" --branch "main"
 ```
 
@@ -293,7 +293,7 @@ To get the most out of pipeline triggers and avoid pitfalls, consider the follow
 
 Even if you are running Azure DevOps Server in your homelab for automation or learning purposes, you should be mindful of security and access control with triggers. All these recommendations are valid again for Azure DevOps on-premises and in the cloud.
 
-- **Protect Sensitive Pipelines:** If a pipeline deploys to production or performs critical actions, ensure that only trusted code can trigger it. For example, restrict the pipeline’s triggers to the `main` branch which is protected by approvals or limited contributors. This prevents unreviewed changes from triggering sensitive workflows.
+- **Protect Sensitive Pipelines:** If a pipeline deploys to production or performs critical actions, ensure that only trusted code can trigger it. For example, restrict the pipeline’s triggers to the `main` branch which is protected by approvals or limited contributors. This prevents un-reviewed changes from triggering sensitive workflows.
 - **Fork PRs and External Contributions:** If you run pipelines on code from forked repositories (common with open-source on GitHub), be cautious. Azure Pipelines by default does **not** expose secrets to builds of forks, and you should keep it that way. It’s recommended to require manual approval or use comment triggers for running CI on forks, so a maintainer can review the forked code before any sensitive steps run. In short, don’t automatically run a pipeline with secrets on code you haven’t vetted.
 - **Scoped Service Connections:** If using pipeline triggers across projects or to external resources, ensure the service connections have minimal necessary permissions[. For example, if Pipeline A triggers Pipeline B in another project, Pipeline B might need a service connection to access Pipeline A’s artifacts – scope that connection to only what’s needed (perhaps a specific artifact feed or storage). Azure DevOps lets you scope service connections to resource groups or specific repositories, which can limit damage if credentials are misused.
 - **Use Branch Policies:** As noted earlier, branch policies in Azure Repos can enforce that certain pipelines run successfully before allowing a PR to be completed. This ensures that the trigger mechanism is part of a controlled quality gate. Policies can also prevent certain branches from having direct pushes (requiring PRs instead), adding another layer of control to what triggers a pipeline.

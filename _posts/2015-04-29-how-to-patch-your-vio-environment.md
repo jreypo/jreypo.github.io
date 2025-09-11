@@ -35,7 +35,7 @@ However after the immediate release of the patch an issue was identified using t
 
 Add the patch using `viopatch` command.
 
-```
+```text
 viouser@vio-manager:~$ sudo viopatch add -l /home/viouser/vio-patch-1_1.0.1.2668568_all.deb
 [sudo] password for viouser:
 /home/viouser/vio-patch-1_1.0.1.2668568_all.deb patch has been added.
@@ -44,7 +44,7 @@ viouser@vio-manager:~$
 
 List the patches to verify that has been added.
 
-```
+```text
 viouser@vio-manager:~$ viopatch list
 Name         Version        Type    Installed
 -----------  -------------  ------  -----------
@@ -55,7 +55,7 @@ viouser@vio-manager:~$
 
 Install the patch, before installing verify that VIO Cluster is in Running status or the update will fail. The patch can also be applied before deploying OpenStack.
 
-```
+```text
 viouser@vio-manager:~$ sudo viopatch install --patch vio-patch-1 --version 1.0.1.2668568
 [sudo] password for viouser:
 Installing patch vio-patch-1 version 1.0.1.2668568

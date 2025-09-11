@@ -29,7 +29,7 @@ If you have used VMware Virtual Infrastructure cloning, probably are used to the
 
 Of course there is a `hpvmclone` command and anyone can think, as I did the first time I had to clone an IVM, I only have to provide the source VM, the new VM name and *voilà* everything will be done:
 
-```
+```text
 [root@hpvmhost] ~ # hpvmclone -P ivm1 -N ivm_clone01
 [root@hpvmhost] ~ # hpvmstatus
 [Virtual Machines]
@@ -43,7 +43,7 @@ ivm_clone01             11 HPUX    Off            3   
 
 The new virtual machine can be seen and everything seems to be fine but when you ask for the configuration details of the new IVM a nasty surprise will appear... the storage devices had not been cloned instead it looks that `hpvmclone` simply mapped the devices of the source IVM to the new IVM:
 
-```
+```text
 [root@hpvmhost] ~ # hpvmstatus -P ivm_clone01
 [Virtual Machine Details]
 Virtual Machine Name VM #  OS Type State
@@ -100,7 +100,7 @@ After reading again the official documentation, a few dozens posts regarding HPV
 Create the LVM structure for the new virtual machine on the host.
 Use `dd` to copy every storage device from the source virtual machine.
 
-```
+```text
 [root@hpvmhost] ~ # dd if=/dev/vg_vmtest/rivm1d1 of=/dev/vg_vmtest/rclone01_d1 bs=1024k
 12000+0 records in
 12000+0 records out
@@ -113,7 +113,7 @@ Use `dd` to copy every storage device from the source virtual machine.
 
 Using `hpvmclone` create the new machine and in the same command add the new storage devices and delete the old ones from its configuration, any resource can also be modified at this point like with `hpvmcreate`.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmclone -P ivm1 -N clone01 -d disk:scsi:0,2,0:lv:/dev/vg_vmtest/rivm1d1 \
 > -d disk:scsi:0,2,1:lv:/dev/vg_vmtest/rivm1d2 \
 > -a disk:scsi::lv:/dev/vg_vmtest/rclone01_d1 \
@@ -134,7 +134,7 @@ I really didn't test this procedure with other devices apart from the booting di
 - As in METHOD 1 create the necessary LVM infrastructure for the new IVM.
 - Once the lvols are created clone the virtual machine.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmclone -P ivm1 -N vxcl01 -a disk:scsi::lv:/dev/vg_vmtest/rvxcl01_d1 \
 > -a disk:scsi::lv:/dev/vg_vmtest/rvxcl01_d2 \
 > -b disk:scsi:0,2,0:lv:/dev/vg_vmtest/rvxcl01_d1 \
@@ -163,7 +163,7 @@ Since with DRD a clone of `vg00` can be produced we can use it too to clone an I
 - Add the new volume to the source virtual machine and from the guest OS re-scan for the new disk.
 - Now proceed with the DRD clone.
 
-```
+```text
 root@ivm2:~# drd clone -v -x overwrite=true -t /dev/disk/disk15   
 
 =======  03/09/10 15:45:15 MST  BEGIN Clone System Image (user=root)  (jobid=ivm2)
@@ -189,7 +189,7 @@ root@ivm2:~#
 
 Mount the new image.
 
-```
+```text
 root@ivm2:~# drd mount -v
 
 =======  03/09/10 16:09:08 MST  BEGIN Mount Inactive System Image (user=root)  (jobid=ivm2)
@@ -210,7 +210,7 @@ root@ivm2:~#
 - Move or delete the DRD XML registry file in `/var/opt/drd/mnts/sysimage_001/var/opt/drd/registry` in order to avoid any problems during the boot of the clone since the source disk will not be present.
 - Unmount the image.
 
-```
+```text
 root@ivm2:~# drd umount -v
 
 =======  03/09/10 16:20:45 MST  BEGIN Unmount Inactive System Image (user=root)  (jobid=ivm2)
@@ -228,7 +228,7 @@ root@ivm2:~#
 
 Now we are going to create the new virtual machine with `hpvmclone`. Of course the new IVM can be created through `hpvmcreate` and add the new disk as its boot disk.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmclone -P ivm2 -N ivm3 -B manual -d disk:scsi:0,1,0:lv:/dev/vg_vmtest/rivm2disk
 [root@hpvmhost] ~ # hpvmstatus -P ivm3
 [Virtual Machine Details]
@@ -277,7 +277,7 @@ Final step is to boot the newly create machine, from the EFI menu we're going to
 
 - First select the *Boot option maintenance menu*:
 
-```
+```text
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option
@@ -291,7 +291,7 @@ Please select a boot option
 
 - Now go to `Add a Boot Option`.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Main Menu. Select an Operation
@@ -317,7 +317,7 @@ Main Menu. Select an Operation
 
 - Select the first partition of the disk.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Add a Boot Option.  Select a Volume
@@ -333,7 +333,7 @@ Add a Boot Option.  Select a Volume
 
 - Select the first option.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Select file or change to new directory:
@@ -345,7 +345,7 @@ Select file or change to new directory:
 
 - Enter the HPUX directory.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Select file or change to new directory:
@@ -362,7 +362,7 @@ Select file or change to new directory:
 
 - Select the `hpux.efi` file.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Select file or change to new directory:
@@ -376,7 +376,7 @@ Select file or change to new directory:
 
 - Enter `BOOTDISK` as description and None as BootOption Data Type. Save changes.
 
-```
+```text
 Filename: \EFI\HPUX\hpux.efi
 DevicePath: [Acpi(PNP0A03,0)/Pci(1|0)/Scsi(Pun2,Lun0)/HD(Part1,Sig71252358-2BCD-11DF-8000-D6217B60E588)/\EFI\HPUX\hpux.efi]
 
@@ -392,7 +392,7 @@ Save changes to NVRAM [Y-Yes N-No]:
 
 - Go back to the EFI main menu and boot from the new option.
 
-```
+```text
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option
@@ -430,7 +430,7 @@ SIZE: Text:41555K + Data:6964K + BSS:20747K = Total:69267K
 - Finally the OS will ask some questions about the network configuration and other parameters, answer what suits better
     your needing.
 
-```
+```text
 _______________________________________________________________________________
 
                        Welcome to HP-UX!

@@ -24,7 +24,7 @@ comments: true
 
 Some of the features I always liked about the Linux LVM2 implementation are the `lvs`, `vgs` and `pvs` commands. With these simple commands a short list of the LVs, VGs and PVs active on the system can be obtained.
 
-```
+```text
 www04:~ # vgs
 VG            #PV #LV #SN Attr   VSize  VFree
 vgwww01         1   6   0 wz--n- 39.75G   6.25G
@@ -35,7 +35,7 @@ www04:~ #
 
 In HP-UX there is nothing similar available, well since HP-UX 11.31 and LVM2 `-F` option has been added to produce a formatted, more script friendly list but is not very human readable.
 
-```
+```text
 [root@nfscl02] ~ # vgdisplay -vF vg00
 vg_name=/dev/vg00:vg_write_access=read,write:vg_status=available:max_lv=255:cur_lv=9:open_lv=9:max_pv=16:cur_pv=1:act_pv=1:max_pe_per_pv=4353:vgda=2:pe_size=32:total_pe=4322:alloc_pe=1539:free_pe=2783:total_pvg=0:total_spare_pvs=0:total_spare_pvs_in_use=0:vg_version=1.0:vg_max_size=2228736m:vg_max_extents=69648
 lv_name=/dev/vg00/lvol1:lv_status=available,syncd:lv_size=1856:current_le=58:allocated_pe=58:used_pv=1
@@ -57,7 +57,7 @@ Because of this I decided to write three scripts to emulate the behavior of `vgs
 
 List the volume group on the `/etc/lvmtab` file, if the server is part of a cluster the volume groups active on other nodes will be showed as deactivated. With the `-v` switch single VGs can be queried.
 
-```
+```text
 root@cldpp01:~# ./vgs.sh
 VG         PVs   LVs   Status               Version  VGSize Free
 vg00       1     9     available            1.0      135G   77G
@@ -152,7 +152,7 @@ done
 
 Like its Linux counterpart shows a list with every active logical volume. As in `vgs.sh` with the `-v` switch you can ask the list of a specific volume group.
 
-```
+```text
 root@asoka:/# ./lvs.sh -v vg00
 LV                             VG           Status            LVSize Permissions Mirrors Stripes  Allocation
 lvol1                          vg00         available,syncd   1G     read,write        0       0  strict,contiguous
@@ -243,7 +243,7 @@ done
 
 And now the last one. List the activated physical volumes, if a VGs is not active on the current node its PVs wouldn't be shown. Like in `pvs.sh` and `vgs.sh` there is a `-v` switch.
 
-```
+```text
 root@oracle:~# ./pvs.sh
 PV                   VG         Status               PVSize Free
 /dev/disk/disk1_p2   vg00       available            135G   48G  

@@ -36,7 +36,7 @@ If you look into `host.deny` will see that everything is denied by default.
 
 Add the following line to the `host.allow` file.
 
-```
+```text
 sshd: ALL: ALLOW
 ```
 

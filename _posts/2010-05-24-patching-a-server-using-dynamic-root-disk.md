@@ -23,7 +23,7 @@ comments: true
 
 ## Step 1 - Clone the root disk
 
-```
+```text
 root@sheldon:/ # drd clone -x overwrite=true -v -t /dev/disk/disk2
 
 =======  04/21/10 09:05:53 EDT  BEGIN Clone System Image (user=root)  (jobid=sheldon-01)
@@ -46,7 +46,7 @@ root@sheldon:/ #
 
 ## Step 2 - Mount the image
 
-```
+```text
 root@sheldon:/ # drd mount
 
 =======  04/21/10 09:41:20 EDT  BEGIN Mount Inactive System Image (user=root)  (jobid=sheldon)
@@ -62,7 +62,7 @@ root@sheldon:/ #
 
 Check the mount by displaying the `drd00` volume group.
 
-```
+```text
 root@sheldon:/ # vgdisplay drd00
 
 VG Name                     /dev/drd00
@@ -89,7 +89,7 @@ root@sheldon:/ #
 
 ## Step 3 - Apply the patches on the mounted clone
 
-```
+```text
 root@sheldon:/ # drd runcmd swinstall -s /tmp/patches_01.depot
 
 =======  04/21/10 09:42:55 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
@@ -130,7 +130,7 @@ root@sheldon:/ #
 
 ## Step 4 - Check the installed patches on the DRD image
 
-```
+```text
 root@sheldon:/ # drd runcmd swlist patches_01
 
 =======  04/21/10 09:45:29 EDT  BEGIN Executing Command On Inactive System Image (user=root)  (jobid=sheldon)
@@ -164,7 +164,7 @@ At this point you only have to activate the patched image with the `drd activate
 
 If you want to activate and reboot at the same time use the `-x reboot=true` option as in the example below.
 
-```
+```text
 root@sheldon:/ # drd activate -x reboot=true
 
 =======  04/21/10 09:52:26 EDT  BEGIN Activate Inactive System Image

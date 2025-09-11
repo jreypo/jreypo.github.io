@@ -86,7 +86,7 @@ For our lab leaving the default values will suffice.
 
 For the next step get the SSL certificate from the Service Node. Establish an SSH session with the appliance as `admin` user and use the `show switch certificate` command. The output of the command can be a bit large, we just need the certificate itself.
 
-```
+```text
 -----BEGIN CERTIFICATE-----
 MIIDgjCCAmoCAQMwDQYJKoZIhvcNAQEEBQAwgYExCzAJBgNVBAYTAlVTMQswCQYD
 VQQIEwJDQTEVMBMGA1UEChMMT3BlbiB2U3dpdGNoMREwDwYDVQQLEwhzd2l0Y2hj
@@ -152,7 +152,7 @@ The first one will transmit the encoded PEM certificates to the NSX Controller w
 
 With those arguments a registering command for our Service Node would be like this.
 
-```
+```text
 request transport-node-register nsxc.vlab.local admin admin mgmt-ip no tc-id 192.168.82.46 tc-uuid b948fd35-5737-4a30-8741-43134771d40c tc-type STT
 ```
 

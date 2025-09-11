@@ -39,7 +39,7 @@ world:
 
 `nsx-dbctl` command, like its OVS equivalent `ovs-vsctl`, sub-commands are the same, and for example `nsx-dbctl show` will produce a similar output to `ovs-vsctl show`.
 
-```
+```text
 ~ # nsx-dbctl show
 ec451c1a-0258-423a-b406-dec83af4b241
     Manager "ssl:192.168.110.201:6632"
@@ -70,7 +70,7 @@ ec451c1a-0258-423a-b406-dec83af4b241
 
 `nsx-dpctl` command maps to `ovs-dpctl` and much like it allow you to manage Open vSwitch datapaths.
 
-```
+```text
 ~ # nsx-dpctl show
 system@nsx-vswitch:
         lookups: hit:1770781 missed:192476 lost:0
@@ -87,7 +87,7 @@ system@nsx-vswitch:
 
 `nsx-appctl` will allow the administrator to manage and configure OVS daemons. It maps to `ovs-appctl` command.
 
-```
+```text
 ~ # nsx-appctl dpif/show
 system@nsx-vswitch: hit:2230477 missed:148652
         flows: cur: 17, avg: 17, max: 33, life span: 1918447ms
@@ -108,7 +108,7 @@ system@nsx-vswitch: hit:2230477 missed:148652
 
 `nsx-flowctl` is the equivalent of `ovs-flowctl` and will allow you to manage NSX vSwich flow tables, ports, etc.
 
-```
+```text
 ~ # nsx-flowctl show br-bond0
 OFPT_FEATURES_REPLY (xid=0x3): dpid:0000725d4492c540
 n_tables:254, n_buffers:256

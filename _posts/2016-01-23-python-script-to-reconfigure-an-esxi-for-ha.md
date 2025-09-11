@@ -25,7 +25,7 @@ If you have following my blog for some time you may remember a [post from 2011](
 
 The usage of the script is very simple and follow the guidelines used in other pyVmomi scripts. you need to provide the vCenter Server, user with administrative rights and of course the ESXi host.
 
-```
+```text
 ./reconfigure_host_for_ha.py -s vcsa-01.jreypo.io -u administrator@starlabs.local -e vsan-esx-01.jreypo.io
 ```
 

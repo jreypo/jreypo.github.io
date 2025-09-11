@@ -38,7 +38,7 @@ Keep in mind also that the scaling operations will require the API model file us
 
 To resize an existing nodepool the best way is tu use the `aks-engine scale` command. The arguments are very similar to the ones used for the upgrade and include:
 
-- `--deployment-dir` The location of the output files creted during the generate operation.
+- `--deployment-dir` The location of the output files created during the generate operation.
 - `--auth-method` The authentication method, can be `client_secret` or `client_certificate`, in our example we are using the first one.
 - `--client-id` AAD Service Principal ID.
 - `--client-secret` AAD Service Principal Secret.
@@ -49,7 +49,7 @@ To resize an existing nodepool the best way is tu use the `aks-engine scale` com
 - `--node-pool` Nodepool name.
 - `--new-node-count` New number of nodes.
 
-```
+```text
 $ aks-engine scale --location westeurope --subscription-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx --resource-group k8s-lab-cl2 --node-pool agentpool1 --master-FQDN https://my-cluster.westeurope.cloudapp.azure.com --new-node-count 4 --auth-method client_secret --client-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx --client-secret xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --deployment-dir ./_output/k8s-lab-cl2/
 INFO[0000] validating...
 INFO[0014] Name suffix: 44862260
@@ -58,9 +58,9 @@ INFO[0014] Starting ARM Deployment (k8s-lab-cl2-1860437642). This will take some
 INFO[0289] Finished ARM Deployment (k8s-lab-cl2-1860437642). Succeeded
 ```
 
-After the command is completed succesfully check that a new node has been added to the cluster. 
+After the command is completed successfully check that a new node has been added to the cluster.
 
-```
+```text
 $ kubectl get nodes
 NAME                                 STATUS   ROLES    AGE    VERSION
 k8s-agentpool1-44862260-vmss000003   Ready    agent    60d    v1.12.2
@@ -169,7 +169,7 @@ I will need to copy the `nodepool1` entry and modify it accordingly.
 },
 ```
 
-Once the `apimodel` file is modified run `aks-engine generate --api-model _output/<clustername>/apimodel.json`. This operation will update the original `azuredeploy.json` and `azuredeploy.parameters.json` files used during the ARM template deployment. 
+Once the `apimodel` file is modified run `aks-engine generate --api-model _output/<clustername>/apimodel.json`. This operation will update the original `azuredeploy.json` and `azuredeploy.parameters.json` files used during the ARM template deployment.
 
 After the `aks-engine generate` operation is done then run  `az group deployment create --template-file _output/<clustername>/azuredeploy.json --parameters _output/<clustername>/azuredeploy.parameters.json --resource-group <my-resource-group>`
 

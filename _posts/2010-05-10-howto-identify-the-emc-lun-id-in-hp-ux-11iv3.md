@@ -28,7 +28,7 @@ comments: true
 
 Every time the storage people add a new LUN to your servers from an EMC disk array they provide you with a Logical device ID (or LUN ID) to identify the disk with PowerPath. If you are in HP-UX 11iv2 no problem here, just run a simple `powermt` command and look for the new LUN.
 
-```
+```text
 [root@totoro] / # powermt display dev=all | more
 ...
 ...
@@ -55,7 +55,7 @@ Fortunately there is way to circumvent the lack of PowerPath in 11iv3. We are go
 
 First get the disks serial number with `scsimgr`.
 
-```
+```text
 [root@totoro] / # scsimgr get_attr -D /dev/rdisk/disk30 -a serial_number
 
  SCSI ATTRIBUTES FOR LUN : /dev/rdisk/disk30

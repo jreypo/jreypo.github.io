@@ -119,7 +119,7 @@ Login as `admin` user with password admin. In a normal deployment you will confi
 
 Set the IP address for the controller node.
 
-```
+```text
 nsx-controller # set network interface breth0 static 192.168.82.45 255.255.255.0
 Setting IP for interface breth0...
 Clearing DNS configuration...
@@ -139,14 +139,14 @@ nsx-controller #
 
 Configure the hostname.
 
-```
+```text
 nsx-controller # set hostname nsxc
 nsxc #
 ```
 
 Next configure the default route.
 
-```
+```text
 nsxc # add network route 0.0.0.0 0.0.0.0 192.168.82.2
 nsxc #
 nsxc # show network route
@@ -158,7 +158,7 @@ nsxc #
 
 Set the address of the DNS and NTP servers.
 
-```
+```text
 nsxc # add network dns-server 192.168.82.110
 nsxc #
 nsxc # add network ntp-server 192.168.82.110
@@ -171,25 +171,25 @@ nsxc #
 
 Set the management address of the control cluster.
 
-```
+```text
 set control-cluster management-address 192.168.82.45
 ```
 
 Configure the IP address to be used for communication with the different transport nodes.
 
-```
+```text
 set control-cluster role switch_manager listen-ip 192.168.82.45
 ```
 
 Configure the IP address to handle NVP API requests.
 
-```
+```text
 set control-cluster role api_provider listen-ip 192.168.82.45
 ```
 
 Finally join the cluster, since this the first node of the cluster the IP has to be its own one.
 
-```
+```text
 nsxc # join control-cluster 192.168.82.45
 Clearing controller state and restarting
 Stopping nicira-nvp-controller: [Done]
@@ -217,7 +217,7 @@ nsxc #
 
 You can check at any moment the status of the node in the cluster with the `show control-cluster status` command.
 
-```
+```text
 nsxc # show control-cluster status
 Type                Status                                       Since
 --------------------------------------------------------------------------------
@@ -245,19 +245,19 @@ Proceed with the Automated Install as in the Controller node. When the installat
 
 Set IP address.
 
-```
+```text
 set network interface breth0 static 192.168.82.47 255.255.255.0
 ```
 
 Set hostname.
 
-```
+```text
 set hostname nsxg
 ```
 
 Configure the rest of the network parameters as in the Controller node and proceed to the gateway specific configuration.
 
-```
+```text
 nsxg # add switch manager 192.168.82.45
 Waiting for the manager CA certificate to synchronize...
 Manager CA certificate synchronized
@@ -268,25 +268,25 @@ nsxg #
 
 Again launch the Automated Install and let it finish. As `admin` user configure the IP address...
 
-```
+```text
 set network interface breth0 static 192.168.82.46 255.255.255.0
 ```
 
 ...and the hostname.
 
-```
+```text
 set hostname nsxsn
 ```
 
 Finish the network configuration as in the Gateway and the Controller and configure the Service Node to be aware of the Controller Cluster
 
-```
+```text
 add switch manager 192.168.82.45
 ```
 
 The above command will return an error like this.
 
-```
+```text
 Manager CA certificate failed to synchronize.  Verify
 the manager is running on the specified IP address.
 ```
@@ -301,7 +301,7 @@ Access the NSX Manager console, you have to see a similar screen.
 
 Set the IP and the hostname and configure the default route, DNS and NTP server.
 
-```
+```text
 set network interface breth0 static 192.168.82.47 255.255.255.0
 set hostname nsxm
 add network route 0.0.0.0 0.0.0.0 192.168.82.2
@@ -327,8 +327,7 @@ Click the **Add Cluster** button and enter the data for the NSX Controller Clust
 
 If the connection is successful the a new screen will show up.
 
-[![Screen Shot 2014-04-28 at
-01.36.29](/assets/images/screen-shot-2014-04-28-at-01-36-29.png "Configure NSX Controller Cluster")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-36-29.png)
+[![Screen Shot 2014-04-28 at 01.36.29](/assets/images/screen-shot-2014-04-28-at-01-36-29.png "Configure NSX Controller Cluster")]({{site.url}}/assets/images/screen-shot-2014-04-28-at-01-36-29.png)
 
 Provide the following information:
 

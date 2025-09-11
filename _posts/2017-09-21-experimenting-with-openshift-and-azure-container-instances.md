@@ -30,14 +30,14 @@ These days I've been playing in my mind with the idea of combining OpenShift and
 
 Edit the `aci-connector.yaml` file, add your Azure subscription information (you may need to create a Service Principal if do not want to use an existing one) and deploy it as a pod with `kubectl`
 
-```
+```text
 $ kubectl create -f aci-connector.yaml
 deployment "aci-connector" created
 ```
 
 This will deploy a pod into the default namespace and will create the `aci-connector` node.
 
-```
+```text
 $ kubectl get pod
 NAME                             READY     STATUS              RESTARTS   AGE
 aci-connector-1703127997-krgb7   0/1       ContainerCreating   0          24s
@@ -56,7 +56,7 @@ k8s-master-4ec80835-0   Ready,SchedulingDisabled   15d       v1.6.6
 
 After that deploy a pod into your Kubernetes cluster with `nodeName: aci-connector` in the container spec, the repo also has an NGINX example.
 
-```
+```text
 $ kubectl create -f nginx-pod.yaml
 pod "nginx" created
 $ kubectl get pod
@@ -70,7 +70,7 @@ twocontainers                    2/2       Running   120        13d
 
 And if you check your container instance in Azure you will see a new `nginx` container there.
 
-```
+```text
 $ az container list
 Name        ResourceGroup    ProvisioningState    Image                     IP:ports          CPU/Memory       OsType    Location
 ----------  ---------------  -------------------  ------------------------  ----------------  ---------------  --------  ----------
@@ -78,11 +78,11 @@ nginx       acidemorg        Succeeded            nginx                     13.6
 helloworld  acidemorg        Succeeded            microsoft/aci-helloworld  52.174.45.71:80   1.0 core/1.5 gb  Linux     westeurope
 ```
 
-With all of this in mind I decided to try the same exercise on the OpenShift Origin cluster I have on my Azure internal subscription. But first remember that this is just an experiment, **none of this is supported by Microsoft or Red Hat**. 
+With all of this in mind I decided to try the same exercise on the OpenShift Origin cluster I have on my Azure internal subscription. But first remember that this is just an experiment, **none of this is supported by Microsoft or Red Hat**.
 
 As I was expecting the first try failed miserably, the pod kept restarting and the `aci-connector` node never showed up, the pod logs shouted this errors.
 
-```
+```text
 $ oc logs -f pod/aci-connector-4041558504-3zj08
 ${ACI_REGION} not specified, defaulting to "westus"
 (node:1) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: EACCES: permission denied, open '/app/tokenstore.json'
@@ -93,7 +93,7 @@ I quickly figured out the issue, the ACI connector pod needs to run as a privile
 
 Using `oc` utility create the new Service Account and with `oadm` give it the proper permissions.
 
-```
+```text
 oc create serviceaccount aci-connector
 oadm policy add-cluster-role-to-user cluster-admin system:serviceaccount:default:aci-connector
 oadm policy add-scc-to-user privileged system:serviceaccount:default:aci-connector
@@ -136,7 +136,7 @@ spec:
 
 Now proceed to deploy `aci-connector` with `oc`.
 
-```
+```text
 $ oc create -f aci-connector.yaml
 deployment "aci-connector" created
 $
@@ -151,7 +151,7 @@ origin-cluster-node-1     Ready                      77d
 
 YAY! This time the deployment worked and the `aci-connector` node appeared. Next step, deploy the NGINX example and here is where I hit a wall... the pod got stuck into `Pending` status.
 
-```
+```text
 $ oc get pod/nginx
 NAME      READY     STATUS    RESTARTS   AGE
 nginx     0/1       Pending   0          17m
@@ -159,7 +159,7 @@ nginx     0/1       Pending   0          17m
 
 The logs showed an error from the server about the address
 
-```
+```text
 $ oc logs -f pod/nginx
 Error from server: no preferred addresses found; known addresses: []
 $ oc get pod/nginx -o wide
@@ -167,9 +167,9 @@ NAME      READY     STATUS    RESTARTS   AGE       IP        NODE
 nginx     0/1       Pending   0          44m       <none>    aci-connector
 ```
 
-After digging a bit more and discussing this with a couple of colleagues and the ACI folks I found an error on the `aci-connector` pod logs. 
+After digging a bit more and discussing this with a couple of colleagues and the ACI folks I found an error on the `aci-connector` pod logs.
 
-```
+```text
 Error: The server '172.30.182.251:5000' in the 'imageRegistryCredentials' of container group 'nginx' is invalid. It should be a valid host name without protocol.
 ```
 

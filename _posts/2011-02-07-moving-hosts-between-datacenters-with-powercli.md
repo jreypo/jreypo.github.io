@@ -32,7 +32,7 @@ To explain a bit the scenario. I currently have two datacenters in my homelab, o
 
 To do so we re going to use the `Set-VMHost` cmdlet.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State "Maintenance"
 
@@ -49,7 +49,7 @@ C:\
 
 To perform this use the `Move-VMHost` cmdlet.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-dc
 
@@ -70,7 +70,7 @@ If you check now the vSphere Client will see the host out of the cluster but sti
 
 Now that our host is in maintenance mode and out of the cluster it is time to move it to the correct datacenter. Again we will use `Move-VMHost`.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % Move-VMHost -VMHost vcloud-esxi1.vjlab.local -Destination vjlab-vcloud -Verbose
 VERBOSE: 03/02/2011 22:30:39 Move-VMHost Started execution
@@ -88,7 +88,7 @@ C:\
 
 Finally put the ESXi out of maintenance mode.
 
-```
+```text
 C:\
 [vSphere PowerCLI] % Set-VMHost -VMHost vcloud-esxi1.vjlab.local -State Connected
 

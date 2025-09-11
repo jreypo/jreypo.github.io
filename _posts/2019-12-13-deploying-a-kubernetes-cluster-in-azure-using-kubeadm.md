@@ -35,13 +35,13 @@ The first thing we myst do is create the necessary infrastructure in our subscri
 
 Create the resource group.
 
-```
+```text
 az group create --name k8s-lab-rg3 --location westeurope
 ```
 
-Create a VNet, during the creation of the VNet we will declare as well the subnet for our cluster. 
+Create a VNet, during the creation of the VNet we will declare as well the subnet for our cluster.
 
-```
+```text
 az network vnet create --name k8s-lab-vnet --resource-group k8s-lab-rg3 --location westeurope --address-prefixes 172.10.0.0/16 --subnet-name k8s-lab-net1 --subnet-prefixes 172.10.1.0/24
 ```
 
@@ -89,13 +89,13 @@ done
 az vm list --resource-group $RG -d
 ```
 
-## Prepare the cluster master and node instances 
+## Prepare the cluster master and node instances
 
 With the instances up and running we need to install the software we will use to create our Kubernetes cluster.
 
 Access the master and install `docker`, remember to install a Docker release validated for Kubernetes. In my case I will use Kubernetes 1.16 and Docker 18.09.
 
-```
+```text
 azureuser@kube-master-lab:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 OK
 azureuser@kube-master-lab:~$ sudo apt-key fingerprint 0EBFCD88
@@ -112,7 +112,7 @@ azureuser@kube-master-lab:~$ sudo apt-get install -y docker-ce=5:18.09.9~3-0~ubu
 
 Configure Docker daemon for Kubernetes.
 
-```
+```text
 azureuser@kube-master-lab:~$ cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -132,7 +132,7 @@ azureuser@kube-master-lab:~$
 
 Configure Kubernetes `apt` repo and install `kubeadm`.
 
-```
+```text
 azureuser@kube-master-lab:~$ sudo apt-get install -y apt-transport-https
 ...
 azureuser@kube-master-lab:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -276,7 +276,7 @@ Next create `/etc/kubernetes/cloud.conf` file, it will contain the configuration
 
 Initialize the master, or control plane node, passing `kuebadm.yaml` as configuration parameter. Make sure that the instance name in Azure is the same as the hostname or `kubeadm` will fail fail to initialize the `kubelet`.
 
-```
+```text
 azureuser@kube-master-lab:~$ sudo kubeadm init --config kubeadm.yml
 [init] Using Kubernetes version: v1.16.0
 [preflight] Running pre-flight checks
@@ -309,7 +309,7 @@ azureuser@kube-master-lab:~$
 
 As the output suggests create a `kubeconfig` file to start using the cluster.
 
-```
+```text
 azureuser@kube-master-lab:~$ mkdir -p $HOME/.kube
 azureuser@kube-master-lab:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 azureuser@kube-master-lab:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -321,7 +321,7 @@ azureuser@kube-master:~$
 
 ### Install a networking add-on
 
-Next is to install a networking add-on in the master, in my example I am going to use [Calico](https://www.projectcalico.org/) but can you choose another if you want. First retrieve `calico.yaml` manifest from `https://docs.projectcalico.org/v3.8/manifests/calico.yaml` edit it and replace `CALICO_IPV4POOL_CIDR` value of `192.168.0.0/16` with the one from `podSubnet` property defined in ourt `kubeadm.yaml` file, in my case `10.11.0.0/16`.
+Next is to install a networking add-on in the master, in my example I am going to use [Calico](https://www.projectcalico.org/) but can you choose another if you want. First retrieve `calico.yaml` manifest from `https://docs.projectcalico.org/v3.8/manifests/calico.yaml` edit it and replace `CALICO_IPV4POOL_CIDR` value of `192.168.0.0/16` with the one from `podSubnet` property defined in our `kubeadm.yaml` file, in my case `10.11.0.0/16`.
 
 ```yaml
 - name: CALICO_IPV4POOL_CIDR
@@ -330,7 +330,7 @@ value: "10.11.0.0/16"
 
 Then apply the manifest with `kubectl`.
 
-```
+```text
 azureuser@kube-master-lab:~$ kubectl apply -f calico.yaml
 configmap/calico-config created
 customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
@@ -377,7 +377,7 @@ azureuser@kube-master=lab:~$
 
 SSH into the first node and execute `kubeadm join` from master `kuebadm init` output. If you did not take note of the command or more than 24 hours have passed do not worry since we can easily reconstruct it with the following commands.
 
-```
+```text
 azureuser@kube-master-lab:~$ kubeadm token create
 bvbjmy.z2m3y0mu9gtvar3s
 azureuser@kube-master-lab:~$ kubeadm token list
@@ -391,7 +391,7 @@ azureuser@kube-master-lab:~$
 
 Now login back into your first node and execute the `kubeadm join` command using the token as argument for the `--token` option and the hash key with format `sha256:<your_hasch>` as argument for the `--discovery-token-ca-cert-hash` option.
 
-```
+```text
 azureuser@kube-node-0:~$ sudo kubeadm join 172.10.1.4:6443 --token bvbjmy.z2m3y0mu9gtvar3s --discovery-token-ca-cert-hash sha256:b5b9429546c8cdf4accf006250558551240a56371528f8bff1a85e401fea4be2
 [preflight] Running pre-flight checks
 [preflight] Reading configuration from the cluster...
@@ -413,7 +413,7 @@ azureuser@kube-node-0:~$
 
 Repeat the process for each node, you can verify the status of the nodes from the master with `kubectl get nodes`.
 
-```
+```text
 azureuser@kube-master-lab:~$ kubectl get nodes -o wide
 NAME          STATUS     ROLES    AGE    VERSION   INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
 kube-master   Ready      master   8d     v1.16.3   172.10.1.4    51.144.178.87   Ubuntu 18.04.3 LTS   5.0.0-1025-azure   docker://18.9.9
