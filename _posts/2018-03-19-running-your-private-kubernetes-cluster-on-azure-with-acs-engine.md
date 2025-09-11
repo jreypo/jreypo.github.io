@@ -112,15 +112,15 @@ My cluster definition file looks like this.
 
 Create the template with `acs-engine`.
 
-```
+```text
 $ acs-engine generate --api-model k8s-19-private.json
 INFO[0000] Generating assets into _output/k8s-19...
 $
 ```
 
-Create the resource group and deploy the cluster. 
+Create the resource group and deploy the cluster.
 
-```
+```text
 $ az group create --name k8s-priv-rg -l eastus
 Location    Name
 ----------  -----------
@@ -130,7 +130,7 @@ $ az group deployment create --name k8s-priv --resource-group k8s-priv-rg --temp
 
 WHen the deployment is finished ssh into the jumpbox, `kubectl` should be automatically configured, and get the cluster info.
 
-```
+```text
 azuser@jumpbox:~$ kubectl cluster-info
 Kubernetes master is running at https://10.255.255.5
 Heapster is running at https://10.255.255.5/api/v1/namespaces/kube-system/services/heapster/proxy

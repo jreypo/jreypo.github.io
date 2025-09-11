@@ -24,7 +24,7 @@ comments: true
 
 Using [Vagrant](https://www.vagrantup.com/) from WSL is perfectly possible as long as you use the Windows version and the `Vagrantfile` is hosted somewhere under `/mnt/c`. You can run `vagrant.exe up --provider virtualbox` and it will work.
 
-```
+```text
 $ vagrant.exe up --provider virtualbox
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Checking if box 'hashicorp/precise64' is up to date...
@@ -58,7 +58,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 The problem appears when you try to ssh your box with `vagrant.exe ssh`.
 
-```
+```text
 $ vagrant.exe ssh
 `ssh` executable not found in any directories in the %PATH% variable. Is an
 SSH client installed? Try installing Cygwin, MinGW or Git, all of which

@@ -20,7 +20,7 @@ Basically with this script you can obtain a small and comprehensive report of ev
 
 I find it very useful to set an alias for this script on the root's profile of every server in which I have the script.
 
-```
+```text
 [root@ignite] / # alias ifc
 alias ifc='/usr/local/scripts/ioscan_fc2.sh'
 [root@ignite] / #
@@ -28,7 +28,7 @@ alias ifc='/usr/local/scripts/ioscan_fc2.sh'
 
 Show every disk:
 
-```
+```text
 [root@prod01] ~ # ifc | grep rdisk
 /dev/rdisk/disk1     0x600508e0000000004911c7e407303805 ONLINE     64000/0xfa00/0x0     136     round_robin  8
 /dev/rdisk/disk28    0x600508b40006cb7000006000094b0000 ONLINE     64000/0xfa00/0x2f    2       least_cmd_load 8
@@ -61,7 +61,7 @@ Show every disk:
 
 Single device query:
 
-```
+```text
 [root@prod01] ~ # ifc -D /dev/rdisk/disk127
 
 disk                 wwid                               state      lun_hw_path          size_gb load_bal     max_q_depth
@@ -75,7 +75,7 @@ disk                 wwid                   �
 
 Verbose mode:
 
-```
+```text
 [root@ignite] / # ifc -v
 
 disk                 wwid                               state      lun_hw_path          size_gb load_bal     max_q_depth

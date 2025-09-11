@@ -31,7 +31,7 @@ Install Fedora 33 in a virtual machine or like in my case in a physical system, 
 
 After the OS is installed run `dnf update` to get latest Fedora updates and install Podman.
 
-```
+```text
 sudo dnf update -y
 sudo dnf install -y podman 
 ```
@@ -42,7 +42,7 @@ Next we need to adjust Fedora network configuration. By default Fedora Server co
 
 Modify your existing connection with `nmcli`, my connection is `ens192` but you should run `nmcli connection` to get a list of the existing connections and use the appropriate one.
 
-```
+```text
 sudo nmcli connection modify ens192 ipv4.method manual
 sudo nmcli connection modify ens192 ipv4.addresses 192.168.1.94/24
 sudo nmcli connection modify ens192 ipv4.gateway 192.168.1.1
@@ -52,7 +52,7 @@ sudo nmcli connection modify ens192 ipv4.gateway 192.168.1.1
 
 Configure DNS and stop and disable `systemd-resolved` service.
 
-```
+```text
 sudo nmcli connection modify ens192 ipv4.dns "8.8.8.8 8.8.4.4"
 sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
@@ -64,7 +64,7 @@ sudo systemctl restart NetworkManager
 
 Configure [FirewallD](https://firewalld.org/) by adding rules to enable access to Pi-Hole TCP and UDP ports. If you want to know more about `firewalld` review my article [here]({% post_url 2015-04-08-firewalld-quickstart-guide %}).
 
-```
+```text
 sudo firewall-cmd --zone=FedoraServer --add-port=80/tcp
 sudo firewall-cmd --zone=FedoraServer --add-port=443/tcp
 sudo firewall-cmd --zone=FedoraServer --add-port=53/tcp
@@ -81,20 +81,20 @@ sudo firewall-cmd --permanent --zone=FedoraServer --add-port=80/tcp
 
 Pi-Hole will need two container volumes to persist data, we can create them with `podman` in the same way as with `docker` cli.
 
-```
+```text
 sudo podman volume create pihole_pihole
 sudo podman volume create pihole_dnsmasq
 ```
 
 Pull latest `pihole` container image.
 
-```
+```text
 sudo podman pull pihole/pihole
 ```
 
 Run `pihole` container to test that it works.
 
-```
+```text
 podman run --name=pihole \
 --hostname=pi-hole \
 --cap-add=NET_ADMIN \
@@ -122,7 +122,7 @@ pihole/pihole
 
 You can verify that container running with `sudo podman ps`.
 
-```
+```text
 $ sudo podman ps
 CONTAINER ID  IMAGE                           COMMAND  CREATED      STATUS          PORTS                                                                                                  NAMES
 3c0f7b90e121  docker.io/pihole/pihole:latest           2 weeks ago  Up 2 weeks ago  0.0.0.0:53->53/tcp, 0.0.0.0:53->53/udp, 0.0.0.0:67->67/udp, 0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp  pihole
@@ -134,7 +134,7 @@ We have verified that Pi-Hole can be run as a Podman container, however if the s
 
 Create your service unit file in `/etc/systemd/system`, I named mine `pi-hole.service`.
 
-```bash
+```ini
 [Unit]
 Description=Pi-Hole Podman Container
 After=firewalld.service
@@ -150,18 +150,18 @@ WantedBy=multi-user.target
 
 After creating the service unit file and before staring the service configure SELinux to allow `systemd` to load containers.
 
-```
+```text
 setsebool -P container_manage_cgroup on
 ```
 
 Enable and start the new service and reboot to verify it runs at boot.
 
-```
+```text
 sudo systemctl enable pi-hole.service
 sudo systemctl start pi-hole.service
 ```
 
-Access yoour Pi-Hole at `http://pi_hole_ip/admin`, login and see the magic happen :)
+Access your Pi-Hole at `http://pi_hole_ip/admin`, login and see the magic happen :)
 
 [![](/assets/images/pi-hole.png)]({{site.url}}/assets/images/pi-hole.png)
 

@@ -29,7 +29,7 @@ Have to admit that because months have passed since the [DC/OS post]({% post_url
 
 As with everything in Azure we need a resource group, it is the basic construct for any Azure deployment based on the ARM model and it will act as a boundary and logic container for all the resources that will form our Kubernetes cluster. You can use an existing one or you can create a new one, in our example we will take the second path.
 
-```
+```text
 $ az group create --name acs-k8s-3 --location westeurope
 Location    Name
 ----------  ---------
@@ -38,7 +38,7 @@ westeurope  acs-k8s-3
 
 Now we can create our cluster. To spin up your Kubernetes cluster you can of use the Azure Portal but I prefer to use [Azure CLI 2.0](https://github.com/Azure/azure-cli). We will need a pair of SSH keys and a Service Principal, I already have them created but if you omit the `--service-principal` option and add the `--generate-ssh-keys` during the `az acs create` operation it will generate both for you.
 
-```
+```text
 az acs create -g acs-k8s-3 -n k8s-cl3 --orchestrator-type kubernetes --service-principal 11111111-1111-1111-1111-111111111111 --client-secret=xxxxxxxxx -d k8s-cl3 --admin-username azuser --verbose
 ```
 
@@ -48,7 +48,7 @@ I choose the defaults for Master and Agent count, one and three respectively, an
 
 Lets explore the cluster like we did with our DC/OS one.
 
-```
+```text
 $ az vm list -d -g acs-k8s-3
 Name                   ResourceGroup    PowerState    Location
 ---------------------  ---------------  ------------  ----------
@@ -71,7 +71,7 @@ Our ACS Kubernetes deployment includes:
 
 We can list all the resources using Azure CLI.
 
-```
+```text
 $ az resource list -g acs-k8s-3
 Name                                                             ResourceGroup    Location    Type                                          Status
 ---------------------------------------------------------------  ---------------  ----------  --------------------------------------------  --------
@@ -107,13 +107,13 @@ Also the deployed architecture for Kubernetes can be seen in the below diagram.
 
 We will now take a look at the Kubernetes components, you will need `kubectl` which the Kubernetes command line. If you do not have don't worry because Azure can get it installed for you with a simple command.
 
-```
+```text
 az acs kubernetes install-cli
 ```
 
 Now we will need to configure `kubectl` with the proper credentials to interact with our shiny Kubernetes cluster Again this can be easily achieved using Azure CLI, and interact with the cluster usign `kubectl`.
 
-```
+```text
 $ az acs kubernetes get-credentials -n k8s-cl3 -g acs-k8s-3
 $
 $ kubectl get nodes
@@ -128,7 +128,7 @@ As you can see currently ACS deploys Kubernetes 1.6.6 by default, if you wish to
 
 Kubernetes dashboard can also be accessed using `kubectl`.
 
-```
+```text
 $ kubectl proxy
 Starting to serve on 127.0.0.1:8001
 ```
@@ -141,7 +141,7 @@ Point then your favorite browser to `http://127.0.0.1:8001/ui` and have a look t
 
 On the network side ACS deployed a similar number and type of resources as for DC/OS. With a VNET, NSG, etc.
 
-```
+```text
 $ az resource list -g acs-k8s-3 | grep Microsoft.Network
 k8s-master-internal-lb-C188E3DA                                  acs-k8s-3        westeurope  Microsoft.Network/loadBalancers
 k8s-master-lb-C188E3DA                                           acs-k8s-3        westeurope  Microsoft.Network/loadBalancers
@@ -159,7 +159,7 @@ The main difference is that due to the lack of VMSS the network interfaces of th
 
 There are two load balancers, one is exposed to the internet and holds our cluster public IP address. The second one is internal to balance the traffic across the masters.
 
-```
+```text
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------
@@ -171,13 +171,13 @@ westeurope  k8s-master-lb-C188E3DA           Succeeded            acs-k8s-3     
 
 It's time to deploy our first app on Kubernetes, we will use the example Voting App from the ACS documentation. First clone the repo from Github.
 
-```
+```text
 git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
 ```
 
 Create the deployment using the YAML manifests from `kubernetes-manifests` directory.
 
-```
+```text
 $ kubectl create -f ./azure-voting-app-redis/kubernetes-manifests/azure-vote-all-in-one-redis.yml
 deployment "azure-vote-back" created
 service "azure-vote-back" created
@@ -187,7 +187,7 @@ service "azure-vote-front" created
 
 Two deployments and its corresponding services will be created on our Kubernetes cluster. 
 
-```
+```text
 $ kubectl get deployment
 NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 azure-vote-back    1         1         1            0           12s
@@ -202,7 +202,7 @@ kubernetes         10.0.0.1       <none>        443/TCP        6d
 
 Use `kubectl` to verify each deployment and its corresponding service.
 
-```
+```text
 $ kubectl describe deployment azure-vote-back
 Name:                   azure-vote-back
 Namespace:              default
@@ -248,7 +248,7 @@ Events:                 <none>
 
 The `azure-vote-front` service will be exposed to the public and as you can see it is still on `<pending>` status waiting for a public IP address. This IP address will be assigned by the Azure fabric to a newly created Azure Load Balancer, this is part of the native integration between Kubernetes and Azure.
 
-```
+```text
 $ az network lb list -g acs-k8s-3
 Location    Name                             ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -------------------------------  -------------------  ---------------  ------------------------------------
@@ -259,7 +259,7 @@ westeurope  k8s-master-lb-C188E3DA           Succeeded            acs-k8s-3     
 
 The `k8s-cl3` load balancer has been created and configured, and after a few minutes `azure-vote-front` service gets its new public IP address from Azure.
 
-```
+```text
 $ kubectl get svc
 NAME               CLUSTER-IP     EXTERNAL-IP      PORT(S)        AGE
 azure-vote-back    10.0.59.147    <none>           6379/TCP       5m

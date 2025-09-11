@@ -30,7 +30,7 @@ The first thing you need to understand about `dnf` is that many commands are ba
 
 Search for a package.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf search htop
 Last metadata expiration check performed 1:25:54 ago on Mon Oct 5 23:47:45 2015.
 =================================== N/S Matched: htop ====================================
@@ -41,19 +41,19 @@ php-lightopenid.noarch : PHP OpenID library
 
 Install a package.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf install htop
 ```
 
 Remove a package.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf remove htop
 ```
 
 Get information about a package
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf info htop
 Last metadata expiration check performed 1:47:13 ago on Mon Oct 5 23:47:45 2015.
 Available Packages
@@ -75,13 +75,13 @@ Description : htop is an interactive text-mode process viewer for Linux, similar
 
 Group and repository management commands are still the same as well.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf repolist
 ```
 
 Querying the available repositories for a specific command.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf repoquery --whatprovides htop
 Last metadata expiration check performed 1:54:52 ago on Mon Oct 5 23:47:45 2015.
 htop-0:1.0.3-4.fc22.x86_64
@@ -90,7 +90,7 @@ htop-0:1.0.3-4.fc22.x86_64
 
 `dnf` comes with some powerful capabilities like history query.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf history list
 Last metadata expiration check performed 11 days, 19:14:54 ago on Wed Oct 7 02:56:21 2015.
 ID | Command line             | Date a           | Action  | Altere
@@ -109,13 +109,13 @@ ID | Command line             | Date a           | Action  | Altere
 
 This can be specially helpful if you need to rollback a change, like clean up dependencies after uninstalling a package or reinstall a package.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo history undo 8
 ```
 
 You can also look for duplicated within the installed ones.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf repoquery --duplicated
 Last metadata expiration check performed 0:30:42 ago on Tue Oct 6 02:48:41 2015.
 kernel-core-0:4.0.4-301.fc22.x86_64
@@ -129,7 +129,7 @@ kernel-modules-0:4.1.7-200.fc22.x86_64
 
 Retrieve all available packages providing a specific software of capability.
 
-```
+```text
 [jrey@fed22-srv ~]$ sudo dnf repoquery --whatprovides curl
 Last metadata expiration check performed 0:38:00 ago on Tue Oct 6 02:48:41 2015.
 curl-0:7.40.0-3.fc22.x86_64

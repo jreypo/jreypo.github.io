@@ -25,7 +25,7 @@ On my [first post about HP ESXi 5.0](/2012/01/09/new-esxcli-namespaces-included-
 
 If you list the software bundles and filter the output to display only the included by HP will notice an `hponcfg` package.
 
-```
+```text
 ~ # esxcli software vib list |grep Hewlett
 char-hpcru            5.0.0.8-1OEM.500.0.0.434156         Hewlett-Packard     PartnerSupported  2011-05-24 
 char-hpilo            500.9.0.0.8-1OEM.500.0.0.434156     Hewlett-Packard     PartnerSupported  2011-05-24 
@@ -37,7 +37,7 @@ hponcfg               03-02.04                  
 
 `hponcfg`, also included on ProLiant Support Pack for Linux, is a tool that enable a System Administrator to manage the iLO of a ProLiant server from the operative system.
 
-```
+```text
 ~ # esxcli software vib get -n hponcfg
 Hewlett-Packard_bootbank_hponcfg_03-02.04
    Name: hponcfg
@@ -65,7 +65,7 @@ Hewlett-Packard_bootbank_hponcfg_03-02.04
 
 The tool is located at `/opt/hp/tools`.
 
-```
+```text
 /opt/hp/tools # ls
 hpbootcfg         hpbootcfg_esxcli  hponcfg
 /opt/hp/tools #
@@ -73,7 +73,7 @@ hpbootcfg         hpbootcfg_esxcli  hponcfg
 
 Launch the utility without arguments and you will get the usage and it will also display current firmware version of the iLO.
 
-```
+```text
 /opt/hp/tools # ./hponcfg
 HP Lights-Out Online Configuration utility
 Version 3.2-4 (c) Hewlett-Packard Company, 2011
@@ -107,7 +107,7 @@ USAGE:
 
 As a non intrusive example you can use `-g` switch to get the server info.
 
-```
+```text
 /opt/hp/tools # ./hponcfg  -g
 HP Lights-Out Online Configuration utility
 Version 3.2-4 (c) Hewlett-Packard Company, 2011

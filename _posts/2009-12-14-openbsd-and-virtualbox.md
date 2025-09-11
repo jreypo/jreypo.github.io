@@ -19,7 +19,7 @@ I've been using **OpenBSD** since the 3.0 version as desktop, in my home servers
 
 The installation went smoothly until I got the following error:
 
-```
+```text
 uid 0 on /: file system full
 /: write failed, file system is full
 Segmentation fault
@@ -31,7 +31,7 @@ I did a small research and found a couple of solutions for this issue. The firs
 
 The second workaround finally allowed me to install OpenBSD without errors. The virtual machine has to be started from the command line with the `-norawr0` option:
 
-```
+```text
 jmr@wopr:~# VirtualBox -startvm <uid_or_name_of_the_vm> -norawr0
 
 jmr@wopr:~# VBoxSDL -norawr0 -vm <uid_or_name_of_the_vm>

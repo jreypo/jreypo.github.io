@@ -32,7 +32,7 @@ This a quick follow-up post to the [How to check the driver version of a network
 
 First I have to say that the two methods described in my first post still work in ESXi 5.0 Shell.
 
-```
+```text
 ~ # vmware -l
 VMware ESXi 5.0.0 GA
 ~ #
@@ -49,7 +49,7 @@ bus-info: 0000:02:00.0
 
 Thanks to the new changes made by VMware in ESXi 5.0 we can now use `esxcli` to get the same result.
 
-```
+```text
 ~ # esxcli system module get -m e1000
    Module: e1000
    Module File: /usr/lib/vmware/vmkmod/e1000
@@ -69,7 +69,7 @@ Thanks to the new changes made by VMware in ESXi 5.0 we can now use `esxcli` to 
 
 There is a big advantage on using `esxcli` over the other methods. In ESX(i) 4.x and ESXi 5.0 with the old procedure you had to be logged into the host but with `esxcli` it can be performed remotely using vSphere CLI.
 
-```
+```text
 vi-admin@vma:~[esxi5.vjlab.local]> esxcli system module get -m e1000
    Module: e1000
    Module File: /usr/lib/vmware/vmkmod/e1000

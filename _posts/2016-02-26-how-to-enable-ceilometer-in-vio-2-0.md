@@ -39,7 +39,7 @@ In the pop-up check **Configure Ceilometer** and click **OK**.
 
 Open an SSH session to ceilometer server from VIO Manager node and list Ceilometer processes, you should get something like this.
 
-```
+```text
 ceilome+ 26248  9.8  5.5 179512 56176 ?        Ss   18:35   1:29 /usr/bin/python /usr/bin/ceilometer-api --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilometer-api.log
 ceilome+ 26300  0.2  3.8 130928 39016 ?        Ss   18:35   0:01 /usr/bin/python /usr/bin/ceilometer-agent-notification --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilomete -agent-notification.log
 ceilome+ 26354  0.1  3.9 132172 40184 ?        Ss   18:35   0:01 /usr/bin/python /usr/bin/ceilometer-alarm-notifier --config-file=/etc/ceilometer/ceilometer.conf --log-file=/var/log/ceilometer/ceilometer-alarm-notifier.log
@@ -50,7 +50,7 @@ ceilome+ 26520  0.1  3.9 132528 40660 ?        Ss   18:35   0:01 /usr/bin/python
 
 Access `controller01` node from VIO Manager server, elevate yourself to root and source `cloudadmin.rc`. Using Ceilometer client cli list and show some samples to check that the service is collecting data.
 
-```
+```text
 root@controller01:~# ceilometer sample-list
 +--------------------------------------+--------------------------------------+------------+-------+-------------+-------+---------------------+
 | ID                                   | Resource ID                          | Name       | Type  | Volume      | Unit  | Timestamp           |

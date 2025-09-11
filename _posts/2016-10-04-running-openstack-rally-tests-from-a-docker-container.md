@@ -24,19 +24,20 @@ image:
 [OpenStack Rally](https://wiki.openstack.org/wiki/Rally) is a benchmarking and testing project for OpenStack, it provides a framework for performance, scalability and stress tests. Rally can simulate different use-cases on an existing cloud.
 
 Many OpenStack operation teams have Rally deployed in its own virtual machine and with all tests files in an external shared filesystem and versioned with git, which a totally valid and recommendable way of running your Rally tests. However running Rally from a Docker container has also unquestionable benefits:
+
 - Portability - If like me you are always on the road and like to have an immutable rally environment always at hand.
 - Integration with your CI/CD infrastructure, like Jenkins.
 
 With the portability in mind I decided to do a learning exercise and dockerize my rally environment, which by the way was on a Centos 7 virtual machine running on VMware Fusion. Rally already provides a Dockerfile and building your own rally Docker container is as simple as:
 
-```
+```text
 git clone https://github.com/openstack/rally.git
 docker build -t rally-docker .
 ```
 
 However this container is built using Ubuntu 16.04 as the base image and I prefer to use CentOS or Fedora. I have created and published a Docker container with all the Rally bits from RDO Mitaka repositories, if you just want to test it run the following command.
 
-```
+```text
 docker run --name rally-mitaka -t -i -v ~/rally_home:/home/rally jreypo/rally-rdo-mitaka
 ```
 
@@ -71,18 +72,29 @@ RUN rally-manage db create
 
 Build and run the container.
 
-```
+```text
 docker build -t jreypo/rally-rdo-mitaka .
 docker run --name rally-mitaka -t -i -v ~/rally_home:/home/rally jreypo/rally-rdo-mitaka
 ```
 
 Once you are in the container bash prompt create a deployment file called `deployment.json`
 
-{% gist jreypo/2e9397dfac8f91d2a893bdb55f20e19e %}
+```json
+{
+    "type": "ExistingCloud",
+    "auth_url": "http://172.16.98.7:5000/v2.0",
+    "region_name": "RegionOne",
+    "admin": {
+        "username": "admin",
+        "password": "redhat",
+        "tenant_name": "admin"
+    }
+}
+```
 
 Create the deployment with `rally` command line.
 
-```
+```text
 [root@c82cd7302a9e rally]# rally deployment create --file=deployment.json --name=existing
 2016-10-04 13:31:27.674 93 INFO rally.deployment.engine [-] Deployment efc2457e-1dff-4edb-bee2-2ea11fb94e68 | Starting:  OpenStack cloud deployment.
 2016-10-04 13:31:27.831 93 INFO rally.deployment.engine [-] Deployment efc2457e-1dff-4edb-bee2-2ea11fb94e68 | Completed: OpenStack cloud deployment.
@@ -107,7 +119,7 @@ HINTS:
 
 Test the connection between the rally container and your OpenStack installation by retrieving the configured flavors.
 
-```
+```text
 [root@c82cd7302a9e rally]# rally show flavors
 
 Flavors for user `admin` in tenant `admin`:
@@ -125,7 +137,7 @@ Flavors for user `admin` in tenant `admin`:
 
 To run your first test create an execution file, you can grab one from the sample files in Rally repository. In my testing environment I am using the Nova scenario sample file `nova-boot-delete.json`. Launch the test with `rally` command line.
 
-```
+```text
 [root@c82cd7302a9e ~]# rally task start nova_boot_delete.json
 --------------------------------------------------------------------------------
  Preparing input task
@@ -196,7 +208,7 @@ Task syntax is correct :)
 
 Export your report in HTML format and store on the Docker volume attached to the container.
 
-```
+```text
 rally task report 0c3f4378-e46e-4903-a1c6-2c42628b06a9 --html-static --out /home/rally/nova-report.html
 ```
 

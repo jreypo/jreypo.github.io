@@ -29,7 +29,7 @@ Creating a mirror of a volume and later split it in LVM is quite easy an can be 
 
 It has to be done with the same number of disks and of the same size that the ones within the VG.
 
-```
+```text
 [root@sheldon] / # vgextend vg_oracle /dev/disk/disk26
 Volume group "vg_oracle" has been successfully extended.
 Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_oracle.conf
@@ -38,7 +38,7 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 
 - Create the mirror
 
-```
+```text
 [root@sheldon] / # lvextend -m 1 /dev/vg_oracle/lv_oracle /dev/disk/disk26
 The newly allocated mirrors are now being synchronized. This operation will
 take some time. Please wait ....
@@ -49,7 +49,7 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 
 - Check the configuration
 
-```
+```text
 [root@sheldon] / # lvdisplay /dev/vg_oracle/lv_oracle
 --- Logical volumes ---
 LV Name                     /dev/vg_oracle/lv_oracle
@@ -74,7 +74,7 @@ Number of Snapshots         0  
 
 - Perform the split
 
-```
+```text
 [root@sheldon] / # lvsplit -s copy /dev/vg_oracle/lv_oracle
 Logical volume "/dev/vg_oracle/lv_oraclecopy" has been successfully created with
 character device "/dev/vg_oracle/rlv_oraclecopy".
@@ -89,7 +89,7 @@ If the VG are 1.0 or 2.0 version the merge can not be performed if the group is 
 
 The order to do the merge is the copy **FIRST** and the master **SECOND**. This is very important if don't want to sync the mirror in wrong direction.
 
-```
+```text
 [root@sheldon] / # lvmerge /dev/vg_oracle/lv_oraclecopy /dev/vg_oracle/lv_oracle
 Logical volume "/dev/vg_oracle/lv_oraclecopy" has been successfully merged
 with logical volume "/dev/vg_oracle/lv_oracle".
@@ -106,7 +106,7 @@ The process in VxVM is in many ways similar to the LVM one.
 
 Launch `vxdiskadm` tool and select `Add or initialize one or more disks`.
 
-```
+```text
 [root@sheldon] / # vxdiskadm
 
 Volume Manager Support Operations
@@ -146,7 +146,7 @@ Select an operation to perform:  1
 
 Enter the disk and answer the questions according to your configuration and exit the tool when the process is done.
 
-```
+```text
 Add or initialize disks
 Menu: VolumeManager/Disk/AddDisks
 
@@ -216,7 +216,7 @@ Add or initialize other disks? [y,n,q,?] (default: n)
 
 - Check the configuration.
 
-```
+```text
 [root@sheldon] / # vxprint -g dg_sap
 TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
 dg dg_sap       dg_sap       -        -        -        -        -       -
@@ -232,7 +232,7 @@ sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -    �
 
 - Create the mirror.
 
-```
+```text
 [root@sheldon] / # vxassist -g dg_sap mirror sapvol dg_sap02
 [root@sheldon] / #
 [root@sheldon] / # vxprint -g dg_sap                        
@@ -254,7 +254,7 @@ sd dg_sap02-01  sapvol-02    ENABLED  204800   0        -    �
 
 To do this just disassociate the corresponding `plex` from the volume.
 
-```
+```text
 [root@sheldon] / # vxplex -g dg_sap dis sapvol-02
 [root@sheldon] / # vxprint -g dg_sap             
 TY NAME         ASSOC        KSTATE   LENGTH   PLOFFS   STATE    TUTIL0  PUTIL0
@@ -274,7 +274,7 @@ sd dg_sap01-01  sapvol-01    ENABLED  204800   0        -    �
 
 - Reattach the `plex` to the volume and reestablish the mirror.
 
-```
+```text
 [root@sheldon] / # vxplex -g dg_sap att sapvol sapvol-02
 ```
 

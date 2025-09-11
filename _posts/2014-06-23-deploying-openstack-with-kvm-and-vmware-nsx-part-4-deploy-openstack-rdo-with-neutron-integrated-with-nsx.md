@@ -59,7 +59,7 @@ In the Neutron node install NSX Open vSwitch version as described in [Part 3]({%
 
 With the network interface configuration files properly setup exist your SSH session and log into the VM console to create the OVS bridges like the example below.
 
-```
+```text
 ovs-vsctl add-br br-ex
 ovs-vsctl br-set-external-id br-ex bridge-id br-ex
 ovs-vsctl set Bridge br-ex fail-mode=standalone
@@ -70,7 +70,7 @@ ovs-vsctl add-port br-ex eth0
 
 RDO relies on `packstack` for the installation of its different components. [Packstack](https://github.com/stackforge/packstack) is a tool that will install all required software in the nodes based on an answer file. Enable RDO and EPEL repos and install `openstack-packstack` package.
 
-```
+```text
 yum install -y http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 yum install -y http://repos.fedorapeople.org/repos/openstack/openstack-havana/rdo-release-havana-8.noarch.rpm
 yum install -y openstack-packstack
@@ -78,7 +78,7 @@ yum install -y openstack-packstack
 
 Once it is installed generate a new answer file, we will use this file as a template for our installation.
 
-```
+```text
 packstack --gen-answer-file rdo_answers.txt
 ```
 
@@ -86,7 +86,7 @@ Edit `packstack` answer file and modify the following entries, leave the rest wi
 
 Deactivate services we do not want to deploy.
 
-```
+```ini
 CONFIG_SWIFT_INSTALL=n
 CONFIG_CEILOMETER_INSTALL=n
 CONFIG_NAGIOS_INSTALL=n
@@ -95,14 +95,14 @@ CONFIG_CINDER_INSTALL=n
 
 Nova settings.
 
-```
+```ini
 CONFIG_NOVA_COMPUTE_HOSTS=192.168.82.42
 CONFIG_NOVA_NETWORK_HOSTS=
 ```
 
 And finally Neutron settings. Don't set any L3 value since that part will be managed by NSX.
 
-```
+```ini
 CONFIG_NEUTRON_SERVER_HOST=192.168.82.41
 CONFIG_NEUTRON_DHCP_HOSTS=192.168.82.41
 CONFIG_NEUTRON_METADATA_HOSTS=192.168.82.41
@@ -110,13 +110,13 @@ CONFIG_NEUTRON_METADATA_HOSTS=192.168.82.41
 
 Launch OpenStack installation process.
 
-```
+```text
 packstack --answer-file rdo_answers.txt
 ```
 
 The installation will take a while so you better grab a cup of coffee and have a look at the output while the software installs on each of the three nodes. If everything goes as expected we should see a similar message at the of the installation process.
 
-```
+```text
  **** Installation completed successfully ******
 
 Additional information:
@@ -140,34 +140,34 @@ RDO `packstack` cannot configure Glance to use GlusterFS as its storage backend
 
 Stop Glance services.
 
-```
+```text
 service openstack-glance-registry stop
 service openstack-glance-api stop
 ```
 
 Install gluster required packages on the controller node.
 
-```
+```text
 yum install glusterfs-fuse glusterfs
 ```
 
 Mount GlusterFS share and set the ownership and permissions for `glance` user.
 
-```
+```text
 mount -t glusterfs gluster.vlab.local:gv0 /var/lib/glance/images
 chown -R glance:glance /var/lib/glance/images
 ```
 
 Start Glance services.
 
-```
+```text
 service openstack-glance-registry start
 service openstack-glance-api start
 ```
 
 With the installation finished OpenStack Horizon dashboard should be available at **http://cloud_controller_fqdn/dashboard**. Log in with the user admin, the password for this user can be found in the file `/root/keystonerc_admin` on the cloud controller node.
 
-```
+```text
 [root@cloud-controller ~]# cat keystonerc_admin
 export OS_USERNAME=admin
 export OS_TENANT_NAME=admin
@@ -193,7 +193,7 @@ VMware provides a set of RPM packages containing the NSX plugin and a VMware san
 
 A tar file containing all the source for both the plugin and Neutron itself is also available and instructions on how to compile and install it are provided in NSX documentation, during my first trials I took this path but this time I decided to use the upstream plugin instead since it was available in RDO repositories.
 
-```
+```text
 yum install openstack-neutron-nicira
 ```
 
@@ -201,13 +201,13 @@ yum install openstack-neutron-nicira
 
 Register the Neutron server as a transport node on the NSX Controller Cluster.
 
-```
+```text
 ovs-vsctl set-manager ssl:192.168.82.45
 ```
 
 Stop neutron services.
 
-```
+```text
 service neutron-server stop
 ```
 
@@ -217,41 +217,41 @@ Configure `nvp.ini` file accordingly, this file can be found in `/etc/neutron/pl
 
 Set NSX admin user and password.
 
-```
+```ini
 nvp_user = admin
 nvp_password = admin
 ```
 
 Configure NSX controllers IP addresses.
 
-```
+```ini
 nvp_controllers = 192.168.82.45
 ```
 
 Set the default Transport Zone UUID and the L3 and L2 gateway services UUID, these values can be retrieved from the NSX Manager web.
 
-```
+```ini
 default_tz_uuid = b948fd35-5737-4a30-8741-43134771d40c
 default_l3_gw_service_uuid = adee048c-3776-4bd2-ade1-42ab5c90bf9e
 ```
 
 Configure metadata for Nova instances, set `metadata_dhcp_host_route` to `False` in `[DEFAULT]` section. In `[nvp]` section set the metadata mode as `access_network`.
 
-```
+```ini
 enable_metadata_access_network = True
 metadata_mode = access_network
 ```
 
 Create a `[database]` section and configure the connection to Neutron MySQL database, the data can be found on `neutron.conf` file.
 
-```
+```ini
 [database]
 connection = mysql://neutron:ac2191a8661b4b66@192.168.82.40/ovs_neutron
 ```
 
 Finally before start Neutron services check `nvp.ini` with the command `neutron-check-nvp-config`. You should get something like this.
 
-```
+```text
 [root@neutron ~]# neutron-check-nvp-config /etc/neutron/plugins/nicira/nvp.ini
 ----------------------- Database Options -----------------------
         connection: mysql://neutron:ac2191a8661b4b66@192.168.82.40/ovs_neutron
@@ -277,13 +277,13 @@ Done.
 
 Start Neutron services
 
-```
+```text
 service neutron-server start
 ```
 
 Create a network neutron command line to test that everything is working as expected.
 
-```
+```text
 [root@cloud-controller ~(keystone_admin)]# neutron net-create nsx-test-net
 Created a new network:
 +-----------------------+--------------------------------------+

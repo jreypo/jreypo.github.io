@@ -27,7 +27,7 @@ There is a Debian based bare-metal installer ISO named [**Proxmos Virtual Enviro
 
 - Add the `yum` repository to the server:
 
-```
+```text
 [root@openvz ~]# cd /etc/yum.repos.d/
 [root@openvz yum.repos.d]# ls
 CentOS-Base.repo  CentOS-Media.repo
@@ -49,7 +49,7 @@ Saving to: `openvz.repo'
 
 - Install the OpenVZ kernel, in my particular case I used the basic kernel but there are SMP+PAE, PAE and Xen kernels available:
 
-```
+```text
 [root@openvz yum.repos.d]# yum install ovzkernel
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -105,7 +105,7 @@ Complete!
 
 - Install OpenVZ management utilities:
 
-```
+```text
 [root@openvz yum.repos.d]# yum install vzctl vzquota
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -172,7 +172,7 @@ Complete!
 
 - Configure the kernel. The following adjustments must be done in the `/etc/sysctl.conf` file:
 
-```
+```text
 # On Hardware Node we generally need
 # packet forwarding enabled and proxy arp disabled
 net.ipv4.ip_forward = 1
@@ -193,7 +193,7 @@ net.ipv4.conf.all.send_redirects = 0
 
 - Disable `SELinux`:
 
-```
+```text
 [root@openvz ~]# cat /etc/sysconfig/selinux   
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
@@ -217,7 +217,7 @@ SETLOCALDEFS=0
 
 - Check OpenVZ service:
 
-```
+```text
 [root@openvz ~]# chkconfig --list vz
 vz              0:off   1:off   2:on    3:on    4:on    5:on    6:off
 [root@openvz ~]# service vz status
@@ -229,7 +229,7 @@ The first part is over, now we are going to create a VPS as a proof of concept.
 
 - Download the template of the Linux distribution to install as VPS and place it in `/vz/template/cache`
 
-```
+```text
 [root@openvz /]# cd vz/template/cache/
 [root@openvz cache]# wget http://download.openvz.org/template/precreated/centos-5-x86.tar.gz
 --2010-04-04 23:20:20--  http://download.openvz.org/template/precreated/centos-5-x86.tar.gz
@@ -248,7 +248,7 @@ Saving to: `centos-5-x86.tar.gz'
 
 - Create a new virtual machine using the template.
 
-```
+```text
 [root@openvz cache]# vzctl create 1 --ostemplate centos-5-x86
 Creating container private area (centos-5-x86)
 Performing postcreate actions
@@ -258,7 +258,7 @@ Container private area was created
 
 - We have a basic VPS created but it needs more tweaking before we can start it. Set the IP address, the DNS server, hostname, a name to identify it in the Host node and finally set the On Boot parameter to automatically start the container with the host.
 
-```
+```text
 [root@openvz cache]# vzctl set 1 --ipadd 192.168.1.70 --save
 Saved parameters for CT 1
 [root@openvz cache]# vzctl set 1 --name vps01 --save
@@ -275,7 +275,7 @@ Saved parameters for CT 1
 
 - Start the container and check it with `vzlist`.
 
-```
+```text
 [root@openvz cache]# vzctl start vps01
 Starting container ...
 Container is mounted
@@ -295,7 +295,7 @@ Container start in progress...
 
 - Enter the container and check that its operating system is up and running.
 
-```
+```text
 [root@openvz cache]# vzctl enter vps01
 entered into CT 1
 [root@vps01 /]#
@@ -311,7 +311,7 @@ Swap:            0          0          0
 
 - To finish the test stop the container.
 
-```
+```text
 [root@openvz /]# vzctl stop 1
 Stopping container ...
 Container was stopped

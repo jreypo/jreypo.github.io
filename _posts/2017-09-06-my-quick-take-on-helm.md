@@ -34,7 +34,7 @@ Helms is made of two differentiated components, `helm` command line client and T
 
 Helm is currently available for Linux and macOS, there is an experimental version for Windows but who needs a Window version when you have Windows Subsystem for Linux. Yes Helm can be installed on a Linux distro running on WSL using the Linux installation script, actually I installed Helm on Ubuntu 16.04, which runs on my Windows 10 laptop on top of Windows Subsystem for Linux.
 
-```
+```text
 $ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.s
 $ chmod 700 get_helm.sh
 $ ./get_helm.sh
@@ -47,7 +47,7 @@ Run 'helm init' to configure helm.
 
 Executing `helm init` will initialize Helm locally, connect to the default Kubernetes cluster and deploy Tiller under the `kube-system` namespace. If your Kubernetes cluster has been deployed using Azure Container Service then tiller comes already deployed, execute `helm init --upgrade` instead.
 
-```
+```text
 $ helm init --upgrade
 Creating /home/jurey/.helm
 Creating /home/jurey/.helm/repository
@@ -69,7 +69,7 @@ In the meantime the quick fix is to update the deployment manifest located in `/
 
 After Helm initialization list the pods running under the `kube-system` namespace and you will see a Tiller one.
 
-```
+```text
 $ kubectl get pod --namespace kube-system
 NAME                                            READY     STATUS    RESTARTS   AGE
 heapster-2708163903-9lg8w                       2/2       Running   0          41s
@@ -89,11 +89,11 @@ tiller-deploy-3019006398-k2tl2                  1/1       Running   0          4
 
 ## Deploy a chart
 
-I found the process to deploy a chart very intuitive, like a said is very much like using any other package manager. Of course many of the charts will requrie some extra arguments or configuration files but thaat is expeced. 
+I found the process to deploy a chart very intuitive, like a said is very much like using any other package manager. Of course many of the charts will require some extra arguments or configuration files but that is expected.
 
 You can manage your repos using `helm repo`.
 
-```
+```text
 $ helm repo list
 NAME    URL
 stable  https://kubernetes-charts.storage.googleapis.com
@@ -107,7 +107,7 @@ Update Complete. ⎈ Happy Helming!⎈
 
 List all the available charts or search for a specific one with `helm search`.
 
-```
+```text
 $ helm search gitlab
 NAME                    VERSION DESCRIPTION
 stable/gitlab-ce        0.1.11  GitLab Community Edition
@@ -116,7 +116,7 @@ stable/gitlab-ee        0.1.10  GitLab Enterprise Edition
 
 For my first try I decided to install something simple like RabbitMQ, I choose the `stable/rabbitmq` chart.
 
-```
+```text
 $ helm install stable/rabbitmq
 NAME:   winsome-quoll
 LAST DEPLOYED: Wed Sep  6 00:24:20 2017

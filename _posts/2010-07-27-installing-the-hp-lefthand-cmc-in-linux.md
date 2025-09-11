@@ -23,7 +23,7 @@ Burn the iso  or mount it in your Linux system. Navigate trough the iso to `GUI
 
 Launch the installer passing it the full path to the installer properties file, in this case the file `MediaId.properties` that can be found on `GUI/Linux/Disk1/InstData`.
 
-```
+```text
 root@wopr:/mnt/iso/GUI/Linux/Disk1/InstData/VM# ./CMC_Installer.bin -f /mnt/iso/Linux/Disk1/InstData/MediaId.properties
 ```
 

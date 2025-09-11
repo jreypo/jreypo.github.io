@@ -24,7 +24,7 @@ author: juan_manuel_rey
 comments: true
 ---
 
-Every time I talk about [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/) and [AKS-Engine](https://github.com/Azure/aks-engine) got the question about the relationship between both. It is very simple, AKS is backed up by AKS-Engine, plain and simple. It is the library leveraged by the managed swrvice to perform all the creation, upgrade and node scaling of the cluster. It is used the same way as you would use it manually from your shell. So you can consider AKS-Engine like the upstream of AKS.
+Every time I talk about [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/) and [AKS-Engine](https://github.com/Azure/aks-engine) got the question about the relationship between both. It is very simple, AKS is backed up by AKS-Engine, plain and simple. It is the library leveraged by the managed service to perform all the creation, upgrade and node scaling of the cluster. It is used the same way as you would use it manually from your shell. So you can consider AKS-Engine like the upstream of AKS.
 
 The below image illustrates it perfectly.
 
@@ -34,7 +34,7 @@ All the node instances deployed in an AKS cluster has the `aks-engine` version u
 
 Using Azure CLI retrieve the list of nodes of our cluster.
 
-```
+```text
 $ az vm list -g MC_aksrg-ready_aks-ready_canadacentral
 Name                      ResourceGroup                           Location       Zones
 ------------------------  --------------------------------------  -------------  -------
@@ -47,7 +47,7 @@ For our example we will use the first node `aks-nodepool1-68968121-0`. To get th
 
 With Azure CLI get the instance Azure Tags.
 
-```
+```text
 $ az vm show -n aks-nodepool1-68968121-0 -g MC_AKSRG-READY_AKS-READY_CANADACENTRAL --query '[tags]' -o json
 [
   {

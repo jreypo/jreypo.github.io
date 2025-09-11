@@ -47,9 +47,9 @@ There is one caveat, any cluster deployed with `acs-engine` will not show as an 
 
 For this first post about ACS we will deploy a simple cluster with the default options and DC/OS orchestrator, which is the default orchestrator for ACS. I will use [Azure CLI 2.0](https://docs.microsoft.com/en-us/cli/azure/overview) but you can use [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-4.0.0) or the [Azure Portal](https://portal.azure.com).
 
-First create a new resource group, is not mandatory since you can always create your cluster under an existing resource group however in my experience is better to deploy your ACS clusters each on its own group. To create the group you have to provide the name of the group and the Azure region where it will be created, in my case Western Europe. 
+First create a new resource group, is not mandatory since you can always create your cluster under an existing resource group however in my experience is better to deploy your ACS clusters each on its own group. To create the group you have to provide the name of the group and the Azure region where it will be created, in my case Western Europe.
 
-```
+```text
 $ az group create -n acsrg1 -l westeurope
 Location    Name
 ----------  ------
@@ -58,7 +58,7 @@ westeurope  acsrg1
 
 Next create the cluster, the mandatory parameters are the name for the cluster, the resource group and a DNS prefix. You will need a pregenerated SSH key in order to access the master(s) but Azure CLI can generate it for you by appending `--generate-ssh-keys`.
 
-```
+```text
 az acs create -g acsrg1 -n acs-dcos-1 -d dcos-cluster-1 --verbose
 ```
 
@@ -71,15 +71,15 @@ It is as simple as it looks, ACS will deploy and configure for you the DC/OS clu
 
 It will create as well a Service Principal, which will allow the cluster to provision resources on Azure within your subscription, like Azure Storage and Load Balancers. For my tests and labs I personally use a smaller configuration, have my own SSH keys and a pre-created Service Principal.
 
-```
+```text
 az acs create -g acsrg2 -n acs-dcos-2 -d dcos-cluster-2 --master-count 1 --agent-count 1 --service-principal 11111111-1111-1111-1111-111111111111 --client-secret=xxxxxxxxx --verbose
 ```
 
 ## Exploring the cluster
 
-After the succesful creation we will use Azure CLI to list and manage the existing clusters and the different resources on each of them.
+After the successful creation we will use Azure CLI to list and manage the existing clusters and the different resources on each of them.
 
-```
+```text
 $ az acs list
 Location    Name         ProvisioningState    ResourceGroup
 ----------  -----------  -------------------  ---------------
@@ -102,7 +102,7 @@ For DC/OS the deployed architecture can be seen in the below diagram:
 
 [![](/assets/images/dcos_architecture.png "DC/OS Architecture")]({{site.url}}/assets/images/dcos_architecture.png)
 
-The agents are organized in two different pools, a public pool and a private pool. You workloads can be deployed to either of theses pools, however there will be differences in the accesibility of the instances since public agents are exposed to the internet through an Azure Load Balancer and private agents will be kept internal. These are basic [DC/OS security concepts](https://dcos.io/docs/1.7/administration/securing-your-cluster/) and are not imposed by Azure Container Service.
+The agents are organized in two different pools, a public pool and a private pool. You workloads can be deployed to either of theses pools, however there will be differences in the accessibility of the instances since public agents are exposed to the internet through an Azure Load Balancer and private agents will be kept internal. These are basic [DC/OS security concepts](https://dcos.io/docs/1.7/administration/securing-your-cluster/) and are not imposed by Azure Container Service.
 
 - Private Agents: Private nodes are run through a non-routable network, accessible only from the Admin zone or through a public edge router. By default DC/OS will deploy the workloads on private agent nodes.
 - Public Agents: Public agents are used to run apps on DC/OS through a publicly accessible network.
@@ -113,7 +113,7 @@ For Kubernetes and Docker Swarm the concept of private agent does not apply.
 
 The masters will show up as independent virtual machines.
 
-```
+```text
 $ az vm list
 Name                      ResourceGroup    Location
 ------------------------  ---------------  ----------
@@ -131,7 +131,7 @@ testvm                    TESTRG           westeurope
 
 The masters can be accessed through SSH using ssh-key authentication with the default user, `azureuser`, or a custom user defined durign the cluster creation. To get he master piblic FQDN you can use the Azure Portal or Azure CLI by retrieving the configuration of the cluster in JSON format.
 
-```
+```text
 az acs show -n acs-dcos-1 -g acsrg1  -o json
 ```
 
@@ -189,7 +189,7 @@ We need the `fqdn` parameter from `masterProfile`.
 
 DC/OS graphic interface can be accessed by creating an SSH tunnel to the master.
 
-```
+```text
 sudo ssh -fNL 80:localhost:80 -p 2200 -i /home/jurey/.ssh/id_rsa azureuser@dcos-cluster-1mgmt.westeurope.cloudapp.azure.com
 ```
 
@@ -209,9 +209,9 @@ After the tunnel is stablished point your local browser to the following URLs.
 
 ## Agent instances
 
-The agent pools are deployed inside two VM Scale Sets, one of the private and one for the public ones. A VM Scale Set is an Azure compute resource that groups set of identical virtual machines to be jointly managed, this enables auto-scaling capabilities with no need of pre-provisioning any virtual machine. 
+The agent pools are deployed inside two VM Scale Sets, one of the private and one for the public ones. A VM Scale Set is an Azure compute resource that groups set of identical virtual machines to be jointly managed, this enables auto-scaling capabilities with no need of pre-provisioning any virtual machine.
 
-```
+```text
 $ az vmss list
 Location    Name                               Overprovision    ProvisioningState    ResourceGroup    SinglePlacementGroup
 ----------  ---------------------------------  ---------------  -------------------  ---------------  ----------------------
@@ -227,7 +227,7 @@ As you can see Docker Swarm and DC/OS use VM Scale Sets for the agent instances 
 
 We can list and inspect the instances within any VM Scale Set, in our case we'll have a look into the private and public ones for acs-dcos-1 cluster.
 
-```
+```text
 $ az vmss list-instances -n dcos-agent-private-633E21A3-vmss0 -g acsrg1
   InstanceId  LatestModelApplied    Location    Name                                 ProvisioningState    ResourceGroup    VmId
 ------------  --------------------  ----------  -----------------------------------  -------------------  ---------------  ------------------------------------
@@ -244,13 +244,13 @@ $ az vmss list-instances -n dcos-agent-public-633E21A3-vmss0 -g acsrg1
 
 Scaling up or down an ACS cluster is a very straightforward task that can be easily perform with Azure CLI.
 
-```
+```text
 az acs scale -n acs-dcos-1 -g acsrg1 --new-agent-count 6
 ```
 
 You can monitor the task by looking at the VM Scale Set. When the scale operation is finished the `ProvisioningState` of every node must be `Succeeded`.
 
-```
+```text
 $ az vmss list-instances -n dcos-agent-private-633E21A3-vmss0 -g acsrg1
   InstanceId  LatestModelApplied    Location    Name                                  ProvisioningState    ResourceGroup    VmId
 ------------  --------------------  ----------  ------------------------------------  -------------------  ---------------  ------------------------------------
@@ -266,7 +266,7 @@ $ az vmss list-instances -n dcos-agent-private-633E21A3-vmss0 -g acsrg1
 
 For each cluster ACS will deploy the needed networking constructs, right no this is not customizable with ACS but it can be achieved using `acs-engine`. Let's see the network resources for the acs-dcos-1 cluster.
 
-```
+```text
 $ az resource list -g acsrg1 | grep Microsoft.Network
 dcos-agent-lb-633E21A3                       acsrg1           westeurope  Microsoft.Network/loadBalancers
 dcos-master-lb-633E21A3                      acsrg1           westeurope  Microsoft.Network/loadBalancers
@@ -285,7 +285,7 @@ As it can be seen there is a VNet, `dcos-vnet-633E21A3`, that has three subnets 
 - Private agent subnet
 - Public agent subnet
 
-```
+```text
 $ az network vnet show -n dcos-vnet-633E21A3 -g acsrg1
 Location    Name                ProvisioningState    ResourceGroup    ResourceGuid
 ----------  ------------------  -------------------  ---------------  ------------------------------------
@@ -305,7 +305,7 @@ AddressPrefix    Name                     ProvisioningState    ResourceGroup
 
 There are also two load balancers with two public IP addresses, one for each. One load balancer is for the master and the other for the agents.
 
-```
+```text
 $ az network lb list -g acsrg1
 Location    Name                     ProvisioningState    ResourceGroup    ResourceGuid
 ----------  -----------------------  -------------------  ---------------  ------------------------------------

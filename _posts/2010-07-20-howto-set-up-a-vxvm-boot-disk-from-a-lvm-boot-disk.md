@@ -61,7 +61,7 @@ Following is an example to illustrate the process.
 
 First, with `diskinfo`, verify the size of the current boot disk and the new disk to check that they are the same.
 
-```
+```text
 root@robin:/# diskinfo /dev/rdsk/c0t0d0
 SCSI describe of /dev/rdsk/c0t0d0:
              vendor: HP      
@@ -82,7 +82,7 @@ root@robin:/#
 
 After that scrub the new disk, this will prevent possible problems during the creation process because if `vxcp_lvmroot` encounter LVM structures on the disk it will fail.
 
-```
+```text
 root@robin:~# dd if=/dev/zero of=/dev/rdsk/c0t8d0 bs=1048576 count=1024  
 1024+0 records in
 1024+0 records out
@@ -93,7 +93,7 @@ Finally launch the `vxcp_lvmroot` command. Before commencing the copy, `vxcp_lvm
 
 Each one of the given disks for the conversion will be checked to make sure that aren't in use as LVM, VxVM or raw disks. Once the appropriate checks have been issued the disks will be given VxVM media names, the disk or disks containing the root will be given `rootdisk##` names and the other disks that are part of the `rootdg` will be given `rootaux##` names, `##` is a number starting on 01.
 
-```
+```text
 root@robin:~# /etc/vx/bin/vxcp_lvmroot -v -b c0t8d0
 VxVM vxcp_lvmroot INFO V-5-2-4668 10:42: Bootdisk is configured with new-style DSF
 VxVM vxcp_lvmroot INFO V-5-2-2499 10:42: Gathering information on LVM root volume group vg00
@@ -125,7 +125,7 @@ root@robin:~#
 
 Now to verify the new VxVM boot disk, first check the newly created `rootdg` diskgroup.
 
-```
+```text
 root@robin:~# vxprint -htg rootdg
 DG NAME         NCONFIG      NLOG     MINORS   GROUP-ID
 ST NAME         STATE        DM_CNT   SPARE_CNT         APPVOL_CNT
@@ -188,7 +188,7 @@ root@robin:~#
 
 Verify the contents of the `LABEL` file.
 
-```
+```text
 root@robin:~# vxvmboot -v /dev/rdsk/c0t8d0s2
 
 LIF Label File @ (1k) block # 834 on VxVM Disk /dev/rdsk/c0t8d0s2:
@@ -201,7 +201,7 @@ root@robin:~#
 
 Check the new boot paths and if everything is OK reboot the server.
 
-```
+```text
 root@robin:~# setboot -v
 Primary bootpath : 0/0/0/0.0x8.0x0 (/dev/rdisk/disk20)
 HA Alternate bootpath :

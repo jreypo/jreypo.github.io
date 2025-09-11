@@ -50,7 +50,7 @@ Based on [OSTree](https://ostree.readthedocs.io/en/latest/), the first thing you
 
 ### Check current status
 
-```
+```text
 [fedora@atomic-01 ~]$ sudo rpm-ostree status
   TIMESTAMP (UTC)         VERSION   ID             OSNAME            REFSPEC
 * 2016-06-15 09:57:04     24.39     2c7d41e8a6     fedora-atomic     fedora-atomic:fedora-atomic/24/x86_64/docker-host
@@ -72,7 +72,7 @@ Based on [OSTree](https://ostree.readthedocs.io/en/latest/), the first thing you
 
 The upgrade option allows you also to preview the changes, display the current version, etc.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo rpm-ostree upgrade --help
 Usage:
   rpm-ostree upgrade [OPTION...] - Perform a system upgrade
@@ -99,7 +99,7 @@ rpm-ostree 2015.11
 
 Performing the upgrade is a simple `rpm-ostree upgrade`.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo rpm-ostree upgrade
 Updating from: fedora-atomic:fedora-atomic/24/x86_64/docker-host
 
@@ -111,7 +111,7 @@ Transaction complete; bootconfig swap: yes deployment count change: 1
 
 After the upgrade reboot the host and verify the new tree is in use.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo rpm-ostree status
 State: idle
 Deployments:
@@ -129,7 +129,7 @@ Deployments:
 
 ### Rollback an upgrade
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo rpm-ostree rollback
 Moving '2c7d41e8a67931fe21bc92100c59cff8a94c2df5a0e6a1b75957bda141601481.0' to be first deployment
 Transaction complete; bootconfig swap: yes deployment count change: 0
@@ -380,7 +380,7 @@ Added:
 
 Reboot the host and verify it is using the previous tree version.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo rpm-ostree status
   TIMESTAMP (UTC)         VERSION   ID             OSNAME            REFSPEC
 * 2016-06-15 09:57:04     24.39     2c7d41e8a6     fedora-atomic     fedora-atomic:fedora-atomic/24/x86_64/docker-host
@@ -410,7 +410,7 @@ Reboot the host and verify it is using the previous tree version.
 
 Atomic includes a new cli called `atomic`, provides a coherent entry point to manage Atomic Hosts. Under the hood `atomic` command is a wrapper that allows an administrator to perform container and host maintenance operations using a unified interface.
 
-```
+```text
 usage: atomic [-h] [-v] [--debug] [-y]
               {containers,diff,help,images,host,info,install,mount,pull,push,upload,run,scan,sign,stop,storage,migrate,top,trust,uninstall,unmount,umount,update,verify,version}
               ...
@@ -453,7 +453,7 @@ optional arguments:
 
 `atomic` can be used for container management operations in several ways, at first sight it looks like a sot of wrapper for `docker`to perform many operations like run, stop, list images, etc, however for an `atomic run` operation it will grab the run LABEL and execute it with no need for the user to pass any parameters. `atomic` implements the command install which instead of jst importing the container image in the host with its corresponding Kubernetes configuration or Systemd unit file.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo atomic run alpine sh
 Trying docker.io/library/alpine:latest
 Uploading blob sha256:baa5d63471ead618ff91ddfacf1e2c81bf0612bfeb1daf00eb0843a41fbfade3
@@ -468,7 +468,7 @@ Storing signatures
 
 `atomic` also allows to manage the installed Docker images.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo atomic images list
    REPOSITORY             TAG      IMAGE ID       CREATED            VIRTUAL SIZE   TYPE
 >  docker.io/nginx        latest   05a60462f8ba   2016-11-08 23:41   181.44 MB      Docker
@@ -488,7 +488,7 @@ INSTALL: /usr/bin/docker run -ti --rm --privileged -v /:/host IMAGE /container/a
 
 For host related operation `atomic` acts as a wrapper for `rpm-ostree` allowing the same kind of operations.
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo atomic host -h
 usage: atomic host [-h]
                    {rollback,status,upgrade,rebase,deploy,unlock,install,uninstall}
@@ -518,7 +518,7 @@ Cockpit is a remote management interface of Linux hosts, I have written before a
 
 To use Cockpit in Atomic is as simple as `sudo atomic run cockpit/ws`.  
 
-```
+```text
 [fedora@fed-atomic-01 ~]$ sudo atomic install cockpit/ws
 Using default tag: latest
 Trying to pull repository docker.io/cockpit/ws ...

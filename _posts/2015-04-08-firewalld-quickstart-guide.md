@@ -33,7 +33,7 @@ FirewallD was first introduced in Fedora 18 and has been the default firewall me
 
 To get the basic status of the service simply use `firewall-cmd --state`.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --state
 running
 [root@centos7 ~]#
@@ -41,7 +41,7 @@ running
 
 If you need to get a more detailed state of the service you can always use `systemctl` command.
 
-```
+```text
 [root@centos7 ~]# systemctl status firewalld.service
 firewalld.service - firewalld - dynamic firewall daemon
    Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled)
@@ -57,7 +57,7 @@ Nov 19 06:47:42 centos7.vlab.local systemd[1]: Started firewalld - dynamic firew
 
 To enable or disable FirewallD again use `systemctl` commands.
 
-```
+```text
 systemctl enable firewalld.service
 systemctl disable firewalld.service
 ```
@@ -76,10 +76,9 @@ FirewallD introduces the zones concept, a zone is no more than a way to define t
 - **Trusted** - All network connections are accepted.
 - **Internal** - For use on internal networks. Only selected incoming connections are accepted.
 
-By default all interfaces are assigned to the public zone. Each zone is defined in its own XML file stored in `/usr/lib/firewalld/zones`. For example the public zone XML file looks like this.
+By default all interfaces are assigned to the public zone. Each zone is defined in its own XML file stored in `/usr/lib/firewalld/zones`. For example the public zone XML file, `public.xml`, looks like this.
 
-```
-root@centos7 zones]# cat public.xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <zone>
   <short>Public</short>
@@ -87,12 +86,11 @@ root@centos7 zones]# cat public.xml
   <service name="ssh"/>
   <service name="dhcpv6-client"/>
 </zone>
-[root@centos7 zones]#
 ```
 
 Retrieve a simple list of the existing zones.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --get-zones
 block dmz drop external home internal public trusted work
 [root@centos7 ~]#
@@ -100,13 +98,13 @@ block dmz drop external home internal public trusted work
 
 Get a detailed list of the same zones.
 
-```
+```text
 firewall-cmd --list-all-zones
 ```
 
 Get the default zone.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --get-default-zone
 public
 [root@centos7 ~]#
@@ -114,7 +112,7 @@ public
 
 Get the active zones.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --get-active-zones
 public
   interfaces: eno16777736 virbr0
@@ -123,7 +121,7 @@ public
 
 Get the details of a specific zone.
 
-```
+```text
 [root@centos7 zones]# firewall-cmd --zone=public --list-all
 public (default, active)
   interfaces: eno16777736 virbr0
@@ -140,7 +138,7 @@ public (default, active)
 
 Change the default zone.
 
-```
+```text
 firewall-cmd --set-default-zone=home
 ```
 
@@ -150,14 +148,14 @@ Zones can be bound to a network interface and to a specific network addressing o
 
 Assign an interface to a different zone, the first command assigns it temporarily and the second makes it permanently.
 
-```
+```text
 firewall-cmd --zone=home --change-interface=eth0
 firewall-cmd --permanent --zone=home --change-interface=eth0
 ```
 
 Retrieve the zone an interface is assigned to.
 
-```
+```text
 [root@centos7 zones]# firewall-cmd --get-zone-of-interface=eno16777736
 public
 [root@centos7 zones]#
@@ -165,13 +163,13 @@ public
 
 Bound the zone `work` to a source.
 
-```
+```text
 firewall-cmd --permanent --zone=work --add-source=192.168.100.0/27
 ```
 
 List the sources assigned to a zone, in this case `work`.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --permanent --zone=work --list-sources
 172.16.10.0/24 192.168.100.0/27
 [root@centos7 ~]#
@@ -181,7 +179,7 @@ List the sources assigned to a zone, in this case `work`.
 
 FirewallD can assign services permanently to a zone, for example to assign `http` service to the `dmz` zone. A service can be also assigned to multiple zones.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --permanent --zone=dmz --add-service=http
 success
 [root@centos7 ~]# firewall-cmd --reload
@@ -191,7 +189,7 @@ success
 
 List the services assigned to a given zone.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --list-services --zone=dmz
 http ssh
 [root@centos7 ~]#
@@ -205,13 +203,13 @@ Besides of Zones, interfaces and Services management FirewallD like other firewa
 
 Add masquerading to a zone.
 
-```
+```text
 firewall-cmd --zone=external --add-masquerade
 ```
 
 Query if masquerading is enabled in a zone.
 
-```
+```text
 [root@centos7 ~]# firewall-cmd --zone=external --query-masquerade
 yes
 [root@centos7 ~]#
@@ -219,13 +217,13 @@ yes
 
 You can also set port redirection. For example to forward traffic originally intended for port `80/tcp` to port `8080/tcp`.
 
-```
+```text
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=8080
 ```
 
 A destination address can also bee added to the above command.
 
-```
+```text
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=8080:toaddr=172.16.10.21
 ```
 
@@ -233,7 +231,7 @@ firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=8080:to
 
 Create a firewall rule for `8080/tcp` port.
 
-```
+```text
 firewall-cmd --direct --add-rule ipv4 filter INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
 ```
 
@@ -241,7 +239,7 @@ firewall-cmd --direct --add-rule ipv4 filter INPUT -p tcp -m state --state NEW -
 
 Allow a port temporary in a zone.
 
-```
+```text
 firewall-cmd --zone=dmz --add-port=8080/tcp
 ```
 

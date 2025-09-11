@@ -29,27 +29,27 @@ To troubleshoot `networkd` in case of failure we can enable debug mode using the
 
 First create `/etc/systemd/system/systemd-networkd.service.d/` directory.
 
-```
+```text
 mkdir -p /etc/systemd/system/systemd-networkd.service.d/
 ```
 
 In the previous path create the `10-debug.conf` drop-in snippet with the following content.
 
-```
+```ini
 [Service]
 Environment=SYSTEMD_LOG_LEVEL=debug
 ```
 
 Reload `systemd` and restart `systemd-networkd`.
 
-```
+```text
 systemctl daemon-reload
 systemctl restart systemd-networkd
 ```
 
 Using `journalctl` we can now see more detailed information in `networkd` log.
 
-```
+```text
 root@lightwave01 [ ~ ]# journalctl -u systemd-networkd -f
 -- Logs begin at Sat 2016-02-06 20:42:47 UTC. --
 Feb 07 03:01:07 lightwave01 systemd-networkd[428]: ICMPv6 CLIENT: Error sending Router Solicitation

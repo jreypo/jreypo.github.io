@@ -28,14 +28,14 @@ Following are some notes and tips I've been creating since the very first time I
 
 - Show `powermt` command version
 
-```
+```text
 [root@totoro] / # powermt version
 EMC powermt for PowerPath (c) Version 5.1.0 (build 160)
 ```
 
 - Display PowerPath configuration.
 
-```
+```text
 [root@totoro] / # powermt display
 Symmetrix logical device count=898
 CLARiiON logical device count=0
@@ -78,7 +78,7 @@ HP HSx logical device count=0
 
 - Check for death paths and remove them.
 
-```
+```text
 [root@sheldon] / # powermt display
 Symmetrix logical device count=34
 CLARiiON logical device count=0
@@ -106,13 +106,13 @@ Do you want to remove it (y/n/a/q)? y
 
 - List all devices.
 
-```
+```text
 [root@totoro] / # powermt display dev=all
 ```
 
 - Remove all devices.
 
-```
+```text
 [root@totoro] / # powermt remove dev=all
 ```
 
@@ -120,13 +120,13 @@ Do you want to remove it (y/n/a/q)? y
 
 After a rescan of the disks with `ioscan` and the creation of the device files with `insf` run the following command  to add the new disk to PowerPath
 
-```
+```text
 [root@totoro] / # powermt config
 ```
 
 Now display all the devices and look the for the `Logical device ID` of the disk.
 
-```
+```text
 [root@totoro] / # powermt display dev=all | more
 ...
 ...
@@ -147,7 +147,7 @@ state=alive; policy=SymmOpt; priority=0; queued-IOs=0
 
 If everything went fine save the config.
 
-```
+```text
 [root@totoro] / # powermt save
 ```
 

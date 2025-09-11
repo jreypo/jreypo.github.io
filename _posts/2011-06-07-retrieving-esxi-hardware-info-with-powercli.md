@@ -29,7 +29,7 @@ We can also enter the **Configuration** tab and get a bit more detailed informat
 
 But why we have to enter a graphical interface in order to get several pieces of information from different areas of the GUI when we can have all that information just a few commands away if we use PowerCLI for the task.
 
-```
+```text
 [vSphere PowerCLI] C:\Users\jreypo> $bl46001 = Get-VMHost esxbl460-01
 [vSphere PowerCLI] C:\Users\jreypo>
 [vSphere PowerCLI] C:\Users\jreypo> $viewbl460 = Get-View $bl46001.Id

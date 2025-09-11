@@ -25,7 +25,7 @@ Yes another post about `esxcli`, what can I say I'm studying very hard for my VC
 
 Again we are going to make use of the system namespace.
 
-```
+```text
 ~ # esxcli system hostname
 Usage: esxcli system hostname {cmd} [cmd options]
 Available Commands:
@@ -36,7 +36,7 @@ Available Commands:
 
 First task of course is to get current hostname.
 
-```
+```text
 ~ # esxcli system hostname get
    Domain Name: vjlab.local
    Fully Qualified Domain Name: esxi5.vjlab.local
@@ -46,7 +46,7 @@ First task of course is to get current hostname.
 
 Next change the hostname, but you should check before what options are at your disposal by getting the command help.
 
-```
+```text
 ~ # esxcli system hostname set --help
 Usage: esxcli system hostname set [cmd options]
 Description:
@@ -65,7 +65,7 @@ We are going to try all of them.
 
 ## Domain
 
-```
+```text
 ~ # esxcli system hostname set --domain=jreypo.local
 ~ #
 ~ # esxcli system hostname get
@@ -77,7 +77,7 @@ We are going to try all of them.
 
 ## Short hostname
 
-```
+```text
     ~ # esxcli system hostname set --host=esxi5-2
     ~ #
     ~ # esxcli system hostname get
@@ -89,7 +89,7 @@ We are going to try all of them.
 
 ## Fully qualified domain name
 
-```
+```text
 ~ # esxcli system hostname set --fqdn=esxi5.vjlab.local
 ~ #
 ~ # esxcli system hostname get

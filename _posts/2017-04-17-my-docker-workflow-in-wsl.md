@@ -30,7 +30,7 @@ I tried [Docker for Windows](https://www.docker.com/docker-windows) and although
 
 In the first versions of WSL there was no way to call Windows excecutables from the Bash shell, but during one of the Insider builds the interoperability feature was introduced and now WSL can see and execute tools like `ipconfig.exe` from Bash. Thanks to this feature I found that was feasible to use `docker-machine.exe` for creating, starting and managing the created machines.
 
-```
+```text
 [jurey@trantor]-[~]
 $ docker-machine.exe start default
 Unable to translate current working directory. Using C:\Users\jurey
@@ -89,7 +89,7 @@ This solution allow me to seamlessly mount any volume as long as it is somewhere
 
 Finally I decided to mask those `Unable to translate current working directory. Using C:\Users\jurey` message, this is very a very common message when you execute Windows binaries from WSL and although it do not represent a real error wrong it can be a bit annoying. So instead of launching `docker-machine.exe` directly I have the command aliased with `STDERR` redirected to `/dev/null`.
 
-```
+```text
 alias docker-machine='/mnt/c/Program\ Files/Docker\ Toolbox/docker-machine.exe 2>/dev/null'
 ```
 
@@ -97,6 +97,6 @@ alias docker-machine='/mnt/c/Program\ Files/Docker\ Toolbox/docker-machine.exe 2
 
 For Docker Compose I created a similar script to configure the Docker variables using the Linux native `docker-compose` command however couldn't make `docker-compose up` work as I wanted and I am still investigating and for now is the only part I am executing from a Powershell prompt instead of WSL. Will continue to work and post an update as soon as I make it work.
 
-Hope this is helpful if any of you wants to use Docker from Windows Subsystem for Linux. Please comment if you have any tip or have had any issues. 
+Hope this is helpful if any of you wants to use Docker from Windows Subsystem for Linux. Please comment if you have any tip or have had any issues.
 
 -- Juanma

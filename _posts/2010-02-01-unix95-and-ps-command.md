@@ -26,14 +26,14 @@ Currently I only use this mode with the ps command. This command has some option
 
 - With this command you can get a sort of equivalent of the Solaris `ptree` command.
 
-```
+```text
 root@asoka:/# alias ptree
 alias ptree='UNIX95=1 ps -eHf'
 ```
 
 - Get the top 15 CPU consuming processes:
 
-```
+```text
 root@asoka:/# alias pcpu
 alias pcpu='UNIX95=1 ps -ef -o pcpu,user,pid,args | /bin/sort -u -r | sed -e '\''s/\.[0-9][0-9]/&\%/g'\'' | sed -n 1,15p'
 root@asoka:/# pcpu

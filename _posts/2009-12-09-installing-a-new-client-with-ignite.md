@@ -23,7 +23,7 @@ In the client:
 
 - Boot your new server into the EFI Shell and with the `lanaddress` command search for our MAC:
 
-```
+```text
 Shell> lanaddress
 
 LAN Address Information
@@ -38,7 +38,7 @@ LAN Address Information
 
 - Create a new Direct Boot Profile:
 
-```
+```text
 Shell> dbprofile -dn newserver -sip 10.10.10.2 -cip 10.10.10.35 -gip 10.31.4.1 -m 255.255.255.0 -b "/opt/ignite/boot/nbp.efi"
 Creating profile newserver
 ```
@@ -56,31 +56,31 @@ In the Ignite server:
 
 - Create the directory `/var/opt/ignite/clients/<0xMAC_of_the_client>`.
 
-```
+```text
 [ignite]/var/opt/ignite/clients # mkdir 0xXXXXXXXXXXXX
 ```
 
 - Put bin:sys as owner:group of the new directory.
 
-```
+```text
 [ignite]/var/opt/ignite/clients # chown bin:sys 0xXXXXXXXXXXXX
 ```
 
 - Create a link `<client> -> <0xMAC_of_the_client>` in the same location.
 
-```
+```text
 [ignite]/var/opt/ignite/clients # ln -s 0xXXXXXXXXXXXX newserver
 ```
 
 - Set `bin:bin` as owner of the link.
 
-```
+```text
 [ignite]/var/opt/ignite/clients # chown -h bin:bin newserver
 ```
 
 - Copy the data from the "source client" to the "target client".
 
-```
+```text
 [ignite]/var/opt/ignite/clients/source_server # find CINDEX recovery | cpio -pdvma ../newserver
 ../newserver/CINDEX
 ../newserver/recovery/client_status
@@ -114,7 +114,7 @@ Now we have to share the new directory via NFS. In HP-UX 11.31 is quite simple, 
 
 In our example server it will shows like this:
 
-```
+```text
 [ignite]/etc/dfs # cat dfstab
 #       place share(1M) commands here for automatic execution #       on entering init state 3.
 #
@@ -129,7 +129,7 @@ If the newserver hostname is not included in your DNS you have to add it to the 
 
 The next step is in the client EFI Shell, we boot it with `lanboot` command.
 
-```
+```text
 Shell> lanboot select -dn newserver
  01 Acpi(HWP0002,PNP0A03,100)/Pci(1|0)/Mac(XXXXXXXXXXXX)
 02 Acpi(HWP0002,PNP0A03,100)/Pci(1|1)/Mac(YYYYYYYYYYYY)
@@ -310,7 +310,7 @@ Please confirm your choice by pressing RETURN or enter a new number:
 
 Now select `"Install HP-UX"` option. And the following screen appears where we select the `"OK"` option:
 
-```
+```text
 User Interface and Media Options
 
 This screen lets you pick from options that will determine if an
@@ -331,7 +331,7 @@ need to use the Advanced mode (or remote graphical interface).
 
 In the next screen we select the corresponding lan interface:
 
-```
+```text
 LAN Interface Selection
 
 More than one network interface was detected on the system.  You
@@ -356,7 +356,7 @@ HW Path    Interface   Station Address  Description
 
 It starts to search for the DHCP server, press `Crtl-C` to stop it. The install process prompts us for the target client IP and hostname.
 
-```
+```text
 * Could not get DHCP information.  No host specific network defaults
  will be supplied.  (dhcpclient returned: 5)
 
@@ -380,7 +380,7 @@ It starts to search for the DHCP server, press `Crtl-C` to stop it. The install 
 
 The new client is added to the Ignite-UX server. It shows a warning screen informing that the disk device is not present in the system and it will substituted, this is normal since we are installing from an Ignite image of other server. Select `"OK"`.
 
-```
+```text
 ----------------------------------------------------------------------------------------------
 +                           /opt/ignite/bin/itool ()                           +
 ¦                                                                              ¦
@@ -411,7 +411,7 @@ The new client is added to the Ignite-UX server. It shows a warning screen infor
 
 In the system tab enter the new hostname and IP address.
 
-```
+```text
 ------------------------------------------------------------------------------------------------
 +                           /opt/ignite/bin/itool ()                           +
 ¦                                                                              ¦
@@ -441,7 +441,7 @@ In the system tab enter the new hostname and IP address.
 
 Now review the other parameters such swap space, filesystems, root password, etc. If everything is fine select `"Go!"`, it will ask for confirmation:
 
-```
+```text
 ------------------------------------------------------------------------------------------------
 ++                             itool Confirmation                             ++
 ¦¦                                                                            ¦¦

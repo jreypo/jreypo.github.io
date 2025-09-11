@@ -30,7 +30,7 @@ Have to say that even with the initial disappointment about `hpvmclone`, cloning
 
 Let's assume we already have a cloned virtual machine, in this particular case I used `dd` to clone the virtual disk and later I created the IVM and added the storage device and the other resources but it also applied to the other method with minor changes.
 
-```
+```text
 [root@hpvmhost] ~ # hpvmstatus -P vmnode2 -d
 [Virtual Machine Devices]
 
@@ -49,7 +49,7 @@ serial:com1::tty:console
 
 We start the virtual machine an access its console.Now we are going to follow some of the final steps of the third method described in my previous post. From the main `EFI Boot Manager` select the `Boot option maintenance menu` option.
 
-```
+```text
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option
@@ -62,7 +62,7 @@ Please select a boot option
 
 Select Boot from a file and the select the first partition:
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Boot From a File.  Select a Volume
@@ -79,7 +79,7 @@ Boot From a File.  Select a Volume
 
 Enter the EFI directory then the HPUX directory and finally select `hpux.file`. Like I said before this part is very similar to the final steps of Method 3.
 
-```
+```text
 EFI Boot Maintenance Manager ver 1.10 [14.62]
 
 Select file or change to new directory:
@@ -93,7 +93,7 @@ Select file or change to new directory:
 
 After this the machine will boot.
 
-```
+```text
    Filename: \EFI\HPUX\hpux.efi
  DevicePath: [Acpi(PNP0A03,0)/Pci(0|0)/Scsi(Pun0,Lun0)/HD(Part1,Sig71252358-2BCD-11DF-8000-D6217B60E588)/\EFI\HPUX\hpux.efi]
    IA-64 EFI Application 03/10/10  04:21p     657,609 bytes
@@ -125,7 +125,7 @@ When the VM is up login as root. The first tasks as always are to change hostnam
 
 Next we are going recreate `lvmtab` since the current one contains the LVM configuration of the source virtual machine. Performing a simple `vgdisplay` will show it.
 
-```
+```text
 root@vmnode2:/# vgdisplay
 vgdisplay: Warning: couldn't query physical volume "/dev/disk/disk15_p2":
 The specified path does not correspond to physical volume attached to
@@ -156,7 +156,7 @@ root@vmnode2:/#
 
 To correct this remove the `/etc/lvmtab` file and execute a new `vgscan`.
 
-```
+```text
 root@vmnode2:/# rm /etc/lvmtab
 /etc/lvmtab: ? (y/n) y
 root@vmnode2:/var/tmp/software# vgscan
@@ -175,7 +175,7 @@ Follow the recommended steps in `vgscan` output, the first step only applies if 
 
 Running `lvnlboot -R` is mandatory since we need to recover and update the links to the logical volumes in the Boot Data Reserved Area of the booting disk.
 
-```
+```text
 root@vmnode2:/# lvlnboot -R
 Volume Group configuration for /dev/vg00 has been saved in /etc/lvmconf/vg00.conf
 root@vmnode2:/#
@@ -183,7 +183,7 @@ root@vmnode2:/#
 
 Now the LVM configuration is fixed, try again the `vgdisplay` command.
 
-```
+```text
 root@vmnode2:/# vgdisplay
 --- Volume groups ---
 VG Name                     /dev/vg00
@@ -210,7 +210,7 @@ root@vmnode2:/#
 
 With the LVM configuration fixed the next step is to indicate the booting disk to the system.
 
-```
+```text
 root@vmnode2:/# setboot -p /dev/disk/disk21_p2
 Primary boot path set to 0/0/0/0.0x0.0x0 (/dev/disk/disk21_p2)
 root@vmnode2:/#
@@ -225,7 +225,7 @@ root@vmnode2:/#
 
 Finally reboot the virtual machine and if we did everything correctly a new boot option will be available in **EFI Boot Manager**.
 
-```
+```text
 EFI Boot Manager ver 1.10 [14.62] [Build: Mon Oct  1 09:27:26 2007]
 
 Please select a boot option

@@ -32,7 +32,7 @@ His intention was to look for the version of the `qla2xxx` driver and my first t
 
 I tried `esxupdate` with no luck.
 
-```
+```text
 ~ # esxupdate query
 ----Bulletin ID----- -----Installed----- --------------Summary---------------
 ESXi410-201101223-UG 2011-01-13T05:09:39 3w-9xxx: scsi driver for VMware ESXi
@@ -42,7 +42,7 @@ ESXi410-201101224-UG 2011-01-13T05:09:39 vxge: net driver for VMware ESXi   �
 
 Then I suddenly thought that the ESXi Tech Support Mode is based on Busybox. If you have ever use a Busybox environment, like a QNAP NAS, you will probably remember that the way to install new software over the network is with `ipkg` command and to list the software packages already installed the syntax is `ipkg list_installed`.
 
-```
+```text
 ~ # ipkg list_installed
 emulex-cim-provider - 410.2.0.32.1-207424 -
 lsi-provider - 410.04.V0.24-140815 -
@@ -119,7 +119,7 @@ There you are! There is one gotcha to get the version, it starts just after the 
 
 Next task of course was to do the same in ESXi 5.0.
 
-```
+```text
 ~ # ipkg list_installed
 -sh: ipkg: not found
 ~ #
@@ -127,7 +127,7 @@ Next task of course was to do the same in ESXi 5.0.
 
 Ouch! `ipkg` has been removed from ESXi 5.0. The key to get the same list is `esxcli`.
 
-```
+```text
 ~ # esxcli software vib list
 Name                  Version                             Vendor  Acceptance Level  Install Date
 --------------------  ----------------------------------  ------  ----------------  ------------

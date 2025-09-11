@@ -22,7 +22,7 @@ Of course Mariner is open source and it has its own repo under [Microsoft's GitH
 
 The build process for an ISO is very straightforward, it relays on pre-compiled RPM packages from [CBL-Mariner package repository](https://github.com/microsoft/CBL-Mariner/blob/1.0/toolkit/docs/building/prerequisites.md). Since I wanted to install Mariner on my vSphere 7 homelab I choose to create the ISO.
 
-```
+```text
 git clone https://github.com/microsoft/CBL-Mariner.git
 cd CBL-Mariner/toolkit
 sudo make iso REBUILD_TOOLS=y REBUILD_PACKAGES=n CONFIG_FILE=./imageconfigs/full.json
@@ -57,7 +57,7 @@ CBL-Mariner feels very similar to other Linux distros like Fedora or Photon-OS, 
 
 As anyone will expect in any modern Linux distro `systemd` it is used as CBL-Mariner system manager. After installing my Mariner VM I had to access it through vSphere console because there is no SSH daemon installed in the default installation, but it can be easily installed using `tdnf`.
 
-```
+```text
 sudo tdnf install -y openssh-server
 sudo systemctl enable --now sshd.service
 ```
@@ -70,7 +70,7 @@ CBL-Mariner also supports an image-based update mechanism for atomic servicing a
 
 In terms of software available after the installation there are two package repositories, `base` and `update`, configured in the system.
 
-```
+```text
 vadmin@cbl-mariner [ ~ ]$ sudo tdnf repolist
 Loaded plugin: tdnfrepogpgcheck
 repo id             repo name                               status

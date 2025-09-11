@@ -23,7 +23,7 @@ Mirroring the root disk group of an HP-UX server is a very straightforward proce
 
 An example will explain better the whole process. Launch the mirroring operation.
 
-```
+```text
 root@robin:~# /etc/vx/bin/vxrootmir -v -b disk22
 VxVM vxrootmir INFO V-5-2-2501 11:38: Gathering information on the current VxVM root configuration
 VxVM vxrootmir INFO V-5-2-2441 11:38: Checking specified disk(s) for usability
@@ -51,7 +51,7 @@ root@robin:~#
 
 After the mirror operation is finished verify the contents of the `rootdg`.
 
-```
+```text
 root@robin:~# vxprint -htg rootdg
 DG NAME         NCONFIG      NLOG     MINORS   GROUP-ID
 ST NAME         STATE        DM_CNT   SPARE_CNT         APPVOL_CNT
@@ -133,7 +133,7 @@ root@robin:~#
 
 Then check the contents of the EFI partition and the `LABEL` file of the mirror disk.
 
-```
+```text
 root@robin:~# efi_ls -d /dev/rdisk/disk22_p1 /efi/hpux
 FileName                             Last Modified             Size
 .                                      6/ 9/2010                  0
@@ -156,7 +156,7 @@ root@robin:~#
 
 Verify that the new disk has been set as the alternate boot device.
 
-```
+```text
 root@robin:~# setboot -v
 Primary bootpath : 0/0/0/0.0x8.0x0 (/dev/rdisk/disk20)
 HA Alternate bootpath :

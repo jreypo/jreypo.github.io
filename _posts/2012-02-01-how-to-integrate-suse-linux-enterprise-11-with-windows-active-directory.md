@@ -81,7 +81,7 @@ The first is the configuration file for the [`samba`](http://samba.org/) service
 
 The file resides in `/etc/samba`. Take a look at the contents of the file, the relevant part is the `global` section.
 
-```
+```ini
 [global]
         workgroup = VJLAB
         passdb backend = tdbsam
@@ -140,9 +140,9 @@ jreypo@sles11-01:/etc>
 
 `nsswitch.conf` file as stated by its man page is the *System Databases and Name Service Switch configuration file*. Basically it includes the different databases of the system to look for authentication information when user tries to log into the server.
 
-Have a quick look into the file and you will notice the two fields changed, `passwd` and `group`. In both the `winbind `` option has been added in order to indicate the system to use `winbind`, the Name Service Switch daemon used to resolve NT server names.
+Have a quick look into the file and you will notice the two fields changed, `passwd` and `group`. In both the `winbind` option has been added in order to indicate the system to use `winbind`, the Name Service Switch daemon used to resolve NT server names.
 
-```
+```text
 passwd: compat winbind
 group:  compat winbind
 ```
@@ -161,7 +161,7 @@ To prevent this potentially dangerous situation we are going to limit the access
 
 First we need to look for the Domain Admins group ID within our Linux box. Log in as `DOMAIN\Administrator` and use the `id` command to get the user info.
 
-```
+```text
 VJLAB\administrator@sles11-01:~> id
 uid=10000(VJLAB\administrator) gid=10000(VJLAB\domain users) groups=10000(VJLAB\domain users),10001(VJLAB\schema admins),10002(VJLAB\domain admins),10003(VJLAB\enterprise admins),10004(VJLAB\group policy creator owners)
 VJLAB\administrator@sles11-01:~>
@@ -181,7 +181,7 @@ On the right pane edit the properties of the account you want to be able to acce
 
 Now we need to modify how the pam daemon manage the authentication. Go back to SLES and edit `/etc/pam.d/sshd` configuration file.
 
-```
+```ini
 #%PAM-1.0
 auth     requisite      pam_nologin.so
 auth     include        common-auth
@@ -193,14 +193,14 @@ session  include        common-session
 
 Delete the account line and add the following two lines.
 
-```
+```ini
 account  sufficient     pam_localuser.so
 account  sufficient     pam_succeed_if.so gid = 10002
 ```
 
 The `sshd` file should look like this:
 
-```
+```ini
 #%PAM-1.0
 auth     requisite      pam_nologin.so
 auth     include        common-auth

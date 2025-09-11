@@ -25,7 +25,7 @@ comments: true
 
 I have written in the past about using [Cockpit](http://cockpit-project.org) with Fedora and CentOS 7 [here]({% post_url 2015-01-08-managing-your-fedora-server-with-cockpit %}) and [here]({% post_url  2015-01-09-how-to-install-cockpit-on-centos-7 %}). Today playing with one of my Lightwave instances I discovered that Cockpit is also available for VMware Photon OS. The Cockpit packages are available in the `photon-extras` repository. If you do have it enabled in your Photon instances add the following `photon-extras.repo` file in `/etc/yum.repos.d/`.
 
-```
+```ini
 [photon-extras]
 name=VMware Photon Extras 1.0(x86_64)
 baseurl=https://dl.bintray.com/vmware/photon_extras
@@ -37,7 +37,7 @@ skip_if_unavailable=True
 
 Install `cockpit` package.
 
-```
+```text
 root@lightwave01 [ ~ ]# tdnf install cockpit
 Installing:
 device-mapper                                                              x86_64                                    2.02.116-2.ph1tp2
@@ -62,7 +62,7 @@ Is this ok [y/N]:
 
 Next enable and start `cockpit.socket` with `systemctl`.
 
-```
+```text
 root@lightwave01 [ ~ ]# systemctl enable cockpit.socket
 root@lightwave01 [ ~ ]# systemctl start cockpit.socket
 root@lightwave01 [ ~ ]#
