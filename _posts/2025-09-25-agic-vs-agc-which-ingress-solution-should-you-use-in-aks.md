@@ -123,7 +123,7 @@ AGC addresses next-generation ingress needs for cloud-native, advanced, and high
 - **Modern API Surface**:
   - Native support for the Kubernetes Gateway API, enabling advanced role separation between platform and application teams, portable route manifests, and rich policy models
 - **Rapid Update & Scale**:
-  - Designed for near-real-time sync between Kubernetes manifests and Azure load balancing infrastructure, minimizing downtime and increasing deployment speed during pod rollouts, scaling, and blue/green deployment events
+  - Designed for near-real-time sync between Kubernetes manifests and Azure load balancing infrastructure, minimizing downtime and increasing deployment speed during pod rollout, scaling, and blue/green deployment events
 - **Zero-touch Management**:
   - Optional mode where AGC and its supporting Azure resources (frontends, associations, security policies) can be provisioned, scaled, and managed entirely through Kubernetes CRDs, with no need for direct ARM or portal intervention
 
@@ -208,7 +208,7 @@ AGC clearly aligns with the Kubernetes future—emphasizing standards, portabili
 ### AGIC Scalability
 
 - **Dependant on Application Gateway V2/WAFv2 Limitations**: AGIC inherits the scaling properties of the underlying App Gateway V2. Some of the key quotas:
-  - **Listeners**: 100 per App Gateway V2 (hard limit, not increaseable). Hitting this cap blocks further ingress creation, requiring manual architectural changes, such as collapsing listeners via wildcards or deploying additional Gateways.
+  - **Listeners**: 100 per App Gateway V2 (hard limit, not increasable). Hitting this cap blocks further ingress creation, requiring manual architectural changes, such as collapsing listeners via wildcards or deploying additional Gateways.
   - **Pods/Backends**: Pod IPs directly in the backend pool. In large clusters with high churn, Application Gateway resource updates can become a bottleneck, increasing reconciliation lag and possible configuration drift.
   - **Autoscaling**: Application Gateway V2 can autoscale instance count, but is still limited by capacity units and various max/min quotas.
 - **Pod Autoscaling**: AGIC observes backend target health and counts. When linking with Kubernetes autoscaler and Azure Metrics Adapter, can scale backend pods in response to live traffic, based on per-backend metrics.
