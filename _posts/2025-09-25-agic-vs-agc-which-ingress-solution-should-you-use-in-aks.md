@@ -20,7 +20,7 @@ comments: true
 
 Welcome back! This is the third and final post in my series on ingress and load balancing for Azure Kubernetes Service (AKS).
 
-In the [first article]({% post_url 22025-09-10-exposing-aks-workloads-on-azure-2025-edition %}) we walked through the different ways you can expose workloads running in AKS. Then in the [second article]({ % post_url 2025-09-19-a-deep-dive-into-the-kubernetes-gateway-api %}) we went deep into the new Kubernetes Gateway API and what it means for AKS.
+In the [first article]({% post_url 2025-09-10-exposing-aks-workloads-on-azure-2025-edition %}) we walked through the different ways you can expose workloads running in AKS. Then in the [second article]({ % post_url 2025-09-19-a-deep-dive-into-the-kubernetes-gateway-api %}) we went deep into the new Kubernetes Gateway API and what it means for AKS.
 
 Now, to wrap things up, let’s talk about the two main Azure-native ingress options: **Application Gateway Ingress Controller (AGIC)** and the newer **Application Gateway for Containers (AGC)**. Both are Layer 7 load balancers designed to front your Kubernetes apps, but they take pretty different approaches. AGIC runs inside your cluster and configures a standard Azure Application Gateway resource based on your Ingress objects. AGC, on the other hand, is a **next-gen, cloud-managed gateway** built for Kubernetes from the ground up. It implements Azure’s flavor of the Gateway API and brings a bunch of new traffic management features.
 
