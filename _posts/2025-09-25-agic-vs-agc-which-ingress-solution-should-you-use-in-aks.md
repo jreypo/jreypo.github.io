@@ -1,6 +1,6 @@
 ---
 title: "AGIC vs AGC: Which Ingress Solution Should You Use in AKS?"
-date: 2025-09-25 18:15:00 Europe/Madrid
+date: 2025-09-25 18:10:00 Europe/Madrid
 type: post
 classes: wide
 published: true
