@@ -1,0 +1,24 @@
+languageCode = "en"
+languageName = "English"
+languageDirection = "ltr"
+weight = 1
+
+title = "Juanma's Blog"
+copyright = "Juan Manuel Rey"
+
+[params]
+  dateFormat = "2 January 2006"
+  mainSections = ["posts"]
+  description = "An old school Unix Geek living the era of Cloud"
+
+[params.author]
+  name = "Juan Manuel Rey"
+  image = "images/author.jpg"
+  headline = "An old school Unix Geek living the era of Cloud"
+  bio = "Engineer. Unix Geek. Sysadmin by heart. Distributed systems nerd."
+  links = [
+    { x-twitter = "https://twitter.com/jreypo" },
+    { github = "https://github.com/jreypo" },
+    { linkedin = "https://linkedin.com/in/jreypo" },
+    { bluesky = "https://bsky.app/profile/jreypo.bsky.social" },
+  ]

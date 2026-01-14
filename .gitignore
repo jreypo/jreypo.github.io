@@ -1,11 +1,33 @@
-.sass-cache
+# Hugo build output
+/public/
+/resources/_gen/
+
+# Hugo cache
+.hugo_build.lock
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
 *.sublime-project
 *.sublime-workspace
-codekit-config.json
-node_modules
+
+# Temporary files
+*~
+\#*\#
+
+# Node (if using npm for assets)
+node_modules/
+
+# Legacy Jekyll (remove after migration)
+.sass-cache
 _asset_bundler_cache.sass-cache/
 .bundle/
 Gemfile.lock
 _site/
-.vscode/
+codekit-config.json
