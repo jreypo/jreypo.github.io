@@ -48,9 +48,9 @@ fingerprintAlgorithm = "sha256"
 
 [list]
   showBreadcrumbs = false
-  showSummary = true
+  showSummary = false
   showTableOfContents = false
-  showTaxonomies = true
+  showTaxonomies = false
   groupByYear = true
   paginationWidth = 1
 
