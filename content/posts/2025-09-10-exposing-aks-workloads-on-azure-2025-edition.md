@@ -1,6 +1,7 @@
 ---
 title: Exposing AKS Workloads on Azure - 2025 Edition
 date: 2025-09-10 12:15:00 +0100
+description: "An updated guide to ingress controllers and load balancing in AKS"
 categories:
 - Microsoft
 - Azure

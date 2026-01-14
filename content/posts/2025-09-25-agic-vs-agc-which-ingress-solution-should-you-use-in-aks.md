@@ -1,6 +1,7 @@
 ---
 title: "AGIC vs AGC: Which Ingress Solution Should You Use in AKS?"
 date: 2025-09-25 18:10:00 +0100
+description: "A side-by-side comparison of Azure's two native ingress options for Kubernetes"
 categories:
 - Microsoft
 - Azure

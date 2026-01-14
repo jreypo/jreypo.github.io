@@ -1,6 +1,7 @@
 ---
 title: A Deep Dive into the Kubernetes Gateway API
 date: 2025-09-19 19:00:00 +0100
+description: "Understanding the next-generation API for Kubernetes service networking"
 categories:
 - Cloud-Native
 tags:

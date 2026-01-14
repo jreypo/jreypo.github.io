@@ -1,6 +1,7 @@
 ---
 title: "Azure DevOps Pipeline Triggers Explained"
 date: 2025-05-23T09:30:00+01:00
+description: "Automate your CI/CD pipelines with CI, PR, scheduled, and completion triggers"
 categories:
 - DevOps
 - Homelab
