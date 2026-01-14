@@ -1,18 +1,9 @@
 ---
 title: Configure AVIO Lan in HPVM Linux guests
 date: 2010-06-28
-categories:
-- HP-UX
-- Itanium
-- Linux
-- Sysadmin
-- Virtualization
 tags:
-- AVIO Lan
-- HPVM
-- HPVM Linux guests
-- Integrity VMs
-- Linux
+- hp-servers
+- linux
 - networking
 - sysadmin
 showComments: true

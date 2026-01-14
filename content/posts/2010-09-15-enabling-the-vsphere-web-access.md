@@ -1,17 +1,10 @@
 ---
 title: Enabling vSphere Web Access
 date: 2010-09-15
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX4
+- esxi
 - sysadmin
-- systems administration
-- vSphere
-- vSphere client
-- vSphere Web Access
+- vsphere
 showComments: true
 ---
 

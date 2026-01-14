@@ -1,20 +1,11 @@
 ---
 title: Managing you Docker images in the cloud with Azure Container Registry
 date: 2017-05-29
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- ACS
-- Azure Container Service
-- Azure Container Registry
-- Containers
-- Cloud-Native
+- azure
+- cloud-native
+- containers
+- docker
 showComments: true
 ---
 

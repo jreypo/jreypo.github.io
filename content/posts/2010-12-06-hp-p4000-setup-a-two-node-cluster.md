@@ -1,21 +1,10 @@
 ---
 title: 'HP P4000: Setup a two-node cluster'
 date: 2010-12-06
-categories:
-- HP
-- Storage
-- Virtualization
-- VMware
 tags:
-- Failover Manager
-- FOM
-- HP Lefthand
-- iSCSI
-- P4000 VSA
-- Storage
-- VMware
-- VMware Workstation
-- vSphere
+- storage
+- vmware
+- vsphere
 showComments: true
 ---
 

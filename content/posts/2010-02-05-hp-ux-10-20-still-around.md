@@ -1,15 +1,9 @@
 ---
 title: HP-UX 10.20, still around :-)
 date: 2010-02-05
-categories:
-- HP-UX
-- PA-RISC
 tags:
-- '10.20'
-- D330
-- HP-UX
-- HP9000
-- PA-RISC
+- hp-servers
+- hp-ux
 showComments: true
 ---
 

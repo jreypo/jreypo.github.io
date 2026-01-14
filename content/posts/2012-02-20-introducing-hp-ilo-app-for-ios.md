@@ -1,16 +1,8 @@
 ---
 title: Introducing HP iLO app for iOS
 date: 2012-02-20
-categories:
-- HP
 tags:
-- HP
-- HP BladeSystem
-- iLO
-- iOS
-- iPad
-- iPhone
-- ProLiant
+- hp-servers
 showComments: true
 ---
 

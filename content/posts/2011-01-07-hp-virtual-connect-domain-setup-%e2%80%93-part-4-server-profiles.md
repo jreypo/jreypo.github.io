@@ -1,19 +1,10 @@
 ---
 title: 'HP Virtual Connect Domain Setup – Part 4: Server Profiles'
 date: 2011-01-07
-categories:
-- HP
-- Networking
-- Virtualization
 tags:
-- HP
-- HP BladeSystem
+- hp-servers
 - networking
-- VC server profiles
-- VCEM
-- VCM
-- Virtual Connect
-- Virtual Connect Manager
+- vmware
 showComments: true
 image:
   feature: banner-blades.png

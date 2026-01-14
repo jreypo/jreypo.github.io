@@ -1,12 +1,9 @@
 ---
 title: Howto get VxVM diskgroup version
 date: 2010-05-21
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- HP-UX
-- VxVM
+- hp-ux
+- storage
 showComments: true
 ---
 

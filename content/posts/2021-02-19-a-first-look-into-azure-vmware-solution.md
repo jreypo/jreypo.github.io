@@ -1,17 +1,9 @@
 ---
 title: A first look into Azure VMware Solution
 date: 2021-02-19 15:00:00 +0100
-categories:
-- Microsoft
-- VMware
-- Cloud
 tags:
-- Microsoft
-- AVS
-- Azure
-- VMware
-- Azure VMware Solution
-- Cloud
+- azure
+- vmware
 showComments: true
 ---
 

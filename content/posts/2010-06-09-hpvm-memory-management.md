@@ -1,18 +1,9 @@
 ---
 title: HPVM memory management
 date: 2010-06-09
-categories:
-- HP
-- HP-UX
-- Itanium
-- Virtualization
 tags:
-- Autmatic Memory Reallocation
-- HP-UX
-- HPVM
-- HPVM 4.2
-- HPVM Dynamic Memory
-- Integrity VMs
+- hp-servers
+- hp-ux
 showComments: true
 ---
 

@@ -1,14 +1,10 @@
 ---
 title: There is still time! Join VMware in the next step forward in Cloud infrastructure!
 date: 2011-07-11
-categories:
-- Virtualization
-- VMware
 tags:
-- Cloud
-- Virtualization
-- VMware
-- vSphere
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

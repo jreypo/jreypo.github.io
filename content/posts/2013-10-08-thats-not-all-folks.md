@@ -1,13 +1,8 @@
 ---
 title: That's NOT all folks!
 date: 2013-10-08
-categories:
-- Blog
-- Personal
 tags:
-- Blogging
-- Personal
-- VMware
+- vmware
 showComments: true
 ---
 

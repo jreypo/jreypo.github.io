@@ -1,18 +1,11 @@
 ---
 title: Mapping VLAN to ports in HPVM
 date: 2011-01-17
-categories:
-- HP-UX
-- Sysadmin
-- Virtualization
 tags:
-- HP-UX
-- HPVM
-- hpvmnet
-- Integrity VMs
+- hp-servers
+- hp-ux
 - networking
 - sysadmin
-- systems administration
 showComments: true
 ---
 

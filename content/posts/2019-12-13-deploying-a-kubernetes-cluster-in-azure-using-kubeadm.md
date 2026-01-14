@@ -1,22 +1,13 @@
 ---
 title: Deploying a Kubernetes cluster in Azure using kubeadm
 date: 2019-12-13 00:15:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
-- DevOps
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- AKS
-- Kubeadm
-- DevOps
-- Azure
+- aks
+- azure
+- cloud-native
+- containers
+- devops
+- kubernetes
 showComments: true
 ---
 

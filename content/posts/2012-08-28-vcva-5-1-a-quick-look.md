@@ -1,17 +1,9 @@
 ---
 title: vCSA 5.1 – A quick look
 date: 2012-08-28
-categories:
-- Virtualization
-- VMware
 tags:
-- vCenter Server
-- vCenter Server Appliance
-- vCloud Suite
-- VCSA
-- VMware
-- vSphere
-- vSphere 5.1
+- vmware
+- vsphere
 showComments: true
 ---
 

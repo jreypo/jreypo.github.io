@@ -1,16 +1,10 @@
 ---
 title: VMware Lightwave multi-node domain setup
 date: 2016-01-11
-categories:
-- Cloud-Native
-- DevOps
-- VMware
 tags:
-- Cloud
 - cloud-native
 - containers
-- Photon
-- Lightwave
+- vmware
 showComments: true
 ---
 

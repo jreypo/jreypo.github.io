@@ -1,20 +1,11 @@
 ---
 title: vCenter Server Appliance. Part 2 - vCenter associated services
 date: 2011-11-30
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi Netdumper
-- ESXi Syslog Collector
-- SLES 11
-- SuSE Linux
-- vCenter Server
-- vCenter Server Appliance
-- VCSA
-- VMware
-- vSphere 5
-- vSphere Auto Deploy
+- esxi
+- linux
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,16 +1,11 @@
 ---
 title: SSH foolishness
 date: 2010-02-08
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- commands
-- HP-UX
+- hp-ux
 - networking
-- ssh
+- scripting
 - sysadmin
-- systems administration
 showComments: true
 ---
 

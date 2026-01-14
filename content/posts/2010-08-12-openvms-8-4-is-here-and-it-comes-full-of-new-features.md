@@ -1,14 +1,8 @@
 ---
 title: OpenVMS 8.4 is here and it comes full of new features
 date: 2010-08-12
-categories:
-- OpenVMS
 tags:
-- Alpha
-- HPVM
-- Insight Dynamics
-- Itanium
-- OpenVMS
+- hp-servers
 showComments: true
 image:
   feature: banner.JPG

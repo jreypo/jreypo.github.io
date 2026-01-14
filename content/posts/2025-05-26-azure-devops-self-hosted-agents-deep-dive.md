@@ -2,16 +2,11 @@
 title: Azure DevOps Self-Hosted Agents Deep Dive
 date: 2025-06-12T12:09:00+01:00
 description: "Set up and manage your own build agents on Linux and Docker"
-categories:
-- Microsoft
-- DevOps
-- Homelab
 tags:
-- Microsoft
-- Azure DevOps Server
-- Azure DevOps
-- DevOps
-- Homelab
+- azure
+- azure-devops
+- devops
+- homelab
 showComments: true
 ---
 

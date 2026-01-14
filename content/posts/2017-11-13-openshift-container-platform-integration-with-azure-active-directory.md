@@ -1,22 +1,13 @@
 ---
 title: OpenShift Container Platform integration with Azure Active Directory
 date: 2017-11-13
-categories:
-- Containers
-- Microsoft
-- Red Hat
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- OpenShift
-- Red Hat
-- Containers
-- Kubernetes
-- Cloud-Native
-- Azure Active Directory
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
+- linux
 showComments: true
 ---
 

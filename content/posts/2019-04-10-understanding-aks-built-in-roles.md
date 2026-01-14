@@ -1,21 +1,13 @@
 ---
 title: Understanding AKS built-in roles
 date: 2019-04-10 09:55:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- AKS
-- Azure Kubernetes Service
-- DevOps
-- Azure
+- aks
+- azure
+- cloud-native
+- containers
+- devops
+- kubernetes
 showComments: true
 ---
 

@@ -1,17 +1,11 @@
 ---
 title: Win a free pass for VMworld 2012 or Microsoft TechEd 2012 thanks to Veeam
 date: 2012-03-13
-categories:
-- Microsoft
-- Veeam
-- Virtualization
-- VMware
 tags:
-- Microsoft
-- Promotion
-- Veeam
-- Virtualization
-- VMware
+- azure
+- career
+- virtualization
+- vmware
 meta:
 showComments: true
 ---

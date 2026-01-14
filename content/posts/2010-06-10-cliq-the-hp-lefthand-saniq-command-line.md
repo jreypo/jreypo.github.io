@@ -1,16 +1,8 @@
 ---
 title: CLIQ – The HP Lefthand SAN/iQ command-line
 date: 2010-06-10
-categories:
-- HP
-- Storage
 tags:
-- CLIQ
-- HP Lefthand
-- iSCSI
-- P4000 VSA
-- SAN/iQ
-- Storage
+- storage
 showComments: true
 ---
 

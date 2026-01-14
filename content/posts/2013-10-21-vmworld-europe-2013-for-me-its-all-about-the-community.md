@@ -1,14 +1,9 @@
 ---
 title: VMworld Europe 2013. For me it’s all about the Community
 date: 2013-10-21
-categories:
-- VMware
 tags:
-- Community
-- vExpert
-- VMware
-- VMworld
-- VMworld 2013
+- career
+- vmware
 showComments: true
 ---
 

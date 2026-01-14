@@ -1,13 +1,9 @@
 ---
 title: How to assign fixed IP addresses in Neutron
 date: 2016-06-08
-categories:
-- OpenStack
-- Networking
 tags:
-- OpenStack
-- Neutron
 - networking
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

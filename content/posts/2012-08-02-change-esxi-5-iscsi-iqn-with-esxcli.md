@@ -1,20 +1,12 @@
 ---
 title: Change ESXi 5 iSCSI iqn with esxcli
 date: 2012-08-02 01:15:00 +0100
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi
-- ESXi5
-- iqn
-- iSCSI
+- esxi
+- scripting
+- storage
 - sysadmin
-- systems administration
-- vSphere
-- vSphere CLI
+- vsphere
 showComments: true
 ---
 

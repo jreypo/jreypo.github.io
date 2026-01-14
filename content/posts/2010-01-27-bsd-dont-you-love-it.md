@@ -1,15 +1,9 @@
 ---
 title: BSD, don't you love it?
 date: 2010-01-27
-categories:
-- BSD
-- Virtualization
 tags:
-- DragonflyBSD
-- FreeBSD
-- NetBSD
-- OpenBSD
-- VirtualBox
+- bsd
+- virtualization
 showComments: true
 ---
 

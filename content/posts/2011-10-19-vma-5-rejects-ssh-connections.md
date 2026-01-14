@@ -1,17 +1,10 @@
 ---
 title: vMA 5 rejects SSH connections
 date: 2011-10-19
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ssh
 - sysadmin
-- systems administration
-- vMA5
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

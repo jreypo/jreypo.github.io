@@ -1,19 +1,12 @@
 ---
 title: My Docker workflow in Windows Subsystem for Linux
 date: 2017-04-17
-categories:
-- Containers
-- Microsoft
-- Windows 10
 tags:
-- Docker
-- Docker Toolbox
-- Bash
-- Windows Subsystem for Linux
-- WSL
-- Microsoft
-- Windows 10
-- Bash on Ubuntu on Windows
+- azure
+- containers
+- docker
+- scripting
+- windows
 showComments: true
 ---
 

@@ -1,17 +1,10 @@
 ---
 title: OpenBSD network interface trunking
 date: 2010-08-11
-categories:
-- BSD
-- Networking
-- Sysadmin
 tags:
-- LACP
+- bsd
 - networking
-- OpenBSD
 - sysadmin
-- systems administration
-- trunk
 showComments: true
 ---
 

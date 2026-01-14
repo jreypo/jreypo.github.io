@@ -1,22 +1,12 @@
 ---
 title: Network configuration in Photon OS
 date: 2016-02-08
-categories:
-- Cloud-Native
-- DevOps
-- VMware
-- Sysadmin
-- Linux
 tags:
-- Cloud
 - cloud-native
-- Photon
-- Linux
-- sysadmin
-- systems management
-- systemd
-- networkd
 - devops
+- linux
+- sysadmin
+- vmware
 showComments: true
 ---
 

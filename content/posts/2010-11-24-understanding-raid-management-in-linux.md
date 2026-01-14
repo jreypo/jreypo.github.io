@@ -1,18 +1,9 @@
 ---
 title: Understanding RAID management in Linux
 date: 2010-11-24
-categories:
-- Linux
 tags:
-- device-mapper
-- dmraid
-- dmsetup
-- EVMS
-- Linux
-- Linux LVM
-- MD
-- mdadm
-- Raid
+- linux
+- storage
 showComments: true
 ---
 

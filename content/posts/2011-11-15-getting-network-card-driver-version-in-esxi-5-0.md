@@ -1,25 +1,12 @@
 ---
 title: Getting network card driver version in ESXi 5.0
 date: 2011-11-15
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi
-- ESXi Shell
-- ESXi TSM
-- ESXi5
-- ethtool
-- PowerCLI
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- vMA
-- vmkload_mod
-- vSphere
-- vSphere 5
-- vSphere CLI
+- vmware
+- vsphere
 showComments: true
 ---
 

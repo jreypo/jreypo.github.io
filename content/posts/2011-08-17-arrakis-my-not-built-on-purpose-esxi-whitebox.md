@@ -1,14 +1,11 @@
 ---
 title: Arrakis, my not built on purpose ESXi whitebox
 date: 2011-08-17
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi
+- esxi
 - homelab
-- Virtualization
-- VMware
+- virtualization
+- vmware
 showComments: true
 ---
 

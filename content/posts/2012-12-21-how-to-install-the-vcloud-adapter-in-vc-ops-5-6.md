@@ -1,16 +1,8 @@
 ---
 title: How to install the vCloud Adapter in vCenter Operations 5.6
 date: 2012-12-21
-categories:
-- Virtualization
-- VMware
 tags:
-- vC Ops
-- vCenter Operations
-- vCenter Operations Manager
-- vCloud Adapter
-- vCloud Director
-- VMware
+- vmware
 showComments: true
 ---
 

@@ -1,13 +1,9 @@
 ---
 title: '#vExpert 2011... Who?! Me?! Really?!'
 date: 2011-07-02
-categories:
-- Personal
-- Virtualization
-- VMware
 tags:
-- vExpert
-- VMware
+- career
+- vmware
 showComments: true
 ---
 

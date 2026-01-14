@@ -1,16 +1,10 @@
 ---
 title: Mirroring VxVM root disk group
 date: 2010-08-16 09:46:47.000000000 +02:00
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- EFI
-- HP-UX
+- hp-ux
+- storage
 - sysadmin
-- systems administration
-- vxrootmir
-- VxVM
 showComments: true
 ---
 

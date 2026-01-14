@@ -1,11 +1,6 @@
 ---
 title: Merry Christmas!
 date: 2010-12-22
-categories:
-- Personal
-tags:
-- Christmas
-- Personal
 showComments: true
 ---
 

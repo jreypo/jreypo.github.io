@@ -1,20 +1,12 @@
 ---
 title: Kubernetes on Azure with Azure Container Service
 date: 2017-09-05
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- ACS
-- Azure Container Service
-- Containers
-- Kubernetes
-- Cloud-Native
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

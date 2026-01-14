@@ -1,21 +1,12 @@
 ---
 title: How to get ESXi network connections using PowerCLI
 date: 2011-09-07
-categories:
-- Sysadmin
-- VMware
-- Windows
 tags:
-- esxcli
-- ESXi4
-- ESXi5
-- Get-EsxCli
-- PowerCLI
-- Powershell
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,14 +1,8 @@
 ---
 title: Some vCenter Chargeback Manager tips
 date: 2013-10-22
-categories:
-- Virtualization
-- VMware
 tags:
-- CBM
-- Chargeback Manager
-- vCenter Chargeback
-- VMware
+- vmware
 showComments: true
 ---
 

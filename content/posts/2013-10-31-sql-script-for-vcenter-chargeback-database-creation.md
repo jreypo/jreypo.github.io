@@ -1,15 +1,8 @@
 ---
 title: SQL script for vCenter Chargeback database creation
 date: 2013-10-31
-categories:
-- Virtualization
-- VMware
 tags:
-- CBM
-- Chargeback Manager
-- SQL
-- vCenter Chargeback
-- VMware
+- vmware
 showComments: true
 ---
 

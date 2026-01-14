@@ -1,16 +1,9 @@
 ---
 title: 'VMware Integrated #OpenStack is GA!'
 date: 2015-03-16
-categories:
-- OpenStack
-- VMware
 tags:
-- Cloud
-- OpenStack
-- SDDC
-- VIO
-- VMware
-- VMware Integrated OpenStack
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

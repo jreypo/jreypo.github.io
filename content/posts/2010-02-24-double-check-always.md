@@ -1,17 +1,10 @@
 ---
 title: Double check! Always!
 date: 2010-02-24
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- errors
-- HP-UX
-- NFS
-- NFS Toolkit
-- ServiceGuard
+- hp-ux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 

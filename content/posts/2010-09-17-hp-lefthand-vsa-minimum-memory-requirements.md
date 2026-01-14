@@ -1,14 +1,9 @@
 ---
 title: HP Lefthand VSA minimum memory requirements
 date: 2010-09-17
-categories:
-- Storage
-- Virtualization
 tags:
-- HP Lefthand
-- P4000 VSA
-- Storage
-- VMware
+- storage
+- vmware
 showComments: true
 ---
 

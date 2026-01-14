@@ -1,19 +1,11 @@
 ---
 title: Managing your vSphere cluster configuration with PowerCLI
 date: 2011-06-06
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- PowerCLI
-- Powershell
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- VMware DRS
-- VMware HA
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

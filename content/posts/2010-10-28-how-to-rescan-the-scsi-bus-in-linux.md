@@ -1,18 +1,10 @@
 ---
 title: How to re-scan the SCSI bus in Linux
 date: 2010-10-28
-categories:
-- HP
-- Linux
-- Storage
-- Sysadmin
 tags:
-- hp_rescan
-- Linux
-- SCSI
-- Storage
+- linux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 

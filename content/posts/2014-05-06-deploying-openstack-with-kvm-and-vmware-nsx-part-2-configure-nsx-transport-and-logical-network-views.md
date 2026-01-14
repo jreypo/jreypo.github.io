@@ -1,23 +1,11 @@
 ---
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 2: Configure NSX Transport and Logical network views'
 date: 2014-05-06
-categories:
-- Cloud
-- Linux
-- Networking
-- OpenStack
-- VMware
 tags:
-- Cloud
-- network virtualization
 - networking
-- NSX
-- NSX-MH
-- Open vSwitch
-- OpenFlow
-- OpenStack
-- OVS
-- VMware
+- nsx
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

@@ -1,16 +1,10 @@
 ---
 title: Machinfo on PA-RISC systems
 date: 2010-02-17
-categories:
-- HP-UX
-- PA-RISC
 tags:
-- 11iv1
-- 11iv2
-- commands
-- HP-UX
-- machinfo
-- PA-RISC
+- hp-servers
+- hp-ux
+- scripting
 showComments: true
 ---
 

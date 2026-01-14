@@ -1,20 +1,11 @@
 ---
 title: vg00 mirroring
 date: 2010-01-27
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- 11iv2
-- 11iv3
-- HP-UX
-- Itanium
-- LVM
-- Mirror-UX
-- PA-RISC
-- Raid
+- hp-servers
+- hp-ux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 
@@ -78,7 +69,8 @@ And it's done. To check that everything correct.
 
 ```text
 root@ayane:/# vgdisplay -v vg00
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg00
 VG Write Access             read/write
 VG Status                   available
@@ -98,11 +90,13 @@ Total PVG                   0
 Total Spare PVs             0
 Total Spare PVs in use      0
 
- --- Logical volumes ---
+ --- Logical volumes 
+---
 .
 .
 .
- --- Physical volumes ---
+ --- Physical volumes 
+---
  PV Name                     /dev/dsk/c0t5d0
  PV Status                   available
  Total PE                    4374

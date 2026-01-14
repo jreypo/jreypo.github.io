@@ -1,13 +1,8 @@
 ---
 title: A new chapter in my life, a new era for the blog
 date: 2021-01-08 00:10:00 +0100
-categories:
-- Personal
-- Blog
 tags:
-- Blogging
-- Career
-- Personal
+- career
 showComments: true
 ---
 

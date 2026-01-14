@@ -1,23 +1,13 @@
 ---
 title: Using Azure CLI to get info about your AKS cluster
 date: 2019-04-09 11:10:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
-- DevOps
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- AKS-Engine
-- Azure Kubernetes Service
-- DevOps
-- Azure
-- Azure CLI
+- aks
+- azure
+- cloud-native
+- containers
+- devops
+- kubernetes
 showComments: true
 ---
 

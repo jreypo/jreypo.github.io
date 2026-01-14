@@ -1,21 +1,13 @@
 ---
 title: Kubernetes version upgrade with AKS-Engine
 date: 2019-02-07 19:45:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- AKS-Engine
-- Azure Kubernetes Service
-- DevOps
-- Azure
+- aks
+- azure
+- cloud-native
+- containers
+- devops
+- kubernetes
 showComments: true
 ---
 

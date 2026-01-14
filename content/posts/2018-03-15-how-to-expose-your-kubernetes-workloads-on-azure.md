@@ -1,22 +1,14 @@
 ---
 title: How to expose your Kubernetes workloads on Azure
 date: 2018-03-15
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- Helm
-- Nginx
-- AKS
-- Azure Container Service
+- aks
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
+- networking
 showComments: true
 ---
 

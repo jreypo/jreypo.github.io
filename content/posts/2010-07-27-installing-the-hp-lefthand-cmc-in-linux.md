@@ -1,14 +1,9 @@
 ---
 title: Installing the HP Lefthand CMC in Linux
 date: 2010-07-27
-categories:
-- Linux
-- Storage
 tags:
-- HP Lefthand
-- Lefthand CMC
-- Linux
-- Storage
+- linux
+- storage
 showComments: true
 ---
 

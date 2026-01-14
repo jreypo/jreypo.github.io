@@ -2,16 +2,11 @@
 title: Level up your homelab automation with Azure DevOps Server
 date: 2025-04-28 10:10:00 +0100
 description: "Run Azure DevOps Server Express in your homelab for free CI/CD pipelines"
-categories:
-- Microsoft
-- DevOps
-- Homelab
 tags:
-- Microsoft
-- Azure DevOps Server
-- DevOps
-- Homelab
-- Self-Hosting
+- azure
+- azure-devops
+- devops
+- homelab
 showComments: true
 ---
 

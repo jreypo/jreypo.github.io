@@ -1,17 +1,12 @@
 ---
 title: Can VMware Workstation 8 be a boost for Hyper-V adoption? And ESXi 5?
 date: 2011-10-04
-categories:
-- Microsoft
-- Virtualization
-- VMware
 tags:
-- ESXi5
+- azure
+- esxi
 - homelab
-- Hyper-V
-- Microsoft
-- VMware
-- VMware Workstation 8
+- vmware
+- windows
 showComments: true
 ---
 

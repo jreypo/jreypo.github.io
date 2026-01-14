@@ -1,18 +1,11 @@
 ---
 title: More HP sauce on ESXi 5.0
 date: 2012-02-24
-categories:
-- HP
-- Virtualization
-- VMware
 tags:
-- ESXi5
-- HP
-- HP ESXi
-- hponcfg
-- ProLiant
-- VMware
-- vSphere
+- esxi
+- hp-servers
+- vmware
+- vsphere
 showComments: true
 ---
 

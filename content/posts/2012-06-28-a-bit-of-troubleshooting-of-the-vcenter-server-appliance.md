@@ -1,20 +1,11 @@
 ---
 title: A bit of troubleshooting of the vCenter Server Appliance
 date: 2012-06-28
-categories:
-- Linux
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- Linux
+- linux
 - sysadmin
-- systems administration
-- vCenter Server
-- vCenter Server Appliancev
-- VCSA
-- VMware
-- vSphere 5
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,17 +1,12 @@
 ---
 title: Virtual machines HDD format conversion with vSphere PowerCLI
 date: 2011-01-26
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- PowerCLI
-- Storage
+- scripting
+- storage
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

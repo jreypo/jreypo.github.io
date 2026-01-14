@@ -1,17 +1,9 @@
 ---
 title: Identifying the HP EVA LUNs on HP-UX 11iv3
 date: 2010-06-15
-categories:
-- HP-UX
-- Storage
-- Sysadmin
 tags:
-- 11iv3
-- Command View
-- EVA
-- HP-UX
-- scsimgr
-- Storage
+- hp-ux
+- storage
 showComments: true
 ---
 

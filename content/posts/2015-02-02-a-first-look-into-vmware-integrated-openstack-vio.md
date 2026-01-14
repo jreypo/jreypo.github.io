@@ -1,22 +1,13 @@
 ---
 title: 'A first look into VMware Integrated #OpenStack (VIO)'
 date: 2015-02-02
-categories:
-- OpenStack
-- VMware
 tags:
-- Cloud
-- DVS
-- network virtualization
-- NSX
-- NSX for vSphere
-- OpenStack
-- SDDC
-- VIO
-- VMware
-- VMware Integrated OpenStack
-- VSAN
-- vSphere
+- networking
+- nsx
+- openstack
+- storage
+- vmware
+- vsphere
 showComments: true
 image:
   feature: openstack-banner.jpg

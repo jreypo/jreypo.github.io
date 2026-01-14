@@ -1,24 +1,13 @@
 ---
 title: Get the iSCSI iqn of an ESX(i) using vSphere CLI
 date: 2010-12-13
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- esxcfg-scsidevs
-- ESXi
+- esxi
 - homelab
-- iSCSI
+- storage
 - sysadmin
-- systems administration
-- vicfg-iscsi
-- vMA
-- vmkiscsi-tool
-- VMware
-- vSphere
-- vSphere CLI
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,16 +1,8 @@
 ---
 title: HP Technology@Work On Tour 2011 - Madrid
 date: 2011-05-05
-categories:
-- HP
 tags:
-- Cloud
-- Converged Infrastructure
-- HP
-- HP BladeSystem
-- HPTAW2011
-- Integrity
-- ProLiant
+- hp-servers
 showComments: true
 image:
   feature: banner.JPG

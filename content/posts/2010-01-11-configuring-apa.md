@@ -1,18 +1,9 @@
 ---
 title: Configuring APA
 date: 2010-01-11
-categories:
-- HP-UX
-- Networking
-- Sysadmin
 tags:
-- 11iv3
-- APA
-- HP-UX
-- nwmgr
-- SMH
+- hp-ux
 - sysadmin
-- systems administration
 showComments: true
 ---
 

@@ -1,21 +1,12 @@
 ---
 title: Getting started with Azure Red Hat OpenShift
 date: 2019-11-18 11:45:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
-- Red Hat
 tags:
-- Microsoft
-- Containers
-- ARO
-- Red Hat
-- OpenShift
-- Cloud-Native
-- Azure
+- azure
+- cloud-native
+- containers
+- kubernetes
+- linux
 showComments: true
 ---
 

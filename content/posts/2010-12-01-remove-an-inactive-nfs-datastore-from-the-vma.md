@@ -1,24 +1,14 @@
 ---
 title: Remove an inactive NFS datastore using vSphere CLI from vMA
 date: 2010-12-01
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESX4
-- esxcfg-nas
-- ESXi
-- ESXi4
+- esxi
 - homelab
-- Linux
-- NFS
+- linux
+- storage
 - sysadmin
-- systems administration
-- vMA
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

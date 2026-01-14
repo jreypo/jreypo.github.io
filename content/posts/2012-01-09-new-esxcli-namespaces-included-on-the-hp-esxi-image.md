@@ -1,17 +1,12 @@
 ---
 title: New esxcli namespaces included on the HP ESXi image
 date: 2012-01-09
-categories:
-- HP
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi5
-- HP
-- HP ESXi
-- VMware
-- vSphere 5
+- esxi
+- hp-servers
+- scripting
+- vmware
+- vsphere
 
 showComments: true
 ---

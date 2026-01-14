@@ -1,10 +1,8 @@
 ---
 title: Console2, a Windows CMD replacement
 date: 2010-01-22
-categories:
-- Windows
 tags:
-- Windows
+- windows
 showComments: true
 ---
 

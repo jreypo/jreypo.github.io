@@ -1,21 +1,10 @@
 ---
 title: How to clean Ironic after a failed overcloud deployment
 date: 2016-09-30
-categories:
-- OpenStack
-- Networking
-- Red Hat
 tags:
-- OpenStack
-- Neutron
+- linux
 - networking
-- Red Hat
-- TripleO
-- Red Hat OSP
-- Ironic
-- Heat
-- RDO
-- OSP-d
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

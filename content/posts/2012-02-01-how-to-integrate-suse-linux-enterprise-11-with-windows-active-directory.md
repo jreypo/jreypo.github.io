@@ -1,22 +1,12 @@
 ---
 title: How to integrate SUSE Linux Enterprise 11 with Windows Active Directory
 date: 2012-02-01
-categories:
-- Linux
-- Sysadmin
-- Windows
 tags:
-- Active Directory
-- Kerberos
-- Linux
-- Microsoft
-- samba
-- SLES11
-- SUSE
+- azure
+- linux
+- security
 - sysadmin
-- systems administration
-- Windows
-- yast2
+- windows
 showComments: true
 ---
 

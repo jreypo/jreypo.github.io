@@ -1,19 +1,11 @@
 ---
 title: How to upgrade the vMA 5
 date: 2012-03-20
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
 - sysadmin
-- systems administration
-- Virtualization
-- vMA
-- vMA5
-- VMware
-- vSphere
-- vSphere 5
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,21 +1,12 @@
 ---
 title: Configure NFS shares in Openfiler for your vSphere homelab
 date: 2010-11-30
-categories:
-- Storage
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESX4
-- ESXi
-- ESXi4
+- esxi
 - homelab
-- NFS
-- Openfiler
-- Storage
-- VMware
-- vSphere
+- storage
+- vmware
+- vsphere
 showComments: true
 ---
 

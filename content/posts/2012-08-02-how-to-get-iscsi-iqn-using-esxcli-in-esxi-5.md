@@ -1,22 +1,12 @@
 ---
 title: How to get iSCSI iqn using esxcli in ESXi 5
 date: 2012-08-02 00:15:00 +0100
-categories:
-- Storage
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi
-- ESXi5
-- iqn
-- iSCSI
-- Storage
+- esxi
+- scripting
+- storage
 - sysadmin
-- systems administration
-- vSphere
-- vSphere CLI
+- vsphere
 showComments: true
 ---
 

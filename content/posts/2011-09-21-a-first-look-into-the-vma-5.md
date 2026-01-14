@@ -1,16 +1,10 @@
 ---
 title: A first look into the vMA 5
 date: 2011-09-21
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi
-- ESXi5
-- vCenter Server
-- vMA5
-- VMware
-- vSphere
+- esxi
+- vmware
+- vsphere
 showComments: true
 ---
 

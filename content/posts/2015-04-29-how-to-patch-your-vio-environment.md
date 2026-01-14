@@ -1,16 +1,9 @@
 ---
 title: How to patch your VIO environment
 date: 2015-04-29
-categories:
-- OpenStack
-- VMware
 tags:
-- Cloud
-- OpenStack
-- SDDC
-- VIO
-- VMware
-- VMware Integrated OpenStack
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

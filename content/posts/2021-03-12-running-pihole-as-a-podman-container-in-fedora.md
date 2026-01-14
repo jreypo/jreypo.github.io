@@ -1,15 +1,12 @@
 ---
 title: Running pi-hole as a podman container in Fedora
 date: 2021-03-12 19:00:00 +0100
-categories:
-- Linux
 tags:
-- Linux
-- Podman
-- Fedora
-- Networking
-- Cloud-Native
-- Homelab
+- cloud-native
+- containers
+- homelab
+- linux
+- networking
 showComments: true
 ---
 I run Pi-Hole at home to filter and block ad traffic, is a fantastic piece of of software that helps me to keep me and my son away from unwanted ads. It can be run on a VM or even better a [Docker container](https://github.com/pi-hole/docker-pi-hole). If you are not doing it yet I encourage you to visit [Pi-Hole homepage](https://pi-hole.net/) and take a look at the project and donate or contribute in [GitHub](https://github.com/pi-hole) to keep it running.

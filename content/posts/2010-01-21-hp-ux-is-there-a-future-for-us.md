@@ -1,15 +1,10 @@
 ---
 title: HP-UX.. Is there a future for us?
 date: 2010-01-21
-categories:
-- HP
-- HP-UX
-- Opinion
 tags:
-- HP
-- HP-UX
-- Itanium
-- Opinion
+- hp-servers
+- hp-ux
+- opinion
 showComments: true
 ---
 

@@ -1,23 +1,13 @@
 ---
 title: List packages installed in ESXi 4.1 and 5.0
 date: 2011-10-27
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- Busybox
-- esxcli
-- ESXi Shell
-- ESXi TSM
-- ESXi4
-- ESXi5
-- ipkg
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- Virtualization
-- VMware
-- vSphere
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

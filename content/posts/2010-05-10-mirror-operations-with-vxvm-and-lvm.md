@@ -1,16 +1,10 @@
 ---
 title: Mirror operations with VxVM and LVM
 date: 2010-05-10
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- HP-UX
-- LVM
-- Mirror-UX
+- hp-ux
+- storage
 - sysadmin
-- systems administration
-- VxVM
 showComments: true
 ---
 
@@ -46,7 +40,8 @@ Volume Group configuration for /dev/vg_oracle has been saved in /etc/lvmconf/vg_
 
 ```text
 [root@sheldon] / # lvdisplay /dev/vg_oracle/lv_oracle
---- Logical volumes ---
+--- Logical volumes 
+---
 LV Name                     /dev/vg_oracle/lv_oracle
 VG Name                     /dev/vg_oracle
 LV Permission               read/write                

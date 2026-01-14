@@ -1,22 +1,12 @@
 ---
 title: First steps with Pivotal Lattice
 date: 2015-10-02
-categories:
-- Cloud-Native
-- DevOps
-- Pivotal
 tags:
-- Cloud
-- Cloud Foundry
 - cloud-native
 - containers
 - devops
-- Docker
-- Lattice
-- lattice.cf
-- ltc
-- Pivotal
-- vagrant
+- docker
+- virtualization
 showComments: true
 ---
 

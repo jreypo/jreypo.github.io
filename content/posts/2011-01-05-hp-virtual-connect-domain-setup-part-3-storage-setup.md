@@ -1,20 +1,10 @@
 ---
 title: 'HP Virtual Connect Domain Setup - Part 3: Storage setup'
 date: 2011-01-05
-categories:
-- HP
-- Networking
-- Storage
-- Virtualization
 tags:
-- Fibre Channel
-- HP
-- HP BladeSystem
-- Storage
-- VCEM
-- VCM
-- Virtual Connect
-- Virtual Connect Manager
+- hp-servers
+- storage
+- vmware
 showComments: true
 image:
   feature: banner-blades.png

@@ -1,20 +1,9 @@
 ---
 title: iSCSI initiator configuration in RedHat Enterprise Linux 5
 date: 2011-02-22
-categories:
-- Linux
-- Red Hat
-- Storage
-- Sysadmin
 tags:
-- HP Lefthand
-- HP P4000
-- iSCSI
-- iscsi-initiator-utils
-- Linux
-- Red Hat
-- RHEL5
-- Storage
+- linux
+- storage
 - sysadmin
 showComments: true
 ---

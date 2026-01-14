@@ -1,18 +1,10 @@
 ---
 title: 'HP Virtual Connect Domain Setup - Part 2: Network Setup'
 date: 2010-12-21
-categories:
-- HP
-- Networking
-- Virtualization
 tags:
-- HP
-- HP BladeSystem
+- hp-servers
 - networking
-- VCEM
-- VCM
-- Virtual Connect
-- Virtual Connect Manager
+- vmware
 showComments: true
 image:
   feature: banner-blades.png

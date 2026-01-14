@@ -1,19 +1,12 @@
 ---
 title: How to configure a remote syslog server for NSX Controller
 date: 2015-09-30
-categories:
-- DevOps
-- VMware
 tags:
-- API
 - devops
-- network virtualization
-- NSX
-- NSX Controller
-- NSX for vSphere
-- REST
+- networking
+- nsx
+- scripting
 - sysadmin
-- syslog
 showComments: true
 ---
 

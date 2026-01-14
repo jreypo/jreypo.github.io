@@ -1,16 +1,9 @@
 ---
 title: vCenter Chargeback Manager services and processes
 date: 2014-01-30
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- CBM
-- Chargeback Manager
 - sysadmin
-- vCenter Chargeback
-- VMware
+- vmware
 showComments: true
 ---
 

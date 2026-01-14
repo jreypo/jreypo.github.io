@@ -1,14 +1,10 @@
 ---
 title: Change vSphere PowerCLI proxy settings
 date: 2011-01-24
-categories:
-- Virtualization
-- VMware
 tags:
-- PowerCLI
-- vCenter Server
-- VMware
-- vSphere
+- scripting
+- vmware
+- vsphere
 showComments: true
 ---
 

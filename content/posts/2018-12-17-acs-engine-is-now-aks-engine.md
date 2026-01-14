@@ -1,20 +1,11 @@
 ---
 title: ACS-Engine is now AKS-Engine
 date: 2018-12-17 10:02:00 +0100
-categories:
-- Containers
-- Microsoft
-- Cloud-Native
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- opensource
-- ACS Engine
-- AKS Engine
-- Azure Container Service
-- Azure Kubernetes Service
-- AKS
+- aks
+- azure
+- containers
+- kubernetes
 showComments: true
 ---
 

@@ -1,12 +1,9 @@
 ---
 title: OpenBSD and VirtualBox
 date: 2009-12-14
-categories:
-- BSD
-- Virtualization
 tags:
-- OpenBSD
-- VirtualBox
+- bsd
+- virtualization
 showComments: true
 ---
 

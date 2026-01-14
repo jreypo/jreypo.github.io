@@ -1,17 +1,11 @@
 ---
 title: Mobile Watchlist, a new app from VMware to monitor your vSphere virtual machines
 date: 2014-02-14
-categories:
-- Virtualization
-- VMware
 tags:
-- Android
-- iOS
-- Mobile
-- systems administration
-- Virtualization
-- VMware
-- vSphere
+- sysadmin
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

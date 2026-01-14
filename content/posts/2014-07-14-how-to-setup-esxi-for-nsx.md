@@ -1,19 +1,11 @@
 ---
 title: How to setup ESXi for NSX
 date: 2014-07-14
-categories:
-- Networking
-- Sysadmin
-- VMware
 tags:
-- ESXi
-- network virtualization
+- esxi
 - networking
-- NSX
-- NSX vSwitch
-- NSX-MH
-- nsxcli
-- VMware
+- nsx
+- vmware
 showComments: true
 ---
 

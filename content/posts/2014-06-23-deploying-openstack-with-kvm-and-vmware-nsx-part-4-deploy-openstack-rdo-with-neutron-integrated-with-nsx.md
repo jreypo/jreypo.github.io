@@ -1,28 +1,11 @@
 ---
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 4: Deploy OpenStack RDO with Neutron integrated with NSX'
 date: 2014-06-23
-categories:
-- Cloud
-- KVM
-- Linux
-- Networking
-- OpenStack
-- Red Hat
-- VMware
 tags:
-- Cloud
-- Linux
-- network virtualization
+- linux
 - networking
-- Neutron
-- Nova
-- NSX
-- NSX-MH
-- Open vSwitch
-- OpenStack
-- OVS
-- RDO
-- Red Hat
+- nsx
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

@@ -1,17 +1,10 @@
 ---
 title: Coming back to the IVM world
 date: 2010-03-02
-categories:
-- HP-UX
-- Itanium
-- Virtualization
 tags:
-- 11iv2
-- 11iv3
-- HP-UX
-- HPVM
-- Integrity VMs
-- LVM
+- hp-servers
+- hp-ux
+- storage
 showComments: true
 ---
 
@@ -32,7 +25,8 @@ Volume Group configuration for /dev/vg_vmtest has been saved in /etc/lvmconf/vg_
 Volume group "vg_vmtest" has been successfully extended.
 Volume Group configuration for /dev/vg_vmtest has been saved in /etc/lvmconf/vg_vmtest.conf
 [root@hpvmhost] ~ # vgdisplay -v vg_vmtest
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg_vmtest
 VG Write Access             read/write     
 VG Status                   available                 
@@ -52,7 +46,8 @@ Total PVG                   0        
 Total Spare PVs             0              
 Total Spare PVs in use      0                     
 
---- Physical volumes ---
+--- Physical volumes 
+---
 PV Name                     /dev/dsk/c15t7d1
 PV Name                     /dev/dsk/c5t7d1  Alternate Link
 PV Name                     /dev/dsk/c7t7d1  Alternate Link

@@ -1,14 +1,9 @@
 ---
 title: Open Source software and HP-UX
 date: 2010-02-05
-categories:
-- HP-UX
 tags:
-- commands
-- GNU
-- HP-UX
-- HP-UX Internet Express
-- opensource
+- hp-ux
+- scripting
 showComments: true
 ---
 

@@ -1,19 +1,10 @@
 ---
 title: Linux LVM commands in HP-UX
 date: 2010-02-16
-categories:
-- HP-UX
-- Linux
 tags:
-- 11iv3
-- commands
-- HP-UX
-- Linux LVM
-- LVM
-- lvs
-- pvs
-- scripts
-- vgs
+- hp-ux
+- scripting
+- storage
 showComments: true
 ---
 

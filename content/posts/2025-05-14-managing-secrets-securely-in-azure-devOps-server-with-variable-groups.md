@@ -2,13 +2,10 @@
 title: "Managing Secrets Securely in Azure DevOps Server with Variable Groups"
 date: 2025-05-13 13:10:00 +0100
 description: "Keep your credentials safe with encrypted Variable Groups in your pipelines"
-categories:
-- DevOps
-- Homelab
 tags:
-- Microsoft
-- Azure DevOps Server
-- DevOps
+- azure
+- azure-devops
+- devops
 showComments: true
 ---
 

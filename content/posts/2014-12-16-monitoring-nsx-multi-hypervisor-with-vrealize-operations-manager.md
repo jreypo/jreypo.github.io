@@ -1,22 +1,10 @@
 ---
 title: Monitoring NSX Multi-Hypervisor with vRealize Operations Manager
 date: 2014-12-16
-categories:
-- DevOps
-- Networking
-- Sysadmin
-- VMware
 tags:
-- network virtualization
 - networking
-- NSX
-- NSX-MH
-- vC Ops
-- vCenter Operations
-- vCenter Operations Manager
-- VMware
-- vRealize Operations
-- vROps
+- nsx
+- vmware
 showComments: true
 ---
 

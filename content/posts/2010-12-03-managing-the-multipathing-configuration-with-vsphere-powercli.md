@@ -1,22 +1,13 @@
 ---
 title: Managing the multipathing configuration with vSphere PowerCLI
 date: 2010-12-03
-categories:
-- Storage
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESXi
-- PowerCLI
-- Powershell
-- Storage
+- esxi
+- scripting
+- storage
 - sysadmin
-- systems administration
-- VI3
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

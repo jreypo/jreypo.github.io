@@ -1,18 +1,13 @@
 ---
 title: Python script to reconfigure an ESXi for HA
 date: 2016-01-23
-categories:
-- Virtualization
-- VMware
-- Sysadmin
-- DevOps
 tags:
 - devops
+- openstack
+- scripting
 - sysadmin
-- VIO
-- Python
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

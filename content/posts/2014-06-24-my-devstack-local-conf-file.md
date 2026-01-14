@@ -1,15 +1,9 @@
 ---
 title: My DevStack local.conf file
 date: 2014-06-24
-categories:
-- Cloud
-- OpenStack
 tags:
-- Cloud
-- developer
-- DevStack
-- Fedora
-- OpenStack
+- linux
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

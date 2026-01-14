@@ -1,13 +1,9 @@
 ---
 title: My first three months at Microsoft
 date: 2017-03-27
-categories:
-- Personal
-- Microsoft
 tags:
-- Personal
-- Microsoft
-- Career
+- azure
+- career
 showComments: true
 ---
 

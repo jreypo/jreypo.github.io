@@ -1,13 +1,9 @@
 ---
 title: Retrieving Veritas license information
 date: 2010-06-11
-categories:
-- HP-UX
 tags:
-- HP-UX
-- Veritas
-- VxFS
-- VxVM
+- hp-ux
+- storage
 showComments: true
 ---
 

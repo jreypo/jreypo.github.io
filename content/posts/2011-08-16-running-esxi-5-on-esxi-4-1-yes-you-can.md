@@ -1,17 +1,12 @@
 ---
 title: Running ESXi 5 on ESXi 4.1? Yes you can!
 date: 2011-08-16
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi
-- ESXi4
-- ESXi5
+- esxi
 - homelab
-- Virtualization
-- VMware
-- vSphere
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

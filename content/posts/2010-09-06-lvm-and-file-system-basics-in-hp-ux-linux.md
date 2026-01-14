@@ -1,21 +1,11 @@
 ---
 title: LVM and file system basics in HP-UX & Linux
 date: 2010-09-06
-categories:
-- HP-UX
-- Linux
-- Red Hat
-- Sysadmin
 tags:
-- ext3
-- fsadm
-- HP-UX
-- Linux
-- Linux LVM
-- LVM
-- mkfs.ext3
+- hp-ux
+- linux
+- storage
 - sysadmin
-- VxFS
 showComments: true
 ---
 
@@ -81,7 +71,8 @@ Volume group "/dev/vg_new" has been successfully created.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
 root@hp-ux:/#
 root@hp-ux:/# vgdisplay -v vg_new
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg_new
 VG Write Access             read/write     
 VG Status                   available                 
@@ -101,7 +92,8 @@ Total PVG                   0        
 Total Spare PVs             0              
 Total Spare PVs in use      0
 
-   --- Physical volumes ---
+   --- Physical volumes 
+---
    PV Name                     /dev/disk/disk10
    PV Status                   available                
    Total PE                    13       
@@ -128,7 +120,8 @@ For the whole disk the process is pretty much the same as in HP-UX.
   Physical volume "/dev/sdb" successfully created
 [root@rhel /]# pvdisplay /dev/sdb
   "/dev/sdb" is a new physical volume of "204.00 MB"
-  --- NEW Physical volume ---
+  --- NEW Physical volume 
+---
   PV Name               /dev/sdb
   VG Name               
   PV Size               204.00 MB
@@ -242,7 +235,8 @@ Now that the PVs are created we can proceed with the volume group creation.
   Using volume group(s) on command line
   Finding volume group "vg_new"
   /dev/hdc: open failed: No medium found
-  --- Volume group ---
+  --- Volume group 
+---
   VG Name               vg_new
   System ID             
   Format                lvm2
@@ -263,7 +257,8 @@ Now that the PVs are created we can proceed with the volume group creation.
   Free  PE / Size       100 / 400.00 MB
   VG UUID               lvrrnt-sHbo-eC8j-kC53-Mm5Z-IDDR-RJJtDr
 
-  --- Physical volumes ---
+  --- Physical volumes 
+---
   PV Name               /dev/sdc1     
   PV UUID               kD0jhk-ws8A-ke3L-a7nd-QucS-SAbH-BrmH28
   PV Status             allocatable
@@ -294,7 +289,8 @@ character device "/dev/vg_new/rlvol_test_S2".
 Logical volume "/dev/vg_new/lvol_test_S2" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
 root@hp-ux:~# lvdisplay  /dev/vg_new/lvol_test
---- Logical volumes ---
+--- Logical volumes 
+---
 LV Name                     /dev/vg_new/lvol_test
 VG Name                     /dev/vg_new
 LV Permission               read/write                
@@ -322,7 +318,8 @@ Logical volume "/dev/vg_new/lvol_test" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
 root@hp-ux:~#
 root@hp-ux:~# lvdisplay  /dev/vg_new/lvol_test
---- Logical volumes ---
+--- Logical volumes 
+---
 LV Name                     /dev/vg_new/lvol_test
 VG Name                     /dev/vg_new
 LV Permission               read/write                
@@ -361,7 +358,8 @@ Create the logical volume with the `lvcreate` command, the most basic options (`
 [root@rhel /]# lvcreate -n lv_test -L 256 vg_new
   Logical volume "lv_test" created
 [root@rhel /]# lvdisplay /dev/vg_new/lv_test
-  --- Logical volume ---
+  --- Logical volume 
+---
   LV Name                /dev/vg_new/lv_test
   VG Name                vg_new
   LV UUID                m5G2vT-dsE1-CycS-BMYR-3MYZ-4y8O-Mx04B8
@@ -387,7 +385,8 @@ Now extend the logical volume to 384 megabytes as we did in HP-UX.
   Logical volume lv_test successfully resized
 [root@rhel /]#
 [root@rhel /]# lvdisplay /dev/vg_new/lv_test
-  --- Logical volume ---
+  --- Logical volume 
+---
   LV Name                /dev/vg_new/lv_test
   VG Name                vg_new
   LV UUID                m5G2vT-dsE1-CycS-BMYR-3MYZ-4y8O-Mx04B8
@@ -449,7 +448,8 @@ Volume group "vg_new" has been successfully extended.
 Volume Group configuration for /dev/vg_new has been saved in /etc/lvmconf/vg_new.conf
 root@hp-ux:/#
 root@hp-ux:/# vgdisplay -v vg_new
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg_new
 VG Write Access             read/write     
 VG Status                   available                 
@@ -469,7 +469,8 @@ Total PVG                   0        
 Total Spare PVs             0              
 Total Spare PVs in use      0
 
-   --- Logical volumes ---
+   --- Logical volumes 
+---
    LV Name                     /dev/vg_mir/lv_sql
    LV Status                   available/syncd           
    LV Size (Mbytes)            384             
@@ -477,7 +478,8 @@ Total Spare PVs in use      0
    Allocated PE                24             
    Used PV                     2
 
-   --- Physical volumes ---
+   --- Physical volumes 
+---
    PV Name                     /dev/disk/disk10
    PV Status                   available                
    Total PE                    13       
@@ -575,7 +577,8 @@ The final part of the section is the file system extension, as we did in the HP-
 [root@rhel ~]# vgdisplay -v vg_new
     Using volume group(s) on command line
     Finding volume group "vg_new"
-  --- Volume group ---
+  --- Volume group 
+---
   VG Name               vg_new
   System ID             
   Format                lvm2
@@ -596,7 +599,8 @@ The final part of the section is the file system extension, as we did in the HP-
   Free  PE / Size       12 / 192.00 MB
   VG UUID               u32c0h-BPGN-HixT-IzsX-cNnC-EspO-xfweaI
 
-  --- Logical volume ---
+  --- Logical volume 
+---
   LV Name                /dev/vg_new/lv_test
   VG Name                vg_new
   LV UUID                ZtArMo-Pyyl-BDHX-9CZQ-uEAK-VDqG-t60xy4
@@ -611,7 +615,8 @@ The final part of the section is the file system extension, as we did in the HP-
   - currently set to     256
   Block device           253:6
 
-  --- Physical volumes ---
+  --- Physical volumes 
+---
   PV Name               /dev/sdc1     
   PV UUID               kD0jhk-ws8A-ke3L-a7nd-QucS-SAbH-BrmH28
   PV Status             allocatable

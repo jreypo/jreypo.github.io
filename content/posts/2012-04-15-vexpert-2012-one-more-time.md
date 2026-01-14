@@ -1,13 +1,9 @@
 ---
 title: vExpert 2012, one more time :-)
 date: 2012-04-15
-categories:
-- Personal
-- Virtualization
-- VMware
 tags:
-- vExpert
-- VMware
+- career
+- vmware
 
 showComments: true
 ---

@@ -1,12 +1,9 @@
 ---
 title: Hardening dilemma
 date: 2009-12-14
-categories:
-- HP-UX
-- Security
 tags:
-- HP-UX
-- Security
+- hp-ux
+- security
 showComments: true
 ---
 

@@ -1,16 +1,9 @@
 ---
 title: Tukwila, we are almost there
 date: 2010-02-03
-categories:
-- HP
-- Itanium
-- Opinion
 tags:
-- HP
-- Intel
-- Itanium
-- Opinion
-- Tukwila
+- hp-servers
+- opinion
 showComments: true
 ---
 

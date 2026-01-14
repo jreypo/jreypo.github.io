@@ -1,16 +1,9 @@
 ---
 title: Taking Chargeback API for a ride - Part 1
 date: 2014-04-03 22:25:19.000000000 +02:00
-categories:
-- Virtualization
-- VMware
 tags:
-- API
-- CBM
-- Chargeback Manager
-- developer
-- REST
-- VMware
+- scripting
+- vmware
 showComments: true
 ---
 

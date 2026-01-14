@@ -1,11 +1,8 @@
 ---
 title: HPUX-admin mailing list closing. Is the end of an era.
 date: 2011-02-08
-categories:
-- HP-UX
 tags:
-- HP-UX
-- HPADM list
+- hp-ux
 showComments: true
 ---
 

@@ -1,19 +1,11 @@
 ---
 title: How to check the driver version of a network interface in ESX(i)
 date: 2011-03-15
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- esxcfg-module
-- ESXi
+- esxi
 - sysadmin
-- systems administration
-- vmkload_mod
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

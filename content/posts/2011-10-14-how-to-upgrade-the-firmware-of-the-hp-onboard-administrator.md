@@ -1,13 +1,8 @@
 ---
 title: How to upgrade the firmware of the HP Onboard Administrator
 date: 2011-10-14
-categories:
-- HP
 tags:
-- HP
-- HP BladeSystem
-- HP c-Class enclosures
-- HP Onboard Administrator
+- hp-servers
 showComments: true
 ---
 

@@ -1,18 +1,12 @@
 ---
 title: Change ESXi 5.0 Shell keyboard layout with esxcli
 date: 2011-11-14
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi Shell
-- ESXi5
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,24 +1,13 @@
 ---
 title: AKS integration with Azure Container Registry
 date: 2019-10-16 15:28:00 +0100
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
-- DevOps
 tags:
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- AKS
-- AKS
-- Azure Container Registry
-- Azure Kubernetes Services
-- DevOps
-- Azure
+- aks
+- azure
+- cloud-native
+- containers
+- devops
+- kubernetes
 showComments: true
 ---
 

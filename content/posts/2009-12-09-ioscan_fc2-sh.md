@@ -1,11 +1,9 @@
 ---
 title: ioscan_fc2.sh
 date: 2009-12-09 00:15:00 +0100
-categories:
-- HP-UX
 tags:
-- HP-UX
-- scripts
+- hp-ux
+- scripting
 showComments: true
 ---
 

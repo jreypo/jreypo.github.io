@@ -20,7 +20,6 @@ timeZone = "Europe/Madrid"
   home = ["HTML", "RSS", "JSON"]
 
 [taxonomies]
-  category = "categories"
   tag = "tags"
 
 [privacy]

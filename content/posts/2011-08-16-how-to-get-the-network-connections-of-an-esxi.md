@@ -1,21 +1,13 @@
 ---
 title: How to get the network connections of an ESXi
 date: 2011-08-16
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi
-- ESXi4
+- esxi
 - networking
+- scripting
 - sysadmin
-- systems administration
-- vMA
-- VMware
-- vSphere
-- vSphere CLI
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,19 +1,10 @@
 ---
 title: Guest migration in HPVM 3.5
 date: 2010-03-24
-categories:
-- HP-UX
-- Itanium
-- Sysadmin
-- Virtualization
 tags:
-- HP-UX
-- HPVM
-- hpvmmigrate
-- Integrity VMs
-- Itanium
+- hp-servers
+- hp-ux
 - sysadmin
-- systems administration
 showComments: true
 ---
 

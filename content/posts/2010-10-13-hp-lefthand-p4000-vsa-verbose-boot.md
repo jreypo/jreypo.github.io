@@ -1,12 +1,8 @@
 ---
 title: HP Lefthand P4000 VSA verbose boot
 date: 2010-10-13
-categories:
-- Storage
-- Virtualization
 tags:
-- HP Lefthand
-- P4000 VSA
+- storage
 showComments: true
 ---
 

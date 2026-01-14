@@ -1,14 +1,9 @@
 ---
 title: How to fix VIO Web Client Plugin after a failed deployment
 date: 2015-06-08
-categories:
-- OpenStack
-- VMware
 tags:
-- OpenStack
-- VIO
-- VMware
-- VMware Integrated OpenStack
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

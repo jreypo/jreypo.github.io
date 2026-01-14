@@ -1,14 +1,9 @@
 ---
 title: Cisco UCS Platform Emulator, first impressions
 date: 2010-10-12
-categories:
-- Cisco
-- Virtualization
 tags:
-- Cisco
-- Cisco UCS
-- UCS Platform Emulator
-- VMware
+- networking
+- vmware
 showComments: true
 ---
 

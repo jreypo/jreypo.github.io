@@ -1,20 +1,10 @@
 ---
 title: How to install Cockpit on CentOS 7
 date: 2015-01-09
-categories:
-- Linux
-- Red Hat
-- Sysadmin
 tags:
-- Atomic
-- CentOS
-- CentOS 7
-- Cockpit
 - devops
-- Linux
-- Red Hat
+- linux
 - sysadmin
-- systems administration
 showComments: true
 ---
 

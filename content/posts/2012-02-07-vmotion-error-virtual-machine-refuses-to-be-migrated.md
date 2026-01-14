@@ -1,16 +1,10 @@
 ---
 title: vMotion error, virtual machine refuses to be migrated.
 date: 2012-02-07
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi
-- vim-cmd
-- VMware
-- VMware DRS
-- VMware HA
-- vSphere
+- esxi
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,19 +1,12 @@
 ---
 title: The Atomic Series. Part 1 - Introduction to Atomic Host
 date: 2016-11-15
-categories:
-- Red Hat
-- Linux
-- Cloud-native
 tags:
-- Project Atomic
-- Kubernetes
-- Atomic
-- Fedora
-- Docker
-- Linux
-- Containers
-- Cloud-native
+- cloud-native
+- containers
+- docker
+- kubernetes
+- linux
 showComments: true
 ---
 

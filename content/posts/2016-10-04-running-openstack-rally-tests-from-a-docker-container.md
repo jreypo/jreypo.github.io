@@ -1,16 +1,11 @@
 ---
 title: Running OpenStack Rally tests from a Docker container
 date: 2016-10-04
-categories:
-- OpenStack
-- Networking
-- Docker
 tags:
-- OpenStack
-- Rally
+- containers
 - docker
 - linux
-- containers
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

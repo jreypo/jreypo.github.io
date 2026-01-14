@@ -1,15 +1,10 @@
 ---
 title: Migrating from OS X to Windows 10
 date: 2017-04-09
-categories:
-- Personal
-- Microsoft
-- Windows 10
 tags:
-- Personal
-- Microsoft
-- Career
-- Windows 10
+- azure
+- career
+- windows
 showComments: true
 ---
 

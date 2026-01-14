@@ -1,25 +1,14 @@
 ---
 title: Add a new NFS datastore via PowerCLI and vSphere CLI from vMA
 date: 2010-12-01
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESX4
-- ESXi
-- ESXi4
-- Linux
-- NFS
-- PowerCLI
-- Powershell
-- Storage
+- esxi
+- linux
+- scripting
+- storage
 - sysadmin
-- systems administration
-- vMA
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

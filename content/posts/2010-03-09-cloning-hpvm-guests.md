@@ -1,20 +1,10 @@
 ---
 title: Cloning HPVM guests
 date: 2010-03-09
-categories:
-- HP-UX
-- Itanium
-- Sysadmin
-- Virtualization
 tags:
-- Dynamic Root Disk
-- HP-UX
-- HPVM
-- hpvmclone
-- Integrity VMs
-- Itanium
+- hp-servers
+- hp-ux
 - sysadmin
-- systems administration
 showComments: true
 ---
 

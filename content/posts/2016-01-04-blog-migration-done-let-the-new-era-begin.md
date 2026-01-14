@@ -1,10 +1,6 @@
 ---
 title: Blog migration done... Let the new era begin!
 date: 2016-01-04
-categories:
-- Blog
-tags:
-- Blog
 showComments: true
 image:
    feature: trantor.png

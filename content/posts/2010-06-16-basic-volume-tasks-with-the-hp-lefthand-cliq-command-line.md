@@ -1,13 +1,8 @@
 ---
 title: Basic volume tasks with the HP Lefthand CLIQ command-line
 date: 2010-06-16
-categories:
-- Storage
 tags:
-- CLIQ
-- HP Lefthand
-- iSCSI
-- P4000 VSA
+- storage
 showComments: true
 ---
 

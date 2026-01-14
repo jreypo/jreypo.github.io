@@ -1,15 +1,10 @@
 ---
 title: Combining Heat with OpenStack Vagrant provider
 date: 2016-10-18
-categories:
-- OpenStack
-- DevOps
-- Sysadmin
 tags:
-- OpenStack
-- Vagrant
-- DevOps
-- Heat
+- devops
+- openstack
+- virtualization
 showComments: true
 image:
   feature: openstack-banner.jpg

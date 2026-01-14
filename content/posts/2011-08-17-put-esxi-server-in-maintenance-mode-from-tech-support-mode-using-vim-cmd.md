@@ -1,19 +1,10 @@
 ---
 title: Put ESXi server in maintenance mode from Tech Support Mode using vim-cmd
 date: 2011-08-17
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESXi
-- ESXi4
-- ESXi5
+- esxi
 - sysadmin
-- systems administration
-- vim-cmd
-- Virtual Connect Manager
-- vSphere
+- vsphere
 showComments: true
 ---
 

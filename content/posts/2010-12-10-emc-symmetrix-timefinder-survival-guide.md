@@ -1,16 +1,8 @@
 ---
 title: EMC Symmetrix Timefinder survival guide
 date: 2010-12-10
-categories:
-- EMC
-- Storage
 tags:
-- BCV
-- EMC
-- EMC Timefinder
-- Storage
-- symcli
-- Symmetrix
+- storage
 showComments: true
 ---
 

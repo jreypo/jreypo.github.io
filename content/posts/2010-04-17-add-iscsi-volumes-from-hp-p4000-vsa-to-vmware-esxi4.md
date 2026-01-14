@@ -1,20 +1,12 @@
 ---
 title: Add iSCSI volumes from HP P4000 VSA to VMware ESXi4
 date: 2010-04-17
-categories:
-- Storage
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESXi4
-- HP Lefthand
-- iSCSI
-- P4000 VSA
+- esxi
+- storage
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

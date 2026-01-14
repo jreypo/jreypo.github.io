@@ -1,19 +1,12 @@
 ---
 title: My quick take on Helm
 date: 2017-09-06
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- Helm
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

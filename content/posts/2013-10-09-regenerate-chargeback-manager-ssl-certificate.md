@@ -1,18 +1,10 @@
 ---
 title: Regenerate Chargeback Manager SSL certificate
 date: 2013-10-09
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- CBM
-- Chargeback Manager
-- OpenSSL
-- SSL
+- security
 - sysadmin
-- vCenter Chargeback
-- VMware
+- vmware
 showComments: true
 ---
 

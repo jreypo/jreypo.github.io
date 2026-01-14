@@ -1,18 +1,10 @@
 ---
 title: vCenter Server Appliance. Part 3 - Managing the embedded DB2 database
 date: 2011-12-02
-categories:
-- Virtualization
-- VMware
 tags:
-- IBM DB2
-- SLES 11
-- SuSE Linux
-- vCenter Server
-- vCenter Server Appliance
-- VCSA
-- VMware
-- vSphere 5
+- linux
+- vmware
+- vsphere
 showComments: true
 ---
 

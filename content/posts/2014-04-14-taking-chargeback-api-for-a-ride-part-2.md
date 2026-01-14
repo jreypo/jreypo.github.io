@@ -1,19 +1,10 @@
 ---
 title: Taking Chargeback API for a ride - Part 2
 date: 2014-04-14
-categories:
-- Virtualization
-- VMware
 tags:
-- API
-- automation
-- CBM
-- Chargeback Manager
-- developer
-- javascript
-- REST
-- vCenter Orchestrator
-- vCO
+- devops
+- scripting
+- vmware
 showComments: true
 ---
 

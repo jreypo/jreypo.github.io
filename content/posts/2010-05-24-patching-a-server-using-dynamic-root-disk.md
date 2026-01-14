@@ -1,16 +1,10 @@
 ---
 title: Patching a server using Dynamic Root Disk
 date: 2010-05-24
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- DRD
-- Dynamic Root Disk
-- HP-UX
-- LVM
+- hp-ux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: I'm not dead or how much I hate to write documentation
 date: 2010-05-05
-categories:
-- Personal
 tags: []
 meta:
 showComments: true

@@ -1,18 +1,12 @@
 ---
 title: Retrieving ESX(i) hardware info with PowerCLI
 date: 2011-06-07
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESXi
-- PowerCLI
-- Powershell
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

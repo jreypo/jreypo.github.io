@@ -1,23 +1,12 @@
 ---
 title: Experimenting with OpenShift and Azure Container Instances
 date: 2017-09-21
-categories:
-- Containers
-- Microsoft
-- Red Hat
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- OpenShift
-- Containers
-- Kubernetes
-- Cloud-Native
-- Azure Container Instances
-- ACI
-- ACS
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

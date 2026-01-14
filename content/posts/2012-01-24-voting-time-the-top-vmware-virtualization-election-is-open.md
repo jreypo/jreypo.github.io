@@ -1,17 +1,9 @@
 ---
 title: Voting time! The Top VMware & Virtualization election is open!
 date: 2012-01-24
-categories:
-- Blog
-- Personal
-- Virtualization
-- VMware
 tags:
-- Blog
-- Blogging
-- Personal
-- Virtualization
-- VMware
+- virtualization
+- vmware
 showComments: true
 ---
 

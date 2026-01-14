@@ -1,20 +1,11 @@
 ---
 title: Howto enable RBAC on your existing ACS deployed Kubernetes cluster
 date: 2017-11-16
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Azure
-- Containers
-- Kubernetes
-- ACS
-- Azure Container Service
-- Cloud-Native
-- Azure Active Directory
+- azure
+- cloud-native
+- containers
+- kubernetes
 showComments: true
 ---
 

@@ -1,20 +1,13 @@
 ---
 title: Running your private Kubernetes cluster on Azure with ACS Engine
 date: 2018-03-19
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Microsoft
-- Containers
-- Kubernetes
-- Cloud-Native
-- ACS Engine
-- Azure Container Service
+- aks
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

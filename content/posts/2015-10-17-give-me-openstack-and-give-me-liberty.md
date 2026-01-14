@@ -1,14 +1,8 @@
 ---
 title: Give me OpenStack and give me Liberty!
 date: 2015-10-17
-categories:
-- Cloud
-- OpenStack
 tags:
-- Cloud
-- opensource
-- OpenStack
-- OpenStack Liberty
+- openstack
 showComments: true
 image:
   feature: openstack-banner.jpg

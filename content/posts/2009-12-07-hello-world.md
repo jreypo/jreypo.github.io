@@ -1,9 +1,6 @@
 ---
 title: Hello world!
 date: 2009-12-07
-categories:
-- Blog
-- Personal
 tags: []
 showComments: true
 ---

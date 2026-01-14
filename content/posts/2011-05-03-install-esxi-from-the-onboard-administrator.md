@@ -1,17 +1,11 @@
 ---
 title: Install ESXi from the Onboard Administrator
 date: 2011-05-03
-categories:
-- HP
-- Virtualization
-- VMware
 tags:
-- ESXi
-- HP
-- HP BladeSystem
-- HP Onboard Administrator
-- VMware
-- vSphere
+- esxi
+- hp-servers
+- vmware
+- vsphere
 showComments: true
 ---
 

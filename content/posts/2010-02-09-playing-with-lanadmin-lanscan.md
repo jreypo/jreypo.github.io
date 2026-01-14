@@ -1,21 +1,11 @@
 ---
 title: Playing with lanadmin & lanscan
 date: 2010-02-09
-categories:
-- HP-UX
-- Networking
-- Sysadmin
 tags:
-- 11iv1
-- 11iv2
-- APA
-- commands
-- HP-UX
-- lanadmin
-- lanscan
+- hp-ux
 - networking
+- scripting
 - sysadmin
-- systems administration
 showComments: true
 ---
 

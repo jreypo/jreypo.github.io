@@ -1,21 +1,11 @@
 ---
 title: HPVM clones first boot tasks
 date: 2010-03-17
-categories:
-- HP-UX
-- Itanium
-- Sysadmin
-- Virtualization
 tags:
-- EFI
-- HP-UX
-- HPVM
-- Integrity VMs
-- Itanium
-- LVM
-- setboot
+- hp-servers
+- hp-ux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 
@@ -126,7 +116,8 @@ vgdisplay: Warning: couldn't query physical volume "/dev/disk/disk15_p2":
 The specified path does not correspond to physical volume attached to
 this volume group
 vgdisplay: Warning: couldn't query all of the physical volumes.
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg00
 VG Write Access             read/write     
 VG Status                   available                 
@@ -180,7 +171,8 @@ Now the LVM configuration is fixed, try again the `vgdisplay` command.
 
 ```text
 root@vmnode2:/# vgdisplay
---- Volume groups ---
+--- Volume groups 
+---
 VG Name                     /dev/vg00
 VG Write Access             read/write
 VG Status                   available

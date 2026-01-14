@@ -1,15 +1,8 @@
 ---
 title: vCSA 5.1 – Deployment and upgrade
 date: 2012-09-05
-categories:
-- Virtualization
-- VMware
 tags:
-- vCenter Server
-- vCenter Server Appliance
-- VCSA
-- vSphere
-- vSphere 5.1
+- vsphere
 showComments: true
 ---
 

@@ -1,14 +1,8 @@
 ---
 title: Monitor ESX 4.x to ESXi 5.0 migration process
 date: 2011-11-04
-categories:
-- Virtualization
-- VMware
 tags:
-- ESX4
-- ESXi Shell
-- ESXi5
-- vmkernel
+- esxi
 showComments: true
 ---
 

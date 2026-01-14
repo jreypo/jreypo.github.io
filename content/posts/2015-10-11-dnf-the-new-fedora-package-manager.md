@@ -1,19 +1,10 @@
 ---
 title: DNF, the new Fedora package manager
 date: 2015-10-11
-categories:
-- Linux
-- Red Hat
-- Sysadmin
 tags:
-- dnf
-- Fedora
-- Fedora 22
-- Linux
-- Photon
+- linux
 - sysadmin
-- tdnf
-- yum
+- vmware
 showComments: true
 ---
 

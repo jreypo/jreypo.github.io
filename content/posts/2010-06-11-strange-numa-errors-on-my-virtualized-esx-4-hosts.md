@@ -1,16 +1,10 @@
 ---
 title: Strange NUMA errors on my virtualized ESX 4 hosts
 date: 2010-06-11
-categories:
-- Virtualization
-- VMware
 tags:
-- ESX4
-- ESXi4
-- NUMA
-- VMware
-- vSphere
-- vSphere client
+- esxi
+- vmware
+- vsphere
 showComments: true
 ---
 

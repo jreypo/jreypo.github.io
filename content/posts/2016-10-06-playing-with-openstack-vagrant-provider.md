@@ -1,14 +1,10 @@
 ---
 title: Playing with OpenStack Vagrant provider
 date: 2016-10-06
-categories:
-- OpenStack
-- DevOps
-- Sysadmin
 tags:
-- OpenStack
-- Vagrant
-- DevOps
+- devops
+- openstack
+- virtualization
 showComments: true
 image:
   feature: openstack-banner.jpg

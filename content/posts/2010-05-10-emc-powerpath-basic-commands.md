@@ -1,19 +1,10 @@
 ---
 title: EMC PowerPath basic commands
 date: 2010-05-10
-categories:
-- EMC
-- HP-UX
-- Storage
-- Sysadmin
 tags:
-- EMC
-- EMC Powerpath
-- HP-UX
-- powermt
-- Storage
+- hp-ux
+- storage
 - sysadmin
-- systems administration
 showComments: true
 ---
 
@@ -129,7 +120,8 @@ Symmetrix ID=000287750035
 Logical device ID=0004
 state=alive; policy=SymmOpt; priority=0; queued-IOs=0
 ==============================================================================
----------------- Host ---------------   - Stor -   -- I/O Path -  -- Stats ---
+---------------- Host ---------------   - Stor -   -- I/O Path -  -- Stats 
+---
 ###  HW Path                I/O Paths    Interf.   Mode    State  Q-IOs Errors
 ==============================================================================
 20 0/0/10/1/0.11.15.0.0.1.3 c20t1d3 SP A0 active alive 0 1

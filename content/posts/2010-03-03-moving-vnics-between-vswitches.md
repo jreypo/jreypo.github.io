@@ -1,19 +1,11 @@
 ---
 title: Moving vNICs between vSwitches
 date: 2010-03-03
-categories:
-- HP-UX
-- Itanium
-- Networking
-- Sysadmin
-- Virtualization
 tags:
-- HP-UX
-- HPVM
-- Integrity VMs
+- hp-servers
+- hp-ux
 - networking
 - sysadmin
-- systems administration
 showComments: true
 ---
 

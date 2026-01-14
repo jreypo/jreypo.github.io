@@ -1,17 +1,10 @@
 ---
 title: vCenter Server Appliance. Part 1 - Configuration and deployment
 date: 2011-11-29
-categories:
-- Virtualization
-- VMware
 tags:
-- SLES 11
-- SuSE Linux
-- vCenter Server
-- vCenter Server Appliance
-- VCSA
-- VMware
-- vSphere 5
+- linux
+- vmware
+- vsphere
 showComments: true
 ---
 

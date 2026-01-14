@@ -1,18 +1,9 @@
 ---
 title: Howto identify the EMC LUN ID in HP-UX 11iv3 – CLARiiON arrays
 date: 2010-06-14
-categories:
-- EMC
-- HP-UX
-- Storage
-- Sysadmin
 tags:
-- 11iv3
-- CLARiiON
-- EMC
-- HP-UX
-- inquiry
-- Storage
+- hp-ux
+- storage
 showComments: true
 ---
 

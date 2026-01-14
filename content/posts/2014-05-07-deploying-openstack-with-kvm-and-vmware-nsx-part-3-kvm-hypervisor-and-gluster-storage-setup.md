@@ -1,34 +1,14 @@
 ---
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup'
 date: 2014-05-07
-categories:
-- Cloud
-- KVM
-- Linux
-- Networking
-- OpenStack
-- Red Hat
-- Virtualization
-- VMware
 tags:
-- CentOS
-- Cloud
-- Fedora
-- gluster
-- GlusterFS
-- KVM
-- Linux
+- linux
 - networking
-- NFS
-- NSX
-- NSX-MH
-- Open vSwitch
-- OpenStack
-- OVS
-- Red Hat
-- Storage
-- Virtualization
-- VMware
+- nsx
+- openstack
+- storage
+- virtualization
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

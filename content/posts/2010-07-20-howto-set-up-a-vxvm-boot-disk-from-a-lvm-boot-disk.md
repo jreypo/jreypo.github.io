@@ -1,19 +1,11 @@
 ---
 title: Howto set-up a VxVM boot disk from a LVM boot disk
 date: 2010-07-20
-categories:
-- HP-UX
-- Itanium
-- Sysadmin
 tags:
-- EFI
-- HP-UX
-- Itanium
-- LVM
+- hp-servers
+- hp-ux
+- storage
 - sysadmin
-- systems administration
-- vxcp_lvmroot
-- VxVM
 showComments: true
 ---
 

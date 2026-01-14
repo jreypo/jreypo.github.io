@@ -1,17 +1,10 @@
 ---
 title: Howto enable HP-UX 11iv3 agile naming mode in VxVM
 date: 2010-06-18
-categories:
-- HP-UX
-- Storage
-- Sysadmin
 tags:
-- 11iv3
-- HP-UX
-- Storage
+- hp-ux
+- storage
 - sysadmin
-- systems administration
-- VxVM
 showComments: true
 ---
 

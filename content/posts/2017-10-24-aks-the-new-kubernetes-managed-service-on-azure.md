@@ -1,21 +1,13 @@
 ---
 title: AKS, the new Kubernetes managed service on Azure
 date: 2017-10-24
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- AKS
-- ACS
-- Azure Container Service
-- Containers
-- Kubernetes
-- Cloud-Native
+- aks
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

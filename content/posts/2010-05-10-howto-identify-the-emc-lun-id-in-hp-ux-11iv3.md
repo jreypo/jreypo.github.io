@@ -1,21 +1,9 @@
 ---
 title: Howto identify the EMC LUN ID in HP-UX 11iv3 - Symmetrix arrays
 date: 2010-05-10
-categories:
-- EMC
-- HP-UX
-- Storage
-- Sysadmin
 tags:
-- 11iv2
-- 11iv3
-- DMX-3
-- EMC
-- EMC Powerpath
-- HP-UX
-- scsimgr
-- Storage
-- Symmetrix
+- hp-ux
+- storage
 showComments: true
 ---
 
@@ -31,7 +19,8 @@ Symmetrix ID=000281150123
 Logical device ID=0CED
 state=alive; policy=SymmOpt; priority=0; queued-IOs=0
 ==============================================================================
----------------- Host ---------------   - Stor -   -- I/O Path -  -- Stats ---
+---------------- Host ---------------   - Stor -   -- I/O Path -  -- Stats 
+---
 ###  HW Path                I/O Paths    Interf.   Mode    State  Q-IOs Errors
 ==============================================================================
 20 0/0/10/1/0.11.15.0.0.1.3 c7t1d3 SP A0 active alive 0 1

@@ -1,15 +1,9 @@
 ---
 title: Infrastructure Navigator lose configured hostname after a reboot
 date: 2013-11-20
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
 - sysadmin
-- vCenter Infrastructure Navigator
-- vIN
-- VMware
+- vmware
 showComments: true
 ---
 

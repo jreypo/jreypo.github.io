@@ -1,13 +1,9 @@
 ---
 title: Automate your Azure Bastion tunnels with a shell script 
 date: 2023-08-29 18:10:00 +0100
-categories:
-- Microsoft
-- Linux
 tags:
-- Microsoft
-- Azure
-- Linux
+- azure
+- linux
 showComments: true
 ---
 

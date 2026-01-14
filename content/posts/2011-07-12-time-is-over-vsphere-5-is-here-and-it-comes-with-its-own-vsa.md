@@ -1,19 +1,12 @@
 ---
 title: Time is over... vSphere 5 is here and it comes with its own VSA
 date: 2011-07-12
-categories:
-- Virtualization
-- VMware
 tags:
-- ESXi
-- ESXi5
-- P4000 VSA
-- vCenter Server
-- Virtualization
-- VMware
-- VSA
-- vSphere
-- vSphere 5
+- esxi
+- storage
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

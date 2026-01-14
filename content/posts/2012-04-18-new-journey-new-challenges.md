@@ -1,10 +1,6 @@
 ---
 title: New journey, new challenges.
 date: 2012-04-18
-categories:
-- Personal
-tags:
-- Personal
 showComments: true
 ---
 

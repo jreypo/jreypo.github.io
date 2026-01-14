@@ -1,16 +1,10 @@
 ---
 title: Enable SSH access against VMware Lightwave
 date: 2016-01-12
-categories:
-- Cloud-Native
-- DevOps
-- VMware
 tags:
-- Cloud
 - cloud-native
 - containers
-- Photon
-- Lightwave
+- vmware
 showComments: true
 ---
 

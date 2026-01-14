@@ -1,12 +1,9 @@
 ---
 title: HP-UX security resources
 date: 2009-12-10
-categories:
-- HP-UX
-- Security
 tags:
-- HP-UX
-- Security
+- hp-ux
+- security
 showComments: true
 ---
 

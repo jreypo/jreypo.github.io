@@ -1,27 +1,12 @@
 ---
 title: HP resources for VMware
 date: 2010-10-20
-categories:
-- HP
-- Storage
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESXi
-- EVA
-- HP
-- HP BladeSystem
-- HP Lefthand
-- HP Matrix
-- P4000 VSA
-- ProLiant
-- Storage
-- vCloud Director
-- Virtual Connect
-- VMware
-- VMware View
-- vSphere
+- esxi
+- hp-servers
+- storage
+- vmware
+- vsphere
 showComments: true
 ---
 

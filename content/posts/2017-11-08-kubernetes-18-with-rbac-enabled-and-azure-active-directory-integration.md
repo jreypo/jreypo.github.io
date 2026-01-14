@@ -1,19 +1,12 @@
 ---
 title: Kubernetes 1.8 with RBAC enabled and Azure Active Directory integration
 date: 2017-11-08
-categories:
-- Containers
-- Microsoft
-- Azure
-- Cloud
-- Cloud-Native
 tags:
-- Docker
-- Azure
-- Azure Active Directory
-- Containers
-- Kubernetes
-- Cloud-Native
+- azure
+- cloud-native
+- containers
+- docker
+- kubernetes
 showComments: true
 ---
 

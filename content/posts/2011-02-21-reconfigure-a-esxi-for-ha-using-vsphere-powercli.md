@@ -1,23 +1,13 @@
 ---
 title: Reconfigure an ESX(i) for HA using vSphere PowerCLI
 date: 2011-02-21
-categories:
-- DevOps
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- API
 - devops
-- ESX
-- ESXi
-- PowerCLI
-- Powershell
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- VMware HA
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

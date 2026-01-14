@@ -1,24 +1,12 @@
 ---
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 1: NSX overview and initial setup'
 date: 2014-04-29
-categories:
-- Cloud
-- Linux
-- Networking
-- OpenStack
-- VMware
 tags:
-- Cloud
-- Havana
-- Linux
+- linux
 - networking
-- NSX
-- NSX-MH
-- Open vSwitch
-- OpenFlow
-- OpenStack
-- OVS
-- Virtualization
+- nsx
+- openstack
+- virtualization
 showComments: true
 image:
   feature: openstack-banner.jpg

@@ -1,20 +1,11 @@
 ---
 title: Linux Kernel 3.7 and VMware Tools issue
 date: 2013-01-28
-categories:
-- Linux
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- Fedora
-- Kernel 3.7
-- Linux
+- linux
 - sysadmin
-- Virtualization
-- VMware
-- VMware Fusion
-- VMware Tools
+- virtualization
+- vmware
 showComments: true
 ---
 

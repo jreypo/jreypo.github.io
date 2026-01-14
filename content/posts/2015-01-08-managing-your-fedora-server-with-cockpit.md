@@ -1,21 +1,10 @@
 ---
 title: Managing your Fedora Server with Cockpit
 date: 2015-01-08
-categories:
-- DevOps
-- Linux
-- Red Hat
-- Sysadmin
 tags:
-- Cockpit
 - devops
-- Fedora
-- Fedora 21
-- Fedora Server
-- Linux
-- Red Hat
+- linux
 - sysadmin
-- systems management
 showComments: true
 ---
 

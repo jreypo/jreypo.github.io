@@ -1,17 +1,12 @@
 ---
 title: Power and maintenance operations in ESXi 5.1 with esxcli
 date: 2012-09-18
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

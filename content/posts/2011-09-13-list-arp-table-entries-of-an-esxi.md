@@ -1,23 +1,12 @@
 ---
 title: List ARP table entries of an ESXi
 date: 2011-09-13
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi TSM
-- ESXi4
-- ESXi5
-- Get-EsxCli
-- PowerCLI
-- Powershell
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
-- vSphere CLI
+- vmware
+- vsphere
 showComments: true
 ---
 

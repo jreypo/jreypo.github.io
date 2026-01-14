@@ -1,14 +1,10 @@
 ---
 title: Linux container-based virtualization with OpenVZ
 date: 2010-04-04
-categories:
-- Linux
-- Virtualization
 tags:
 - containers
-- Linux
-- OpenVZ
-- Parallels
+- linux
+- virtualization
 showComments: true
 ---
 

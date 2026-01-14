@@ -1,16 +1,9 @@
 ---
 title: Managing VIO with viocli
 date: 2016-04-27
-categories:
-- OpenStack
-- VMware
 tags:
-- OpenStack
-- VIO
-- VIO 2.0
-- VMware
-- VMware Integrated OpenStack
-- viocli
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

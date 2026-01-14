@@ -1,12 +1,8 @@
 ---
 title: VMworld 2012, it's time to vote
 date: 2012-06-01
-categories:
-- Virtualization
-- VMware
 tags:
-- VMware
-- VMworld 2012
+- vmware
 showComments: true
 ---
 

@@ -1,16 +1,9 @@
 ---
 title: 'HP P4000: Generating the CLIQ key file'
 date: 2010-11-02
-categories:
-- HP
-- Storage
 tags:
-- CLIQ
-- HP
-- HP 4000
-- HP Lefthand
-- SAN/iQ
-- Storage
+- hp-servers
+- storage
 showComments: true
 ---
 

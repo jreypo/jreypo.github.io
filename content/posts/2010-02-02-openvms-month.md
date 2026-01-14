@@ -1,16 +1,8 @@
 ---
 title: OpenVMS Month!
 date: 2010-02-02
-categories:
-- HP
-- OpenVMS
 tags:
-- Alpha
-- Emulators
-- HP
-- Integrity VMs
-- Itanium
-- OpenVMS
+- hp-servers
 showComments: true
 ---
 

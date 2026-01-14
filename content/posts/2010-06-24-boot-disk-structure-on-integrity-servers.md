@@ -1,14 +1,9 @@
 ---
 title: Boot disk structure on Integrity servers
 date: 2010-06-24
-categories:
-- HP-UX
-- Itanium
 tags:
-- EFI
-- HP Service Partition
-- HP-UX
-- Itanium
+- hp-servers
+- hp-ux
 showComments: true
 ---
 

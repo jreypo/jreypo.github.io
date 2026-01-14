@@ -1,16 +1,10 @@
 ---
 title: First hands-on with the HP Lefthand P4000 VSA
 date: 2010-04-09
-categories:
-- Storage
-- Virtualization
 tags:
-- HP Lefthand
-- iSCSI
-- P4000 VSA
-- Storage
-- VMware Workstation
-- vSphere
+- storage
+- vmware
+- vsphere
 showComments: true
 ---
 

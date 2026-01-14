@@ -1,19 +1,12 @@
 ---
 title: Vagrant ssh in Windows 10 from WSL
 date: 2017-04-18
-categories:
-- DevOps
-- Microsoft
-- Windows 10
 tags:
-- DevOps
-- Vagrant
-- Bash
-- Windows Subsystem for Linux
-- WSL
-- Microsoft
-- Windows 10
-- Bash on Ubuntu on Windows
+- azure
+- devops
+- scripting
+- virtualization
+- windows
 showComments: true
 ---
 

@@ -1,16 +1,9 @@
 ---
 title: How to enable Ceilometer in VIO 2.0
 date: 2016-02-26
-categories:
-- OpenStack
-- VMware
 tags:
-- OpenStack
-- VIO
-- VIO 2.0
-- VMware
-- VMware Integrated OpenStack
-- ceilometer
+- openstack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

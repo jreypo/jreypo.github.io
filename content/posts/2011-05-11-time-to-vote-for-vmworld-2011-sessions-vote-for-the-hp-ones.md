@@ -1,16 +1,8 @@
 ---
 title: Time to vote for VMworld 2011 sessions! Vote for the HP ones!
 date: 2011-05-05
-categories:
-- HP
 tags:
-- Cloud
-- Converged Infrastructure
-- HP
-- HP BladeSystem
-- HPTAW2011
-- Integrity
-- ProLiant
+- hp-servers
 showComments: true
 ---
 

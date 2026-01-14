@@ -1,23 +1,10 @@
 ---
 title: FirewallD quickstart guide
 date: 2015-04-08
-categories:
-- Linux
-- Red Hat
-- Security
-- Sysadmin
 tags:
-- CentOS
-- Fedora
-- firewall
-- firewall-cmd
-- firewalld
-- Linux
-- Red Hat
-- RHEL
-- RHEL7
+- linux
+- security
 - sysadmin
-- systems administration
 showComments: true
 ---
 **FirewallD**, or Dynamic Firewall Manager, is the replacement for the **IPTables** firewall in **Red Hat Enterprise Linux**. The main improvement over IPTables is the capacity to make changes without the need to restart the whole firewall service.

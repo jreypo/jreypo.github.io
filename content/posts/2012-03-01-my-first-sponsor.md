@@ -1,13 +1,6 @@
 ---
 title: My first sponsor
 date: 2012-03-01
-categories:
-- Blog
-- Veeam
-tags:
-- Blog
-- Personal
-- Veeam
 showComments: true
 ---
 

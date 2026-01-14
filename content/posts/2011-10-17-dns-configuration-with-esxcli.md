@@ -1,19 +1,14 @@
 ---
 title: DNS configuration with esxcli
 date: 2011-10-17
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- esxcli
-- ESXi5
+- esxi
 - networking
+- scripting
 - sysadmin
-- systems administration
-- Virtualization
-- VMware
-- vSphere
+- virtualization
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,15 +1,9 @@
 ---
 title: How to create a new file system in OpenBSD
 date: 2011-03-07
-categories:
-- BSD
-- Sysadmin
 tags:
-- disklabel
-- newfs
-- OpenBSD
+- bsd
 - sysadmin
-- systems administration
 showComments: true
 ---
 

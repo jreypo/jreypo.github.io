@@ -1,20 +1,10 @@
 ---
 title: Open vSwitch and NSX vSwitch command equivalencies
 date: 2014-12-16
-categories:
-- Networking
-- Sysadmin
-- VMware
 tags:
-- network virtualization
 - networking
-- NSX
-- NSX vSwitch
-- NSX-MH
-- NVS
-- Open vSwitch
-- OVS
-- VMware
+- nsx
+- vmware
 showComments: true
 ---
 

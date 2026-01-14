@@ -1,20 +1,11 @@
 ---
 title: Upgrading VMware Integrated OpenStack
 date: 2015-10-21
-categories:
-- OpenStack
-- VMware
 tags:
-- Cloud
 - devops
-- OpenStack
-- OpenStack Kilo
+- openstack
 - sysadmin
-- VIO
-- VIO 2.0
-- VIO upgrade
-- VMware
-- VMware Integrated OpenStack
+- vmware
 showComments: true
 image:
   feature: openstack-banner.jpg

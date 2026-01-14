@@ -1,13 +1,8 @@
 ---
 title: Generate a Show All report in HP c-Class Blade Enclosures
 date: 2011-05-04
-categories:
-- HP
 tags:
-- HP
-- HP BladeSystem
-- HP c-Class enclosures
-- HP Onboard Administrator
+- hp-servers
 showComments: true
 ---
 

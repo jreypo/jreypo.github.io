@@ -1,20 +1,13 @@
 ---
 title: Get the iSCSI iqn of an ESX(i) using vSphere PowerCLI
 date: 2010-12-14
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESXi
-- iSCSI
-- PowerCLI
-- Powershell
+- esxi
+- scripting
+- storage
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

@@ -1,19 +1,12 @@
 ---
 title: Moving hosts between datacenters with PowerCLI
 date: 2011-02-07
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESXi
-- PowerCLI
-- Powershell
+- esxi
+- scripting
 - sysadmin
-- systems administration
-- VMware
-- vSphere
+- vmware
+- vsphere
 showComments: true
 ---
 

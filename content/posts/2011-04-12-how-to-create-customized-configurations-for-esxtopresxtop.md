@@ -1,22 +1,11 @@
 ---
 title: How to create customized configurations for esxtop/resxtop
 date: 2011-04-12
-categories:
-- Sysadmin
-- Virtualization
-- VMware
 tags:
-- ESX
-- ESXi
-- esxtop
-- performance
-- resxtop
+- esxi
 - sysadmin
-- systems administration
-- vMA
-- VMware
-- vSphere
-- vSphere CLI
+- vmware
+- vsphere
 showComments: true
 ---
 

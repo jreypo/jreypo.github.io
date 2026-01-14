@@ -1,19 +1,8 @@
 ---
 title: New Generation Integrity Servers
 date: 2010-05-05
-categories:
-- HP
-- Itanium
 tags:
-- BL860c_i2
-- BL870c_i2
-- BL890c_i2
-- HP
-- Integrity Servers
-- Itanium
-- rx2800
-- Superdome 2
-- Tukwila
+- hp-servers
 showComments: true
 ---
 

@@ -1,20 +1,12 @@
 ---
 title: You can run Cockpit in Photon OS
 date: 2016-01-12
-categories:
-- Cloud-Native
-- DevOps
-- VMware
-- Sysadmin
 tags:
-- Cloud
 - cloud-native
 - containers
-- Photon
-- Linux
-- Cockpit
+- linux
 - sysadmin
-- systems management
+- vmware
 showComments: true
 ---
 

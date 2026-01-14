@@ -1,15 +1,11 @@
 ---
 title: New HP-UX release, new HPVM, new features... same odd naming convention
 date: 2010-04-06
-categories:
-- HP-UX
 tags:
-- 11iv3
-- HP-UX
-- HPVM
-- Integrity VMs
-- LVM
-- Opinion
+- hp-servers
+- hp-ux
+- opinion
+- storage
 showComments: true
 ---
 

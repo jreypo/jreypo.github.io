@@ -1,16 +1,10 @@
 ---
 title: OpenVZ in CentOS 5.4
 date: 2010-04-04
-categories:
-- Linux
-- Virtualization
 tags:
-- CentOS
 - containers
-- Linux
-- OpenVZ
-- vzctl
-- vzlist
+- linux
+- virtualization
 showComments: true
 ---
 

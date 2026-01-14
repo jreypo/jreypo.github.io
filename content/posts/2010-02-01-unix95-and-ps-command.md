@@ -1,15 +1,10 @@
 ---
 title: UNIX95 and ps command
 date: 2010-02-01
-categories:
-- HP-UX
-- Sysadmin
 tags:
-- commands
-- HP-UX
+- hp-ux
+- scripting
 - sysadmin
-- systems administration
-- Unix
 showComments: true
 ---
 

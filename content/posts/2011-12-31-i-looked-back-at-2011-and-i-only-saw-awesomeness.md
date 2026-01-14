@@ -2,12 +2,6 @@
 title: I looked back at 2011 and I only saw awesomeness!
 date: 2011-12-31
 clases: wide
-categories:
-- Blog
-- Personal
-tags:
-- Blog
-- Personal
 showComments: true
 ---
 
