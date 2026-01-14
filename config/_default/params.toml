@@ -1,0 +1,64 @@
+# -- Theme Parameters --
+# Congo theme configuration for jreypo.io
+
+colorScheme = "congo"
+defaultAppearance = "dark"  # Match Jekyll dark skin
+autoSwitchAppearance = true
+
+defaultThemeColor = "#FFFFFF"
+
+enableSearch = true  # Enable search like Jekyll
+enableCodeCopy = true
+enableImageLazyLoading = true
+enableImageWebp = true
+
+fingerprintAlgorithm = "sha256"
+
+[header]
+  layout = "basic"
+  showTitle = true
+
+[footer]
+  showCopyright = true
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"  # Show author profile on homepage
+  showRecent = true
+  recentLimit = 5
+
+[article]
+  showDate = true
+  showDateUpdated = false
+  showAuthor = true
+  showBreadcrumbs = true
+  showDraftLabel = true
+  showEdit = false
+  showHeadingAnchors = true
+  showPagination = true
+  invertPagination = false
+  showReadingTime = true  # Match Jekyll read_time: true
+  showTableOfContents = true
+  showTaxonomies = true  # Show categories and tags
+  showWordCount = false
+  showComments = true  # Enable Disqus comments
+  sharingLinks = ["x-twitter", "linkedin", "reddit", "email", "bluesky"]
+
+[list]
+  showBreadcrumbs = false
+  showSummary = true
+  showTableOfContents = false
+  showTaxonomies = true
+  groupByYear = true
+  paginationWidth = 1
+
+[sitemap]
+  excludedKinds = []
+
+[taxonomy]
+  showTermCount = true
+
+[verification]
+  bing = "9E4C27EEF9E87E298B32ED7B5CAB0C85"

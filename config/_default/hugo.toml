@@ -1,0 +1,39 @@
+# -- Site Configuration --
+# Hugo configuration for jreypo.io blog
+# Migrated from Jekyll/Minimal Mistakes
+
+baseURL = "https://jreypo.io/"
+defaultContentLanguage = "en"
+theme = "congo"
+enableRobotsTXT = true
+summaryLength = 30
+timeZone = "Europe/Madrid"
+
+# Keep same permalink structure as Jekyll for SEO
+[permalinks]
+  posts = "/:year/:month/:day/:slug/"
+
+[pagination]
+  pagerSize = 5  # Same as Jekyll paginate setting
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[privacy]
+  [privacy.disqus]
+    disable = false
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[services]
+  [services.disqus]
+    shortname = "juanmasblog"
+  [services.googleAnalytics]
+    ID = "G-87W4YXF731"
