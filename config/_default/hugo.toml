@@ -6,7 +6,7 @@ baseURL = "https://jreypo.io/"
 defaultContentLanguage = "en"
 theme = "congo"
 enableRobotsTXT = true
-summaryLength = 30
+summaryLength = 0  # Only show summary if description is set in front matter
 timeZone = "Europe/Madrid"
 
 # Keep same permalink structure as Jekyll for SEO
