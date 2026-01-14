@@ -63,9 +63,9 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Juan Manuel Rey"
-  avatar : "/assets/images/bio-photo.jpeg"
-  bio    : "Nerd. Engineer. Unix Geek. Sysadmin by heart. Creating more problems than solving them in Microsoft Azure engineering."
+  name: "Juan Manuel Rey"
+  avatar: "/assets/images/bio-photo.jpeg"
+  bio: "Engineer. Unix Geek. Sysadmin by heart. Distributed systems nerd."
   links:
     - label: "X/Twitter"
       icon: "fab fa-fw fa-square-x-twitter"
@@ -81,13 +81,13 @@ author:
       url: "https://bsky.app/profile/jreypo.bsky.social"
 
 analytics:
-  provider               : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider: "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          : G-87W4YXF731
-    anonymize_ip         : # true, false (default)
+    tracking_id: G-87W4YXF731
+    anonymize_ip: # true, false (default)
 # SEO Related
 # google_site_verification :
-bing_site_verification   : 9E4C27EEF9E87E298B32ED7B5CAB0C85
+bing_site_verification: 9E4C27EEF9E87E298B32ED7B5CAB0C85
 footer:
   links:
     - label: "X/Twitter"
