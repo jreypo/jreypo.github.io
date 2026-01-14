@@ -1,6 +1,7 @@
 ---
 title: Building an Internal CA for your Homelab with HashiCorp Vault
 date: 2026-01-13 18:00:00 +0100
+description: "Deploy Vault as your own CA using Portainer - say goodbye to self-signed certificate warnings"
 categories:
 - Homelab
 tags:
