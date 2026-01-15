@@ -14,7 +14,7 @@ copyright = "Juan Manuel Rey"
 [params.author]
   name = "Juan Manuel Rey"
   image = "images/author.jpg"
-  headline = "An old school Unix Geek living the era of Cloud"
+  headline = "Engineer. Unix Geek. Sysadmin by heart. Distributed systems nerd."
   bio = "Engineer. Unix Geek. Sysadmin by heart. Distributed systems nerd."
   links = [
     { x-twitter = "https://twitter.com/jreypo" },
