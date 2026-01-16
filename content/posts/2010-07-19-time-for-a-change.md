@@ -1,6 +1,7 @@
 ---
 title: Time for a change
 date: 2010-07-19
+tags: [career, linux]
 showComments: true
 ---
 

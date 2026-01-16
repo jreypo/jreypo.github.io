@@ -1,7 +1,7 @@
 ---
 title: I looked back at 2011 and I only saw awesomeness!
 date: 2011-12-31
-clases: wide
+tags: [personal, career, vmware]
 showComments: true
 ---
 

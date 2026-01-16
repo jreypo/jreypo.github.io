@@ -1,6 +1,7 @@
 ---
 title: Merry Christmas!
 date: 2010-12-22
+tags: [personal, homelab]
 showComments: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Happy Birthday to me!
 date: 2010-02-11
+tags: [personal]
 showComments: true
 ---
 

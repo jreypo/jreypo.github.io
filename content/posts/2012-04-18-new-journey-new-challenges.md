@@ -1,6 +1,7 @@
 ---
 title: New journey, new challenges.
 date: 2012-04-18
+tags: [career, vmware]
 showComments: true
 ---
 

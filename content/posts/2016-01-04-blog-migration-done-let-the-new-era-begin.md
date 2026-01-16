@@ -1,6 +1,7 @@
 ---
 title: Blog migration done... Let the new era begin!
 date: 2016-01-04
+tags: [blog, devops]
 showComments: true
 image:
    feature: trantor.png
