@@ -1,6 +1,7 @@
 ---
 title: My first sponsor
 date: 2012-03-01
+tags: [blog, vmware]
 showComments: true
 ---
 

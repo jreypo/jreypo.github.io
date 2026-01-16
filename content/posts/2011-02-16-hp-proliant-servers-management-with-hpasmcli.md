@@ -1,7 +1,7 @@
 ---
 title: HP ProLiant servers management with hpasmcli
 date: 2011-02-16
-meta: juan_manuel_rey
+tags: [hp-servers, linux, sysadmin]
 showComments: true
 ---
 
