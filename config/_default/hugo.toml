@@ -6,33 +6,33 @@ baseURL = "https://jreypo.io/"
 defaultContentLanguage = "en"
 theme = "congo"
 enableRobotsTXT = true
-summaryLength = 0  # Only show summary if description is set in front matter
+summaryLength = 0              # Only show summary if description is set in front matter
 timeZone = "Europe/Madrid"
 
 # Keep same permalink structure as Jekyll for SEO
 [permalinks]
-  posts = "/:year/:month/:day/:slug/"
+posts = "/:year/:month/:day/:slug/"
 
 [pagination]
-  pagerSize = 5  # Same as Jekyll paginate setting
+pagerSize = 10
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]
 
 [taxonomies]
-  tag = "tags"
+tag = "tags"
 
 [privacy]
-  [privacy.disqus]
-    disable = false
-  [privacy.googleAnalytics]
-    disable = false
-    respectDoNotTrack = true
-  [privacy.youtube]
-    privacyEnhanced = true
+[privacy.disqus]
+disable = false
+[privacy.googleAnalytics]
+disable = false
+respectDoNotTrack = true
+[privacy.youtube]
+privacyEnhanced = true
 
 [services]
-  [services.disqus]
-    shortname = "juanmasblog"
-  [services.googleAnalytics]
-    ID = "G-87W4YXF731"
+[services.disqus]
+shortname = "juanmasblog"
+[services.googleAnalytics]
+ID = "G-87W4YXF731"
