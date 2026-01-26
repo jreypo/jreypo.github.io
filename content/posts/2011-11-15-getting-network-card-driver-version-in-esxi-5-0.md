@@ -73,11 +73,11 @@ But there is more, thanks to `Get-EsxCli` cmdlet the same operation can be done 
 
 First we need to setup the `esxcli` instance.
 
-[![](/assets/assets/images/get-esxcli_instance.png)](/assets/assets/images/get-esxcli_instance.png)
+[![](/images/get-esxcli_instance.png)](/images/get-esxcli_instance.png)
 
 And now we issue the command using the name of the module as the argument, please pay attention to the syntax.
 
-[![](/assets/assets/images/get-esxcli_get_nic_driver.png)](/assets/assets/images/get-esxcli_get_nic_driver.png)
+[![](/images/get-esxcli_get_nic_driver.png)](/images/get-esxcli_get_nic_driver.png)
 
 As you should have imagined this procedure can be used to get info about any VMkernel module in the host, not just the network interface one.
 

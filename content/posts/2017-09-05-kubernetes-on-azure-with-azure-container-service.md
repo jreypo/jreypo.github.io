@@ -111,7 +111,7 @@ k8s-agent-c188e3da-2    Ready                      2d        v1.6.6
 k8s-master-c188e3da-0   Ready,SchedulingDisabled   2d        v1.6.6
 ```
 
-As you can see currently ACS deploys Kubernetes 1.6.6 by default, if you wish to deploy a different version the best option will be to use ACS-Engine however that will have no support SLA. The ACS team is rolling out a new version of the ACS resource provider that will allow to customize the orchestrator version, use an existing VNET and more great features. However I will leave those two options for a future post. 
+As you can see currently ACS deploys Kubernetes 1.6.6 by default, if you wish to deploy a different version the best option will be to use ACS-Engine however that will have no support SLA. The ACS team is rolling out a new version of the ACS resource provider that will allow to customize the orchestrator version, use an existing VNET and more great features. However I will leave those two options for a future post.
 
 Kubernetes dashboard can also be accessed using `kubectl`.
 
@@ -260,7 +260,7 @@ azure-vote-front-3648172574-1znnq   1/1       Running   0          5m
 
 Now access the Voting App using a browser to verify the deployment is working as expected.
 
-[![](/images/azure_voting_app.png "Azure Voting App")](/images/azure_vorting_app.png)
+[![](/images/azure_voting_app.png "Azure Voting App")](/images/azure_voting_app.png)
 
 Hope all of you find this post or at least part of it helpful and informative, stay tuned for more articles around Kubernetes on Azure.
 
