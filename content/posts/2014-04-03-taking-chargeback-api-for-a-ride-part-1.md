@@ -40,7 +40,7 @@ We have also included the API version, I usually includes the version as an URL 
 
 If there is need for more complex information either in the request or the response an XML payload have to be sent, just like in many other REST APIs. Even to perform a simple login an XML has to be sent, just like the next example.
 
-{{< jreypo 11113319 >}}
+{{< gist jreypo 11113319 >}}
 
 For our first ride with CBM API we will use Firefox REST Client add-on, can be found here, this handy add-on provides a visual an easy way to quickly ramp up with any REST API. I personally have used it a lot with Chargeback to try the different API operations during a development project for a customer.
 
@@ -159,7 +159,7 @@ POST https://<chargeback_server>/vCenter-CB/api/hierarchy
 
 In this case I’m not going to put the version as a parameter. An XML payload with the details of the new hierarchy is required.
 
-{{< jreypo 11114576 >}}
+{{< gist jreypo 11114576 >}}
 
 [![](/images/cbm_api_add_new_hierarchy.png "Add new hierarchy")](/images/cbm_api_add_new_hierarchy.png)
 
