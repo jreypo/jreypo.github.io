@@ -54,7 +54,7 @@ Check that the workflows attributes are correctly mapped as the input (cbmServer
 
 Next add a **Scriptable task** element to the workflow and edit it. Map **hierarchyList** attribute as input parameter. In the **Scripting** tab paste this code.
 
-{% gist jreypo/11114725 %}
+{{< jreypo 11114725 >}}
 
 Validate the workflow and save it. The scheme has to look like this.
 
@@ -74,11 +74,11 @@ From basic administration tasks to search and reporting. Also Chargeback plugin 
 
 Make a call to a method from a scripting class is relatively easy as we will see in the following example. We want to get a hierarchy and later use in a different task. We can use a method from **CbServer** class: **getHierarchyByName**. It accepts the hierarchy name and CBM API version as parameters. Basic syntax would be:
 
-{% gist jreypo/11114747 %}
+{{< jreypo 11114747 >}}
 
 The hierarchy scripting object is now instantiated and we can get any property from it, like its ID.
 
-{% gist jreypo/11114757 %}
+{{< jreypo 11114757 >}}
 
 ## Using vCO HTTP-REST plugin with Chargeback
 
@@ -172,7 +172,7 @@ Add two Scriptable tasks to the workflow, name the first as **API Login** and th
 
 Edit the API Login element and in the scripting tab add the following Javascript code.
 
-{% gist jreypo/11114778 %}
+{{< jreypo 11114778 >}}
 
 With this chunk of code will suffice to launch the operation, however there is no error control. The HTTP status code is not enough because the login operation can fail even with a 200 code, like the example below.
 
@@ -184,7 +184,7 @@ To solve this we need to parse the response content. REST plugin scripting API p
 
 The following code will do the trick.
 
-{% gist jreypo/11114795 %}
+{{< jreypo 11114795 >}}
 
 Firstly we need to convert the string to and array, then we get the second element of the array since and look for a successful status. The element has **loginStatus** as output parameter bind to the attribute of the same name. The **System.log** statements are not required but can be useful for troubleshooting purposes.
 
@@ -200,7 +200,7 @@ Next edit the **Create hierarchy** element. Bind **restCreateHierarchy**, **cbmU
 
 In the scripting tab paste this code.
 
-{% gist jreypo/11114815 %}
+{{< jreypo 11114815 >}}
 
 The last part, this is the REST operation output is optional but again it can be useful if we need to troubleshoot the workflows using vCO logs.
 
@@ -251,7 +251,7 @@ Change the name of the second scriptable task to **Add new Fixed Cost** and edit
 
 In the XML payload we need to reflect all these parameters. Below is code for the scripting part.
 
-{% gist jreypo/11114833 %}
+{{< jreypo 11114833 >}}
 
 Validate the workflow and save it. Execute it and fill in the input parameters.
 

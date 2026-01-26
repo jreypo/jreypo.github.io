@@ -26,7 +26,7 @@ Edit the file using your favorite text editor, in my case I’m using Notepad++,
 
 Change the `–days` flag from 60 to your desired value, in the example the value is 365 this is the certificate will expire in one year.
 
-{% gist jreypo/11115289 %}
+{{< jreypo 11115289 >}}
 
 After we can launch the generation process. The batch file will open a `cmd` window, stop the CBM Load Balancer service and asks for the passphrase of default.key. You’ll have to enter it three times and after that the process will ask for information about the State, City, common name (usually the server FQDN), company name, email, etc.
 

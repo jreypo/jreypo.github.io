@@ -35,7 +35,7 @@ To construct this URL you will need the controller ID that can be get in the N
 
 Select POST as the method. You will need to enter the body for the HTTP Request, in XML format. Use the below code as an example to build the content for the HTTP Request body.
 
-{% gist jreypo/8840b4e887095e5a460d %}
+{{< jreypo 8840b4e887095e5a460d >}}
 
 This XML code will indicate the NSX Manager to set the IP address in the `syslogServer` node as the remote syslog server for the controller in the URL. The protocol, port and log level are also defined.
 
