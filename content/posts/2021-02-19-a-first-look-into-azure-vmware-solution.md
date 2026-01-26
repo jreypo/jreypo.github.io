@@ -38,7 +38,7 @@ On the hardware side AV36 is the only SKU available today to deploy your AVS Pri
 
 As seen in the previous section AVS is built on top of VMware Cloud Foundation, deployed on dedicated, bare-metal Azure hosts. The architecture of the service is more or less like this one.
 
-[![](/images/avs_architecture.png)](/images//avs_architecture.png)
+[![](/images/avs_architecture.png)](/images/avs_architecture.png)
 
 To enable the connectivity between AVS workloads and the main Azure fabric [ExpressRoute Global Reach](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-global-reach) is used. ExpressRoute is a dedicated line that enables customers to connect their on-premises environment into Azure and Global Reach is an ExpressRoute add-on that allows to link ExpressRoute circuits together to make a private network between customer on-premises networks, in this case is used to link AVS ExpressRoute circuit with an existing customer circuit. Since transitive routing between circuits is not enabled on Azure ExpressRoute Gateways, the usage of Global Reach is mandatory in order to interconnect an on-premises vSphere environment and AVS.
 
