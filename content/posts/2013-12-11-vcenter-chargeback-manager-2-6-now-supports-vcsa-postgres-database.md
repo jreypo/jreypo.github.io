@@ -2,6 +2,7 @@
 title: vCenter Chargeback Manager 2.6 now supports vCSA Postgres database
 date: 2013-12-11
 tags:
+- databases
 - vmware
 - vsphere
 showComments: true

@@ -2,6 +2,7 @@
 title: SQL script for vCenter Chargeback database creation
 date: 2013-10-31
 tags:
+- databases
 - vmware
 showComments: true
 ---

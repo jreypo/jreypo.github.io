@@ -5,6 +5,7 @@ description: "Keep your credentials safe with encrypted Variable Groups in your 
 tags:
 - azure
 - azure-devops
+- databases
 - devops
 showComments: true
 ---

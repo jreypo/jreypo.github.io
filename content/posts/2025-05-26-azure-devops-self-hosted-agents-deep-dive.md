@@ -6,6 +6,7 @@ tags:
 - azure
 - azure-devops
 - devops
+- distributed-systems
 - homelab
 showComments: true
 ---

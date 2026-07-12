@@ -3,6 +3,7 @@ title: Running OpenStack Rally tests from a Docker container
 date: 2016-10-04
 tags:
 - containers
+- distributed-systems
 - docker
 - linux
 - openstack

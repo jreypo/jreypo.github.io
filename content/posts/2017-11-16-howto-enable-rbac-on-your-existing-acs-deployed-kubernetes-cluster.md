@@ -5,6 +5,7 @@ tags:
 - azure
 - cloud-native
 - containers
+- distributed-systems
 - kubernetes
 showComments: true
 ---
