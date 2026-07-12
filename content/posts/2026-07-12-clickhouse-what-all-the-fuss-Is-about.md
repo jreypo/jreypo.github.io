@@ -59,7 +59,7 @@ There is a whole family of specialized variants built on top of plain MergeTree,
 
 Here is what that looks like end to end for a small production-style cluster:
 
-```mermaid
+{{< mermaid >}}
 graph TB
     Keeper["ClickHouse Keeper<br/>3-node Raft cluster<br/>replication coordination"]
 
@@ -93,7 +93,7 @@ graph TB
 
     Client["Client Queries"]
     Dist --> Client
-```
+{{< /mermaid >}}
 
 Each shard holds a slice of the data (typically hashed on some key), each shard has two or more replicas for durability, and Keeper keeps everyone honest about which parts exist where. Clients (or a load balancer in front of them) talk to the `Distributed` table, which handles fan-out and merge transparently.
 
@@ -362,7 +362,7 @@ The pattern here, `PrepareBatch` then `Append` in a loop then `Send`, is the idi
 
 Putting the pieces together, here's a fairly typical shape for a production pipeline feeding ClickHouse, similar in spirit to what Cloudflare and Uber both described in their own write-ups, just at a saner scale:
 
-```mermaid
+{{< mermaid >}}
 graph LR
     App["Application Services /<br/>Edge Nodes"]
     Kafka["Kafka Topic"]
@@ -378,7 +378,7 @@ graph LR
     CH --> MV
     CH --> Raw
     MV --> Dash
-```
+{{< /mermaid >}}
 
 The important design decisions in a pipeline like this:
 
