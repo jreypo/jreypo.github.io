@@ -2,6 +2,7 @@
 title: 'A first look into VMware Integrated #OpenStack (VIO)'
 date: 2015-02-02
 tags:
+- distributed-systems
 - networking
 - nsx
 - openstack

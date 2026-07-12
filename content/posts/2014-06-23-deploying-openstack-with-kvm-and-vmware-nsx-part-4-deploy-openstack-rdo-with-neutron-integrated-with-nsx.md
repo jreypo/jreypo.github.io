@@ -2,6 +2,7 @@
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 4: Deploy OpenStack RDO with Neutron integrated with NSX'
 date: 2014-06-23
 tags:
+- distributed-systems
 - linux
 - networking
 - nsx

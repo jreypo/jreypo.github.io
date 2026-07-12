@@ -2,6 +2,7 @@
 title: vCenter Server Appliance. Part 1 - Configuration and deployment
 date: 2011-11-29
 tags:
+- databases
 - linux
 - vmware
 - vsphere

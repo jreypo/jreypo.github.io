@@ -6,6 +6,7 @@ tags:
 - aks
 - azure
 - cloud-native
+- distributed-systems
 - kubernetes
 - networking
 showComments: true

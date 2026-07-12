@@ -2,6 +2,7 @@
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 1: NSX overview and initial setup'
 date: 2014-04-29
 tags:
+- distributed-systems
 - linux
 - networking
 - nsx

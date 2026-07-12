@@ -3,6 +3,7 @@ title: Upgrading VMware Integrated OpenStack
 date: 2015-10-21
 tags:
 - devops
+- distributed-systems
 - openstack
 - sysadmin
 - vmware

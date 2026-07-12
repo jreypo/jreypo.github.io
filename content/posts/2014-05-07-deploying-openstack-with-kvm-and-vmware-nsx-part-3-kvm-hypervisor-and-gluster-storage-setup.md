@@ -2,6 +2,7 @@
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 3:  KVM hypervisor and Gluster storage setup'
 date: 2014-05-07
 tags:
+- distributed-systems
 - linux
 - networking
 - nsx

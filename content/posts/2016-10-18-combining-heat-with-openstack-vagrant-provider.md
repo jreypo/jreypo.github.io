@@ -3,6 +3,7 @@ title: Combining Heat with OpenStack Vagrant provider
 date: 2016-10-18
 tags:
 - devops
+- distributed-systems
 - openstack
 - virtualization
 showComments: true

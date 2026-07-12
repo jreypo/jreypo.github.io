@@ -2,6 +2,7 @@
 title: 'Deploying OpenStack with KVM and VMware NSX - Part 2: Configure NSX Transport and Logical network views'
 date: 2014-05-06
 tags:
+- distributed-systems
 - networking
 - nsx
 - openstack

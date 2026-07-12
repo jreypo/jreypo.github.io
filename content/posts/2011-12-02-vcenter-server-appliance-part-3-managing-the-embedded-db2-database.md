@@ -2,6 +2,7 @@
 title: vCenter Server Appliance. Part 3 - Managing the embedded DB2 database
 date: 2011-12-02
 tags:
+- databases
 - linux
 - vmware
 - vsphere

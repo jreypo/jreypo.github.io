@@ -2,6 +2,7 @@
 title: vCSA 5.1 – Deployment and upgrade
 date: 2012-09-05
 tags:
+- databases
 - vsphere
 showComments: true
 ---
